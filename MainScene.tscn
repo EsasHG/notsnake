@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://brhwlteib5565"]
+
+[ext_resource type="Script" path="res://PlayerCharacter.gd" id="1_8v0u1"]
+[ext_resource type="Script" path="res://SimplePlayerCharacter.gd" id="2_3btb2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s25nq"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_x8yn6"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_uhthx"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+visible = false
+script = ExtResource("1_8v0u1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_s25nq")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+scale = Vector2(20, 20)
+texture = SubResource("CanvasTexture_x8yn6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.513726, 1, 1)
+scale = Vector2(20, 20)
+texture = SubResource("CanvasTexture_uhthx")
+script = ExtResource("2_3btb2")
+
+[node name="Camera2D" type="Camera2D" parent="."]
