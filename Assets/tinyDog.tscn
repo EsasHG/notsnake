@@ -1,0 +1,115 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxeirq16lwypu"]
+
+[ext_resource type="Script" path="res://SimplePlayerCharacter.gd" id="1_h51aq"]
+[ext_resource type="Texture2D" uid="uid://dopkokna0w8sq" path="res://Assets/tinydog_HEAD.png" id="2_lla6u"]
+[ext_resource type="Texture2D" uid="uid://dhhduacimerj7" path="res://Assets/tinydog_BODYseg.png" id="3_as2h8"]
+[ext_resource type="Texture2D" uid="uid://dkxxhr21suis3" path="res://Assets/tinydog_LEGS_FRONT.png" id="4_ckpky"]
+[ext_resource type="Texture2D" uid="uid://dq3ojxigij8x0" path="res://Assets/tinydog_BUTT.png" id="5_oyr4y"]
+[ext_resource type="Texture2D" uid="uid://bacqyly50dytn" path="res://Assets/tinydog_LEGS_BACK.png" id="6_a347q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bh26d"]
+size = Vector2(85, 105)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Area2D2" type="Area2D" parent="Node2D" node_paths=PackedStringArray("segmentSprites")]
+script = ExtResource("1_h51aq")
+MOVE_SPEED = 300
+segmentSprites = [NodePath("../TinydogBodYseg"), NodePath("../TinydogBodYseg2"), NodePath("../TinydogBodYseg3"), NodePath("../TinydogBodYseg4"), NodePath("../TinydogBodYseg5"), NodePath("../TinydogBodYseg6"), NodePath("../TinydogBodYseg7"), NodePath("../TinydogBodYseg8"), NodePath("../TinydogBodYseg9"), NodePath("../TinydogBodYseg10"), NodePath("../TinydogBodYseg11"), NodePath("../TinydogBodYseg12"), NodePath("../TinydogBodYseg13"), NodePath("../Butt")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D2"]
+visible = false
+position = Vector2(-1.5, -12.5)
+shape = SubResource("RectangleShape2D_bh26d")
+
+[node name="TinydogHead" type="Sprite2D" parent="Node2D/Area2D2"]
+z_index = 1
+texture_filter = 1
+texture = ExtResource("2_lla6u")
+
+[node name="TinydogLegsFront" type="Sprite2D" parent="Node2D/Area2D2/TinydogHead"]
+z_index = -1
+texture_filter = 1
+position = Vector2(0, 3)
+texture = ExtResource("4_ckpky")
+
+[node name="TinydogBodYseg" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg2" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg3" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg4" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg5" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg6" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg7" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg8" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg9" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg10" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg11" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg12" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="TinydogBodYseg13" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -8)
+texture = ExtResource("3_as2h8")
+
+[node name="Butt" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(0, -21)
+texture = ExtResource("5_oyr4y")
+
+[node name="TinydogLegsBack" type="Sprite2D" parent="Node2D/Butt"]
+z_index = -1
+texture_filter = 1
+position = Vector2(0, -3)
+texture = ExtResource("6_a347q")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.145, 3.145)
