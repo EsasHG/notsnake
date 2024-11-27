@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cek8fr66labht"]
+
+[ext_resource type="Texture2D" uid="uid://ch0ddw1a0nqj3" path="res://Assets/fountain_rough.png" id="1_hf6n6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vis6b"]
+radius = 73.0616
+
+[node name="Fountain" type="Area2D" groups=["Dangers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vis6b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4, 7)
+texture = ExtResource("1_hf6n6")

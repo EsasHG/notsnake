@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmdwqot80pmgt"]
+
+[ext_resource type="Texture2D" uid="uid://be2egdx3mryqw" path="res://Assets/running_dog1.png" id="1_tc4b4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gieqm"]
+size = Vector2(120, 47)
+
+[node name="Running_Dog" type="Area2D" groups=["Dangers"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_tc4b4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_gieqm")

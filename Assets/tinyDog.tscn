@@ -27,10 +27,9 @@ animations = [{
 [node name="Node2D" type="Node2D" parent="."]
 scale = Vector2(2, 2)
 
-[node name="Area2D2" type="Area2D" parent="Node2D" node_paths=PackedStringArray("segmentSprites")]
+[node name="Area2D2" type="Area2D" parent="Node2D"]
 script = ExtResource("1_h51aq")
 MOVE_SPEED = 300
-segmentSprites = [NodePath("../TinydogBodYseg"), NodePath("../TinydogBodYseg2"), NodePath("../TinydogBodYseg3"), NodePath("../TinydogBodYseg4"), NodePath("../TinydogBodYseg5"), NodePath("../TinydogBodYseg6"), NodePath("../TinydogBodYseg7"), NodePath("../TinydogBodYseg8"), NodePath("../TinydogBodYseg9"), NodePath("../TinydogBodYseg10"), NodePath("../TinydogBodYseg11"), NodePath("../TinydogBodYseg12"), NodePath("../TinydogBodYseg13")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D2"]
 visible = false

@@ -27,6 +27,7 @@ project/assembly_name="NotSnake"
 [global_group]
 
 Treats=""
+Dangers=""
 
 [rendering]
 
