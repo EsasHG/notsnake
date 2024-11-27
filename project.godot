@@ -24,6 +24,10 @@ window/size/viewport_height=1080
 
 project/assembly_name="NotSnake"
 
+[global_group]
+
+Treats=""
+
 [rendering]
 
 renderer/rendering_method="mobile"

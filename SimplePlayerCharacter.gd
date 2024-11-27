@@ -13,11 +13,12 @@ var frameDelay = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$AnimatedSprite2D.play("default")
+	$Head.play("default")
+	$Head/Legs.play("default")
+	$"../Butt/Tail".play("default")
 	for i : int in 5:
 		add_sprite()
 		
-	$"../Line2D".add_point(position)
 	#butt.play("default")
 	pass # Replace with function body.
 
@@ -52,7 +53,6 @@ func _process(delta: float) -> void:
 	prevPos.push_front([position, rotation])
 	
 	move_local_y(delta*MOVE_SPEED)
-	$"../Line2D".add_point(position)
 #	position.x += delta*100
 	
 	if(Input.is_key_pressed(KEY_SPACE)):
@@ -60,3 +60,12 @@ func _process(delta: float) -> void:
 	else:
 		rotate(-delta*ROTATE_SPEED)
 	pass
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if(area.is_in_group("Treats")):
+		print_debug("Adding sprritesa")
+		for i : int in 20:
+			add_sprite()
+	
+	pass # Replace with function body.
