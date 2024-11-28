@@ -8,7 +8,6 @@ var spritesToAdd = 0
 @onready var pickupSpawner : PickupSpawner = get_tree().root.find_child("PickupSpawner", true, false)
 @onready var butt : Sprite2D = $Butt
 
-
 var segmentSprites : Array[Node2D]
 var canAddSprites = true
 
