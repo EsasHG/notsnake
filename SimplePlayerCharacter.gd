@@ -5,9 +5,12 @@ extends Area2D
 var prevPos = []
 var spritesToAdd = 0
 @onready var sprite = preload("res://Assets/BODY_SEGMENT_C.png")
+@onready var pickupSpawner : PickupSpawner = get_tree().root.find_child("PickupSpawner", true, false)
+@onready var butt : Sprite2D = $"../Butt"
+@onready var game_over_scene = preload("res://GameOverScreen.tscn")
+
 
 var segmentSprites : Array[Node2D]
-@onready var butt : Sprite2D = $"../Butt"
 var canAddSprites = true
 
 var frameDelay = 1
@@ -88,10 +91,13 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("Treats")):
-		print_debug("Adding sprritesa")
 		for i : int in segmentsPerSection:
 			add_sprite()
+		pickupSpawner.SpawnPickup()         
 		area.queue_free()
 	elif(area.is_in_group("Dangers")):
 		move = false
+		var g =  game_over_scene.instantiate()
+		get_tree().root.add_child(g)
+		get_node("/root/Main").free.call_deferred()
 	pass # Replace with function body.

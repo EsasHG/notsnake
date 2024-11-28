@@ -1,42 +1,42 @@
-[gd_scene load_steps=42 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=42 format=3 uid="uid://drmsvya5vdx65"]
 
-[ext_resource type="Script" path="res://SimplePlayerCharacter.gd" id="2_anabk"]
-[ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/BUTT_C.png" id="2_m7cpy"]
-[ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/TAIL_C.png" id="3_pu5l5"]
-[ext_resource type="Texture2D" uid="uid://be7ausi6tfjmr" path="res://Assets/newdog_LegsBACK_sheet_C.png" id="5_h0s1x"]
-[ext_resource type="Texture2D" uid="uid://bid4i25qetdmx" path="res://Assets/TAILS.png" id="7_ou8m1"]
-[ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/FACES_C.png" id="7_rqn14"]
-[ext_resource type="Texture2D" uid="uid://c821bbhducux1" path="res://Assets/mapmaybe_base.png" id="8_22lru"]
-[ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/newdog_legsFRONT_sheet_C.png" id="8_ps52y"]
-[ext_resource type="PackedScene" uid="uid://c7508ame74p7h" path="res://DogBone.tscn" id="9_7fe6i"]
-[ext_resource type="PackedScene" uid="uid://bmdwqot80pmgt" path="res://Running_dog.tscn" id="11_77w4f"]
-[ext_resource type="Script" path="res://running_dog.gd" id="12_0yqns"]
-[ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://bench.tscn" id="13_y4fym"]
-[ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://fountain.tscn" id="14_518u0"]
-[ext_resource type="Script" path="res://DogCrackerSpawner.gd" id="14_lwrxm"]
+[ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/BUTT_C.png" id="1_3ftf1"]
+[ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/TAIL_C.png" id="2_vdncb"]
+[ext_resource type="Texture2D" uid="uid://bid4i25qetdmx" path="res://Assets/TAILS.png" id="3_kg647"]
+[ext_resource type="Texture2D" uid="uid://be7ausi6tfjmr" path="res://Assets/newdog_LegsBACK_sheet_C.png" id="4_3f1u3"]
+[ext_resource type="Script" path="res://SimplePlayerCharacter.gd" id="5_sxnbw"]
+[ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/FACES_C.png" id="6_wjr40"]
+[ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/newdog_legsFRONT_sheet_C.png" id="7_qkvwy"]
+[ext_resource type="Texture2D" uid="uid://c821bbhducux1" path="res://Assets/mapmaybe_base.png" id="8_falp5"]
+[ext_resource type="PackedScene" uid="uid://c7508ame74p7h" path="res://DogBone.tscn" id="9_ixidc"]
+[ext_resource type="PackedScene" uid="uid://bmdwqot80pmgt" path="res://Running_dog.tscn" id="10_vc4jv"]
+[ext_resource type="Script" path="res://running_dog.gd" id="11_0ie8g"]
+[ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://bench.tscn" id="12_coeje"]
+[ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://fountain.tscn" id="13_bnlvw"]
+[ext_resource type="Script" path="res://DogCrackerSpawner.gd" id="14_h3h1w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xmaxq"]
-atlas = ExtResource("7_ou8m1")
+atlas = ExtResource("3_kg647")
 region = Rect2(23, 0, 23, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bj3i6"]
-atlas = ExtResource("7_ou8m1")
+atlas = ExtResource("3_kg647")
 region = Rect2(46, 0, 23, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2afur"]
-atlas = ExtResource("7_ou8m1")
+atlas = ExtResource("3_kg647")
 region = Rect2(0, 0, 23, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yt3ar"]
-atlas = ExtResource("7_ou8m1")
+atlas = ExtResource("3_kg647")
 region = Rect2(46, 0, 23, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_taul4"]
-atlas = ExtResource("7_ou8m1")
+atlas = ExtResource("3_kg647")
 region = Rect2(69, 0, 23, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3l62o"]
-atlas = ExtResource("7_ou8m1")
+atlas = ExtResource("3_kg647")
 region = Rect2(0, 0, 23, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4dxs5"]
@@ -72,23 +72,23 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4rppu"]
-atlas = ExtResource("5_h0s1x")
+atlas = ExtResource("4_3f1u3")
 region = Rect2(0, 0, 32, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4layu"]
-atlas = ExtResource("5_h0s1x")
+atlas = ExtResource("4_3f1u3")
 region = Rect2(32, 0, 32, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gjimy"]
-atlas = ExtResource("5_h0s1x")
+atlas = ExtResource("4_3f1u3")
 region = Rect2(64, 0, 32, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7g5d7"]
-atlas = ExtResource("5_h0s1x")
+atlas = ExtResource("4_3f1u3")
 region = Rect2(96, 0, 32, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4js1l"]
-atlas = ExtResource("5_h0s1x")
+atlas = ExtResource("4_3f1u3")
 region = Rect2(128, 0, 32, 77)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d51rk"]
@@ -118,11 +118,11 @@ animations = [{
 size = Vector2(32, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_45bpw"]
-atlas = ExtResource("7_rqn14")
+atlas = ExtResource("6_wjr40")
 region = Rect2(43, 0, 43, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1v2bu"]
-atlas = ExtResource("7_rqn14")
+atlas = ExtResource("6_wjr40")
 region = Rect2(0, 0, 43, 37)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2kam3"]
@@ -140,23 +140,23 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dlucr"]
-atlas = ExtResource("8_ps52y")
+atlas = ExtResource("7_qkvwy")
 region = Rect2(0, 0, 32, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a0jc0"]
-atlas = ExtResource("8_ps52y")
+atlas = ExtResource("7_qkvwy")
 region = Rect2(32, 0, 32, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nqkaf"]
-atlas = ExtResource("8_ps52y")
+atlas = ExtResource("7_qkvwy")
 region = Rect2(64, 0, 32, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bgbr8"]
-atlas = ExtResource("8_ps52y")
+atlas = ExtResource("7_qkvwy")
 region = Rect2(96, 0, 32, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qjwsp"]
-atlas = ExtResource("8_ps52y")
+atlas = ExtResource("7_qkvwy")
 region = Rect2(128, 0, 32, 60)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rudug"]
@@ -204,13 +204,13 @@ distance = -898.5
 [node name="Butt" type="Sprite2D" parent="Node2D"]
 texture_filter = 1
 position = Vector2(0, -33)
-texture = ExtResource("2_m7cpy")
+texture = ExtResource("1_3ftf1")
 
 [node name="Tail2" type="Sprite2D" parent="Node2D/Butt"]
 z_index = -2
 texture_filter = 1
 position = Vector2(0, -11)
-texture = ExtResource("3_pu5l5")
+texture = ExtResource("2_vdncb")
 region_enabled = true
 region_rect = Rect2(7, 3, 6, 14)
 
@@ -230,7 +230,7 @@ sprite_frames = SubResource("SpriteFrames_d51rk")
 frame_progress = 0.618145
 
 [node name="Area2D" type="Area2D" parent="Node2D"]
-script = ExtResource("2_anabk")
+script = ExtResource("5_sxnbw")
 MOVE_SPEED = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
@@ -261,14 +261,14 @@ position_smoothing_speed = 11.86
 
 [node name="MapmaybeBase" type="Sprite2D" parent="."]
 z_index = -3
-texture = ExtResource("8_22lru")
+texture = ExtResource("8_falp5")
 
-[node name="Area2D" parent="." instance=ExtResource("9_7fe6i")]
+[node name="Area2D" parent="." instance=ExtResource("9_ixidc")]
 position = Vector2(6, 126)
 
-[node name="Area2D2" parent="." instance=ExtResource("11_77w4f")]
+[node name="Area2D2" parent="." instance=ExtResource("10_vc4jv")]
 position = Vector2(814, 454)
-script = ExtResource("12_0yqns")
+script = ExtResource("11_0ie8g")
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -282,10 +282,10 @@ shape = SubResource("WorldBoundaryShape2D_fj0g7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D2"]
 shape = SubResource("WorldBoundaryShape2D_6ntvb")
 
-[node name="Bench" parent="Walls/Area2D2" instance=ExtResource("13_y4fym")]
+[node name="Bench" parent="Walls/Area2D2" instance=ExtResource("12_coeje")]
 position = Vector2(-586, 91)
 
-[node name="Fountain" parent="Walls/Area2D2" instance=ExtResource("14_518u0")]
+[node name="Fountain" parent="Walls/Area2D2" instance=ExtResource("13_bnlvw")]
 position = Vector2(-577, -160)
 
 [node name="Area2D3" type="Area2D" parent="Walls" groups=["Dangers"]]
@@ -299,7 +299,7 @@ shape = SubResource("WorldBoundaryShape2D_hivew")
 shape = SubResource("WorldBoundaryShape2D_rkj8e")
 
 [node name="PickupSpawner" type="Node2D" parent="."]
-script = ExtResource("14_lwrxm")
+script = ExtResource("14_h3h1w")
 
 [node name="PickupPoints" type="Node2D" parent="."]
 

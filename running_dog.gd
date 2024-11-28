@@ -2,6 +2,7 @@ extends Area2D
 
 @export var SPEED = 600
 @export var TARGET_X : int = -829
+
 var dir : int  = -1
 var start
 var move = true
