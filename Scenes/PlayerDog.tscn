@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bkjd5mneny7c1"]
+[gd_scene load_steps=32 format=3 uid="uid://bkjd5mneny7c1"]
 
 [ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="1_f7yc0"]
 [ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/Dogs/OutlinedDog/TAIL_C.png" id="2_c2s43"]
@@ -75,6 +75,10 @@ animations = [{
 "name": &"default",
 "speed": 10.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qqgea"]
+radius = 13.0
+height = 38.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xmaxq"]
 atlas = ExtResource("3_d8esg")
@@ -176,7 +180,6 @@ animations = [{
 }]
 
 [node name="PlayerDog" type="Area2D"]
-rotation = 0.320143
 script = ExtResource("5_q7dwm")
 MOVE_SPEED = 300
 
@@ -205,12 +208,20 @@ limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 11.86
 
-[node name="Butt" type="Sprite2D" parent="."]
+[node name="Butt" type="Area2D" parent="."]
+position = Vector2(0, -27)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Butt"]
+position = Vector2(0, -5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qqgea")
+disabled = true
+
+[node name="ButtSprite" type="Sprite2D" parent="Butt"]
 texture_filter = 1
-position = Vector2(0, -16)
 texture = ExtResource("1_f7yc0")
 
-[node name="Tail2" type="Sprite2D" parent="Butt"]
+[node name="Tail2" type="Sprite2D" parent="Butt/ButtSprite"]
 z_index = -2
 texture_filter = 1
 position = Vector2(0, -11)
@@ -218,7 +229,7 @@ texture = ExtResource("2_c2s43")
 region_enabled = true
 region_rect = Rect2(7, 3, 6, 14)
 
-[node name="Tail" type="AnimatedSprite2D" parent="Butt"]
+[node name="Tail" type="AnimatedSprite2D" parent="Butt/ButtSprite"]
 visible = false
 z_index = -1
 texture_filter = 1
@@ -227,7 +238,7 @@ sprite_frames = SubResource("SpriteFrames_4dxs5")
 frame = 2
 frame_progress = 0.490707
 
-[node name="Legs_back" type="AnimatedSprite2D" parent="Butt"]
+[node name="Legs_back" type="AnimatedSprite2D" parent="Butt/ButtSprite"]
 z_index = -1
 position = Vector2(0, 13)
 sprite_frames = SubResource("SpriteFrames_d51rk")

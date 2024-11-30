@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b64vm8vof02aj"]
+
+[ext_resource type="Texture2D" uid="uid://c84i47m2lf0ea" path="res://Assets/Dogs/OutlinedDog/BODY_SEGMENT_C.png" id="1_v3mki"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kj1qg"]
+size = Vector2(24, 20)
+
+[node name="DogSegment" type="Area2D" groups=["Dangers"]]
+scale = Vector2(1, 0.25)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kj1qg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_v3mki")

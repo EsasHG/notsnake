@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 		
 func filled():
 	var s = scene.instantiate()
-	get_tree().root.add_child(s)
+	get_tree().root.find_child("World", true, false).add_child(s)
 	retryButtonPressed = false 
 	visible = false
 	$RetryButton/TextureProgressBar.value = 0

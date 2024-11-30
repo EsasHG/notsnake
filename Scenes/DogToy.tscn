@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctigc12c0n7it"]
 
-[ext_resource type="Texture2D" uid="uid://bardqifcsvpnh" path="res://Assets/Items/ITEMS_1.png" id="1_em804"]
+[ext_resource type="Texture2D" uid="uid://crn70nucnj654" path="res://Assets/Items/ITEMS_TOY1_BIGGEST_RIKTIG.png" id="1_0u2nx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_greaw"]
 size = Vector2(52, 20)
@@ -10,8 +10,7 @@ size = Vector2(52, 20)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 texture_filter = 1
-texture = ExtResource("1_em804")
-region_enabled = true
+texture = ExtResource("1_0u2nx")
 region_rect = Rect2(70, 10, 52, 19)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
