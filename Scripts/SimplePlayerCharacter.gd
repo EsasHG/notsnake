@@ -54,6 +54,7 @@ func _process(delta: float) -> void:
 		s.scale.y = 0.25
 		segmentSprites.insert(segmentSprites.size()-1,s) #legger til nest sist.
 		add_child(s)
+		s.position =  Vector2(0,0)
 		spritesToAdd-=1
 	$Head/Legs.play()
 	

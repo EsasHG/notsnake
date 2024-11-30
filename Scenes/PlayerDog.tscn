@@ -176,6 +176,7 @@ animations = [{
 }]
 
 [node name="PlayerDog" type="Area2D"]
+rotation = 0.320143
 script = ExtResource("5_q7dwm")
 MOVE_SPEED = 300
 

@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
+[ext_resource type="PackedScene" uid="uid://c7508ame74p7h" path="res://Scenes/DogBone.tscn" id="9_7fe6i"]
 [ext_resource type="PackedScene" uid="uid://bmdwqot80pmgt" path="res://Scenes/Running_dog.tscn" id="11_77w4f"]
-[ext_resource type="Script" path="res://Scripts/running_dog.gd" id="12_0yqns"]
 [ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://Scenes/bench.tscn" id="13_y4fym"]
 [ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/fountain.tscn" id="14_518u0"]
 [ext_resource type="Script" path="res://Scripts/DogCrackerSpawner.gd" id="14_lwrxm"]
@@ -28,27 +28,25 @@ distance = -898.5
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="Node2D" parent="World" instance=ExtResource("1_qv8ra")]
+[node name="PlayerDog" parent="World" instance=ExtResource("1_qv8ra")]
 
 [node name="MapmaybeBase" type="Sprite2D" parent="World"]
 z_index = -3
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_yclsr")
 
-[node name="Area2D2" parent="World" instance=ExtResource("11_77w4f")]
-position = Vector2(814, 454)
-script = ExtResource("12_0yqns")
-
 [node name="Walls" type="Node2D" parent="World"]
 
 [node name="Area2D" type="Area2D" parent="World/Walls" groups=["Dangers"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/Area2D"]
+position = Vector2(0, -16)
 shape = SubResource("WorldBoundaryShape2D_fj0g7")
 
 [node name="Area2D2" type="Area2D" parent="World/Walls" groups=["Dangers"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/Area2D2"]
+position = Vector2(0, 4)
 shape = SubResource("WorldBoundaryShape2D_6ntvb")
 
 [node name="Area2D3" type="Area2D" parent="World/Walls" groups=["Dangers"]]
@@ -66,6 +64,9 @@ position = Vector2(-586, 91)
 
 [node name="Fountain" parent="World" instance=ExtResource("14_518u0")]
 position = Vector2(-577, -160)
+
+[node name="Running_Dog" parent="World" instance=ExtResource("11_77w4f")]
+position = Vector2(814, 454)
 
 [node name="PickupSpawner" type="Node2D" parent="World"]
 script = ExtResource("14_lwrxm")
@@ -113,3 +114,6 @@ offset_bottom = 40.0
 [node name="GameOverScreen" parent="CanvasLayer/Gui" instance=ExtResource("15_i27mg")]
 visible = false
 layout_mode = 0
+
+[node name="DogBone" parent="." instance=ExtResource("9_7fe6i")]
+position = Vector2(-95, 116)
