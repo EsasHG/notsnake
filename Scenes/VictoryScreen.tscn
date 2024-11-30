@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://c32a5s2ngxrmo"]
+
+[ext_resource type="Script" path="res://VictoryScreen.gd" id="1_434jl"]
+[ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="2_gmc5o"]
+[ext_resource type="Texture2D" uid="uid://ch2frfffss3xv" path="res://Assets/UI/RETRY_1.png" id="3_ru005"]
+[ext_resource type="Texture2D" uid="uid://5rmu0g0f3sdu" path="res://Assets/UI/RETRY_5.png" id="4_grrl2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_du5xi"]
+texture = ExtResource("2_gmc5o")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ujcjt"]
+texture = ExtResource("3_ru005")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wd1t0"]
+texture = ExtResource("4_grrl2")
+
+[node name="VictoryScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_434jl")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_du5xi")
+
+[node name="RetryButton" type="Button" parent="."]
+z_index = -1
+offset_left = 862.0
+offset_top = 878.0
+offset_right = 2056.0
+offset_bottom = 1418.0
+scale = Vector2(0.2, 0.2)
+theme_override_styles/focus = SubResource("StyleBoxTexture_ujcjt")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ujcjt")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ujcjt")
+theme_override_styles/normal = SubResource("StyleBoxTexture_wd1t0")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="RetryButton"]
+z_index = 1
+layout_mode = 0
+offset_right = 1194.0
+offset_bottom = 540.0
+fill_mode = 6
+texture_under = ExtResource("4_grrl2")
+texture_progress = ExtResource("3_ru005")
+
+[connection signal="button_down" from="RetryButton" to="." method="_on_retry_button_button_down"]
+[connection signal="button_up" from="RetryButton" to="." method="_on_retry_button_button_up"]
