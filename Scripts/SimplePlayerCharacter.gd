@@ -23,29 +23,35 @@ func _ready() -> void:
 	$Butt/Tail.play("default")
 	segmentSprites.push_back(butt)
 	add_sprite()
-		
-	#butt.play("default")
-	pass # Replace with function body.
+
 
 func add_sprite():
 	if(canAddSprites):
 		spritesToAdd+=segmentsPerSection
 		canAddSprites = false
 		get_tree().create_timer(1.0).timeout.connect(resetSpriteTimer)
-#	var s : Sprite2D = Sprite2D.new()
-#	s.texture = sprite
-#	s.scale.y = 0.25
-#	segmentSprites.push_back(s)
-#	segmentSprites.insert(segmentSprites.size()-1,s) #legger til nest sist.
-#	add_sibling.call_deferred(s)
+
 
 func resetSpriteTimer():
 	canAddSprites = true
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
 	if(!move): return
+	
+	prevPos.push_front([position, rotation])
+	
+	#Player has to move and rotate before the sprites so we don't override their global rotation by rotating the player. 
+	move_local_y(delta*MOVE_SPEED)
+#	position.x += delta*100
+	
+	if(Input.is_key_pressed(KEY_SPACE)):
+		rotate(delta*ROTATE_SPEED)
+	else:
+		rotate(-delta*ROTATE_SPEED)
+	
 	
 	if(spritesToAdd > 0):
 		$Head/Legs.pause()
@@ -66,21 +72,6 @@ func _process(delta: float) -> void:
 			s.global_position = nPos1
 			s.global_rotation = newPos1[1]
 			i=i+1		
-		#var newPos : Array[Vector2, int] = prevPos.pop_back()
-		#var nPos : Vector2 = newPos[0]
-		#$Sprite2D.global_position = nPos
-		#$Sprite2D.global_rotation = newPos[1]
-	
-	prevPos.push_front([position, rotation])
-	
-	move_local_y(delta*MOVE_SPEED)
-#	position.x += delta*100
-	
-	if(Input.is_key_pressed(KEY_SPACE)):
-		rotate(delta*ROTATE_SPEED)
-	else:
-		rotate(-delta*ROTATE_SPEED)
-	pass
 
 
 func _on_area_entered(area: Area2D) -> void:
@@ -97,6 +88,3 @@ func _on_area_entered(area: Area2D) -> void:
 		var g : Control = get_tree().root.find_child("GameOverScreen",true, false)
 		g.visible = true 
 		queue_free()
-#		get_tree().root.find_child("GameOverScreen").visible = true
-		#get_node("/root/Main").queue_free()
-	pass # Replace with function body.
