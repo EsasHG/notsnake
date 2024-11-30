@@ -68,12 +68,6 @@ func resetSpriteTimer():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	
-
-
-
-	print_debug()
-	
 	if(!move): return
 	
 	prevPos.push_front([position, rotation])
@@ -131,7 +125,10 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	if(area == $Butt):
 		print_debug("You Won!")
-		
+		move = false
+		var g : Control = get_tree().root.find_child("VictoryScreen",true, false)
+		g.visible = true 
+		queue_free()
 	elif(area.is_in_group("Treats")):
 		if(canAddSprites):
 			score+=1
