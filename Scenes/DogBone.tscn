@@ -11,6 +11,7 @@ size = Vector2(38, 20)
 shape = SubResource("RectangleShape2D_df3dv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 texture_filter = 1
 texture = ExtResource("1_plxrs")
 region_enabled = true

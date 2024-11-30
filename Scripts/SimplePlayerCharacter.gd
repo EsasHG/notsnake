@@ -10,6 +10,7 @@ var spritesToAdd = 0
 
 var segmentSprites : Array[Node2D]
 var canAddSprites = true
+var score : int = 0 
 
 var frameDelay = 1
 var segmentsPerSection = 50
@@ -83,10 +84,13 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("Treats")):
+		score+=1
 		for i : int in segmentsPerSection:
 			add_sprite()
 		pickupSpawner.SpawnPickup()         
 		area.queue_free()
+		print_debug("Score: " + var_to_str(score))
+		
 	elif(area.is_in_group("Dangers")):
 		move = false
 		var g : Control = get_tree().root.find_child("GameOverScreen",true, false)

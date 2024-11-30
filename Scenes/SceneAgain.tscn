@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=13 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
-[ext_resource type="PackedScene" uid="uid://c7508ame74p7h" path="res://Scenes/DogBone.tscn" id="9_7fe6i"]
 [ext_resource type="PackedScene" uid="uid://bmdwqot80pmgt" path="res://Scenes/Running_dog.tscn" id="11_77w4f"]
 [ext_resource type="Script" path="res://Scripts/running_dog.gd" id="12_0yqns"]
 [ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://Scenes/bench.tscn" id="13_y4fym"]
@@ -36,9 +35,6 @@ z_index = -3
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_yclsr")
 
-[node name="Area2D" parent="World" instance=ExtResource("9_7fe6i")]
-position = Vector2(6, 126)
-
 [node name="Area2D2" parent="World" instance=ExtResource("11_77w4f")]
 position = Vector2(814, 454)
 script = ExtResource("12_0yqns")
@@ -55,12 +51,6 @@ shape = SubResource("WorldBoundaryShape2D_fj0g7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/Area2D2"]
 shape = SubResource("WorldBoundaryShape2D_6ntvb")
 
-[node name="Bench" parent="World/Walls/Area2D2" instance=ExtResource("13_y4fym")]
-position = Vector2(-586, 91)
-
-[node name="Fountain" parent="World/Walls/Area2D2" instance=ExtResource("14_518u0")]
-position = Vector2(-577, -160)
-
 [node name="Area2D3" type="Area2D" parent="World/Walls" groups=["Dangers"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/Area2D3"]
@@ -71,39 +61,45 @@ shape = SubResource("WorldBoundaryShape2D_hivew")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/Area2D4"]
 shape = SubResource("WorldBoundaryShape2D_rkj8e")
 
+[node name="Bench" parent="World" instance=ExtResource("13_y4fym")]
+position = Vector2(-586, 91)
+
+[node name="Fountain" parent="World" instance=ExtResource("14_518u0")]
+position = Vector2(-577, -160)
+
 [node name="PickupSpawner" type="Node2D" parent="World"]
 script = ExtResource("14_lwrxm")
 
-[node name="PickupPoints" type="Node2D" parent="World"]
+[node name="PickupPoints" type="Node2D" parent="World/PickupSpawner"]
 
-[node name="Node2D" type="Node2D" parent="World/PickupPoints"]
+[node name="Node2D" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(5, 394)
 
-[node name="Node2D2" type="Node2D" parent="World/PickupPoints"]
+[node name="Node2D2" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(-597, -23)
 
-[node name="Node2D3" type="Node2D" parent="World/PickupPoints"]
+[node name="Node2D3" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(691, -395)
 
-[node name="Node2D4" type="Node2D" parent="World/PickupPoints"]
+[node name="Node2D4" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(803, 289)
 
-[node name="Node2D5" type="Node2D" parent="World/PickupPoints"]
+[node name="Node2D5" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(261, -237)
 
-[node name="Node2D6" type="Node2D" parent="World/PickupPoints"]
+[node name="Node2D6" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(-785, -417)
 
-[node name="Node2D7" type="Node2D" parent="World/PickupPoints"]
+[node name="Node2D7" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(-797, 376)
 
-[node name="Node2D8" type="Node2D" parent="World/PickupPoints"]
+[node name="Node2D8" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(808, 216)
 
-[node name="Node2D9" type="Node2D" parent="World/PickupPoints"]
+[node name="Node2D9" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(393, 100)
 
-[node name="Node2D10" type="Node2D" parent="World/PickupPoints"]
+[node name="Node2D10" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(593, -100)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -3,8 +3,7 @@ class_name PickupSpawner
 
 @onready var toy = preload("res://Scenes/DogToy.tscn")
 @onready var bone = preload("res://Scenes/DogBone.tscn")
-@onready var pickupPoints : Array[Node] = get_tree().root.find_child("PickupPoints", true, false).get_children()
-
+@onready var pickupPoints : Array[Node] = $PickupPoints.get_children()
 var prevPoint : int = 14
 
 # Called when the node enters the scene tree for the first time.
