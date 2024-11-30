@@ -6,10 +6,11 @@
 size = Vector2(24, 20)
 
 [node name="DogSegment" type="Area2D" groups=["Dangers"]]
-scale = Vector2(1, 0.25)
+scale = Vector2(1, 0.4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kj1qg")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

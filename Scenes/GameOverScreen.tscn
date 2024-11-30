@@ -1,19 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://ck7vl8h740cpk"]
+[gd_scene load_steps=10 format=3 uid="uid://ck7vl8h740cpk"]
 
 [ext_resource type="Script" path="res://Scripts/game_over_screen.gd" id="1_7tubc"]
 [ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="1_k4sjf"]
 [ext_resource type="Texture2D" uid="uid://ch2frfffss3xv" path="res://Assets/UI/RETRY_1.png" id="3_1gffc"]
 [ext_resource type="Texture2D" uid="uid://5rmu0g0f3sdu" path="res://Assets/UI/RETRY_5.png" id="3_grf0n"]
 [ext_resource type="Texture2D" uid="uid://bnr3m854v23q7" path="res://Assets/UI/Font pngs/txt_SCORE.png" id="5_20k6k"]
-[ext_resource type="Texture2D" uid="uid://bukecieisfuc5" path="res://Assets/UI/Font pngs/nr_2.png" id="6_1sfto"]
-[ext_resource type="Texture2D" uid="uid://b5w28ta6lm866" path="res://Assets/UI/Font pngs/nr_3.png" id="7_trnf0"]
-[ext_resource type="Texture2D" uid="uid://epm75dvxqur0" path="res://Assets/UI/Font pngs/nr_4.png" id="8_3wuou"]
-[ext_resource type="Texture2D" uid="uid://62mfi663osm7" path="res://Assets/UI/Font pngs/nr_6.png" id="9_6jf14"]
-[ext_resource type="Texture2D" uid="uid://bmgq1s7frqet5" path="res://Assets/UI/Font pngs/nr_5.png" id="9_ibifd"]
-[ext_resource type="Texture2D" uid="uid://co8kpdrv02qtt" path="res://Assets/UI/Font pngs/nr_1.png" id="10_8l1p0"]
-[ext_resource type="Texture2D" uid="uid://d0esrhf6a4bq7" path="res://Assets/UI/Font pngs/nr_7.png" id="11_pfo06"]
-[ext_resource type="Texture2D" uid="uid://b38si7mj5lk13" path="res://Assets/UI/Font pngs/nr_9.png" id="13_3cq1i"]
-[ext_resource type="Texture2D" uid="uid://c0tstatsq03du" path="res://Assets/UI/Font pngs/nr_0.png" id="14_qoi6d"]
+[ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="6_nrd6a"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mnkbk"]
 texture = ExtResource("1_k4sjf")
@@ -75,65 +67,8 @@ scale = Vector2(0.27, 0.27)
 layout_mode = 2
 texture = ExtResource("5_20k6k")
 
-[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("6_1sfto")
-stretch_mode = 5
-
-[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("7_trnf0")
-stretch_mode = 5
-
-[node name="TextureRect4" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("8_3wuou")
-stretch_mode = 5
-
-[node name="TextureRect5" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("9_ibifd")
-stretch_mode = 5
-
-[node name="TextureRect6" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("9_6jf14")
-stretch_mode = 5
-
-[node name="TextureRect7" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("11_pfo06")
-stretch_mode = 5
-
-[node name="TextureRect8" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("10_8l1p0")
-stretch_mode = 5
-
-[node name="TextureRect9" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("13_3cq1i")
-stretch_mode = 5
-
-[node name="TextureRect10" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("14_qoi6d")
-stretch_mode = 5
-
-[node name="TextureRect11" type="TextureRect" parent="HBoxContainer"]
-visible = false
-layout_mode = 2
-texture = ExtResource("10_8l1p0")
-stretch_mode = 5
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_nrd6a")
 
 [connection signal="button_down" from="RetryButton" to="." method="_on_retry_button_button_down"]
 [connection signal="button_up" from="RetryButton" to="." method="_on_retry_button_button_up"]

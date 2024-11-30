@@ -2,6 +2,7 @@ extends Control
 
 var startButtonPressed = false
 var startButtonStayFilled = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$StartButton.grab_focus()
@@ -13,9 +14,9 @@ func _process(delta: float) -> void:
 	#$StartButton.grab_focus()
 	
 	if(startButtonPressed):
-		$StartButton/TextureProgressBar.value += $StartButton/TextureProgressBar.step
+		$StartButton/TextureProgressBar.value += 100*delta
 	elif(!startButtonStayFilled):
-		$StartButton/TextureProgressBar.value -= $StartButton/TextureProgressBar.step
+		$StartButton/TextureProgressBar.value -= 100*delta
 		
 	if(!startButtonStayFilled && $StartButton/TextureProgressBar.value == $StartButton/TextureProgressBar.max_value):
 		filled()

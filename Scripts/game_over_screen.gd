@@ -17,9 +17,9 @@ func on_visibility_changed():
 func _process(delta: float) -> void:
 	
 	if(retryButtonPressed):
-		$RetryButton/TextureProgressBar.value += $RetryButton/TextureProgressBar.step
+		$RetryButton/TextureProgressBar.value += 100*delta
 	else:
-		$RetryButton/TextureProgressBar.value -= $RetryButton/TextureProgressBar.step
+		$RetryButton/TextureProgressBar.value -= 100*delta
 		
 	if($RetryButton/TextureProgressBar.value == $RetryButton/TextureProgressBar.max_value):
 		filled()
@@ -42,7 +42,7 @@ func filled():
 func SetScore(in_score : int):
 	score = in_score
 	
-	var str_score = var_to_str(score)
+	var str_score : String = var_to_str(score)
 	for c in str_score:
 		var tex : TextureRect = TextureRect.new()
 		tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED

@@ -36,6 +36,7 @@ texture = ExtResource("2_5vvlb")
 
 [node name="StartButton" type="Button" parent="."]
 z_index = -1
+layout_mode = 0
 offset_left = 862.0
 offset_top = 878.0
 offset_right = 2056.0
