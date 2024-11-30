@@ -76,7 +76,13 @@ func _process(delta: float) -> void:
 	move_local_y(delta*MOVE_SPEED)
 #	position.x += delta*100
 	
-	if(Input.is_key_pressed(KEY_SPACE)):
+	if(Input.is_action_just_pressed("Press")):
+		$Head/BarkSound.play()
+	if(Input.is_action_just_released("Press")):
+		$Head/BarkSound.play()
+		
+	
+	if(Input.is_action_pressed("Press")):
 		rotate(delta*ROTATE_SPEED)
 	else:
 		rotate(-delta*ROTATE_SPEED)
@@ -127,6 +133,7 @@ func _on_area_entered(area: Area2D) -> void:
 		print_debug("You Won!")
 		move = false
 		var g : Control = get_tree().root.find_child("VictoryScreen",true, false)
+		g.SetScore(score)
 		g.visible = true 
 		queue_free()
 	elif(area.is_in_group("Treats")):
@@ -141,6 +148,7 @@ func _on_area_entered(area: Area2D) -> void:
 	elif(area.is_in_group("Dangers")):
 		move = false
 		var g : Control = get_tree().root.find_child("GameOverScreen",true, false)
+		g.SetScore(score)
 		g.visible = true 
 		queue_free()
 		

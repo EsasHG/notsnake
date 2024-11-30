@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c32a5s2ngxrmo"]
+[gd_scene load_steps=9 format=3 uid="uid://c32a5s2ngxrmo"]
 
-[ext_resource type="Script" path="res://VictoryScreen.gd" id="1_434jl"]
+[ext_resource type="Script" path="res://Scripts/game_over_screen.gd" id="1_gps28"]
 [ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="2_gmc5o"]
 [ext_resource type="Texture2D" uid="uid://ch2frfffss3xv" path="res://Assets/UI/RETRY_1.png" id="3_ru005"]
 [ext_resource type="Texture2D" uid="uid://5rmu0g0f3sdu" path="res://Assets/UI/RETRY_5.png" id="4_grrl2"]
+[ext_resource type="Texture2D" uid="uid://bnr3m854v23q7" path="res://Assets/UI/Font pngs/txt_SCORE.png" id="5_bulj1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_du5xi"]
 texture = ExtResource("2_gmc5o")
@@ -21,15 +22,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_434jl")
+script = ExtResource("1_gps28")
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_du5xi")
 
 [node name="RetryButton" type="Button" parent="."]
 z_index = -1
+layout_mode = 0
 offset_left = 862.0
 offset_top = 878.0
 offset_right = 2056.0
@@ -48,6 +51,16 @@ offset_bottom = 540.0
 fill_mode = 6
 texture_under = ExtResource("4_grrl2")
 texture_progress = ExtResource("3_ru005")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 2210.0
+offset_bottom = 415.0
+scale = Vector2(0.27, 0.27)
+
+[node name="ScoreLabel" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_bulj1")
 
 [connection signal="button_down" from="RetryButton" to="." method="_on_retry_button_button_down"]
 [connection signal="button_up" from="RetryButton" to="." method="_on_retry_button_button_up"]

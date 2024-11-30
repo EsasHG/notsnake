@@ -1,5 +1,6 @@
 extends Control
 
+var score : int
 @onready var scene = load("res://Scenes/PlayerDog.tscn")
 var retryButtonPressed =false
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +32,21 @@ func filled():
 	visible = false
 	$RetryButton/TextureProgressBar.value = 0
 	
+	for c in $HBoxContainer.get_children():
+		if(c.name != "ScoreLabel"):
+			c.queue_free()
+	
+	
+	
+func SetScore(in_score : int):
+	score = in_score
+	
+	var str_score = var_to_str(score)
+	for c in str_score:
+		var tex : TextureRect = TextureRect.new()
+		tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tex.texture = load("res://Assets/UI/Font pngs/nr_" + c +".png")
+		$HBoxContainer.add_child(tex)
 
 func _on_retry_button_button_down() -> void:
 	retryButtonPressed = true

@@ -1,9 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://ck7vl8h740cpk"]
+[gd_scene load_steps=18 format=3 uid="uid://ck7vl8h740cpk"]
 
 [ext_resource type="Script" path="res://Scripts/game_over_screen.gd" id="1_7tubc"]
 [ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="1_k4sjf"]
 [ext_resource type="Texture2D" uid="uid://ch2frfffss3xv" path="res://Assets/UI/RETRY_1.png" id="3_1gffc"]
 [ext_resource type="Texture2D" uid="uid://5rmu0g0f3sdu" path="res://Assets/UI/RETRY_5.png" id="3_grf0n"]
+[ext_resource type="Texture2D" uid="uid://bnr3m854v23q7" path="res://Assets/UI/Font pngs/txt_SCORE.png" id="5_20k6k"]
+[ext_resource type="Texture2D" uid="uid://bukecieisfuc5" path="res://Assets/UI/Font pngs/nr_2.png" id="6_1sfto"]
+[ext_resource type="Texture2D" uid="uid://b5w28ta6lm866" path="res://Assets/UI/Font pngs/nr_3.png" id="7_trnf0"]
+[ext_resource type="Texture2D" uid="uid://epm75dvxqur0" path="res://Assets/UI/Font pngs/nr_4.png" id="8_3wuou"]
+[ext_resource type="Texture2D" uid="uid://62mfi663osm7" path="res://Assets/UI/Font pngs/nr_6.png" id="9_6jf14"]
+[ext_resource type="Texture2D" uid="uid://bmgq1s7frqet5" path="res://Assets/UI/Font pngs/nr_5.png" id="9_ibifd"]
+[ext_resource type="Texture2D" uid="uid://co8kpdrv02qtt" path="res://Assets/UI/Font pngs/nr_1.png" id="10_8l1p0"]
+[ext_resource type="Texture2D" uid="uid://d0esrhf6a4bq7" path="res://Assets/UI/Font pngs/nr_7.png" id="11_pfo06"]
+[ext_resource type="Texture2D" uid="uid://b38si7mj5lk13" path="res://Assets/UI/Font pngs/nr_9.png" id="13_3cq1i"]
+[ext_resource type="Texture2D" uid="uid://c0tstatsq03du" path="res://Assets/UI/Font pngs/nr_0.png" id="14_qoi6d"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mnkbk"]
 texture = ExtResource("1_k4sjf")
@@ -22,6 +32,7 @@ offset_bottom = 40.0
 script = ExtResource("1_7tubc")
 
 [node name="Panel" type="Panel" parent="."]
+texture_repeat = 2
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -48,6 +59,81 @@ offset_bottom = 540.0
 fill_mode = 6
 texture_under = ExtResource("3_grf0n")
 texture_progress = ExtResource("3_1gffc")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 2210.0
+offset_bottom = 415.0
+scale = Vector2(0.27, 0.27)
+
+[node name="ScoreLabel" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_20k6k")
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("6_1sfto")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("7_trnf0")
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("8_3wuou")
+stretch_mode = 5
+
+[node name="TextureRect5" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("9_ibifd")
+stretch_mode = 5
+
+[node name="TextureRect6" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("9_6jf14")
+stretch_mode = 5
+
+[node name="TextureRect7" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("11_pfo06")
+stretch_mode = 5
+
+[node name="TextureRect8" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("10_8l1p0")
+stretch_mode = 5
+
+[node name="TextureRect9" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("13_3cq1i")
+stretch_mode = 5
+
+[node name="TextureRect10" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("14_qoi6d")
+stretch_mode = 5
+
+[node name="TextureRect11" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("10_8l1p0")
+stretch_mode = 5
 
 [connection signal="button_down" from="RetryButton" to="." method="_on_retry_button_button_down"]
 [connection signal="button_up" from="RetryButton" to="." method="_on_retry_button_button_up"]

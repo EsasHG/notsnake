@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=14 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
 [ext_resource type="PackedScene" uid="uid://c32a5s2ngxrmo" path="res://Scenes/VictoryScreen.tscn" id="8_ejsn6"]
+[ext_resource type="AudioStream" uid="uid://cr7rgnem0d7n0" path="res://Assets/Sound/33 - Ditty.mp3" id="9_3xwyg"]
 [ext_resource type="PackedScene" uid="uid://bmdwqot80pmgt" path="res://Scenes/Running_dog.tscn" id="11_77w4f"]
 [ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://Scenes/bench.tscn" id="13_y4fym"]
 [ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/fountain.tscn" id="14_518u0"]
@@ -60,10 +61,12 @@ shape = SubResource("WorldBoundaryShape2D_hivew")
 shape = SubResource("WorldBoundaryShape2D_rkj8e")
 
 [node name="Bench" parent="World" instance=ExtResource("13_y4fym")]
-position = Vector2(-586, 91)
+position = Vector2(-562, 100)
+scale = Vector2(0.61, 0.61)
 
 [node name="Fountain" parent="World" instance=ExtResource("14_518u0")]
 position = Vector2(-577, -160)
+scale = Vector2(0.575, 0.575)
 
 [node name="Running_Dog" parent="World" instance=ExtResource("11_77w4f")]
 position = Vector2(814, 454)
@@ -125,3 +128,9 @@ offset_bottom = 23.0
 [node name="VictoryScreen" parent="CanvasLayer/Gui" instance=ExtResource("8_ejsn6")]
 visible = false
 layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_3xwyg")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
