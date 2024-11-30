@@ -1,5 +1,7 @@
 extends Area2D
 
+class_name PlayerDog
+
 @export var ROTATE_SPEED = 5
 @export var MOVE_SPEED = 1
 var prevPos = []
@@ -13,6 +15,7 @@ var canAddSprites = true
 var score : int = 0 
 var showFps = false
 
+var playerControl = false
 var frameDelay = 1
 var segmentsPerSection = 50
 var move = true
@@ -75,15 +78,15 @@ func _process(delta: float) -> void:
 	#Player has to move and rotate before the sprites so we don't override their global rotation by rotating the player. 
 	move_local_y(delta*MOVE_SPEED)
 #	position.x += delta*100
-	
-	if(Input.is_action_just_pressed("Press")):
-		$Head/BarkSound.play()
-	if(Input.is_action_just_released("Press")):
-		$Head/BarkSound.play()
+	if(playerControl):
+		if(Input.is_action_just_pressed("Press")):
+			$Head/BarkSound.play()
+		if(Input.is_action_just_released("Press")):
+			$Head/BarkSound.play()
 		
 	
-	if(Input.is_action_pressed("Press")):
-		rotate(delta*ROTATE_SPEED)
+	if(Input.is_action_pressed("Press") && playerControl):
+			rotate(delta*ROTATE_SPEED)
 	else:
 		rotate(-delta*ROTATE_SPEED)
 		
@@ -135,6 +138,8 @@ func _on_area_entered(area: Area2D) -> void:
 		var g : Control = get_tree().root.find_child("VictoryScreen",true, false)
 		g.SetScore(score)
 		g.visible = true 
+		var camera = get_tree().root.find_child("Camera2D", true, false)
+		camera.reparent(get_tree().root.find_child("World", true, false))
 		queue_free()
 	elif(area.is_in_group("Treats")):
 		if(canAddSprites):
@@ -150,5 +155,12 @@ func _on_area_entered(area: Area2D) -> void:
 		var g : Control = get_tree().root.find_child("GameOverScreen",true, false)
 		g.SetScore(score)
 		g.visible = true 
+		var camera = get_tree().root.find_child("Camera2D", true, false)
+		camera.reparent(get_tree().root.find_child("World", true, false))
 		queue_free()
 		
+func grabCamera():	
+	var camera = get_tree().root.find_child("Camera2D", true, false)
+	camera.reparent(self, false)
+	camera.position = Vector2(0,0)
+	playerControl = true

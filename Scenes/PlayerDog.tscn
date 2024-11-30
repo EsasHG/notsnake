@@ -202,16 +202,6 @@ frame_progress = 0.515546
 [node name="BarkSound" type="AudioStreamPlayer2D" parent="Head"]
 stream = ExtResource("4_wxfsi")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.63, 1.63)
-limit_left = -953
-limit_top = -535
-limit_right = 953
-limit_bottom = 535
-limit_smoothed = true
-position_smoothing_enabled = true
-position_smoothing_speed = 11.86
-
 [node name="Butt" type="Area2D" parent="."]
 position = Vector2(0, -27)
 

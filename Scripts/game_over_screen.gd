@@ -26,8 +26,9 @@ func _process(delta: float) -> void:
 		
 		
 func filled():
-	var s = scene.instantiate()
+	var s : PlayerDog = scene.instantiate()
 	get_tree().root.find_child("World", true, false).add_child(s)
+	s.grabCamera()
 	retryButtonPressed = false 
 	visible = false
 	$RetryButton/TextureProgressBar.value = 0
@@ -47,7 +48,7 @@ func SetScore(in_score : int):
 		tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		tex.texture = load("res://Assets/UI/Font pngs/nr_" + c +".png")
 		$HBoxContainer.add_child(tex)
-
+	
 func _on_retry_button_button_down() -> void:
 	retryButtonPressed = true
 	#get_tree().root.find_child("World", true, false).queue_free()

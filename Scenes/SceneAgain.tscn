@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=15 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
 [ext_resource type="PackedScene" uid="uid://c32a5s2ngxrmo" path="res://Scenes/VictoryScreen.tscn" id="8_ejsn6"]
 [ext_resource type="AudioStream" uid="uid://cr7rgnem0d7n0" path="res://Assets/Sound/33 - Ditty.mp3" id="9_3xwyg"]
+[ext_resource type="PackedScene" uid="uid://jdiyiwxj7kh0" path="res://Scenes/main_menu.tscn" id="9_vbmn1"]
 [ext_resource type="PackedScene" uid="uid://bmdwqot80pmgt" path="res://Scenes/Running_dog.tscn" id="11_77w4f"]
 [ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://Scenes/bench.tscn" id="13_y4fym"]
 [ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/fountain.tscn" id="14_518u0"]
@@ -30,6 +31,18 @@ distance = -898.5
 [node name="World" type="Node2D" parent="."]
 
 [node name="PlayerDog" parent="World" instance=ExtResource("1_qv8ra")]
+position = Vector2(-256, 115)
+
+[node name="Camera2D" type="Camera2D" parent="World"]
+position = Vector2(-192, 0)
+zoom = Vector2(1.63, 1.63)
+limit_left = -953
+limit_top = -535
+limit_right = 953
+limit_bottom = 535
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 11.86
 
 [node name="MapmaybeBase" type="Sprite2D" parent="World"]
 z_index = -3
@@ -127,6 +140,9 @@ offset_bottom = 23.0
 
 [node name="VictoryScreen" parent="CanvasLayer/Gui" instance=ExtResource("8_ejsn6")]
 visible = false
+layout_mode = 1
+
+[node name="MainMenu" parent="CanvasLayer/Gui" instance=ExtResource("9_vbmn1")]
 layout_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
