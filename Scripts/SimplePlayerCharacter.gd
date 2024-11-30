@@ -208,6 +208,7 @@ func _on_area_entered(area: Area2D) -> void:
 		var camera = get_tree().root.find_child("Camera2D", true, false)
 		camera.reparent(get_tree().root.find_child("World", true, false))
 		playerControl = false
+		segmentParent.queue_free()
 		queue_free()
 		
 	elif(area.is_in_group("Dangers")):
