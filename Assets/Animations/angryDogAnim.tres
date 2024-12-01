@@ -1,0 +1,41 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dtci15yb371cm"]
+
+[ext_resource type="Texture2D" uid="uid://c87o2mnll85xe" path="res://Assets/Obstacles/NPC_dogs/rottweiller_angryface.png" id="1_6vh43"]
+[ext_resource type="Texture2D" uid="uid://b2b7gnhbdr4tr" path="res://Assets/Obstacles/NPC_dogs/rottweiller_frame1.png" id="2_m8e0g"]
+[ext_resource type="Texture2D" uid="uid://dota2bmufaipa" path="res://Assets/Obstacles/NPC_dogs/rottweiller_frame2.png" id="3_qxslw"]
+[ext_resource type="Texture2D" uid="uid://dwo433nurk147" path="res://Assets/Obstacles/NPC_dogs/rottweiller_frame3.png" id="4_4lf12"]
+[ext_resource type="Texture2D" uid="uid://bu28c5wcvqhrh" path="res://Assets/Obstacles/NPC_dogs/rottweiller_frame4.png" id="5_da6sf"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6vh43")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m8e0g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qxslw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4lf12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_da6sf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4lf12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qxslw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]

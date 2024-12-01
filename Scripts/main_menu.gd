@@ -69,7 +69,8 @@ func _process(delta: float) -> void:
 			activeBubbleTween.pause()
 			activeBubbleTween.custom_step(1.0)
 		else:
-			activeBubbleTimer.time_left = 0
+			if(activeBubbleTimer != null):
+				activeBubbleTimer.time_left = 0
 		skip = true
 		
 		

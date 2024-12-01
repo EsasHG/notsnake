@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=22 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://jdiyiwxj7kh0" path="res://Scenes/main_menu.tscn" id="9_vbmn1"]
 [ext_resource type="PackedScene" uid="uid://bob8kh4co86nl" path="res://Scenes/Tree_4.tscn" id="10_t73dl"]
 [ext_resource type="PackedScene" uid="uid://bmdwqot80pmgt" path="res://Scenes/Running_dog.tscn" id="11_77w4f"]
+[ext_resource type="PackedScene" uid="uid://dnq1hhrmswccv" path="res://Scenes/chiweewee.tscn" id="11_vsml2"]
+[ext_resource type="PackedScene" uid="uid://c0h220kvrr0mb" path="res://Scenes/angry_dog.tscn" id="12_msgav"]
 [ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://Scenes/bench.tscn" id="13_y4fym"]
 [ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/fountain.tscn" id="14_518u0"]
 [ext_resource type="Script" path="res://Scripts/DogCrackerSpawner.gd" id="14_lwrxm"]
@@ -163,6 +165,12 @@ scale = Vector2(0.6, 0.6)
 [node name="Tree_4" parent="World/Obstacles" instance=ExtResource("10_t73dl")]
 position = Vector2(560, 137)
 scale = Vector2(0.468075, 0.468075)
+
+[node name="Chiweewee" parent="World" instance=ExtResource("11_vsml2")]
+position = Vector2(-514, 166)
+
+[node name="AngryDog" parent="World" instance=ExtResource("12_msgav")]
+position = Vector2(847, -274)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
