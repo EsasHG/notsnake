@@ -6,6 +6,7 @@ class_name PlayerDog
 @export var MOVE_SPEED = 1
 var prevPositionsArr = []
 @export var hats : Array[Sprite2D]
+@export var bonusScreenThreshold = 30
 
 var currentHat = -1
 var spritesToAdd = 0
@@ -29,7 +30,7 @@ var playerControl = false
 var frameDelay = 1
 var segmentsPerSection = 20
 var move = true
-signal GameOver
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Head.play("default")
@@ -199,7 +200,6 @@ func _on_area_entered(area: Area2D) -> void:
 	if(area == butt):
 		if(playerControl == false):
 			return	
-		GameOver.emit()
 		move = false
 		var g : Control = get_tree().root.find_child("VictoryScreen",true, false)
 		g.SetScore(score)
@@ -222,7 +222,13 @@ func _on_area_entered(area: Area2D) -> void:
 		if(playerControl == false):
 			return	
 		move = false
-		var g : Control = get_tree().root.find_child("GameOverScreen",true, false)
+		var g
+		if(score >= bonusScreenThreshold):
+			g = get_tree().root.find_child("BonusScreen",true, false)
+		else:
+			g = get_tree().root.find_child("GameOverScreen",true, false)
+			
+		
 		g.SetScore(score)
 		g.visible = true 
 		var camera = get_tree().root.find_child("Camera2D", true, false)
@@ -239,7 +245,7 @@ func _on_area_entered(area: Area2D) -> void:
 			for i : int in segmentsPerSection:
 				add_segment()
 				
-			if(score % 4 == 0):
+			if(score % 10 == 0):
 				pickupSpawner.SpawnPresent()
 			else:
 				pickupSpawner.SpawnPickup()

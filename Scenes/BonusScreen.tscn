@@ -1,0 +1,74 @@
+[gd_scene load_steps=10 format=3 uid="uid://db21xerm8qjf4"]
+
+[ext_resource type="Script" path="res://Scripts/game_over_screen.gd" id="1_trdmj"]
+[ext_resource type="Texture2D" uid="uid://c02fkdaroc7h7" path="res://Assets/UI/GAME_HIGHSCORE.png" id="2_5lw60"]
+[ext_resource type="Texture2D" uid="uid://ch2frfffss3xv" path="res://Assets/UI/RETRY_1.png" id="3_gbibm"]
+[ext_resource type="Texture2D" uid="uid://5rmu0g0f3sdu" path="res://Assets/UI/RETRY_5.png" id="4_cxqe5"]
+[ext_resource type="Texture2D" uid="uid://bnr3m854v23q7" path="res://Assets/UI/Font pngs/txt_SCORE.png" id="5_r2vka"]
+[ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="6_fjn3l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mnkbk"]
+texture = ExtResource("2_5lw60")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rso4g"]
+texture = ExtResource("3_gbibm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l25qd"]
+texture = ExtResource("4_cxqe5")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_trdmj")
+
+[node name="Panel" type="Panel" parent="."]
+texture_repeat = 2
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_mnkbk")
+
+[node name="RetryButton" type="Button" parent="."]
+z_index = -1
+layout_mode = 0
+offset_left = 862.0
+offset_top = 878.0
+offset_right = 2056.0
+offset_bottom = 1418.0
+scale = Vector2(0.2, 0.2)
+theme_override_styles/focus = SubResource("StyleBoxTexture_rso4g")
+theme_override_styles/hover = SubResource("StyleBoxTexture_rso4g")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_rso4g")
+theme_override_styles/normal = SubResource("StyleBoxTexture_l25qd")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="RetryButton"]
+z_index = 1
+layout_mode = 0
+offset_right = 1194.0
+offset_bottom = 540.0
+fill_mode = 6
+texture_under = ExtResource("4_cxqe5")
+texture_progress = ExtResource("3_gbibm")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 2210.0
+offset_bottom = 415.0
+scale = Vector2(0.27, 0.27)
+
+[node name="ScoreLabel" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_r2vka")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_fjn3l")
+
+[connection signal="button_down" from="RetryButton" to="." method="_on_retry_button_button_down"]
+[connection signal="button_up" from="RetryButton" to="." method="_on_retry_button_button_up"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=23 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/DogCrackerSpawner.gd" id="14_lwrxm"]
 [ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="15_56jjb"]
 [ext_resource type="PackedScene" uid="uid://ck7vl8h740cpk" path="res://Scenes/GameOverScreen.tscn" id="15_i27mg"]
+[ext_resource type="PackedScene" uid="uid://db21xerm8qjf4" path="res://Scenes/BonusScreen.tscn" id="16_cwq0r"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fj0g7"]
 distance = -509.11
@@ -197,6 +198,9 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 bubblePos = Vector2(75, -86)
+
+[node name="BonusScreen" parent="CanvasLayer/Gui" instance=ExtResource("16_cwq0r")]
+visible = false
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_3xwyg")
