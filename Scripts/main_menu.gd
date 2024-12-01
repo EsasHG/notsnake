@@ -16,11 +16,26 @@ var activeBubble : Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = true
-	$StartButton.grab_focus()
-	var tween = get_tree().create_tween()
-	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property($Panel, "modulate:a", 0, 2.0)
-	
+	$Panel.modulate.a = 0
+	var comicStartTimer = get_tree().create_timer(0.5).timeout.connect(func():
+		
+		var comicFadeInTween = get_tree().create_tween()
+		comicFadeInTween.set_ease(Tween.EASE_IN)
+		comicFadeInTween.tween_property($Panel, "modulate:a", 1, 1.0)
+		comicFadeInTween.tween_callback(func():
+			var timer = get_tree().create_timer(4.0).timeout.connect(func(): 
+				var tween = get_tree().create_tween()
+				tween.set_ease(Tween.EASE_OUT)
+				tween.tween_property($Panel, "modulate:a", 0, 1.0)
+				tween.tween_callback(func(): 
+					$StartButton.grab_focus()
+					var blackPanelTween = get_tree().create_tween()
+					blackPanelTween.set_ease(Tween.EASE_IN)
+					blackPanelTween.tween_property($Panel2, "modulate:a", 0, 1.5)
+				)
+			)
+		)
+	)
 	#$StartButton.grab_focus()
 	
 	var music = get_tree().root.find_child("BGMusic", true, false)

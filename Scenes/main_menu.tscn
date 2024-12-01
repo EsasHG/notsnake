@@ -1,9 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://jdiyiwxj7kh0"]
+[gd_scene load_steps=14 format=3 uid="uid://jdiyiwxj7kh0"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
 [ext_resource type="Texture2D" uid="uid://dcecd6rbo2blp" path="res://Assets/UI/startbutton_1.png" id="3_wiek5"]
 [ext_resource type="Texture2D" uid="uid://bde1l8ykv1rtx" path="res://Assets/UI/startbutton_5.png" id="4_uoro4"]
+[ext_resource type="Texture2D" uid="uid://bcf4ifygghr1k" path="res://Assets/UI/OPENER COMIC/GAME_COMIC_PANEL1.png" id="5_a54ho"]
+[ext_resource type="Texture2D" uid="uid://cr0k00imrx8au" path="res://Assets/UI/OPENER COMIC/GAME_COMIC_PANEL2.png" id="6_afy1m"]
+[ext_resource type="Texture2D" uid="uid://cdauou7c8qwkk" path="res://Assets/UI/OPENER COMIC/GAME_COMIC_PANEL3.png" id="7_wbc7c"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lryf2"]
 texture = ExtResource("3_wiek5")
@@ -17,8 +20,11 @@ texture = ExtResource("3_wiek5")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_r767b"]
 texture = ExtResource("4_uoro4")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c58tn"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
 bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c58tn"]
+bg_color = Color(0.890196, 0.886275, 0.882353, 0)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -61,11 +67,46 @@ fill_mode = 6
 texture_under = ExtResource("4_uoro4")
 texture_progress = ExtResource("3_wiek5")
 
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 6.10352e-05
+offset_top = 6.10352e-05
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cy8ve")
+
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_c58tn")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 339.0
+offset_top = 59.0
+offset_right = 1253.0
+offset_bottom = 1427.0
+scale = Vector2(0.675, 0.675)
+texture = ExtResource("5_a54ho")
+
+[node name="TextureRect2" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 981.0
+offset_top = 94.0
+offset_right = 1795.0
+offset_bottom = 808.0
+scale = Vector2(0.675, 0.675)
+texture = ExtResource("6_afy1m")
+
+[node name="TextureRect3" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 976.0
+offset_top = 618.0
+offset_right = 1878.0
+offset_bottom = 1204.0
+scale = Vector2(0.675, 0.675)
+texture = ExtResource("7_wbc7c")
 
 [connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
 [connection signal="button_up" from="StartButton" to="." method="_on_start_button_button_up"]
