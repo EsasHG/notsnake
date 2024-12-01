@@ -245,7 +245,7 @@ func _on_area_entered(area: Area2D) -> void:
 			for i : int in segmentsPerSection:
 				add_segment()
 				
-			if(score % 10 == 0):
+			if(score == 10):
 				pickupSpawner.SpawnPresent()
 			else:
 				pickupSpawner.SpawnPickup()

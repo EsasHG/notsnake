@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck7vl8h740cpk"]
+[gd_scene load_steps=17 format=3 uid="uid://ck7vl8h740cpk"]
 
 [ext_resource type="Script" path="res://Scripts/game_over_screen.gd" id="1_7tubc"]
 [ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="1_k4sjf"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://5rmu0g0f3sdu" path="res://Assets/UI/RETRY_5.png" id="3_grf0n"]
 [ext_resource type="Texture2D" uid="uid://bnr3m854v23q7" path="res://Assets/UI/Font pngs/txt_SCORE.png" id="5_20k6k"]
 [ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="6_nrd6a"]
+[ext_resource type="Texture2D" uid="uid://chpu7hodmmbuu" path="res://Assets/UI/QUIT_2.png" id="7_b8yx4"]
+[ext_resource type="Texture2D" uid="uid://y1a5d52xbq2a" path="res://Assets/UI/QUIT_1.png" id="8_73uxn"]
+[ext_resource type="Texture2D" uid="uid://cmi2tok2niuud" path="res://Assets/UI/QUIT_3.png" id="9_knqth"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mnkbk"]
 texture = ExtResource("1_k4sjf")
@@ -15,6 +18,18 @@ texture = ExtResource("3_1gffc")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l25qd"]
 texture = ExtResource("3_grf0n")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x0n2p"]
+texture = ExtResource("7_b8yx4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vj1fb"]
+texture = ExtResource("7_b8yx4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n6uw2"]
+texture = ExtResource("7_b8yx4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2dd65"]
+texture = ExtResource("8_73uxn")
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -33,9 +48,9 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_mnkbk")
 [node name="RetryButton" type="Button" parent="."]
 z_index = -1
 layout_mode = 0
-offset_left = 862.0
+offset_left = 647.0
 offset_top = 878.0
-offset_right = 2056.0
+offset_right = 1841.0
 offset_bottom = 1418.0
 scale = Vector2(0.2, 0.2)
 theme_override_styles/focus = SubResource("StyleBoxTexture_rso4g")
@@ -70,5 +85,30 @@ texture = ExtResource("5_20k6k")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_nrd6a")
 
+[node name="QuitButton" type="Button" parent="."]
+z_index = -1
+layout_mode = 0
+offset_left = 1092.0
+offset_top = 880.0
+offset_right = 2286.0
+offset_bottom = 1420.0
+scale = Vector2(0.2, 0.2)
+theme_override_styles/focus = SubResource("StyleBoxTexture_x0n2p")
+theme_override_styles/hover = SubResource("StyleBoxTexture_vj1fb")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_n6uw2")
+theme_override_styles/normal = SubResource("StyleBoxTexture_2dd65")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="QuitButton"]
+z_index = 1
+layout_mode = 0
+offset_left = -20.0
+offset_right = 1289.0
+offset_bottom = 671.0
+fill_mode = 6
+texture_under = ExtResource("9_knqth")
+texture_progress = ExtResource("7_b8yx4")
+
 [connection signal="button_down" from="RetryButton" to="." method="_on_retry_button_button_down"]
 [connection signal="button_up" from="RetryButton" to="." method="_on_retry_button_button_up"]
+[connection signal="button_down" from="QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]

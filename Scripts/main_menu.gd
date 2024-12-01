@@ -1,13 +1,22 @@
 extends Control
 
 var startButtonPressed = false
+var quitButtonPressed = false
 var startButtonStayFilled = false
+var justPressed = false
+var justPressedTime = 0.2
+var start_unfocused = preload("res://Assets/UI/startbutton_2.png")
+var start_focused = preload("res://Assets/UI/startbutton_5.png")
+var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
+var quit_focused = preload("res://Assets/UI/QUIT_1.png")
 @export var bubblePos : Vector2 = Vector2(-190, -40)
 
 var thoughtBubble = preload("res://Scenes/ThoughtBubble_SadFace.tscn")
 var thoughtBubble1 = preload("res://Scenes/ThoughtBubble_1.tscn")
 var thoughtBubble2 = preload("res://Scenes/ThoughtBubble_2.tscn")
 var thoughtBubble3 = preload("res://Scenes/ThoughtBubble_3.tscn")
+
+
 
 @onready var world : Node2D = get_tree().root.find_child("World", true, false)
 
@@ -55,9 +64,18 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#$StartButton.grab_focus()
+	if(quitButtonPressed):
+		$QuitButton/TextureProgressBar.value += 80*delta
+	elif(!quitButtonPressed):
+		$QuitButton/TextureProgressBar.value -= 100*delta
+		
+	if($QuitButton/TextureProgressBar.value == $QuitButton/TextureProgressBar.max_value):
+		quitFilled()
+	
+	
 	
 	if(startButtonPressed):
-		$StartButton/TextureProgressBar.value += 100*delta
+		$StartButton/TextureProgressBar.value += 80*delta
 	elif(!startButtonStayFilled):
 		$StartButton/TextureProgressBar.value -= 100*delta
 		
@@ -78,17 +96,26 @@ func filled():
 	startButtonStayFilled = true
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property($StartButton, "position", Vector2(862,1126), 0.5)
+	tween.tween_property($StartButton, "position", Vector2($StartButton.position.x,1126), 0.5)
 	tween.tween_callback(menuOut)
+	
+	var quitButtonTween = get_tree().create_tween()
+	quitButtonTween.set_ease(Tween.EASE_IN)
+	quitButtonTween.tween_property($QuitButton, "position", Vector2($QuitButton.position.x,1126), 0.5)
 	
 	var tween2 = get_tree().create_tween()
 	tween2.set_ease(Tween.EASE_IN)
 	tween2.tween_property($Logo, "position",Vector2(1056, -500), 0.5)
-
 	
+	
+func quitFilled():
+	get_tree().quit()
+	pass
+			 
 func menuOut():
 	$Logo.visible = false
 	$StartButton.visible = false
+	$QuitButton.visible = false
 	var bubble = thoughtBubble.instantiate()
 	activeBubble = bubble
 	bubble.modulate.a = 0
@@ -160,10 +187,34 @@ func deleteBubble():
 	
 func _on_start_button_button_down() -> void:
 	print_debug("Start down!")
+	justPressed = true
+	get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
 	startButtonPressed = true
 
 
 func _on_start_button_button_up() -> void:
 	print_debug("Start up!")
+	if(justPressed):
+		$QuitButton.grab_focus()
+		justPressed = false
+		
+		$StartButton/TextureProgressBar.texture_under = start_unfocused
+		$QuitButton/TextureProgressBar.texture_under = quit_focused
 	startButtonPressed = false
 pass # Replace with function body.
+
+
+func _on_quit_button_button_down() -> void:
+	quitButtonPressed = true
+	justPressed = true
+	get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
+
+
+func _on_quit_button_button_up() -> void:
+	if(justPressed):
+		$StartButton.grab_focus()
+		$StartButton/TextureProgressBar.texture_under = start_focused
+		$QuitButton/TextureProgressBar.texture_under = quit_unfocused
+		justPressed = false
+	quitButtonPressed = false
+	pass # Replace with function body.

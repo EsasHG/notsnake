@@ -1,5 +1,13 @@
 extends Control
 
+var quitButtonPressed = false
+var justPressed = false
+var justPressedTime = 0.2
+var retry_unfocused = preload("res://Assets/UI/RETRY_2.png")
+var retry_focused = preload("res://Assets/UI/RETRY_5.png")
+
+var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
+var quit_focused = preload("res://Assets/UI/QUIT_1.png")
 var score : int
 @onready var scene = load("res://Scenes/PlayerDog.tscn")
 
@@ -17,9 +25,18 @@ func on_visibility_changed():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if(quitButtonPressed):
+		$QuitButton/TextureProgressBar.value += 80*delta
+	elif(!quitButtonPressed):
+		$QuitButton/TextureProgressBar.value -= 100*delta
+		
+	if($QuitButton/TextureProgressBar.value == $QuitButton/TextureProgressBar.max_value):
+		quitFilled()
+	
+	
 	
 	if(retryButtonPressed):
-		$RetryButton/TextureProgressBar.value += 100*delta
+		$RetryButton/TextureProgressBar.value += 80*delta
 	else:
 		$RetryButton/TextureProgressBar.value -= 100*delta
 		
@@ -27,7 +44,7 @@ func _process(delta: float) -> void:
 		filled()
 		
 		
-func filled():
+func filled():    
 	var s : PlayerDog = scene.instantiate()
 	get_tree().root.find_child("World", true, false).add_child(s)
 	s.grabCamera()
@@ -43,6 +60,9 @@ func filled():
 	loseMusic.stop()
 	BGmusic.play()
 	
+func quitFilled():
+	get_tree().quit()
+	
 	
 func SetScore(in_score : int):
 	score = in_score
@@ -56,6 +76,8 @@ func SetScore(in_score : int):
 	
 func _on_retry_button_button_down() -> void:
 	retryButtonPressed = true
+	justPressed = true
+	get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
 	#get_tree().root.find_child("World", true, false).queue_free()
 	#var s = scene.instantiate()
 	#get_tree().root.add_child(s)
@@ -65,5 +87,26 @@ func _on_retry_button_button_down() -> void:
 
 
 func _on_retry_button_button_up() -> void:
+	if(justPressed):
+		$QuitButton.grab_focus()
+		justPressed = false
+		
+		$RetryButton/TextureProgressBar.texture_under = retry_unfocused
+		$QuitButton/TextureProgressBar.texture_under = quit_focused
 	retryButtonPressed = false
-	
+
+
+func _on_quit_button_button_down() -> void:
+	quitButtonPressed = true
+	justPressed = true
+	get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
+
+
+func _on_quit_button_button_up() -> void:	
+	if(justPressed):
+		$RetryButton.grab_focus()
+		$RetryButton/TextureProgressBar.texture_under = retry_focused
+		$QuitButton/TextureProgressBar.texture_under = quit_unfocused
+		justPressed = false
+	quitButtonPressed = false
+	pass # Replace with function body.

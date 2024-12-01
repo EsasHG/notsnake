@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://c32a5s2ngxrmo"]
+[gd_scene load_steps=16 format=3 uid="uid://c32a5s2ngxrmo"]
 
 [ext_resource type="Script" path="res://Scripts/game_over_screen.gd" id="1_gps28"]
 [ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="2_gmc5o"]
 [ext_resource type="Texture2D" uid="uid://ch2frfffss3xv" path="res://Assets/UI/RETRY_1.png" id="3_ru005"]
 [ext_resource type="Texture2D" uid="uid://5rmu0g0f3sdu" path="res://Assets/UI/RETRY_5.png" id="4_grrl2"]
 [ext_resource type="Texture2D" uid="uid://bnr3m854v23q7" path="res://Assets/UI/Font pngs/txt_SCORE.png" id="5_bulj1"]
+[ext_resource type="Texture2D" uid="uid://chpu7hodmmbuu" path="res://Assets/UI/QUIT_2.png" id="6_4pxhs"]
+[ext_resource type="Texture2D" uid="uid://y1a5d52xbq2a" path="res://Assets/UI/QUIT_1.png" id="7_g1i7x"]
+[ext_resource type="Texture2D" uid="uid://cmi2tok2niuud" path="res://Assets/UI/QUIT_3.png" id="8_iplc1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_du5xi"]
 texture = ExtResource("2_gmc5o")
@@ -14,6 +17,18 @@ texture = ExtResource("3_ru005")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wd1t0"]
 texture = ExtResource("4_grrl2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t3idc"]
+texture = ExtResource("6_4pxhs")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tvxi0"]
+texture = ExtResource("6_4pxhs")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3khe1"]
+texture = ExtResource("6_4pxhs")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q301e"]
+texture = ExtResource("7_g1i7x")
 
 [node name="VictoryScreen" type="Control"]
 layout_mode = 3
@@ -33,9 +48,9 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_du5xi")
 [node name="RetryButton" type="Button" parent="."]
 z_index = -1
 layout_mode = 0
-offset_left = 862.0
+offset_left = 692.0
 offset_top = 878.0
-offset_right = 2056.0
+offset_right = 1886.0
 offset_bottom = 1418.0
 scale = Vector2(0.2, 0.2)
 theme_override_styles/focus = SubResource("StyleBoxTexture_ujcjt")
@@ -62,5 +77,30 @@ scale = Vector2(0.27, 0.27)
 layout_mode = 2
 texture = ExtResource("5_bulj1")
 
+[node name="QuitButton" type="Button" parent="."]
+z_index = -1
+layout_mode = 0
+offset_left = 976.0
+offset_top = 880.0
+offset_right = 2170.0
+offset_bottom = 1420.0
+scale = Vector2(0.2, 0.2)
+theme_override_styles/focus = SubResource("StyleBoxTexture_t3idc")
+theme_override_styles/hover = SubResource("StyleBoxTexture_tvxi0")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3khe1")
+theme_override_styles/normal = SubResource("StyleBoxTexture_q301e")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="QuitButton"]
+z_index = 1
+layout_mode = 0
+offset_left = -20.0
+offset_right = 1289.0
+offset_bottom = 671.0
+fill_mode = 6
+texture_under = ExtResource("8_iplc1")
+texture_progress = ExtResource("6_4pxhs")
+
 [connection signal="button_down" from="RetryButton" to="." method="_on_retry_button_button_down"]
 [connection signal="button_up" from="RetryButton" to="." method="_on_retry_button_button_up"]
+[connection signal="button_down" from="QuitButton" to="." method="_on_quit_button_button_down"]
+[connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]
