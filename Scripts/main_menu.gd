@@ -13,30 +13,39 @@ var thoughtBubble3 = preload("res://Scenes/ThoughtBubble_3.tscn")
 
 var bubblesSpawned : int = 0
 var activeBubble : Node2D
+var activeBubbleTween : Tween
+var activeBubbleTimer : SceneTreeTimer
+var skip : bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visible = true
 	$Panel.modulate.a = 0
-	var comicStartTimer = get_tree().create_timer(0.5).timeout.connect(func():
-		
-		var comicFadeInTween = get_tree().create_tween()
-		comicFadeInTween.set_ease(Tween.EASE_IN)
-		comicFadeInTween.tween_property($Panel, "modulate:a", 1, 1.0)
-		comicFadeInTween.tween_callback(func():
-			var timer = get_tree().create_timer(4.0).timeout.connect(func(): 
-				var tween = get_tree().create_tween()
-				tween.set_ease(Tween.EASE_OUT)
-				tween.tween_property($Panel, "modulate:a", 0, 1.0)
-				tween.tween_callback(func(): 
-					$StartButton.grab_focus()
-					var blackPanelTween = get_tree().create_tween()
-					blackPanelTween.set_ease(Tween.EASE_IN)
-					blackPanelTween.tween_property($Panel2, "modulate:a", 0, 1.5)
-				)
-			)
+	var timer = get_tree().create_timer(0.5).timeout.connect(func():	
+		var blackPanelTween = get_tree().create_tween()
+		blackPanelTween.set_ease(Tween.EASE_IN)
+		blackPanelTween.tween_property($Panel2, "modulate:a", 0, 1.5)
 		)
-	)
-	#$StartButton.grab_focus()
+	
+	#var comicStartTimer = get_tree().create_timer(0.5).timeout.connect(func():
+		#
+		#var comicFadeInTween = get_tree().create_tween()
+		#comicFadeInTween.set_ease(Tween.EASE_IN)
+		#comicFadeInTween.tween_property($Panel, "modulate:a", 1, 1.0)
+		#comicFadeInTween.tween_callback(func():
+			#var timer = get_tree().create_timer(4.0).timeout.connect(func(): 
+				#var tween = get_tree().create_tween()
+				#tween.set_ease(Tween.EASE_OUT)
+				#tween.tween_property($Panel, "modulate:a", 0, 1.0)
+				#tween.tween_callback(func(): 
+					#$StartButton.grab_focus()
+					#var blackPanelTween = get_tree().create_tween()
+					#blackPanelTween.set_ease(Tween.EASE_IN)
+					#blackPanelTween.tween_property($Panel2, "modulate:a", 0, 1.5)
+				#)
+			#)
+		#)
+	#)
+	$StartButton.grab_focus()
 	
 	var music = get_tree().root.find_child("BGMusic", true, false)
 	music.play()
@@ -54,6 +63,15 @@ func _process(delta: float) -> void:
 		
 	if(!startButtonStayFilled && $StartButton/TextureProgressBar.value == $StartButton/TextureProgressBar.max_value):
 		filled()
+		
+	if(startButtonStayFilled && Input.is_action_just_pressed("Press")):
+		if( activeBubbleTween != null && activeBubbleTween.is_valid() && activeBubbleTween.is_running()):
+			activeBubbleTween.pause()
+			activeBubbleTween.custom_step(1.0)
+		else:
+			activeBubbleTimer.time_left = 0
+		skip = true
+		
 		
 func filled():
 	startButtonStayFilled = true
@@ -74,18 +92,29 @@ func menuOut():
 	activeBubble = bubble
 	bubble.modulate.a = 0
 	var tween = get_tree().create_tween()
+	activeBubbleTween = tween
 	tween.tween_property(bubble, "modulate:a", 1, 0.3)
 	tween.tween_callback(bubbleOut)
 	bubble.global_position = bubblePos
 	world.add_child(bubble)
 	
 func bubbleOut():
-	var timer = get_tree().create_timer(2.0).timeout.connect(func():
-		var tween = get_tree().create_tween()
-		tween.set_ease(Tween.EASE_IN)
-		tween.tween_property(activeBubble, "modulate:a", 0, 0.3)
-		tween.tween_callback(deleteBubble)
-		)
+	if(skip):
+		deleteBubble()
+	else:
+		var timer = get_tree().create_timer(2.0)
+		timer.timeout.connect(func():
+			if(skip):
+				activeBubble.modulate.a = 0
+				deleteBubble()
+			else:
+				var tween = get_tree().create_tween()
+				activeBubbleTween = tween
+				tween.set_ease(Tween.EASE_IN)
+				tween.tween_property(activeBubble, "modulate:a", 0, 0.3)
+				tween.tween_callback(deleteBubble)
+			)
+		activeBubbleTimer = timer
 	
 	#var tween = get_tree().create_tween()
 	#tween.set_ease(Tween.EASE_IN)
@@ -112,12 +141,20 @@ func deleteBubble():
 			return
 	bubblesSpawned+=1
 	activeBubble = bubble
-	activeBubble.modulate.a = 0
-	var tween = get_tree().create_tween()
-	tween.tween_property(activeBubble, "modulate:a", 1, 0.3)
-	tween.tween_callback(bubbleOut)
 	bubble.global_position = bubblePos
 	world.add_child(activeBubble)
+	
+	if(skip):
+		skip = false
+		
+		activeBubble.modulate.a = 1
+		bubbleOut()
+	else:
+		activeBubble.modulate.a = 0
+		var tween = get_tree().create_tween()
+		activeBubbleTween = tween
+		tween.tween_property(activeBubble, "modulate:a", 1, 0.3)
+		tween.tween_callback(bubbleOut)
 	
 	
 func _on_start_button_button_down() -> void:

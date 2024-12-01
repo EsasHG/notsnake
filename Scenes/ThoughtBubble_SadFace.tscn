@@ -22,4 +22,5 @@ texture = ExtResource("2_tt4ij")
 
 [node name="ComicBubbleSadface" type="Sprite2D" parent="."]
 z_index = 12
+position = Vector2(-9, 22)
 texture = ExtResource("3_ktdrf")
