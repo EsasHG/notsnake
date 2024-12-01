@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bob8kh4co86nl"]
+
+[ext_resource type="Texture2D" uid="uid://8sk1okil76nj" path="res://Assets/Obstacles/obstacles/tree_4.png" id="1_xtrwr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wje06"]
+radius = 151.003
+
+[node name="Tree_4" type="Area2D" groups=["Dangers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 40)
+shape = SubResource("CircleShape2D_wje06")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4, -3)
+texture = ExtResource("1_xtrwr")

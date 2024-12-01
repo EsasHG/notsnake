@@ -1,10 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=19 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
+[ext_resource type="PackedScene" uid="uid://bdgut8fsafskf" path="res://Scenes/Tree_1.tscn" id="7_3i67f"]
 [ext_resource type="PackedScene" uid="uid://c32a5s2ngxrmo" path="res://Scenes/VictoryScreen.tscn" id="8_ejsn6"]
+[ext_resource type="PackedScene" uid="uid://b2vvgcdqie4wf" path="res://Scenes/Tree_2.tscn" id="8_rh7mh"]
 [ext_resource type="AudioStream" uid="uid://cr7rgnem0d7n0" path="res://Assets/Sound/33 - Ditty.mp3" id="9_3xwyg"]
+[ext_resource type="PackedScene" uid="uid://bnepouvao7645" path="res://Scenes/Tree_3.tscn" id="9_r0j0q"]
 [ext_resource type="PackedScene" uid="uid://jdiyiwxj7kh0" path="res://Scenes/main_menu.tscn" id="9_vbmn1"]
+[ext_resource type="PackedScene" uid="uid://bob8kh4co86nl" path="res://Scenes/Tree_4.tscn" id="10_t73dl"]
 [ext_resource type="PackedScene" uid="uid://bmdwqot80pmgt" path="res://Scenes/Running_dog.tscn" id="11_77w4f"]
 [ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://Scenes/bench.tscn" id="13_y4fym"]
 [ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/fountain.tscn" id="14_518u0"]
@@ -35,14 +39,14 @@ position = Vector2(-256, 115)
 
 [node name="Camera2D" type="Camera2D" parent="World"]
 position = Vector2(-192, 0)
-zoom = Vector2(1.63, 1.63)
+zoom = Vector2(1.4, 1.4)
 limit_left = -953
 limit_top = -535
 limit_right = 953
 limit_bottom = 535
 limit_smoothed = true
 position_smoothing_enabled = true
-position_smoothing_speed = 11.86
+position_smoothing_speed = 3.45
 
 [node name="MapmaybeBase" type="Sprite2D" parent="World"]
 z_index = -3
@@ -73,14 +77,6 @@ shape = SubResource("WorldBoundaryShape2D_hivew")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Walls/Area2D4"]
 shape = SubResource("WorldBoundaryShape2D_rkj8e")
 
-[node name="Bench" parent="World" instance=ExtResource("13_y4fym")]
-position = Vector2(-562, 100)
-scale = Vector2(0.61, 0.61)
-
-[node name="Fountain" parent="World" instance=ExtResource("14_518u0")]
-position = Vector2(-577, -160)
-scale = Vector2(0.575, 0.575)
-
 [node name="Running_Dog" parent="World" instance=ExtResource("11_77w4f")]
 position = Vector2(814, 454)
 
@@ -90,7 +86,7 @@ script = ExtResource("14_lwrxm")
 [node name="PickupPoints" type="Node2D" parent="World/PickupSpawner"]
 
 [node name="Node2D" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
-position = Vector2(5, 394)
+position = Vector2(104, 431)
 
 [node name="Node2D2" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(-597, -23)
@@ -99,19 +95,19 @@ position = Vector2(-597, -23)
 position = Vector2(691, -395)
 
 [node name="Node2D4" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
-position = Vector2(803, 289)
+position = Vector2(140, 247)
 
 [node name="Node2D5" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(261, -237)
 
 [node name="Node2D6" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
-position = Vector2(-785, -417)
+position = Vector2(-785, -270)
 
 [node name="Node2D7" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
-position = Vector2(-797, 376)
+position = Vector2(-660, 310)
 
 [node name="Node2D8" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
-position = Vector2(808, 216)
+position = Vector2(783, 109)
 
 [node name="Node2D9" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(393, 100)
@@ -120,6 +116,52 @@ position = Vector2(393, 100)
 position = Vector2(593, -100)
 
 [node name="Node2D12" type="Node2D" parent="World/PickupSpawner"]
+
+[node name="Obstacles" type="Node2D" parent="World"]
+
+[node name="Bench" parent="World/Obstacles" instance=ExtResource("13_y4fym")]
+position = Vector2(-522, 141)
+scale = Vector2(0.6, 0.6)
+
+[node name="Fountain" parent="World/Obstacles" instance=ExtResource("14_518u0")]
+position = Vector2(-581, -153)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_1" parent="World/Obstacles" instance=ExtResource("7_3i67f")]
+position = Vector2(719, -417)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_9" parent="World/Obstacles" instance=ExtResource("7_3i67f")]
+position = Vector2(750, 335)
+scale = Vector2(-0.6, 0.6)
+
+[node name="Tree_7" parent="World/Obstacles" instance=ExtResource("7_3i67f")]
+position = Vector2(-658, -384)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_2" parent="World/Obstacles" instance=ExtResource("8_rh7mh")]
+position = Vector2(804, -415)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_3" parent="World/Obstacles" instance=ExtResource("9_r0j0q")]
+position = Vector2(-264, -224)
+scale = Vector2(-0.6, 0.6)
+
+[node name="Tree_6" parent="World/Obstacles" instance=ExtResource("9_r0j0q")]
+position = Vector2(-768, -448)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_5" parent="World/Obstacles" instance=ExtResource("9_r0j0q")]
+position = Vector2(-830, 383)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_8" parent="World/Obstacles" instance=ExtResource("9_r0j0q")]
+position = Vector2(845, 288)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_4" parent="World/Obstacles" instance=ExtResource("10_t73dl")]
+position = Vector2(560, 137)
+scale = Vector2(0.468075, 0.468075)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -143,10 +185,11 @@ visible = false
 layout_mode = 1
 
 [node name="MainMenu" parent="CanvasLayer/Gui" instance=ExtResource("9_vbmn1")]
+visible = false
 layout_mode = 1
+bubblePos = Vector2(75, -86)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_3xwyg")
 volume_db = -15.0
-autoplay = true
 parameters/looping = true

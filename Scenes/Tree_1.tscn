@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdgut8fsafskf"]
+
+[ext_resource type="Texture2D" uid="uid://cniserfs5j5yw" path="res://Assets/Obstacles/obstacles/tree_1.png" id="1_fmkun"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hc7wb"]
+size = Vector2(136, 100)
+
+[node name="Tree_1" type="Area2D" groups=["Dangers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 13)
+shape = SubResource("RectangleShape2D_hc7wb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4, -3)
+texture = ExtResource("1_fmkun")

@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="7_dffxg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7we7l"]
-size = Vector2(33, 28)
+size = Vector2(27, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_45bpw"]
 atlas = ExtResource("6_a0qte")
@@ -185,6 +185,7 @@ script = ExtResource("5_q7dwm")
 MOVE_SPEED = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_7we7l")
 
 [node name="Head" type="AnimatedSprite2D" parent="."]

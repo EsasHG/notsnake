@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bighcj0mfvk1w"]
+
+[ext_resource type="Texture2D" uid="uid://of66bep112e8" path="res://Assets/UI/thought_bubble/comic_bubble_small.png" id="1_1eadi"]
+[ext_resource type="Texture2D" uid="uid://bih0o3akae0et" path="res://Assets/UI/thought_bubble/comic_bubble_medium.png" id="2_75g30"]
+[ext_resource type="Texture2D" uid="uid://cdauou7c8qwkk" path="res://Assets/UI/OPENER COMIC/GAME_COMIC_PANEL3.png" id="3_ywi4s"]
+[ext_resource type="Script" path="res://Scripts/thought_bubble.gd" id="4_3h65y"]
+
+[node name="ThoughtBubble_3" type="Node2D"]
+script = ExtResource("4_3h65y")
+
+[node name="ComicBubbleSmall" type="Sprite2D" parent="."]
+z_index = 12
+position = Vector2(-167, 140)
+texture = ExtResource("1_1eadi")
+
+[node name="ComicBubbleMedium" type="Sprite2D" parent="."]
+z_index = 12
+position = Vector2(-104, 111)
+texture = ExtResource("2_75g30")
+
+[node name="GameComicPanel3" type="Sprite2D" parent="."]
+position = Vector2(74, -34)
+scale = Vector2(0.405, 0.405)
+texture = ExtResource("3_ywi4s")

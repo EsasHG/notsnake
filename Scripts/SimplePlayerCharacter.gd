@@ -45,7 +45,7 @@ func add_sprite():
 	if(canAddSprites):
 		spritesToAdd+=segmentsPerSection
 		canAddSprites = false
-		get_tree().create_timer(1.0).timeout.connect(resetSpriteTimer)
+		get_tree().create_timer(0.1).timeout.connect(resetSpriteTimer)
 		
 			#if(spritesToAdd > 0):
 		hindLegs.pause()
@@ -63,7 +63,7 @@ func add_segment():
 	if(canAddSprites):
 		spritesToAdd+=segmentsPerSection
 		canAddSprites = false
-		get_tree().create_timer(1.0).timeout.connect(resetSpriteTimer)
+		get_tree().create_timer(0.1).timeout.connect(resetSpriteTimer)
 		
 			#if(spritesToAdd > 0):
 		#$Head/Legs.pause()
@@ -87,8 +87,6 @@ func _process(delta: float) -> void:
 	if(!move): return
 #	position.x += delta*100
 		
-
-		
 	var dir : int = -1
 	if(Input.is_action_pressed("Press") && playerControl):
 		dir = 1
@@ -99,7 +97,6 @@ func _process(delta: float) -> void:
 		
 	#Player has to move and rotate before the sprites so we don't override their global rotation by rotating the player. 
 	move_local_y(delta*MOVE_SPEED)
-		
 	
 	var pos = global_position
 	var left = transform.x*dir
@@ -214,9 +211,11 @@ func _on_area_entered(area: Area2D) -> void:
 	elif(area.is_in_group("Dangers")):
 		
 		GameOver.emit()
-		var music = get_tree().root.find_child("AudioStreamPlayer", true, false)
-		
+		var music = get_tree().root.find_child("BGMusic", true, false)
+		music.stop()
 		var m :  AudioStreamPlayer = music
+		m.autoplay = false
+		m.stream_paused = true
 		m.stop()
 		m.stream = load("res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3")
 		m.play()
@@ -247,6 +246,10 @@ func _on_area_entered(area: Area2D) -> void:
 		
 func grabCamera():	
 	var camera = get_tree().root.find_child("Camera2D", true, false)
-	camera.reparent(self, false)
-	camera.position = Vector2(0,0)
-	playerControl = true
+	camera.reparent(self)
+	var tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(camera, "position", Vector2(0,0), 0.5)
+	tween.tween_callback(func(): playerControl = true)
+	#camera.position = Vector2(0,0)
+#	playerControl = true
