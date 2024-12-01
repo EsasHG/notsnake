@@ -29,6 +29,7 @@ animations = [{
 
 [node name="Chiweewee" type="Area2D"]
 script = ExtResource("1_bkt5k")
+distThreshold = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)

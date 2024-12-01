@@ -3,6 +3,7 @@ class_name PickupSpawner
 
 @onready var toy = preload("res://Scenes/DogToy.tscn")
 @onready var bone = preload("res://Scenes/DogBone.tscn")
+@onready var present = preload("res://Scenes/present.tscn")
 @onready var pickupPoints : Array[Node] = $PickupPoints.get_children()
 var prevPoint : int = 14
 
@@ -19,7 +20,6 @@ func SpawnPickup():
 	else:
 		pickup = toy.instantiate()
 	
-	
 	var point : int = prevPoint
 	while point == prevPoint:
 		point =	randi_range(0, pickupPoints.size()-1)
@@ -30,6 +30,20 @@ func SpawnPickup():
 	print_debug("Adding pickup")
 	add_child.call_deferred(pickup)
 	
+	
+func SpawnPresent():
+	
+	var pickup : Area2D = present.instantiate()
+	
+	var point : int = prevPoint
+	while point == prevPoint:
+		point =	randi_range(0, pickupPoints.size()-1)
+	prevPoint = point
+	#var pickupLoc : Vector2 = Vector2(randi_range(-xBorder, xBorder), randi_range(-yBorder, yBorder))
+	pickup.position = pickupPoints[point].position
+	
+	print_debug("Adding pickup")
+	add_child.call_deferred(pickup)
 	#while pickup.has_overlapping_areas():
 	#	pickupLoc = Vector2(randi_range(-xBorder, xBorder), randi_range(-yBorder, yBorder))
 	#	pickup.position = pickupLoc

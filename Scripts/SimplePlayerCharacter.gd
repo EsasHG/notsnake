@@ -5,7 +5,9 @@ class_name PlayerDog
 @export var ROTATE_SPEED = 5
 @export var MOVE_SPEED = 1
 var prevPositionsArr = []
+@export var hats : Array[Sprite2D]
 
+var currentHat = -1
 var spritesToAdd = 0
 var timer : float = 0.0
 var spawnTime : float = 0.02
@@ -229,6 +231,32 @@ func _on_area_entered(area: Area2D) -> void:
 		segmentParent.queue_free()
 		queue_free()
 	elif(area.is_in_group("Treats")):
+		$Head/BarkSound.pitch_scale = randf_range(0.9,1.1)
+		$Head/BarkSound.play()
+		
+		if(canAddSprites):
+			score+=1
+			for i : int in segmentsPerSection:
+				add_segment()
+				
+			if(score % 4 == 0):
+				pickupSpawner.SpawnPresent()
+			else:
+				pickupSpawner.SpawnPickup()
+			
+			area.queue_free()
+			print_debug("Score: " + var_to_str(score))
+	elif(area.is_in_group("Present")):
+		
+		var hatRand : int = currentHat
+		while hatRand == currentHat:
+			hatRand = randi_range(0, hats.size()-1)
+		
+		if(currentHat != -1):
+			hats[currentHat].visible = false
+		
+		hats[hatRand].visible = true
+		currentHat = hatRand
 		
 		$Head/BarkSound.pitch_scale = randf_range(0.9,1.1)
 		$Head/BarkSound.play()

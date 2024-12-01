@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var player : Node2D = get_tree().root.find_child("PlayerDog", true, false)
 
-var distThreshold = 250
+@export var distThreshold = 250
 var playerCrossedThreshold = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,5 +25,5 @@ func _process(delta: float) -> void:
 			$AudioStreamPlayer2D.stop()
 	elif(player == null):
 		player = get_tree().root.find_child("PlayerDog", true, false)
-		
-	pass
+		$AnimatedSprite2D.play("default")	
+		$AudioStreamPlayer2D.stop()
