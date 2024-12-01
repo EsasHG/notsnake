@@ -25,7 +25,7 @@ var showFps = false
 
 var playerControl = false
 var frameDelay = 1
-var segmentsPerSection =40
+var segmentsPerSection = 20
 var move = true
 signal GameOver
 # Called when the node enters the scene tree for the first time.
@@ -210,15 +210,13 @@ func _on_area_entered(area: Area2D) -> void:
 		
 	elif(area.is_in_group("Dangers")):
 		
-		GameOver.emit()
 		var music = get_tree().root.find_child("BGMusic", true, false)
 		music.stop()
-		var m :  AudioStreamPlayer = music
-		m.autoplay = false
-		m.stream_paused = true
-		m.stop()
-		m.stream = load("res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3")
-		m.play()
+		music.stream_paused = true
+		var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
+		loseMusic.play()
+
+		#m.stream = load("res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3")
 		if(playerControl == false):
 			return	
 		move = false

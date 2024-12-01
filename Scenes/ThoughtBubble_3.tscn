@@ -19,6 +19,6 @@ position = Vector2(-104, 111)
 texture = ExtResource("2_75g30")
 
 [node name="GameComicPanel3" type="Sprite2D" parent="."]
-position = Vector2(74, -34)
+position = Vector2(28, -15)
 scale = Vector2(0.405, 0.405)
 texture = ExtResource("3_ywi4s")

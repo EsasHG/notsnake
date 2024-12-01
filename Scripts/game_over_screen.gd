@@ -2,6 +2,8 @@ extends Control
 
 var score : int
 @onready var scene = load("res://Scenes/PlayerDog.tscn")
+
+@onready var BGmusic = get_tree().root.find_child("BGMusic", true, false)
 var retryButtonPressed =false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,6 +39,9 @@ func filled():
 		if(c.name != "ScoreLabel"):
 			c.queue_free()
 	
+	var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
+	loseMusic.stop()
+	BGmusic.play()
 	
 	
 func SetScore(in_score : int):
