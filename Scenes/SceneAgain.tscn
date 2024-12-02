@@ -177,18 +177,20 @@ position = Vector2(847, -274)
 
 [node name="Gui" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="GameOverScreen" parent="CanvasLayer/Gui" instance=ExtResource("15_i27mg")]
-visible = false
-layout_mode = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="FPS_Tracker" type="Label" parent="CanvasLayer/Gui"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="GameOverScreen" parent="CanvasLayer/Gui" instance=ExtResource("15_i27mg")]
+visible = false
+layout_mode = 1
 
 [node name="VictoryScreen" parent="CanvasLayer/Gui" instance=ExtResource("8_ejsn6")]
 visible = false
@@ -201,6 +203,7 @@ bubblePos = Vector2(75, -86)
 
 [node name="BonusScreen" parent="CanvasLayer/Gui" instance=ExtResource("16_cwq0r")]
 visible = false
+layout_mode = 1
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_3xwyg")

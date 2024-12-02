@@ -154,46 +154,17 @@ func _process(delta: float) -> void:
 	
 	prevPositionsArr.push_front([global_position, rotation])
 	
-	if(Input.is_key_pressed(KEY_F)):
-		showFps = true
-		var fps : float = 1/ delta
-		$"../../CanvasLayer/Gui/FPS_Tracker".text = "Framerate: " + var_to_str(fps)
-	else:
-		showFps = false
-#		$"../../CanvasLayer/Gui/FPS_Tracker".text = ""
+	#if(Input.is_key_pressed(KEY_F)):
+		#showFps = true
+		#var fps : float = 1/ delta
+		#$"../../CanvasLayer/Gui/FPS_Tracker".text = "Framerate: " + var_to_str(fps)
+	#else:
+		#showFps = false
+##		$"../../CanvasLayer/Gui/FPS_Tracker".text = ""
 		
-	
-	 
-	#var i : int = 0
-	#for s in segmentSprites:
-		#var newPos1 
-		#var nPos1 : Vector2
-#
-		#if(prevPositionsArr.size() > i):	
-			#newPos1 = prevPositionsArr[i]
-			#nPos1 = newPos1[0]
-		#else:
-			#newPos1 = prevPositionsArr[prevPositionsArr.size()-2] #if there's more sprites than we know where to put, use the second to last position
-			#nPos1 = newPos1[0]
-		#s.global_position = nPos1
-		#s.global_rotation = newPos1[1]
-		#i+=1		
-	#if(prevPositionsArr.size() > (segmentSprites.size())*frameDelay):
-		#prevPositionsArr.pop_back()
-	#if(spritesToAdd > 0):
-		#$Head/Legs.pause()
-		#var s : Sprite2D = Sprite2D.new()
-		#s.texture = sprite
-		#s.scale.y = 0.25
-		#segmentSprites.insert(segmentSprites.size()-1,s) #legger til nest sist.
-		#add_child(s)
-		#s.position =  Vector2(0,0)
-		#spritesToAdd-=1
-	#$Head/Legs.play()
 	prevPos = global_position
 	prevLeft = left
 	prevDir = dir
-	queue_redraw()
 
 func _on_area_entered(area: Area2D) -> void:
 	

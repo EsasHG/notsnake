@@ -31,28 +31,41 @@ texture = ExtResource("7_b8yx4")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2dd65"]
 texture = ExtResource("8_73uxn")
 
-[node name="Control" type="Control"]
+[node name="GameOverScreen" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_7tubc")
 
 [node name="Panel" type="Panel" parent="."]
 texture_repeat = 2
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_mnkbk")
 
 [node name="RetryButton" type="Button" parent="."]
 z_index = -1
-layout_mode = 0
-offset_left = 647.0
-offset_top = 878.0
-offset_right = 1841.0
-offset_bottom = 1418.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -597.0
+offset_top = -380.0
+offset_right = 597.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 0
 scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(597, 270)
 theme_override_styles/focus = SubResource("StyleBoxTexture_rso4g")
 theme_override_styles/hover = SubResource("StyleBoxTexture_rso4g")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_rso4g")
@@ -60,8 +73,9 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_l25qd")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="RetryButton"]
 z_index = 1
-layout_mode = 0
-offset_right = 1194.0
+layout_mode = 1
+offset_left = -20.0
+offset_right = 1174.0
 offset_bottom = 540.0
 fill_mode = 6
 texture_under = ExtResource("3_grf0n")
@@ -86,13 +100,22 @@ texture = ExtResource("5_20k6k")
 stream = ExtResource("6_nrd6a")
 
 [node name="QuitButton" type="Button" parent="."]
+visible = false
 z_index = -1
-layout_mode = 0
-offset_left = 1092.0
-offset_top = 880.0
-offset_right = 2286.0
-offset_bottom = 1420.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -234.0
+offset_top = -380.0
+offset_right = 966.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 0
 scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(597, 270)
 theme_override_styles/focus = SubResource("StyleBoxTexture_x0n2p")
 theme_override_styles/hover = SubResource("StyleBoxTexture_vj1fb")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_n6uw2")
@@ -100,10 +123,10 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_2dd65")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="QuitButton"]
 z_index = 1
-layout_mode = 0
+layout_mode = 1
 offset_left = -20.0
-offset_right = 1289.0
-offset_bottom = 671.0
+offset_right = 1180.0
+offset_bottom = 540.0
 fill_mode = 6
 texture_under = ExtResource("9_knqth")
 texture_progress = ExtResource("7_b8yx4")

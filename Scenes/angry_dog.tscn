@@ -7,14 +7,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xavxj"]
 size = Vector2(65, 160)
 
-[node name="AngryDog" type="Area2D"]
+[node name="AngryDog" type="Area2D" groups=["Dangers"]]
 script = ExtResource("1_u6g5v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 20)
 shape = SubResource("RectangleShape2D_xavxj")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Dangers"]]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_py7at")
 frame_progress = 0.492944
 

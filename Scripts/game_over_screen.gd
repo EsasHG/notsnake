@@ -25,13 +25,14 @@ func on_visibility_changed():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if(quitButtonPressed):
-		$QuitButton/TextureProgressBar.value += 80*delta
-	elif(!quitButtonPressed):
-		$QuitButton/TextureProgressBar.value -= 100*delta
-		
-	if($QuitButton/TextureProgressBar.value == $QuitButton/TextureProgressBar.max_value):
-		quitFilled()
+	if(!OS.has_feature("web")):
+		if(quitButtonPressed):
+			$QuitButton/TextureProgressBar.value += 80*delta
+		elif(!quitButtonPressed):
+			$QuitButton/TextureProgressBar.value -= 100*delta
+			
+		if($QuitButton/TextureProgressBar.value == $QuitButton/TextureProgressBar.max_value):
+			quitFilled()
 	
 	
 	
@@ -76,8 +77,9 @@ func SetScore(in_score : int):
 	
 func _on_retry_button_button_down() -> void:
 	retryButtonPressed = true
-	justPressed = true
-	get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
+	if(!OS.has_feature("web")):
+		justPressed = true
+		get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
 	#get_tree().root.find_child("World", true, false).queue_free()
 	#var s = scene.instantiate()
 	#get_tree().root.add_child(s)
@@ -87,12 +89,13 @@ func _on_retry_button_button_down() -> void:
 
 
 func _on_retry_button_button_up() -> void:
-	if(justPressed):
-		$QuitButton.grab_focus()
-		justPressed = false
+	if(!OS.has_feature("web")):
+		if(justPressed):
+			$QuitButton.grab_focus()
+			justPressed = false
 		
-		$RetryButton/TextureProgressBar.texture_under = retry_unfocused
-		$QuitButton/TextureProgressBar.texture_under = quit_focused
+			$RetryButton/TextureProgressBar.texture_under = retry_unfocused
+			$QuitButton/TextureProgressBar.texture_under = quit_focused
 	retryButtonPressed = false
 
 
