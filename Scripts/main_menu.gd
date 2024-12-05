@@ -64,13 +64,14 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#$StartButton.grab_focus()
-	if(quitButtonPressed):
-		$QuitButton/TextureProgressBar.value += 80*delta
-	elif(!quitButtonPressed):
-		$QuitButton/TextureProgressBar.value -= 100*delta
-		
-	if($QuitButton/TextureProgressBar.value == $QuitButton/TextureProgressBar.max_value):
-		quitFilled()
+	if(!OS.has_feature("web")):
+		if(quitButtonPressed):
+			$QuitButton/TextureProgressBar.value += 80*delta
+		elif(!quitButtonPressed):
+			$QuitButton/TextureProgressBar.value -= 100*delta
+			
+		if($QuitButton/TextureProgressBar.value == $QuitButton/TextureProgressBar.max_value):
+			quitFilled()
 	
 	
 	
@@ -187,19 +188,22 @@ func deleteBubble():
 	
 func _on_start_button_button_down() -> void:
 	print_debug("Start down!")
-	justPressed = true
-	get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
+	if(!OS.has_feature("web")):
+		justPressed = true
+		get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
 	startButtonPressed = true
 
 
 func _on_start_button_button_up() -> void:
 	print_debug("Start up!")
-	if(justPressed):
-		$QuitButton.grab_focus()
-		justPressed = false
-		
-		$StartButton/TextureProgressBar.texture_under = start_unfocused
-		$QuitButton/TextureProgressBar.texture_under = quit_focused
+	if(!OS.has_feature("web")):
+		if(justPressed):
+			$QuitButton.grab_focus()
+			justPressed = false
+			
+			$StartButton/TextureProgressBar.texture_under = start_unfocused
+			$QuitButton/TextureProgressBar.texture_under = quit_focused
+	
 	startButtonPressed = false
 pass # Replace with function body.
 

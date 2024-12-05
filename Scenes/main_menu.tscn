@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://jdiyiwxj7kh0"]
+[gd_scene load_steps=22 format=3 uid="uid://jdiyiwxj7kh0"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
@@ -35,6 +35,9 @@ texture = ExtResource("8_52c2e")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5i33v"]
 texture = ExtResource("9_i5odq")
 
+[sub_resource type="Shortcut" id="Shortcut_8klix"]
+events = [null]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -51,101 +54,158 @@ grow_vertical = 2
 script = ExtResource("1_jrsic")
 
 [node name="Logo" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 1056.0
-offset_right = 4896.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -865.0
+offset_right = 2975.0
 offset_bottom = 2160.0
+grow_horizontal = 0
 scale = Vector2(0.225, 0.225)
 texture = ExtResource("2_5vvlb")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="StartButton" type="Button" parent="."]
 z_index = -1
-layout_mode = 0
-offset_left = 605.0
-offset_top = 878.0
-offset_right = 1799.0
-offset_bottom = 1418.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -597.0
+offset_top = -380.0
+offset_right = 597.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 0
 scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(640, 270)
 theme_override_styles/focus = SubResource("StyleBoxTexture_lryf2")
 theme_override_styles/hover = SubResource("StyleBoxTexture_gxmeb")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_yal6d")
 theme_override_styles/normal = SubResource("StyleBoxTexture_r767b")
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="StartButton"]
 z_index = 1
-layout_mode = 0
-offset_left = -20.0
-offset_top = -30.0
-offset_right = 1289.0
-offset_bottom = 641.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -57.5
+offset_top = -65.5
+offset_right = 57.5
+offset_bottom = 65.5
+grow_horizontal = 2
+grow_vertical = 2
 step = 0.1
 fill_mode = 6
 texture_under = ExtResource("4_uoro4")
 texture_progress = ExtResource("3_wiek5")
 
 [node name="QuitButton" type="Button" parent="."]
+visible = false
 z_index = -1
-layout_mode = 0
-offset_left = 1156.0
-offset_top = 887.0
-offset_right = 2350.0
-offset_bottom = 1427.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -234.0
+offset_top = -380.0
+offset_right = 960.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 0
 scale = Vector2(0.2, 0.2)
+pivot_offset = Vector2(597, 270)
 theme_override_styles/focus = SubResource("StyleBoxTexture_eqqvd")
 theme_override_styles/hover = SubResource("StyleBoxTexture_6oyoi")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_cgqex")
 theme_override_styles/normal = SubResource("StyleBoxTexture_5i33v")
+shortcut = SubResource("Shortcut_8klix")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="QuitButton"]
 z_index = 1
-layout_mode = 0
-offset_left = -20.0
-offset_right = 1289.0
-offset_bottom = 671.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 step = 0.1
 fill_mode = 6
 texture_under = ExtResource("10_rtivd")
 texture_progress = ExtResource("8_52c2e")
 
 [node name="Panel2" type="Panel" parent="."]
-layout_mode = 0
-offset_left = 6.10352e-05
-offset_top = 6.10352e-05
-offset_right = 1920.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cy8ve")
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c58tn")
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
-layout_mode = 0
-offset_left = 339.0
-offset_top = 59.0
-offset_right = 1253.0
-offset_bottom = 1427.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -593.0
+offset_top = -472.0
+offset_right = 321.0
+offset_bottom = 896.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.675, 0.675)
 texture = ExtResource("5_a54ho")
 
 [node name="TextureRect2" type="TextureRect" parent="Panel"]
-layout_mode = 0
-offset_left = 981.0
-offset_top = 94.0
-offset_right = 1795.0
-offset_bottom = 808.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 46.0
+offset_top = -408.0
+offset_right = 860.0
+offset_bottom = 306.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.675, 0.675)
 texture = ExtResource("6_afy1m")
 
 [node name="TextureRect3" type="TextureRect" parent="Panel"]
-layout_mode = 0
-offset_left = 976.0
-offset_top = 618.0
-offset_right = 1878.0
-offset_bottom = 1204.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 926.0
+offset_bottom = 618.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.675, 0.675)
 texture = ExtResource("7_wbc7c")
 
