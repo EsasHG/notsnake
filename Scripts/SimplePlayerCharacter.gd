@@ -44,6 +44,9 @@ func _ready() -> void:
 	add_sibling.call_deferred(segmentParent)
 	butt.reparent(segmentParent)
 	
+	Input.emulate_mouse_from_touch = true
+	
+	
 func add_sprite():
 	if(canAddSprites):
 		spritesToAdd+=segmentsPerSection
@@ -89,9 +92,8 @@ func resetSpriteTimer():
 func _process(delta: float) -> void:
 	if(!move): return
 #	position.x += delta*100
-		
 	var dir : int = -1
-	if(Input.is_action_pressed("Press") && playerControl):
+	if(Input.is_action_pressed("Press") && ("Press") && playerControl):
 		dir = 1
 		rotate(delta*ROTATE_SPEED)
 	else:

@@ -54,7 +54,8 @@ func _ready() -> void:
 			#)
 		#)
 	#)
-	$StartButton.grab_focus()
+	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
+		$StartButton.grab_focus()
 	
 	var music = get_tree().root.find_child("BGMusic", true, false)
 	music.play()
@@ -64,7 +65,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#$StartButton.grab_focus()
-	if(!OS.has_feature("web")):
+	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
 		if(quitButtonPressed):
 			$QuitButton/TextureProgressBar.value += 80*delta
 		elif(!quitButtonPressed):
@@ -74,11 +75,10 @@ func _process(delta: float) -> void:
 			quitFilled()
 	
 	
-	
-	if(startButtonPressed):
-		$StartButton/TextureProgressBar.value += 80*delta
-	elif(!startButtonStayFilled):
-		$StartButton/TextureProgressBar.value -= 100*delta
+		if(startButtonPressed):
+			$StartButton/TextureProgressBar.value += 80*delta
+		elif(!startButtonStayFilled):
+			$StartButton/TextureProgressBar.value -= 100*delta
 		
 	if(!startButtonStayFilled && $StartButton/TextureProgressBar.value == $StartButton/TextureProgressBar.max_value):
 		filled()
@@ -188,7 +188,8 @@ func deleteBubble():
 	
 func _on_start_button_button_down() -> void:
 	print_debug("Start down!")
-	if(!OS.has_feature("web")):
+	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
+
 		justPressed = true
 		get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
 	startButtonPressed = true
@@ -196,7 +197,7 @@ func _on_start_button_button_down() -> void:
 
 func _on_start_button_button_up() -> void:
 	print_debug("Start up!")
-	if(!OS.has_feature("web")):
+	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
 		if(justPressed):
 			$QuitButton.grab_focus()
 			justPressed = false
