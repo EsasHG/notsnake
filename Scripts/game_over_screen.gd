@@ -1,5 +1,6 @@
 extends Control
 
+var retryButtonPressed = false
 var quitButtonPressed = false
 var justPressed = false
 var justPressedTime = 0.2
@@ -12,10 +13,12 @@ var score : int
 @onready var scene = load("res://Scenes/PlayerDog.tscn")
 
 @onready var BGmusic = get_tree().root.find_child("BGMusic", true, false)
-var retryButtonPressed =false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	visibility_changed.connect(on_visibility_changed)
+	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
+		if(visible):
+			$RetryButton.grab_focus()
 
 
 func on_visibility_changed():
@@ -36,15 +39,13 @@ func _process(delta: float) -> void:
 		if($QuitButton/TextureProgressBar.value == $QuitButton/TextureProgressBar.max_value):
 			quitFilled()
 	
-	
-	
-	if(retryButtonPressed):
-		$RetryButton/TextureProgressBar.value += 80*delta
-	else:
-		$RetryButton/TextureProgressBar.value -= 100*delta
-		
-	if($RetryButton/TextureProgressBar.value == $RetryButton/TextureProgressBar.max_value):
-		filled()
+		if(retryButtonPressed):
+			$RetryButton/TextureProgressBar.value += 80*delta
+		else:
+			$RetryButton/TextureProgressBar.value -= 100*delta
+			
+		if($RetryButton/TextureProgressBar.value == $RetryButton/TextureProgressBar.max_value):
+			filled()
 		
 		
 func filled():    
@@ -78,10 +79,12 @@ func SetScore(in_score : int):
 		$HBoxContainer.add_child(tex)
 	
 func _on_retry_button_button_down() -> void:
-	retryButtonPressed = true
 	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
 		justPressed = true
 		get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
+	elif OS.has_feature("mobile"):
+		filled()
+	retryButtonPressed = true
 	#get_tree().root.find_child("World", true, false).queue_free()
 	#var s = scene.instantiate()
 	#get_tree().root.add_child(s)
@@ -91,6 +94,7 @@ func _on_retry_button_button_down() -> void:
 
 
 func _on_retry_button_button_up() -> void:
+	
 	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
 		if(justPressed):
 			$QuitButton.grab_focus()

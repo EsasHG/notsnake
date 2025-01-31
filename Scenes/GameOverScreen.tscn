@@ -41,6 +41,7 @@ grow_vertical = 2
 script = ExtResource("1_7tubc")
 
 [node name="Panel" type="Panel" parent="."]
+z_index = -2
 texture_repeat = 2
 layout_mode = 1
 anchors_preset = 15
@@ -48,9 +49,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_mnkbk")
 
 [node name="RetryButton" type="Button" parent="."]
+z_index = -1
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

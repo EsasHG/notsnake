@@ -101,14 +101,12 @@ offset_right = 57.5
 offset_bottom = 65.5
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 step = 0.1
 fill_mode = 6
 texture_under = ExtResource("4_uoro4")
 texture_progress = ExtResource("3_wiek5")
 
 [node name="QuitButton" type="Button" parent="."]
-visible = false
 z_index = -1
 layout_mode = 1
 anchors_preset = 7
@@ -150,6 +148,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cy8ve")
 
 [node name="Panel" type="Panel" parent="."]
@@ -160,6 +159,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_c58tn")
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
@@ -176,6 +176,7 @@ offset_bottom = 896.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.675, 0.675)
+mouse_filter = 2
 texture = ExtResource("5_a54ho")
 
 [node name="TextureRect2" type="TextureRect" parent="Panel"]
@@ -192,6 +193,7 @@ offset_bottom = 306.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.675, 0.675)
+mouse_filter = 2
 texture = ExtResource("6_afy1m")
 
 [node name="TextureRect3" type="TextureRect" parent="Panel"]
@@ -208,6 +210,7 @@ offset_bottom = 618.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.675, 0.675)
+mouse_filter = 2
 texture = ExtResource("7_wbc7c")
 
 [connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]

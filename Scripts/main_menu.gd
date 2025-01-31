@@ -60,7 +60,7 @@ func _ready() -> void:
 	var music = get_tree().root.find_child("BGMusic", true, false)
 	music.play()
 	
-	pass # Replace with function body.
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -167,6 +167,7 @@ func deleteBubble():
 			var player = get_tree().root.find_child("PlayerDog", true, false)
 			player.playerControl = true
 			player.grabCamera()
+			visible = false
 			return
 	bubblesSpawned+=1
 	activeBubble = bubble
@@ -192,6 +193,8 @@ func _on_start_button_button_down() -> void:
 
 		justPressed = true
 		get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
+	elif OS.has_feature("mobile"):
+		filled()
 	startButtonPressed = true
 
 
