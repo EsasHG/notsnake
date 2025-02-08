@@ -4,6 +4,7 @@ class_name PlayerDog
 
 @export var ROTATE_SPEED = 5
 @export var MOVE_SPEED = 1
+@export var OVERALL_SPEED = 0.9
 var prevPositionsArr = []
 @export var hats : Array[Sprite2D]
 @export var bonusScreenThreshold = 30
@@ -31,18 +32,17 @@ var frameDelay = 1
 var segmentsPerSection = 20
 var move = true
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Head.play("default")
 	$Head/Legs.play("default")
 	$Butt/ButtSprite/Legs_back.play("default")
 	$Butt/ButtSprite/Tail.play("default")
-	#segmentSprites.push_back($Butt)
 	add_sprite()
 	get_tree().create_timer(1.0).timeout.connect(func(): butt.get_child(0).disabled = false)
 	
 	add_sibling.call_deferred(segmentParent)
 	butt.reparent(segmentParent)
+	GameSettings.currentScore = 0
 	
 	Input.emulate_mouse_from_touch = true
 	
@@ -52,56 +52,33 @@ func add_sprite():
 		spritesToAdd+=segmentsPerSection
 		canAddSprites = false
 		get_tree().create_timer(0.1).timeout.connect(resetSpriteTimer)
-		
-			#if(spritesToAdd > 0):
 		hindLegs.pause()
-#		$Head/Legs.pause()
-		#for i:int in segmentsPerSection: 
-			#var s : Sprite2D = Sprite2D.new()
-			#s.texture = sprite
-			#s.scale.y = 0.5
-			#segmentSprites.insert(segmentSprites.size()-1,s) #legger til nest sist.
-			#add_child(s)
-			#s.position =  $Butt.position
-			#spritesToAdd-=1
 
 func add_segment():
 	if(canAddSprites):
 		spritesToAdd+=segmentsPerSection
 		canAddSprites = false
 		get_tree().create_timer(0.1).timeout.connect(resetSpriteTimer)
-		
-			#if(spritesToAdd > 0):
-		#$Head/Legs.pause()
 		hindLegs.pause()
 		
-		#for i:int in segmentsPerSection: 
-			#var s  = segment.instantiate()
-			#segmentSprites.insert(segmentSprites.size()-1,s) #legger til nest sist.
-			#add_child.call_deferred(s)
-			#s.position =  $Butt.position
-			#spritesToAdd-=1
-		#$Head/Legs.play()
-
 
 func resetSpriteTimer():
 	canAddSprites = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if(!move): return
 #	position.x += delta*100
 	var dir : int = -1
 	if(Input.is_action_pressed("Press") && ("Press") && playerControl):
 		dir = 1
-		rotate(delta*ROTATE_SPEED)
+		rotate(delta*ROTATE_SPEED*OVERALL_SPEED)
 	else:
 		dir = -1
-		rotate(-delta*ROTATE_SPEED)
+		rotate(-delta*ROTATE_SPEED*OVERALL_SPEED)
 		
 	#Player has to move and rotate before the sprites so we don't override their global rotation by rotating the player. 
-	move_local_y(delta*MOVE_SPEED)
+	move_local_y(delta*MOVE_SPEED*OVERALL_SPEED)
 	
 	var pos = global_position
 	var left = transform.x*dir
@@ -113,7 +90,6 @@ func _process(delta: float) -> void:
 	var proj = distVec.project(left)
 	var dist_to = proj.distance_to(prevPos-pos)
 	var si = sin(ang)
-	var end = dist_to/si
 	
 	var rotationCenter = pos+(left*dist) 
 	timer+=delta
@@ -168,14 +144,16 @@ func _process(delta: float) -> void:
 	prevLeft = left
 	prevDir = dir
 
+
 func _on_area_entered(area: Area2D) -> void:
-	
 	if(area == butt):
 		if(playerControl == false):
 			return	
 		move = false
 		var g : Control = get_tree().root.find_child("VictoryScreen",true, false)
-		g.SetScore(score)
+		g.SetScore(GameSettings.currentScore)
+		#g.SetScore(score)
+		
 		g.visible = true 
 		var camera = get_tree().root.find_child("Camera2D", true, false)
 		camera.reparent(get_tree().root.find_child("World", true, false))
@@ -191,18 +169,18 @@ func _on_area_entered(area: Area2D) -> void:
 		var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
 		loseMusic.play()
 
-		#m.stream = load("res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3")
 		if(playerControl == false):
 			return	
 		move = false
 		var g
-		if(score >= bonusScreenThreshold):
+		if(GameSettings.currentScore >= bonusScreenThreshold):
 			g = get_tree().root.find_child("BonusScreen",true, false)
 		else:
 			g = get_tree().root.find_child("GameOverScreen",true, false)
 			
 		
-		g.SetScore(score)
+#		g.SetScore(score)
+		g.SetScore(GameSettings.currentScore)
 		g.visible = true 
 		var camera = get_tree().root.find_child("Camera2D", true, false)
 		camera.reparent(get_tree().root.find_child("World", true, false))
@@ -215,16 +193,18 @@ func _on_area_entered(area: Area2D) -> void:
 		
 		if(canAddSprites):
 			score+=1
+			GameSettings.currentScore += 1
 			for i : int in segmentsPerSection:
 				add_segment()
 				
-			if(score == 10):
+			if(GameSettings.currentScore == 10):
 				pickupSpawner.SpawnPresent()
 			else:
 				pickupSpawner.SpawnPickup()
 			
 			area.queue_free()
 			print_debug("Score: " + var_to_str(score))
+			print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
 	elif(area.is_in_group("Present")):
 		
 		var hatRand : int = currentHat
@@ -242,12 +222,12 @@ func _on_area_entered(area: Area2D) -> void:
 		
 		if(canAddSprites):
 			score+=1
+			GameSettings.currentScore+=1
 			for i : int in segmentsPerSection:
 				add_segment()
 			pickupSpawner.SpawnPickup()
 			area.queue_free()
 			print_debug("Score: " + var_to_str(score))
-
 		
 func grabCamera():	
 	var camera = get_tree().root.find_child("Camera2D", true, false)

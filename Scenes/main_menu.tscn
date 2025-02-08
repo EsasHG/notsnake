@@ -107,6 +107,7 @@ texture_under = ExtResource("4_uoro4")
 texture_progress = ExtResource("3_wiek5")
 
 [node name="QuitButton" type="Button" parent="."]
+visible = false
 z_index = -1
 layout_mode = 1
 anchors_preset = 7

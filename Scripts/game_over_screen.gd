@@ -70,13 +70,19 @@ func quitFilled():
 	
 func SetScore(in_score : int):
 	score = in_score
-	
 	var str_score : String = var_to_str(score)
+	
+	if score > GameSettings.highScore:
+		GameSettings.highScore = score
+		GameSettings.saveScore()
+		GameSettings.currentScore = 0
 	for c in str_score:
 		var tex : TextureRect = TextureRect.new()
 		tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		tex.texture = load("res://Assets/UI/Font pngs/nr_" + c +".png")
 		$HBoxContainer.add_child(tex)
+		
+	$HighScoreLabel.text = "Best: " + var_to_str(GameSettings.highScore)
 	
 func _on_retry_button_button_down() -> void:
 	if(!OS.has_feature("web") && !OS.has_feature("mobile")):

@@ -10,10 +10,16 @@ config_version=5
 
 [application]
 
-config/name="NotSnake"
+config/name="Loop Dog"
 run/main_scene="res://Scenes/SceneAgain.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
-config/icon="res://icon.svg"
+boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
+boot_splash/use_filter=false
+config/icon="res://Assets/Dogs/OutlinedDog/DOG_THUMBNAIL.png"
+
+[autoload]
+
+GameSettings="*res://game_settings.gd"
 
 [display]
 

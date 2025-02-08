@@ -83,10 +83,14 @@ fill_mode = 6
 texture_under = ExtResource("3_grf0n")
 texture_progress = ExtResource("3_1gffc")
 
-[node name="Label" type="Label" parent="."]
+[node name="HighScoreLabel" type="Label" parent="."]
 layout_mode = 0
+offset_top = 106.0
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 129.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Best:"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0

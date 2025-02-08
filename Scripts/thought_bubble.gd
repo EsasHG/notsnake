@@ -19,6 +19,5 @@ func _process(delta):
 	var q1 = pointPos.lerp(global_position, min(t1, 1.0))
 	$ComicBubbleSmall.global_position = q0.lerp(q1, min(t1, 1.0))
 	
-	var q0_2 = playerPos.lerp(pointPos, min(t2, 1.0))
 	var q1_2 = pointPos.lerp(global_position, min(t2, 1.0))
 	$ComicBubbleMedium.global_position = q0.lerp(q1_2, min(t2, 1.0))
