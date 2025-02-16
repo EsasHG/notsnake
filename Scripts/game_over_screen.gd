@@ -68,8 +68,8 @@ func quitFilled():
 	get_tree().quit()
 	
 	
-func SetScore(in_score : int):
-	score = in_score
+func SetScore():
+	score = GameSettings.currentScore
 	var str_score : String = var_to_str(score)
 	
 	if score > GameSettings.highScore:

@@ -29,7 +29,7 @@ var skip : bool = false
 func _ready() -> void:
 	visible = true
 	$Panel.modulate.a = 0
-	var timer = get_tree().create_timer(0.5).timeout.connect(func():	
+	get_tree().create_timer(0.5).timeout.connect(func():	
 		var blackPanelTween = get_tree().create_tween()
 		blackPanelTween.set_ease(Tween.EASE_IN)
 		blackPanelTween.tween_property($Panel2, "modulate:a", 0, 1.5)

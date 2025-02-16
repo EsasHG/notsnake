@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=31 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
@@ -18,6 +18,10 @@
 [ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="15_56jjb"]
 [ext_resource type="PackedScene" uid="uid://ck7vl8h740cpk" path="res://Scenes/GameOverScreen.tscn" id="15_i27mg"]
 [ext_resource type="PackedScene" uid="uid://db21xerm8qjf4" path="res://Scenes/BonusScreen.tscn" id="16_cwq0r"]
+[ext_resource type="Texture2D" uid="uid://dj5ymgtujgle6" path="res://Assets/UI/options_icons_etc/musicnote_2.png" id="17_awcq1"]
+[ext_resource type="Texture2D" uid="uid://c7viv7v30veef" path="res://Assets/UI/options_icons_etc/speaker_3.png" id="17_rnapm"]
+[ext_resource type="Texture2D" uid="uid://5ut7n13w7gl0" path="res://Assets/UI/options_icons_etc/musicnote_1.png" id="18_l5q7l"]
+[ext_resource type="Texture2D" uid="uid://n0icqrejpobn" path="res://Assets/UI/options_icons_etc/speaker_off_2.png" id="19_clje1"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fj0g7"]
 distance = -509.11
@@ -33,6 +37,18 @@ distance = -914.25
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rkj8e"]
 normal = Vector2(-1, 0)
 distance = -898.5
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iebsm"]
+texture = ExtResource("17_awcq1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uuckf"]
+texture = ExtResource("18_l5q7l")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c7mro"]
+texture = ExtResource("19_clje1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ef823"]
+texture = ExtResource("17_rnapm")
 
 [node name="Main" type="Node"]
 
@@ -204,6 +220,46 @@ bubblePos = Vector2(75, -86)
 [node name="BonusScreen" parent="CanvasLayer/Gui" instance=ExtResource("16_cwq0r")]
 visible = false
 layout_mode = 1
+
+[node name="AudioButtons" type="Control" parent="CanvasLayer/Gui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Gui/AudioButtons"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -104.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 185.0
+grow_horizontal = 0
+
+[node name="MusicMute" type="Button" parent="CanvasLayer/Gui/AudioButtons/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_iebsm")
+theme_override_styles/hover = SubResource("StyleBoxTexture_uuckf")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_iebsm")
+theme_override_styles/normal = SubResource("StyleBoxTexture_uuckf")
+toggle_mode = true
+metadata/_edit_use_anchors_ = true
+
+[node name="SFXMute" type="Button" parent="CanvasLayer/Gui/AudioButtons/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_c7mro")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ef823")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_c7mro")
+theme_override_styles/normal = SubResource("StyleBoxTexture_ef823")
+toggle_mode = true
+metadata/_edit_use_anchors_ = true
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_3xwyg")
