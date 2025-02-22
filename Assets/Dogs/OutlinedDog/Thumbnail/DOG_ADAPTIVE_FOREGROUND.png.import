@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp1qs2tnveae5"
-path="res://.godot/imported/DOG_THUMBNAIL.png-0419ed68c4b63aab2cd3aa55e7d07e57.ctex"
+uid="uid://bcof7nqyg61fu"
+path="res://.godot/imported/DOG_ADAPTIVE_FOREGROUND.png-7e5eea719f7e64d13de8bbd0e5d85b18.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Dogs/OutlinedDog/DOG_THUMBNAIL.png"
-dest_files=["res://.godot/imported/DOG_THUMBNAIL.png-0419ed68c4b63aab2cd3aa55e7d07e57.ctex"]
+source_file="res://Assets/Dogs/OutlinedDog/Thumbnail/DOG_ADAPTIVE_FOREGROUND.png"
+dest_files=["res://.godot/imported/DOG_ADAPTIVE_FOREGROUND.png-7e5eea719f7e64d13de8bbd0e5d85b18.ctex"]
 
 [params]
 
