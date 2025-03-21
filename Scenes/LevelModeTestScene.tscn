@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://cu0h58qcgwl4k"]
+
+[ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_f80r4"]
+[ext_resource type="PackedScene" uid="uid://c7508ame74p7h" path="res://Scenes/DogBone.tscn" id="2_4nuwq"]
+[ext_resource type="PackedScene" uid="uid://ctigc12c0n7it" path="res://Scenes/DogToy.tscn" id="3_yrudy"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vmial"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iu6cv"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="PlayerDog" parent="." instance=ExtResource("1_f80r4")]
+position = Vector2(187, 163)
+playerControl = true
+
+[node name="Obstacle" type="Area2D" parent="." groups=["Dangers"]]
+position = Vector2(426, 222)
+scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle"]
+scale = Vector2(20, 20)
+texture = SubResource("CanvasTexture_vmial")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle"]
+shape = SubResource("RectangleShape2D_iu6cv")
+
+[node name="Obstacle2" type="Area2D" parent="." groups=["Dangers"]]
+position = Vector2(562, 222)
+scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle2"]
+scale = Vector2(20, 20)
+texture = SubResource("CanvasTexture_vmial")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2"]
+shape = SubResource("RectangleShape2D_iu6cv")
+
+[node name="Obstacle3" type="Area2D" parent="." groups=["Dangers"]]
+position = Vector2(680, 222)
+scale = Vector2(0.6, 0.6)
+
+[node name="Sprite2D" type="Sprite2D" parent="Obstacle3"]
+scale = Vector2(20, 20)
+texture = SubResource("CanvasTexture_vmial")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle3"]
+shape = SubResource("RectangleShape2D_iu6cv")
+
+[node name="DogBone" parent="." instance=ExtResource("2_4nuwq")]
+position = Vector2(493, 224)
+
+[node name="DogToy" parent="." instance=ExtResource("3_yrudy")]
+position = Vector2(620, 226)

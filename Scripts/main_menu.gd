@@ -16,8 +16,8 @@ var thoughtBubble1 = preload("res://Scenes/ThoughtBubble_1.tscn")
 var thoughtBubble2 = preload("res://Scenes/ThoughtBubble_2.tscn")
 var thoughtBubble3 = preload("res://Scenes/ThoughtBubble_3.tscn")
 
-
-
+@onready var playGamesSignInClient : PlayGamesSignInClient = %PlayGamesSignInClient
+@onready var leaderboardsClient : PlayGamesLeaderboardsClient = %PlayGamesLeaderboardsClient
 @onready var world : Node2D = get_tree().root.find_child("World", true, false)
 
 var bubblesSpawned : int = 0
@@ -25,8 +25,18 @@ var activeBubble : Node2D
 var activeBubbleTween : Tween
 var activeBubbleTimer : SceneTreeTimer
 var skip : bool = false
+
+func _enter_tree() -> void:
+	print_debug("Entered tree!")
+	GodotPlayGameServices.initialize()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	if not GodotPlayGameServices.android_plugin:
+		printerr("Could not find Google Play Games Services plugin!")
+		
+	playGamesSignInClient.is_authenticated()
 	visible = true
 	$Panel.modulate.a = 0
 	get_tree().create_timer(0.5).timeout.connect(func():	
@@ -74,7 +84,6 @@ func _process(delta: float) -> void:
 		if($QuitButton/TextureProgressBar.value == $QuitButton/TextureProgressBar.max_value):
 			quitFilled()
 	
-	
 		if(startButtonPressed):
 			$StartButton/TextureProgressBar.value += 80*delta
 		elif(!startButtonStayFilled):
@@ -103,6 +112,14 @@ func filled():
 	var quitButtonTween = get_tree().create_tween()
 	quitButtonTween.set_ease(Tween.EASE_IN)
 	quitButtonTween.tween_property($QuitButton, "position", Vector2($QuitButton.position.x,1126), 0.5)
+	
+	var signInTween = get_tree().create_tween()
+	signInTween.set_ease(Tween.EASE_IN)
+	signInTween.tween_property($"Sign In", "position", Vector2($"Sign In".position.x,1126), 0.5)
+	
+	var leaderboardTween = get_tree().create_tween()
+	leaderboardTween.set_ease(Tween.EASE_IN)
+	leaderboardTween.tween_property($Leaderboard,"position", Vector2($Leaderboard.position.x,1126), 0.5)
 	
 	var tween2 = get_tree().create_tween()
 	tween2.set_ease(Tween.EASE_IN)
@@ -226,3 +243,24 @@ func _on_quit_button_button_up() -> void:
 		justPressed = false
 	quitButtonPressed = false
 	pass # Replace with function body.
+
+
+func _on_user_authenticated(is_authenticated: bool) -> void:
+	if is_authenticated:
+		$"Sign In".visible = false
+		$Leaderboard.visible = true
+		print_debug("Authenticated!")
+	else:
+		$"Sign In".visible = true
+		$Leaderboard.visible = false
+		print_debug("Not authenticated!")
+		
+
+func _on_sign_in_pressed() -> void:
+	
+	playGamesSignInClient.sign_in()
+	pass # Replace with function body.
+
+
+func _on_leaderboard_pressed() -> void:
+	leaderboardsClient.show_all_leaderboards()

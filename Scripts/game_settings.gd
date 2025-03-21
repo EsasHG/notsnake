@@ -8,8 +8,10 @@ var musicVol = -15
 
 var musicMuted : bool = false
 var sfxMuted : bool = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#PlayGamesSDK.initialize(this)
 	if FileAccess.file_exists("user://savegame.save"):
 		loadScore()	
 		
@@ -23,16 +25,22 @@ func _ready() -> void:
 	
 func connectToButtons():
 	var button : Button = get_tree().root.find_child("MusicMute", true, false)
-	button.toggled.connect(_on_music_mute_toggled)
-	button.set_pressed_no_signal(musicMuted)
+	if(is_instance_valid(button)):
+		button.toggled.connect(_on_music_mute_toggled)
+		button.set_pressed_no_signal(musicMuted)
 	setMusicVol(musicVol)
 	
-	
 	button = get_tree().root.find_child("SFXMute", true, false)
-	button.toggled.connect(_on_sfx_mute_toggled)
-	button.set_pressed_no_signal(sfxMuted)
+	if(is_instance_valid(button)):
+		button.toggled.connect(_on_sfx_mute_toggled)
+		button.set_pressed_no_signal(sfxMuted)
 	setSFXVol(sfxVol)
 	
+	SignalManager.on_pickup.connect(increaseScore)
+	
+func increaseScore():
+	currentScore+=1
+		
 
 func saveScore():
 	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
@@ -96,3 +104,4 @@ func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 	if sfxMuted: 
 		vol = linear_to_db(0)
 	setSFXVol(vol)
+	

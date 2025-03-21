@@ -10,15 +10,27 @@ var retry_focused = preload("res://Assets/UI/RETRY_5.png")
 var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
 var quit_focused = preload("res://Assets/UI/QUIT_1.png")
 var score : int
+
+@export var bonusScreenThreshold = 30
 @onready var scene = load("res://Scenes/PlayerDog.tscn")
+@onready var scoreBoard : PlayGamesLeaderboard
+var leaderboardArray : Array[PlayGamesLeaderboard]
+@onready var leaderboardsClient : PlayGamesLeaderboardsClient = %PlayGamesLeaderboardsClient
 
 @onready var BGmusic = get_tree().root.find_child("BGMusic", true, false)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if not leaderboardsClient:
+		printerr("No leaderboards client found!")
+	else:
+		print_debug("Finding leaderboards!") 
+		leaderboardsClient.load_all_leaderboards(true)
+		leaderboardsClient.all_leaderboards_loaded.connect(all_leaderboards_loaded)
 	visibility_changed.connect(on_visibility_changed)
 	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
 		if(visible):
 			$RetryButton.grab_focus()
+	SignalManager.on_gameOver.connect(GameOver)
 
 
 func on_visibility_changed():
@@ -56,9 +68,6 @@ func filled():
 	visible = false
 	$RetryButton/TextureProgressBar.value = 0
 	
-	for c in $HBoxContainer.get_children():
-		if(c.name != "ScoreLabel"):
-			c.queue_free()
 	
 	var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
 	loseMusic.stop()
@@ -71,18 +80,13 @@ func quitFilled():
 func SetScore():
 	score = GameSettings.currentScore
 	var str_score : String = var_to_str(score)
+	$ScoreLabels/ScoreLabel.text = "Score: " + str_score
 	
 	if score > GameSettings.highScore:
 		GameSettings.highScore = score
 		GameSettings.saveScore()
-		GameSettings.currentScore = 0
-	for c in str_score:
-		var tex : TextureRect = TextureRect.new()
-		tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		tex.texture = load("res://Assets/UI/Font pngs/nr_" + c +".png")
-		$HBoxContainer.add_child(tex)
 		
-	$HighScoreLabel.text = "Best: " + var_to_str(GameSettings.highScore)
+	$ScoreLabels/HighScoreLabel.text = "Best: " + var_to_str(GameSettings.highScore)
 	
 func _on_retry_button_button_down() -> void:
 	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
@@ -124,4 +128,53 @@ func _on_quit_button_button_up() -> void:
 		$QuitButton/TextureProgressBar.texture_under = quit_unfocused
 		justPressed = false
 	quitButtonPressed = false
+	pass # Replace with function body.
+
+func GameOver(won:bool):
+	print_debug("Game over!")
+	SetScore()
+	if(won):
+		print_debug("Player Won!")
+		$LongDogPanel.visible = false
+		$WinnerPanel.visible = true
+		$Panel.visible = false
+	elif(GameSettings.currentScore > bonusScreenThreshold):
+		print_debug("Player got over 20 treats!")
+		$LongDogPanel.visible = true
+		$WinnerPanel.visible = false
+		$Panel.visible = false
+	else:
+		$LongDogPanel.visible = false
+		$WinnerPanel.visible = false
+		$Panel.visible = true
+		
+	visible = true
+	if leaderboardsClient && scoreBoard:
+		print_debug("Submitting Score: " + var_to_str(GameSettings.currentScore))
+		leaderboardsClient.submit_score(scoreBoard.leaderboard_id,GameSettings.currentScore)
+		
+	GameSettings.currentScore = 0
+	
+
+func all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void:
+	print_debug("All leaderboards loaded!")
+	if not leaderboards.size() == 0:
+		leaderboardArray = leaderboards
+		scoreBoard = leaderboardArray.front()
+	else:
+		printerr("No leaderboards found!")
+	pass # Replace with function body.
+
+
+func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
+	if is_submitted:
+		print_debug("Score Submitted!")
+		leaderboardsClient.load_player_score(leaderboard_id,PlayGamesLeaderboardVariant.TimeSpan.TIME_SPAN_ALL_TIME, PlayGamesLeaderboardVariant.Collection.COLLECTION_PUBLIC)
+	else: 
+		printerr("Score not submitted!")
+	pass # Replace with function body.
+
+
+func _on_leaderboard_pressed() -> void:	
+	leaderboardsClient.show_leaderboard(scoreBoard.leaderboard_id)
 	pass # Replace with function body.

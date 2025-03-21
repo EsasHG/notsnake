@@ -18,7 +18,9 @@ boot_splash/use_filter=false
 
 [autoload]
 
-GameSettings="*res://game_settings.gd"
+GodotPlayGameServices="*res://addons/GodotPlayGameServices/scripts/autoloads/godot_play_game_services.gd"
+GameSettings="*res://Scripts/game_settings.gd"
+SignalManager="*res://Scripts/signal_manager.gd"
 
 [display]
 
@@ -31,6 +33,10 @@ window/stretch/scale=0.75
 [dotnet]
 
 project/assembly_name="NotSnake"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GodotPlayGameServices/plugin.cfg")
 
 [global_group]
 

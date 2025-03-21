@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
 [ext_resource type="PackedScene" uid="uid://bdgut8fsafskf" path="res://Scenes/Tree_1.tscn" id="7_3i67f"]
-[ext_resource type="PackedScene" uid="uid://c32a5s2ngxrmo" path="res://Scenes/VictoryScreen.tscn" id="8_ejsn6"]
 [ext_resource type="PackedScene" uid="uid://b2vvgcdqie4wf" path="res://Scenes/Tree_2.tscn" id="8_rh7mh"]
 [ext_resource type="AudioStream" uid="uid://cr7rgnem0d7n0" path="res://Assets/Sound/33 - Ditty.mp3" id="9_3xwyg"]
 [ext_resource type="PackedScene" uid="uid://bnepouvao7645" path="res://Scenes/Tree_3.tscn" id="9_r0j0q"]
@@ -17,11 +16,12 @@
 [ext_resource type="Script" path="res://Scripts/DogCrackerSpawner.gd" id="14_lwrxm"]
 [ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="15_56jjb"]
 [ext_resource type="PackedScene" uid="uid://ck7vl8h740cpk" path="res://Scenes/GameOverScreen.tscn" id="15_i27mg"]
-[ext_resource type="PackedScene" uid="uid://db21xerm8qjf4" path="res://Scenes/BonusScreen.tscn" id="16_cwq0r"]
 [ext_resource type="Texture2D" uid="uid://dj5ymgtujgle6" path="res://Assets/UI/options_icons_etc/musicnote_2.png" id="17_awcq1"]
 [ext_resource type="Texture2D" uid="uid://c7viv7v30veef" path="res://Assets/UI/options_icons_etc/speaker_3.png" id="17_rnapm"]
 [ext_resource type="Texture2D" uid="uid://5ut7n13w7gl0" path="res://Assets/UI/options_icons_etc/musicnote_1.png" id="18_l5q7l"]
 [ext_resource type="Texture2D" uid="uid://n0icqrejpobn" path="res://Assets/UI/options_icons_etc/speaker_off_2.png" id="19_clje1"]
+[ext_resource type="Script" path="res://Scripts/AudioManager.gd" id="21_nmt78"]
+[ext_resource type="Script" path="res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd" id="24_c74x7"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fj0g7"]
 distance = -509.11
@@ -135,7 +135,20 @@ position = Vector2(393, 100)
 [node name="Node2D10" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
 position = Vector2(593, -100)
 
-[node name="Node2D12" type="Node2D" parent="World/PickupSpawner"]
+[node name="Node2D11" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
+position = Vector2(-48, -334)
+
+[node name="Node2D12" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
+position = Vector2(409, -333)
+
+[node name="Node2D13" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
+position = Vector2(91, 137)
+
+[node name="Node2D14" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
+position = Vector2(-768, 82)
+
+[node name="Node2D15" type="Node2D" parent="World/PickupSpawner/PickupPoints"]
+position = Vector2(115, -159)
 
 [node name="Obstacles" type="Node2D" parent="World"]
 
@@ -208,18 +221,10 @@ offset_bottom = 23.0
 visible = false
 layout_mode = 1
 
-[node name="VictoryScreen" parent="CanvasLayer/Gui" instance=ExtResource("8_ejsn6")]
-visible = false
-layout_mode = 1
-
 [node name="MainMenu" parent="CanvasLayer/Gui" instance=ExtResource("9_vbmn1")]
 visible = false
 layout_mode = 1
 bubblePos = Vector2(75, -86)
-
-[node name="BonusScreen" parent="CanvasLayer/Gui" instance=ExtResource("16_cwq0r")]
-visible = false
-layout_mode = 1
 
 [node name="AudioButtons" type="Control" parent="CanvasLayer/Gui"]
 layout_mode = 1
@@ -261,11 +266,20 @@ theme_override_styles/normal = SubResource("StyleBoxTexture_ef823")
 toggle_mode = true
 metadata/_edit_use_anchors_ = true
 
-[node name="BGMusic" type="AudioStreamPlayer" parent="."]
+[node name="Audio" type="Node" parent="."]
+script = ExtResource("21_nmt78")
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("9_3xwyg")
 volume_db = -15.0
 parameters/looping = true
 
-[node name="LoseMusic" type="AudioStreamPlayer" parent="."]
+[node name="LoseMusic" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("15_56jjb")
 volume_db = -15.0
+
+[node name="PlayGamesLeaderboardsClient" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("24_c74x7")
+
+[connection signal="score_submitted" from="PlayGamesLeaderboardsClient" to="CanvasLayer/Gui/GameOverScreen" method="_score_submitted"]

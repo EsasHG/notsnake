@@ -9,10 +9,16 @@ var prevPoint : int = 14
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SignalManager.on_pickup.connect(SpawnPickup)
+	
 	SpawnPickup()
 	
 
 func SpawnPickup():
+	if(GameSettings.currentScore == 2):
+		SpawnPresent()
+		return
+		
 	var boneOrToy = randi_range(0,1)
 	var pickup : Area2D
 	if(boneOrToy):

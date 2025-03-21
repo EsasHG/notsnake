@@ -6,8 +6,7 @@ class_name PlayerDog
 @export var MOVE_SPEED = 1
 @export var OVERALL_SPEED = 0.9
 var prevPositionsArr = []
-@export var hats : Array[Sprite2D]
-@export var bonusScreenThreshold = 30
+@export var hats : Array[Node]
 
 var currentHat = -1
 var spritesToAdd = 0
@@ -26,7 +25,7 @@ var canAddSprites = true
 var showFps = false
 @onready var butt = $Butt
 
-var playerControl = false
+@export var playerControl = false
 var frameDelay = 1
 var segmentsPerSection = 20
 var move = true
@@ -44,7 +43,7 @@ func _ready() -> void:
 	GameSettings.currentScore = 0
 	$Head/BarkSound.volume_db = GameSettings.sfxVol
 	Input.emulate_mouse_from_touch = true
-
+	hats = $Head/Hats.get_children(true)
 	
 func add_sprite():
 	if(canAddSprites):
@@ -143,13 +142,11 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if(area == butt):
+		SignalManager.on_gameOver.emit(true)
+		
 		if(playerControl == false):
 			return	
 		move = false
-		var g : Control = get_tree().root.find_child("VictoryScreen",true, false)
-		g.SetScore()
-		
-		g.visible = true 
 		var camera = get_tree().root.find_child("Camera2D", true, false)
 		camera.reparent(get_tree().root.find_child("World", true, false))
 		playerControl = false
@@ -158,44 +155,31 @@ func _on_area_entered(area: Area2D) -> void:
 		
 	elif(area.is_in_group("Dangers")):
 		
-		var music = get_tree().root.find_child("BGMusic", true, false)
-		music.stop()
-		music.stream_paused = true
-		var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
-		loseMusic.play()
-
+		SignalManager.on_gameOver.emit(false)
+	
 		if(playerControl == false):
 			return	
 		move = false
-		var g
-		if(GameSettings.currentScore >= bonusScreenThreshold):
-			g = get_tree().root.find_child("BonusScreen",true, false)
-		else:
-			g = get_tree().root.find_child("GameOverScreen",true, false)
-			
-		g.SetScore()
-		g.visible = true 
 		var camera = get_tree().root.find_child("Camera2D", true, false)
 		camera.reparent(get_tree().root.find_child("World", true, false))
 		playerControl = false
 		segmentParent.queue_free()
 		queue_free()
+		
 	elif(area.is_in_group("Treats")):
-		bark()
 		if(canAddSprites):
-			GameSettings.currentScore += 1
+			bark()
+			
 			for i : int in segmentsPerSection:
 				add_segment()
-				
-			if(GameSettings.currentScore == 10):
-				pickupSpawner.SpawnPresent()
-			else:
-				pickupSpawner.SpawnPickup()
+			SignalManager.on_pickup.emit()
 			
 			area.queue_free()
 			print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
+			
 	elif(area.is_in_group("Present")):
 		
+		print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
 		var hatRand : int = currentHat
 		while hatRand == currentHat:
 			hatRand = randi_range(0, hats.size()-1)
@@ -212,9 +196,10 @@ func _on_area_entered(area: Area2D) -> void:
 			GameSettings.currentScore+=1
 			for i : int in segmentsPerSection:
 				add_segment()
-			pickupSpawner.SpawnPickup()
+			SignalManager.on_pickup.emit()
 			area.queue_free()
-		
+			print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
+			
 func grabCamera():	
 	var camera = get_tree().root.find_child("Camera2D", true, false)
 	camera.reparent(self)

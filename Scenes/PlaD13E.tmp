@@ -207,27 +207,25 @@ frame_progress = 0.515546
 [node name="BarkSound" type="AudioStreamPlayer2D" parent="Head"]
 stream = ExtResource("4_wxfsi")
 
-[node name="Hats" type="Node2D" parent="Head"]
-
-[node name="HatChristmas" type="Sprite2D" parent="Head/Hats"]
+[node name="HatChristmas" type="Sprite2D" parent="Head"]
 visible = false
 z_index = 1
 position = Vector2(1, -17)
 texture = ExtResource("5_cvw6e")
 
-[node name="HatCowboy" type="Sprite2D" parent="Head/Hats"]
+[node name="HatCowboy" type="Sprite2D" parent="Head"]
 visible = false
 z_index = 1
 position = Vector2(1, -11)
 texture = ExtResource("6_kak2d")
 
-[node name="HatCrashdummyDot" type="Sprite2D" parent="Head/Hats"]
+[node name="HatCrashdummyDot" type="Sprite2D" parent="Head"]
 visible = false
 z_index = 1
 position = Vector2(-6, -6)
 texture = ExtResource("7_te1u3")
 
-[node name="HatHelmet" type="Sprite2D" parent="Head/Hats"]
+[node name="HatHelmet" type="Sprite2D" parent="Head"]
 visible = false
 z_index = 1
 position = Vector2(1, -4)

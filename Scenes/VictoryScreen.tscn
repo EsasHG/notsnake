@@ -129,6 +129,7 @@ texture_under = ExtResource("8_iplc1")
 texture_progress = ExtResource("6_4pxhs")
 
 [node name="HighScoreLabel" type="Label" parent="."]
+layout_mode = 0
 offset_top = 106.0
 offset_right = 40.0
 offset_bottom = 129.0
