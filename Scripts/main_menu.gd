@@ -185,6 +185,7 @@ func deleteBubble():
 			player.playerControl = true
 			player.grabCamera()
 			visible = false
+			SignalManager.on_gameBegin.emit()
 			return
 	bubblesSpawned+=1
 	activeBubble = bubble
@@ -257,7 +258,6 @@ func _on_user_authenticated(is_authenticated: bool) -> void:
 		
 
 func _on_sign_in_pressed() -> void:
-	
 	playGamesSignInClient.sign_in()
 	pass # Replace with function body.
 

@@ -67,7 +67,7 @@ func filled():
 	retryButtonPressed = false 
 	visible = false
 	$RetryButton/TextureProgressBar.value = 0
-	
+	SignalManager.on_gameBegin.emit()
 	
 	var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
 	loseMusic.stop()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bkjd5mneny7c1"]
+[gd_scene load_steps=38 format=3 uid="uid://bkjd5mneny7c1"]
 
 [ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="1_f7yc0"]
 [ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/Dogs/OutlinedDog/TAIL_C.png" id="2_c2s43"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="7_dffxg"]
 [ext_resource type="Texture2D" uid="uid://dvj0pjlmvqwve" path="res://Assets/Dogs/cosmetics/hat_crashdummyDot.png" id="7_te1u3"]
 [ext_resource type="Texture2D" uid="uid://bmdnyc2fq6qg7" path="res://Assets/Dogs/cosmetics/hat_helmet.png" id="8_jux0v"]
+[ext_resource type="Texture2D" uid="uid://bywajg5yonlif" path="res://Assets/UI/arrow.png" id="9_sxgt2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7we7l"]
 size = Vector2(27, 24)
@@ -232,6 +233,15 @@ visible = false
 z_index = 1
 position = Vector2(1, -4)
 texture = ExtResource("8_jux0v")
+
+[node name="ArrowHolder" type="Node2D" parent="Head"]
+visible = false
+
+[node name="Arrow" type="Sprite2D" parent="Head/ArrowHolder"]
+position = Vector2(1.88294e-13, 53)
+rotation = 1.5708
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("9_sxgt2")
 
 [node name="Butt" type="Area2D" parent="."]
 position = Vector2(0, -27)

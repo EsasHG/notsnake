@@ -5,6 +5,9 @@ class_name PlayerDog
 @export var ROTATE_SPEED = 5
 @export var MOVE_SPEED = 1
 @export var OVERALL_SPEED = 0.9
+@export var MIN_ARROW_DIST = 120
+@export var MAX_ARROW_DIST = 150
+
 var prevPositionsArr = []
 @export var hats : Array[Node]
 
@@ -29,6 +32,7 @@ var showFps = false
 var frameDelay = 1
 var segmentsPerSection = 20
 var move = true
+var arrowTarget : Vector2
 
 func _ready() -> void:
 	$Head.play("default")
@@ -45,6 +49,8 @@ func _ready() -> void:
 	Input.emulate_mouse_from_touch = true
 	hats = $Head/Hats.get_children(true)
 	
+	SignalManager.on_pickupSpawned.connect(SetArrowTarget)
+	SignalManager.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
 func add_sprite():
 	if(canAddSprites):
 		spritesToAdd+=segmentsPerSection
@@ -65,6 +71,7 @@ func resetSpriteTimer():
 
 
 func _process(delta: float) -> void:
+	
 	if(!move): return
 #	position.x += delta*100
 	var dir : int = -1
@@ -133,12 +140,17 @@ func _process(delta: float) -> void:
 		#$"../../CanvasLayer/Gui/FPS_Tracker".text = "Framerate: " + var_to_str(fps)
 	#else:
 		#showFps = false
-##		$"../../CanvasLayer/Gui/FPS_Tracker".text = ""
+#		$"../../CanvasLayer/Gui/FPS_Tracker".text = ""
 		
 	prevPos = global_position
 	prevLeft = left
 	prevDir = dir
 
+	$Head/ArrowHolder.look_at(arrowTarget)
+	$Head/ArrowHolder.rotate(deg_to_rad(-90))
+	var arrowDist = position.distance_to(arrowTarget)
+	var lerped = (arrowDist-MIN_ARROW_DIST)/MAX_ARROW_DIST
+	$Head/ArrowHolder/Arrow.modulate.a = lerped
 
 func _on_area_entered(area: Area2D) -> void:
 	if(area == butt):
@@ -213,4 +225,7 @@ func grabCamera():
 func bark():
 	$Head/BarkSound.pitch_scale = randf_range(0.9,1.1)
 	$Head/BarkSound.play()
+	
+func SetArrowTarget(target:Node2D):
+	arrowTarget = target.global_position
 	

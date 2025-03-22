@@ -5,7 +5,7 @@ extends Node
 func _ready() -> void:
 	SignalManager.on_gameOver.connect(stopMusic)
 
-func stopMusic():
+func stopMusic(won:bool):
 	var music = find_child("BGMusic", true, false)
 	music.stop()
 	music.stream_paused = true

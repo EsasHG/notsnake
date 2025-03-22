@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=32 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c7viv7v30veef" path="res://Assets/UI/options_icons_etc/speaker_3.png" id="17_rnapm"]
 [ext_resource type="Texture2D" uid="uid://5ut7n13w7gl0" path="res://Assets/UI/options_icons_etc/musicnote_1.png" id="18_l5q7l"]
 [ext_resource type="Texture2D" uid="uid://n0icqrejpobn" path="res://Assets/UI/options_icons_etc/speaker_off_2.png" id="19_clje1"]
+[ext_resource type="Script" path="res://Scripts/ScoreLabel.gd" id="19_n1mp8"]
 [ext_resource type="Script" path="res://Scripts/AudioManager.gd" id="21_nmt78"]
 [ext_resource type="Script" path="res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd" id="24_c74x7"]
 
@@ -265,6 +266,18 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_c7mro")
 theme_override_styles/normal = SubResource("StyleBoxTexture_ef823")
 toggle_mode = true
 metadata/_edit_use_anchors_ = true
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Gui"]
+layout_mode = 0
+offset_left = 25.0
+offset_right = 201.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0.941176, 0.929412, 0.929412, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 60
+text = "Score: 0"
+script = ExtResource("19_n1mp8")
 
 [node name="Audio" type="Node" parent="."]
 script = ExtResource("21_nmt78")

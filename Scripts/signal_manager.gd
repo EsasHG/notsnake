@@ -3,6 +3,9 @@ extends Node
 
 signal on_pickup()
 signal on_gameOver(won:bool)
+signal on_gameBegin()
+signal on_pickupSpawned(pickup:Area2D)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
