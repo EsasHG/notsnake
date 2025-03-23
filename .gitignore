@@ -15,4 +15,6 @@ data_*/
 mono_crash.*.json
 
 build/*
-android/*
+#Android build ignore
+android/build/*
+!android/build/AndroidManifest.xml
