@@ -18,19 +18,17 @@ func _process(delta: float) -> void:
 
 	if(!move):
 		return
-		
 	position.x += dir*delta*SPEED
-	
 	if(position.x <= TARGET_X):
 		dir=1
 		move = false
-		get_tree().create_timer(0.5).timeout.connect(flip)
+		get_tree().create_timer(0.5).timeout.connect(flip.bind(true))
 	elif(position.x >= start.x):
-		get_tree().create_timer(0.5).timeout.connect(flip)
+		get_tree().create_timer(0.5).timeout.connect(flip.bind(false))
 		move = false
 		dir=-1
 		
-func flip():
-	$Sprite2D.flip_h = !$Sprite2D.flip_h
+func flip(flip:bool):
+	$Sprite2D.flip_h = flip
 	get_tree().create_timer(0.5).timeout.connect(func(): move = true)
 	

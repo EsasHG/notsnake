@@ -91,7 +91,7 @@ func _process(delta: float) -> void:
 	prevLeft = prevLeft * dir * prevDir
 	var ang = left.angle_to(prevLeft)
 	var dist = left.project(pos-prevPos).distance_to(prevPos-pos)/sin(ang)*dir
-	var distVec = pos-prevPos
+
 	
 	var rotationCenter = pos+(left*dist) 
 	timer+=delta

@@ -9,11 +9,18 @@ var musicVol = -15
 var musicMuted : bool = false
 var sfxMuted : bool = false
 
+func _enter_tree() -> void:
+	print_debug("Entered tree!")
+	GodotPlayGameServices.initialize()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#PlayGamesSDK.initialize(this)
 	if FileAccess.file_exists("user://savegame.save"):
 		loadScore()	
+	else:
+		sfxMuted = false
+		musicMuted = false
 		
 	if db_to_linear(GameSettings.musicVol) == 0:
 		musicMuted = true
@@ -79,13 +86,13 @@ func loadScore():
 			musicVol = -15
 	print_debug("Finished loading")
 		
-func setSFXVol(in_vol : int):
+func setSFXVol(in_vol : float):
 	sfxVol = in_vol
 	for audio : AudioStreamPlayer2D in get_tree().root.find_children("*", "AudioStreamPlayer2D", true, false):
 		audio.volume_db = in_vol
 	saveScore()
 
-func setMusicVol(in_vol : int):
+func setMusicVol(in_vol : float):
 	musicVol = in_vol
 	for audio : AudioStreamPlayer in get_tree().root.find_children("*", "AudioStreamPlayer", true, false):
 		audio.volume_db = in_vol

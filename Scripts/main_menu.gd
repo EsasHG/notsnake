@@ -26,17 +26,15 @@ var activeBubbleTween : Tween
 var activeBubbleTimer : SceneTreeTimer
 var skip : bool = false
 
-func _enter_tree() -> void:
-	print_debug("Entered tree!")
-	GodotPlayGameServices.initialize()
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
 	if not GodotPlayGameServices.android_plugin:
 		printerr("Could not find Google Play Games Services plugin!")
-		
+	
+	playGamesSignInClient.user_authenticated.connect(_on_user_authenticated)	
 	playGamesSignInClient.is_authenticated()
+	
 	visible = true
 	$Panel.modulate.a = 0
 	get_tree().create_timer(0.5).timeout.connect(func():	

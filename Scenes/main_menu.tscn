@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://jdiyiwxj7kh0"]
+[gd_scene load_steps=21 format=3 uid="uid://jdiyiwxj7kh0"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://chpu7hodmmbuu" path="res://Assets/UI/QUIT_2.png" id="8_52c2e"]
 [ext_resource type="Texture2D" uid="uid://y1a5d52xbq2a" path="res://Assets/UI/QUIT_1.png" id="9_i5odq"]
 [ext_resource type="Texture2D" uid="uid://cmi2tok2niuud" path="res://Assets/UI/QUIT_3.png" id="10_rtivd"]
-[ext_resource type="Script" path="res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd" id="11_ivfi5"]
 [ext_resource type="StyleBox" uid="uid://ktqcdhd8okf4" path="res://Assets/Styles/empty_button_style_box_texture.tres" id="12_eprln"]
 
 [sub_resource type="SystemFont" id="SystemFont_i7lj5"]
@@ -64,6 +63,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="Sign In" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -90,6 +90,7 @@ text = "Sign in to
 Google Play"
 
 [node name="Leaderboard" type="Button" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -195,7 +196,6 @@ texture_under = ExtResource("10_rtivd")
 texture_progress = ExtResource("8_52c2e")
 
 [node name="Panel2" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -267,14 +267,9 @@ scale = Vector2(0.675, 0.675)
 mouse_filter = 2
 texture = ExtResource("7_wbc7c")
 
-[node name="PlayGamesSignInClient" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("11_ivfi5")
-
 [connection signal="pressed" from="Sign In" to="." method="_on_sign_in_pressed"]
 [connection signal="pressed" from="Leaderboard" to="." method="_on_leaderboard_pressed"]
 [connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
 [connection signal="button_up" from="StartButton" to="." method="_on_start_button_button_up"]
 [connection signal="button_down" from="QuitButton" to="." method="_on_quit_button_button_down"]
 [connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]
-[connection signal="user_authenticated" from="PlayGamesSignInClient" to="." method="_on_user_authenticated"]

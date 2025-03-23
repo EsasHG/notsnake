@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=33 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="1_qv8ra"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_yclsr"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://Scripts/ScoreLabel.gd" id="19_n1mp8"]
 [ext_resource type="Script" path="res://Scripts/AudioManager.gd" id="21_nmt78"]
 [ext_resource type="Script" path="res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd" id="24_c74x7"]
+[ext_resource type="Script" path="res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd" id="24_vk5ck"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fj0g7"]
 distance = -509.11
@@ -186,7 +187,7 @@ position = Vector2(-768, -448)
 scale = Vector2(0.6, 0.6)
 
 [node name="Tree_5" parent="World/Obstacles" instance=ExtResource("9_r0j0q")]
-position = Vector2(-830, 383)
+position = Vector2(-830, 343)
 scale = Vector2(0.6, 0.6)
 
 [node name="Tree_8" parent="World/Obstacles" instance=ExtResource("9_r0j0q")]
@@ -268,6 +269,7 @@ toggle_mode = true
 metadata/_edit_use_anchors_ = true
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer/Gui"]
+visible = false
 layout_mode = 0
 offset_left = 25.0
 offset_right = 201.0
@@ -294,5 +296,9 @@ volume_db = -15.0
 [node name="PlayGamesLeaderboardsClient" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("24_c74x7")
+
+[node name="PlayGamesSignInClient" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("24_vk5ck")
 
 [connection signal="score_submitted" from="PlayGamesLeaderboardsClient" to="CanvasLayer/Gui/GameOverScreen" method="_score_submitted"]

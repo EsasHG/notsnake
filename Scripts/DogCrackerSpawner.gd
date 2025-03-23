@@ -13,7 +13,7 @@ func _ready() -> void:
 	
 	SignalManager.on_gameBegin.connect(SpawnPickup)
 	
-	SignalManager.on_gameOver.connect(func(won:bool): 	
+	SignalManager.on_gameOver.connect(func(_won:bool): 	
 		currentPickup.queue_free()
 		prevPoint = -1
 		)

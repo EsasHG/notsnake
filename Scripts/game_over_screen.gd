@@ -16,6 +16,7 @@ var score : int
 @onready var scoreBoard : PlayGamesLeaderboard
 var leaderboardArray : Array[PlayGamesLeaderboard]
 @onready var leaderboardsClient : PlayGamesLeaderboardsClient = %PlayGamesLeaderboardsClient
+@onready var signInClient : PlayGamesSignInClient = %PlayGamesSignInClient
 
 @onready var BGmusic = get_tree().root.find_child("BGMusic", true, false)
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +32,8 @@ func _ready() -> void:
 		if(visible):
 			$RetryButton.grab_focus()
 	SignalManager.on_gameOver.connect(GameOver)
+	if(signInClient):
+		signInClient.user_authenticated.connect(_on_user_authenticated)
 
 
 func on_visibility_changed():
@@ -178,3 +181,11 @@ func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
 func _on_leaderboard_pressed() -> void:	
 	leaderboardsClient.show_leaderboard(scoreBoard.leaderboard_id)
 	pass # Replace with function body.
+
+func _on_user_authenticated(is_authenticated: bool) -> void:
+	if is_authenticated:
+		$Leaderboard.visible = true
+		print_debug("Authenticated!")
+	else:
+		$Leaderboard.visible = false
+		print_debug("Not authenticated!")
