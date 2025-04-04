@@ -9,11 +9,11 @@ var prevPoint : int = 14
 var currentPickup:Area2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	SignalManager.on_pickup.connect(SpawnPickup)
+	GameSettings.on_pickup.connect(SpawnPickup)
 	
-	SignalManager.on_gameBegin.connect(SpawnPickup)
+	GameSettings.on_gameBegin.connect(SpawnPickup)
 	
-	SignalManager.on_gameOver.connect(func(_won:bool): 	
+	GameSettings.on_gameOver.connect(func(_won:bool): 	
 		currentPickup.queue_free()
 		prevPoint = -1
 		)
@@ -40,7 +40,7 @@ func SpawnPickup():
 	print_debug("Adding pickup")
 	add_child.call_deferred(pickup)
 	currentPickup = pickup
-	SignalManager.on_pickupSpawned.emit(pickup)
+	GameSettings.on_pickupSpawned.emit(pickup)
 	
 func SpawnPresent():
 	
@@ -56,7 +56,7 @@ func SpawnPresent():
 	print_debug("Adding pickup")
 	add_child.call_deferred(pickup)
 	currentPickup = pickup
-	SignalManager.on_pickupSpawned.emit(pickup)
+	GameSettings.on_pickupSpawned.emit(pickup)
 	
 	#while pickup.has_overlapping_areas():
 	#	pickupLoc = Vector2(randi_range(-xBorder, xBorder), randi_range(-yBorder, yBorder))

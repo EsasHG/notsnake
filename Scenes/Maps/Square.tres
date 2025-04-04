@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Map" load_steps=4 format=3 uid="uid://br6kp3c2pxqet"]
+
+[ext_resource type="PackedScene" uid="uid://d0lv3j2ywaltm" path="res://Scenes/Maps/Square_Map.tscn" id="1_r1kvs"]
+[ext_resource type="Texture2D" uid="uid://cfj8pc4i4drtn" path="res://Assets/Icons/Square_Map.png" id="2_cm3ci"]
+[ext_resource type="Script" path="res://Scripts/Map.gd" id="3_aeitm"]
+
+[resource]
+script = ExtResource("3_aeitm")
+Scene = ExtResource("1_r1kvs")
+name = "Square"
+icon = ExtResource("2_cm3ci")

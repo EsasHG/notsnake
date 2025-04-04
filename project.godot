@@ -20,15 +20,15 @@ boot_splash/use_filter=false
 
 GodotPlayGameServices="*res://addons/GodotPlayGameServices/scripts/autoloads/godot_play_game_services.gd"
 GameSettings="*res://Scripts/game_settings.gd"
-SignalManager="*res://Scripts/signal_manager.gd"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
-window/stretch/mode="canvas_items"
+window/size/viewport_width=500
+window/size/viewport_height=500
+window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale=0.75
+window/handheld/orientation=6
 
 [dotnet]
 

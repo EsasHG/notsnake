@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Map" load_steps=4 format=3 uid="uid://ce2xllrb7yjod"]
+
+[ext_resource type="PackedScene" uid="uid://tcsre6epm8ss" path="res://Scenes/Maps/Park_Map.tscn" id="1_08ppb"]
+[ext_resource type="Script" path="res://Scripts/Map.gd" id="1_bsn4t"]
+[ext_resource type="Texture2D" uid="uid://dto7sml4al4sb" path="res://Assets/Icons/Park.png" id="2_rietx"]
+
+[resource]
+script = ExtResource("1_bsn4t")
+Scene = ExtResource("1_08ppb")
+name = "Park"
+icon = ExtResource("2_rietx")

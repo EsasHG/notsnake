@@ -49,8 +49,10 @@ func _ready() -> void:
 	Input.emulate_mouse_from_touch = true
 	hats = $Head/Hats.get_children(true)
 	
-	SignalManager.on_pickupSpawned.connect(SetArrowTarget)
-	SignalManager.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
+	GameSettings.on_pickupSpawned.connect(SetArrowTarget)
+	GameSettings.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
+#	if(playerControl):
+#		get_tree().create_timer(1.0).timeout.connect(func(): GameSettings.on_gameBegin.emit())
 func add_sprite():
 	if(canAddSprites):
 		spritesToAdd+=segmentsPerSection
@@ -154,7 +156,8 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if(area == butt):
-		SignalManager.on_gameOver.emit(true)
+		print_debug("Player Won!")
+		GameSettings.on_gameOver.emit(true)
 		
 		if(playerControl == false):
 			return	
@@ -166,14 +169,14 @@ func _on_area_entered(area: Area2D) -> void:
 		queue_free()
 		
 	elif(area.is_in_group("Dangers")):
-		
-		SignalManager.on_gameOver.emit(false)
-	
+		print_debug("Player Lost!")
 		if(playerControl == false):
+			printerr("Player overlapped danger while not having control!")
 			return	
+	
+		GameSettings.on_gameOver.emit(false)
+
 		move = false
-		var camera = get_tree().root.find_child("Camera2D", true, false)
-		camera.reparent(get_tree().root.find_child("World", true, false))
 		playerControl = false
 		segmentParent.queue_free()
 		queue_free()
@@ -184,31 +187,31 @@ func _on_area_entered(area: Area2D) -> void:
 			
 			for i : int in segmentsPerSection:
 				add_segment()
-			SignalManager.on_pickup.emit()
+			GameSettings.on_pickup.emit()
 			
 			area.queue_free()
 			print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
 			
 	elif(area.is_in_group("Present")):
-		
-		print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
-		var hatRand : int = currentHat
-		while hatRand == currentHat:
-			hatRand = randi_range(0, hats.size()-1)
-		
-		if(currentHat != -1):
-			hats[currentHat].visible = false
-		
-		hats[hatRand].visible = true
-		currentHat = hatRand
-		
-		bark()
-		
 		if(canAddSprites):
+		
+			print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
+			var hatRand : int = currentHat
+			while hatRand == currentHat:
+				hatRand = randi_range(0, hats.size()-1)
+			
+			if(currentHat != -1):
+				hats[currentHat].visible = false
+		
+			hats[hatRand].visible = true
+			currentHat = hatRand
+		
+		
+			bark()
 			GameSettings.currentScore+=1
 			for i : int in segmentsPerSection:
 				add_segment()
-			SignalManager.on_pickup.emit()
+			GameSettings.on_pickup.emit()
 			area.queue_free()
 			print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
 			
@@ -219,9 +222,9 @@ func grabCamera():
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(camera, "position", Vector2(0,0), 0.5)
 	tween.tween_callback(func(): playerControl = true)
-	#camera.position = Vector2(0,0)
-#	playerControl = true
-
+	
+	#playerControl = true
+	
 func bark():
 	$Head/BarkSound.pitch_scale = randf_range(0.9,1.1)
 	$Head/BarkSound.play()

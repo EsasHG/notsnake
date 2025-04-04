@@ -5,38 +5,23 @@ var quitButtonPressed = false
 var startButtonStayFilled = false
 var justPressed = false
 var justPressedTime = 0.2
-var start_unfocused = preload("res://Assets/UI/startbutton_2.png")
 var start_focused = preload("res://Assets/UI/startbutton_5.png")
 var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
-var quit_focused = preload("res://Assets/UI/QUIT_1.png")
-@export var bubblePos : Vector2 = Vector2(-190, -40)
-
-var thoughtBubble = preload("res://Scenes/ThoughtBubble_SadFace.tscn")
-var thoughtBubble1 = preload("res://Scenes/ThoughtBubble_1.tscn")
-var thoughtBubble2 = preload("res://Scenes/ThoughtBubble_2.tscn")
-var thoughtBubble3 = preload("res://Scenes/ThoughtBubble_3.tscn")
 
 @onready var playGamesSignInClient : PlayGamesSignInClient = %PlayGamesSignInClient
 @onready var leaderboardsClient : PlayGamesLeaderboardsClient = %PlayGamesLeaderboardsClient
-@onready var world : Node2D = get_tree().root.find_child("World", true, false)
-
-var bubblesSpawned : int = 0
-var activeBubble : Node2D
-var activeBubbleTween : Tween
-var activeBubbleTimer : SceneTreeTimer
-var skip : bool = false
+@onready var levelSelect = preload("res://Scenes/LevelSelect.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
 	if not GodotPlayGameServices.android_plugin:
 		printerr("Could not find Google Play Games Services plugin!")
-	
-	playGamesSignInClient.user_authenticated.connect(_on_user_authenticated)	
-	playGamesSignInClient.is_authenticated()
+	if(playGamesSignInClient):
+		playGamesSignInClient.user_authenticated.connect(_on_user_authenticated)	
+		playGamesSignInClient.is_authenticated()
 	
 	visible = true
-	$Panel.modulate.a = 0
 	get_tree().create_timer(0.5).timeout.connect(func():	
 		var blackPanelTween = get_tree().create_tween()
 		blackPanelTween.set_ease(Tween.EASE_IN)
@@ -66,40 +51,10 @@ func _ready() -> void:
 		$StartButton.grab_focus()
 	
 	var music = get_tree().root.find_child("BGMusic", true, false)
-	music.play()
+	if(music):
+		music.play()
 	
 	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#$StartButton.grab_focus()
-	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
-		if(quitButtonPressed):
-			$QuitButton/TextureProgressBar.value += 80*delta
-		elif(!quitButtonPressed):
-			$QuitButton/TextureProgressBar.value -= 100*delta
-			
-		if($QuitButton/TextureProgressBar.value == $QuitButton/TextureProgressBar.max_value):
-			quitFilled()
-	
-		if(startButtonPressed):
-			$StartButton/TextureProgressBar.value += 80*delta
-		elif(!startButtonStayFilled):
-			$StartButton/TextureProgressBar.value -= 100*delta
-		
-	if(!startButtonStayFilled && $StartButton/TextureProgressBar.value == $StartButton/TextureProgressBar.max_value):
-		filled()
-		
-	if(startButtonStayFilled && Input.is_action_just_pressed("Press")):
-		if( activeBubbleTween != null && activeBubbleTween.is_valid() && activeBubbleTween.is_running()):
-			activeBubbleTween.pause()
-			activeBubbleTween.custom_step(1.0)
-		else:
-			if(activeBubbleTimer != null):
-				activeBubbleTimer.time_left = 0
-		skip = true
-		
-		
 func filled():
 	startButtonStayFilled = true
 	var tween = get_tree().create_tween()
@@ -132,102 +87,9 @@ func menuOut():
 	$Logo.visible = false
 	$StartButton.visible = false
 	$QuitButton.visible = false
-	var bubble = thoughtBubble.instantiate()
-	activeBubble = bubble
-	bubble.modulate.a = 0
-	var tween = get_tree().create_tween()
-	activeBubbleTween = tween
-	tween.tween_property(bubble, "modulate:a", 1, 0.3)
-	tween.tween_callback(bubbleOut)
-	bubble.global_position = bubblePos
-	world.add_child(bubble)
-	
-func bubbleOut():
-	if(skip):
-		deleteBubble()
-	else:
-		var timer = get_tree().create_timer(2.0)
-		timer.timeout.connect(func():
-			if(skip):
-				activeBubble.modulate.a = 0
-				deleteBubble()
-			else:
-				var tween = get_tree().create_tween()
-				activeBubbleTween = tween
-				tween.set_ease(Tween.EASE_IN)
-				tween.tween_property(activeBubble, "modulate:a", 0, 0.3)
-				tween.tween_callback(deleteBubble)
-			)
-		activeBubbleTimer = timer
-	
-	#var tween = get_tree().create_tween()
-	#tween.set_ease(Tween.EASE_IN)
-	#tween.tween_property(activeBubble, "modulate:a", 0, 2)
-	#tween.tween_callback(deleteBubble)
-	
-	
-	
-func deleteBubble():
-	print_debug("Deleting Bubble!")
-	activeBubble.queue_free()
-	var bubble
-	match bubblesSpawned:
-		0:
-			bubble = thoughtBubble1.instantiate()
-		1:
-			bubble = thoughtBubble2.instantiate()
-		2:
-			bubble = thoughtBubble3.instantiate()
-		_:
-			var player = get_tree().root.find_child("PlayerDog", true, false)
-			player.playerControl = true
-			player.grabCamera()
-			visible = false
-			SignalManager.on_gameBegin.emit()
-			return
-	bubblesSpawned+=1
-	activeBubble = bubble
-	bubble.global_position = bubblePos
-	world.add_child(activeBubble)
-	
-	if(skip):
-		skip = false
-		
-		activeBubble.modulate.a = 1
-		bubbleOut()
-	else:
-		activeBubble.modulate.a = 0
-		var tween = get_tree().create_tween()
-		activeBubbleTween = tween
-		tween.tween_property(activeBubble, "modulate:a", 1, 0.3)
-		tween.tween_callback(bubbleOut)
-	
-	
-func _on_start_button_button_down() -> void:
-	print_debug("Start down!")
-	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
 
-		justPressed = true
-		get_tree().create_timer(justPressedTime).timeout.connect(func(): justPressed = false)
-	elif OS.has_feature("mobile"):
-		filled()
-	startButtonPressed = true
-
-
-func _on_start_button_button_up() -> void:
-	print_debug("Start up!")
-	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
-		if(justPressed):
-			$QuitButton.grab_focus()
-			justPressed = false
-			
-			$StartButton/TextureProgressBar.texture_under = start_unfocused
-			$QuitButton/TextureProgressBar.texture_under = quit_focused
 	
-	startButtonPressed = false
-pass # Replace with function body.
-
-
+	
 func _on_quit_button_button_down() -> void:
 	quitButtonPressed = true
 	justPressed = true
@@ -262,3 +124,9 @@ func _on_sign_in_pressed() -> void:
 
 func _on_leaderboard_pressed() -> void:
 	leaderboardsClient.show_all_leaderboards()
+
+func _on_start_button_pressed() -> void:
+	print_debug("Start pressed!")
+	var l = levelSelect.instantiate()
+	get_parent().add_child(l)
+	queue_free()

@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://cms25cq8nkurk"]
+
+[ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="1_gqdtr"]
+[ext_resource type="Script" path="res://Scripts/LevelSelect.gd" id="1_jilec"]
+[ext_resource type="Script" path="res://Scripts/Map.gd" id="3_0gmo4"]
+[ext_resource type="Resource" uid="uid://cibsfp4rd5p5b" path="res://Scenes/Maps/Field.tres" id="4_3t0aq"]
+[ext_resource type="Resource" uid="uid://ce2xllrb7yjod" path="res://Scenes/Maps/Park.tres" id="5_7xxf7"]
+[ext_resource type="Resource" uid="uid://br6kp3c2pxqet" path="res://Scenes/Maps/Square.tres" id="6_irs0w"]
+[ext_resource type="Resource" uid="uid://c786inhs2hhtg" path="res://Scenes/Maps/Small.tres" id="7_p8fhk"]
+[ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="10_il346"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxlm1"]
+bg_color = Color(0, 0, 0, 0.270588)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 0.270588)
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gqdtr")
+script = ExtResource("1_jilec")
+scenes = Array[ExtResource("3_0gmo4")]([ExtResource("4_3t0aq"), ExtResource("5_7xxf7"), ExtResource("6_irs0w"), ExtResource("7_p8fhk")])
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -4
+layout_mode = 0
+offset_right = 1891.0
+offset_bottom = 1476.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("10_il346")
+expand_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -55.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rxlm1")
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+last_wrap_alignment = 2

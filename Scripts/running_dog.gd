@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 		move = false
 		dir=-1
 		
-func flip(flip:bool):
-	$Sprite2D.flip_h = flip
+func flip(right:bool):
+	$Sprite2D.flip_h = right
 	get_tree().create_timer(0.5).timeout.connect(func(): move = true)
 	

@@ -1,0 +1,154 @@
+[gd_scene load_steps=7 format=3 uid="uid://bex5qw1acdrnm"]
+
+[ext_resource type="Script" path="res://Scenes/LevelSelect.gd" id="1_jilec"]
+[ext_resource type="PackedScene" uid="uid://tcsre6epm8ss" path="res://Scenes/Park_Map.tscn" id="1_of618"]
+[ext_resource type="Texture2D" uid="uid://bywajg5yonlif" path="res://Assets/UI/arrow.png" id="2_le5wp"]
+[ext_resource type="PackedScene" uid="uid://d0lv3j2ywaltm" path="res://Scenes/Square_Map.tscn" id="3_4ou3j"]
+[ext_resource type="PackedScene" uid="uid://bmtfcin4sha1p" path="res://Scenes/Maps/TutorialMaps.tscn" id="4_y1wot"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o54br"]
+texture = ExtResource("2_le5wp")
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jilec")
+
+[node name="Next" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 136.0
+offset_top = -20.0
+offset_right = 176.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(20, 20)
+theme_override_styles/focus = SubResource("StyleBoxTexture_o54br")
+theme_override_styles/hover = SubResource("StyleBoxTexture_o54br")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_o54br")
+theme_override_styles/normal = SubResource("StyleBoxTexture_o54br")
+
+[node name="Prev" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.0
+offset_top = -20.0
+offset_right = -136.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-1, -1)
+pivot_offset = Vector2(20, 20)
+theme_override_styles/focus = SubResource("StyleBoxTexture_o54br")
+theme_override_styles/hover = SubResource("StyleBoxTexture_o54br")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_o54br")
+theme_override_styles/normal = SubResource("StyleBoxTexture_o54br")
+
+[node name="SubViewports" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 100)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="SubViewports"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 100)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewports/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+size_2d_override = Vector2i(800, 800)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="World" parent="SubViewports/SubViewportContainer/SubViewport" instance=ExtResource("1_of618")]
+position = Vector2(800, 500)
+
+[node name="SubViewportContainer2" type="SubViewportContainer" parent="SubViewports"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 350.0
+offset_top = -100.0
+offset_right = 550.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 100)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewports/SubViewportContainer2"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+size_2d_override = Vector2i(1600, 1600)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="World" parent="SubViewports/SubViewportContainer2/SubViewport" instance=ExtResource("3_4ou3j")]
+position = Vector2(800, 800)
+
+[node name="SubViewportContainer3" type="SubViewportContainer" parent="SubViewports"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 800.0
+offset_top = -100.0
+offset_right = 1000.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(100, 100)
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="SubViewports/SubViewportContainer3"]
+handle_input_locally = false
+size = Vector2i(200, 200)
+size_2d_override = Vector2i(1600, 1600)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="World" parent="SubViewports/SubViewportContainer3/SubViewport" instance=ExtResource("4_y1wot")]
+position = Vector2(800, 800)
+
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Prev" to="." method="_on_prev_pressed"]

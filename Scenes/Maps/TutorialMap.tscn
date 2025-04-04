@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmtfcin4sha1p"]
+
+[ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="1_ed8o2"]
+[ext_resource type="Script" path="res://Scripts/FollowCamera.gd" id="2_8tg2e"]
+[ext_resource type="Script" path="res://Scripts/PlayerSpawner.gd" id="2_sjtta"]
+[ext_resource type="Script" path="res://Scripts/DogCrackerSpawner.gd" id="3_5h5vq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k13ou"]
+size = Vector2(1980, 323.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xehlq"]
+size = Vector2(261, 1561)
+
+[node name="World" type="Node2D"]
+
+[node name="PlayerStart" type="Node2D" parent="."]
+script = ExtResource("2_sjtta")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -933
+limit_top = -730
+limit_right = 938
+limit_bottom = 720
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+editor_draw_limits = true
+script = ExtResource("2_8tg2e")
+
+[node name="MapTutorial1" type="Sprite2D" parent="."]
+z_index = -3
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_ed8o2")
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+position = Vector2(0, -905)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+shape = SubResource("RectangleShape2D_k13ou")
+
+[node name="BottomWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+position = Vector2(0, 1654)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
+position = Vector2(0, -748)
+shape = SubResource("RectangleShape2D_k13ou")
+
+[node name="RightWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+position = Vector2(1082, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+shape = SubResource("RectangleShape2D_xehlq")
+
+[node name="LeftWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+position = Vector2(-1085, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+shape = SubResource("RectangleShape2D_xehlq")
+
+[node name="PickupSpawner" type="Node2D" parent="."]
+script = ExtResource("3_5h5vq")
+
+[node name="PickupPoints" type="Node2D" parent="PickupSpawner"]
+scale = Vector2(1.22042, 0.916599)
+
+[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(104, 432)
+
+[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-487, 201)
+
+[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(579, -421)
+
+[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-202, 374)
+
+[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(38, -602)
+
+[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-615, -383)
+
+[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-312, -609)
+
+[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(749, 86)
+
+[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(393, 100)
+
+[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(593, -100)
+
+[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-48, -334)
+
+[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(245, -412)
+
+[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(278, 276)
+
+[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-706, 119)
+
+[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-139, 651)

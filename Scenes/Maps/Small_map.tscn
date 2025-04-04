@@ -1,0 +1,333 @@
+[gd_scene load_steps=16 format=3 uid="uid://dw8vjc4lovnfv"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerSpawner.gd" id="1_iugb5"]
+[ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_jsq6t"]
+[ext_resource type="Script" path="res://Scripts/DogCrackerSpawner.gd" id="3_5p3d3"]
+[ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://Scenes/bench.tscn" id="4_4y7p2"]
+[ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/fountain.tscn" id="5_c3vhc"]
+[ext_resource type="PackedScene" uid="uid://bdgut8fsafskf" path="res://Scenes/Tree_1.tscn" id="6_0p5h7"]
+[ext_resource type="PackedScene" uid="uid://b2vvgcdqie4wf" path="res://Scenes/Tree_2.tscn" id="7_vn6tb"]
+[ext_resource type="PackedScene" uid="uid://bnepouvao7645" path="res://Scenes/Tree_3.tscn" id="8_2u7e6"]
+[ext_resource type="PackedScene" uid="uid://bob8kh4co86nl" path="res://Scenes/Tree_4.tscn" id="9_2lrx0"]
+[ext_resource type="PackedScene" uid="uid://dnq1hhrmswccv" path="res://Scenes/chiweewee.tscn" id="10_1andm"]
+[ext_resource type="PackedScene" uid="uid://c0h220kvrr0mb" path="res://Scenes/angry_dog.tscn" id="11_lqxm4"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fj0g7"]
+distance = -1118.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_6ntvb"]
+normal = Vector2(0, 1)
+distance = -253.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hivew"]
+normal = Vector2(1, 0)
+distance = -1282.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rkj8e"]
+normal = Vector2(-1, 0)
+distance = -1240.0
+
+[node name="World" type="Node2D"]
+
+[node name="PlayerStart" type="Node2D" parent="."]
+position = Vector2(-722, 263)
+script = ExtResource("1_iugb5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-917, 318)
+limit_left = -1303
+limit_top = -30
+limit_right = -107
+limit_bottom = 745
+limit_smoothed = true
+position_smoothing_speed = 10.0
+editor_draw_limits = true
+
+[node name="MapmaybeBase" type="Sprite2D" parent="."]
+z_index = -3
+position = Vector2(-672, 306)
+scale = Vector2(0.420003, 0.655205)
+texture = ExtResource("2_jsq6t")
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Walls" groups=["Dangers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D"]
+position = Vector2(0, -16)
+shape = SubResource("WorldBoundaryShape2D_fj0g7")
+
+[node name="Area2D2" type="Area2D" parent="Walls" groups=["Dangers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D2"]
+position = Vector2(0, 71)
+shape = SubResource("WorldBoundaryShape2D_6ntvb")
+
+[node name="Area2D3" type="Area2D" parent="Walls" groups=["Dangers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D3"]
+shape = SubResource("WorldBoundaryShape2D_hivew")
+
+[node name="Area2D4" type="Area2D" parent="Walls" groups=["Dangers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D4"]
+position = Vector2(-1112, 23)
+shape = SubResource("WorldBoundaryShape2D_rkj8e")
+
+[node name="PickupSpawner" type="Node2D" parent="."]
+script = ExtResource("3_5p3d3")
+
+[node name="PickupPoints" type="Node2D" parent="PickupSpawner"]
+
+[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-524, 420)
+
+[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-487, 201)
+
+[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-379, 463)
+
+[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-800, 308)
+
+[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-798, 160)
+
+[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-586, 183)
+
+[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-900, 619)
+
+[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-758, 435)
+
+[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-944, 285)
+
+[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-302, 228)
+
+[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-1066, 388)
+
+[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-247, 312)
+
+[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-248, 244)
+
+[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-697, 133)
+
+[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-1074, 173)
+
+[node name="Obstacles" type="Node2D" parent="."]
+
+[node name="Bench" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1194, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench2" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1104, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench3" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1015, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench4" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-923, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench5" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-833, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench6" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-744, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench7" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-652, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench8" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-562, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench9" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-473, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench10" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-390, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench11" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-300, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench12" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-211, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench13" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1246, 54)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench25" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1260, 93.9999)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench26" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1260, 176)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench27" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1260, 257)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench28" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1260, 339)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench29" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1260, 423)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench30" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1260, 505)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench33" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-153, 174)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench40" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-153, 86)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench34" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-153, 256)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench35" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-153, 337)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench39" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-126, 668)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench36" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-153, 419)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench37" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-153, 503)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench38" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-153, 585)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench31" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1276, 592)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench32" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1213, 664)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench14" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1127, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench15" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-1038, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench16" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-946, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench17" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-856, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench18" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-767, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench19" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-675, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench20" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-585, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench21" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-496, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench22" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-413, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench23" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-323, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Bench24" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+position = Vector2(-234, 23.0001)
+scale = Vector2(0.372073, 0.372073)
+
+[node name="Fountain" parent="Obstacles" instance=ExtResource("5_c3vhc")]
+position = Vector2(-398, 362)
+scale = Vector2(0.289338, 0.289338)
+
+[node name="Tree_1" parent="Obstacles" instance=ExtResource("6_0p5h7")]
+position = Vector2(409, 727)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_9" parent="Obstacles" instance=ExtResource("6_0p5h7")]
+position = Vector2(750, 335)
+scale = Vector2(-0.6, 0.6)
+
+[node name="Tree_7" parent="Obstacles" instance=ExtResource("6_0p5h7")]
+position = Vector2(-436, -189)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_2" parent="Obstacles" instance=ExtResource("7_vn6tb")]
+position = Vector2(320, 331)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_3" parent="Obstacles" instance=ExtResource("8_2u7e6")]
+position = Vector2(-142, 978)
+scale = Vector2(-0.328906, 0.328906)
+
+[node name="Tree_6" parent="Obstacles" instance=ExtResource("8_2u7e6")]
+position = Vector2(-768, -634)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_5" parent="Obstacles" instance=ExtResource("8_2u7e6")]
+position = Vector2(-1081, 510)
+scale = Vector2(0.401347, 0.401347)
+
+[node name="Tree_8" parent="Obstacles" instance=ExtResource("8_2u7e6")]
+position = Vector2(845, 288)
+scale = Vector2(0.6, 0.6)
+
+[node name="Tree_4" parent="Obstacles" instance=ExtResource("9_2lrx0")]
+position = Vector2(-260, 521)
+scale = Vector2(0.238654, 0.238654)
+
+[node name="Chiweewee" parent="." instance=ExtResource("10_1andm")]
+position = Vector2(-257, 32)
+
+[node name="AngryDog" parent="." instance=ExtResource("11_lqxm4")]
+position = Vector2(852, -449)

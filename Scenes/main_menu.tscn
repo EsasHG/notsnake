@@ -1,43 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://jdiyiwxj7kh0"]
+[gd_scene load_steps=7 format=3 uid="uid://jdiyiwxj7kh0"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
-[ext_resource type="Texture2D" uid="uid://dcecd6rbo2blp" path="res://Assets/UI/startbutton_1.png" id="3_wiek5"]
-[ext_resource type="Texture2D" uid="uid://bde1l8ykv1rtx" path="res://Assets/UI/startbutton_5.png" id="4_uoro4"]
-[ext_resource type="Texture2D" uid="uid://bcf4ifygghr1k" path="res://Assets/UI/OPENER COMIC/GAME_COMIC_PANEL1.png" id="5_a54ho"]
-[ext_resource type="Texture2D" uid="uid://cr0k00imrx8au" path="res://Assets/UI/OPENER COMIC/GAME_COMIC_PANEL2.png" id="6_afy1m"]
-[ext_resource type="Texture2D" uid="uid://cdauou7c8qwkk" path="res://Assets/UI/OPENER COMIC/GAME_COMIC_PANEL3.png" id="7_wbc7c"]
-[ext_resource type="Texture2D" uid="uid://chpu7hodmmbuu" path="res://Assets/UI/QUIT_2.png" id="8_52c2e"]
-[ext_resource type="Texture2D" uid="uid://y1a5d52xbq2a" path="res://Assets/UI/QUIT_1.png" id="9_i5odq"]
-[ext_resource type="Texture2D" uid="uid://cmi2tok2niuud" path="res://Assets/UI/QUIT_3.png" id="10_rtivd"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_f6ncm"]
+[ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="12_12hqc"]
 [ext_resource type="StyleBox" uid="uid://ktqcdhd8okf4" path="res://Assets/Styles/empty_button_style_box_texture.tres" id="12_eprln"]
-
-[sub_resource type="SystemFont" id="SystemFont_i7lj5"]
-subpixel_positioning = 0
-
-[sub_resource type="SystemFont" id="SystemFont_3agwa"]
-subpixel_positioning = 0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eqqvd"]
-texture = ExtResource("8_52c2e")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6oyoi"]
-texture = ExtResource("8_52c2e")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cgqex"]
-texture = ExtResource("8_52c2e")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5i33v"]
-texture = ExtResource("9_i5odq")
-
-[sub_resource type="Shortcut" id="Shortcut_8klix"]
-events = [null]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
 bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c58tn"]
-bg_color = Color(0.890196, 0.886275, 0.882353, 0)
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -46,156 +16,78 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_jrsic")
 
 [node name="Logo" type="TextureRect" parent="."]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -865.0
-offset_right = 2975.0
-offset_bottom = 2160.0
-grow_horizontal = 0
-scale = Vector2(0.225, 0.225)
+offset_right = 450.0
+offset_bottom = 300.0
+mouse_filter = 2
 texture = ExtResource("2_5vvlb")
 expand_mode = 1
 stretch_mode = 4
 
 [node name="Sign In" type="Button" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -416.0
+offset_left = -210.0
 offset_top = -120.0
-offset_right = -216.0
-offset_bottom = -45.0
+offset_right = -80.0
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 0
-pivot_offset = Vector2(100, 37)
-theme_override_colors/font_color = Color(0.941176, 0.929412, 0.929412, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_fonts/font = SubResource("SystemFont_i7lj5")
-theme_override_font_sizes/font_size = 23
+pivot_offset = Vector2(65, 25)
+theme = ExtResource("3_f6ncm")
+theme_override_font_sizes/font_size = 20
 theme_override_styles/focus = ExtResource("12_eprln")
 theme_override_styles/hover = ExtResource("12_eprln")
 theme_override_styles/pressed = ExtResource("12_eprln")
 theme_override_styles/normal = ExtResource("12_eprln")
-text = "Sign in to 
-Google Play"
+text = "SIGN IN TO 
+GOOGLE PLAY"
 
 [node name="Leaderboard" type="Button" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 216.0
+offset_left = 80.0
 offset_top = -120.0
-offset_right = 416.0
-offset_bottom = -45.0
+offset_right = 210.0
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 0
-pivot_offset = Vector2(100, 37)
-theme_override_colors/font_color = Color(0.941176, 0.929412, 0.929412, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 3
-theme_override_constants/h_separation = 0
-theme_override_fonts/font = SubResource("SystemFont_3agwa")
-theme_override_font_sizes/font_size = 28
-theme_override_styles/focus = ExtResource("12_eprln")
-theme_override_styles/hover = ExtResource("12_eprln")
-theme_override_styles/pressed = ExtResource("12_eprln")
-theme_override_styles/normal = ExtResource("12_eprln")
+pivot_offset = Vector2(65, 25)
+theme = ExtResource("3_f6ncm")
+theme_override_font_sizes/font_size = 19
 text = "Leaderboard"
 
 [node name="StartButton" type="Button" parent="."]
-z_index = -1
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
+offset_left = -65.0
 offset_top = -120.0
-offset_right = 100.0
-offset_bottom = -45.0
+offset_right = 65.0
+offset_bottom = -70.0
 grow_horizontal = 2
 grow_vertical = 0
-pivot_offset = Vector2(100, 37)
-theme_override_colors/font_color = Color(0.941176, 0.929412, 0.929412, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = ExtResource("12_eprln")
-theme_override_styles/hover = ExtResource("12_eprln")
-theme_override_styles/pressed = ExtResource("12_eprln")
-theme_override_styles/normal = ExtResource("12_eprln")
+pivot_offset = Vector2(65, 25)
+theme = ExtResource("3_f6ncm")
 text = "Start"
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="StartButton"]
-visible = false
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -57.5
-offset_top = -65.5
-offset_right = 57.5
-offset_bottom = 65.5
-grow_horizontal = 2
-grow_vertical = 2
-step = 0.1
-fill_mode = 6
-texture_under = ExtResource("4_uoro4")
-texture_progress = ExtResource("3_wiek5")
-
-[node name="QuitButton" type="Button" parent="."]
-visible = false
-z_index = -1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -234.0
-offset_top = -380.0
-offset_right = 960.0
-offset_bottom = 160.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(0.2, 0.2)
-pivot_offset = Vector2(597, 270)
-theme_override_styles/focus = SubResource("StyleBoxTexture_eqqvd")
-theme_override_styles/hover = SubResource("StyleBoxTexture_6oyoi")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_cgqex")
-theme_override_styles/normal = SubResource("StyleBoxTexture_5i33v")
-shortcut = SubResource("Shortcut_8klix")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="QuitButton"]
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-step = 0.1
-fill_mode = 6
-texture_under = ExtResource("10_rtivd")
-texture_progress = ExtResource("8_52c2e")
-
 [node name="Panel2" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -205,71 +97,16 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cy8ve")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+z_index = -4
+layout_mode = 0
+offset_right = 1891.0
+offset_bottom = 1476.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_c58tn")
-
-[node name="TextureRect" type="TextureRect" parent="Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -593.0
-offset_top = -472.0
-offset_right = 321.0
-offset_bottom = 896.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.675, 0.675)
-mouse_filter = 2
-texture = ExtResource("5_a54ho")
-
-[node name="TextureRect2" type="TextureRect" parent="Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 46.0
-offset_top = -408.0
-offset_right = 860.0
-offset_bottom = 306.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.675, 0.675)
-mouse_filter = 2
-texture = ExtResource("6_afy1m")
-
-[node name="TextureRect3" type="TextureRect" parent="Panel"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 24.0
-offset_top = 32.0
-offset_right = 926.0
-offset_bottom = 618.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.675, 0.675)
-mouse_filter = 2
-texture = ExtResource("7_wbc7c")
+texture = ExtResource("12_12hqc")
+expand_mode = 1
 
 [connection signal="pressed" from="Sign In" to="." method="_on_sign_in_pressed"]
 [connection signal="pressed" from="Leaderboard" to="." method="_on_leaderboard_pressed"]
-[connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
-[connection signal="button_up" from="StartButton" to="." method="_on_start_button_button_up"]
-[connection signal="button_down" from="QuitButton" to="." method="_on_quit_button_button_down"]
-[connection signal="button_up" from="QuitButton" to="." method="_on_quit_button_button_up"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

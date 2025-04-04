@@ -1,0 +1,7 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bf6psobc6m43r"]
+
+[ext_resource type="Texture2D" uid="uid://c83txwkdq3lm4" path="res://Assets/UI/empty_button_unfocused.png" id="1_cmak5"]
+
+[resource]
+texture = ExtResource("1_cmak5")
+region_rect = Rect2(81.5, 103.5, 1107, 475)
