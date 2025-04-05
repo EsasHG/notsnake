@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0h220kvrr0mb"]
+[gd_scene load_steps=6 format=3 uid="uid://c0h220kvrr0mb"]
 
 [ext_resource type="Script" path="res://Scripts/angry_dog.gd" id="1_u6g5v"]
 [ext_resource type="SpriteFrames" uid="uid://dtci15yb371cm" path="res://Assets/Animations/angryDogAnim.tres" id="2_py7at"]
 [ext_resource type="AudioStream" uid="uid://i378i3hla5nk" path="res://Assets/Sound/bark_looping.wav" id="3_2mjkq"]
+[ext_resource type="Script" path="res://Scripts/SFXPlayer.gd" id="4_rkn7a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xavxj"]
 size = Vector2(65, 160)
@@ -21,3 +22,4 @@ frame_progress = 0.492944
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_2mjkq")
 pitch_scale = 0.65
+script = ExtResource("4_rkn7a")

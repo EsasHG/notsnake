@@ -28,64 +28,6 @@ texture = ExtResource("2_5vvlb")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Sign In" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -210.0
-offset_top = -120.0
-offset_right = -80.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(65, 25)
-theme = ExtResource("3_f6ncm")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = ExtResource("12_eprln")
-theme_override_styles/hover = ExtResource("12_eprln")
-theme_override_styles/pressed = ExtResource("12_eprln")
-theme_override_styles/normal = ExtResource("12_eprln")
-text = "SIGN IN TO 
-GOOGLE PLAY"
-
-[node name="Leaderboard" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 80.0
-offset_top = -120.0
-offset_right = 210.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(65, 25)
-theme = ExtResource("3_f6ncm")
-theme_override_font_sizes/font_size = 19
-text = "Leaderboard"
-
-[node name="StartButton" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -65.0
-offset_top = -120.0
-offset_right = 65.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(65, 25)
-theme = ExtResource("3_f6ncm")
-text = "Start"
-
 [node name="Panel2" type="Panel" parent="."]
 visible = false
 layout_mode = 1
@@ -107,6 +49,46 @@ mouse_filter = 2
 texture = ExtResource("12_12hqc")
 expand_mode = 1
 
-[connection signal="pressed" from="Sign In" to="." method="_on_sign_in_pressed"]
-[connection signal="pressed" from="Leaderboard" to="." method="_on_leaderboard_pressed"]
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -120.0
+offset_right = 199.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Sign In" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("3_f6ncm")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("12_eprln")
+theme_override_styles/hover = ExtResource("12_eprln")
+theme_override_styles/pressed = ExtResource("12_eprln")
+theme_override_styles/normal = ExtResource("12_eprln")
+text = "SIGN IN TO 
+GOOGLE PLAY"
+
+[node name="StartButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("3_f6ncm")
+text = "Start"
+
+[node name="Leaderboard" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("3_f6ncm")
+theme_override_font_sizes/font_size = 19
+text = "Leaderboard"
+
+[connection signal="pressed" from="HBoxContainer/Sign In" to="." method="_on_sign_in_pressed"]
+[connection signal="pressed" from="HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]

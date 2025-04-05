@@ -32,6 +32,7 @@ script = ExtResource("2_qtlb6")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-9, 466)
+zoom = Vector2(1.1, 1.1)
 limit_left = -953
 limit_top = -830
 limit_right = 963

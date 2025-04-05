@@ -4,6 +4,8 @@ signal on_pickup()
 signal on_gameOver(won:bool)
 signal on_gameBegin()
 signal on_pickupSpawned(pickup:Area2D)
+signal on_mainMenuOpened()
+signal on_sfx_volume_changed(new_vol : float)
 
 @export var currentScore : int = 0 
 var currentMap :Map
@@ -15,6 +17,8 @@ var sfxMuted : bool = false
 
 @onready var gameOverScreen : PackedScene = preload("res://Scenes/GameOverScreen.tscn")
 @onready var playerChar : PackedScene = preload("res://Scenes/PlayerDog.tscn")
+@onready var pauseMenu : PackedScene = preload("res://Scenes/Menus/pause_menu.tscn")
+@onready var bubbleScene : PackedScene = preload("res://Scenes/BubbleCutscene.tscn")
 @onready var leaderboardsClient : PlayGamesLeaderboardsClient = %PlayGamesLeaderboardsClient
 @onready var signInClient : PlayGamesSignInClient = %PlayGamesSignInClient
 @onready var scoreBoard : PlayGamesLeaderboard
@@ -51,6 +55,10 @@ func doDeferredSetup():
 		button.set_pressed_no_signal(sfxMuted)
 	setSFXVol(sfxVol)
 	
+	button = get_tree().root.find_child("Pause", true, false)
+	if(is_instance_valid(button)):
+		button.pressed.connect(on_pause_pressed)
+		button.set_pressed_no_signal(sfxMuted)
 	if not leaderboardsClient:
 		printerr("No leaderboards client found!")
 	else:
@@ -60,6 +68,14 @@ func doDeferredSetup():
 		leaderboardsClient.load_all_leaderboards(true)
 	if(signInClient):
 		signInClient.user_authenticated.connect(_on_user_authenticated)
+		
+func mainMenu():
+	if(currentWorld != null):
+		currentWorld.queue_free()
+	var b = bubbleScene.instantiate()
+	b.skipEntireCutscene = true
+	get_tree().root.add_child(b)
+	on_mainMenuOpened.emit()
 	
 func startGame():
 	if(currentWorld != null):
@@ -147,8 +163,10 @@ func loadScore():
 		
 func setSFXVol(in_vol : float):
 	sfxVol = in_vol
-	for audio : AudioStreamPlayer2D in get_tree().root.find_children("*", "AudioStreamPlayer2D", true, false):
-		audio.volume_db = in_vol
+	on_sfx_volume_changed.emit(in_vol)
+	#for audio : AudioStreamPlayer2D in get_tree().root.find_children("*", "AudioStreamPlayer2D", true, false):
+	#	audio.volume_db = in_vol
+		
 
 
 func setMusicVol(in_vol : float):
@@ -156,22 +174,33 @@ func setMusicVol(in_vol : float):
 	for audio : AudioStreamPlayer in get_tree().root.find_children("*", "AudioStreamPlayer", true, false):
 		audio.volume_db = in_vol
 
-func _on_music_mute_toggled(toggled_on: bool) -> void:
-	musicMuted = toggled_on
+func setMusicMuted(muted:bool):
+	musicMuted = muted
 	var vol : float = linear_to_db(0.8)
 	if musicMuted: 
 		vol = linear_to_db(0)
 	setMusicVol(vol)
 	saveScore()
-
-
-func _on_sfx_mute_toggled(toggled_on: bool) -> void:
-	sfxMuted = toggled_on
+	
+func setSFXMuted(muted:bool):
+	sfxMuted = muted
 	var vol : float = linear_to_db(0.8)
 	if sfxMuted: 
 		vol = linear_to_db(0)
 	setSFXVol(vol)
 	saveScore()
+	
+func _on_music_mute_toggled(toggled_on: bool) -> void:
+	setMusicMuted(toggled_on)
+
+func _on_sfx_mute_toggled(toggled_on: bool) -> void:
+	setSFXMuted(toggled_on)
+
+func on_pause_pressed():
+	var pauseScreen = pauseMenu.instantiate()
+	$"../Main/CanvasLayer/Gui".add_child(pauseScreen)
+	get_tree().paused = true
+	pass
 
 func ShowLeaderboard():
 	if(leaderboardsClient):

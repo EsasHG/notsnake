@@ -22,6 +22,7 @@ func _ready() -> void:
 		playGamesSignInClient.is_authenticated()
 	
 	visible = true
+	#$Panel2.visible = true
 	get_tree().create_timer(0.5).timeout.connect(func():	
 		var blackPanelTween = get_tree().create_tween()
 		blackPanelTween.set_ease(Tween.EASE_IN)
@@ -48,7 +49,7 @@ func _ready() -> void:
 		#)
 	#)
 	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
-		$StartButton.grab_focus()
+		$HBoxContainer/StartButton.grab_focus()
 	
 	var music = get_tree().root.find_child("BGMusic", true, false)
 	if(music):

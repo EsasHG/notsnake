@@ -17,6 +17,7 @@ size = Vector2(261, 1561)
 script = ExtResource("2_sjtta")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.1, 1.1)
 limit_left = -933
 limit_top = -730
 limit_right = 938

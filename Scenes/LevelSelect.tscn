@@ -30,13 +30,14 @@ scenes = Array[ExtResource("3_0gmo4")]([ExtResource("4_3t0aq"), ExtResource("5_7
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -4
+texture_repeat = 2
 layout_mode = 0
 offset_right = 1891.0
 offset_bottom = 1476.0
 scale = Vector2(0.5, 0.5)
 mouse_filter = 2
 texture = ExtResource("10_il346")
-expand_mode = 1
+stretch_mode = 5
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1

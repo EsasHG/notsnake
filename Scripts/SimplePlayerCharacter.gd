@@ -32,6 +32,7 @@ var showFps = false
 var frameDelay = 1
 var segmentsPerSection = 20
 var move = true
+var rotateRight = false
 var arrowTarget : Vector2
 
 func _ready() -> void:
@@ -66,18 +67,25 @@ func add_segment():
 		canAddSprites = false
 		get_tree().create_timer(0.1).timeout.connect(resetSpriteTimer)
 		hindLegs.pause()
-		
 
 func resetSpriteTimer():
 	canAddSprites = true
 
-
+func _unhandled_input(event: InputEvent) -> void:
+	#event.is_action_pressed()
+	if(event.is_action("Press")):
+		if(event.is_pressed()):
+			rotateRight = true
+		else:
+			rotateRight = false
+			
 func _process(delta: float) -> void:
 	
 	if(!move): return
 #	position.x += delta*100
 	var dir : int = -1
-	if(Input.is_action_pressed("Press") && ("Press") && playerControl):
+	
+	if(rotateRight && playerControl):
 		dir = 1
 		rotate(delta*ROTATE_SPEED*OVERALL_SPEED)
 	else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bkjd5mneny7c1"]
+[gd_scene load_steps=39 format=3 uid="uid://bkjd5mneny7c1"]
 
 [ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="1_f7yc0"]
 [ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/Dogs/OutlinedDog/TAIL_C.png" id="2_c2s43"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://bj3kggw0gs3xi" path="res://Assets/Sound/bark.wav" id="4_wxfsi"]
 [ext_resource type="Texture2D" uid="uid://cxm52e0c581yk" path="res://Assets/Dogs/cosmetics/hat_christmas.png" id="5_cvw6e"]
 [ext_resource type="Script" path="res://Scripts/SimplePlayerCharacter.gd" id="5_q7dwm"]
+[ext_resource type="Script" path="res://Scripts/SFXPlayer.gd" id="5_xdk5u"]
 [ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="6_a0qte"]
 [ext_resource type="Texture2D" uid="uid://baisbs5c35f4g" path="res://Assets/Dogs/cosmetics/hat_cowboy.png" id="6_kak2d"]
 [ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="7_dffxg"]
@@ -207,6 +208,7 @@ frame_progress = 0.515546
 
 [node name="BarkSound" type="AudioStreamPlayer2D" parent="Head"]
 stream = ExtResource("4_wxfsi")
+script = ExtResource("5_xdk5u")
 
 [node name="Hats" type="Node2D" parent="Head"]
 

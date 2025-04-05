@@ -1,0 +1,169 @@
+[gd_scene load_steps=11 format=3 uid="uid://d0eb6heqgmexf"]
+
+[ext_resource type="Script" path="res://Scripts/pause_menu.gd" id="1_ekn4r"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="1_vms7i"]
+[ext_resource type="Texture2D" uid="uid://dj5ymgtujgle6" path="res://Assets/UI/options_icons_etc/musicnote_2.png" id="2_alqa4"]
+[ext_resource type="Texture2D" uid="uid://5ut7n13w7gl0" path="res://Assets/UI/options_icons_etc/musicnote_1.png" id="3_6gp46"]
+[ext_resource type="Texture2D" uid="uid://n0icqrejpobn" path="res://Assets/UI/options_icons_etc/speaker_off_2.png" id="4_huejo"]
+[ext_resource type="Texture2D" uid="uid://c7viv7v30veef" path="res://Assets/UI/options_icons_etc/speaker_3.png" id="5_prdnq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ovcku"]
+texture = ExtResource("2_alqa4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_umxxc"]
+texture = ExtResource("3_6gp46")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t7vc4"]
+texture = ExtResource("4_huejo")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g648p"]
+texture = ExtResource("5_prdnq")
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ekn4r")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -25.0
+offset_right = 65.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="MusicMute" type="Button" parent="Panel/VBoxContainer"]
+z_index = 3
+z_as_relative = false
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ovcku")
+theme_override_styles/hover = SubResource("StyleBoxTexture_umxxc")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ovcku")
+theme_override_styles/normal = SubResource("StyleBoxTexture_umxxc")
+toggle_mode = true
+metadata/_edit_use_anchors_ = true
+
+[node name="SFXMute" type="Button" parent="Panel/VBoxContainer"]
+z_index = 3
+z_as_relative = false
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_t7vc4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_g648p")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_t7vc4")
+theme_override_styles/normal = SubResource("StyleBoxTexture_g648p")
+toggle_mode = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -193.5
+offset_top = -125.0
+offset_right = 193.5
+offset_bottom = -75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vms7i")
+theme_override_font_sizes/font_size = 60
+text = "Game Paused!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -86.0
+offset_top = -42.0
+offset_right = 86.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -120.0
+offset_right = 132.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Resume" type="Button" parent="Panel/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_vms7i")
+text = "Resume"
+
+[node name="MainMenu" type="Button" parent="Panel/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_vms7i")
+theme_override_font_sizes/font_size = 25
+text = "Main Menu"
+
+[node name="Countdown" type="Label" parent="."]
+visible = false
+custom_minimum_size = Vector2(74, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -12.5
+offset_right = 36.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(37, 12)
+theme = ExtResource("1_vms7i")
+text = "Loop!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="toggled" from="Panel/VBoxContainer/MusicMute" to="." method="_on_music_mute_toggled"]
+[connection signal="toggled" from="Panel/VBoxContainer/SFXMute" to="." method="_on_sfx_mute_toggled"]
+[connection signal="pressed" from="Panel/HBoxContainer2/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer2/MainMenu" to="." method="_on_main_menu_pressed"]
