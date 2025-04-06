@@ -9,12 +9,13 @@ signal on_sfx_volume_changed(new_vol : float)
 
 @export var currentScore : int = 0 
 var currentMap :Map
-var highScore : int = 0
+var highScores = {"Field":0, "Park": 0, "Square": 0, "Small":0}
 var sfxVol = linear_to_db(0.8)
 var musicVol = linear_to_db(0.8)
 var musicMuted : bool = false
 var sfxMuted : bool = false
 var userAuthenticated = false
+
 
 @onready var gameOverScreen : PackedScene = preload("res://Scenes/GameOverScreen.tscn")
 @onready var playerChar : PackedScene = preload("res://Scenes/PlayerDog.tscn")
@@ -88,6 +89,10 @@ func startGame():
 	on_gameBegin.emit.call_deferred()
 	
 func gameOver(won:bool):
+	if currentScore > highScores[currentMap.name]:
+		highScores[currentMap.name] = currentScore
+		saveScore()
+	
 	if leaderboardsClient:
 		print_debug("Submitting Score: " + var_to_str(currentScore))
 		var submitted : bool = false
@@ -103,6 +108,7 @@ func gameOver(won:bool):
 	get_tree().root.find_child("Gui", true, false).add_child(ui)
 	ui.GameOver(won)
 	
+	GameSettings.currentScore = 0
 		
 func increaseScore():
 	currentScore+=1
@@ -112,7 +118,7 @@ func saveScore():
 	print_debug("Saving!")
 	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	
-	var saveDict = {"highScore" = highScore, "musicVol" = db_to_linear(musicVol), "sfxVol" = db_to_linear(sfxVol), "musicMuted" = musicMuted, "sfxMuted" = sfxMuted} 
+	var saveDict = {"highScores" = highScores, "musicVol" = db_to_linear(musicVol), "sfxVol" = db_to_linear(sfxVol), "musicMuted" = musicMuted, "sfxMuted" = sfxMuted} 
 	saveFile.store_line(JSON.stringify(saveDict))
 	print_debug("Saved!")
 	
@@ -132,8 +138,10 @@ func loadScore():
 			continue
 		var node_data : Dictionary = json.data
 		
-		highScore = node_data["highScore"]
-		
+		if node_data.has("highScore"):
+			highScores["Park"] = node_data["highScore"]
+		elif node_data.has("highScores"):
+			highScores = node_data["highScores"]
 		if node_data.has("sfxVol"):
 			sfxVol = linear_to_db(node_data["sfxVol"])
 		else:
@@ -163,6 +171,9 @@ func loadScore():
 
 			
 	print_debug("Finished loading")
+		
+func getCurrentMapHighScore():
+	return highScores[currentMap.name]
 		
 func setSFXVol(in_vol : float):
 	sfxVol = in_vol

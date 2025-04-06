@@ -1,7 +1,5 @@
 extends Control
 
-var score : int
-
 @export var bonusScreenThreshold = 30
 
 
@@ -14,14 +12,11 @@ func _ready() -> void:
 	
 func SetScore():
 	print_debug("Setting Scores in game over screen!")
-	score = GameSettings.currentScore
-	var str_score : String = var_to_str(score)
-	$ScoreLabels/ScoreLabel.text = "Score: " + str_score
+	var score : int = GameSettings.currentScore
+	var highScore : int = GameSettings.getCurrentMapHighScore()
 	
-	if score > GameSettings.highScore:
-		GameSettings.highScore = score
-		GameSettings.saveScore()
-	$ScoreLabels/HighScoreLabel.text = "Best: " + var_to_str(GameSettings.highScore)
+	$ScoreLabels/ScoreLabel.text = "Score: " + var_to_str(score)
+	$ScoreLabels/HighScoreLabel.text = "Best: " + var_to_str(highScore)
 
 func GameOver(won:bool):
 	print_debug("Game over!")
@@ -42,7 +37,6 @@ func GameOver(won:bool):
 		$Panel.visible = true
 		
 	visible = true
-	GameSettings.currentScore = 0
 	
 func _on_leaderboard_pressed() -> void:	
 	GameSettings.ShowLeaderboard()
