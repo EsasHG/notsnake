@@ -213,10 +213,8 @@ func _on_area_entered(area: Area2D) -> void:
 		
 			hats[hatRand].visible = true
 			currentHat = hatRand
-		
-		
+			
 			bark()
-			GameSettings.currentScore+=1
 			for i : int in segmentsPerSection:
 				add_segment()
 			GameSettings.on_pickup.emit()

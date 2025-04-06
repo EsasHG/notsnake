@@ -8,8 +8,6 @@ var justPressedTime = 0.2
 var start_focused = preload("res://Assets/UI/startbutton_5.png")
 var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
 
-@onready var playGamesSignInClient : PlayGamesSignInClient = %PlayGamesSignInClient
-@onready var leaderboardsClient : PlayGamesLeaderboardsClient = %PlayGamesLeaderboardsClient
 @onready var levelSelect = preload("res://Scenes/LevelSelect.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -17,9 +15,9 @@ func _ready() -> void:
 	
 	if not GodotPlayGameServices.android_plugin:
 		printerr("Could not find Google Play Games Services plugin!")
-	if(playGamesSignInClient):
-		playGamesSignInClient.user_authenticated.connect(_on_user_authenticated)	
-		playGamesSignInClient.is_authenticated()
+	if(GameSettings.signInClient):
+		GameSettings.signInClient.user_authenticated.connect(_on_user_authenticated)	
+		GameSettings.signInClient.is_authenticated()
 	
 	visible = true
 	#$Panel2.visible = true
@@ -60,20 +58,16 @@ func filled():
 	startButtonStayFilled = true
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN)
-	tween.tween_property($StartButton, "position", Vector2($StartButton.position.x,1126), 0.5)
+	tween.tween_property($HBoxContainer/StartButton, "position", Vector2($HBoxContainer/StartButton.position.x,1126), 0.5)
 	tween.tween_callback(menuOut)
-	
-	var quitButtonTween = get_tree().create_tween()
-	quitButtonTween.set_ease(Tween.EASE_IN)
-	quitButtonTween.tween_property($QuitButton, "position", Vector2($QuitButton.position.x,1126), 0.5)
 	
 	var signInTween = get_tree().create_tween()
 	signInTween.set_ease(Tween.EASE_IN)
-	signInTween.tween_property($"Sign In", "position", Vector2($"Sign In".position.x,1126), 0.5)
+	signInTween.tween_property($"HBoxContainer/Sign In", "position", Vector2($"HBoxContainer/Sign In".position.x,1126), 0.5)
 	
 	var leaderboardTween = get_tree().create_tween()
 	leaderboardTween.set_ease(Tween.EASE_IN)
-	leaderboardTween.tween_property($Leaderboard,"position", Vector2($Leaderboard.position.x,1126), 0.5)
+	leaderboardTween.tween_property($HBoxContainer/Leaderboard,"position", Vector2($HBoxContainer/Leaderboard.position.x,1126), 0.5)
 	
 	var tween2 = get_tree().create_tween()
 	tween2.set_ease(Tween.EASE_IN)
@@ -86,8 +80,8 @@ func quitFilled():
 			 
 func menuOut():
 	$Logo.visible = false
-	$StartButton.visible = false
-	$QuitButton.visible = false
+	$HBoxContainer/StartButton.visible = false
+	$HBoxContainer/QuitButton.visible = false
 
 	
 	
@@ -99,9 +93,9 @@ func _on_quit_button_button_down() -> void:
 
 func _on_quit_button_button_up() -> void:
 	if(justPressed):
-		$StartButton.grab_focus()
-		$StartButton/TextureProgressBar.texture_under = start_focused
-		$QuitButton/TextureProgressBar.texture_under = quit_unfocused
+		$HBoxContainer/StartButton.grab_focus()
+		$HBoxContainer/StartButton/TextureProgressBar.texture_under = start_focused
+		
 		justPressed = false
 	quitButtonPressed = false
 	pass # Replace with function body.
@@ -109,22 +103,22 @@ func _on_quit_button_button_up() -> void:
 
 func _on_user_authenticated(is_authenticated: bool) -> void:
 	if is_authenticated:
-		$"Sign In".visible = false
-		$Leaderboard.visible = true
+		$"HBoxContainer/Sign In".visible = false
+		$HBoxContainer/Leaderboard.visible = true
 		print_debug("Authenticated!")
 	else:
-		$"Sign In".visible = true
-		$Leaderboard.visible = false
+		$"HBoxContainer/Sign In".visible = true
+		$HBoxContainer/Leaderboard.visible = false
 		print_debug("Not authenticated!")
 		
 
 func _on_sign_in_pressed() -> void:
-	playGamesSignInClient.sign_in()
+	GameSettings.signInClient.sign_in()
 	pass # Replace with function body.
 
 
 func _on_leaderboard_pressed() -> void:
-	leaderboardsClient.show_all_leaderboards()
+	GameSettings.leaderboardsClient.show_all_leaderboards()
 
 func _on_start_button_pressed() -> void:
 	print_debug("Start pressed!")

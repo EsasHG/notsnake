@@ -31,6 +31,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="AudioButtons" type="Control" parent="CanvasLayer/Gui"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -58,6 +59,7 @@ text = "Pause
 "
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer/Gui"]
+visible = false
 layout_mode = 0
 offset_left = 40.0
 offset_top = 40.0

@@ -14,13 +14,14 @@ var sfxVol = linear_to_db(0.8)
 var musicVol = linear_to_db(0.8)
 var musicMuted : bool = false
 var sfxMuted : bool = false
+var userAuthenticated = false
 
 @onready var gameOverScreen : PackedScene = preload("res://Scenes/GameOverScreen.tscn")
 @onready var playerChar : PackedScene = preload("res://Scenes/PlayerDog.tscn")
 @onready var pauseMenu : PackedScene = preload("res://Scenes/Menus/pause_menu.tscn")
 @onready var bubbleScene : PackedScene = preload("res://Scenes/BubbleCutscene.tscn")
-@onready var leaderboardsClient : PlayGamesLeaderboardsClient = %PlayGamesLeaderboardsClient
-@onready var signInClient : PlayGamesSignInClient = %PlayGamesSignInClient
+@onready var leaderboardsClient : PlayGamesLeaderboardsClient = get_tree().root.find_child("PlayGamesLeaderboardsClient", true, false)
+@onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
 @onready var scoreBoard : PlayGamesLeaderboard
 var leaderboardArray : Array[PlayGamesLeaderboard]
 var currentWorld : Node2D
@@ -87,9 +88,6 @@ func startGame():
 	on_gameBegin.emit.call_deferred()
 	
 func gameOver(won:bool):
-	var ui = gameOverScreen.instantiate()
-	get_tree().root.find_child("Gui", true, false).add_child(ui)
-	ui.GameOver(won)
 	if leaderboardsClient:
 		print_debug("Submitting Score: " + var_to_str(currentScore))
 		var submitted : bool = false
@@ -100,6 +98,11 @@ func gameOver(won:bool):
 				submitted = true
 		if !submitted:
 			printerr("Score was never submitted!")
+	
+	var ui = gameOverScreen.instantiate()
+	get_tree().root.find_child("Gui", true, false).add_child(ui)
+	ui.GameOver(won)
+	
 		
 func increaseScore():
 	currentScore+=1
@@ -216,11 +219,12 @@ func all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void:
 	pass # Replace with function body.
 
 func _on_user_authenticated(is_authenticated: bool) -> void:
+	userAuthenticated = is_authenticated
 	if is_authenticated:
-		$Leaderboard.visible = true
+		#$Leaderboard.visible = true
 		print_debug("Authenticated!")
 	else:
-		$Leaderboard.visible = false
+		#$Leaderboard.visible = false
 		print_debug("Not authenticated!")
 
 func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
