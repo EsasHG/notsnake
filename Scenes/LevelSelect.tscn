@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cms25cq8nkurk"]
+[gd_scene load_steps=11 format=3 uid="uid://cms25cq8nkurk"]
 
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="1_gqdtr"]
 [ext_resource type="Script" path="res://Scripts/LevelSelect.gd" id="1_jilec"]
@@ -7,6 +7,7 @@
 [ext_resource type="Resource" uid="uid://ce2xllrb7yjod" path="res://Scenes/Maps/Park.tres" id="5_7xxf7"]
 [ext_resource type="Resource" uid="uid://br6kp3c2pxqet" path="res://Scenes/Maps/Square.tres" id="6_irs0w"]
 [ext_resource type="Resource" uid="uid://c786inhs2hhtg" path="res://Scenes/Maps/Small.tres" id="7_p8fhk"]
+[ext_resource type="Resource" uid="uid://oa287witflah" path="res://Scenes/Maps/Forest.tres" id="8_r1xxw"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="10_il346"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxlm1"]
@@ -26,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_gqdtr")
 script = ExtResource("1_jilec")
-scenes = Array[ExtResource("3_0gmo4")]([ExtResource("4_3t0aq"), ExtResource("5_7xxf7"), ExtResource("6_irs0w"), ExtResource("7_p8fhk")])
+scenes = Array[ExtResource("3_0gmo4")]([ExtResource("4_3t0aq"), ExtResource("5_7xxf7"), ExtResource("6_irs0w"), ExtResource("7_p8fhk"), ExtResource("8_r1xxw")])
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -4

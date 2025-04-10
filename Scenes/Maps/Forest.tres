@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Map" load_steps=4 format=3 uid="uid://oa287witflah"]
+
+[ext_resource type="PackedScene" uid="uid://dxkydv08bbemt" path="res://Scenes/Maps/Forest.tscn" id="1_h3l7p"]
+[ext_resource type="Texture2D" uid="uid://dqg0n4l7w438o" path="res://Assets/Icons/Tutorial_Map.png" id="2_hfjif"]
+[ext_resource type="Script" path="res://Scripts/Map.gd" id="3_6djsl"]
+
+[resource]
+script = ExtResource("3_6djsl")
+Scene = ExtResource("1_h3l7p")
+name = "Forest"
+icon = ExtResource("2_hfjif")

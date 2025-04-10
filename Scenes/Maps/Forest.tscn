@@ -1,0 +1,196 @@
+[gd_scene load_steps=8 format=3 uid="uid://dxkydv08bbemt"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerSpawner.gd" id="1_k5m1j"]
+[ext_resource type="Script" path="res://Scripts/FollowCamera.gd" id="2_nk4kc"]
+[ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="3_r7tox"]
+[ext_resource type="Script" path="res://Scripts/DogCrackerSpawner.gd" id="4_0dh7j"]
+[ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/fountain.tscn" id="5_ef7ge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k13ou"]
+size = Vector2(1980, 323.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xehlq"]
+size = Vector2(261, 1561)
+
+[node name="World" type="Node2D"]
+
+[node name="PlayerStart" type="Node2D" parent="."]
+script = ExtResource("1_k5m1j")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.1, 1.1)
+limit_left = -800
+limit_top = -625
+limit_right = 800
+limit_bottom = 625
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+editor_draw_limits = true
+script = ExtResource("2_nk4kc")
+
+[node name="MapTutorial1" type="Sprite2D" parent="."]
+z_index = -3
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_r7tox")
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="TopWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+position = Vector2(0, -811)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+shape = SubResource("RectangleShape2D_k13ou")
+
+[node name="BottomWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+position = Vector2(0, 805)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
+shape = SubResource("RectangleShape2D_k13ou")
+
+[node name="RightWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+position = Vector2(951, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+shape = SubResource("RectangleShape2D_xehlq")
+
+[node name="LeftWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+position = Vector2(-957, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+shape = SubResource("RectangleShape2D_xehlq")
+
+[node name="PickupSpawner" type="Node2D" parent="."]
+script = ExtResource("4_0dh7j")
+
+[node name="PickupPoints" type="Node2D" parent="PickupSpawner"]
+scale = Vector2(1.22042, 0.916599)
+
+[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(104, 432)
+
+[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-487, 201)
+
+[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(544.075, -376.391)
+
+[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-202, 374)
+
+[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(73.7451, -528.039)
+
+[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-510.48, -177.831)
+
+[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-236.804, -471.307)
+
+[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(426.902, 426.577)
+
+[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(393, 100)
+
+[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(593, -100)
+
+[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-48, -334)
+
+[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(245, -412)
+
+[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(278, 276)
+
+[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(-553.908, 357.845)
+
+[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints"]
+position = Vector2(1.63878, 585.861)
+
+[node name="Fountain" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(341, 81)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain2" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(610, -176)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain11" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(518, -457)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain12" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(629, 289)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain3" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(-65, -401)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain4" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(298, -519)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain5" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(69, -159)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain19" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(247, -196)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain20" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(273, -240)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain21" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(303, -200)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain6" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(-467, 53)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain7" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(-371, -238)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain8" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(-492, 340)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain13" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(-282, 181)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain14" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(-566, -389)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain16" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(-105, 413)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain17" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(-335, 513)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain18" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(701, 92)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain15" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(-705, -546)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain9" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(350, 410)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain10" parent="." instance=ExtResource("5_ef7ge")]
+position = Vector2(639, 467)
+scale = Vector2(0.132989, 0.132989)

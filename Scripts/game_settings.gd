@@ -9,7 +9,7 @@ signal on_sfx_volume_changed(new_vol : float)
 
 @export var currentScore : int = 0 
 var currentMap :Map
-var highScores = {"Field":0, "Park": 0, "Square": 0, "Small":0}
+var highScores = {"Field":0, "Park": 0, "Square": 0, "Small":0, "Forest":0}
 var sfxVol = linear_to_db(0.8)
 var musicVol = linear_to_db(0.8)
 var musicMuted : bool = false

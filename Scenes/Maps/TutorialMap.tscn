@@ -18,10 +18,10 @@ script = ExtResource("2_sjtta")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.1, 1.1)
-limit_left = -933
-limit_top = -730
-limit_right = 938
-limit_bottom = 720
+limit_left = -800
+limit_top = -625
+limit_right = 800
+limit_bottom = 625
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
@@ -36,26 +36,25 @@ texture = ExtResource("1_ed8o2")
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="TopWall" type="Area2D" parent="Walls" groups=["Dangers"]]
-position = Vector2(0, -905)
+position = Vector2(0, -811)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
 shape = SubResource("RectangleShape2D_k13ou")
 
 [node name="BottomWall" type="Area2D" parent="Walls" groups=["Dangers"]]
-position = Vector2(0, 1654)
+position = Vector2(0, 805)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
-position = Vector2(0, -748)
 shape = SubResource("RectangleShape2D_k13ou")
 
 [node name="RightWall" type="Area2D" parent="Walls" groups=["Dangers"]]
-position = Vector2(1082, 0)
+position = Vector2(951, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
 shape = SubResource("RectangleShape2D_xehlq")
 
 [node name="LeftWall" type="Area2D" parent="Walls" groups=["Dangers"]]
-position = Vector2(-1085, 0)
+position = Vector2(-957, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
 shape = SubResource("RectangleShape2D_xehlq")
@@ -82,19 +81,19 @@ position = Vector2(-202, 374)
 position = Vector2(38, -602)
 
 [node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints"]
-position = Vector2(-615, -383)
+position = Vector2(-469.51, -255.292)
 
 [node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints"]
-position = Vector2(-312, -609)
+position = Vector2(-374.461, -464.762)
 
 [node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints"]
-position = Vector2(749, 86)
+position = Vector2(292.522, -100.371)
 
 [node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints"]
 position = Vector2(393, 100)
 
 [node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints"]
-position = Vector2(593, -100)
+position = Vector2(473.607, -133.101)
 
 [node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints"]
 position = Vector2(-48, -334)
@@ -106,7 +105,7 @@ position = Vector2(245, -412)
 position = Vector2(278, 276)
 
 [node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints"]
-position = Vector2(-706, 119)
+position = Vector2(-381.016, -130.919)
 
 [node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints"]
-position = Vector2(-139, 651)
+position = Vector2(-28.6786, 538.949)
