@@ -28,10 +28,10 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("1_1k5l1")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = ExtResource("2_3vwfq")
-theme_override_styles/hover = ExtResource("2_3vwfq")
-theme_override_styles/pressed = ExtResource("2_3vwfq")
 theme_override_styles/normal = ExtResource("2_3vwfq")
+theme_override_styles/pressed = ExtResource("2_3vwfq")
+theme_override_styles/hover = ExtResource("2_3vwfq")
+theme_override_styles/focus = ExtResource("2_3vwfq")
 text = "Start"
 
 [node name="StartButton2" type="Button" parent="."]
@@ -53,10 +53,10 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 14
 theme_override_fonts/font = ExtResource("3_8pipe")
 theme_override_font_sizes/font_size = 50
-theme_override_styles/focus = ExtResource("2_3vwfq")
-theme_override_styles/hover = ExtResource("2_3vwfq")
-theme_override_styles/pressed = ExtResource("2_3vwfq")
 theme_override_styles/normal = ExtResource("2_3vwfq")
+theme_override_styles/pressed = ExtResource("2_3vwfq")
+theme_override_styles/hover = ExtResource("2_3vwfq")
+theme_override_styles/focus = ExtResource("2_3vwfq")
 text = "Start"
 
 [node name="StartButton3" type="Button" parent="."]
@@ -78,10 +78,10 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("4_42rgu")
 theme_override_font_sizes/font_size = 40
-theme_override_styles/focus = ExtResource("2_3vwfq")
-theme_override_styles/hover = ExtResource("2_3vwfq")
-theme_override_styles/pressed = ExtResource("2_3vwfq")
 theme_override_styles/normal = ExtResource("2_3vwfq")
+theme_override_styles/pressed = ExtResource("2_3vwfq")
+theme_override_styles/hover = ExtResource("2_3vwfq")
+theme_override_styles/focus = ExtResource("2_3vwfq")
 text = "Start"
 
 [node name="Label" type="Label" parent="."]

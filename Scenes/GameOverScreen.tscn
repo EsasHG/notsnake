@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://ck7vl8h740cpk"]
 
-[ext_resource type="Script" path="res://Scripts/game_over_screen.gd" id="1_7tubc"]
+[ext_resource type="Script" uid="uid://dt85v1n4h7vqg" path="res://Scripts/game_over_screen.gd" id="1_7tubc"]
 [ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="1_k4sjf"]
 [ext_resource type="Texture2D" uid="uid://c02fkdaroc7h7" path="res://Assets/UI/GAME_HIGHSCORE.png" id="3_cim2l"]
 [ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="4_rde26"]
@@ -92,62 +92,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_yr1h0")
 
-[node name="RetryButton" type="Button" parent="."]
-z_index = -1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -200.0
-offset_top = -120.0
-offset_right = -70.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(65, 25)
-theme = ExtResource("5_4fc7w")
-text = "Retry"
-
-[node name="LevelSelectButton" type="Button" parent="."]
-z_index = -1
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -65.0
-offset_top = -120.0
-offset_right = 65.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(65, 25)
-theme = ExtResource("5_4fc7w")
-theme_override_font_sizes/font_size = 23
-text = "Level 
-Select"
-
-[node name="Leaderboard" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 70.0
-offset_top = -120.0
-offset_right = 200.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 0
-pivot_offset = Vector2(65, 25)
-theme = ExtResource("5_4fc7w")
-theme_override_font_sizes/font_size = 19
-text = "Leaderboard"
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_nrd6a")
 
@@ -170,6 +114,44 @@ theme = ExtResource("5_4fc7w")
 theme_override_font_sizes/font_size = 40
 text = "Best:"
 
-[connection signal="pressed" from="RetryButton" to="." method="_on_retry_button_pressed"]
-[connection signal="pressed" from="LevelSelectButton" to="." method="_on_level_select_button_pressed"]
-[connection signal="pressed" from="Leaderboard" to="." method="_on_leaderboard_pressed"]
+[node name="ButtonContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -120.0
+offset_right = 199.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="RetryButton" type="Button" parent="ButtonContainer"]
+z_index = -1
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("5_4fc7w")
+text = "Retry"
+
+[node name="LevelSelectButton" type="Button" parent="ButtonContainer"]
+z_index = -1
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("5_4fc7w")
+theme_override_font_sizes/font_size = 23
+text = "Level 
+Select"
+
+[node name="Leaderboard" type="Button" parent="ButtonContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("5_4fc7w")
+theme_override_font_sizes/font_size = 19
+text = "Leaderboard"
+
+[connection signal="pressed" from="ButtonContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]

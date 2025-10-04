@@ -12,9 +12,9 @@ config_version=5
 
 config/name="Loop Dog"
 run/main_scene="res://Scenes/SceneAgain.tscn"
-config/features=PackedStringArray("4.3", "Mobile")
-boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
+config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/use_filter=false
+boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
 
 [autoload]
 

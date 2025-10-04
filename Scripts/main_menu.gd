@@ -15,6 +15,7 @@ func _ready() -> void:
 	
 	if not GodotPlayGameServices.android_plugin:
 		printerr("Could not find Google Play Games Services plugin!")
+		_on_user_authenticated(false)
 	if(GameSettings.signInClient):
 		GameSettings.signInClient.user_authenticated.connect(_on_user_authenticated)	
 		GameSettings.signInClient.is_authenticated()

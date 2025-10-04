@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://jdiyiwxj7kh0"]
 
-[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_jrsic"]
+[ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_f6ncm"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="12_12hqc"]
@@ -69,10 +69,10 @@ custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("3_f6ncm")
 theme_override_font_sizes/font_size = 20
-theme_override_styles/focus = ExtResource("12_eprln")
-theme_override_styles/hover = ExtResource("12_eprln")
-theme_override_styles/pressed = ExtResource("12_eprln")
 theme_override_styles/normal = ExtResource("12_eprln")
+theme_override_styles/pressed = ExtResource("12_eprln")
+theme_override_styles/hover = ExtResource("12_eprln")
+theme_override_styles/focus = ExtResource("12_eprln")
 text = "SIGN IN TO 
 GOOGLE PLAY"
 

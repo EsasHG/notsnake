@@ -7,6 +7,10 @@ extends Control
 @onready var levelSelect = preload("res://Scenes/LevelSelect.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if GameSettings.userAuthenticated:
+		$ButtonContainer/Leaderboard.visible = true
+	else:
+		$ButtonContainer/Leaderboard.visible = false
 	pass
 	#GameOver(false)
 	
@@ -19,6 +23,11 @@ func SetScore():
 	$ScoreLabels/HighScoreLabel.text = "Best: " + var_to_str(highScore)
 
 func GameOver(won:bool):
+	
+	if GameSettings.userAuthenticated:
+		$ButtonContainer/Leaderboard.visible = true
+	else:
+		$ButtonContainer/Leaderboard.visible = false
 	print_debug("Game over!")
 	SetScore()
 	if(won):
@@ -44,10 +53,10 @@ func _on_leaderboard_pressed() -> void:
 
 func _on_user_authenticated(is_authenticated: bool) -> void:
 	if is_authenticated:
-		$Leaderboard.visible = true
+		$ButtonContainer/Leaderboard.visible = true
 		print_debug("Authenticated!")
 	else:
-		$Leaderboard.visible = false
+		$ButtonContainer/Leaderboard.visible = false
 		print_debug("Not authenticated!")
 
 

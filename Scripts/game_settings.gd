@@ -89,7 +89,7 @@ func startGame():
 	on_gameBegin.emit.call_deferred()
 	
 func gameOver(won:bool):
-	if currentScore > highScores[currentMap.name]:
+	if currentScore > highScores.get_or_add(currentMap.name,0):
 		highScores[currentMap.name] = currentScore
 		saveScore()
 	
