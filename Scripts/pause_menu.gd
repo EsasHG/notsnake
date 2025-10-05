@@ -3,13 +3,6 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Panel/VBoxContainer/MusicMute.set_pressed_no_signal(GameSettings.musicMuted)
-	$Panel/VBoxContainer/SFXMute.set_pressed_no_signal(GameSettings.sfxMuted)
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
 	pass
 
 
@@ -59,11 +52,3 @@ func _on_main_menu_pressed() -> void:
 	GameSettings.mainMenu()
 	get_tree().paused = false
 	queue_free()
-
-
-func _on_music_mute_toggled(toggled_on: bool) -> void:
-	GameSettings.setMusicMuted(toggled_on)
-
-
-func _on_sfx_mute_toggled(toggled_on: bool) -> void:
-	GameSettings.setSFXMuted(toggled_on)

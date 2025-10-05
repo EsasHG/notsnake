@@ -7,28 +7,30 @@ class_name PlayerDog
 @export var OVERALL_SPEED = 0.9
 @export var MIN_ARROW_DIST = 120
 @export var MAX_ARROW_DIST = 150
-
-var prevPositionsArr = []
 @export var hats : Array[Node]
+@export var playerControl = false
 
-var currentHat = -1
-var spritesToAdd = 0
-var timer : float = 0.0
-var spawnTime : float = 0.02
 @onready var prevPos : Vector2 = position
-var prevLeft : Vector2 = Vector2(1,0)
-var prevDir : int = -1
 @onready var sprite = preload("res://Assets/Dogs/OutlinedDog/BODY_SEGMENT_C.png")
 @onready var segment = preload("res://Scenes/DogSegment.tscn")
 @onready var pickupSpawner : PickupSpawner = get_tree().root.find_child("PickupSpawner", true, false)
 @onready var segmentParent : Node2D = Node2D.new()
 @onready var hindLegs = find_child("Legs_back", true, false)
+@onready var butt = $Butt
+
+var prevPositionsArr = []
+
+var currentHat = -1
+var spritesToAdd = 0
+var timer : float = 0.0
+var spawnTime : float = 0.02
+var prevLeft : Vector2 = Vector2(1,0)
+var prevDir : int = -1
+
 var segmentSprites : Array[Node2D]
 var canAddSprites = true
 var showFps = false
-@onready var butt = $Butt
 
-@export var playerControl = false
 var frameDelay = 1
 var segmentsPerSection = 20
 var move = true
@@ -51,6 +53,7 @@ func _ready() -> void:
 	hats = $Head/Hats.get_children(true)
 	
 	GameSettings.on_pickupSpawned.connect(SetArrowTarget)
+	GameSettings.on_controls_changed.connect(_on_controls_changed)
 	GameSettings.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
 #	if(playerControl):
 #		get_tree().create_timer(1.0).timeout.connect(func(): GameSettings.on_gameBegin.emit())
@@ -73,11 +76,15 @@ func resetSpriteTimer():
 
 func _unhandled_input(event: InputEvent) -> void:
 	#event.is_action_pressed()
-	if(event.is_action("Press")):
-		if(event.is_pressed()):
-			rotateRight = true
-		else:
-			rotateRight = false
+	if GameSettings.holdControls:
+		if(event.is_action("Press")):
+			if(event.is_pressed()):
+				rotateRight = true
+			else:
+				rotateRight = false
+	else: 
+		if(event.is_action("Press") and event.is_pressed()):
+			rotateRight = !rotateRight
 			
 func _process(delta: float) -> void:
 	
@@ -238,3 +245,6 @@ func bark():
 func SetArrowTarget(target:Node2D):
 	arrowTarget = target.global_position
 	
+func _on_controls_changed(holdControls:bool):
+	rotateRight = false
+	pass

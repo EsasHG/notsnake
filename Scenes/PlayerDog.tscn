@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bkjd5mneny7c1"]
+[gd_scene load_steps=40 format=3 uid="uid://bkjd5mneny7c1"]
 
 [ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="1_f7yc0"]
 [ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/Dogs/OutlinedDog/TAIL_C.png" id="2_c2s43"]
@@ -6,14 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://be7ausi6tfjmr" path="res://Assets/Dogs/NewDog/newdog_LegsBACK_sheet_C.png" id="4_mgnkb"]
 [ext_resource type="AudioStream" uid="uid://bj3kggw0gs3xi" path="res://Assets/Sound/bark.wav" id="4_wxfsi"]
 [ext_resource type="Texture2D" uid="uid://cxm52e0c581yk" path="res://Assets/Dogs/cosmetics/hat_christmas.png" id="5_cvw6e"]
-[ext_resource type="Script" path="res://Scripts/SimplePlayerCharacter.gd" id="5_q7dwm"]
-[ext_resource type="Script" path="res://Scripts/SFXPlayer.gd" id="5_xdk5u"]
+[ext_resource type="Script" uid="uid://b78ceum26wnjq" path="res://Scripts/SimplePlayerCharacter.gd" id="5_q7dwm"]
+[ext_resource type="Script" uid="uid://hsasvuue7e5b" path="res://Scripts/SFXPlayer.gd" id="5_xdk5u"]
 [ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="6_a0qte"]
 [ext_resource type="Texture2D" uid="uid://baisbs5c35f4g" path="res://Assets/Dogs/cosmetics/hat_cowboy.png" id="6_kak2d"]
 [ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="7_dffxg"]
 [ext_resource type="Texture2D" uid="uid://dvj0pjlmvqwve" path="res://Assets/Dogs/cosmetics/hat_crashdummyDot.png" id="7_te1u3"]
 [ext_resource type="Texture2D" uid="uid://bmdnyc2fq6qg7" path="res://Assets/Dogs/cosmetics/hat_helmet.png" id="8_jux0v"]
 [ext_resource type="Texture2D" uid="uid://bywajg5yonlif" path="res://Assets/UI/arrow.png" id="9_sxgt2"]
+[ext_resource type="Script" uid="uid://brb1sob6alono" path="res://Scenes/PausedInputBuffer.gd" id="15_6v1gi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7we7l"]
 size = Vector2(27, 24)
@@ -281,5 +282,9 @@ z_index = -1
 position = Vector2(0, 13)
 sprite_frames = SubResource("SpriteFrames_d51rk")
 frame_progress = 0.618145
+
+[node name="PausedInputBuffer" type="Node2D" parent="."]
+process_mode = 2
+script = ExtResource("15_6v1gi")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

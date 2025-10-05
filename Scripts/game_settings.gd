@@ -6,6 +6,7 @@ signal on_gameBegin()
 signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
 signal on_sfx_volume_changed(new_vol : float)
+signal on_controls_changed(holdControls:bool)
 
 @export var currentScore : int = 0 
 var currentMap :Map
@@ -15,7 +16,7 @@ var musicVol = linear_to_db(0.8)
 var musicMuted : bool = false
 var sfxMuted : bool = false
 var userAuthenticated = false
-
+var holdControls:bool = true
 
 @onready var gameOverScreen : PackedScene = preload("res://Scenes/GameOverScreen.tscn")
 @onready var playerChar : PackedScene = preload("res://Scenes/PlayerDog.tscn")
@@ -118,7 +119,7 @@ func saveScore():
 	print_debug("Saving!")
 	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	
-	var saveDict = {"highScores" = highScores, "musicVol" = db_to_linear(musicVol), "sfxVol" = db_to_linear(sfxVol), "musicMuted" = musicMuted, "sfxMuted" = sfxMuted} 
+	var saveDict = {"highScores" = highScores, "musicVol" = db_to_linear(musicVol), "sfxVol" = db_to_linear(sfxVol), "musicMuted" = musicMuted, "sfxMuted" = sfxMuted, "controls" = holdControls} 
 	saveFile.store_line(JSON.stringify(saveDict))
 	print_debug("Saved!")
 	
@@ -169,6 +170,10 @@ func loadScore():
 			printerr("Could not load music muted from save file!")
 			musicMuted = false
 
+		if node_data.has("controls"):
+			holdControls = node_data["controls"]
+		else:
+			holdControls = true
 			
 	print_debug("Finished loading")
 		
@@ -245,3 +250,8 @@ func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
 	else: 
 		printerr("Score not submitted!")
 	pass # Replace with function body.
+
+func setControls(hold:bool):
+	holdControls = hold
+	on_controls_changed.emit(holdControls)
+	saveScore()

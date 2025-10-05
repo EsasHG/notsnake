@@ -9,6 +9,8 @@ var start_focused = preload("res://Assets/UI/startbutton_5.png")
 var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
 
 @onready var levelSelect = preload("res://Scenes/LevelSelect.tscn")
+@onready var settings_container: PanelContainer = $SettingsContainer
+@onready var buttons: HBoxContainer = $HBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -126,3 +128,12 @@ func _on_start_button_pressed() -> void:
 	var l = levelSelect.instantiate()
 	get_parent().add_child(l)
 	queue_free()
+
+func _on_settings_pressed() -> void:
+	buttons.visible = false
+	settings_container.visible = true
+
+
+func _on_back_pressed() -> void:
+	buttons.visible = true
+	settings_container.visible = false
