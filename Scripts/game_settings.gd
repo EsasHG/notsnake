@@ -17,7 +17,7 @@ var musicMuted : bool = false
 var sfxMuted : bool = false
 var userAuthenticated = false
 var holdControls:bool = true
-
+var pauseButton:Button
 @onready var gameOverScreen : PackedScene = preload("res://Scenes/GameOverScreen.tscn")
 @onready var playerChar : PackedScene = preload("res://Scenes/PlayerDog.tscn")
 @onready var pauseMenu : PackedScene = preload("res://Scenes/Menus/pause_menu.tscn")
@@ -58,10 +58,11 @@ func doDeferredSetup():
 		button.set_pressed_no_signal(sfxMuted)
 	setSFXVol(sfxVol)
 	
-	button = get_tree().root.find_child("Pause", true, false)
-	if(is_instance_valid(button)):
-		button.pressed.connect(on_pause_pressed)
-		button.set_pressed_no_signal(sfxMuted)
+	pauseButton = get_tree().root.find_child("PauseButton", true, false)
+	if(is_instance_valid(pauseButton)):
+		pauseButton.pressed.connect(on_pause_pressed)
+	else:
+		printerr("Pause button not found in game settings!")
 	if not leaderboardsClient:
 		printerr("No leaderboards client found!")
 	else:
@@ -218,6 +219,11 @@ func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 func on_pause_pressed():
 	var pauseScreen = pauseMenu.instantiate()
 	$"../Main/CanvasLayer/Gui".add_child(pauseScreen)
+	
+	if(not is_instance_valid(pauseButton)):
+		pauseButton = get_tree().root.find_child("PauseButton",true,false)
+	pauseButton.visible = false
+				
 	get_tree().paused = true
 	pass
 

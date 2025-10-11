@@ -112,7 +112,6 @@ CheckBox/colors/font_pressed_color = Color(1, 1, 1, 1)
 CheckBox/constants/check_v_offset = 0
 CheckBox/constants/h_separation = 4
 CheckBox/constants/outline_size = 6
-CheckBox/font_sizes/font_size = 16
 CheckBox/fonts/font = ExtResource("1_sw1jp")
 CheckBox/icons/checked = SubResource("DPITexture_fpaq5")
 CheckBox/icons/checked_disabled = SubResource("DPITexture_34ovf")

@@ -1,6 +1,6 @@
 extends Control
 
-
+@onready var pauseButton:Button = get_tree().root.find_child("PauseButton",true,false)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -31,6 +31,10 @@ func _on_resume_pressed() -> void:
 				
 				var tGo = CreateCountdownTween()
 				get_tree().paused = false
+				if not pauseButton:
+					pauseButton = get_tree().root.find_child("PauseButton",true,false)
+				pauseButton.visible = true
+				
 				tGo.tween_callback(func():
 					queue_free()
 				)

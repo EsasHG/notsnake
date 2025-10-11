@@ -41,7 +41,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_7xh38")
 
-[node name="Pause" type="Button" parent="CanvasLayer/Gui/AudioButtons"]
+[node name="PauseButton" type="Button" parent="CanvasLayer/Gui/AudioButtons"]
 z_index = 3
 z_as_relative = false
 layout_mode = 1
