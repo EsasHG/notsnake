@@ -31,36 +31,26 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7tubc")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("1_k4sjf")
-expand_mode = 1
-stretch_mode = 5
-
 [node name="Panel" type="Panel" parent="."]
+visible = false
 z_index = -2
 texture_repeat = 2
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_mnkbk")
+metadata/_edit_use_anchors_ = true
 
 [node name="LongDogPanel" type="Panel" parent="."]
 visible = false
 z_index = -2
 texture_repeat = 2
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -72,7 +62,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_2fbmf")
 visible = false
 z_index = -2
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -145,13 +135,64 @@ theme_override_font_sizes/font_size = 23
 text = "Level 
 Select"
 
+[node name="MainMenuButton" type="Button" parent="ButtonContainer"]
+z_index = -1
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("5_4fc7w")
+theme_override_font_sizes/font_size = 23
+text = "Main Menu"
+
 [node name="Leaderboard" type="Button" parent="ButtonContainer"]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("5_4fc7w")
 theme_override_font_sizes/font_size = 19
 text = "Leaderboard"
 
+[node name="GameOverTex" type="TextureRect" parent="."]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_k4sjf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LongDogTex" type="TextureRect" parent="."]
+visible = false
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_cim2l")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="WinnerTex" type="TextureRect" parent="."]
+visible = false
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_rde26")
+expand_mode = 1
+stretch_mode = 5
+
 [connection signal="pressed" from="ButtonContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]

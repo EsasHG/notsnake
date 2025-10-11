@@ -18,3 +18,4 @@ build/*
 #Android build ignore
 android/build/*
 Godot_v4.5-stable_win64.exe - Shortcut.lnk
+Godot_v4.5-stable_mono_win64.exe - Shortcut.lnk

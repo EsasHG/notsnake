@@ -1,11 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://jdiyiwxj7kh0"]
+[gd_scene load_steps=17 format=3 uid="uid://jdiyiwxj7kh0"]
 
 [ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_f6ncm"]
 [ext_resource type="PackedScene" uid="uid://padbn8hpbpo6" path="res://Scenes/Menus/Settings.tscn" id="6_opfnp"]
+[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/Map.gd" id="8_5egv6"]
+[ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="8_vtepg"]
+[ext_resource type="Resource" uid="uid://cibsfp4rd5p5b" path="res://Scenes/Maps/Field.tres" id="9_vtepg"]
+[ext_resource type="Resource" uid="uid://ce2xllrb7yjod" path="res://Scenes/Maps/Park.tres" id="10_8dnnj"]
+[ext_resource type="Resource" uid="uid://br6kp3c2pxqet" path="res://Scenes/Maps/Square.tres" id="11_m3bi6"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="12_12hqc"]
 [ext_resource type="StyleBox" uid="uid://ktqcdhd8okf4" path="res://Assets/Styles/empty_button_style_box_texture.tres" id="12_eprln"]
+[ext_resource type="Resource" uid="uid://c786inhs2hhtg" path="res://Scenes/Maps/Small.tres" id="12_wyh8j"]
+[ext_resource type="Resource" uid="uid://oa287witflah" path="res://Scenes/Maps/Forest.tres" id="13_ujyyl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
 bg_color = Color(0, 0, 0, 1)
@@ -17,6 +24,14 @@ expand_margin_top = 20.0
 expand_margin_right = 20.0
 expand_margin_bottom = 20.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhxw7"]
+bg_color = Color(0, 0, 0, 0.270588)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 0.270588)
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -26,6 +41,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_jrsic")
+buttonTheme = ExtResource("8_vtepg")
+levels = Array[ExtResource("8_5egv6")]([ExtResource("9_vtepg"), ExtResource("10_8dnnj"), ExtResource("11_m3bi6"), ExtResource("12_wyh8j"), ExtResource("13_ujyyl")])
 
 [node name="Logo" type="TextureRect" parent="."]
 layout_mode = 1
@@ -98,6 +115,7 @@ theme_override_font_sizes/font_size = 19
 text = "Settings"
 
 [node name="Leaderboard" type="Button" parent="HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("3_f6ncm")
@@ -130,7 +148,54 @@ layout_mode = 2
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("3_f6ncm")
-theme_override_font_sizes/font_size = 19
+text = "Back"
+
+[node name="LevelSelectScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="LevelSelectScreen"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yhxw7")
+
+[node name="LevelButtons" type="HFlowContainer" parent="LevelSelectScreen/PanelContainer"]
+layout_mode = 2
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="LevelSelectScreen"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -120.0
+offset_right = 199.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+alignment = 1
+
+[node name="Back" type="Button" parent="LevelSelectScreen/ButtonContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("3_f6ncm")
 text = "Back"
 
 [connection signal="pressed" from="HBoxContainer/Sign In" to="." method="_on_sign_in_pressed"]
@@ -138,3 +203,4 @@ text = "Back"
 [connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="HBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]
 [connection signal="pressed" from="SettingsContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="LevelSelectScreen/ButtonContainer/Back" to="." method="_on_back_pressed"]

@@ -247,4 +247,3 @@ func SetArrowTarget(target:Node2D):
 	
 func _on_controls_changed(holdControls:bool):
 	rotateRight = false
-	pass

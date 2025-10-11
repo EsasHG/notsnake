@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://3va5fhmx5hn4"]
 
-[ext_resource type="Script" path="res://Scripts/BubbleCutscene.gd" id="1_mow2u"]
+[ext_resource type="Script" uid="uid://cknjmxpx8bd6r" path="res://Scripts/BubbleCutscene.gd" id="1_mow2u"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="6_rr6g4"]
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="7_ah2kl"]
 [ext_resource type="PackedScene" uid="uid://beaa80kph8rv6" path="res://Scenes/ThoughtBubble_1.tscn" id="8_fts1w"]

@@ -31,24 +31,25 @@ func GameOver(won:bool):
 	print_debug("Game over!")
 	SetScore()
 	if(won):
+		
 		print_debug("Player Won!")
-		$LongDogPanel.visible = false
-		$WinnerPanel.visible = true
-		$Panel.visible = false
+		$LongDogTex.visible = false
+		$WinnerTex.visible = true
+		$GameOverTex.visible = false
 	elif(GameSettings.currentScore > bonusScreenThreshold):
 		print_debug("Player got over 20 treats!")
-		$LongDogPanel.visible = true
-		$WinnerPanel.visible = false
-		$Panel.visible = false
+		$LongDogTex.visible = true
+		$WinnerTex.visible = false
+		$GameOverTex.visible = false
 	else:
-		$LongDogPanel.visible = false
-		$WinnerPanel.visible = false
-		$Panel.visible = true
+		$LongDogTex.visible = false
+		$WinnerTex.visible = false
+		$GameOverTex.visible = true
 		
 	visible = true
 	
 func _on_leaderboard_pressed() -> void:	
-	GameSettings.ShowLeaderboard()
+	GameSettings.showLeaderboard()
 	pass # Replace with function body.
 
 func _on_user_authenticated(is_authenticated: bool) -> void:
@@ -72,7 +73,11 @@ func _on_retry_button_pressed() -> void:
 
 
 func _on_level_select_button_pressed() -> void:
-	var levelSelectScene = levelSelect.instantiate()
-	get_parent().add_child(levelSelectScene)
+	GameSettings.levelSelect()
 	queue_free()
 	pass # Replace with function body.
+
+
+func _on_main_menu_button_pressed() -> void:
+	GameSettings.mainMenu()
+	queue_free()

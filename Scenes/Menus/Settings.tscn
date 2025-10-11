@@ -43,6 +43,7 @@ script = ExtResource("1_kuoau")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("3_bd3ey")
 text = "Settings:"
 
@@ -65,6 +66,7 @@ metadata/_edit_use_anchors_ = true
 [node name="MusicCheckbox" type="CheckBox" parent="."]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("3_bd3ey")
 theme_override_icons/checked = ExtResource("4_o23xy")
 theme_override_icons/unchecked = ExtResource("5_b0u2s")
@@ -74,6 +76,7 @@ text = "Music"
 [node name="SFXCheckbox" type="CheckBox" parent="."]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("3_bd3ey")
 theme_override_icons/checked = ExtResource("6_ojke6")
 theme_override_icons/unchecked = ExtResource("7_q57ny")
@@ -100,11 +103,13 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Controls"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("3_bd3ey")
 text = "Controls:"
 
 [node name="HoldControls" type="CheckBox" parent="Controls"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("3_bd3ey")
 button_pressed = true
 button_group = SubResource("ButtonGroup_7smr3")
@@ -112,11 +117,31 @@ text = "Hold"
 
 [node name="TapControls" type="CheckBox" parent="Controls"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme = ExtResource("3_bd3ey")
 button_group = SubResource("ButtonGroup_7smr3")
 text = "Tap
 "
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="AchievementsButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("3_bd3ey")
+theme_override_font_sizes/font_size = 20
+text = "Achievements"
+
+[node name="LeaderboardsButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("3_bd3ey")
+theme_override_font_sizes/font_size = 20
+text = "Leaderboards"
+
 [connection signal="toggled" from="MusicMute" to="." method="_on_music_mute_toggled"]
 [connection signal="toggled" from="SFXMute" to="." method="_on_sfx_mute_toggled"]
 [connection signal="toggled" from="Controls/HoldControls" to="." method="_on_hold_controls_toggled"]
+[connection signal="pressed" from="HBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/LeaderboardsButton" to="." method="_on_leaderboards_button_pressed"]

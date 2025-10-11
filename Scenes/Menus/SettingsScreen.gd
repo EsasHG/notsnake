@@ -24,3 +24,11 @@ func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 
 func _on_hold_controls_toggled(toggled_on: bool) -> void:
 	GameSettings.setControls(toggled_on)
+
+
+func _on_achievements_button_pressed() -> void:
+	GameSettings.showAchievements()
+
+
+func _on_leaderboards_button_pressed() -> void:
+		GameSettings.showAllLeaderboards()

@@ -10,17 +10,20 @@ var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
 
 @onready var levelSelect = preload("res://Scenes/LevelSelect.tscn")
 @onready var settings_container: PanelContainer = $SettingsContainer
+#@onready var level_select_container: VBoxContainer = $LevelSelectContainer
 @onready var buttons: HBoxContainer = $HBoxContainer
+@onready var level_select_screen: Control = $LevelSelectScreen
+@onready var level_buttons: HFlowContainer = $LevelSelectScreen/PanelContainer/LevelButtons
 
+@export var buttonTheme:Theme
+@export var levels : Array[Map]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	if not GodotPlayGameServices.android_plugin:
-		printerr("Could not find Google Play Games Services plugin!")
-		_on_user_authenticated(false)
+	_on_user_authenticated(GameSettings.userAuthenticated)
 	if(GameSettings.signInClient):
 		GameSettings.signInClient.user_authenticated.connect(_on_user_authenticated)	
-		GameSettings.signInClient.is_authenticated()
+		
 	
 	visible = true
 	#$Panel2.visible = true
@@ -55,6 +58,19 @@ func _ready() -> void:
 	var music = get_tree().root.find_child("BGMusic", true, false)
 	if(music):
 		music.play()
+	
+	for s : Map in levels:
+		print_debug(s.name)
+		var button : Button = Button.new()
+		button.theme = buttonTheme
+		button.icon = s.icon
+		button.text = s.name
+		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		button.expand_icon = true
+		button.custom_minimum_size = Vector2(100,100)
+		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		level_buttons.add_child(button)
+		button.pressed.connect(_on_map_selected.bind(s))
 	
 	
 func filled():
@@ -105,14 +121,9 @@ func _on_quit_button_button_up() -> void:
 
 
 func _on_user_authenticated(is_authenticated: bool) -> void:
-	if is_authenticated:
-		$"HBoxContainer/Sign In".visible = false
-		$HBoxContainer/Leaderboard.visible = true
-		print_debug("Authenticated!")
-	else:
-		$"HBoxContainer/Sign In".visible = true
-		$HBoxContainer/Leaderboard.visible = false
-		print_debug("Not authenticated!")
+	$"HBoxContainer/Sign In".visible = !is_authenticated
+	#$HBoxContainer/Leaderboard.visible = true
+
 		
 
 func _on_sign_in_pressed() -> void:
@@ -121,13 +132,17 @@ func _on_sign_in_pressed() -> void:
 
 
 func _on_leaderboard_pressed() -> void:
-	GameSettings.leaderboardsClient.show_all_leaderboards()
+	GameSettings.showAllLeaderboards()
 
+func openLevelSelect():
+	buttons.visible = false
+	level_select_screen.visible = true
+	
 func _on_start_button_pressed() -> void:
-	print_debug("Start pressed!")
-	var l = levelSelect.instantiate()
-	get_parent().add_child(l)
-	queue_free()
+	#var l = levelSelect.instantiate()
+	#get_parent().add_child(l)
+	#queue_free()
+	openLevelSelect()
 
 func _on_settings_pressed() -> void:
 	buttons.visible = false
@@ -137,3 +152,9 @@ func _on_settings_pressed() -> void:
 func _on_back_pressed() -> void:
 	buttons.visible = true
 	settings_container.visible = false
+	level_select_screen.visible = false
+
+func _on_map_selected(scene:Map): 
+	GameSettings.currentMap = scene
+	GameSettings.startGame()
+	queue_free()

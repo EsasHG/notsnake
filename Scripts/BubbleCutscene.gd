@@ -12,6 +12,7 @@ var bubblesSpawned : int = 0
 var activeBubble : Node2D
 var activeBubbleTween : Tween
 var activeBubbleTimer : SceneTreeTimer
+var levelSelect : bool = false
 
 @onready var menu : PackedScene = preload("res://Scenes/main_menu.tscn")
 @onready var world : Node2D = get_tree().root.find_child("World", true, false)
@@ -34,9 +35,8 @@ func _ready() -> void:
 		activeBubbleTween = tween
 		tween.tween_property(activeBubble, "modulate:a", 1, 0.3)
 		tween.tween_callback(bubbleOut)
-	
-	pass # Replace with function body.
 
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if(Input.is_action_just_pressed("Press")):
@@ -75,7 +75,6 @@ func bubbleOut():
 	
 
 func deleteBubble():
-	print_debug("Deleting Bubble!")
 	activeBubble.queue_free()
 	var bubble
 	match bubblesSpawned:
@@ -110,3 +109,5 @@ func deleteBubble():
 func showMenu():
 	var mainMenu = menu.instantiate()
 	get_tree().root.find_child("Gui",true, false).add_child(mainMenu)
+	if levelSelect:
+		mainMenu.openLevelSelect()
