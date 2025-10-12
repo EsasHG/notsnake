@@ -8,7 +8,6 @@ var justPressedTime = 0.2
 var start_focused = preload("res://Assets/UI/startbutton_5.png")
 var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
 
-@onready var levelSelect = preload("res://Scenes/LevelSelect.tscn")
 @onready var settings_container: PanelContainer = $SettingsContainer
 #@onready var level_select_container: VBoxContainer = $LevelSelectContainer
 @onready var buttons: HBoxContainer = $HBoxContainer
@@ -22,8 +21,11 @@ func _ready() -> void:
 	
 	_on_user_authenticated(GameSettings.userAuthenticated)
 	if(GameSettings.signInClient):
-		GameSettings.signInClient.user_authenticated.connect(_on_user_authenticated)	
+		Logging.logMessage("Main menu: sign in client found in game settings! Connecting to user_authenticated.")
 		
+		GameSettings.signInClient.user_authenticated.connect(_on_user_authenticated)	
+	else: 
+		Logging.error("Main menu: No signInClient found in game settings!")
 	
 	visible = true
 	#$Panel2.visible = true
@@ -60,7 +62,6 @@ func _ready() -> void:
 		music.play()
 	
 	for s : Map in levels:
-		print_debug(s.name)
 		var button : Button = Button.new()
 		button.theme = buttonTheme
 		button.icon = s.icon
@@ -121,13 +122,17 @@ func _on_quit_button_button_up() -> void:
 
 
 func _on_user_authenticated(is_authenticated: bool) -> void:
+	Logging.logMessage("Main menu: On user authenticated: " + str(is_authenticated))
+	
 	$"HBoxContainer/Sign In".visible = !is_authenticated
 	#$HBoxContainer/Leaderboard.visible = true
 
 		
 
 func _on_sign_in_pressed() -> void:
-	GameSettings.signInClient.sign_in()
+	if(GameSettings.signInClient):
+		Logging.logMessage("Main menu: Signing in")
+		GameSettings.signInClient.sign_in()
 	pass # Replace with function body.
 
 

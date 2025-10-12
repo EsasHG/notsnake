@@ -20,6 +20,7 @@ boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
 
 GodotPlayGameServices="*res://addons/GodotPlayGameServices/scripts/autoloads/godot_play_game_services.gd"
 GameSettings="*res://Scripts/game_settings.gd"
+Logging="*res://logging.gd"
 
 [display]
 

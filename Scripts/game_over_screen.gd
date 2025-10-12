@@ -4,7 +4,6 @@ extends Control
 
 
 @onready var BGmusic = get_tree().root.find_child("BGMusic", true, false)
-@onready var levelSelect = preload("res://Scenes/LevelSelect.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if GameSettings.userAuthenticated:
@@ -15,7 +14,7 @@ func _ready() -> void:
 	#GameOver(false)
 	
 func SetScore():
-	print_debug("Setting Scores in game over screen!")
+	Logging.logMessage("Setting Scores in game over screen!")
 	var score : int = GameSettings.currentScore
 	var highScore : int = GameSettings.getCurrentMapHighScore()
 	
@@ -28,16 +27,16 @@ func GameOver(won:bool):
 		$ButtonContainer/Leaderboard.visible = true
 	else:
 		$ButtonContainer/Leaderboard.visible = false
-	print_debug("Game over!")
+	Logging.logMessage("Game over!")
 	SetScore()
 	if(won):
 		
-		print_debug("Player Won!")
+		Logging.logMessage("Player Won!")
 		$LongDogTex.visible = false
 		$WinnerTex.visible = true
 		$GameOverTex.visible = false
 	elif(GameSettings.currentScore > bonusScreenThreshold):
-		print_debug("Player got over 20 treats!")
+		Logging.logMessage("Player got over 20 treats!")
 		$LongDogTex.visible = true
 		$WinnerTex.visible = false
 		$GameOverTex.visible = false
@@ -52,17 +51,9 @@ func _on_leaderboard_pressed() -> void:
 	GameSettings.showLeaderboard()
 	pass # Replace with function body.
 
-func _on_user_authenticated(is_authenticated: bool) -> void:
-	if is_authenticated:
-		$ButtonContainer/Leaderboard.visible = true
-		print_debug("Authenticated!")
-	else:
-		$ButtonContainer/Leaderboard.visible = false
-		print_debug("Not authenticated!")
-
 
 func _on_retry_button_pressed() -> void:
-	print_debug("Retry Button Pressed!")
+	Logging.logMessage("Retry Button Pressed!")
 	visible = false
 	
 	var loseMusic = get_tree().root.find_child("LoseMusic", true, false)

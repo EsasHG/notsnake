@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=12 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://3va5fhmx5hn4" path="res://Scenes/BubbleCutscene.tscn" id="1_6k2w8"]
 [ext_resource type="Script" uid="uid://dk0kh7s0cylgw" path="res://Scripts/gameVisibleUI.gd" id="2_7xh38"]
+[ext_resource type="PackedScene" uid="uid://cuenmscfk4h76" path="res://Scenes/Menus/LogWindow.tscn" id="5_35usu"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="6_verp3"]
 [ext_resource type="AudioStream" uid="uid://cr7rgnem0d7n0" path="res://Assets/Sound/33 - Ditty.mp3" id="9_3xwyg"]
 [ext_resource type="Script" uid="uid://b8e7mo16ebjn" path="res://addons/GodotPlayGameServices/scripts/achievements/achievements_client.gd" id="10_8vumw"]
@@ -70,6 +71,9 @@ theme = ExtResource("6_verp3")
 theme_override_font_sizes/font_size = 60
 text = "Score: 0"
 script = ExtResource("19_n1mp8")
+
+[node name="LogWindow" parent="CanvasLayer/Gui" instance=ExtResource("5_35usu")]
+layout_mode = 1
 
 [node name="Audio" type="Node" parent="."]
 script = ExtResource("21_nmt78")

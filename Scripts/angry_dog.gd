@@ -1,6 +1,7 @@
 extends Area2D
 
 @onready var player : Node2D = get_tree().root.find_child("PlayerDog", true, false)
+@onready var audio_stream_player_2d: SFXPlayer = $AudioStreamPlayer2D
 
 @export var distThreshold = 250
 var playerCrossedThreshold = false
@@ -16,13 +17,13 @@ func _process(_delta: float) -> void:
 		if(!playerCrossedThreshold):
 			playerCrossedThreshold = true
 			$AnimatedSprite2D.play("angry")
-			$AudioStreamPlayer2D.play()
+			audio_stream_player_2d.play()
 	elif(player != null):
 		if(playerCrossedThreshold):
 			playerCrossedThreshold = false
 			$AnimatedSprite2D.play("default")
-			$AudioStreamPlayer2D.stop()
+			audio_stream_player_2d.stop()
 	elif(player == null):
 		player = get_tree().root.find_child("PlayerDog", true, false)
 		$AnimatedSprite2D.play("default")	
-		$AudioStreamPlayer2D.stop()
+		audio_stream_player_2d.stop()

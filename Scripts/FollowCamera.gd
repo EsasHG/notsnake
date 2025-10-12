@@ -5,7 +5,7 @@ func _ready() -> void:
 	GameSettings.on_gameBegin.connect(ParentToDog)
 	
 func ParentToDog():
-	print_debug("Parenting to dog!")
+	Logging.logMessage("Parenting to dog!")
 	var dog = get_tree().root.find_child("PlayerDog",true, false)
 	reparent(dog)
 	var tween = get_tree().create_tween()

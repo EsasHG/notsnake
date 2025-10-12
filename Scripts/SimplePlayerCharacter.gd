@@ -171,7 +171,7 @@ func _process(delta: float) -> void:
 
 func _on_area_entered(area: Area2D) -> void:
 	if(area == butt):
-		print_debug("Player Won!")
+		Logging.logMessage("Player won!")
 		GameSettings.on_gameOver.emit(true)
 		
 		if(playerControl == false):
@@ -184,9 +184,9 @@ func _on_area_entered(area: Area2D) -> void:
 		queue_free()
 		
 	elif(area.is_in_group("Dangers")):
-		print_debug("Player Lost!")
+		Logging.logMessage("Player Lost!")
 		if(playerControl == false):
-			printerr("Player overlapped danger while not having control!")
+			Logging.error("Player overlapped danger while not having control!")
 			return	
 	
 		GameSettings.on_gameOver.emit(false)
@@ -205,12 +205,12 @@ func _on_area_entered(area: Area2D) -> void:
 			GameSettings.on_pickup.emit()
 			
 			area.queue_free()
-			print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
+			Logging.logMessage("Currrent Score: " + var_to_str(GameSettings.currentScore))
 			
 	elif(area.is_in_group("Present")):
 		if(canAddSprites):
 		
-			print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
+			Logging.logMessage("Currrent Score: " + var_to_str(GameSettings.currentScore))
 			var hatRand : int = currentHat
 			while hatRand == currentHat:
 				hatRand = randi_range(0, hats.size()-1)
@@ -226,7 +226,7 @@ func _on_area_entered(area: Area2D) -> void:
 				add_segment()
 			GameSettings.on_pickup.emit()
 			area.queue_free()
-			print_debug("Currrent Score: " + var_to_str(GameSettings.currentScore))
+			Logging.logMessage("Currrent Score: " + var_to_str(GameSettings.currentScore))
 			
 func grabCamera():	
 	var camera = get_tree().root.find_child("Camera2D", true, false)
@@ -245,5 +245,5 @@ func bark():
 func SetArrowTarget(target:Node2D):
 	arrowTarget = target.global_position
 	
-func _on_controls_changed(holdControls:bool):
+func _on_controls_changed(_holdControls:bool):
 	rotateRight = false

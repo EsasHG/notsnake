@@ -30,9 +30,12 @@ var achievementsCache: Array[PlayGamesAchievement]
 var leaderboardArray : Array[PlayGamesLeaderboard]
 var currentWorld : Node2D
 func _enter_tree() -> void:
-	print_debug("Entered tree!")
-	GodotPlayGameServices.initialize()
-	
+	Logging.logMessage("GameSettings Entered tree!")
+	if GodotPlayGameServices.initialize() == GodotPlayGameServices.PlayGamesPluginError.OK:
+		Logging.logMessage("Godot play games services initialized successfully")
+	else:
+		Logging.error("Could not initialize godot play games services plugin!")
+		
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#PlayGamesSDK.initialize(this)
@@ -67,30 +70,34 @@ func doDeferredSetup():
 	if(is_instance_valid(pauseButton)):
 		pauseButton.pressed.connect(on_pause_pressed)
 	else:
-		printerr("Pause button not found in game settings!")
+		Logging.error("Pause button not found in game settings!")
 		
-	if not GodotPlayGameServices.android_plugin:
-		printerr("Could not find Google Play Games Services plugin!")
-		
-	if(signInClient):
-		signInClient.user_authenticated.connect(_on_user_authenticated)
-		signInClient.is_authenticated()
-	else:
-		printerr("No sign in client found!")
-	if leaderboardsClient:
-		print_debug("Finding leaderboards!") 
-		leaderboardsClient.all_leaderboards_loaded.connect(all_leaderboards_loaded)
-		leaderboardsClient.score_submitted.connect(_score_submitted)
-		leaderboardsClient.score_loaded.connect(_on_player_score_loaded)
-		leaderboardsClient.load_all_leaderboards(true)
-	else:
-		printerr("No leaderboards client found!")
+	if GodotPlayGameServices.android_plugin:
+		if(signInClient):
+			signInClient.user_authenticated.connect(_on_user_authenticated)
+			signInClient.is_authenticated()
+		else:
+			Logging.error("No sign in client found!")
+		if leaderboardsClient:
+			Logging.logMessage("Finding leaderboards!") 
+			leaderboardsClient.all_leaderboards_loaded.connect(all_leaderboards_loaded)
+			leaderboardsClient.score_submitted.connect(_score_submitted)
+			leaderboardsClient.score_loaded.connect(_on_player_score_loaded)
+			leaderboardsClient.load_all_leaderboards(true)
+		else:
+			Logging.error("No leaderboards client found!")
 
-	if(achievementsClient):
-		achievementsClient.achievements_loaded.connect(_on_achievements_loaded)
-		achievementsClient.load_achievements(true)
+		if(achievementsClient):
+			achievementsClient.achievements_loaded.connect(_on_achievements_loaded)
+			achievementsClient.load_achievements(true)
+		else:
+			Logging.error("No achievement client found!")
 	else:
-		printerr("No achievement client found!")
+		Logging.error("Could not find Google Play Games Services plugin!")
+		signInClient = null
+		leaderboardsClient = null
+		achievementsClient = null
+		
 		
 func levelSelect():
 	if(currentWorld != null):
@@ -116,7 +123,7 @@ func startGame():
 	if(currentWorld != null):
 		currentWorld.queue_free()
 	else:
-		print_debug("No existing world")
+		Logging.logMessage("No existing world")
 	currentWorld = currentMap.Scene.instantiate()
 	get_tree().root.add_child(currentWorld)
 	on_gameBegin.emit.call_deferred()
@@ -129,22 +136,23 @@ func gameOver(won:bool):
 		saveScore()
 	
 	if leaderboardsClient:
-		print_debug("Submitting Score: " + var_to_str(currentScore))
+		Logging.logMessage("Trying to submit score: " + var_to_str(currentScore))
 		var submitted : bool = false
 		for board in leaderboardArray:
 			if board.display_name == currentMap.name:
 				scoreBoard = board
+				Logging.logMessage("Leaderboard found. Submitting Score: " + var_to_str(currentScore))
 				leaderboardsClient.submit_score(scoreBoard.leaderboard_id,currentScore)
 				submitted = true
 		if !submitted:
-			printerr("Score was never submitted!")
+			Logging.error("Could not find a leaderboard with name "+ currentMap.name + "! Score was never submitted!")
 	
 	if(achievementsClient):
-		if currentScore >= 20:
-			var mapAchievement = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(currentMap.name))
-			achievementsClient.unlock_achievement(achievementsCache[mapAchievement].achievement_id)
+		_checkLevelAchievement(currentMap.name)
 		if won:
-			achievementsClient.unlock_achievement("CgkIso_-xZsLEAIQBw")
+			var a:int = achievementsCache.find_custom(func(a:PlayGamesAchievement): a.achievement_id == "CgkIso_-xZsLEAIQBw")
+			if achievementsCache[a].state != PlayGamesAchievement.State.STATE_UNLOCKED:
+				achievementsClient.unlock_achievement(achievementsCache[a].achievement_id)
 	var ui = gameOverScreen.instantiate()
 	get_tree().root.find_child("Gui", true, false).add_child(ui)
 	ui.GameOver(won)
@@ -156,18 +164,18 @@ func increaseScore():
 		
 
 func saveScore():
-	print_debug("Saving!")
+	Logging.logMessage("Saving!")
 	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	
 	var saveDict = {"highScores" = highScores, "musicVol" = db_to_linear(musicVol), "sfxVol" = db_to_linear(sfxVol), "musicMuted" = musicMuted, "sfxMuted" = sfxMuted, "controls" = holdControls} 
 	saveFile.store_line(JSON.stringify(saveDict))
-	print_debug("Saved!")
+	Logging.logMessage("Saved!")
 	
 	
 func loadScore():
-	print_debug("Loading")
+	Logging.logMessage("Loading")
 	if not FileAccess.file_exists("user://savegame.save"):
-		print_debug("Error! Trying to load a non-existing save file!")	
+		Logging.logMessage("Error! Trying to load a non-existing save file!")	
 			
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
@@ -175,7 +183,8 @@ func loadScore():
 		var json = JSON.new()
 		var parse_result = json.parse(json_str)
 		if not parse_result == OK:
-			printerr("JSON Parse Error: ", json.get_error_message(), " in ", json_str, " at line ", json.get_error_line())
+			Logging.error("JSON Parse Error: " + json.get_error_message() + " in " + json_str + " at line " + str(json.get_error_line()))
+
 			continue
 		var node_data : Dictionary = json.data
 		
@@ -187,12 +196,12 @@ func loadScore():
 		if node_data.has("sfxVol"):
 			sfxVol = linear_to_db(node_data["sfxVol"])
 		else:
-			printerr("Could not load SFX volume from save file!")
+			Logging.error("Could not load SFX volume from save file!")
 			sfxVol = linear_to_db(0.8)
 		if node_data.has("musicVol"):
 			musicVol = linear_to_db(node_data["musicVol"])
 		else:
-			printerr("Could not load music volume from save file!")
+			Logging.error("Could not load music volume from save file!")
 			musicVol = linear_to_db(0.8)
 			
 		if node_data.has("sfxMuted"):
@@ -200,7 +209,7 @@ func loadScore():
 			if(sfxMuted):
 				setSFXVol(linear_to_db(0))
 		else:
-			printerr("Could not load SFX muted from save file!")
+			Logging.error("Could not load SFX muted from save file!")
 			sfxMuted = false
 	
 		if node_data.has("musicMuted"):
@@ -208,7 +217,7 @@ func loadScore():
 			if(musicMuted):
 				setMusicVol(linear_to_db(0))
 		else:
-			printerr("Could not load music muted from save file!")
+			Logging.error("Could not load music muted from save file!")
 			musicMuted = false
 
 		if node_data.has("controls"):
@@ -216,7 +225,7 @@ func loadScore():
 		else:
 			holdControls = true
 			
-	print_debug("Finished loading")
+	Logging.logMessage("Finished loading")
 		
 func getCurrentMapHighScore():
 	return highScores[currentMap.name]
@@ -224,10 +233,6 @@ func getCurrentMapHighScore():
 func setSFXVol(in_vol : float):
 	sfxVol = in_vol
 	on_sfx_volume_changed.emit(in_vol)
-	#for audio : AudioStreamPlayer2D in get_tree().root.find_children("*", "AudioStreamPlayer2D", true, false):
-	#	audio.volume_db = in_vol
-		
-
 
 func setMusicVol(in_vol : float):
 	musicVol = in_vol
@@ -257,6 +262,8 @@ func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 	setSFXMuted(toggled_on)
 
 func on_pause_pressed():
+	Logging.logMessage("Pausing game")
+	
 	var pauseScreen = pauseMenu.instantiate()
 	$"../Main/CanvasLayer/Gui".add_child(pauseScreen)
 	
@@ -265,61 +272,65 @@ func on_pause_pressed():
 	pauseButton.visible = false
 				
 	get_tree().paused = true
-	pass
 
 func showLeaderboard():
 	if(leaderboardsClient):
+		Logging.logMessage("Showing leaderboard " + scoreBoard.display_name)
 		leaderboardsClient.show_leaderboard(scoreBoard.leaderboard_id)
 	
 func showAllLeaderboards():
 	if(leaderboardsClient):
+		Logging.logMessage("Showing all leaderboards")
 		leaderboardsClient.show_all_leaderboards()
 
 func showAchievements():
 	if(achievementsClient):
+		Logging.logMessage("Showing achievements")
 		achievementsClient.show_achievements()
 
 func all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void:
-	print_debug("All leaderboards loaded!")
+	Logging.logMessage("All leaderboards loaded!")
 	if not leaderboards.size() == 0:
 		leaderboardArray = leaderboards
 		scoreBoard = leaderboardArray.front()
 		
 		for board in leaderboardArray:
-			leaderboardsClient.load_player_score(board.leaderboard_id,PlayGamesLeaderboardVariant.TimeSpan.TIME_SPAN_ALL_TIME,PlayGamesLeaderboardVariant.Collection.COLLECTION_PUBLIC)
+			Logging.logMessage("Loading player score for leaderboard " + board.display_name)
 			leaderboardsClient.load_player_score(board.leaderboard_id,PlayGamesLeaderboardVariant.TimeSpan.TIME_SPAN_ALL_TIME,PlayGamesLeaderboardVariant.Collection.COLLECTION_FRIENDS)
 	else:
-		printerr("No leaderboards found!")
+		Logging.error("No leaderboards found!")
 	pass # Replace with function body.
 
 func _on_user_authenticated(is_authenticated: bool) -> void:
 	userAuthenticated = is_authenticated
 	if is_authenticated:
 		#$Leaderboard.visible = true
-		print_debug("Authenticated!")
+		Logging.logMessage("Authenticated!")
 	else:
 		#$Leaderboard.visible = false
-		print_debug("Not authenticated!")
+		Logging.warn("User not authenticated!")
 
 func _on_player_score_loaded(leaderboard_id: String, score: PlayGamesLeaderboardScore):
 	var leaderboard = leaderboardArray[leaderboardArray.find_custom(func(l:PlayGamesLeaderboard): return l.leaderboard_id == leaderboard_id)]
+	Logging.logMessage("Score loaded for leaderboard " + leaderboard.display_name + ". Score: " + score.display_score)
+	
 	if highScores[leaderboard.display_name] < score.raw_score:
+		Logging.warn("Found higher highscore from leaderboard! Overwriting locally saved score of" + str(highScores[leaderboard.display_name]) + " with " + str(score.raw_score))
 		highScores[leaderboard.display_name] = score.raw_score
 	elif highScores[leaderboard.display_name] > score.raw_score and score.raw_score > 0:
+		Logging.warn("Found higher highscore in local save! submitting score of " + str(highScores[leaderboard.display_name]) + " to leaderboard " + leaderboard.display_name)
 		leaderboardsClient.submit_score(leaderboard_id,highScores[leaderboard.display_name])
-		
-	if achievementsClient and achievementsCache.size()>0 and highScores[leaderboard.display_name] >= 20:
-		var mapAchievement = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(leaderboard.display_name))
-		achievementsClient.unlock_achievement(achievementsCache[mapAchievement].achievement_id)
-
+	_checkLevelAchievement(leaderboard.display_name)
 		
 
 func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
 	if is_submitted:
-		print_debug("Score Submitted!")
-		leaderboardsClient.load_player_score(leaderboard_id,PlayGamesLeaderboardVariant.TimeSpan.TIME_SPAN_ALL_TIME, PlayGamesLeaderboardVariant.Collection.COLLECTION_PUBLIC)
+		Logging.logMessage("Score Submitted for leaderboard "+ leaderboard_id)
+		if leaderboardsClient:
+			Logging.logMessage("Loading player score for leaderboard " + leaderboard_id)
+			leaderboardsClient.load_player_score(leaderboard_id,PlayGamesLeaderboardVariant.TimeSpan.TIME_SPAN_ALL_TIME, PlayGamesLeaderboardVariant.Collection.COLLECTION_PUBLIC)
 	else: 
-		printerr("Score not submitted!")
+		Logging.error("Score not submitted for leaderboard " +  leaderboard_id)
 	pass # Replace with function body.
 
 func setControls(hold:bool):
@@ -328,10 +339,18 @@ func setControls(hold:bool):
 	saveScore()
 
 func _on_achievements_loaded(achievements: Array[PlayGamesAchievement]) -> void:
-	print_debug("Achievements loaded!")
+	Logging.logMessage("Achievements loaded!")
 	achievementsCache = achievements
 	for key in highScores:
-		if highScores[key] >= 20:
-			var mapAchievement = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(key))
-			achievementsClient.unlock_achievement(achievementsCache[mapAchievement].achievement_name)
-	
+		_checkLevelAchievement(key)
+			
+func _checkLevelAchievement(levelName:String):
+	if achievementsClient and achievementsCache.size()>0 and highScores[levelName] >= 20:
+		var achievementNum = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(levelName))
+		var ach: PlayGamesAchievement = achievementsCache[achievementNum]
+		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED: 
+			Logging.warn("Score is high enough for achievement! Unlocking achievement " + ach.achievement_name)
+			achievementsClient.unlock_achievement(ach.achievement_id)
+		else:
+			Logging.logMessage("Score is high enough for achievement, and achievement is already unlocked! " + ach.achievement_name)
+			

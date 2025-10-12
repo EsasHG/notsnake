@@ -98,6 +98,11 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_t7vc4")
 toggle_mode = true
 metadata/_edit_use_anchors_ = true
 
+[node name="ShowLog" type="CheckButton" parent="."]
+layout_mode = 2
+theme = ExtResource("3_bd3ey")
+text = "Show log window"
+
 [node name="Controls" type="VBoxContainer" parent="."]
 layout_mode = 2
 
@@ -142,6 +147,7 @@ text = "Leaderboards"
 
 [connection signal="toggled" from="MusicMute" to="." method="_on_music_mute_toggled"]
 [connection signal="toggled" from="SFXMute" to="." method="_on_sfx_mute_toggled"]
+[connection signal="toggled" from="ShowLog" to="." method="_on_show_log_toggled"]
 [connection signal="toggled" from="Controls/HoldControls" to="." method="_on_hold_controls_toggled"]
 [connection signal="pressed" from="HBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/LeaderboardsButton" to="." method="_on_leaderboards_button_pressed"]
