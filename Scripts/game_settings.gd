@@ -9,6 +9,14 @@ signal on_sfx_volume_changed(new_vol : float)
 signal on_controls_changed(holdControls:bool)
 
 @export var currentScore : int = 0 
+
+@onready var gameOverScreen : PackedScene = preload("res://Scenes/GameOverScreen.tscn")
+@onready var playerChar : PackedScene = preload("res://Scenes/PlayerDog.tscn")
+@onready var pauseMenu : PackedScene = preload("res://Scenes/Menus/pause_menu.tscn")
+@onready var bubbleScene : PackedScene = preload("res://Scenes/BubbleCutscene.tscn")
+@onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
+
+
 var currentMap :Map
 var highScores = {"Field":0, "Park": 0, "Square": 0, "Small":0, "Forest":0}
 var sfxVol = linear_to_db(0.8)
@@ -19,14 +27,11 @@ var userAuthenticated = false
 var holdControls:bool = true
 var pauseButton:Button
 var achievementsCache: Array[PlayGamesAchievement]
-@onready var gameOverScreen : PackedScene = preload("res://Scenes/GameOverScreen.tscn")
-@onready var playerChar : PackedScene = preload("res://Scenes/PlayerDog.tscn")
-@onready var pauseMenu : PackedScene = preload("res://Scenes/Menus/pause_menu.tscn")
-@onready var bubbleScene : PackedScene = preload("res://Scenes/BubbleCutscene.tscn")
-@onready var leaderboardsClient : PlayGamesLeaderboardsClient = get_tree().root.find_child("PlayGamesLeaderboardsClient", true, false)
-@onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
-@onready var achievementsClient : PlayGamesAchievementsClient = get_tree().root.find_child("PlayGamesAchievementsClient", true, false)
-@onready var scoreBoard : PlayGamesLeaderboard
+
+var achievementsClient : PlayGamesAchievementsClient
+var leaderboardsClient : PlayGamesLeaderboardsClient
+
+var scoreBoard : PlayGamesLeaderboard
 var leaderboardArray : Array[PlayGamesLeaderboard]
 var currentWorld : Node2D
 func _enter_tree() -> void:
@@ -68,7 +73,7 @@ func doDeferredSetup():
 	
 	pauseButton = get_tree().root.find_child("PauseButton", true, false)
 	if(is_instance_valid(pauseButton)):
-		pauseButton.pressed.connect(on_pause_pressed)
+		pauseButton.pressed.connect(_on_pause_pressed)
 	else:
 		Logging.error("Pause button not found in game settings!")
 		
@@ -78,20 +83,7 @@ func doDeferredSetup():
 			signInClient.is_authenticated()
 		else:
 			Logging.error("No sign in client found!")
-		if leaderboardsClient:
-			Logging.logMessage("Finding leaderboards!") 
-			leaderboardsClient.all_leaderboards_loaded.connect(all_leaderboards_loaded)
-			leaderboardsClient.score_submitted.connect(_score_submitted)
-			leaderboardsClient.score_loaded.connect(_on_player_score_loaded)
-			leaderboardsClient.load_all_leaderboards(true)
-		else:
-			Logging.error("No leaderboards client found!")
-
-		if(achievementsClient):
-			achievementsClient.achievements_loaded.connect(_on_achievements_loaded)
-			achievementsClient.load_achievements(true)
-		else:
-			Logging.error("No achievement client found!")
+		
 	else:
 		Logging.error("Could not find Google Play Games Services plugin!")
 		signInClient = null
@@ -150,9 +142,9 @@ func gameOver(won:bool):
 	if(achievementsClient):
 		_checkLevelAchievement(currentMap.name)
 		if won:
-			var a:int = achievementsCache.find_custom(func(a:PlayGamesAchievement): a.achievement_id == "CgkIso_-xZsLEAIQBw")
-			if achievementsCache[a].state != PlayGamesAchievement.State.STATE_UNLOCKED:
-				achievementsClient.unlock_achievement(achievementsCache[a].achievement_id)
+			var ach:int = achievementsCache.find_custom(func(a:PlayGamesAchievement): a.achievement_id == "CgkIso_-xZsLEAIQBw")
+			if achievementsCache[ach].state != PlayGamesAchievement.State.STATE_UNLOCKED:
+				achievementsClient.unlock_achievement(achievementsCache[ach].achievement_id)
 	var ui = gameOverScreen.instantiate()
 	get_tree().root.find_child("Gui", true, false).add_child(ui)
 	ui.GameOver(won)
@@ -255,13 +247,17 @@ func setSFXMuted(muted:bool):
 	setSFXVol(vol)
 	saveScore()
 	
+func setControls(hold:bool):
+	holdControls = hold
+	on_controls_changed.emit(holdControls)
+	saveScore()
 func _on_music_mute_toggled(toggled_on: bool) -> void:
 	setMusicMuted(toggled_on)
 
 func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 	setSFXMuted(toggled_on)
 
-func on_pause_pressed():
+func _on_pause_pressed():
 	Logging.logMessage("Pausing game")
 	
 	var pauseScreen = pauseMenu.instantiate()
@@ -288,7 +284,48 @@ func showAchievements():
 		Logging.logMessage("Showing achievements")
 		achievementsClient.show_achievements()
 
-func all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void:
+func _checkLevelAchievement(levelName:String):
+	if achievementsClient and achievementsCache.size()>0 and highScores[levelName] >= 20:
+		var achievementNum = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(levelName))
+		var ach: PlayGamesAchievement = achievementsCache[achievementNum]
+		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED: 
+			Logging.warn("Score is high enough for achievement! Unlocking achievement " + ach.achievement_name)
+			achievementsClient.unlock_achievement(ach.achievement_id)
+		else:
+			Logging.logMessage("Score is high enough for achievement, and achievement is already unlocked! " + ach.achievement_name)
+
+
+func _on_user_authenticated(is_authenticated: bool) -> void:
+	if is_authenticated:
+		#$Leaderboard.visible = true
+		Logging.logMessage("Authenticated!")
+		
+		# If user was not authenticated before, setup leaderboard and achievements.
+		if not userAuthenticated: 
+			leaderboardsClient = get_tree().root.find_child("PlayGamesLeaderboardsClient", true, false)
+			if leaderboardsClient:
+				Logging.logMessage("Finding leaderboards!") 
+				leaderboardsClient.all_leaderboards_loaded.connect(_all_leaderboards_loaded)
+				leaderboardsClient.score_submitted.connect(_score_submitted)
+				leaderboardsClient.score_loaded.connect(_on_player_score_loaded)
+				leaderboardsClient.load_all_leaderboards(true)
+			else:
+				Logging.error("No leaderboards client found!")
+				
+			achievementsClient = get_tree().root.find_child("PlayGamesAchievementsClient", true, false)
+			if(achievementsClient):
+				achievementsClient.achievements_loaded.connect(_on_achievements_loaded)
+				achievementsClient.load_achievements(true)
+			else:
+				Logging.error("No achievement client found!")
+		
+	else:
+		#$Leaderboard.visible = false
+		Logging.warn("User not authenticated!")
+
+	userAuthenticated = is_authenticated
+
+func _all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void:
 	Logging.logMessage("All leaderboards loaded!")
 	if not leaderboards.size() == 0:
 		leaderboardArray = leaderboards
@@ -300,15 +337,6 @@ func all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void:
 	else:
 		Logging.error("No leaderboards found!")
 	pass # Replace with function body.
-
-func _on_user_authenticated(is_authenticated: bool) -> void:
-	userAuthenticated = is_authenticated
-	if is_authenticated:
-		#$Leaderboard.visible = true
-		Logging.logMessage("Authenticated!")
-	else:
-		#$Leaderboard.visible = false
-		Logging.warn("User not authenticated!")
 
 func _on_player_score_loaded(leaderboard_id: String, score: PlayGamesLeaderboardScore):
 	var leaderboard = leaderboardArray[leaderboardArray.find_custom(func(l:PlayGamesLeaderboard): return l.leaderboard_id == leaderboard_id)]
@@ -333,24 +361,10 @@ func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
 		Logging.error("Score not submitted for leaderboard " +  leaderboard_id)
 	pass # Replace with function body.
 
-func setControls(hold:bool):
-	holdControls = hold
-	on_controls_changed.emit(holdControls)
-	saveScore()
 
 func _on_achievements_loaded(achievements: Array[PlayGamesAchievement]) -> void:
 	Logging.logMessage("Achievements loaded!")
 	achievementsCache = achievements
 	for key in highScores:
 		_checkLevelAchievement(key)
-			
-func _checkLevelAchievement(levelName:String):
-	if achievementsClient and achievementsCache.size()>0 and highScores[levelName] >= 20:
-		var achievementNum = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(levelName))
-		var ach: PlayGamesAchievement = achievementsCache[achievementNum]
-		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED: 
-			Logging.warn("Score is high enough for achievement! Unlocking achievement " + ach.achievement_name)
-			achievementsClient.unlock_achievement(ach.achievement_id)
-		else:
-			Logging.logMessage("Score is high enough for achievement, and achievement is already unlocked! " + ach.achievement_name)
 			
