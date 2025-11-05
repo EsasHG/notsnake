@@ -127,6 +127,8 @@ func startGame():
 	
 	
 func gameOver(won:bool):
+	increment_achievement("Hungry dog", currentScore)
+	increment_achievement("Insatiable dog", currentScore)
 	if currentScore > highScores.get_or_add(currentMap.name,0):
 		highScores[currentMap.name] = currentScore
 		saveScore()
@@ -146,10 +148,12 @@ func gameOver(won:bool):
 	if(achievementsClient):
 		if highScores[currentMap.name] >= 20:
 			unlock_achievement(currentMap.name)	
-		if won:
-			var ach:int = achievementsCache.find_custom(func(a:PlayGamesAchievement): a.achievement_id == "CgkIso_-xZsLEAIQBw")
-			if achievementsCache[ach].state != PlayGamesAchievement.State.STATE_UNLOCKED:
-				achievementsClient.unlock_achievement(achievementsCache[ach].achievement_id)
+			
+		if won:		#do we really need this if we unlock in playerDog?
+			var achievementNum:int = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_id == "CgkIso_-xZsLEAIQBw")
+			var ach:PlayGamesAchievement = achievementsCache[achievementNum]
+			if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED:
+				achievementsClient.unlock_achievement(ach.achievement_id)
 	var ui = gameOverScreen.instantiate()
 	get_tree().root.find_child("Gui", true, false).add_child(ui)
 	ui.GameOver(won)
@@ -334,21 +338,24 @@ func showAchievements():
 		achievementsClient.show_achievements()
 
 
-		
-		
+func _get_achievement(achievementName:String) -> PlayGamesAchievement:
+		var achievementNum = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(achievementName))
+		return achievementsCache[achievementNum]
 #Should probably do something like save achievement unlocks and progress locally, 
 #so we can instantly unlock things if players authenticate after playing for a while?
 func unlock_achievement(achievementName:String):
 	if userAuthenticated and achievementsClient and achievementsCache.size()>0:
-		var achievementNum = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(achievementName))
-		var ach: PlayGamesAchievement = achievementsCache[achievementNum]
+		var ach: PlayGamesAchievement = _get_achievement(achievementName)
 		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED: 
 			Logging.warn("Score is high enough for achievement! Unlocking achievement " + ach.achievement_name)
 			achievementsClient.unlock_achievement(ach.achievement_id)
 		else:
 			Logging.logMessage("Score is high enough for achievement, and achievement is already unlocked! " + ach.achievement_name)
 
-
+func increment_achievement(achievementName:String, amount:int):
+	var ach:PlayGamesAchievement = _get_achievement(achievementName)
+	achievementsClient.increment_achievement(ach.achievement_id, amount)
+	
 func _on_user_authenticated(is_authenticated: bool) -> void:
 	if is_authenticated:
 		#$Leaderboard.visible = true
@@ -404,8 +411,6 @@ func _on_player_score_loaded(leaderboard_id: String, score: PlayGamesLeaderboard
 		leaderboardsClient.submit_score(leaderboard_id,highScores[leaderboard.display_name])
 	if highScores[leaderboard.display_name] >= 20:
 		unlock_achievement(leaderboard.display_name)
-	
-		
 
 func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
 	if is_submitted:
@@ -416,7 +421,6 @@ func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
 	else: 
 		Logging.error("Score not submitted for leaderboard " +  leaderboard_id)
 	pass # Replace with function body.
-
 
 func _on_achievements_loaded(achievements: Array[PlayGamesAchievement]) -> void:
 	Logging.logMessage("Achievements loaded!")
