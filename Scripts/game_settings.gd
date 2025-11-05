@@ -5,7 +5,6 @@ signal on_gameOver(won:bool)
 signal on_gameBegin()
 signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
-signal on_sfx_volume_changed(new_vol : float)
 signal on_controls_changed(holdControls:bool)
 
 @export var currentScore : int = 0 
@@ -266,16 +265,14 @@ func loadSettings() -> bool:
 		
 func getCurrentMapHighScore():
 	return highScores[currentMap.name]
-		
-func setSFXVol(in_vol : float):
-	sfxVol = in_vol
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),in_vol)
-	
-	on_sfx_volume_changed.emit(in_vol)
 
 func setMusicVol(in_vol : float):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),in_vol)
 	musicVol = in_vol
+	
+func setSFXVol(in_vol : float):
+	sfxVol = in_vol
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),in_vol)
 
 func setMusicMuted(muted:bool):
 	Logging.logMessage("Setting music muted to " + str(muted))

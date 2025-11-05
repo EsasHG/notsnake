@@ -105,6 +105,7 @@ bus = &"SFX"
 stream = ExtResource("8_35usu")
 volume_db = -15.0
 pitch_scale = 35.0
+bus = &"SFX"
 
 [node name="PlayGamesLeaderboardsClient" type="Node" parent="."]
 unique_name_in_owner = true

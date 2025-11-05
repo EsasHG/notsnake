@@ -1,7 +1,7 @@
 extends Area2D
 
 @onready var player : Node2D = get_tree().root.find_child("PlayerDog", true, false)
-@onready var audio_stream_player_2d: SFXPlayer = $AudioStreamPlayer2D
+@onready var audio_stream_player_2d: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 @export var distThreshold = 250
 var playerCrossedThreshold = false
