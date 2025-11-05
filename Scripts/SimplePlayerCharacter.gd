@@ -55,8 +55,8 @@ func _ready() -> void:
 	GameSettings.on_pickupSpawned.connect(SetArrowTarget)
 	GameSettings.on_controls_changed.connect(_on_controls_changed)
 	GameSettings.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
-#	if(playerControl):
-#		get_tree().create_timer(1.0).timeout.connect(func(): GameSettings.on_gameBegin.emit())
+	
+	
 func add_sprite():
 	if(canAddSprites):
 		spritesToAdd+=segmentsPerSection
@@ -75,7 +75,6 @@ func resetSpriteTimer():
 	canAddSprites = true
 
 func _unhandled_input(event: InputEvent) -> void:
-	#event.is_action_pressed()
 	if GameSettings.holdControls:
 		if(event.is_action("Press")):
 			if(event.is_pressed()):
@@ -89,7 +88,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	
 	if(!move): return
-#	position.x += delta*100
 	var dir : int = -1
 	
 	if(rotateRight && playerControl):
@@ -127,7 +125,6 @@ func _process(delta: float) -> void:
 			if(!hindLegs.is_playing()):
 				hindLegs.play()
 			
-		#	$Head/Legs.play()
 		if(segmentSprites.size() > 10):
 			segmentSprites[10].get_child(0).disabled = false
 			
@@ -142,23 +139,9 @@ func _process(delta: float) -> void:
 		
 		butt.global_position = segmentSprites.back().global_position
 		butt.global_rotation = segmentSprites.back().global_rotation
-	#while timer > spawntime: 
-		#spawn
-		#remove spawntime
-		#funksjon for å predicte hvor jeg ville vært på substep	
-		#prev frame pos/rot, current frame pos/rot, middle of rotation
-	
 	
 	prevPositionsArr.push_front([global_position, rotation])
 	
-	#if(Input.is_key_pressed(KEY_F)):
-		#showFps = true
-		#var fps : float = 1/ delta
-		#$"../../CanvasLayer/Gui/FPS_Tracker".text = "Framerate: " + var_to_str(fps)
-	#else:
-		#showFps = false
-#		$"../../CanvasLayer/Gui/FPS_Tracker".text = ""
-		
 	prevPos = global_position
 	prevLeft = left
 	prevDir = dir
@@ -185,10 +168,16 @@ func _on_area_entered(area: Area2D) -> void:
 		
 	elif(area.is_in_group("Dangers")):
 		Logging.logMessage("Player Lost!")
+
+			
 		if(playerControl == false):
 			Logging.error("Player overlapped danger while not having control!")
 			return	
 	
+		if area.is_in_group("DogSegment"):
+			Logging.logMessage("Collided with self!")
+			GameSettings.unlock_achievement("Dog knot")
+			
 		GameSettings.on_gameOver.emit(false)
 
 		move = false
@@ -222,6 +211,8 @@ func _on_area_entered(area: Area2D) -> void:
 			currentHat = hatRand
 			
 			bark()
+			GameSettings.unlock_achievement("Dapper dog")
+			
 			for i : int in segmentsPerSection:
 				add_segment()
 			GameSettings.on_pickup.emit()
@@ -236,7 +227,6 @@ func grabCamera():
 	tween.tween_property(camera, "position", Vector2(0,0), 0.5)
 	tween.tween_callback(func(): playerControl = true)
 	
-	#playerControl = true
 	
 func bark():
 	$Head/BarkSound.pitch_scale = randf_range(0.9,1.1)

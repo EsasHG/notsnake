@@ -13,6 +13,7 @@ var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
 @onready var buttons: HBoxContainer = $HBoxContainer
 @onready var level_select_screen: Control = $LevelSelectScreen
 @onready var level_buttons: HFlowContainer = $LevelSelectScreen/PanelContainer/LevelButtons
+@onready var level_selected_sound: AudioStreamPlayer = get_tree().root.find_child("LevelSelected", true, false)
 
 @export var buttonTheme:Theme
 @export var levels : Array[Map]
@@ -35,25 +36,6 @@ func _ready() -> void:
 		blackPanelTween.tween_property($Panel2, "modulate:a", 0, 1.5)
 		)
 	
-	#var comicStartTimer = get_tree().create_timer(0.5).timeout.connect(func():
-		#
-		#var comicFadeInTween = get_tree().create_tween()
-		#comicFadeInTween.set_ease(Tween.EASE_IN)
-		#comicFadeInTween.tween_property($Panel, "modulate:a", 1, 1.0)
-		#comicFadeInTween.tween_callback(func():
-			#var timer = get_tree().create_timer(4.0).timeout.connect(func(): 
-				#var tween = get_tree().create_tween()
-				#tween.set_ease(Tween.EASE_OUT)
-				#tween.tween_property($Panel, "modulate:a", 0, 1.0)
-				#tween.tween_callback(func(): 
-					#$StartButton.grab_focus()
-					#var blackPanelTween = get_tree().create_tween()
-					#blackPanelTween.set_ease(Tween.EASE_IN)
-					#blackPanelTween.tween_property($Panel2, "modulate:a", 0, 1.5)
-				#)
-			#)
-		#)
-	#)
 	if(!OS.has_feature("web") && !OS.has_feature("mobile")):
 		$HBoxContainer/StartButton.grab_focus()
 	
@@ -160,6 +142,7 @@ func _on_back_pressed() -> void:
 	level_select_screen.visible = false
 
 func _on_map_selected(scene:Map): 
+	level_selected_sound.play()
 	GameSettings.currentMap = scene
 	GameSettings.startGame()
 	queue_free()

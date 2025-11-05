@@ -42,4 +42,5 @@ sprite_frames = SubResource("SpriteFrames_eip46")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_3h6uo")
 pitch_scale = 1.4
+bus = &"SFX"
 script = ExtResource("5_yy0qr")

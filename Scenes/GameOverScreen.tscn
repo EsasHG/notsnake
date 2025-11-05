@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dt85v1n4h7vqg" path="res://Scripts/game_over_screen.gd" id="1_7tubc"]
 [ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="1_k4sjf"]
 [ext_resource type="Texture2D" uid="uid://c02fkdaroc7h7" path="res://Assets/UI/GAME_HIGHSCORE.png" id="3_cim2l"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/AudioButton.gd" id="4_ew8mo"]
 [ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="4_rde26"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="5_4fc7w"]
-[ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="6_nrd6a"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jx1af"]
 
@@ -34,9 +34,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_yr1h0")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_nrd6a")
 
 [node name="ScoreLabels" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -78,6 +75,7 @@ custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("5_4fc7w")
 text = "Retry"
+script = ExtResource("4_ew8mo")
 
 [node name="LevelSelectButton" type="Button" parent="ButtonContainer"]
 z_index = -1
@@ -87,6 +85,7 @@ theme = ExtResource("5_4fc7w")
 theme_override_font_sizes/font_size = 23
 text = "Level 
 Select"
+script = ExtResource("4_ew8mo")
 
 [node name="MainMenuButton" type="Button" parent="ButtonContainer"]
 z_index = -1
@@ -95,6 +94,7 @@ layout_mode = 2
 theme = ExtResource("5_4fc7w")
 theme_override_font_sizes/font_size = 23
 text = "Main Menu"
+script = ExtResource("4_ew8mo")
 
 [node name="Leaderboard" type="Button" parent="ButtonContainer"]
 visible = false
@@ -103,6 +103,7 @@ layout_mode = 2
 theme = ExtResource("5_4fc7w")
 theme_override_font_sizes/font_size = 19
 text = "Leaderboard"
+script = ExtResource("4_ew8mo")
 
 [node name="GameOverTex" type="TextureRect" parent="."]
 z_index = -2

@@ -64,11 +64,15 @@ func _on_retry_button_pressed() -> void:
 
 
 func _on_level_select_button_pressed() -> void:
+	var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
+	loseMusic.stop()
 	GameSettings.levelSelect()
 	queue_free()
 	pass # Replace with function body.
 
 
 func _on_main_menu_button_pressed() -> void:
+	var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
+	loseMusic.stop()
 	GameSettings.mainMenu()
 	queue_free()

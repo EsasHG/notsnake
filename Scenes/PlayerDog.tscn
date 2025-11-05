@@ -209,6 +209,7 @@ frame_progress = 0.515546
 
 [node name="BarkSound" type="AudioStreamPlayer2D" parent="Head"]
 stream = ExtResource("4_wxfsi")
+bus = &"SFX"
 script = ExtResource("5_xdk5u")
 
 [node name="Hats" type="Node2D" parent="Head"]

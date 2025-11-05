@@ -44,6 +44,7 @@ enabled=PackedStringArray("res://addons/GodotPlayGameServices/plugin.cfg")
 Treats=""
 Dangers=""
 Present=""
+DogSegment=""
 
 [input]
 

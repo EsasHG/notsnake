@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://padbn8hpbpo6"]
+[gd_scene load_steps=17 format=3 uid="uid://padbn8hpbpo6"]
 
 [ext_resource type="Texture2D" uid="uid://5ut7n13w7gl0" path="res://Assets/UI/options_icons_etc/musicnote_1.png" id="1_01yro"]
 [ext_resource type="Script" uid="uid://ihu4evvvu1ue" path="res://Scenes/Menus/SettingsScreen.gd" id="1_kuoau"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_bd3ey"]
 [ext_resource type="Texture2D" uid="uid://cwr3xy00vr1xt" path="res://Assets/UI/options_icons_etc/musicnote_1_small.png" id="4_o23xy"]
 [ext_resource type="Texture2D" uid="uid://csa2i730dryet" path="res://Assets/UI/options_icons_etc/musicnote_2_small.png" id="5_b0u2s"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/AudioButton.gd" id="5_bd3ey"]
 [ext_resource type="Texture2D" uid="uid://biwe7c60f6r35" path="res://Assets/UI/options_icons_etc/speaker_3_small.png" id="6_ojke6"]
 [ext_resource type="Texture2D" uid="uid://b5y0sal86emi0" path="res://Assets/UI/options_icons_etc/speaker_off_2_small.png" id="7_q57ny"]
 [ext_resource type="Texture2D" uid="uid://c7viv7v30veef" path="res://Assets/UI/options_icons_etc/speaker_3.png" id="8_g8o6k"]
@@ -61,6 +62,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_ovcku")
 theme_override_styles/hover = SubResource("StyleBoxTexture_umxxc")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ovcku")
 toggle_mode = true
+script = ExtResource("5_bd3ey")
 metadata/_edit_use_anchors_ = true
 
 [node name="MusicCheckbox" type="CheckBox" parent="."]
@@ -96,12 +98,14 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_t7vc4")
 theme_override_styles/hover = SubResource("StyleBoxTexture_g648p")
 theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_t7vc4")
 toggle_mode = true
+script = ExtResource("5_bd3ey")
 metadata/_edit_use_anchors_ = true
 
 [node name="ShowLog" type="CheckButton" parent="."]
 layout_mode = 2
 theme = ExtResource("3_bd3ey")
 text = "Show log window"
+script = ExtResource("5_bd3ey")
 
 [node name="Controls" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -119,6 +123,7 @@ theme = ExtResource("3_bd3ey")
 button_pressed = true
 button_group = SubResource("ButtonGroup_7smr3")
 text = "Hold"
+script = ExtResource("5_bd3ey")
 
 [node name="TapControls" type="CheckBox" parent="Controls"]
 layout_mode = 2
@@ -127,6 +132,7 @@ theme = ExtResource("3_bd3ey")
 button_group = SubResource("ButtonGroup_7smr3")
 text = "Tap
 "
+script = ExtResource("5_bd3ey")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -137,6 +143,7 @@ layout_mode = 2
 theme = ExtResource("3_bd3ey")
 theme_override_font_sizes/font_size = 20
 text = "Achievements"
+script = ExtResource("5_bd3ey")
 
 [node name="LeaderboardsButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(130, 50)
@@ -144,6 +151,7 @@ layout_mode = 2
 theme = ExtResource("3_bd3ey")
 theme_override_font_sizes/font_size = 20
 text = "Leaderboards"
+script = ExtResource("5_bd3ey")
 
 [connection signal="toggled" from="MusicMute" to="." method="_on_music_mute_toggled"]
 [connection signal="toggled" from="SFXMute" to="." method="_on_sfx_mute_toggled"]

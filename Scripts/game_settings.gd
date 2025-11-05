@@ -15,7 +15,8 @@ signal on_controls_changed(holdControls:bool)
 @onready var pauseMenu : PackedScene = preload("res://Scenes/Menus/pause_menu.tscn")
 @onready var bubbleScene : PackedScene = preload("res://Scenes/BubbleCutscene.tscn")
 @onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
-
+enum ViewportMode {PORTRAIT, LANDSCAPE}
+var viewMode:ViewportMode = ViewportMode.LANDSCAPE
 
 var currentMap :Map
 var highScores = {"Field":0, "Park": 0, "Square": 0, "Small":0, "Forest":0}
@@ -34,6 +35,8 @@ var leaderboardsClient : PlayGamesLeaderboardsClient
 var scoreBoard : PlayGamesLeaderboard
 var leaderboardArray : Array[PlayGamesLeaderboard]
 var currentWorld : Node2D
+var uiClickPlayer : AudioStreamPlayer
+
 func _enter_tree() -> void:
 	Logging.logMessage("GameSettings Entered tree!")
 	if GodotPlayGameServices.initialize() == GodotPlayGameServices.PlayGamesPluginError.OK:
@@ -44,15 +47,17 @@ func _enter_tree() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	#PlayGamesSDK.initialize(this)
-	if FileAccess.file_exists("user://savegame.save"):
-		loadScore()	
-	else:
+	loadScore()	
+	
+	if not loadSettings():
 		sfxMuted = false
 		musicMuted = false
+		setSFXMuted(sfxMuted)
+		setMusicMuted(musicMuted)
 	
 	on_pickup.connect(increaseScore)
 	on_gameOver.connect(gameOver)
-	#on_gameBegin.connect(startGame)
+	get_viewport().size_changed.connect(_on_viewport_size_changed)
 	call_deferred("doDeferredSetup")	
 	
 func doDeferredSetup():
@@ -140,7 +145,8 @@ func gameOver(won:bool):
 			Logging.error("Could not find a leaderboard with name "+ currentMap.name + "! Score was never submitted!")
 	
 	if(achievementsClient):
-		_checkLevelAchievement(currentMap.name)
+		if highScores[currentMap.name] >= 20:
+			unlock_achievement(currentMap.name)	
 		if won:
 			var ach:int = achievementsCache.find_custom(func(a:PlayGamesAchievement): a.achievement_id == "CgkIso_-xZsLEAIQBw")
 			if achievementsCache[ach].state != PlayGamesAchievement.State.STATE_UNLOCKED:
@@ -159,16 +165,27 @@ func saveScore():
 	Logging.logMessage("Saving!")
 	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	
-	var saveDict = {"highScores" = highScores, "musicVol" = db_to_linear(musicVol), "sfxVol" = db_to_linear(sfxVol), "musicMuted" = musicMuted, "sfxMuted" = sfxMuted, "controls" = holdControls} 
+	var saveDict = {"highScores" = highScores} 
+	saveFile.store_line(JSON.stringify(saveDict))
+	Logging.logMessage("Saved!")
+	
+func saveSettings(): #TODO finish this
+	pass
+	Logging.logMessage("Saving!")
+	var saveFile = FileAccess.open("user://settings.save", FileAccess.WRITE)
+	
+	var saveDict = {"musicVol" = db_to_linear(musicVol), "sfxVol" = db_to_linear(sfxVol), "musicMuted" = musicMuted, "sfxMuted" = sfxMuted, "controls" = holdControls} 
 	saveFile.store_line(JSON.stringify(saveDict))
 	Logging.logMessage("Saved!")
 	
 	
-func loadScore():
+	
+func loadScore() -> bool:
 	Logging.logMessage("Loading")
 	if not FileAccess.file_exists("user://savegame.save"):
 		Logging.logMessage("Error! Trying to load a non-existing save file!")	
-			
+		return false
+		
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_str = save_file.get_line()	
@@ -185,6 +202,35 @@ func loadScore():
 		elif node_data.has("highScores"):
 			highScores = node_data["highScores"]
 			
+	Logging.logMessage("Finished loading high scores")
+	return true
+	
+	
+func loadSettings() -> bool:
+	Logging.logMessage("Loading")
+	var possibleFileNames: Array[String] = ["user://settings.save","user://savegame.save"]
+	var fileName:String = ""
+	
+	for possibleName:String in possibleFileNames:
+		if FileAccess.file_exists(possibleName):
+			fileName = possibleName
+			break
+			
+	if fileName.is_empty():
+		Logging.warn("Could not find a settings file!")
+		return false
+		
+	var save_file = FileAccess.open(fileName, FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var json_str = save_file.get_line()	
+		var json = JSON.new()
+		var parse_result = json.parse(json_str)
+		if not parse_result == OK:
+			Logging.error("JSON Parse Error: " + json.get_error_message() + " in " + json_str + " at line " + str(json.get_error_line()))
+
+			continue
+		var node_data : Dictionary = json.data
+		
 		if node_data.has("sfxVol"):
 			sfxVol = linear_to_db(node_data["sfxVol"])
 		else:
@@ -198,16 +244,14 @@ func loadScore():
 			
 		if node_data.has("sfxMuted"):
 			sfxMuted = node_data["sfxMuted"]
-			if(sfxMuted):
-				setSFXVol(linear_to_db(0))
+			setSFXMuted(sfxMuted)
 		else:
 			Logging.error("Could not load SFX muted from save file!")
 			sfxMuted = false
 	
 		if node_data.has("musicMuted"):
 			musicMuted = node_data["musicMuted"]
-			if(musicMuted):
-				setMusicVol(linear_to_db(0))
+			setMusicMuted(musicMuted)
 		else:
 			Logging.error("Could not load music muted from save file!")
 			musicMuted = false
@@ -216,41 +260,49 @@ func loadScore():
 			holdControls = node_data["controls"]
 		else:
 			holdControls = true
+	Logging.logMessage("Finished loading settings")
+	return true
 			
-	Logging.logMessage("Finished loading")
 		
 func getCurrentMapHighScore():
 	return highScores[currentMap.name]
 		
 func setSFXVol(in_vol : float):
 	sfxVol = in_vol
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),in_vol)
+	
 	on_sfx_volume_changed.emit(in_vol)
 
 func setMusicVol(in_vol : float):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),in_vol)
 	musicVol = in_vol
-	for audio : AudioStreamPlayer in get_tree().root.find_children("*", "AudioStreamPlayer", true, false):
-		audio.volume_db = in_vol
 
 func setMusicMuted(muted:bool):
+	Logging.logMessage("Setting music muted to " + str(muted))
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"),muted)
 	musicMuted = muted
 	var vol : float = linear_to_db(0.8)
 	if musicMuted: 
 		vol = linear_to_db(0)
 	setMusicVol(vol)
-	saveScore()
+	saveSettings()
 	
 func setSFXMuted(muted:bool):
+	Logging.logMessage("Setting sfx muted to " + str(muted))
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"),muted)
 	sfxMuted = muted
 	var vol : float = linear_to_db(0.8)
 	if sfxMuted: 
 		vol = linear_to_db(0)
 	setSFXVol(vol)
-	saveScore()
+	saveSettings()
+	
 	
 func setControls(hold:bool):
 	holdControls = hold
 	on_controls_changed.emit(holdControls)
-	saveScore()
+	saveSettings()
+	
 func _on_music_mute_toggled(toggled_on: bool) -> void:
 	setMusicMuted(toggled_on)
 
@@ -284,9 +336,14 @@ func showAchievements():
 		Logging.logMessage("Showing achievements")
 		achievementsClient.show_achievements()
 
-func _checkLevelAchievement(levelName:String):
-	if achievementsClient and achievementsCache.size()>0 and highScores[levelName] >= 20:
-		var achievementNum = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(levelName))
+
+		
+		
+#Should probably do something like save achievement unlocks and progress locally, 
+#so we can instantly unlock things if players authenticate after playing for a while?
+func unlock_achievement(achievementName:String):
+	if userAuthenticated and achievementsClient and achievementsCache.size()>0:
+		var achievementNum = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(achievementName))
 		var ach: PlayGamesAchievement = achievementsCache[achievementNum]
 		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED: 
 			Logging.warn("Score is high enough for achievement! Unlocking achievement " + ach.achievement_name)
@@ -348,7 +405,9 @@ func _on_player_score_loaded(leaderboard_id: String, score: PlayGamesLeaderboard
 	elif highScores[leaderboard.display_name] > score.raw_score and score.raw_score > 0:
 		Logging.warn("Found higher highscore in local save! submitting score of " + str(highScores[leaderboard.display_name]) + " to leaderboard " + leaderboard.display_name)
 		leaderboardsClient.submit_score(leaderboard_id,highScores[leaderboard.display_name])
-	_checkLevelAchievement(leaderboard.display_name)
+	if highScores[leaderboard.display_name] >= 20:
+		unlock_achievement(leaderboard.display_name)
+	
 		
 
 func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
@@ -366,5 +425,13 @@ func _on_achievements_loaded(achievements: Array[PlayGamesAchievement]) -> void:
 	Logging.logMessage("Achievements loaded!")
 	achievementsCache = achievements
 	for key in highScores:
-		_checkLevelAchievement(key)
+		if highScores[key] >= 20:
+			unlock_achievement(key)
 			
+func _on_viewport_size_changed():
+	var viewportSize:Vector2 = get_viewport().size
+	Logging.logMessage("Viewport size: " + str(get_viewport().size))
+	if viewportSize.x > viewportSize.y:
+		viewMode = ViewportMode.LANDSCAPE
+	else:
+		viewMode = ViewportMode.PORTRAIT
