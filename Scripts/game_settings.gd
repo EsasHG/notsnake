@@ -347,14 +347,17 @@ func unlock_achievement(achievementName:String):
 	if userAuthenticated and achievementsClient and achievementsCache.size()>0:
 		var ach: PlayGamesAchievement = _get_achievement(achievementName)
 		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED: 
-			Logging.warn("Score is high enough for achievement! Unlocking achievement " + ach.achievement_name)
+			Logging.logMessage("Score is high enough for achievement! Unlocking achievement " + ach.achievement_name)
 			achievementsClient.unlock_achievement(ach.achievement_id)
 		else:
 			Logging.logMessage("Score is high enough for achievement, and achievement is already unlocked! " + ach.achievement_name)
 
 func increment_achievement(achievementName:String, amount:int):
-	var ach:PlayGamesAchievement = _get_achievement(achievementName)
-	achievementsClient.increment_achievement(ach.achievement_id, amount)
+	if userAuthenticated and achievementsClient and achievementsCache.size()>0:
+		var ach:PlayGamesAchievement = _get_achievement(achievementName)
+		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED:
+			Logging.logMessage("Incrementing achievement " + ach.achievement_name)
+			achievementsClient.increment_achievement(ach.achievement_id, amount)
 	
 func _on_user_authenticated(is_authenticated: bool) -> void:
 	if is_authenticated:
