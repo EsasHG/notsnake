@@ -83,9 +83,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -199.0
-offset_top = -120.0
+offset_top = -214.0
 offset_right = 199.0
-offset_bottom = -70.0
+offset_bottom = -164.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
@@ -165,40 +165,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="LevelSelectScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelectScreen"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -5.0
-offset_bottom = 5.0
+offset_top = -32.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="LevelSelectScreen/VBoxContainer"]
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yhxw7")
 
-[node name="LevelButtons" type="HFlowContainer" parent="LevelSelectScreen/PanelContainer"]
+[node name="LevelButtons" type="HFlowContainer" parent="LevelSelectScreen/VBoxContainer/PanelContainer"]
 layout_mode = 2
 alignment = 1
 last_wrap_alignment = 2
 
-[node name="ButtonContainer" type="HBoxContainer" parent="LevelSelectScreen"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -199.0
-offset_top = -120.0
-offset_right = 199.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="ButtonContainer" type="HBoxContainer" parent="LevelSelectScreen/VBoxContainer"]
+layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Back" type="Button" parent="LevelSelectScreen/ButtonContainer"]
+[node name="Back" type="Button" parent="LevelSelectScreen/VBoxContainer/ButtonContainer"]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("3_f6ncm")
@@ -210,4 +202,4 @@ script = ExtResource("13_vtepg")
 [connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="HBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]
 [connection signal="pressed" from="SettingsContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="LevelSelectScreen/ButtonContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="LevelSelectScreen/VBoxContainer/ButtonContainer/Back" to="." method="_on_back_pressed"]

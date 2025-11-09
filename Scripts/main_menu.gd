@@ -12,7 +12,7 @@ var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
 #@onready var level_select_container: VBoxContainer = $LevelSelectContainer
 @onready var buttons: HBoxContainer = $HBoxContainer
 @onready var level_select_screen: Control = $LevelSelectScreen
-@onready var level_buttons: HFlowContainer = $LevelSelectScreen/PanelContainer/LevelButtons
+@onready var level_buttons: HFlowContainer = $LevelSelectScreen/VBoxContainer/PanelContainer/LevelButtons
 @onready var level_selected_sound: AudioStreamPlayer = get_tree().root.find_child("LevelSelected", true, false)
 
 @export var buttonTheme:Theme

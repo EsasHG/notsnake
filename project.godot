@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Loop Dog"
-run/main_scene="res://Scenes/SceneAgain.tscn"
+run/main_scene="uid://2rjb4w7s6uto"
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/use_filter=false
 boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
@@ -37,7 +37,7 @@ project/assembly_name="NotSnake"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotPlayGameServices/plugin.cfg")
+enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg")
 
 [global_group]
 

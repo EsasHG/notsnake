@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbpsuve1obkdr"]
+
+[ext_resource type="Script" uid="uid://0i3u717uyf8u" path="res://admob_test_scene.gd" id="1_o0upi"]
+[ext_resource type="Script" uid="uid://d2ekpef26q3vr" path="res://addons/AdmobPlugin/Admob.gd" id="2_iqevv"]
+
+[node name="AdmobTestScene" type="Node2D"]
+script = ExtResource("1_o0upi")
+
+[node name="Admob" type="Node" parent="."]
+script = ExtResource("2_iqevv")
+debug_application_id = "ca-app-pub-3940256099942544~3347511713"
+debug_banner_id = "ca-app-pub-3940256099942544/9214589741"
+debug_interstitial_id = "ca-app-pub-3940256099942544/1033173712"
+debug_rewarded_id = "ca-app-pub-3940256099942544/5224354917"
+debug_rewarded_interstitial_id = "ca-app-pub-3940256099942544/5354046379"
+metadata/_custom_type_script = "uid://d2ekpef26q3vr"
+
+[node name="Banner" type="Button" parent="."]
+offset_left = 400.0
+offset_top = 262.0
+offset_right = 465.0
+offset_bottom = 293.0
+text = "Banner"
+
+[node name="Interstitial" type="Button" parent="."]
+offset_left = 101.0
+offset_top = 136.0
+offset_right = 190.0
+offset_bottom = 167.0
+text = "Interstitial
+"
+
+[node name="Rewards" type="Button" parent="."]
+offset_left = 273.0
+offset_top = 143.0
+offset_right = 348.0
+offset_bottom = 174.0
+text = "Rewards
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 214.0
+offset_top = 54.0
+offset_right = 264.0
+offset_bottom = 94.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Gold: "
+
+[node name="amount" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="initialization_completed" from="Admob" to="." method="_on_admob_initialization_completed"]
+[connection signal="rewarded_ad_user_earned_reward" from="Admob" to="." method="_on_admob_rewarded_ad_user_earned_reward"]
+[connection signal="pressed" from="Banner" to="." method="_on_banner_pressed"]
+[connection signal="pressed" from="Interstitial" to="." method="_on_interstitial_pressed"]
+[connection signal="pressed" from="Rewards" to="." method="_on_rewards_pressed"]
