@@ -38,9 +38,9 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_yr1h0")
 [node name="ScoreLabels" type="VBoxContainer" parent="."]
 layout_mode = 1
 offset_left = 40.0
-offset_top = 40.0
+offset_top = 110.0
 offset_right = 224.0
-offset_bottom = 182.0
+offset_bottom = 252.0
 
 [node name="ScoreLabel" type="Label" parent="ScoreLabels"]
 layout_mode = 2

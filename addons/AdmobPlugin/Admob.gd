@@ -763,7 +763,6 @@ func _on_tracking_authorization_denied() -> void:
 static func log_error(a_description: String) -> void:
 	push_error(a_description)
 
-
 static func log_warn(a_description: String) -> void:
 	push_warning(a_description)
 

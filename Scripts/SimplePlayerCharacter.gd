@@ -100,7 +100,7 @@ func _process(delta: float) -> void:
 	#Player has to move and rotate before the sprites so we don't override their global rotation by rotating the player. 
 	move_local_y(delta*MOVE_SPEED*OVERALL_SPEED)
 	
-	var pos = global_position
+	var pos = position
 	var left = transform.x*dir
 	
 	prevLeft = prevLeft * dir * prevDir
@@ -121,10 +121,13 @@ func _process(delta: float) -> void:
 			
 		else:
 			s = segmentSprites.pop_back()
-			s.get_child(0).disabled = true
+			s.visible = true
+			s.get_child(0).disabled = true ##child 0 is collision shape
 			if(!hindLegs.is_playing()):
 				hindLegs.play()
 			
+			
+		#why this??
 		if(segmentSprites.size() > 10):
 			segmentSprites[10].get_child(0).disabled = false
 			
@@ -132,17 +135,18 @@ func _process(delta: float) -> void:
 		var newPos = rotationCenter - left.rotated(ang*t)*dist
 		var newRot = transform.x.rotated(ang*t)
 		
-		s.global_position = newPos
-		s.global_rotation = newRot.angle()
+		s.position = newPos
+		s.rotation = newRot.angle()
 		
 		segmentSprites.push_front(s)
 		
-		butt.global_position = segmentSprites.back().global_position
-		butt.global_rotation = segmentSprites.back().global_rotation
+		butt.position = segmentSprites.back().position
+		butt.rotation = segmentSprites.back().rotation
+		segmentSprites.back().visible = false
+		segmentSprites[segmentSprites.size()-2].visible = true
+	prevPositionsArr.push_front([position, rotation])
 	
-	prevPositionsArr.push_front([global_position, rotation])
-	
-	prevPos = global_position
+	prevPos = position
 	prevLeft = left
 	prevDir = dir
 

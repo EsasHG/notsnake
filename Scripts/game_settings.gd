@@ -9,11 +9,16 @@ signal on_controls_changed(holdControls:bool)
 
 @export var currentScore : int = 0 
 
+const SCENE_TRANSITION = preload("res://Scenes/Menus/scene_transition.tscn")
 @onready var gameOverScreen : PackedScene = preload("res://Scenes/GameOverScreen.tscn")
 @onready var playerChar : PackedScene = preload("res://Scenes/PlayerDog.tscn")
 @onready var pauseMenu : PackedScene = preload("res://Scenes/Menus/pause_menu.tscn")
 @onready var bubbleScene : PackedScene = preload("res://Scenes/BubbleCutscene.tscn")
 @onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
+
+@onready var mainGuiNode = get_tree().root.find_child("Gui", true, false)
+@onready var adManager : AdManager = get_tree().root.find_child("AdManager", true, false)
+
 enum ViewportMode {PORTRAIT, LANDSCAPE}
 var viewMode:ViewportMode = ViewportMode.LANDSCAPE
 
@@ -104,6 +109,7 @@ func levelSelect():
 	currentWorld = b
 	get_tree().root.add_child(b)
 	on_mainMenuOpened.emit()
+	adManager.setup_interstitial_ad()
 		
 func mainMenu():
 	if(currentWorld != null):
@@ -114,17 +120,27 @@ func mainMenu():
 	currentWorld = b
 	get_tree().root.add_child(b)
 	on_mainMenuOpened.emit()
+	adManager.setup_interstitial_ad()
 	
 func startGame():
-	if(currentWorld != null):
-		currentWorld.queue_free()
-	else:
-		Logging.logMessage("No existing world")
-	currentWorld = currentMap.Scene.instantiate()
-	get_tree().root.add_child(currentWorld)
-	on_gameBegin.emit.call_deferred()
-	pauseButton.visible = true
-	
+	var transition : SceneTransition = _create_transition()
+	transition.transition_in_finished.connect(func(): 
+		if(currentWorld != null):
+			currentWorld.queue_free()
+		else:
+			Logging.logMessage("No existing world")
+		currentWorld = currentMap.Scene.instantiate()
+		get_tree().root.add_child(currentWorld)
+		
+		get_tree().create_timer(1).timeout.connect(func(): 
+			transition.transition_out())
+		
+		)
+	transition.transition_out_finished.connect(func():
+		on_gameBegin.emit.call_deferred()
+		pauseButton.visible = true
+		)
+	adManager.setup_interstitial_ad()
 	
 func gameOver(won:bool):
 	increment_achievement("Hungry dog", currentScore)
@@ -154,15 +170,25 @@ func gameOver(won:bool):
 			var ach:PlayGamesAchievement = achievementsCache[achievementNum]
 			if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED:
 				achievementsClient.unlock_achievement(ach.achievement_id)
-	var ui = gameOverScreen.instantiate()
-	get_tree().root.find_child("Gui", true, false).add_child(ui)
-	ui.GameOver(won)
+				
 	
+	var ui : GameOverScreen = gameOverScreen.instantiate()
+	mainGuiNode.add_child(ui)
+	ui.GameOver(won)
+	if adManager.admob_initialized and adManager._can_show_interstitial_ad and adManager.interstitial_ad_loaded:
+		adManager.rounds_played+=1
+		get_tree().create_timer(0.6).timeout.connect(func(): 
+			adManager.show_interstitial_ad()
+			)
+		get_tree().create_timer(0.75).timeout.connect(ui.showButtons) # i migth want different wait times in the future
+	else: 
+		get_tree().create_timer(0.75).timeout.connect(ui.showButtons)
 	GameSettings.currentScore = 0
 		
 func increaseScore():
 	currentScore+=1
 		
+
 
 func saveScore():
 	Logging.logMessage("Saving!")
@@ -303,6 +329,13 @@ func setControls(hold:bool):
 	holdControls = hold
 	on_controls_changed.emit(holdControls)
 	saveSettings()
+	
+	
+	
+func _create_transition() -> SceneTransition:
+	var transition : SceneTransition = SCENE_TRANSITION.instantiate()
+	mainGuiNode.add_child.call_deferred(transition)
+	return transition
 	
 func _on_music_mute_toggled(toggled_on: bool) -> void:
 	setMusicMuted(toggled_on)

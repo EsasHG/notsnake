@@ -1,17 +1,22 @@
 extends Control
 
+class_name  GameOverScreen
+
 @export var bonusScreenThreshold = 30
 
-
 @onready var BGmusic = get_tree().root.find_child("BGMusic", true, false)
+@onready var button_container: HBoxContainer = $ButtonContainer
+
+@onready var visibleButtonYPos : float = button_container.position.y
+@onready var hiddenButtonYOffset : float = 150
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if GameSettings.userAuthenticated:
 		$ButtonContainer/Leaderboard.visible = true
 	else:
 		$ButtonContainer/Leaderboard.visible = false
-	pass
-	#GameOver(false)
+		
+	button_container.position.y = visibleButtonYPos+hiddenButtonYOffset
 	
 func SetScore():
 	Logging.logMessage("Setting Scores in game over screen!")
@@ -46,6 +51,12 @@ func GameOver(won:bool):
 		$GameOverTex.visible = true
 		
 	visible = true
+	
+func showButtons() -> void:
+	Logging.logMessage("Showing buttons in game over!")
+	var tween : Tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(button_container,"position:y",visibleButtonYPos,0.2)
 	
 func _on_leaderboard_pressed() -> void:	
 	GameSettings.showLeaderboard()

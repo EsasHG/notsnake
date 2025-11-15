@@ -24,11 +24,10 @@ Logging="*res://logging.gd"
 
 [display]
 
-window/size/viewport_width=500
-window/size/viewport_height=500
+window/size/viewport_width=720
+window/size/viewport_height=720
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
-window/stretch/scale=0.75
 window/handheld/orientation=6
 
 [dotnet]

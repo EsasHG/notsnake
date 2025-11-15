@@ -41,3 +41,9 @@ func _on_show_log_toggled(toggled_on: bool) -> void:
 
 func _on_visibility_changed():
 	googlePlayButtonsContainer.visible = GameSettings.userAuthenticated
+
+
+func _on_show_framerate_toggled(toggled_on: bool) -> void:
+	var node = get_tree().root.find_child("FPS_Tracker",true, false)
+	node.visible = toggled_on
+	pass # Replace with function body.

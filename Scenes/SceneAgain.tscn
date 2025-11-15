@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=16 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://3va5fhmx5hn4" path="res://Scenes/BubbleCutscene.tscn" id="1_6k2w8"]
+[ext_resource type="Script" uid="uid://brq0l2fygvy7n" path="res://Scenes/fps_tracker.gd" id="2_7fbxc"]
 [ext_resource type="Script" uid="uid://dk0kh7s0cylgw" path="res://Scripts/gameVisibleUI.gd" id="2_7xh38"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/AudioButton.gd" id="4_olukk"]
 [ext_resource type="PackedScene" uid="uid://cuenmscfk4h76" path="res://Scenes/Menus/LogWindow.tscn" id="5_35usu"]
@@ -31,9 +32,11 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="FPS_Tracker" type="Label" parent="CanvasLayer/Gui"]
+visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+script = ExtResource("2_7fbxc")
 
 [node name="AudioButtons" type="Control" parent="CanvasLayer/Gui"]
 visible = false
@@ -54,9 +57,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -153.0
-offset_top = 40.0
+offset_top = 100.0
 offset_right = -69.0
-offset_bottom = 95.0
+offset_bottom = 155.0
 grow_horizontal = 0
 size_flags_vertical = 3
 theme = ExtResource("6_verp3")
@@ -68,9 +71,9 @@ script = ExtResource("4_olukk")
 visible = false
 layout_mode = 0
 offset_left = 40.0
-offset_top = 40.0
+offset_top = 110.0
 offset_right = 275.0
-offset_bottom = 123.0
+offset_bottom = 193.0
 theme = ExtResource("6_verp3")
 theme_override_font_sizes/font_size = 60
 text = "Score: 0"
