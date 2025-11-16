@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://dw8vjc4lovnfv"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerSpawner.gd" id="1_iugb5"]
-[ext_resource type="Script" path="res://Scripts/FollowCamera.gd" id="2_0io2e"]
+[ext_resource type="Script" uid="uid://be5gopm2b1v5a" path="res://Scripts/PlayerSpawner.gd" id="1_iugb5"]
+[ext_resource type="Script" uid="uid://cgcpju57f0k1c" path="res://Scripts/FollowCamera.gd" id="2_0io2e"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_jsq6t"]
-[ext_resource type="Script" path="res://Scripts/DogCrackerSpawner.gd" id="3_5p3d3"]
+[ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/DogCrackerSpawner.gd" id="3_5p3d3"]
 [ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://Scenes/bench.tscn" id="4_4y7p2"]
 [ext_resource type="PackedScene" uid="uid://dnq1hhrmswccv" path="res://Scenes/chiweewee.tscn" id="10_1andm"]
 [ext_resource type="PackedScene" uid="uid://c0h220kvrr0mb" path="res://Scenes/angry_dog.tscn" id="11_lqxm4"]
@@ -15,7 +15,7 @@ position = Vector2(-722, 263)
 script = ExtResource("1_iugb5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-917, 318)
+position = Vector2(-722, 263)
 limit_left = -1303
 limit_top = -10
 limit_right = -107

@@ -17,7 +17,7 @@ debug_rewarded_interstitial_id = "ca-app-pub-3940256099942544/5354046379"
 metadata/_custom_type_script = "uid://d2ekpef26q3vr"
 
 [node name="Interstitial Ad Timer" type="Timer" parent="."]
-wait_time = 250.0
+wait_time = 180.0
 one_shot = true
 ignore_time_scale = true
 

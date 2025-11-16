@@ -6,6 +6,8 @@ signal on_gameBegin()
 signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
 signal on_controls_changed(holdControls:bool)
+const AD_MANAGER = preload("res://Scenes/AdManager.tscn")
+const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 
 @export var currentScore : int = 0 
 
@@ -17,7 +19,8 @@ const SCENE_TRANSITION = preload("res://Scenes/Menus/scene_transition.tscn")
 @onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
 
 @onready var mainGuiNode = get_tree().root.find_child("Gui", true, false)
-@onready var adManager : AdManager = get_tree().root.find_child("AdManager", true, false)
+var adManager : AdManager
+var billingManager : BillingManager
 
 enum ViewportMode {PORTRAIT, LANDSCAPE}
 var viewMode:ViewportMode = ViewportMode.LANDSCAPE
@@ -67,6 +70,13 @@ func _ready() -> void:
 func doDeferredSetup():
 	if(currentWorld==null):
 		currentWorld = get_tree().root.find_child("BubbleCutscene",true,false)
+		
+	adManager = AD_MANAGER.instantiate()
+	get_tree().root.call_deferred("add_child", adManager)
+	
+	billingManager = BILLING_MANAGER.instantiate()
+	get_tree().root.call_deferred("add_child", billingManager)
+	
 	
 	var button : Button = get_tree().root.find_child("MusicMute", true, false)
 	if(is_instance_valid(button)):
@@ -99,7 +109,10 @@ func doDeferredSetup():
 		leaderboardsClient = null
 		achievementsClient = null
 		
+	var scene_transition:SceneTransition = get_tree().root.find_child("SceneTransition",true,false)
 		
+	get_tree().create_timer(1.5).timeout.connect(func(): scene_transition.transition_out())
+	
 func levelSelect():
 	if(currentWorld != null):
 		currentWorld.queue_free()
@@ -109,7 +122,8 @@ func levelSelect():
 	currentWorld = b
 	get_tree().root.add_child(b)
 	on_mainMenuOpened.emit()
-	adManager.setup_interstitial_ad()
+	if adManager:
+		adManager.setup_interstitial_ad()
 		
 func mainMenu():
 	if(currentWorld != null):
@@ -120,7 +134,8 @@ func mainMenu():
 	currentWorld = b
 	get_tree().root.add_child(b)
 	on_mainMenuOpened.emit()
-	adManager.setup_interstitial_ad()
+	if adManager:
+		adManager.setup_interstitial_ad()
 	
 func startGame():
 	var transition : SceneTransition = _create_transition()
@@ -133,14 +148,17 @@ func startGame():
 		get_tree().root.add_child(currentWorld)
 		
 		get_tree().create_timer(1).timeout.connect(func(): 
-			transition.transition_out())
+			transition.transition_out()
+			on_gameBegin.emit.call_deferred()
+			)
 		
 		)
-	transition.transition_out_finished.connect(func():
-		on_gameBegin.emit.call_deferred()
-		pauseButton.visible = true
-		)
-	adManager.setup_interstitial_ad()
+	#transition.transition_out_finished.connect(func():
+		#on_gameBegin.emit.call_deferred()
+		#pauseButton.visible = true
+		#)
+	if adManager:
+		adManager.setup_interstitial_ad()
 	
 func gameOver(won:bool):
 	increment_achievement("Hungry dog", currentScore)
@@ -175,14 +193,17 @@ func gameOver(won:bool):
 	var ui : GameOverScreen = gameOverScreen.instantiate()
 	mainGuiNode.add_child(ui)
 	ui.GameOver(won)
-	if adManager.admob_initialized and adManager._can_show_interstitial_ad and adManager.interstitial_ad_loaded:
+	if adManager:
 		adManager.rounds_played+=1
-		get_tree().create_timer(0.6).timeout.connect(func(): 
-			adManager.show_interstitial_ad()
-			)
-		get_tree().create_timer(0.75).timeout.connect(ui.showButtons) # i migth want different wait times in the future
+		if adManager.admob_initialized and adManager._can_show_interstitial_ad and adManager.interstitial_ad_loaded:
+			get_tree().create_timer(0.6).timeout.connect(func(): 
+				adManager.show_interstitial_ad()
+				)
+			get_tree().create_timer(0.75).timeout.connect(ui.showButtons) # i migth want different wait times in the future
+		else: 
+			get_tree().create_timer(0.3).timeout.connect(ui.showButtons)
 	else: 
-		get_tree().create_timer(0.75).timeout.connect(ui.showButtons)
+		get_tree().create_timer(0.3).timeout.connect(ui.showButtons)
 	GameSettings.currentScore = 0
 		
 func increaseScore():

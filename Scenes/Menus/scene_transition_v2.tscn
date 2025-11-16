@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://gsu5a1hu0rjf"]
+[gd_scene load_steps=5 format=3 uid="uid://d3b2ntiks10q5"]
 
-[ext_resource type="Script" uid="uid://c88hm3dixahy8" path="res://scene_transition.gd" id="1_qbdc5"]
-[ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="2_p0jsr"]
-[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_a84u6"]
+[ext_resource type="Script" uid="uid://c88hm3dixahy8" path="res://scene_transition.gd" id="1_cr6kr"]
+[ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="2_pmbux"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_jk4pa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5p7fk"]
 bg_color = Color(0, 0, 0, 1)
@@ -14,33 +14,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_qbdc5")
+script = ExtResource("1_cr6kr")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -723.0
+offset_right = -723.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5p7fk")
 
 [node name="Control" type="Control" parent="Panel"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -150.0
-offset_top = -75.0
-offset_right = -150.0
-offset_bottom = -75.0
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = 61.0
+offset_right = -60.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.75, 0.75)
 
-[node name="BubbleDog" parent="Panel/Control" instance=ExtResource("2_p0jsr")]
+[node name="BubbleDog" parent="Panel/Control" instance=ExtResource("2_pmbux")]
 OVERALL_SPEED = 1.1
 
 [node name="Label" type="Label" parent="Panel"]
@@ -56,6 +58,6 @@ offset_right = 65.5
 offset_bottom = -102.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("3_a84u6")
+theme = ExtResource("3_jk4pa")
 text = "Loading...
 "

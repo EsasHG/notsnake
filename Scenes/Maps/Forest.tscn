@@ -1,13 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://dxkydv08bbemt"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerSpawner.gd" id="1_k5m1j"]
-[ext_resource type="Script" path="res://Scripts/FollowCamera.gd" id="2_nk4kc"]
+[ext_resource type="Script" uid="uid://be5gopm2b1v5a" path="res://Scripts/PlayerSpawner.gd" id="1_k5m1j"]
+[ext_resource type="Script" uid="uid://cgcpju57f0k1c" path="res://Scripts/FollowCamera.gd" id="2_nk4kc"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="3_r7tox"]
-[ext_resource type="Script" path="res://Scripts/DogCrackerSpawner.gd" id="4_0dh7j"]
+[ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/DogCrackerSpawner.gd" id="4_0dh7j"]
 [ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/fountain.tscn" id="5_ef7ge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k13ou"]
-size = Vector2(1980, 323.5)
+size = Vector2(1980, 163.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xehlq"]
 size = Vector2(261, 1561)
@@ -19,10 +19,10 @@ script = ExtResource("1_k5m1j")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.1, 1.1)
-limit_left = -800
-limit_top = -625
-limit_right = 800
-limit_bottom = 625
+limit_left = -900
+limit_top = -710
+limit_right = 900
+limit_bottom = 710
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
@@ -37,25 +37,25 @@ texture = ExtResource("3_r7tox")
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="TopWall" type="Area2D" parent="Walls" groups=["Dangers"]]
-position = Vector2(0, -811)
+position = Vector2(0, -828)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
 shape = SubResource("RectangleShape2D_k13ou")
 
 [node name="BottomWall" type="Area2D" parent="Walls" groups=["Dangers"]]
-position = Vector2(0, 805)
+position = Vector2(0, 826)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
 shape = SubResource("RectangleShape2D_k13ou")
 
 [node name="RightWall" type="Area2D" parent="Walls" groups=["Dangers"]]
-position = Vector2(951, 0)
+position = Vector2(1075, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
 shape = SubResource("RectangleShape2D_xehlq")
 
 [node name="LeftWall" type="Area2D" parent="Walls" groups=["Dangers"]]
-position = Vector2(-957, 0)
+position = Vector2(-1075, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
 shape = SubResource("RectangleShape2D_xehlq")

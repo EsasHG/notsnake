@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://di83hh7jce01j"]
+
+[ext_resource type="Script" uid="uid://so22cqtbwsq6" path="res://Scripts/billing_manager.gd" id="1_wqdxx"]
+
+[node name="BillingManager" type="Node2D"]
+script = ExtResource("1_wqdxx")

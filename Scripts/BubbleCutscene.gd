@@ -29,14 +29,19 @@ func _ready() -> void:
 	GameSettings.on_gameBegin.connect(queue_free)
 	if(skipEntireCutscene):
 		showMenu()
-	else:
-		activeBubble.visible = true
-		var tween = get_tree().create_tween()
-		activeBubbleTween = tween
-		tween.tween_property(activeBubble, "modulate:a", 1, 0.3)
-		tween.tween_callback(bubbleOut)
 
-	
+func startBubbleCutscene():
+	if not skipEntireCutscene:
+		activeBubbleTimer = get_tree().create_timer(1)
+		activeBubbleTimer.timeout.connect(func():
+			activeBubble.visible = true
+			var tween = get_tree().create_tween()
+			activeBubbleTween = tween
+			tween.tween_property(activeBubble, "modulate:a", 1, 0.3)
+			tween.tween_callback(bubbleOut)
+		)
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if(Input.is_action_just_pressed("Press")):

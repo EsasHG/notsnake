@@ -17,6 +17,7 @@ class_name PlayerDog
 @onready var segmentParent : Node2D = Node2D.new()
 @onready var hindLegs = find_child("Legs_back", true, false)
 @onready var butt = $Butt
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var prevPositionsArr = []
 
@@ -29,9 +30,7 @@ var prevDir : int = -1
 
 var segmentSprites : Array[Node2D]
 var canAddSprites = true
-var showFps = false
 
-var frameDelay = 1
 var segmentsPerSection = 20
 var move = true
 var rotateRight = false
@@ -55,7 +54,7 @@ func _ready() -> void:
 	GameSettings.on_pickupSpawned.connect(SetArrowTarget)
 	GameSettings.on_controls_changed.connect(_on_controls_changed)
 	GameSettings.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
-	
+	visibility_changed.connect(func(): segmentParent.visible =visible) 
 	
 func add_sprite():
 	if(canAddSprites):
@@ -107,7 +106,6 @@ func _process(delta: float) -> void:
 	var ang = left.angle_to(prevLeft)
 	var dist = left.project(pos-prevPos).distance_to(prevPos-pos)/sin(ang)*dir
 
-	
 	var rotationCenter = pos+(left*dist) 
 	timer+=delta
 	while timer > spawnTime:
@@ -164,8 +162,6 @@ func _on_area_entered(area: Area2D) -> void:
 		if(playerControl == false):
 			return	
 		move = false
-		var camera = get_tree().root.find_child("Camera2D", true, false)
-		camera.reparent(get_tree().root.find_child("World", true, false))
 		playerControl = false
 		segmentParent.queue_free()
 		GameSettings.unlock_achievement("Wi(e)nner")
@@ -224,15 +220,7 @@ func _on_area_entered(area: Area2D) -> void:
 			area.queue_free()
 			Logging.logMessage("Currrent Score: " + var_to_str(GameSettings.currentScore))
 			
-func grabCamera():	
-	var camera = get_tree().root.find_child("Camera2D", true, false)
-	camera.reparent(self)
-	var tween = get_tree().create_tween()
-	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.tween_property(camera, "position", Vector2(0,0), 0.5)
-	tween.tween_callback(func(): playerControl = true)
-	
-	
+			
 func bark():
 	$Head/BarkSound.pitch_scale = randf_range(0.9,1.1)
 	$Head/BarkSound.play()

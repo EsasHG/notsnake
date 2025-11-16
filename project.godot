@@ -36,7 +36,7 @@ project/assembly_name="NotSnake"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg")
+enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/GodotGooglePlayBilling/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg")
 
 [global_group]
 

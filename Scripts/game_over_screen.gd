@@ -65,13 +65,14 @@ func _on_leaderboard_pressed() -> void:
 
 func _on_retry_button_pressed() -> void:
 	Logging.logMessage("Retry Button Pressed!")
-	visible = false
+	
 	
 	var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
 	loseMusic.stop()
 	BGmusic.play()
 	GameSettings.startGame()
-	queue_free()
+	GameSettings.on_gameBegin.connect(queue_free)
+	#queue_free()
 
 
 func _on_level_select_button_pressed() -> void:
