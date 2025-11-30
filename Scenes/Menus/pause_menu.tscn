@@ -1,9 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0eb6heqgmexf"]
+[gd_scene load_steps=6 format=3 uid="uid://d0eb6heqgmexf"]
 
 [ext_resource type="Script" uid="uid://bksp4hitp0rwk" path="res://Scripts/pause_menu.gd" id="1_ekn4r"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="1_vms7i"]
 [ext_resource type="PackedScene" uid="uid://padbn8hpbpo6" path="res://Scenes/Menus/Settings.tscn" id="2_tf3q2"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/AudioButton.gd" id="4_yeo1y"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yeo1y"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2
@@ -24,6 +36,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_yeo1y")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 1

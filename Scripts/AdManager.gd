@@ -9,9 +9,13 @@ var admob_initialized:bool = false
 var _can_show_interstitial_ad : bool = false
 var rounds_between_ad:int = 3
 var rounds_played:int = 0
+
 func _ready() -> void:
-	admob.initialize()
+	pass
 	
+
+func initialize() -> void:
+	admob.initialize()
 	interstitial_ad_timer.timeout.connect(func(): 
 		Logging.logMessage("Can show ad!")
 		_can_show_interstitial_ad = true
@@ -25,13 +29,18 @@ func setup_banner_ad() -> void:
 		#admob.set_banner_size(LoadAdRequest.AdSize.BANNER)
 		admob.set_banner_size(LoadAdRequest.AdSize.FULL_BANNER)
 		admob.load_banner_ad()
-		
+
+func remove_banner_ad() -> void:
+	if admob_initialized:
+		admob.hide_banner_ad()
+		admob.remove_banner_ad()
+
 func _on_admob_initialization_completed(_status_data: InitializationStatus) -> void:
 	admob_initialized = true
 	setup_banner_ad()
 	setup_interstitial_ad()
-	Logging.logMessage("Loading consent form")
-	admob.load_consent_form()
+	#Logging.logMessage("Loading consent form")
+	#admob.load_consent_form()
 	
 func _on_admob_banner_ad_failed_to_load(_ad_id: String, error_data: LoadAdError) -> void:
 	Logging.error("Banner ad failed to load! " + error_data.get_response_info())

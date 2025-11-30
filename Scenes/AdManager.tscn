@@ -14,6 +14,7 @@ debug_banner_id = "ca-app-pub-3940256099942544/9214589741"
 debug_interstitial_id = "ca-app-pub-3940256099942544/1033173712"
 debug_rewarded_id = "ca-app-pub-3940256099942544/5224354917"
 debug_rewarded_interstitial_id = "ca-app-pub-3940256099942544/5354046379"
+real_application_id = "ca-app-pub-1333268640689716~3036536539"
 metadata/_custom_type_script = "uid://d2ekpef26q3vr"
 
 [node name="Interstitial Ad Timer" type="Timer" parent="."]

@@ -6,8 +6,9 @@ signal on_gameBegin()
 signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
 signal on_controls_changed(holdControls:bool)
-const AD_MANAGER = preload("res://Scenes/AdManager.tscn")
+
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
+const AD_MANAGER = preload("uid://ck01dnrayeqyd")
 
 @export var currentScore : int = 0 
 
@@ -53,7 +54,6 @@ func _enter_tree() -> void:
 		
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#PlayGamesSDK.initialize(this)
 	loadScore()	
 	
 	if not loadSettings():
@@ -71,11 +71,12 @@ func doDeferredSetup():
 	if(currentWorld==null):
 		currentWorld = get_tree().root.find_child("BubbleCutscene",true,false)
 		
-	adManager = AD_MANAGER.instantiate()
-	get_tree().root.call_deferred("add_child", adManager)
+	adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
+#	get_tree().root.call_deferred("add_child", adManager)
 	
 	billingManager = BILLING_MANAGER.instantiate()
-	get_tree().root.call_deferred("add_child", billingManager)
+	billingManager.loading_finished.connect(_on_billing_manager_loading_finished)
+	get_tree().root.find_child("Gui",true,false).call_deferred("add_child", billingManager)
 	
 	
 	var button : Button = get_tree().root.find_child("MusicMute", true, false)
@@ -122,10 +123,13 @@ func levelSelect():
 	currentWorld = b
 	get_tree().root.add_child(b)
 	on_mainMenuOpened.emit()
-	if adManager:
+	if adManager && adManager.is_node_ready() && adManager.admob_initialized:
 		adManager.setup_interstitial_ad()
 		
 func mainMenu():
+	
+	#TODO: Pause button dissapears when going back to the menu from a level, then back into a level
+	#not sure there's anything here doing it, just needed to write it somewhere.
 	if(currentWorld != null):
 		currentWorld.queue_free()
 	var b = bubbleScene.instantiate()
@@ -134,7 +138,7 @@ func mainMenu():
 	currentWorld = b
 	get_tree().root.add_child(b)
 	on_mainMenuOpened.emit()
-	if adManager:
+	if adManager && adManager.is_node_ready() && adManager.admob_initialized:
 		adManager.setup_interstitial_ad()
 	
 func startGame():
@@ -157,7 +161,7 @@ func startGame():
 		#on_gameBegin.emit.call_deferred()
 		#pauseButton.visible = true
 		#)
-	if adManager:
+	if adManager && adManager.is_node_ready() && adManager.admob_initialized:
 		adManager.setup_interstitial_ad()
 	
 func gameOver(won:bool):
@@ -345,13 +349,15 @@ func setSFXMuted(muted:bool):
 	setSFXVol(vol)
 	saveSettings()
 	
-	
 func setControls(hold:bool):
 	holdControls = hold
 	on_controls_changed.emit(holdControls)
 	saveSettings()
 	
-	
+func remove_all_ads():
+	adManager.remove_banner_ad()
+	adManager.queue_free()
+	adManager = null
 	
 func _create_transition() -> SceneTransition:
 	var transition : SceneTransition = SCENE_TRANSITION.instantiate()
@@ -493,3 +499,7 @@ func _on_viewport_size_changed():
 		viewMode = ViewportMode.LANDSCAPE
 	else:
 		viewMode = ViewportMode.PORTRAIT
+
+func _on_billing_manager_loading_finished() -> void:
+	if adManager:
+		adManager.initialize() 

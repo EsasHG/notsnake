@@ -1,6 +1,214 @@
-[gd_scene load_steps=2 format=3 uid="uid://di83hh7jce01j"]
+[gd_scene load_steps=4 format=3 uid="uid://di83hh7jce01j"]
 
 [ext_resource type="Script" uid="uid://so22cqtbwsq6" path="res://Scripts/billing_manager.gd" id="1_wqdxx"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_qogck"]
 
-[node name="BillingManager" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qogck"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="BillingManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 2
 script = ExtResource("1_wqdxx")
+
+[node name="Ad_removal_popup" type="Panel" parent="."]
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ad_removal_popup"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.5
+offset_top = -20.0
+offset_right = 93.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="Ad_removal_popup/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_qogck")
+text = "Tired of ads?"
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="Ad_removal_popup/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_qogck")
+text = "Purchase ad removal"
+autowrap_mode = 3
+
+[node name="PriceLabel" type="Label" parent="Ad_removal_popup/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_qogck")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Ad_removal_popup/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button_Yes" type="Button" parent="Ad_removal_popup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("2_qogck")
+text = "Yes pls"
+
+[node name="Button_No" type="Button" parent="Ad_removal_popup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_qogck")
+text = "No thx
+"
+
+[node name="Purchased_popup" type="Panel" parent="."]
+visible = false
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Purchased_popup"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.5
+offset_top = -20.0
+offset_right = 93.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="Purchased_popup/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_qogck")
+text = "Thank you!"
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="Purchased_popup/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_qogck")
+text = "You will no longer see ads"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Purchased_popup/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button_Close_Purchased" type="Button" parent="Purchased_popup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_qogck")
+text = "Close"
+
+[node name="Error_popup" type="Panel" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Error_popup"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.5
+offset_top = -20.0
+offset_right = 93.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="Error_popup/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_qogck")
+text = "Something went wrong with your purchase"
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="Error_popup/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_qogck")
+text = "Try again?"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Error_popup/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button_Retry_Purchase" type="Button" parent="Error_popup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_qogck")
+text = "Retry"
+
+[node name="Button_Close_Error" type="Button" parent="Error_popup/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("2_qogck")
+text = "Close"
+
+[connection signal="pressed" from="Ad_removal_popup/VBoxContainer/HBoxContainer/Button_Yes" to="." method="_on_button_yes_pressed"]
+[connection signal="pressed" from="Ad_removal_popup/VBoxContainer/HBoxContainer/Button_No" to="." method="_on_button_no_pressed"]
+[connection signal="pressed" from="Purchased_popup/VBoxContainer/HBoxContainer/Button_Close_Purchased" to="." method="_on_button_close_purchased_pressed"]
+[connection signal="pressed" from="Error_popup/VBoxContainer/HBoxContainer/Button_Retry_Purchase" to="." method="_on_button_retry_purchase_pressed"]
+[connection signal="pressed" from="Error_popup/VBoxContainer/HBoxContainer/Button_Close_Error" to="." method="_on_button_close_error_pressed"]
