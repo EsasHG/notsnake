@@ -2,7 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://dw8vjc4lovnfv" path="res://Scenes/Maps/Small_map.tscn" id="1_rw4hu"]
 [ext_resource type="Texture2D" uid="uid://n8g26ey6h3uc" path="res://Assets/Icons/Small_Map.png" id="2_4vfcv"]
-[ext_resource type="Script" path="res://Scripts/Map.gd" id="3_5w18m"]
+[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="3_5w18m"]
+
 
 [resource]
 script = ExtResource("3_5w18m")

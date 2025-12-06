@@ -12,7 +12,7 @@ class_name PlayerDog
 
 @onready var prevPos : Vector2 = position
 @onready var sprite = preload("res://Assets/Dogs/OutlinedDog/BODY_SEGMENT_C.png")
-@onready var segment = preload("res://Scenes/DogSegment.tscn")
+@onready var segment = preload("uid://b64vm8vof02aj")
 @onready var pickupSpawner : PickupSpawner = get_tree().root.find_child("PickupSpawner", true, false)
 @onready var segmentParent : Node2D = Node2D.new()
 @onready var hindLegs = find_child("Legs_back", true, false)

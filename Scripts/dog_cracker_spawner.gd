@@ -1,9 +1,9 @@
 extends Node2D
 class_name PickupSpawner
 
-@onready var toy = preload("res://Scenes/DogToy.tscn")
-@onready var bone = preload("res://Scenes/DogBone.tscn")
-@onready var present = preload("res://Scenes/present.tscn")
+@onready var toy = preload("uid://ctigc12c0n7it")
+@onready var bone = preload("uid://c7508ame74p7h")
+@onready var present = preload("uid://b4ksiqva2w1ll")
 @onready var pickupPoints : Array[Node] = $PickupPoints.get_children()
 var prevPoint : int = 14
 var currentPickup:Area2D

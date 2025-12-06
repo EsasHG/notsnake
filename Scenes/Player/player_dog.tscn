@@ -1,29 +1,29 @@
 [gd_scene load_steps=39 format=3 uid="uid://bkjd5mneny7c1"]
 
-[ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="1_f7yc0"]
-[ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/Dogs/OutlinedDog/TAIL_C.png" id="2_c2s43"]
-[ext_resource type="Texture2D" uid="uid://bid4i25qetdmx" path="res://Assets/Dogs/TAILS.png" id="3_d8esg"]
-[ext_resource type="Texture2D" uid="uid://be7ausi6tfjmr" path="res://Assets/Dogs/NewDog/newdog_LegsBACK_sheet_C.png" id="4_mgnkb"]
-[ext_resource type="AudioStream" uid="uid://bj3kggw0gs3xi" path="res://Assets/Sound/bark.wav" id="4_wxfsi"]
-[ext_resource type="Texture2D" uid="uid://cxm52e0c581yk" path="res://Assets/Dogs/cosmetics/hat_christmas.png" id="5_cvw6e"]
-[ext_resource type="Script" uid="uid://b78ceum26wnjq" path="res://Scripts/SimplePlayerCharacter.gd" id="5_q7dwm"]
-[ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="6_a0qte"]
-[ext_resource type="Texture2D" uid="uid://baisbs5c35f4g" path="res://Assets/Dogs/cosmetics/hat_cowboy.png" id="6_kak2d"]
-[ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="7_dffxg"]
-[ext_resource type="Texture2D" uid="uid://dvj0pjlmvqwve" path="res://Assets/Dogs/cosmetics/hat_crashdummyDot.png" id="7_te1u3"]
-[ext_resource type="Texture2D" uid="uid://bmdnyc2fq6qg7" path="res://Assets/Dogs/cosmetics/hat_helmet.png" id="8_jux0v"]
-[ext_resource type="Texture2D" uid="uid://bywajg5yonlif" path="res://Assets/UI/arrow.png" id="9_sxgt2"]
-[ext_resource type="Script" uid="uid://brb1sob6alono" path="res://Scenes/PausedInputBuffer.gd" id="15_6v1gi"]
+[ext_resource type="Script" uid="uid://b78ceum26wnjq" path="res://Scripts/simple_player_character.gd" id="1_hgq6l"]
+[ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="2_nccp2"]
+[ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="3_cyf8n"]
+[ext_resource type="AudioStream" uid="uid://bj3kggw0gs3xi" path="res://Assets/Sound/bark.wav" id="4_7e683"]
+[ext_resource type="Texture2D" uid="uid://cxm52e0c581yk" path="res://Assets/Dogs/cosmetics/hat_christmas.png" id="5_ddf6l"]
+[ext_resource type="Texture2D" uid="uid://baisbs5c35f4g" path="res://Assets/Dogs/cosmetics/hat_cowboy.png" id="6_82a65"]
+[ext_resource type="Texture2D" uid="uid://dvj0pjlmvqwve" path="res://Assets/Dogs/cosmetics/hat_crashdummyDot.png" id="7_105w1"]
+[ext_resource type="Texture2D" uid="uid://bmdnyc2fq6qg7" path="res://Assets/Dogs/cosmetics/hat_helmet.png" id="8_l1xol"]
+[ext_resource type="Texture2D" uid="uid://bywajg5yonlif" path="res://Assets/UI/arrow.png" id="9_50el2"]
+[ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="10_m7s8p"]
+[ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/Dogs/OutlinedDog/TAIL_C.png" id="11_ei6el"]
+[ext_resource type="Texture2D" uid="uid://bid4i25qetdmx" path="res://Assets/Dogs/TAILS.png" id="12_8os0a"]
+[ext_resource type="Texture2D" uid="uid://be7ausi6tfjmr" path="res://Assets/Dogs/NewDog/newdog_LegsBACK_sheet_C.png" id="13_pdohe"]
+[ext_resource type="Script" uid="uid://brb1sob6alono" path="res://Scripts/paused_input_buffer.gd" id="14_x26c4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7we7l"]
 size = Vector2(27, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_45bpw"]
-atlas = ExtResource("6_a0qte")
+atlas = ExtResource("2_nccp2")
 region = Rect2(43, 0, 43, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1v2bu"]
-atlas = ExtResource("6_a0qte")
+atlas = ExtResource("2_nccp2")
 region = Rect2(0, 0, 43, 37)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2kam3"]
@@ -41,23 +41,23 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dlucr"]
-atlas = ExtResource("7_dffxg")
+atlas = ExtResource("3_cyf8n")
 region = Rect2(0, 0, 32, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a0jc0"]
-atlas = ExtResource("7_dffxg")
+atlas = ExtResource("3_cyf8n")
 region = Rect2(32, 0, 32, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nqkaf"]
-atlas = ExtResource("7_dffxg")
+atlas = ExtResource("3_cyf8n")
 region = Rect2(64, 0, 32, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bgbr8"]
-atlas = ExtResource("7_dffxg")
+atlas = ExtResource("3_cyf8n")
 region = Rect2(96, 0, 32, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qjwsp"]
-atlas = ExtResource("7_dffxg")
+atlas = ExtResource("3_cyf8n")
 region = Rect2(128, 0, 32, 60)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rudug"]
@@ -88,27 +88,27 @@ radius = 16.0
 height = 42.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xmaxq"]
-atlas = ExtResource("3_d8esg")
+atlas = ExtResource("12_8os0a")
 region = Rect2(23, 0, 23, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bj3i6"]
-atlas = ExtResource("3_d8esg")
+atlas = ExtResource("12_8os0a")
 region = Rect2(46, 0, 23, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2afur"]
-atlas = ExtResource("3_d8esg")
+atlas = ExtResource("12_8os0a")
 region = Rect2(0, 0, 23, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yt3ar"]
-atlas = ExtResource("3_d8esg")
+atlas = ExtResource("12_8os0a")
 region = Rect2(46, 0, 23, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_taul4"]
-atlas = ExtResource("3_d8esg")
+atlas = ExtResource("12_8os0a")
 region = Rect2(69, 0, 23, 21)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3l62o"]
-atlas = ExtResource("3_d8esg")
+atlas = ExtResource("12_8os0a")
 region = Rect2(0, 0, 23, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4dxs5"]
@@ -144,23 +144,23 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4rppu"]
-atlas = ExtResource("4_mgnkb")
+atlas = ExtResource("13_pdohe")
 region = Rect2(0, 0, 32, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4layu"]
-atlas = ExtResource("4_mgnkb")
+atlas = ExtResource("13_pdohe")
 region = Rect2(32, 0, 32, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gjimy"]
-atlas = ExtResource("4_mgnkb")
+atlas = ExtResource("13_pdohe")
 region = Rect2(64, 0, 32, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7g5d7"]
-atlas = ExtResource("4_mgnkb")
+atlas = ExtResource("13_pdohe")
 region = Rect2(96, 0, 32, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4js1l"]
-atlas = ExtResource("4_mgnkb")
+atlas = ExtResource("13_pdohe")
 region = Rect2(128, 0, 32, 77)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d51rk"]
@@ -187,7 +187,7 @@ animations = [{
 }]
 
 [node name="PlayerDog" type="Area2D"]
-script = ExtResource("5_q7dwm")
+script = ExtResource("1_hgq6l")
 MOVE_SPEED = 300
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -207,7 +207,7 @@ sprite_frames = SubResource("SpriteFrames_rudug")
 frame_progress = 0.515546
 
 [node name="BarkSound" type="AudioStreamPlayer2D" parent="Head"]
-stream = ExtResource("4_wxfsi")
+stream = ExtResource("4_7e683")
 bus = &"SFX"
 
 [node name="Hats" type="Node2D" parent="Head"]
@@ -216,25 +216,25 @@ bus = &"SFX"
 visible = false
 z_index = 1
 position = Vector2(1, -17)
-texture = ExtResource("5_cvw6e")
+texture = ExtResource("5_ddf6l")
 
 [node name="HatCowboy" type="Sprite2D" parent="Head/Hats"]
 visible = false
 z_index = 1
 position = Vector2(1, -11)
-texture = ExtResource("6_kak2d")
+texture = ExtResource("6_82a65")
 
 [node name="HatCrashdummyDot" type="Sprite2D" parent="Head/Hats"]
 visible = false
 z_index = 1
 position = Vector2(-6, -6)
-texture = ExtResource("7_te1u3")
+texture = ExtResource("7_105w1")
 
 [node name="HatHelmet" type="Sprite2D" parent="Head/Hats"]
 visible = false
 z_index = 1
 position = Vector2(1, -4)
-texture = ExtResource("8_jux0v")
+texture = ExtResource("8_l1xol")
 
 [node name="ArrowHolder" type="Node2D" parent="Head"]
 visible = false
@@ -243,7 +243,7 @@ visible = false
 position = Vector2(1.88294e-13, 53)
 rotation = 1.5708
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("9_sxgt2")
+texture = ExtResource("9_50el2")
 
 [node name="Butt" type="Area2D" parent="."]
 position = Vector2(0, -27)
@@ -257,13 +257,13 @@ disabled = true
 [node name="ButtSprite" type="Sprite2D" parent="Butt"]
 z_index = 1
 texture_filter = 1
-texture = ExtResource("1_f7yc0")
+texture = ExtResource("10_m7s8p")
 
 [node name="Tail2" type="Sprite2D" parent="Butt/ButtSprite"]
 z_index = -2
 texture_filter = 1
 position = Vector2(0, -11)
-texture = ExtResource("2_c2s43")
+texture = ExtResource("11_ei6el")
 region_enabled = true
 region_rect = Rect2(7, 3, 6, 14)
 
@@ -284,6 +284,6 @@ frame_progress = 0.618145
 
 [node name="PausedInputBuffer" type="Node2D" parent="."]
 process_mode = 2
-script = ExtResource("15_6v1gi")
+script = ExtResource("14_x26c4")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
