@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://ck01dnrayeqyd"]
 
-[ext_resource type="Script" uid="uid://ccmc352d6i6js" path="res://Scripts/AdManager.gd" id="1_eyngg"]
+[ext_resource type="Script" uid="uid://ccmc352d6i6js" path="res://Scripts/ad_manager.gd" id="1_eyngg"]
 [ext_resource type="Script" uid="uid://d2ekpef26q3vr" path="res://addons/AdmobPlugin/Admob.gd" id="2_nuc1s"]
+
 
 [node name="AdManager" type="Node2D"]
 script = ExtResource("1_eyngg")

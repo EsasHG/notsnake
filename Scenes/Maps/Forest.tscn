@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://dxkydv08bbemt"]
 
-[ext_resource type="Script" uid="uid://be5gopm2b1v5a" path="res://Scripts/PlayerSpawner.gd" id="1_k5m1j"]
-[ext_resource type="Script" uid="uid://cgcpju57f0k1c" path="res://Scripts/FollowCamera.gd" id="2_nk4kc"]
+[ext_resource type="Script" uid="uid://be5gopm2b1v5a" path="res://Scripts/player_spawner.gd" id="1_k5m1j"]
+[ext_resource type="Script" uid="uid://cgcpju57f0k1c" path="res://Scripts/follow_camera.gd" id="2_nk4kc"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="3_r7tox"]
-[ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/DogCrackerSpawner.gd" id="4_0dh7j"]
-[ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/fountain.tscn" id="5_ef7ge"]
+[ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/dog_cracker_spawner.gd" id="4_0dh7j"]
+[ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/Obstacles/fountain.tscn" id="5_ef7ge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k13ou"]
 size = Vector2(1980, 163.375)

@@ -13,10 +13,10 @@ const AD_MANAGER = preload("uid://ck01dnrayeqyd")
 @export var currentScore : int = 0 
 
 const SCENE_TRANSITION = preload("res://Scenes/Menus/scene_transition.tscn")
-@onready var gameOverScreen : PackedScene = preload("res://Scenes/GameOverScreen.tscn")
-@onready var playerChar : PackedScene = preload("res://Scenes/PlayerDog.tscn")
+@onready var gameOverScreen : PackedScene = preload("uid://ck7vl8h740cpk")
+@onready var playerChar : PackedScene = preload("uid://bkjd5mneny7c1")
 @onready var pauseMenu : PackedScene = preload("res://Scenes/Menus/pause_menu.tscn")
-@onready var bubbleScene : PackedScene = preload("res://Scenes/BubbleCutscene.tscn")
+@onready var bubbleScene : PackedScene = preload("uid://3va5fhmx5hn4")
 @onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
 
 @onready var mainGuiNode = get_tree().root.find_child("Gui", true, false)

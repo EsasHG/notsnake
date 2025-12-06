@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://d3b2ntiks10q5"]
 
-[ext_resource type="Script" uid="uid://c88hm3dixahy8" path="res://scene_transition.gd" id="1_cr6kr"]
-[ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/PlayerDog.tscn" id="2_pmbux"]
+[ext_resource type="Script" uid="uid://c88hm3dixahy8" path="res://Scripts/scene_transition.gd" id="1_cr6kr"]
+[ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/Player/player_dog.tscn" id="2_pmbux"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_jk4pa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5p7fk"]

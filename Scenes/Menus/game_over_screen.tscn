@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://ck7vl8h740cpk"]
 
-[ext_resource type="Script" uid="uid://dt85v1n4h7vqg" path="res://Scripts/game_over_screen.gd" id="1_7tubc"]
-[ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="1_k4sjf"]
-[ext_resource type="Texture2D" uid="uid://c02fkdaroc7h7" path="res://Assets/UI/GAME_HIGHSCORE.png" id="3_cim2l"]
-[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/AudioButton.gd" id="4_ew8mo"]
-[ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="4_rde26"]
-[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="5_4fc7w"]
+[ext_resource type="Script" uid="uid://dt85v1n4h7vqg" path="res://Scripts/game_over_screen.gd" id="1_st1k0"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_3eorv"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="3_3eq00"]
+[ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="4_htq65"]
+[ext_resource type="Texture2D" uid="uid://c02fkdaroc7h7" path="res://Assets/UI/GAME_HIGHSCORE.png" id="5_j3nvf"]
+[ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="6_dgp11"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jx1af"]
 
@@ -21,7 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_7tubc")
+script = ExtResource("1_st1k0")
 
 [node name="WhiteBackgroundPanel" type="Panel" parent="."]
 z_index = -3
@@ -44,13 +44,13 @@ offset_bottom = 292.0
 
 [node name="ScoreLabel" type="Label" parent="ScoreLabels"]
 layout_mode = 2
-theme = ExtResource("5_4fc7w")
+theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 60
 text = "Score:"
 
 [node name="HighScoreLabel" type="Label" parent="ScoreLabels"]
 layout_mode = 2
-theme = ExtResource("5_4fc7w")
+theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 40
 text = "Best:"
 
@@ -73,37 +73,37 @@ alignment = 1
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("5_4fc7w")
+theme = ExtResource("2_3eorv")
 text = "Retry"
-script = ExtResource("4_ew8mo")
+script = ExtResource("3_3eq00")
 
 [node name="LevelSelectButton" type="Button" parent="ButtonContainer"]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("5_4fc7w")
+theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 23
 text = "Level 
 Select"
-script = ExtResource("4_ew8mo")
+script = ExtResource("3_3eq00")
 
 [node name="MainMenuButton" type="Button" parent="ButtonContainer"]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("5_4fc7w")
+theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 23
 text = "Main Menu"
-script = ExtResource("4_ew8mo")
+script = ExtResource("3_3eq00")
 
 [node name="Leaderboard" type="Button" parent="ButtonContainer"]
 visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("5_4fc7w")
+theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 19
 text = "Leaderboard"
-script = ExtResource("4_ew8mo")
+script = ExtResource("3_3eq00")
 
 [node name="GameOverTex" type="TextureRect" parent="."]
 z_index = -2
@@ -114,7 +114,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("1_k4sjf")
+texture = ExtResource("4_htq65")
 expand_mode = 1
 stretch_mode = 5
 
@@ -128,7 +128,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("3_cim2l")
+texture = ExtResource("5_j3nvf")
 expand_mode = 1
 stretch_mode = 5
 
@@ -142,7 +142,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_rde26")
+texture = ExtResource("6_dgp11")
 expand_mode = 1
 stretch_mode = 5
 

@@ -1,6 +1,6 @@
 extends Node2D
 
-var player: PackedScene = preload("res://Scenes/PlayerDog.tscn")
+var player: PackedScene = preload("uid://bkjd5mneny7c1")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var p : PlayerDog = player.instantiate()

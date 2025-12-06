@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://duteas65upb2"]
 
-[ext_resource type="Script" path="res://Scripts/MapScreenshotter.gd" id="1_fliql"]
+[ext_resource type="Script" uid="uid://bb10dd3rdiaqd" path="res://Scripts/map_screenshotter.gd" id="1_fliql"]
 [ext_resource type="PackedScene" uid="uid://tcsre6epm8ss" path="res://Scenes/Maps/Park_Map.tscn" id="2_iok1a"]
 [ext_resource type="PackedScene" uid="uid://d0lv3j2ywaltm" path="res://Scenes/Maps/Square_Map.tscn" id="3_s3aig"]
 [ext_resource type="PackedScene" uid="uid://dw8vjc4lovnfv" path="res://Scenes/Maps/Small_map.tscn" id="4_iqgwl"]
 [ext_resource type="PackedScene" uid="uid://bmtfcin4sha1p" path="res://Scenes/Maps/TutorialMap.tscn" id="5_yvmfn"]
+
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_fliql")
