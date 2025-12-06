@@ -96,15 +96,6 @@ theme_override_font_sizes/font_size = 23
 text = "Main Menu"
 script = ExtResource("4_ew8mo")
 
-[node name="Leaderboard" type="Button" parent="ButtonContainer"]
-visible = false
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-theme = ExtResource("5_4fc7w")
-theme_override_font_sizes/font_size = 19
-text = "Leaderboard"
-script = ExtResource("4_ew8mo")
-
 [node name="GameOverTex" type="TextureRect" parent="."]
 z_index = -2
 layout_mode = 1
@@ -149,4 +140,3 @@ stretch_mode = 5
 [connection signal="pressed" from="ButtonContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="ButtonContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]

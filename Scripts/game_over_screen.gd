@@ -11,11 +11,6 @@ class_name  GameOverScreen
 @onready var hiddenButtonYOffset : float = 150
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if GameSettings.userAuthenticated:
-		$ButtonContainer/Leaderboard.visible = true
-	else:
-		$ButtonContainer/Leaderboard.visible = false
-		
 	button_container.position.y = visibleButtonYPos+hiddenButtonYOffset
 	
 func SetScore():
@@ -27,11 +22,6 @@ func SetScore():
 	$ScoreLabels/HighScoreLabel.text = "Best: " + var_to_str(highScore)
 
 func GameOver(won:bool):
-	
-	if GameSettings.userAuthenticated:
-		$ButtonContainer/Leaderboard.visible = true
-	else:
-		$ButtonContainer/Leaderboard.visible = false
 	Logging.logMessage("Game over!")
 	SetScore()
 	if(won):
@@ -58,11 +48,6 @@ func showButtons() -> void:
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(button_container,"position:y",visibleButtonYPos,0.2)
 	
-func _on_leaderboard_pressed() -> void:	
-	GameSettings.showLeaderboard()
-	pass # Replace with function body.
-
-
 func _on_retry_button_pressed() -> void:
 	Logging.logMessage("Retry Button Pressed!")
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=13 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://3va5fhmx5hn4" path="res://Scenes/BubbleCutscene.tscn" id="1_6k2w8"]
 [ext_resource type="Script" uid="uid://brq0l2fygvy7n" path="res://Scenes/fps_tracker.gd" id="2_7fbxc"]
@@ -9,13 +9,9 @@
 [ext_resource type="AudioStream" uid="uid://bmgl7qtv2qg6w" path="res://Assets/Sound/wall_hit_sound.wav" id="8_35usu"]
 [ext_resource type="PackedScene" uid="uid://gsu5a1hu0rjf" path="res://Scenes/Menus/scene_transition.tscn" id="8_npwm1"]
 [ext_resource type="AudioStream" uid="uid://cr7rgnem0d7n0" path="res://Assets/Sound/33 - Ditty.mp3" id="9_3xwyg"]
-[ext_resource type="Script" uid="uid://b8e7mo16ebjn" path="res://addons/GodotPlayGameServices/scripts/achievements/achievements_client.gd" id="10_8vumw"]
 [ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="15_56jjb"]
-[ext_resource type="PackedScene" uid="uid://ck01dnrayeqyd" path="res://Scenes/AdManager.tscn" id="16_npwm1"]
 [ext_resource type="Script" uid="uid://bk38lwjwmwmqo" path="res://Scripts/ScoreLabel.gd" id="19_n1mp8"]
 [ext_resource type="Script" uid="uid://c1ktgg75y0rmt" path="res://Scripts/AudioManager.gd" id="21_nmt78"]
-[ext_resource type="Script" uid="uid://d0td4u4d05wup" path="res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd" id="24_c74x7"]
-[ext_resource type="Script" uid="uid://dwanyal5j0j23" path="res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd" id="24_vk5ck"]
 
 [node name="Main" type="Node"]
 
@@ -119,20 +115,5 @@ stream = ExtResource("8_35usu")
 volume_db = -15.0
 pitch_scale = 35.0
 bus = &"SFX"
-
-[node name="PlayGamesLeaderboardsClient" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("24_c74x7")
-
-[node name="PlayGamesSignInClient" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("24_vk5ck")
-
-[node name="PlayGamesAchievementsClient" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("10_8vumw")
-metadata/_custom_type_script = "uid://b8e7mo16ebjn"
-
-[node name="AdManager" parent="." instance=ExtResource("16_npwm1")]
 
 [connection signal="transition_out_finished" from="CanvasLayer/SceneTransition" to="BubbleCutscene" method="startBubbleCutscene"]

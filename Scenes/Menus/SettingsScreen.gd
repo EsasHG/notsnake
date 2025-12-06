@@ -18,7 +18,6 @@ func _ready() -> void:
 	tap_controls.set_pressed_no_signal(!GameSettings.holdControls)
 	show_log.set_pressed_no_signal(Logging.isLogWindowVisible())
 	visibility_changed.connect(_on_visibility_changed)
-	googlePlayButtonsContainer.visible = GameSettings.userAuthenticated
 
 func _on_music_mute_toggled(toggled_on: bool) -> void:
 	GameSettings.setMusicMuted(toggled_on)

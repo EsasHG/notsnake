@@ -140,29 +140,8 @@ text = "Tap
 "
 script = ExtResource("5_bd3ey")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 2
-
-[node name="AchievementsButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-theme = ExtResource("3_bd3ey")
-theme_override_font_sizes/font_size = 20
-text = "Achievements"
-script = ExtResource("5_bd3ey")
-
-[node name="LeaderboardsButton" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-theme = ExtResource("3_bd3ey")
-theme_override_font_sizes/font_size = 20
-text = "Leaderboards"
-script = ExtResource("5_bd3ey")
-
 [connection signal="toggled" from="MusicMute" to="." method="_on_music_mute_toggled"]
 [connection signal="toggled" from="SFXMute" to="." method="_on_sfx_mute_toggled"]
 [connection signal="toggled" from="ShowLog" to="." method="_on_show_log_toggled"]
 [connection signal="toggled" from="ShowFramerate" to="." method="_on_show_framerate_toggled"]
 [connection signal="toggled" from="Controls/HoldControls" to="." method="_on_hold_controls_toggled"]
-[connection signal="pressed" from="HBoxContainer/AchievementsButton" to="." method="_on_achievements_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/LeaderboardsButton" to="." method="_on_leaderboards_button_pressed"]

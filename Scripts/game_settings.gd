@@ -7,9 +7,6 @@ signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
 signal on_controls_changed(holdControls:bool)
 
-const BILLING_MANAGER = preload("uid://di83hh7jce01j")
-const AD_MANAGER = preload("uid://ck01dnrayeqyd")
-
 @export var currentScore : int = 0 
 
 const SCENE_TRANSITION = preload("res://Scenes/Menus/scene_transition.tscn")
@@ -17,11 +14,8 @@ const SCENE_TRANSITION = preload("res://Scenes/Menus/scene_transition.tscn")
 @onready var playerChar : PackedScene = preload("res://Scenes/PlayerDog.tscn")
 @onready var pauseMenu : PackedScene = preload("res://Scenes/Menus/pause_menu.tscn")
 @onready var bubbleScene : PackedScene = preload("res://Scenes/BubbleCutscene.tscn")
-@onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
 
 @onready var mainGuiNode = get_tree().root.find_child("Gui", true, false)
-var adManager : AdManager
-var billingManager : BillingManager
 
 enum ViewportMode {PORTRAIT, LANDSCAPE}
 var viewMode:ViewportMode = ViewportMode.LANDSCAPE
@@ -32,7 +26,6 @@ var sfxVol = linear_to_db(0.8)
 var musicVol = linear_to_db(0.8)
 var musicMuted : bool = false
 var sfxMuted : bool = false
-var userAuthenticated = false
 var holdControls:bool = true
 var pauseButton:Button
 var achievementsCache: Array[PlayGamesAchievement]
@@ -47,10 +40,6 @@ var uiClickPlayer : AudioStreamPlayer
 
 func _enter_tree() -> void:
 	Logging.logMessage("GameSettings Entered tree!")
-	if GodotPlayGameServices.initialize() == GodotPlayGameServices.PlayGamesPluginError.OK:
-		Logging.logMessage("Godot play games services initialized successfully")
-	else:
-		Logging.error("Could not initialize godot play games services plugin!")
 		
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -71,12 +60,6 @@ func doDeferredSetup():
 	if(currentWorld==null):
 		currentWorld = get_tree().root.find_child("BubbleCutscene",true,false)
 		
-	adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
-#	get_tree().root.call_deferred("add_child", adManager)
-	
-	billingManager = BILLING_MANAGER.instantiate()
-	billingManager.loading_finished.connect(_on_billing_manager_loading_finished)
-	get_tree().root.find_child("Gui",true,false).call_deferred("add_child", billingManager)
 	
 	
 	var button : Button = get_tree().root.find_child("MusicMute", true, false)
@@ -97,18 +80,6 @@ func doDeferredSetup():
 	else:
 		Logging.error("Pause button not found in game settings!")
 		
-	if GodotPlayGameServices.android_plugin:
-		if(signInClient):
-			signInClient.user_authenticated.connect(_on_user_authenticated)
-			signInClient.is_authenticated()
-		else:
-			Logging.error("No sign in client found!")
-		
-	else:
-		Logging.error("Could not find Google Play Games Services plugin!")
-		signInClient = null
-		leaderboardsClient = null
-		achievementsClient = null
 		
 	var scene_transition:SceneTransition = get_tree().root.find_child("SceneTransition",true,false)
 		
@@ -123,9 +94,7 @@ func levelSelect():
 	currentWorld = b
 	get_tree().root.add_child(b)
 	on_mainMenuOpened.emit()
-	if adManager && adManager.is_node_ready() && adManager.admob_initialized:
-		adManager.setup_interstitial_ad()
-		
+	
 func mainMenu():
 	
 	#TODO: Pause button dissapears when going back to the menu from a level, then back into a level
@@ -138,8 +107,6 @@ func mainMenu():
 	currentWorld = b
 	get_tree().root.add_child(b)
 	on_mainMenuOpened.emit()
-	if adManager && adManager.is_node_ready() && adManager.admob_initialized:
-		adManager.setup_interstitial_ad()
 	
 func startGame():
 	var transition : SceneTransition = _create_transition()
@@ -157,57 +124,17 @@ func startGame():
 			)
 		
 		)
-	#transition.transition_out_finished.connect(func():
-		#on_gameBegin.emit.call_deferred()
-		#pauseButton.visible = true
-		#)
-	if adManager && adManager.is_node_ready() && adManager.admob_initialized:
-		adManager.setup_interstitial_ad()
 	
 func gameOver(won:bool):
-	increment_achievement("Hungry dog", currentScore)
-	increment_achievement("Insatiable dog", currentScore)
 	if currentScore > highScores.get_or_add(currentMap.name,0):
 		highScores[currentMap.name] = currentScore
 		saveScore()
-	
-	if leaderboardsClient:
-		Logging.logMessage("Trying to submit score: " + var_to_str(currentScore))
-		var submitted : bool = false
-		for board in leaderboardArray:
-			if board.display_name == currentMap.name:
-				scoreBoard = board
-				Logging.logMessage("Leaderboard found. Submitting Score: " + var_to_str(currentScore))
-				leaderboardsClient.submit_score(scoreBoard.leaderboard_id,currentScore)
-				submitted = true
-		if !submitted:
-			Logging.error("Could not find a leaderboard with name "+ currentMap.name + "! Score was never submitted!")
-	
-	if(achievementsClient):
-		if highScores[currentMap.name] >= 20:
-			unlock_achievement(currentMap.name)	
-			
-		if won:		#do we really need this if we unlock in playerDog?
-			var achievementNum:int = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_id == "CgkIso_-xZsLEAIQBw")
-			var ach:PlayGamesAchievement = achievementsCache[achievementNum]
-			if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED:
-				achievementsClient.unlock_achievement(ach.achievement_id)
 				
-	
 	var ui : GameOverScreen = gameOverScreen.instantiate()
 	mainGuiNode.add_child(ui)
 	ui.GameOver(won)
-	if adManager:
-		adManager.rounds_played+=1
-		if adManager.admob_initialized and adManager._can_show_interstitial_ad and adManager.interstitial_ad_loaded:
-			get_tree().create_timer(0.6).timeout.connect(func(): 
-				adManager.show_interstitial_ad()
-				)
-			get_tree().create_timer(0.75).timeout.connect(ui.showButtons) # i migth want different wait times in the future
-		else: 
-			get_tree().create_timer(0.3).timeout.connect(ui.showButtons)
-	else: 
-		get_tree().create_timer(0.3).timeout.connect(ui.showButtons)
+
+	get_tree().create_timer(0.3).timeout.connect(ui.showButtons)
 	GameSettings.currentScore = 0
 		
 func increaseScore():
@@ -353,12 +280,7 @@ func setControls(hold:bool):
 	holdControls = hold
 	on_controls_changed.emit(holdControls)
 	saveSettings()
-	
-func remove_all_ads():
-	adManager.remove_banner_ad()
-	adManager.queue_free()
-	adManager = null
-	
+
 func _create_transition() -> SceneTransition:
 	var transition : SceneTransition = SCENE_TRANSITION.instantiate()
 	mainGuiNode.add_child.call_deferred(transition)
@@ -403,94 +325,6 @@ func _get_achievement(achievementName:String) -> PlayGamesAchievement:
 		return achievementsCache[achievementNum]
 #Should probably do something like save achievement unlocks and progress locally, 
 #so we can instantly unlock things if players authenticate after playing for a while?
-func unlock_achievement(achievementName:String):
-	if userAuthenticated and achievementsClient and achievementsCache.size()>0:
-		var ach: PlayGamesAchievement = _get_achievement(achievementName)
-		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED: 
-			Logging.logMessage("Score is high enough for achievement! Unlocking achievement " + ach.achievement_name)
-			achievementsClient.unlock_achievement(ach.achievement_id)
-		else:
-			Logging.logMessage("Score is high enough for achievement, and achievement is already unlocked! " + ach.achievement_name)
-
-func increment_achievement(achievementName:String, amount:int):
-	if userAuthenticated and achievementsClient and achievementsCache.size()>0:
-		var ach:PlayGamesAchievement = _get_achievement(achievementName)
-		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED:
-			Logging.logMessage("Incrementing achievement " + ach.achievement_name)
-			achievementsClient.increment_achievement(ach.achievement_id, amount)
-	
-func _on_user_authenticated(is_authenticated: bool) -> void:
-	if is_authenticated:
-		#$Leaderboard.visible = true
-		Logging.logMessage("Authenticated!")
-		
-		# If user was not authenticated before, setup leaderboard and achievements.
-		if not userAuthenticated: 
-			leaderboardsClient = get_tree().root.find_child("PlayGamesLeaderboardsClient", true, false)
-			if leaderboardsClient:
-				Logging.logMessage("Finding leaderboards!") 
-				leaderboardsClient.all_leaderboards_loaded.connect(_all_leaderboards_loaded)
-				leaderboardsClient.score_submitted.connect(_score_submitted)
-				leaderboardsClient.score_loaded.connect(_on_player_score_loaded)
-				leaderboardsClient.load_all_leaderboards(true)
-			else:
-				Logging.error("No leaderboards client found!")
-				
-			achievementsClient = get_tree().root.find_child("PlayGamesAchievementsClient", true, false)
-			if(achievementsClient):
-				achievementsClient.achievements_loaded.connect(_on_achievements_loaded)
-				achievementsClient.load_achievements(true)
-			else:
-				Logging.error("No achievement client found!")
-		
-	else:
-		#$Leaderboard.visible = false
-		Logging.warn("User not authenticated!")
-
-	userAuthenticated = is_authenticated
-
-func _all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void:
-	Logging.logMessage("All leaderboards loaded!")
-	if not leaderboards.size() == 0:
-		leaderboardArray = leaderboards
-		scoreBoard = leaderboardArray.front()
-		
-		for board in leaderboardArray:
-			Logging.logMessage("Loading player score for leaderboard " + board.display_name)
-			leaderboardsClient.load_player_score(board.leaderboard_id,PlayGamesLeaderboardVariant.TimeSpan.TIME_SPAN_ALL_TIME,PlayGamesLeaderboardVariant.Collection.COLLECTION_FRIENDS)
-	else:
-		Logging.error("No leaderboards found!")
-	pass # Replace with function body.
-
-func _on_player_score_loaded(leaderboard_id: String, score: PlayGamesLeaderboardScore):
-	var leaderboard = leaderboardArray[leaderboardArray.find_custom(func(l:PlayGamesLeaderboard): return l.leaderboard_id == leaderboard_id)]
-	Logging.logMessage("Score loaded for leaderboard " + leaderboard.display_name + ". Score: " + score.display_score)
-	
-	if highScores[leaderboard.display_name] < score.raw_score:
-		Logging.warn("Found higher highscore from leaderboard! Overwriting locally saved score of" + str(highScores[leaderboard.display_name]) + " with " + str(score.raw_score))
-		highScores[leaderboard.display_name] = score.raw_score
-	elif highScores[leaderboard.display_name] > score.raw_score and score.raw_score > 0:
-		Logging.warn("Found higher highscore in local save! submitting score of " + str(highScores[leaderboard.display_name]) + " to leaderboard " + leaderboard.display_name)
-		leaderboardsClient.submit_score(leaderboard_id,highScores[leaderboard.display_name])
-	if highScores[leaderboard.display_name] >= 20:
-		unlock_achievement(leaderboard.display_name)
-
-func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
-	if is_submitted:
-		Logging.logMessage("Score Submitted for leaderboard "+ leaderboard_id)
-		if leaderboardsClient:
-			Logging.logMessage("Loading player score for leaderboard " + leaderboard_id)
-			leaderboardsClient.load_player_score(leaderboard_id,PlayGamesLeaderboardVariant.TimeSpan.TIME_SPAN_ALL_TIME, PlayGamesLeaderboardVariant.Collection.COLLECTION_PUBLIC)
-	else: 
-		Logging.error("Score not submitted for leaderboard " +  leaderboard_id)
-	pass # Replace with function body.
-
-func _on_achievements_loaded(achievements: Array[PlayGamesAchievement]) -> void:
-	Logging.logMessage("Achievements loaded!")
-	achievementsCache = achievements
-	for key in highScores:
-		if highScores[key] >= 20:
-			unlock_achievement(key)
 			
 func _on_viewport_size_changed():
 	var viewportSize:Vector2 = get_viewport().size
@@ -499,7 +333,3 @@ func _on_viewport_size_changed():
 		viewMode = ViewportMode.LANDSCAPE
 	else:
 		viewMode = ViewportMode.PORTRAIT
-
-func _on_billing_manager_loading_finished() -> void:
-	if adManager:
-		adManager.initialize() 
