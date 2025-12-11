@@ -137,7 +137,7 @@ grow_horizontal = 2
 
 [node name="WinnerLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 theme = ExtResource("2_3eorv")
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 250
@@ -145,7 +145,7 @@ text = "Player won!"
 
 [node name="ScoreLabelWinner" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 theme = ExtResource("2_3eorv")
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 119
