@@ -20,13 +20,16 @@ class_name PlayerDog
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var prevPositionsArr = []
-
+var playerID = -1
 var currentHat = -1
 var spritesToAdd = 0
 var timer : float = 0.0
 var spawnTime : float = 0.02
 var prevLeft : Vector2 = Vector2(1,0)
 var prevDir : int = -1
+var holdControls = true
+
+var score = 0
 
 var segmentSprites : Array[Node2D]
 var canAddSprites = true
@@ -43,14 +46,23 @@ func _ready() -> void:
 	$Butt/ButtSprite/Tail.play("default")
 	add_sprite()
 	get_tree().create_timer(1.0).timeout.connect(func(): butt.get_child(0).disabled = false)
-	
+
 	add_sibling.call_deferred(segmentParent)
 	butt.reparent(segmentParent)
+	$Head.self_modulate = self_modulate
+	$Head/Legs.modulate = self_modulate
+	segmentParent.modulate = self_modulate
 	GameSettings.currentScore = 0
 	$Head/BarkSound.volume_db = GameSettings.sfxVol
 	Input.emulate_mouse_from_touch = true
 	hats = $Head/Hats.get_children(true)
-	
+	for hat in hats:
+		hat.visible = false
+		
+	if currentHat <0 || currentHat > hats.size()-1:
+		currentHat = 0
+		
+	hats[currentHat].visible = true
 	GameSettings.on_pickupSpawned.connect(SetArrowTarget)
 	GameSettings.on_controls_changed.connect(_on_controls_changed)
 	GameSettings.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
@@ -73,8 +85,10 @@ func add_segment():
 func resetSpriteTimer():
 	canAddSprites = true
 
-func _unhandled_input(event: InputEvent) -> void:
-	if GameSettings.holdControls:
+func _input(event: InputEvent) -> void:
+	if event.device != GlobalInputMap.ControllerIds[playerID]:
+		return
+	if holdControls:
 		if(event.is_action("Press")):
 			if(event.is_pressed()):
 				rotateRight = true
@@ -83,6 +97,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	else: 
 		if(event.is_action("Press") and event.is_pressed()):
 			rotateRight = !rotateRight
+			
+	if event.is_action("Pause"):
+		GameSettings._on_pause_pressed()
 			
 func _process(delta: float) -> void:
 	
@@ -155,21 +172,11 @@ func _process(delta: float) -> void:
 	$Head/ArrowHolder/Arrow.modulate.a = lerped
 
 func _on_area_entered(area: Area2D) -> void:
-	if(area == butt):
-		Logging.logMessage("Player won!")
-		GameSettings.on_gameOver.emit(true)
-		
-		if(playerControl == false):
-			return	
-		move = false
-		playerControl = false
-		segmentParent.queue_free()
-		GameSettings.unlock_achievement("Wi(e)nner")
-		queue_free()
-		
-	elif(area.is_in_group("Dangers")):
+
+	if(area.is_in_group("Dangers")):
 		Logging.logMessage("Player Lost!")
 
+		GameSettings.player_lost(self)
 			
 		if(playerControl == false):
 			Logging.error("Player overlapped danger while not having control!")
@@ -177,9 +184,7 @@ func _on_area_entered(area: Area2D) -> void:
 	
 		if area.is_in_group("DogSegment"):
 			Logging.logMessage("Collided with self!")
-			GameSettings.unlock_achievement("Dog knot")
 			
-		GameSettings.on_gameOver.emit(false)
 
 		move = false
 		playerControl = false
@@ -193,14 +198,17 @@ func _on_area_entered(area: Area2D) -> void:
 			for i : int in segmentsPerSection:
 				add_segment()
 			GameSettings.on_pickup.emit()
+			score+=1
 			
+			if GlobalInputMap.Player_Score.keys().has(playerID):
+				GlobalInputMap.Player_Score[playerID]+=1
+			else:
+				GlobalInputMap.Player_Score[playerID] = 1
 			area.queue_free()
-			Logging.logMessage("Currrent Score: " + var_to_str(GameSettings.currentScore))
+			
 			
 	elif(area.is_in_group("Present")):
 		if(canAddSprites):
-		
-			Logging.logMessage("Currrent Score: " + var_to_str(GameSettings.currentScore))
 			var hatRand : int = currentHat
 			while hatRand == currentHat:
 				hatRand = randi_range(0, hats.size()-1)
@@ -212,13 +220,11 @@ func _on_area_entered(area: Area2D) -> void:
 			currentHat = hatRand
 			
 			bark()
-			GameSettings.unlock_achievement("Dapper dog")
 			
 			for i : int in segmentsPerSection:
 				add_segment()
 			GameSettings.on_pickup.emit()
 			area.queue_free()
-			Logging.logMessage("Currrent Score: " + var_to_str(GameSettings.currentScore))
 			
 			
 func bark():

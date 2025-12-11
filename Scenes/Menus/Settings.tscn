@@ -101,18 +101,6 @@ toggle_mode = true
 script = ExtResource("5_bd3ey")
 metadata/_edit_use_anchors_ = true
 
-[node name="ShowLog" type="CheckButton" parent="."]
-layout_mode = 2
-theme = ExtResource("3_bd3ey")
-text = "Show log window"
-script = ExtResource("5_bd3ey")
-
-[node name="ShowFramerate" type="CheckButton" parent="."]
-layout_mode = 2
-theme = ExtResource("3_bd3ey")
-text = "Show Framerate"
-script = ExtResource("5_bd3ey")
-
 [node name="Controls" type="VBoxContainer" parent="."]
 layout_mode = 2
 
@@ -142,6 +130,4 @@ script = ExtResource("5_bd3ey")
 
 [connection signal="toggled" from="MusicMute" to="." method="_on_music_mute_toggled"]
 [connection signal="toggled" from="SFXMute" to="." method="_on_sfx_mute_toggled"]
-[connection signal="toggled" from="ShowLog" to="." method="_on_show_log_toggled"]
-[connection signal="toggled" from="ShowFramerate" to="." method="_on_show_framerate_toggled"]
 [connection signal="toggled" from="Controls/HoldControls" to="." method="_on_hold_controls_toggled"]

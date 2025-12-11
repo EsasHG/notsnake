@@ -14,7 +14,8 @@ var activeBubbleTween : Tween
 var activeBubbleTimer : SceneTreeTimer
 var levelSelect : bool = false
 
-@onready var menu : PackedScene = preload("uid://jdiyiwxj7kh0")
+#@onready var menu : PackedScene = preload("uid://jdiyiwxj7kh0")
+@onready var menu : PackedScene = preload("uid://bo42loyctrla7")
 @onready var world : Node2D = get_tree().root.find_child("World", true, false)
 
 var skip : bool = false

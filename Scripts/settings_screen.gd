@@ -7,8 +7,7 @@ extends VBoxContainer
 
 @onready var music_checkbox: CheckBox = $MusicCheckbox
 @onready var sfx_checkbox: CheckBox = $SFXCheckbox
-@onready var show_log: CheckButton = $ShowLog
-@onready var googlePlayButtonsContainer: HBoxContainer = $HBoxContainer
+#@onready var show_log: CheckButton = $ShowLog
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,7 +15,6 @@ func _ready() -> void:
 	sfx_mute.set_pressed_no_signal(GameSettings.sfxMuted)
 	hold_controls.set_pressed_no_signal(GameSettings.holdControls)
 	tap_controls.set_pressed_no_signal(!GameSettings.holdControls)
-	show_log.set_pressed_no_signal(Logging.isLogWindowVisible())
 	visibility_changed.connect(_on_visibility_changed)
 
 func _on_music_mute_toggled(toggled_on: bool) -> void:
@@ -28,7 +26,6 @@ func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 func _on_hold_controls_toggled(toggled_on: bool) -> void:
 	GameSettings.setControls(toggled_on)
 
-
 func _on_achievements_button_pressed() -> void:
 	GameSettings.showAchievements()
 
@@ -39,7 +36,7 @@ func _on_show_log_toggled(toggled_on: bool) -> void:
 	Logging.showLogWindow(toggled_on)
 
 func _on_visibility_changed():
-	googlePlayButtonsContainer.visible = GameSettings.userAuthenticated
+	pass
 
 
 func _on_show_framerate_toggled(toggled_on: bool) -> void:

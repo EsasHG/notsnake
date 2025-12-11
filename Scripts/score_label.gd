@@ -5,7 +5,7 @@ extends Label
 func _ready() -> void:
 	GameSettings.on_pickup.connect(SetScore)
 	GameSettings.on_gameBegin.connect(func(): visible = true)
-	GameSettings.on_gameOver.connect(func(_won:bool): visible = false)
+	GameSettings.on_gameOver.connect(func(): visible = false)
 	GameSettings.on_mainMenuOpened.connect(func(): visible = false)
 
 func SetScore():

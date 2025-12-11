@@ -13,16 +13,12 @@ func _ready() -> void:
 	
 	GameSettings.on_gameBegin.connect(SpawnPickup)
 	
-	GameSettings.on_gameOver.connect(func(_won:bool): 	
+	GameSettings.on_gameOver.connect(func(): 	
 		currentPickup.queue_free()
 		prevPoint = -1
 		)
 
 func SpawnPickup():
-	if(GameSettings.currentScore == 10):
-		SpawnPresent()
-		return
-		
 	var boneOrToy = randi_range(0,1)
 	var pickup : Area2D
 	if(boneOrToy):

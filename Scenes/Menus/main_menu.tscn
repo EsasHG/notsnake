@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://jdiyiwxj7kh0"]
+[gd_scene load_steps=17 format=3 uid="uid://jdiyiwxj7kh0"]
 
 [ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
@@ -10,7 +10,6 @@
 [ext_resource type="Resource" uid="uid://ce2xllrb7yjod" path="res://Scenes/Maps/Park.tres" id="10_8dnnj"]
 [ext_resource type="Resource" uid="uid://br6kp3c2pxqet" path="res://Scenes/Maps/Square.tres" id="11_m3bi6"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="12_12hqc"]
-[ext_resource type="StyleBox" uid="uid://ktqcdhd8okf4" path="res://Assets/Styles/empty_button_style_box_texture.tres" id="12_eprln"]
 [ext_resource type="Resource" uid="uid://c786inhs2hhtg" path="res://Scenes/Maps/Small.tres" id="12_wyh8j"]
 [ext_resource type="Resource" uid="uid://oa287witflah" path="res://Scenes/Maps/Forest.tres" id="13_ujyyl"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="13_vtepg"]
@@ -96,19 +95,6 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="Sign In" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-theme = ExtResource("3_f6ncm")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = ExtResource("12_eprln")
-theme_override_styles/pressed = ExtResource("12_eprln")
-theme_override_styles/hover = ExtResource("12_eprln")
-theme_override_styles/focus = ExtResource("12_eprln")
-text = "SIGN IN TO 
-GOOGLE PLAY"
-script = ExtResource("13_vtepg")
-
 [node name="StartButton" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -122,15 +108,6 @@ layout_mode = 2
 theme = ExtResource("3_f6ncm")
 theme_override_font_sizes/font_size = 19
 text = "Settings"
-script = ExtResource("13_vtepg")
-
-[node name="Leaderboard" type="Button" parent="HBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-theme = ExtResource("3_f6ncm")
-theme_override_font_sizes/font_size = 19
-text = "Leaderboard"
 script = ExtResource("13_vtepg")
 
 [node name="SettingsContainer" type="PanelContainer" parent="."]
@@ -203,9 +180,7 @@ theme = ExtResource("3_f6ncm")
 text = "Back"
 script = ExtResource("13_vtepg")
 
-[connection signal="pressed" from="HBoxContainer/Sign In" to="." method="_on_sign_in_pressed"]
 [connection signal="pressed" from="HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="HBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]
 [connection signal="pressed" from="SettingsContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="LevelSelectScreen/VBoxContainer/ButtonContainer/Back" to="." method="_on_back_pressed"]

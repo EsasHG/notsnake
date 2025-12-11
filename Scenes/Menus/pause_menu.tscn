@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0eb6heqgmexf"]
+[gd_scene load_steps=5 format=3 uid="uid://d0eb6heqgmexf"]
 
 [ext_resource type="Script" uid="uid://bksp4hitp0rwk" path="res://Scripts/pause_menu.gd" id="1_ekn4r"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="1_vms7i"]
-[ext_resource type="PackedScene" uid="uid://padbn8hpbpo6" path="res://Scenes/Menus/settings.tscn" id="2_tf3q2"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="4_yeo1y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yeo1y"]
@@ -60,10 +59,6 @@ theme = ExtResource("1_vms7i")
 theme_override_font_sizes/font_size = 60
 text = "Game Paused!"
 
-[node name="SettingsScreen" parent="Panel/VBoxContainer" instance=ExtResource("2_tf3q2")]
-layout_mode = 2
-size_flags_horizontal = 4
-
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -85,7 +80,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_vms7i")
 theme_override_font_sizes/font_size = 25
-text = "Main Menu"
+text = "Quit"
 script = ExtResource("4_yeo1y")
 
 [node name="Countdown" type="Label" parent="."]

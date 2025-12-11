@@ -35,25 +35,6 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_yr1h0")
 
-[node name="ScoreLabels" type="VBoxContainer" parent="."]
-layout_mode = 1
-offset_left = 40.0
-offset_top = 150.0
-offset_right = 224.0
-offset_bottom = 292.0
-
-[node name="ScoreLabel" type="Label" parent="ScoreLabels"]
-layout_mode = 2
-theme = ExtResource("2_3eorv")
-theme_override_font_sizes/font_size = 60
-text = "Score:"
-
-[node name="HighScoreLabel" type="Label" parent="ScoreLabels"]
-layout_mode = 2
-theme = ExtResource("2_3eorv")
-theme_override_font_sizes/font_size = 40
-text = "Best:"
-
 [node name="ButtonContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -106,6 +87,7 @@ text = "Leaderboard"
 script = ExtResource("3_3eq00")
 
 [node name="GameOverTex" type="TextureRect" parent="."]
+visible = false
 z_index = -2
 layout_mode = 1
 anchors_preset = 15
@@ -133,7 +115,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="WinnerTex" type="TextureRect" parent="."]
-visible = false
 z_index = -2
 layout_mode = 1
 anchors_preset = 15
@@ -145,6 +126,90 @@ mouse_filter = 2
 texture = ExtResource("6_dgp11")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 33.0
+offset_bottom = 609.0
+grow_horizontal = 2
+
+[node name="WinnerLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_3eorv")
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 250
+text = "Player won!"
+
+[node name="ScoreLabelWinner" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_3eorv")
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 119
+text = "Player won!"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="WinnerLabel2" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_3eorv")
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 120
+text = "Second: "
+
+[node name="Place_2" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_3eorv")
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 120
+text = "2"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="WinnerLabel2" type="Label" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_3eorv")
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 120
+text = "Third: "
+
+[node name="Place_3" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_3eorv")
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 120
+text = "3"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="WinnerLabel2" type="Label" parent="VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_3eorv")
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 120
+text = "Fourth: "
+
+[node name="Place_4" type="Label" parent="VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_3eorv")
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 120
+text = "4"
 
 [connection signal="pressed" from="ButtonContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
