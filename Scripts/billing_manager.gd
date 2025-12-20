@@ -6,11 +6,12 @@ class_name BillingManager
 @onready var purchased_popup: Panel = $Purchased_popup
 @onready var error_popup: Panel = $Error_popup
 @onready var error_description_label: Label = $Error_popup/VBoxContainer/DescriptionLabel
+@onready var pending_popup: Panel = $Pending_popup
 @onready var billing_client:BillingClient = BillingClient.new()
 
 ##For testing purposes only
-@export var consume_ad_removal_purchase : bool = false
-@export var enable = false
+@export var consume_ad_removal_purchase : bool = true
+@export var enable = true
 
 signal loading_finished
 
@@ -26,7 +27,7 @@ func _ready() -> void:
 	ad_removal_popup.visible = false
 	purchased_popup.visible = false
 	error_popup.visible = false
-	
+	pending_popup.visible = false
 	if enable:
 		billing_client.connected.connect(_on_connected)
 		billing_client.disconnected.connect(_on_disconnected) # No params
@@ -47,7 +48,6 @@ func query_product_details():
 
 func query_purchases():
 	Logging.logMessage("Querying purchases!")
-	
 	billing_client.query_purchases(BillingClient.ProductType.INAPP) # Or BillingClient.ProductType.SUBS for subscriptions.
 
 
@@ -87,13 +87,16 @@ func _on_query_purchases_response(query_result: Dictionary):
 	if query_result.response_code == BillingClient.BillingResponseCode.OK:
 		Logging.logMessage("Purchase query success")
 		for purchase in query_result.purchases:
-			Logging.logMessage(str(purchase))
-			for id in purchase.product_ids:
-				if id == remove_ads_id:
-					no_ads_purchased = true
-					GameSettings.remove_all_ads()
-					if consume_ad_removal_purchase:
-						billing_client.consume_purchase(purchase.purchase_token)
+			if purchase.purchase_state == billing_client.PurchaseState.PURCHASED:
+				Logging.logMessage(str(purchase))
+				for id in purchase.product_ids:
+					if id == remove_ads_id:
+						no_ads_purchased = true
+						GameSettings.remove_all_ads()
+						if not purchase.is_acknowledged:
+							billing_client.acknowledge_purchase(purchase.purchase_token)
+						if consume_ad_removal_purchase:
+							billing_client.consume_purchase(purchase.purchase_token)
 		purchases_checked = true
 		update_popup()	
 		checkLoadingFinished()
@@ -108,65 +111,52 @@ func checkLoadingFinished() -> void:
 		
 func _on_purchase_updated(response: Dictionary):
 	Logging.logMessage("Purchases updated")
+	var response_ok:bool = false
 	match response.response_code:
 		billing_client.BillingResponseCode.OK:
+			response_ok = true
 			for purchase in response.purchases:
 				if purchase.package_name != "loopdog.loopdog":
 					Logging.error("Purchase comes from a different package!")
-				elif purchase.purchase_state == billing_client.PurchaseState.PURCHASED:
-					for id in purchase.product_ids:
-						if id == remove_ads_id:
-							GameSettings.remove_all_ads()
-							# check if acknowledged, and acknowledge if not.
-							billing_client.acknowledge_purchase(purchase.purchase_token)
+				else:
+					match purchase.purchase_state:
+						billing_client.PurchaseState.PURCHASED:
+							for id in purchase.product_ids:
+								if id == remove_ads_id:
+									pending_popup.visible = false
+									GameSettings.remove_all_ads()
+									billing_client.acknowledge_purchase(purchase.purchase_token)
+						billing_client.PurchaseState.PENDING:
+							pending_popup.visible = true
+								
 		billing_client.BillingResponseCode.ITEM_ALREADY_OWNED:
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "You seem to already own this."
-			error_popup.visible = true
 		billing_client.BillingResponseCode.USER_CANCELED:
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "The purchase was cancelled by the user."
-			error_popup.visible = true
 		billing_client.BillingResponseCode.SERVICE_UNAVAILABLE:
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "The service is currently unavaliable. Try again later."
-			error_popup.visible = true		
 		billing_client.BillingResponseCode.BILLING_UNAVAILABLE:
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "The billing service is currently unavaliable. Try again later."
-			error_popup.visible = true
 		billing_client.BillingResponseCode.ITEM_UNAVAILABLE:
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "The item is no longer avaliable."
-			error_popup.visible = true
 		billing_client.BillingResponseCode.ITEM_NOT_OWNED:
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "An unknown error occurred!"
-			error_popup.visible = true
 		billing_client.BillingResponseCode.NETWORK_ERROR:
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "An network error occurred!"
-			error_popup.visible = true
 		billing_client.BillingResponseCode.SERVICE_DISCONNECTED:
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "The service disconnected."
-			error_popup.visible = true
 		billing_client.BillingResponseCode.FEATURE_NOT_SUPPORTED:
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "This feature is not supported."
-			error_popup.visible = true
 		billing_client.BillingResponseCode.SERVICE_TIMEOUT:
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "The service timed out."
-			error_popup.visible = true
 		_: 
-			Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 			error_description_label.text = "An unknown error occurred!"
-			error_popup.visible = true
 			
+	if not response_ok:
+		Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
+		pending_popup.visible = false
+		error_popup.visible = true
 	
-	pass			
-
 	
 func _on_consume_purchase_response(response: Dictionary):
 	Logging.logMessage("Consume purchase response")
@@ -180,12 +170,12 @@ func _on_acknowledge_purchase_response(response: Dictionary):
 	Logging.logMessage("Acknowledge purchase response")
 	match response.response_code:
 		billing_client.BillingResponseCode.OK:
-			purchased_popup.visible = true
 			ad_removal_popup.visible = false
+			pending_popup.visible = false
+			purchased_popup.visible = true
 			Logging.logMessage("Purchase acknowledged!")
 		_:
 			Logging.logMessage("Error acknowledging purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
-		
 
 
 func _on_button_yes_pressed() -> void:
@@ -195,8 +185,6 @@ func _on_button_yes_pressed() -> void:
 
 func _on_button_no_pressed() -> void:
 	ad_removal_popup.visible = false
-	pass # Replace with function body.
-
 
 func _on_button_close_purchased_pressed() -> void:
 	purchased_popup.visible = false
@@ -207,3 +195,6 @@ func _on_button_retry_purchase_pressed() -> void:
 	
 func _on_button_close_error_pressed() -> void:
 	error_popup.visible = false
+
+func _on_button_close_pending_pressed() -> void:
+	pending_popup.visible = false
