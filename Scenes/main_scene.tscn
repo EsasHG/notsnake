@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://3va5fhmx5hn4" path="res://Scenes/Bubble Cutscene/bubble_cutscene.tscn" id="1_gnsmo"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_psl12"]
 [ext_resource type="Script" uid="uid://dk0kh7s0cylgw" path="res://Scripts/game_visible_ui.gd" id="4_oyb3p"]
-[ext_resource type="Script" uid="uid://70vyyvp51k8q" path="res://Scenes/round_timer_display.gd" id="6_76v2p"]
+[ext_resource type="Script" uid="uid://70vyyvp51k8q" path="res://Scenes/Menus/Arena/round_timer_display.gd" id="6_76v2p"]
 [ext_resource type="PackedScene" uid="uid://cuenmscfk4h76" path="res://Scenes/Menus/log_window.tscn" id="7_8edxt"]
 [ext_resource type="PackedScene" uid="uid://gsu5a1hu0rjf" path="res://Scenes/Menus/scene_transition.tscn" id="8_5oxhp"]
 [ext_resource type="AudioStream" uid="uid://c06tcjnc38rx4" path="res://Assets/Sound/1-02 - Menu.mp3" id="9_76v2p"]

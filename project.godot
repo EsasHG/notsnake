@@ -20,7 +20,7 @@ boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
 
 GameSettings="*res://Scripts/game_settings.gd"
 Logging="*res://Scripts/logging.gd"
-GlobalInputMap="*res://global_input_map.gd"
+GlobalInputMap="*res://Scenes/Menus/Arena/global_input_map.gd"
 
 [display]
 

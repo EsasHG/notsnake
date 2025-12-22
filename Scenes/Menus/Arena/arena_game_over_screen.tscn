@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck7vl8h740cpk"]
+[gd_scene load_steps=9 format=3 uid="uid://u1gfn45v12yd"]
 
-[ext_resource type="Script" uid="uid://dt85v1n4h7vqg" path="res://Scripts/game_over_screen.gd" id="1_st1k0"]
-[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_3eorv"]
-[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="3_3eq00"]
-[ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="4_htq65"]
-[ext_resource type="Texture2D" uid="uid://c02fkdaroc7h7" path="res://Assets/UI/GAME_HIGHSCORE.png" id="5_j3nvf"]
-[ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="6_dgp11"]
+[ext_resource type="Script" uid="uid://checflx6cgbvd" path="res://Scenes/Menus/Arena/arena_game_over_screen.gd" id="1_fww2u"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_cjqb1"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="3_cgyu3"]
+[ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="4_upl4f"]
+[ext_resource type="Texture2D" uid="uid://c02fkdaroc7h7" path="res://Assets/UI/GAME_HIGHSCORE.png" id="5_ghhf7"]
+[ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="6_32wba"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jx1af"]
 
@@ -21,8 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_st1k0")
-bonusScreenThreshold = null
+script = ExtResource("1_fww2u")
 
 [node name="WhiteBackgroundPanel" type="Panel" parent="."]
 z_index = -3
@@ -55,37 +54,37 @@ alignment = 1
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 text = "Retry"
-script = ExtResource("3_3eq00")
+script = ExtResource("3_cgyu3")
 
 [node name="LevelSelectButton" type="Button" parent="ButtonContainer"]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_font_sizes/font_size = 23
 text = "Level 
 Select"
-script = ExtResource("3_3eq00")
+script = ExtResource("3_cgyu3")
 
 [node name="MainMenuButton" type="Button" parent="ButtonContainer"]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_font_sizes/font_size = 23
 text = "Main Menu"
-script = ExtResource("3_3eq00")
+script = ExtResource("3_cgyu3")
 
 [node name="Leaderboard" type="Button" parent="ButtonContainer"]
 visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_font_sizes/font_size = 19
 text = "Leaderboard"
-script = ExtResource("3_3eq00")
+script = ExtResource("3_cgyu3")
 
 [node name="GameOverTex" type="TextureRect" parent="."]
 visible = false
@@ -97,7 +96,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("4_htq65")
+texture = ExtResource("4_upl4f")
 expand_mode = 1
 stretch_mode = 5
 
@@ -111,7 +110,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("5_j3nvf")
+texture = ExtResource("5_ghhf7")
 expand_mode = 1
 stretch_mode = 5
 
@@ -124,7 +123,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-texture = ExtResource("6_dgp11")
+texture = ExtResource("6_32wba")
 expand_mode = 1
 stretch_mode = 5
 
@@ -139,7 +138,7 @@ grow_horizontal = 2
 [node name="WinnerLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 250
 text = "Player won!"
@@ -147,7 +146,7 @@ text = "Player won!"
 [node name="ScoreLabelWinner" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 119
 text = "Player won!"
@@ -159,7 +158,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "Second: "
@@ -167,7 +166,7 @@ text = "Second: "
 [node name="Place_2" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "2"
@@ -179,7 +178,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "Third: "
@@ -187,7 +186,7 @@ text = "Third: "
 [node name="Place_3" type="Label" parent="VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "3"
@@ -199,7 +198,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "Fourth: "
@@ -207,7 +206,7 @@ text = "Fourth: "
 [node name="Place_4" type="Label" parent="VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_3eorv")
+theme = ExtResource("2_cjqb1")
 theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "4"
