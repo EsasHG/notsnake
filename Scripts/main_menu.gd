@@ -13,6 +13,7 @@ var menu_active = true;
 const ARENA = preload("uid://sctscfmi6mda")
 
 @onready var settings_container: PanelContainer = $SettingsContainer
+@onready var settings_back: Button = $SettingsContainer/VBoxContainer/Back
 #@onready var level_select_container: VBoxContainer = $LevelSelectContainer
 @onready var buttons: HBoxContainer = $HBoxContainer
 @onready var level_select_screen: Control = $LevelSelectScreen
@@ -56,6 +57,10 @@ func _ready() -> void:
 		level_buttons.add_child(button)
 		button.pressed.connect(_on_map_selected.bind(s))
 	
+	settings_container.visibility_changed.connect(func():
+		if settings_container.visible == true:
+			settings_back.grab_focus()
+			)
 
 func _input(event: InputEvent) -> void:
 	

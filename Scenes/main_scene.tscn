@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://2rjb4w7s6uto"]
+[gd_scene load_steps=11 format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://3va5fhmx5hn4" path="res://Scenes/Bubble Cutscene/bubble_cutscene.tscn" id="1_gnsmo"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_psl12"]
-[ext_resource type="Script" uid="uid://brq0l2fygvy7n" path="res://Scripts/fps_tracker.gd" id="3_2ebs2"]
 [ext_resource type="Script" uid="uid://dk0kh7s0cylgw" path="res://Scripts/game_visible_ui.gd" id="4_oyb3p"]
 [ext_resource type="Script" uid="uid://70vyyvp51k8q" path="res://Scenes/round_timer_display.gd" id="6_76v2p"]
 [ext_resource type="PackedScene" uid="uid://cuenmscfk4h76" path="res://Scenes/Menus/log_window.tscn" id="7_8edxt"]
@@ -26,15 +25,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="FPS_Tracker" type="Label" parent="CanvasLayer/Gui"]
-visible = false
-layout_mode = 0
-offset_top = 234.0
-offset_right = 105.0
-offset_bottom = 259.0
-theme = ExtResource("2_psl12")
-script = ExtResource("3_2ebs2")
 
 [node name="AudioButtons" type="Control" parent="CanvasLayer/Gui"]
 layout_mode = 1

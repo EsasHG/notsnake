@@ -18,7 +18,6 @@ boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
 
 [autoload]
 
-GodotPlayGameServices="*res://addons/GodotPlayGameServices/scripts/autoloads/godot_play_game_services.gd"
 GameSettings="*res://Scripts/game_settings.gd"
 Logging="*res://Scripts/logging.gd"
 GlobalInputMap="*res://global_input_map.gd"
@@ -35,10 +34,6 @@ window/handheld/orientation=6
 [dotnet]
 
 project/assembly_name="NotSnake"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/GodotGooglePlayBilling/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg")
 
 [global_group]
 
