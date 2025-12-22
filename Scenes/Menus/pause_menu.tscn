@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://padbn8hpbpo6" path="res://Scenes/Menus/settings.tscn" id="2_tf3q2"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="4_yeo1y"]
 
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yeo1y"]
 content_margin_left = 0.0
 content_margin_top = 0.0

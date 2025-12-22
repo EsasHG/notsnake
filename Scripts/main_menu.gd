@@ -19,14 +19,14 @@ var quit_unfocused = preload("res://Assets/UI/QUIT_3.png")
 @export var levels : Array[Map]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
-	_on_user_authenticated(GameSettings.userAuthenticated)
-	if(GameSettings.signInClient):
-		Logging.logMessage("Main menu: sign in client found in game settings! Connecting to user_authenticated.")
+	if OS.has_feature("mobile"):
+		_on_user_authenticated(GameSettings.userAuthenticated)
+		if(GameSettings.signInClient):
+			Logging.logMessage("Main menu: sign in client found in game settings! Connecting to user_authenticated.")
 		
-		GameSettings.signInClient.user_authenticated.connect(_on_user_authenticated)	
-	else: 
-		Logging.error("Main menu: No signInClient found in game settings!")
+			GameSettings.signInClient.user_authenticated.connect(_on_user_authenticated)	
+		else: 
+			Logging.error("Main menu: No signInClient found in game settings!")
 	
 	visible = true
 	#$Panel2.visible = true

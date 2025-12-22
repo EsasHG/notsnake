@@ -20,8 +20,8 @@ const SCENE_TRANSITION = preload("res://Scenes/Menus/scene_transition.tscn")
 @onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
 
 @onready var mainGuiNode = get_tree().root.find_child("Gui", true, false)
-var adManager : AdManager
-var billingManager : BillingManager
+var adManager : AdManager = null
+var billingManager : BillingManager = null
 
 enum ViewportMode {PORTRAIT, LANDSCAPE}
 var viewMode:ViewportMode = ViewportMode.LANDSCAPE
@@ -37,8 +37,8 @@ var holdControls:bool = true
 var pauseButton:Button
 var achievementsCache: Array[PlayGamesAchievement]
 
-var achievementsClient : PlayGamesAchievementsClient
-var leaderboardsClient : PlayGamesLeaderboardsClient
+var achievementsClient : PlayGamesAchievementsClient = null
+var leaderboardsClient : PlayGamesLeaderboardsClient = null
 
 var scoreBoard : PlayGamesLeaderboard
 var leaderboardArray : Array[PlayGamesLeaderboard]
@@ -47,10 +47,12 @@ var uiClickPlayer : AudioStreamPlayer
 
 func _enter_tree() -> void:
 	Logging.logMessage("GameSettings Entered tree!")
-	if GodotPlayGameServices.initialize() == GodotPlayGameServices.PlayGamesPluginError.OK:
-		Logging.logMessage("Godot play games services initialized successfully")
-	else:
-		Logging.error("Could not initialize godot play games services plugin!")
+	
+	if OS.has_feature("mobile"):
+		if GodotPlayGameServices.initialize() == GodotPlayGameServices.PlayGamesPluginError.OK:
+			Logging.logMessage("Godot play games services initialized successfully")
+		else:
+			Logging.error("Could not initialize godot play games services plugin!")
 		
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -70,13 +72,13 @@ func _ready() -> void:
 func doDeferredSetup():
 	if(currentWorld==null):
 		currentWorld = get_tree().root.find_child("BubbleCutscene",true,false)
-		
-	adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
-#	get_tree().root.call_deferred("add_child", adManager)
+	if OS.has_feature("mobile"):
+		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
+#		get_tree().root.call_deferred("add_child", adManager)
 	
-	billingManager = BILLING_MANAGER.instantiate()
-	billingManager.loading_finished.connect(_on_billing_manager_loading_finished)
-	get_tree().root.find_child("Gui",true,false).call_deferred("add_child", billingManager)
+		billingManager = BILLING_MANAGER.instantiate()
+		billingManager.loading_finished.connect(_on_billing_manager_loading_finished)
+		get_tree().root.find_child("Gui",true,false).call_deferred("add_child", billingManager)
 	
 	
 	var button : Button = get_tree().root.find_child("MusicMute", true, false)
@@ -97,18 +99,19 @@ func doDeferredSetup():
 	else:
 		Logging.error("Pause button not found in game settings!")
 		
-	if GodotPlayGameServices.android_plugin:
-		if(signInClient):
-			signInClient.user_authenticated.connect(_on_user_authenticated)
-			signInClient.is_authenticated()
-		else:
-			Logging.error("No sign in client found!")
+	if OS.has_feature("mobile"):
+		if GodotPlayGameServices.android_plugin:
+			if(signInClient):
+				signInClient.user_authenticated.connect(_on_user_authenticated)
+				signInClient.is_authenticated()
+			else:
+				Logging.error("No sign in client found!")
 		
-	else:
-		Logging.error("Could not find Google Play Games Services plugin!")
-		signInClient = null
-		leaderboardsClient = null
-		achievementsClient = null
+		else:
+			Logging.error("Could not find Google Play Games Services plugin!")
+			signInClient = null
+			leaderboardsClient = null
+			achievementsClient = null
 		
 	var scene_transition:SceneTransition = get_tree().root.find_child("SceneTransition",true,false)
 		
