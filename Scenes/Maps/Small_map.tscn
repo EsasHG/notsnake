@@ -13,6 +13,7 @@
 [node name="PlayerStart" type="Node2D" parent="."]
 position = Vector2(-722, 263)
 script = ExtResource("1_iugb5")
+spawn_on_start = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-722, 263)
@@ -247,4 +248,5 @@ scale = Vector2(0.372073, 0.372073)
 position = Vector2(-257, 32)
 
 [node name="AngryDog" parent="." instance=ExtResource("11_lqxm4")]
-position = Vector2(852, -449)
+position = Vector2(-908.0001, 757)
+rotation = 3.2798004

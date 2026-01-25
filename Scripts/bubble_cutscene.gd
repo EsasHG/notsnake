@@ -14,8 +14,9 @@ var activeBubbleTween : Tween
 var activeBubbleTimer : SceneTreeTimer
 var levelSelect : bool = false
 
-@onready var menu : PackedScene = preload("uid://jdiyiwxj7kh0")
 @onready var world : Node2D = get_tree().root.find_child("World", true, false)
+const ARENA_MENU = preload("uid://bo42loyctrla7")
+const MAIN_MENU = preload("uid://jdiyiwxj7kh0")
 
 var skip : bool = false
 
@@ -112,7 +113,12 @@ func deleteBubble():
 
 
 func showMenu():
-	var mainMenu = menu.instantiate()
+	var mainMenu = null
+	if GameSettings.game_mode == GameSettings.GAME_MODE.SINGLE_PLAYER:
+		mainMenu = MAIN_MENU.instantiate()
+	else:
+		mainMenu = ARENA_MENU.instantiate()
+		
 	get_tree().root.find_child("Gui",true, false).add_child(mainMenu)
 	if levelSelect:
-		mainMenu.openLevelSelect()
+		mainMenu.open_level_select()

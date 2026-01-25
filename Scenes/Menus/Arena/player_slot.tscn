@@ -1,0 +1,308 @@
+[gd_scene load_steps=25 format=3 uid="uid://dgcfowugwe1op"]
+
+[ext_resource type="Script" uid="uid://ckpdumpv2ic5t" path="res://Scenes/Menus/Arena/player_slot.gd" id="1_ks1p2"]
+[ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="2_aup6r"]
+[ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="3_b17ae"]
+[ext_resource type="AudioStream" uid="uid://bj3kggw0gs3xi" path="res://Assets/Sound/bark.wav" id="4_wdt0y"]
+[ext_resource type="Texture2D" uid="uid://cxm52e0c581yk" path="res://Assets/Dogs/cosmetics/hat_christmas.png" id="5_c45sk"]
+[ext_resource type="Texture2D" uid="uid://baisbs5c35f4g" path="res://Assets/Dogs/cosmetics/hat_cowboy.png" id="6_kcd4c"]
+[ext_resource type="Texture2D" uid="uid://dvj0pjlmvqwve" path="res://Assets/Dogs/cosmetics/hat_crashdummyDot.png" id="7_u55o0"]
+[ext_resource type="Texture2D" uid="uid://bmdnyc2fq6qg7" path="res://Assets/Dogs/cosmetics/hat_helmet.png" id="8_wmlh6"]
+[ext_resource type="Texture2D" uid="uid://b0tyotp4tpuu8" path="res://Assets/UI/martin_arrow.png" id="9_b17ae"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="10_c45sk"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="11_kcd4c"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45bpw"]
+atlas = ExtResource("2_aup6r")
+region = Rect2(43, 0, 43, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1v2bu"]
+atlas = ExtResource("2_aup6r")
+region = Rect2(0, 0, 43, 37)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yg18o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45bpw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1v2bu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlucr"]
+atlas = ExtResource("3_b17ae")
+region = Rect2(0, 0, 32, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0jc0"]
+atlas = ExtResource("3_b17ae")
+region = Rect2(32, 0, 32, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqkaf"]
+atlas = ExtResource("3_b17ae")
+region = Rect2(64, 0, 32, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgbr8"]
+atlas = ExtResource("3_b17ae")
+region = Rect2(96, 0, 32, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjwsp"]
+atlas = ExtResource("3_b17ae")
+region = Rect2(128, 0, 32, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tsio3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dlucr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0jc0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqkaf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgbr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjwsp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_b17ae"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrows:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [80.0]
+}
+
+[sub_resource type="Animation" id="Animation_wdt0y"]
+resource_name = "move_selection"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Arrows:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [80.0, 22.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wdt0y"]
+_data = {
+&"RESET": SubResource("Animation_b17ae"),
+&"move_selection": SubResource("Animation_wdt0y")
+}
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_u55o0"]
+
+[node name="PlayerSlot" type="Control"]
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 3
+anchor_left = 0.44791666
+anchor_top = 0.4074074
+anchor_right = 0.5520833
+anchor_bottom = 0.5925926
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_ks1p2")
+metadata/_edit_use_anchors_ = true
+
+[node name="Dog" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Head" type="AnimatedSprite2D" parent="Dog"]
+z_index = 1
+texture_filter = 1
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_yg18o")
+
+[node name="Legs" type="AnimatedSprite2D" parent="Dog/Head"]
+z_index = -1
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_tsio3")
+
+[node name="BarkSound" type="AudioStreamPlayer2D" parent="Dog/Head"]
+stream = ExtResource("4_wdt0y")
+bus = &"SFX"
+
+[node name="Hats" type="Node2D" parent="Dog/Head"]
+
+[node name="HatNone" type="Node2D" parent="Dog/Head/Hats"]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="HatChristmas" type="Sprite2D" parent="Dog/Head/Hats"]
+visible = false
+z_index = 1
+position = Vector2(1, -17)
+texture = ExtResource("5_c45sk")
+
+[node name="HatCowboy" type="Sprite2D" parent="Dog/Head/Hats"]
+visible = false
+z_index = 1
+position = Vector2(1, -11)
+texture = ExtResource("6_kcd4c")
+
+[node name="HatCrashdummyDot" type="Sprite2D" parent="Dog/Head/Hats"]
+visible = false
+z_index = 1
+position = Vector2(-6, -6)
+texture = ExtResource("7_u55o0")
+
+[node name="HatHelmet" type="Sprite2D" parent="Dog/Head/Hats"]
+visible = false
+z_index = 1
+position = Vector2(1, -4)
+texture = ExtResource("8_wmlh6")
+
+[node name="Arrows" type="Control" parent="."]
+visible = false
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 19.999992
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Arrows"]
+z_index = 1
+layout_mode = 0
+offset_left = -100.0
+offset_right = -50.0
+offset_bottom = 50.0
+texture = ExtResource("9_b17ae")
+
+[node name="TextureRect2" type="TextureRect" parent="Arrows"]
+z_index = 1
+layout_mode = 0
+offset_left = 95.0
+offset_right = 145.0
+offset_bottom = 50.0
+texture = ExtResource("9_b17ae")
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_wdt0y")
+}
+
+[node name="OptionsPanel" type="PanelContainer" parent="."]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -64.0
+offset_right = 68.5
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Controls" type="VBoxContainer" parent="OptionsPanel"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="OptionsPanel/Controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("10_c45sk")
+text = "Controls:"
+
+[node name="HoldControls" type="CheckBox" parent="OptionsPanel/Controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_bottom = NodePath("../TapControls")
+theme = ExtResource("10_c45sk")
+button_pressed = true
+button_group = SubResource("ButtonGroup_u55o0")
+text = "Hold"
+script = ExtResource("11_kcd4c")
+
+[node name="TapControls" type="CheckBox" parent="OptionsPanel/Controls"]
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_top = NodePath("../HoldControls")
+focus_neighbor_bottom = NodePath("../Ready")
+theme = ExtResource("10_c45sk")
+button_group = SubResource("ButtonGroup_u55o0")
+text = "Tap
+"
+script = ExtResource("11_kcd4c")
+
+[node name="Ready" type="Button" parent="OptionsPanel/Controls"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+focus_neighbor_top = NodePath("../TapControls")
+theme = ExtResource("10_c45sk")
+text = "Ready!"
+script = ExtResource("11_kcd4c")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="JoinLabel" type="Label" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("10_c45sk")
+text = "Press X/A to join!"
+
+[node name="ReadyLabel" type="Label" parent="PanelContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme = ExtResource("10_c45sk")
+theme_override_font_sizes/font_size = 40
+text = "Ready!"
+
+[connection signal="toggled" from="OptionsPanel/Controls/HoldControls" to="." method="_on_hold_controls_toggled"]
+[connection signal="pressed" from="OptionsPanel/Controls/Ready" to="." method="_on_ready_pressed"]

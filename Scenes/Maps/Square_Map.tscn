@@ -29,6 +29,7 @@ distance = -898.5
 [node name="PlayerStart" type="Node2D" parent="."]
 position = Vector2(-9, 466)
 script = ExtResource("2_qtlb6")
+spawn_on_start = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-9, 466)

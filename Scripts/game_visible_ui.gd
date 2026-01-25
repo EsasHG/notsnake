@@ -5,5 +5,5 @@ extends Control
 func _ready() -> void:
 	visible = false
 	GameSettings.on_gameBegin.connect(func(): visible = true)
-	GameSettings.on_gameOver.connect(func(_won:bool): visible = false)
+	GameSettings.on_gameOver.connect(func(): visible = false)
 	GameSettings.on_mainMenuOpened.connect(func(): visible = false)

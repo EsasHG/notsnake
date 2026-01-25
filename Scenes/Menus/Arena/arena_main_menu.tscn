@@ -1,0 +1,420 @@
+[gd_scene load_steps=17 format=3 uid="uid://bo42loyctrla7"]
+
+[ext_resource type="Script" uid="uid://csbd7v1lu5ia4" path="res://Scenes/Menus/Arena/arena_main_menu.gd" id="1_iw7kp"]
+[ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="2_l1pdr"]
+[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/Map.gd" id="3_v1cxu"]
+[ext_resource type="Resource" uid="uid://sctscfmi6mda" path="res://Scenes/Maps/Arena/Arena.tres" id="4_uqunw"]
+[ext_resource type="Resource" uid="uid://dcj6sgelx8ixk" path="res://Scenes/Maps/Arena/Square_Arena.tres" id="5_mrvwy"]
+[ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="6_x1slo"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="7_dnubf"]
+[ext_resource type="FontFile" uid="uid://37gbdvnlba5u" path="res://Assets/UI/Fonts/Herofire-Regular.ttf" id="8_3jh0s"]
+[ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="9_tnk5f"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="10_bhhod"]
+[ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/settings.tscn" id="11_gbl5x"]
+[ext_resource type="PackedScene" uid="uid://dgcfowugwe1op" path="res://Scenes/Menus/Arena/player_slot.tscn" id="12_mjnm4"]
+[ext_resource type="Script" uid="uid://c180npg2ssksp" path="res://Scripts/game_settings_container.gd" id="13_pdc06"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cp0ys"]
+bg_color = Color(0, 0, 0, 0.1764706)
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhxw7"]
+bg_color = Color(0, 0, 0, 0.270588)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 0.270588)
+
+[node name="ArenaMainMenu" type="Control" node_paths=PackedStringArray("playerSlots")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("1_iw7kp")
+playerSlots = [NodePath("PlayerSlots/PlayerSlot"), NodePath("PlayerSlots/PlayerSlot2"), NodePath("PlayerSlots/PlayerSlot3"), NodePath("PlayerSlots/PlayerSlot4")]
+buttonTheme = ExtResource("2_l1pdr")
+levels = Array[ExtResource("3_v1cxu")]([ExtResource("4_uqunw"), ExtResource("5_mrvwy")])
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -225.0
+offset_top = 48.0
+offset_right = 225.0
+offset_bottom = 348.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("6_x1slo")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ArenaLabel" type="Label" parent="Logo"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -347.5
+offset_top = -258.0
+offset_right = 347.5
+offset_bottom = 233.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 0.0018129945
+theme = ExtResource("7_dnubf")
+theme_override_colors/font_color = Color(0.6460436, 0.09575621, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("8_3jh0s")
+theme_override_font_sizes/font_size = 247
+text = "ARENA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+visible = false
+z_index = -4
+layout_mode = 0
+offset_right = 1937.122
+offset_bottom = 1512.0
+mouse_filter = 2
+texture = ExtResource("9_tnk5f")
+expand_mode = 1
+
+[node name="Panel2" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cy8ve")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+z_index = -4
+layout_mode = 0
+offset_right = 1891.0
+offset_bottom = 1476.0
+mouse_filter = 2
+texture = ExtResource("9_tnk5f")
+expand_mode = 1
+
+[node name="MainButtons" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -214.0
+offset_right = 199.0
+offset_bottom = -164.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Start" type="Button" parent="MainButtons"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+text = "Start"
+script = ExtResource("10_bhhod")
+
+[node name="Settings" type="Button" parent="MainButtons"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+theme_override_font_sizes/font_size = 19
+text = "Settings"
+script = ExtResource("10_bhhod")
+
+[node name="Quit" type="Button" parent="MainButtons"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+theme_override_font_sizes/font_size = 19
+text = "Quit"
+script = ExtResource("10_bhhod")
+
+[node name="SettingsContainer" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -113.5
+offset_right = 68.5
+offset_bottom = 113.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cp0ys")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsContainer"]
+layout_mode = 2
+
+[node name="SettingsScreen" parent="SettingsContainer/VBoxContainer" instance=ExtResource("11_gbl5x")]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="SettingsContainer/VBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+text = "Back"
+script = ExtResource("10_bhhod")
+
+[node name="LevelSelectScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelectScreen"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="LevelSelectScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yhxw7")
+
+[node name="LevelButtons" type="HFlowContainer" parent="LevelSelectScreen/VBoxContainer/PanelContainer"]
+layout_mode = 2
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="LevelSelectScreen/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="Back" type="Button" parent="LevelSelectScreen/VBoxContainer/ButtonContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+text = "Back"
+script = ExtResource("10_bhhod")
+
+[node name="PlayerSlots" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -50.0
+offset_right = 206.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="PlayerSlot" parent="PlayerSlots" instance=ExtResource("12_mjnm4")]
+layout_mode = 2
+
+[node name="PlayerSlot2" parent="PlayerSlots" instance=ExtResource("12_mjnm4")]
+layout_mode = 2
+playerNr = 1
+
+[node name="PlayerSlot3" parent="PlayerSlots" instance=ExtResource("12_mjnm4")]
+layout_mode = 2
+playerNr = 2
+
+[node name="PlayerSlot4" parent="PlayerSlots" instance=ExtResource("12_mjnm4")]
+layout_mode = 2
+playerNr = 3
+
+[node name="GameSettingsContainer" type="Panel" parent="."]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -250.0
+offset_right = 200.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_pdc06")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameSettingsContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.5
+offset_top = -29.0
+offset_right = 85.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="GameSettingsContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+text = "Game mode:"
+horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="GameSettingsContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+selected = 0
+allow_reselect = true
+item_count = 3
+popup/item_0/text = "Last Dog Standing"
+popup/item_0/id = 0
+popup/item_1/text = "Longest dog"
+popup/item_1/id = 1
+popup/item_2/text = "High score"
+popup/item_2/id = 2
+
+[node name="LivesContainer" type="VBoxContainer" parent="GameSettingsContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Lives" type="Label" parent="GameSettingsContainer/VBoxContainer/LivesContainer"]
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+text = "Lives:"
+horizontal_alignment = 1
+
+[node name="LivesSelector" type="HBoxContainer" parent="GameSettingsContainer/VBoxContainer/LivesContainer"]
+layout_mode = 2
+theme_override_constants/separation = 19
+alignment = 1
+
+[node name="Button_minus" type="Button" parent="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+focus_neighbor_right = NodePath("../Button_plus")
+theme = ExtResource("7_dnubf")
+text = "-"
+
+[node name="LivesLabel" type="Label" parent="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector"]
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+theme_override_font_sizes/font_size = 40
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button_plus" type="Button" parent="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+focus_neighbor_left = NodePath("../Button_minus")
+theme = ExtResource("7_dnubf")
+text = "+
+"
+
+[node name="TimeContainer" type="VBoxContainer" parent="GameSettingsContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Time" type="Label" parent="GameSettingsContainer/VBoxContainer/TimeContainer"]
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+text = "Round Length:"
+horizontal_alignment = 1
+
+[node name="TimeSelector" type="HBoxContainer" parent="GameSettingsContainer/VBoxContainer/TimeContainer"]
+layout_mode = 2
+theme_override_constants/separation = 19
+alignment = 1
+
+[node name="TimeButton_minus" type="Button" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+focus_neighbor_right = NodePath("../TimeButton_plus")
+theme = ExtResource("7_dnubf")
+text = "-"
+
+[node name="TimeLabel" type="Label" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector"]
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+theme_override_font_sizes/font_size = 40
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Minutes" type="Label" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector"]
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+theme_override_font_sizes/font_size = 28
+text = "minute"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimeButton_plus" type="Button" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+focus_neighbor_left = NodePath("../TimeButton_minus")
+theme = ExtResource("7_dnubf")
+text = "+
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameSettingsContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="GameSettingsContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+text = "Start"
+script = ExtResource("10_bhhod")
+
+[node name="GameSettingsBack" type="Button" parent="GameSettingsContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("7_dnubf")
+text = "Back"
+script = ExtResource("10_bhhod")
+
+[connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainButtons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="SettingsContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="LevelSelectScreen/VBoxContainer/ButtonContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="item_selected" from="GameSettingsContainer/VBoxContainer/OptionButton" to="GameSettingsContainer" method="_on_option_button_item_selected"]
+[connection signal="pressed" from="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector/Button_minus" to="GameSettingsContainer" method="_on_button_minus_pressed"]
+[connection signal="pressed" from="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector/Button_plus" to="GameSettingsContainer" method="_on_button_plus_pressed"]
+[connection signal="pressed" from="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector/TimeButton_minus" to="GameSettingsContainer" method="_on_time_button_minus_pressed"]
+[connection signal="pressed" from="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector/TimeButton_plus" to="GameSettingsContainer" method="_on_time_button_plus_pressed"]
+[connection signal="pressed" from="GameSettingsContainer/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_game_settings_start_button_pressed"]
+[connection signal="pressed" from="GameSettingsContainer/VBoxContainer/HBoxContainer/StartButton" to="GameSettingsContainer" method="_on_start_button_pressed"]
+[connection signal="pressed" from="GameSettingsContainer/VBoxContainer/HBoxContainer/GameSettingsBack" to="." method="_on_game_settings_back_pressed"]

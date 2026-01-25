@@ -186,11 +186,11 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="PlayerDog" type="Area2D"]
+[node name="PlayerDog" type="Area2D" groups=["Dangers"]]
 script = ExtResource("1_hgq6l")
 MOVE_SPEED = 300
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Dangers"]]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_7we7l")
 
@@ -211,6 +211,9 @@ stream = ExtResource("4_7e683")
 bus = &"SFX"
 
 [node name="Hats" type="Node2D" parent="Head"]
+
+[node name="HatNone" type="Sprite2D" parent="Head/Hats"]
+visible = false
 
 [node name="HatChristmas" type="Sprite2D" parent="Head/Hats"]
 visible = false
@@ -240,9 +243,9 @@ texture = ExtResource("8_l1xol")
 visible = false
 
 [node name="Arrow" type="Sprite2D" parent="Head/ArrowHolder"]
-position = Vector2(1.88294e-13, 53)
+position = Vector2(0, 43.465)
 rotation = 1.5708
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.03, 0.04)
 texture = ExtResource("9_50el2")
 
 [node name="Butt" type="Area2D" parent="."]
@@ -252,7 +255,6 @@ position = Vector2(0, -27)
 position = Vector2(0, -5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qqgea")
-disabled = true
 
 [node name="ButtSprite" type="Sprite2D" parent="Butt"]
 z_index = 1

@@ -18,7 +18,8 @@ func _ready() -> void:
 	tap_controls.set_pressed_no_signal(!GameSettings.holdControls)
 	show_log.set_pressed_no_signal(Logging.isLogWindowVisible())
 	visibility_changed.connect(_on_visibility_changed)
-	googlePlayButtonsContainer.visible = GameSettings.userAuthenticated
+	if OS.has_feature("mobile"):
+		googlePlayButtonsContainer.visible = GameSettings.userAuthenticated
 
 func _on_music_mute_toggled(toggled_on: bool) -> void:
 	GameSettings.setMusicMuted(toggled_on)
@@ -28,7 +29,6 @@ func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 
 func _on_hold_controls_toggled(toggled_on: bool) -> void:
 	GameSettings.setControls(toggled_on)
-
 
 func _on_achievements_button_pressed() -> void:
 	GameSettings.showAchievements()
@@ -40,7 +40,9 @@ func _on_show_log_toggled(toggled_on: bool) -> void:
 	Logging.showLogWindow(toggled_on)
 
 func _on_visibility_changed():
-	googlePlayButtonsContainer.visible = GameSettings.userAuthenticated
+	if OS.has_feature("mobile"):
+		googlePlayButtonsContainer.visible = GameSettings.userAuthenticated
+
 
 
 func _on_show_framerate_toggled(toggled_on: bool) -> void:

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_f6ncm"]
-[ext_resource type="PackedScene" uid="uid://padbn8hpbpo6" path="res://Scenes/Menus/settings.tscn" id="6_opfnp"]
+[ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/settings.tscn" id="6_opfnp"]
 [ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/Map.gd" id="8_5egv6"]
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="8_vtepg"]
 [ext_resource type="Resource" uid="uid://cibsfp4rd5p5b" path="res://Scenes/Maps/Field.tres" id="9_vtepg"]
@@ -81,7 +81,7 @@ mouse_filter = 2
 texture = ExtResource("12_12hqc")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MainButtons" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -96,7 +96,7 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="Sign In" type="Button" parent="HBoxContainer"]
+[node name="Sign In" type="Button" parent="MainButtons"]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("3_f6ncm")
@@ -109,14 +109,14 @@ text = "SIGN IN TO
 GOOGLE PLAY"
 script = ExtResource("13_vtepg")
 
-[node name="StartButton" type="Button" parent="HBoxContainer"]
+[node name="Start" type="Button" parent="MainButtons"]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("3_f6ncm")
 text = "Start"
 script = ExtResource("13_vtepg")
 
-[node name="Settings" type="Button" parent="HBoxContainer"]
+[node name="Settings" type="Button" parent="MainButtons"]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("3_f6ncm")
@@ -124,13 +124,12 @@ theme_override_font_sizes/font_size = 19
 text = "Settings"
 script = ExtResource("13_vtepg")
 
-[node name="Leaderboard" type="Button" parent="HBoxContainer"]
+[node name="Quit" type="Button" parent="MainButtons"]
 visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("3_f6ncm")
-theme_override_font_sizes/font_size = 19
-text = "Leaderboard"
+text = "Quit"
 script = ExtResource("13_vtepg")
 
 [node name="SettingsContainer" type="PanelContainer" parent="."]
@@ -163,7 +162,6 @@ text = "Back"
 script = ExtResource("13_vtepg")
 
 [node name="LevelSelectScreen" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -203,9 +201,9 @@ theme = ExtResource("3_f6ncm")
 text = "Back"
 script = ExtResource("13_vtepg")
 
-[connection signal="pressed" from="HBoxContainer/Sign In" to="." method="_on_sign_in_pressed"]
-[connection signal="pressed" from="HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="HBoxContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]
+[connection signal="pressed" from="MainButtons/Sign In" to="." method="_on_sign_in_pressed"]
+[connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainButtons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="SettingsContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="LevelSelectScreen/VBoxContainer/ButtonContainer/Back" to="." method="_on_back_pressed"]

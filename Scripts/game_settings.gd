@@ -1,7 +1,7 @@
 extends Node
 
 signal on_pickup()
-signal on_gameOver(won:bool)
+signal on_gameOver()
 signal on_gameBegin()
 signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
@@ -12,17 +12,30 @@ const AD_MANAGER = preload("uid://ck01dnrayeqyd")
 
 @export var currentScore : int = 0 
 
-const SCENE_TRANSITION = preload("res://Scenes/Menus/scene_transition.tscn")
-@onready var gameOverScreen : PackedScene = preload("uid://ck7vl8h740cpk")
-@onready var playerChar : PackedScene = preload("uid://bkjd5mneny7c1")
-@onready var pauseMenu : PackedScene = preload("res://Scenes/Menus/pause_menu.tscn")
-@onready var bubbleScene : PackedScene = preload("uid://3va5fhmx5hn4")
-@onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
+enum GAME_MODE {LAST_DOG_STANDING, TIME, SCORE, SINGLE_PLAYER}
+var game_mode :GAME_MODE = GAME_MODE.LAST_DOG_STANDING
+#var game_mode :GAME_MODE = GAME_MODE.SINGLE_PLAYER
 
+@onready var game_timer : Timer = Timer.new()
+var round_time_seconds:int = 60 
+var lives = 1
+var game_running:bool = false
+
+const SCENE_TRANSITION = preload("uid://gsu5a1hu0rjf")
+const GAME_OVER_SCREEN = preload("uid://ck7vl8h740cpk")
+const ARENA_GAME_OVER_SCREEN = preload("uid://u1gfn45v12yd")
+
+const PAUSE_MENU = preload("uid://d0eb6heqgmexf")
+const BUBBLE_CUTSCENE = preload("uid://3va5fhmx5hn4")
+
+@onready var signInClient : PlayGamesSignInClient = get_tree().root.find_child("PlayGamesSignInClient", true, false)
 @onready var mainGuiNode = get_tree().root.find_child("Gui", true, false)
 var adManager : AdManager = null
 var billingManager : BillingManager = null
 
+var player_spawners : Array[Node]
+
+var players : Array[PlayerDog]
 enum ViewportMode {PORTRAIT, LANDSCAPE}
 var viewMode:ViewportMode = ViewportMode.LANDSCAPE
 
@@ -35,26 +48,24 @@ var sfxMuted : bool = false
 var userAuthenticated = false
 var holdControls:bool = true
 var pauseButton:Button
-var achievementsCache: Array[PlayGamesAchievement]
 
 var achievementsClient : PlayGamesAchievementsClient = null
 var leaderboardsClient : PlayGamesLeaderboardsClient = null
-
 var scoreBoard : PlayGamesLeaderboard
 var leaderboardArray : Array[PlayGamesLeaderboard]
-var currentWorld : Node2D
-var uiClickPlayer : AudioStreamPlayer
+var achievementsCache: Array[PlayGamesAchievement]
+
+var currentWorld : Node2D = null
 
 func _enter_tree() -> void:
 	Logging.logMessage("GameSettings Entered tree!")
-	
 	if OS.has_feature("mobile"):
 		if GodotPlayGameServices.initialize() == GodotPlayGameServices.PlayGamesPluginError.OK:
 			Logging.logMessage("Godot play games services initialized successfully")
 		else:
 			Logging.error("Could not initialize godot play games services plugin!")
+		game_mode = GAME_MODE.SINGLE_PLAYER
 		
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	loadScore()	
 	
@@ -65,21 +76,40 @@ func _ready() -> void:
 		setMusicMuted(musicMuted)
 	
 	on_pickup.connect(increaseScore)
-	on_gameOver.connect(gameOver)
+	on_gameOver.connect(game_over)
+	on_gameBegin.connect(func(): 
+		game_running = true	
+		)
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
-	call_deferred("doDeferredSetup")	
+	call_deferred("_do_deferred_setup")	
+	game_timer.autostart = false
+	game_timer.one_shot = true
+	game_timer.wait_time = round_time_seconds
+	game_timer.timeout.connect(func(): on_gameOver.emit())
+	get_tree().root.add_child.call_deferred(game_timer)
 	
-func doDeferredSetup():
-	if(currentWorld==null):
+	
+func _do_deferred_setup():
+	if(currentWorld == null):
 		currentWorld = get_tree().root.find_child("BubbleCutscene",true,false)
 	if OS.has_feature("mobile"):
 		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
-#		get_tree().root.call_deferred("add_child", adManager)
-	
+		
 		billingManager = BILLING_MANAGER.instantiate()
 		billingManager.loading_finished.connect(_on_billing_manager_loading_finished)
 		get_tree().root.find_child("Gui",true,false).call_deferred("add_child", billingManager)
-	
+		
+		if GodotPlayGameServices.android_plugin:
+			if(signInClient):
+				signInClient.user_authenticated.connect(_on_user_authenticated)
+				signInClient.is_authenticated()
+			else:
+				Logging.error("No sign in client found!")
+		else:
+			Logging.error("Could not find Google Play Games Services plugin!")
+			signInClient = null
+			leaderboardsClient = null
+			achievementsClient = null
 	
 	var button : Button = get_tree().root.find_child("MusicMute", true, false)
 	if(is_instance_valid(button)):
@@ -92,132 +122,152 @@ func doDeferredSetup():
 		button.toggled.connect(_on_sfx_mute_toggled)
 		button.set_pressed_no_signal(sfxMuted)
 	setSFXVol(sfxVol)
-	
+
 	pauseButton = get_tree().root.find_child("PauseButton", true, false)
 	if(is_instance_valid(pauseButton)):
 		pauseButton.pressed.connect(_on_pause_pressed)
 	else:
 		Logging.error("Pause button not found in game settings!")
 		
-	if OS.has_feature("mobile"):
-		if GodotPlayGameServices.android_plugin:
-			if(signInClient):
-				signInClient.user_authenticated.connect(_on_user_authenticated)
-				signInClient.is_authenticated()
-			else:
-				Logging.error("No sign in client found!")
-		
-		else:
-			Logging.error("Could not find Google Play Games Services plugin!")
-			signInClient = null
-			leaderboardsClient = null
-			achievementsClient = null
-		
 	var scene_transition:SceneTransition = get_tree().root.find_child("SceneTransition",true,false)
-		
 	get_tree().create_timer(1.5).timeout.connect(func(): scene_transition.transition_out())
-	
+
+
 func levelSelect():
 	if(currentWorld != null):
 		currentWorld.queue_free()
-	var b = bubbleScene.instantiate()
+		currentWorld = null
+	var b = BUBBLE_CUTSCENE.instantiate()
 	b.skipEntireCutscene = true
 	b.levelSelect = true
 	currentWorld = b
 	get_tree().root.add_child(b)
+	game_running = false
 	on_mainMenuOpened.emit()
 	if adManager && adManager.is_node_ready() && adManager.admob_initialized:
 		adManager.setup_interstitial_ad()
-		
+
+
 func mainMenu():
-	
 	#TODO: Pause button dissapears when going back to the menu from a level, then back into a level
 	#not sure there's anything here doing it, just needed to write it somewhere.
-	if(currentWorld != null):
-		currentWorld.queue_free()
-	var b = bubbleScene.instantiate()
-	b.skipEntireCutscene = true
-	b.levelSelect = false
-	currentWorld = b
-	get_tree().root.add_child(b)
-	on_mainMenuOpened.emit()
-	if adManager && adManager.is_node_ready() && adManager.admob_initialized:
-		adManager.setup_interstitial_ad()
-	
-func startGame():
-	var transition : SceneTransition = _create_transition()
-	transition.transition_in_finished.connect(func(): 
+	if game_running:
+		on_gameOver.emit()
+	else:
 		if(currentWorld != null):
 			currentWorld.queue_free()
-		else:
-			Logging.logMessage("No existing world")
-		currentWorld = currentMap.Scene.instantiate()
-		get_tree().root.add_child(currentWorld)
-		
-		get_tree().create_timer(1).timeout.connect(func(): 
-			transition.transition_out()
-			on_gameBegin.emit.call_deferred()
-			)
-		
+			currentWorld = null
+		var b = BUBBLE_CUTSCENE.instantiate()
+		b.skipEntireCutscene = true
+		b.levelSelect = false
+		currentWorld = b
+		get_tree().root.add_child(b)
+		on_mainMenuOpened.emit()
+		game_running = false
+
+
+func startGame():
+	assert(!game_running)
+	GameSettings.currentScore = 0
+
+	var transition : SceneTransition = _create_transition()
+	transition.transition_in_finished.connect(_actually_start_game)
+	get_tree().create_timer(1).timeout.connect(func(): 
+		transition.transition_out()
+		on_gameBegin.emit.call_deferred()
 		)
-	#transition.transition_out_finished.connect(func():
-		#on_gameBegin.emit.call_deferred()
-		#pauseButton.visible = true
-		#)
-	if adManager && adManager.is_node_ready() && adManager.admob_initialized:
-		adManager.setup_interstitial_ad()
+
+
+func _actually_start_game():
+	if currentWorld != null:
+		currentWorld.queue_free()
+		currentWorld = null
+	else:
+		Logging.logMessage("No existing world")
+	currentWorld = currentMap.Scene.instantiate()
+	get_tree().root.add_child(currentWorld)
 	
-func gameOver(won:bool):
-	increment_achievement("Hungry dog", currentScore)
-	increment_achievement("Insatiable dog", currentScore)
+	player_spawners = get_tree().root.find_children("PlayerStart*","Node2D",true,false)
+	
+	var playerIndex = -1
+	for id in GlobalInputMap.ControllerIds:
+		playerIndex += 1
+		if(id != -1):
+			var spawner : PlayerSpawner = player_spawners[playerIndex]
+			spawner.playerID = playerIndex
+			var spawned_player : PlayerDog = spawner.spawn_player()
+			if spawned_player != null:
+				players.push_back(spawned_player)
+
+	Logging.logMessage("Starting game!")
+	match game_mode:
+		GAME_MODE.LAST_DOG_STANDING:
+			Logging.logMessage("Last dog Standing!")
+			for p in players:
+				GlobalInputMap.Player_Lives[p.playerID] = lives
+				GlobalInputMap.Player_Placement[p.playerID] = 1
+		GAME_MODE.TIME:
+			Logging.logMessage("Time: " + str(round_time_seconds))
+
+			## +1 second since _actually_start_game() happens after transition in, 
+			## but the visual timer doesn't start until on_gameBegin is emitted, 
+			## which is after transition out.
+			game_timer.start(round_time_seconds+1)
+		GAME_MODE.SCORE:
+			Logging.logMessage("Score! Round time: " + str(round_time_seconds))
+			
+			## +1 second since _actually_start_game() happens after transition in, 
+			## but the visual timer doesn't start until on_gameBegin is emitted, 
+			## which is after transition out.
+			game_timer.start(round_time_seconds+1) 
+			for p in players:
+				GlobalInputMap.Player_Score[p.playerID] = 0
+		GAME_MODE.SINGLE_PLAYER: 
+			Logging.logMessage("Single player!")
+			var p = players[0]
+			GlobalInputMap.Player_Score[p.playerID] = 0
+			GlobalInputMap.Player_Lives[p.playerID] = lives
+			
+			
+func game_over():
+	if ! game_running: 
+		return
+	if OS.has_feature("mobile"):	
+		increment_achievement("Hungry dog", currentScore)
+		increment_achievement("Insatiable dog", currentScore)
+
+	if currentWorld != null:
+		currentWorld.queue_free()
+		currentWorld = null
 	if currentScore > highScores.get_or_add(currentMap.name,0):
 		highScores[currentMap.name] = currentScore
 		saveScore()
-	
-	if leaderboardsClient:
-		Logging.logMessage("Trying to submit score: " + var_to_str(currentScore))
-		var submitted : bool = false
-		for board in leaderboardArray:
-			if board.display_name == currentMap.name:
-				scoreBoard = board
-				Logging.logMessage("Leaderboard found. Submitting Score: " + var_to_str(currentScore))
-				leaderboardsClient.submit_score(scoreBoard.leaderboard_id,currentScore)
-				submitted = true
-		if !submitted:
-			Logging.error("Could not find a leaderboard with name "+ currentMap.name + "! Score was never submitted!")
-	
-	if(achievementsClient):
-		if highScores[currentMap.name] >= 20:
-			unlock_achievement(currentMap.name)	
-			
-		if won:		#do we really need this if we unlock in playerDog?
-			var achievementNum:int = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_id == "CgkIso_-xZsLEAIQBw")
-			var ach:PlayGamesAchievement = achievementsCache[achievementNum]
-			if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED:
-				achievementsClient.unlock_achievement(ach.achievement_id)
-				
-	
-	var ui : GameOverScreen = gameOverScreen.instantiate()
-	mainGuiNode.add_child(ui)
-	ui.GameOver(won)
-	if adManager:
-		adManager.rounds_played+=1
-		if adManager.admob_initialized and adManager._can_show_interstitial_ad and adManager.interstitial_ad_loaded:
-			get_tree().create_timer(0.6).timeout.connect(func(): 
-				adManager.show_interstitial_ad()
-				)
-			get_tree().create_timer(0.75).timeout.connect(ui.showButtons) # i migth want different wait times in the future
-		else: 
-			get_tree().create_timer(0.3).timeout.connect(ui.showButtons)
-	else: 
-		get_tree().create_timer(0.3).timeout.connect(ui.showButtons)
-	GameSettings.currentScore = 0
+	var ui : GameOverScreen = null
+	if game_mode == GAME_MODE.SINGLE_PLAYER:
+		ui = GAME_OVER_SCREEN.instantiate()
+	else:
+		ui = ARENA_GAME_OVER_SCREEN.instantiate()
 		
+	mainGuiNode.add_child(ui)
+	
+	Logging.logMessage("Game over!")
+	ui.game_over(players)
+	players.clear()
+	
+	for s in player_spawners:
+		s.stop_timer()
+	player_spawners.clear()
+	GlobalInputMap.Player_Lives.clear()
+	GlobalInputMap.Player_Score.clear()
+	GlobalInputMap.Player_Placement.clear()
+	get_tree().create_timer(0.3).timeout.connect(ui.show_buttons)
+	currentScore = 0
+	
+	game_running = false
+
 func increaseScore():
 	currentScore+=1
 		
-
-
 func saveScore():
 	Logging.logMessage("Saving!")
 	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
@@ -226,16 +276,14 @@ func saveScore():
 	saveFile.store_line(JSON.stringify(saveDict))
 	Logging.logMessage("Saved!")
 	
+	
 func saveSettings(): #TODO finish this
-	pass
 	Logging.logMessage("Saving!")
 	var saveFile = FileAccess.open("user://settings.save", FileAccess.WRITE)
 	
 	var saveDict = {"musicVol" = db_to_linear(musicVol), "sfxVol" = db_to_linear(sfxVol), "musicMuted" = musicMuted, "sfxMuted" = sfxMuted, "controls" = holdControls} 
 	saveFile.store_line(JSON.stringify(saveDict))
 	Logging.logMessage("Saved!")
-	
-	
 	
 func loadScore() -> bool:
 	Logging.logMessage("Loading")
@@ -324,13 +372,16 @@ func loadSettings() -> bool:
 func getCurrentMapHighScore():
 	return highScores[currentMap.name]
 
+
 func setMusicVol(in_vol : float):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),in_vol)
 	musicVol = in_vol
 	
+	
 func setSFXVol(in_vol : float):
 	sfxVol = in_vol
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),in_vol)
+
 
 func setMusicMuted(muted:bool):
 	Logging.logMessage("Setting music muted to " + str(muted))
@@ -376,51 +427,41 @@ func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 func _on_pause_pressed():
 	Logging.logMessage("Pausing game")
 	
-	var pauseScreen = pauseMenu.instantiate()
+	var pauseScreen = PAUSE_MENU.instantiate()
 	$"../Main/CanvasLayer/Gui".add_child(pauseScreen)
-	
-	if(not is_instance_valid(pauseButton)):
-		pauseButton = get_tree().root.find_child("PauseButton",true,false)
-	pauseButton.visible = false
-				
 	get_tree().paused = true
 
-func showLeaderboard():
-	if(leaderboardsClient):
-		Logging.logMessage("Showing leaderboard " + scoreBoard.display_name)
-		leaderboardsClient.show_leaderboard(scoreBoard.leaderboard_id)
-	
-func showAllLeaderboards():
-	if(leaderboardsClient):
-		Logging.logMessage("Showing all leaderboards")
-		leaderboardsClient.show_all_leaderboards()
 
-func showAchievements():
-	if(achievementsClient):
-		Logging.logMessage("Showing achievements")
-		achievementsClient.show_achievements()
-
-
-func _get_achievement(achievementName:String) -> PlayGamesAchievement:
-		var achievementNum = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(achievementName))
-		return achievementsCache[achievementNum]
-#Should probably do something like save achievement unlocks and progress locally, 
-#so we can instantly unlock things if players authenticate after playing for a while?
-func unlock_achievement(achievementName:String):
-	if userAuthenticated and achievementsClient and achievementsCache.size()>0:
-		var ach: PlayGamesAchievement = _get_achievement(achievementName)
-		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED: 
-			Logging.logMessage("Score is high enough for achievement! Unlocking achievement " + ach.achievement_name)
-			achievementsClient.unlock_achievement(ach.achievement_id)
-		else:
-			Logging.logMessage("Score is high enough for achievement, and achievement is already unlocked! " + ach.achievement_name)
-
-func increment_achievement(achievementName:String, amount:int):
-	if userAuthenticated and achievementsClient and achievementsCache.size()>0:
-		var ach:PlayGamesAchievement = _get_achievement(achievementName)
-		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED:
-			Logging.logMessage("Incrementing achievement " + ach.achievement_name)
-			achievementsClient.increment_achievement(ach.achievement_id, amount)
+func _on_viewport_size_changed():
+	var viewportSize:Vector2 = get_viewport().size
+	Logging.logMessage("Viewport size: " + str(get_viewport().size))
+	if viewportSize.x > viewportSize.y:
+		viewMode = ViewportMode.LANDSCAPE
+	else:
+		viewMode = ViewportMode.PORTRAIT
+		
+		
+func player_lost(player : PlayerDog) -> void:
+	if !game_running:
+		return
+	match game_mode:
+		GAME_MODE.LAST_DOG_STANDING:
+			if GlobalInputMap.Player_Lives.has(player.playerID):
+				if GlobalInputMap.Player_Lives[player.playerID] > 1:
+					GlobalInputMap.Player_Lives[player.playerID] -=1
+					player_spawners[player.playerID].start_timer()
+					players.erase(player)
+				else:
+					GlobalInputMap.Player_Placement[player.playerID] = players.size()+1
+					if players.size() <= 1:
+						on_gameOver.emit()
+						players.clear()
+		GAME_MODE.TIME:
+			player_spawners[player.playerID].start_timer()
+			players.erase(player)
+		GAME_MODE.SINGLE_PLAYER:
+			on_gameOver.emit()
+			
 	
 func _on_user_authenticated(is_authenticated: bool) -> void:
 	if is_authenticated:
@@ -495,14 +536,43 @@ func _on_achievements_loaded(achievements: Array[PlayGamesAchievement]) -> void:
 		if highScores[key] >= 20:
 			unlock_achievement(key)
 			
-func _on_viewport_size_changed():
-	var viewportSize:Vector2 = get_viewport().size
-	Logging.logMessage("Viewport size: " + str(get_viewport().size))
-	if viewportSize.x > viewportSize.y:
-		viewMode = ViewportMode.LANDSCAPE
-	else:
-		viewMode = ViewportMode.PORTRAIT
-
 func _on_billing_manager_loading_finished() -> void:
 	if adManager:
 		adManager.initialize() 
+
+func showLeaderboard():
+	if(leaderboardsClient):
+		Logging.logMessage("Showing leaderboard " + scoreBoard.display_name)
+		leaderboardsClient.show_leaderboard(scoreBoard.leaderboard_id)
+	
+func showAllLeaderboards():
+	if(leaderboardsClient):
+		Logging.logMessage("Showing all leaderboards")
+		leaderboardsClient.show_all_leaderboards()
+
+func showAchievements():
+	if(achievementsClient):
+		Logging.logMessage("Showing achievements")
+		achievementsClient.show_achievements()
+
+
+func _get_achievement(achievementName:String) -> PlayGamesAchievement:
+		var achievementNum = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(achievementName))
+		return achievementsCache[achievementNum]
+#Should probably do something like save achievement unlocks and progress locally, 
+#so we can instantly unlock things if players authenticate after playing for a while?
+func unlock_achievement(achievementName:String):
+	if userAuthenticated and achievementsClient and achievementsCache.size()>0:
+		var ach: PlayGamesAchievement = _get_achievement(achievementName)
+		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED: 
+			Logging.logMessage("Score is high enough for achievement! Unlocking achievement " + ach.achievement_name)
+			achievementsClient.unlock_achievement(ach.achievement_id)
+		else:
+			Logging.logMessage("Score is high enough for achievement, and achievement is already unlocked! " + ach.achievement_name)
+
+func increment_achievement(achievementName:String, amount:int):
+	if userAuthenticated and achievementsClient and achievementsCache.size()>0:
+		var ach:PlayGamesAchievement = _get_achievement(achievementName)
+		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED:
+			Logging.logMessage("Incrementing achievement " + ach.achievement_name)
+			achievementsClient.increment_achievement(ach.achievement_id, amount)

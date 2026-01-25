@@ -1,8 +1,9 @@
 [gd_resource type="Resource" script_class="Map" load_steps=4 format=3 uid="uid://cibsfp4rd5p5b"]
 
-[ext_resource type="PackedScene" uid="uid://bmtfcin4sha1p" path="res://Scenes/Maps/TutorialMap.tscn" id="1_b05gc"]
+[ext_resource type="PackedScene" uid="uid://bmtfcin4sha1p" path="res://Scenes/Maps/Field_Map.tscn" id="1_b05gc"]
 [ext_resource type="Texture2D" uid="uid://dqg0n4l7w438o" path="res://Assets/Icons/Tutorial_Map.png" id="2_hohf5"]
-[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="3_q7ys8"]
+[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/Map.gd" id="3_q7ys8"]
+
 
 
 [resource]
