@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://df6v31n3ooicl"]
+
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="1_bxlk4"]
+[ext_resource type="Script" uid="uid://drepaxmc1i3o1" path="res://Scripts/back_button.gd" id="2_5l65n"]
+
+[node name="Back" type="Button"]
+custom_minimum_size = Vector2(130, 50)
+theme = ExtResource("1_bxlk4")
+text = "Back"
+script = ExtResource("2_5l65n")

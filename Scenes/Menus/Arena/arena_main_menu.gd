@@ -7,16 +7,13 @@ const ARENA = preload("uid://sctscfmi6mda")
 @onready var player_slots_container: HBoxContainer = $PlayerSlots
 @onready var game_settings_container: Panel = $GameSettingsContainer
 
-
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("MenuCancel") and event.device not in GlobalInputMap.ControllerIds:
-		if level_select_screen.visible:
-			_on_back_pressed()
-		elif game_settings_container.visible:
-			_on_game_settings_back_pressed()	
+		if level_select_screen.visible or game_settings_container.visible:
+			UINavigator.back()
 		elif ! menu_active:
-			reopen_menu_screen()
-	
+			UINavigator.back()
+			menu_active = true
 	if menu_active:
 		return
 	
@@ -34,35 +31,18 @@ func start_game() -> void:
 	queue_free()
 
 func _on_start_button_pressed() -> void:
-	open_game_settings()
+	UINavigator.open(game_settings_container,true)
 
 func open_game_settings() -> void:
-	hide_all()
-	game_settings_container.visible = true
-
-func _on_back_pressed() -> void:
-	hide_all()
-	game_settings_container.visible = true
+	UINavigator.open(game_settings_container,true)
 
 func _on_map_selected(scene:Map): 
 	level_selected_sound.play()
 	GameSettings.currentMap = scene
-	menu_deactivated()
-
-func menu_deactivated() -> void:
-	hide_all()
 	menu_active = false
-	player_slots_container.visible = true
+	UINavigator.open(player_slots_container,true)
 
-func hide_all() -> void:
-	super()
-	player_slots_container.visible = false
-	game_settings_container.visible = false
 
 func _on_game_settings_start_button_pressed() -> void:
-	open_level_select()
-
-func _on_game_settings_back_pressed() -> void:
-	hide_all()
-	buttons.visible = true
-	start_button.grab_focus()
+	UINavigator.open(level_select_screen,true)
+	#open_level_select()

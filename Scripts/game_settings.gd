@@ -13,8 +13,8 @@ const AD_MANAGER = preload("uid://ck01dnrayeqyd")
 @export var currentScore : int = 0 
 
 enum GAME_MODE {LAST_DOG_STANDING, TIME, SCORE, SINGLE_PLAYER}
-var game_mode :GAME_MODE = GAME_MODE.LAST_DOG_STANDING
-#var game_mode :GAME_MODE = GAME_MODE.SINGLE_PLAYER
+#var game_mode :GAME_MODE = GAME_MODE.LAST_DOG_STANDING
+var game_mode :GAME_MODE = GAME_MODE.SINGLE_PLAYER
 
 @onready var game_timer : Timer = Timer.new()
 var round_time_seconds:int = 60 
@@ -427,8 +427,9 @@ func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 func _on_pause_pressed():
 	Logging.logMessage("Pausing game")
 	
-	var pauseScreen = PAUSE_MENU.instantiate()
-	$"../Main/CanvasLayer/Gui".add_child(pauseScreen)
+	#var pauseScreen = PAUSE_MENU.instantiate()
+	#$"../Main/CanvasLayer/Gui".add_child(pauseScreen)
+	UINavigator.open_from_scene(PAUSE_MENU)
 	get_tree().paused = true
 
 

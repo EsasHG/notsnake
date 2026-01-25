@@ -37,6 +37,7 @@ var ready_pressed = false
 var controls = true
 var can_move_left_timer: Timer
 var can_move_right_timer : Timer
+
 func _ready() -> void:
 		
 	GlobalInputMap.ControllerIds = [-1, -1, -1, -1];
@@ -214,15 +215,17 @@ func unselect_character():
 	
 func _on_ready_pressed() -> void:
 	ready_pressed = true
-	options_panel.visible = false;
-	ready_label.visible = true;
+	UINavigator.open(ready_label, true)	
+	#options_panel.visible = false;
+	#ready_label.visible = true;
 	GlobalInputMap.Player_Controls_Selected[playerNr] = controls
 	head.frame = 0
 	
 func unpress_ready() -> void:
+	UINavigator.back()
 	ready_pressed = false
-	ready_label.visible = false
-	options_panel.visible = true;
+#	ready_label.visible = false
+#	options_panel.visible = true;
 	GlobalInputMap.Player_Controls_Selected.erase(playerNr)
 	head.frame = 1
 	

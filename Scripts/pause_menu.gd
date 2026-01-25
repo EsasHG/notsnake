@@ -10,7 +10,6 @@ func _ready() -> void:
 	pass
 
 func _on_resume_pressed() -> void:
-	
 	$Panel.visible = false
 	$Countdown.visible = true
 	var tween = CreateCountdownTween()
@@ -36,7 +35,7 @@ func _on_resume_pressed() -> void:
 				get_tree().paused = false
 				
 				tGo.tween_callback(func():
-					queue_free()
+					UINavigator.back()
 				)
 			)
 		)

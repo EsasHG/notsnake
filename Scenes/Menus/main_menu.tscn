@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://jdiyiwxj7kh0"]
+[gd_scene load_steps=19 format=3 uid="uid://jdiyiwxj7kh0"]
 
 [ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://c786inhs2hhtg" path="res://Scenes/Maps/Small.tres" id="12_wyh8j"]
 [ext_resource type="Resource" uid="uid://oa287witflah" path="res://Scenes/Maps/Forest.tres" id="13_ujyyl"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="13_vtepg"]
+[ext_resource type="PackedScene" uid="uid://df6v31n3ooicl" path="res://Scenes/Menus/back_button.tscn" id="15_0xbgx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
 bg_color = Color(0, 0, 0, 1)
@@ -154,14 +155,11 @@ layout_mode = 2
 [node name="SettingsScreen" parent="SettingsContainer/VBoxContainer" instance=ExtResource("6_opfnp")]
 layout_mode = 2
 
-[node name="Back" type="Button" parent="SettingsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(130, 50)
+[node name="Back" parent="SettingsContainer/VBoxContainer" instance=ExtResource("15_0xbgx")]
 layout_mode = 2
-theme = ExtResource("3_f6ncm")
-text = "Back"
-script = ExtResource("13_vtepg")
 
 [node name="LevelSelectScreen" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -194,16 +192,10 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Back" type="Button" parent="LevelSelectScreen/VBoxContainer/ButtonContainer"]
-custom_minimum_size = Vector2(130, 50)
+[node name="Back" parent="LevelSelectScreen/VBoxContainer/ButtonContainer" instance=ExtResource("15_0xbgx")]
 layout_mode = 2
-theme = ExtResource("3_f6ncm")
-text = "Back"
-script = ExtResource("13_vtepg")
 
 [connection signal="pressed" from="MainButtons/Sign In" to="." method="_on_sign_in_pressed"]
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MainButtons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="SettingsContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="LevelSelectScreen/VBoxContainer/ButtonContainer/Back" to="." method="_on_back_pressed"]

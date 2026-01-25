@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bo42loyctrla7"]
+[gd_scene load_steps=18 format=3 uid="uid://bo42loyctrla7"]
 
 [ext_resource type="Script" uid="uid://csbd7v1lu5ia4" path="res://Scenes/Menus/Arena/arena_main_menu.gd" id="1_iw7kp"]
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="2_l1pdr"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="9_tnk5f"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="10_bhhod"]
 [ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/settings.tscn" id="11_gbl5x"]
+[ext_resource type="PackedScene" uid="uid://df6v31n3ooicl" path="res://Scenes/Menus/back_button.tscn" id="12_l1pdr"]
 [ext_resource type="PackedScene" uid="uid://dgcfowugwe1op" path="res://Scenes/Menus/Arena/player_slot.tscn" id="12_mjnm4"]
 [ext_resource type="Script" uid="uid://c180npg2ssksp" path="res://Scripts/game_settings_container.gd" id="13_pdc06"]
 
@@ -117,7 +118,6 @@ texture = ExtResource("9_tnk5f")
 expand_mode = 1
 
 [node name="MainButtons" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -177,12 +177,8 @@ layout_mode = 2
 [node name="SettingsScreen" parent="SettingsContainer/VBoxContainer" instance=ExtResource("11_gbl5x")]
 layout_mode = 2
 
-[node name="Back" type="Button" parent="SettingsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(130, 50)
+[node name="Back" parent="SettingsContainer/VBoxContainer" instance=ExtResource("12_l1pdr")]
 layout_mode = 2
-theme = ExtResource("7_dnubf")
-text = "Back"
-script = ExtResource("10_bhhod")
 
 [node name="LevelSelectScreen" type="Control" parent="."]
 visible = false
@@ -218,12 +214,8 @@ layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Back" type="Button" parent="LevelSelectScreen/VBoxContainer/ButtonContainer"]
-custom_minimum_size = Vector2(130, 50)
+[node name="Back" parent="LevelSelectScreen/VBoxContainer/ButtonContainer" instance=ExtResource("12_l1pdr")]
 layout_mode = 2
-theme = ExtResource("7_dnubf")
-text = "Back"
-script = ExtResource("10_bhhod")
 
 [node name="PlayerSlots" type="HBoxContainer" parent="."]
 visible = false
@@ -257,6 +249,7 @@ layout_mode = 2
 playerNr = 3
 
 [node name="GameSettingsContainer" type="Panel" parent="."]
+visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
 anchors_preset = 8
@@ -398,18 +391,12 @@ theme = ExtResource("7_dnubf")
 text = "Start"
 script = ExtResource("10_bhhod")
 
-[node name="GameSettingsBack" type="Button" parent="GameSettingsContainer/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(130, 50)
+[node name="Back" parent="GameSettingsContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_l1pdr")]
 layout_mode = 2
-theme = ExtResource("7_dnubf")
-text = "Back"
-script = ExtResource("10_bhhod")
 
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MainButtons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="SettingsContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="LevelSelectScreen/VBoxContainer/ButtonContainer/Back" to="." method="_on_back_pressed"]
 [connection signal="item_selected" from="GameSettingsContainer/VBoxContainer/OptionButton" to="GameSettingsContainer" method="_on_option_button_item_selected"]
 [connection signal="pressed" from="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector/Button_minus" to="GameSettingsContainer" method="_on_button_minus_pressed"]
 [connection signal="pressed" from="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector/Button_plus" to="GameSettingsContainer" method="_on_button_plus_pressed"]
@@ -417,4 +404,3 @@ script = ExtResource("10_bhhod")
 [connection signal="pressed" from="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector/TimeButton_plus" to="GameSettingsContainer" method="_on_time_button_plus_pressed"]
 [connection signal="pressed" from="GameSettingsContainer/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_game_settings_start_button_pressed"]
 [connection signal="pressed" from="GameSettingsContainer/VBoxContainer/HBoxContainer/StartButton" to="GameSettingsContainer" method="_on_start_button_pressed"]
-[connection signal="pressed" from="GameSettingsContainer/VBoxContainer/HBoxContainer/GameSettingsBack" to="." method="_on_game_settings_back_pressed"]

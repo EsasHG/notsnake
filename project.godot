@@ -22,6 +22,7 @@ GameSettings="*res://Scripts/game_settings.gd"
 Logging="*res://Scripts/logging.gd"
 GlobalInputMap="*res://Scenes/Menus/Arena/global_input_map.gd"
 GodotPlayGameServices="*res://addons/GodotPlayGameServices/scripts/autoloads/godot_play_game_services.gd"
+UINavigator="*res://Scripts/ui_navigator.gd"
 
 [display]
 

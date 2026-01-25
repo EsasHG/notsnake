@@ -34,9 +34,7 @@ func _ready() -> void:
 		if sign_in_button:
 			sign_in_button.visible = false
 	visible = true
-	hide_all()
 	buttons.visible = true
-	#$Panel2.visible = true
 	get_tree().create_timer(0.5).timeout.connect(func():	
 		var blackPanelTween = get_tree().create_tween()
 		blackPanelTween.set_ease(Tween.EASE_IN)
@@ -73,17 +71,15 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("MenuCancel") and event.device not in GlobalInputMap.ControllerIds:
 		if level_select_screen.visible:
-			_on_back_pressed()
+			UINavigator.back()
 		elif ! menu_active:
-			reopen_menu_screen()
-	
+			menu_active = true
 	if menu_active:
 		return
 	if event.device not in GlobalInputMap.ControllerIds && event.is_action_released("MenuSelect"):
 		var index = 0;
 		while GlobalInputMap.ControllerIds[index] != -1 && index < 4:
 			index += 1;
-
 
 func start_game() -> void:
 	GlobalInputMap.ControllerIds = [0,-1,-1,-1]
@@ -93,74 +89,40 @@ func start_game() -> void:
 	GameSettings.startGame()
 	queue_free()
 
-
 func menu_out():
 	$Logo.visible = false
 	start_button.visible = false
 	quit_button.visible = false
 
-
 func _on_user_authenticated(is_authenticated: bool) -> void:
 	Logging.logMessage("Main menu: On user authenticated: " + str(is_authenticated))
 	sign_in_button.visible = !is_authenticated
 	
-	
 func _on_start_button_pressed() -> void:
 	open_level_select()
 	
-	
 func open_level_select():
 	level_buttons.get_children()[0].grab_focus()
-	hide_all()
-	level_select_screen.visible = true
-	
+	#hide_all()
+	UINavigator.open(level_select_screen,true)
 	
 func _on_settings_pressed() -> void:
-	hide_all()
-	settings_container.visible = true
-
-
-func _on_back_pressed() -> void:
-	hide_all()
-	buttons.visible = true
-
+	UINavigator.open(settings_container,true)
 
 func _on_map_selected(scene:Map): 
 	level_selected_sound.play()
 	GameSettings.currentMap = scene
-	menu_deactivated()
+	menu_active = false
 	start_game()
-
 
 func _on_quit_pressed() -> void:
 	get_tree().quit();
-
-
-func reopen_menu_screen():
-	menu_active = true
-	#buttons.visible = true
-	hide_all()
-	level_select_screen.visible = true
-	level_buttons.get_children()[0].grab_focus()
-#	start_button.grab_focus()
-	
-func menu_deactivated() -> void:
-	hide_all()
-	menu_active = false
-
-
-func hide_all() -> void:
-	buttons.visible = false
-	level_select_screen.visible = false
-	settings_container.visible = false
-
 
 func _on_sign_in_pressed() -> void:
 	if(GameSettings.signInClient):
 		Logging.logMessage("Main menu: Signing in")
 		GameSettings.signInClient.sign_in()
 	pass # Replace with function body.
-
 
 func _on_leaderboard_pressed() -> void:
 	GameSettings.showAllLeaderboards()
