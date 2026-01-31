@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3b2ntiks10q5"]
+[gd_scene format=3 uid="uid://d3b2ntiks10q5"]
 
 [ext_resource type="Script" uid="uid://c88hm3dixahy8" path="res://Scripts/scene_transition.gd" id="1_cr6kr"]
 [ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/Player/player_dog.tscn" id="2_pmbux"]
@@ -7,7 +7,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5p7fk"]
 bg_color = Color(0, 0, 0, 1)
 
-[node name="SceneTransition" type="Control"]
+[node name="SceneTransition" type="Control" unique_id=664662880]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cr6kr")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=675043885]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5p7fk")
 
-[node name="Control" type="Control" parent="Panel"]
+[node name="Control" type="Control" parent="Panel" unique_id=375603043]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,10 +42,10 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.75, 0.75)
 
-[node name="BubbleDog" parent="Panel/Control" instance=ExtResource("2_pmbux")]
+[node name="BubbleDog" parent="Panel/Control" unique_id=1563776740 instance=ExtResource("2_pmbux")]
 OVERALL_SPEED = 1.1
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="Label" type="Label" parent="Panel" unique_id=1171784781]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

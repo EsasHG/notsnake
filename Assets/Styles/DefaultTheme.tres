@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=35 format=3 uid="uid://caljym4n8ghq8"]
+[gd_resource type="Theme" format=3 uid="uid://caljym4n8ghq8"]
 
 [ext_resource type="StyleBox" uid="uid://ktqcdhd8okf4" path="res://Assets/Styles/empty_button_style_box_texture.tres" id="1_2bk5u"]
 [ext_resource type="FontFile" uid="uid://dob3c4yaduo05" path="res://Assets/UI/Fonts/SuperEnjoy-vm46O.ttf" id="1_sw1jp"]

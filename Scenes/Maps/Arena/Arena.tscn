@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://3q2e5hhy65st"]
+[gd_scene format=3 uid="uid://3q2e5hhy65st"]
 
 [ext_resource type="Script" uid="uid://be5gopm2b1v5a" path="res://Scripts/player_spawner.gd" id="1_n6ye7"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="3_akw0j"]
@@ -10,29 +10,29 @@ size = Vector2(1980, 565.75)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xehlq"]
 size = Vector2(261, 1561)
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=1160671191]
 
-[node name="PlayerStart_1" type="Node2D" parent="."]
+[node name="PlayerStart_1" type="Node2D" parent="." unique_id=2014230386]
 position = Vector2(-730, -340)
 script = ExtResource("1_n6ye7")
 spawn_on_start = false
 
-[node name="PlayerStart_2" type="Node2D" parent="."]
+[node name="PlayerStart_2" type="Node2D" parent="." unique_id=1765438553]
 position = Vector2(730, -340)
 script = ExtResource("1_n6ye7")
 spawn_on_start = false
 
-[node name="PlayerStart_3" type="Node2D" parent="."]
+[node name="PlayerStart_3" type="Node2D" parent="." unique_id=1166278236]
 position = Vector2(-730, 340)
 script = ExtResource("1_n6ye7")
 spawn_on_start = false
 
-[node name="PlayerStart_4" type="Node2D" parent="."]
+[node name="PlayerStart_4" type="Node2D" parent="." unique_id=2083447552]
 position = Vector2(730, 340)
 script = ExtResource("1_n6ye7")
 spawn_on_start = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=360562594]
 zoom = Vector2(1.1, 1.1)
 limit_left = -900
 limit_top = -710
@@ -43,90 +43,90 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 editor_draw_limits = true
 
-[node name="MapTutorial1" type="Sprite2D" parent="."]
+[node name="MapTutorial1" type="Sprite2D" parent="." unique_id=102515605]
 z_index = -3
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_akw0j")
 
-[node name="Walls" type="Node2D" parent="."]
+[node name="Walls" type="Node2D" parent="." unique_id=2070261129]
 visible = false
 
-[node name="TopWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+[node name="TopWall" type="Area2D" parent="Walls" unique_id=897791493 groups=["Dangers"]]
 position = Vector2(0, -907)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall" unique_id=1473736392]
 position = Vector2(0, 121.125)
 shape = SubResource("RectangleShape2D_k13ou")
 
-[node name="BottomWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+[node name="BottomWall" type="Area2D" parent="Walls" unique_id=1132268722 groups=["Dangers"]]
 position = Vector2(0, 805)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall" unique_id=2082783525]
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_k13ou")
 
-[node name="RightWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+[node name="RightWall" type="Area2D" parent="Walls" unique_id=479356653 groups=["Dangers"]]
 position = Vector2(1086, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall" unique_id=1926220118]
 position = Vector2(-35, 0)
 shape = SubResource("RectangleShape2D_xehlq")
 
-[node name="LeftWall" type="Area2D" parent="Walls" groups=["Dangers"]]
+[node name="LeftWall" type="Area2D" parent="Walls" unique_id=169126052 groups=["Dangers"]]
 visible = false
 position = Vector2(-957, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall" unique_id=1652324450]
 position = Vector2(-68, 0)
 shape = SubResource("RectangleShape2D_xehlq")
 
-[node name="PickupSpawner" type="Node2D" parent="."]
+[node name="PickupSpawner" type="Node2D" parent="." unique_id=1373977112]
 script = ExtResource("4_sljvg")
 
-[node name="PickupPoints" type="Node2D" parent="PickupSpawner"]
+[node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=1384919770]
 scale = Vector2(1.22042, 0.916599)
 
-[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1214601828]
 position = Vector2(104, 432)
 
-[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=904032295]
 position = Vector2(-304.8131, 85.097206)
 
-[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1749231662]
 position = Vector2(548.17194, 96.00708)
 
-[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1081661532]
 position = Vector2(-186.00154, 224.74388)
 
-[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=677099102]
 position = Vector2(271.21808, -327.2969)
 
-[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1124541916]
 position = Vector2(-424.44406, -159.28448)
 
-[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=328006516]
 position = Vector2(-352.3377, -406.93915)
 
-[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=590425761]
 position = Vector2(292.522, -100.371)
 
-[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1606724151]
 position = Vector2(393, 100)
 
-[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1478476114]
 position = Vector2(473.607, -133.101)
 
-[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1734007860]
 position = Vector2(-277.77322, 400.39322)
 
-[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1038133628]
 position = Vector2(172.0719, -106.91702)
 
-[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=743349563]
 position = Vector2(278, 276)
 
-[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1213338725]
 position = Vector2(-154.04533, -120.00886)
 
-[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1955233873]
 position = Vector2(-28.6786, 173.46738)

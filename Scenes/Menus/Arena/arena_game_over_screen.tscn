@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://u1gfn45v12yd"]
+[gd_scene format=3 uid="uid://u1gfn45v12yd"]
 
 [ext_resource type="Script" uid="uid://checflx6cgbvd" path="res://Scenes/Menus/Arena/arena_game_over_screen.gd" id="1_fww2u"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_cjqb1"]
@@ -13,7 +13,7 @@
 texture = SubResource("CanvasTexture_jx1af")
 modulate_color = Color(0.886275, 0.878431, 0.87451, 1)
 
-[node name="ArenaGameOverScreen" type="Control"]
+[node name="ArenaGameOverScreen" type="Control" unique_id=983769798]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_fww2u")
 
-[node name="WhiteBackgroundPanel" type="Panel" parent="."]
+[node name="WhiteBackgroundPanel" type="Panel" parent="." unique_id=1199670284]
 z_index = -3
 texture_repeat = 2
 layout_mode = 1
@@ -35,7 +35,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_yr1h0")
 
-[node name="ButtonContainer" type="HBoxContainer" parent="."]
+[node name="ButtonContainer" type="HBoxContainer" parent="." unique_id=256574603]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -50,7 +50,7 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="RetryButton" type="Button" parent="ButtonContainer"]
+[node name="RetryButton" type="Button" parent="ButtonContainer" unique_id=866540755]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -58,7 +58,7 @@ theme = ExtResource("2_cjqb1")
 text = "Retry"
 script = ExtResource("3_cgyu3")
 
-[node name="LevelSelectButton" type="Button" parent="ButtonContainer"]
+[node name="LevelSelectButton" type="Button" parent="ButtonContainer" unique_id=2051601532]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -68,7 +68,7 @@ text = "Level
 Select"
 script = ExtResource("3_cgyu3")
 
-[node name="MainMenuButton" type="Button" parent="ButtonContainer"]
+[node name="MainMenuButton" type="Button" parent="ButtonContainer" unique_id=1861003128]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -77,7 +77,7 @@ theme_override_font_sizes/font_size = 23
 text = "Main Menu"
 script = ExtResource("3_cgyu3")
 
-[node name="Leaderboard" type="Button" parent="ButtonContainer"]
+[node name="Leaderboard" type="Button" parent="ButtonContainer" unique_id=1601366102]
 visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -86,7 +86,7 @@ theme_override_font_sizes/font_size = 19
 text = "Leaderboard"
 script = ExtResource("3_cgyu3")
 
-[node name="GameOverTex" type="TextureRect" parent="."]
+[node name="GameOverTex" type="TextureRect" parent="." unique_id=2099729880]
 visible = false
 z_index = -2
 layout_mode = 1
@@ -100,7 +100,7 @@ texture = ExtResource("4_upl4f")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LongDogTex" type="TextureRect" parent="."]
+[node name="LongDogTex" type="TextureRect" parent="." unique_id=1827377968]
 visible = false
 z_index = -2
 layout_mode = 1
@@ -114,7 +114,7 @@ texture = ExtResource("5_ghhf7")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="WinnerTex" type="TextureRect" parent="."]
+[node name="WinnerTex" type="TextureRect" parent="." unique_id=981246149]
 z_index = -2
 layout_mode = 1
 anchors_preset = 15
@@ -127,7 +127,7 @@ texture = ExtResource("6_32wba")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="PlacementsContainer" type="VBoxContainer" parent="."]
+[node name="PlacementsContainer" type="VBoxContainer" parent="." unique_id=207919987]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -135,7 +135,7 @@ offset_left = 33.0
 offset_bottom = 609.0
 grow_horizontal = 2
 
-[node name="WinnerLabel" type="Label" parent="PlacementsContainer"]
+[node name="WinnerLabel" type="Label" parent="PlacementsContainer" unique_id=562710043]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_cjqb1")
@@ -143,7 +143,7 @@ theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 250
 text = "Player won!"
 
-[node name="ScoreLabelWinner" type="Label" parent="PlacementsContainer"]
+[node name="ScoreLabelWinner" type="Label" parent="PlacementsContainer" unique_id=2071657287]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("2_cjqb1")
@@ -151,10 +151,10 @@ theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 119
 text = "Player won!"
 
-[node name="2ndPlaceContainer" type="HBoxContainer" parent="PlacementsContainer"]
+[node name="2ndPlaceContainer" type="HBoxContainer" parent="PlacementsContainer" unique_id=310509669]
 layout_mode = 2
 
-[node name="Second_Label" type="Label" parent="PlacementsContainer/2ndPlaceContainer"]
+[node name="Second_Label" type="Label" parent="PlacementsContainer/2ndPlaceContainer" unique_id=943087271]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -163,7 +163,7 @@ theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "Second: "
 
-[node name="Place_2" type="Label" parent="PlacementsContainer/2ndPlaceContainer"]
+[node name="Place_2" type="Label" parent="PlacementsContainer/2ndPlaceContainer" unique_id=449691615]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_cjqb1")
@@ -171,10 +171,10 @@ theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "2"
 
-[node name="3rdPlaceContainer" type="HBoxContainer" parent="PlacementsContainer"]
+[node name="3rdPlaceContainer" type="HBoxContainer" parent="PlacementsContainer" unique_id=1974703982]
 layout_mode = 2
 
-[node name="Third_Label" type="Label" parent="PlacementsContainer/3rdPlaceContainer"]
+[node name="Third_Label" type="Label" parent="PlacementsContainer/3rdPlaceContainer" unique_id=2006973164]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -183,7 +183,7 @@ theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "Third: "
 
-[node name="Place_3" type="Label" parent="PlacementsContainer/3rdPlaceContainer"]
+[node name="Place_3" type="Label" parent="PlacementsContainer/3rdPlaceContainer" unique_id=622810786]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_cjqb1")
@@ -191,10 +191,10 @@ theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "3"
 
-[node name="4thPlaceContainer" type="HBoxContainer" parent="PlacementsContainer"]
+[node name="4thPlaceContainer" type="HBoxContainer" parent="PlacementsContainer" unique_id=729785327]
 layout_mode = 2
 
-[node name="Fourth_Label" type="Label" parent="PlacementsContainer/4thPlaceContainer"]
+[node name="Fourth_Label" type="Label" parent="PlacementsContainer/4thPlaceContainer" unique_id=334733283]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -203,7 +203,7 @@ theme_override_constants/outline_size = 16
 theme_override_font_sizes/font_size = 120
 text = "Fourth: "
 
-[node name="Place_4" type="Label" parent="PlacementsContainer/4thPlaceContainer"]
+[node name="Place_4" type="Label" parent="PlacementsContainer/4thPlaceContainer" unique_id=63744284]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_cjqb1")

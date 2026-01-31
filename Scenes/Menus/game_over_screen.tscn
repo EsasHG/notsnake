@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ck7vl8h740cpk"]
+[gd_scene format=3 uid="uid://ck7vl8h740cpk"]
 
 [ext_resource type="Script" uid="uid://dt85v1n4h7vqg" path="res://Scripts/game_over_screen.gd" id="1_st1k0"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_3eorv"]
@@ -13,7 +13,7 @@
 texture = SubResource("CanvasTexture_jx1af")
 modulate_color = Color(0.886275, 0.878431, 0.87451, 1)
 
-[node name="GameOverScreen" type="Control"]
+[node name="GameOverScreen" type="Control" unique_id=742327613]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,7 +23,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_st1k0")
 
-[node name="WhiteBackgroundPanel" type="Panel" parent="."]
+[node name="WhiteBackgroundPanel" type="Panel" parent="." unique_id=846407584]
 z_index = -3
 texture_repeat = 2
 layout_mode = 1
@@ -35,26 +35,26 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_yr1h0")
 
-[node name="ScoreLabels" type="VBoxContainer" parent="."]
+[node name="ScoreLabels" type="VBoxContainer" parent="." unique_id=1789853997]
 layout_mode = 1
 offset_left = 40.0
 offset_top = 150.0
 offset_right = 224.0
 offset_bottom = 292.0
 
-[node name="ScoreLabel" type="Label" parent="ScoreLabels"]
+[node name="ScoreLabel" type="Label" parent="ScoreLabels" unique_id=1652480004]
 layout_mode = 2
 theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 60
 text = "Score:"
 
-[node name="HighScoreLabel" type="Label" parent="ScoreLabels"]
+[node name="HighScoreLabel" type="Label" parent="ScoreLabels" unique_id=295813944]
 layout_mode = 2
 theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 40
 text = "Best:"
 
-[node name="ButtonContainer" type="HBoxContainer" parent="."]
+[node name="ButtonContainer" type="HBoxContainer" parent="." unique_id=2069789025]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -69,7 +69,7 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="RetryButton" type="Button" parent="ButtonContainer"]
+[node name="RetryButton" type="Button" parent="ButtonContainer" unique_id=1455811056]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -77,7 +77,7 @@ theme = ExtResource("2_3eorv")
 text = "Retry"
 script = ExtResource("3_3eq00")
 
-[node name="LevelSelectButton" type="Button" parent="ButtonContainer"]
+[node name="LevelSelectButton" type="Button" parent="ButtonContainer" unique_id=1249506116]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -87,7 +87,7 @@ text = "Level
 Select"
 script = ExtResource("3_3eq00")
 
-[node name="MainMenuButton" type="Button" parent="ButtonContainer"]
+[node name="MainMenuButton" type="Button" parent="ButtonContainer" unique_id=884263697]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -96,7 +96,7 @@ theme_override_font_sizes/font_size = 23
 text = "Main Menu"
 script = ExtResource("3_3eq00")
 
-[node name="Leaderboard" type="Button" parent="ButtonContainer"]
+[node name="Leaderboard" type="Button" parent="ButtonContainer" unique_id=147126916]
 visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -105,7 +105,7 @@ theme_override_font_sizes/font_size = 19
 text = "Leaderboard"
 script = ExtResource("3_3eq00")
 
-[node name="GameOverTex" type="TextureRect" parent="."]
+[node name="GameOverTex" type="TextureRect" parent="." unique_id=1096799978]
 z_index = -2
 layout_mode = 1
 anchors_preset = 15
@@ -118,7 +118,7 @@ texture = ExtResource("4_htq65")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="LongDogTex" type="TextureRect" parent="."]
+[node name="LongDogTex" type="TextureRect" parent="." unique_id=1373034331]
 visible = false
 z_index = -2
 layout_mode = 1
@@ -132,7 +132,7 @@ texture = ExtResource("5_j3nvf")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="WinnerTex" type="TextureRect" parent="."]
+[node name="WinnerTex" type="TextureRect" parent="." unique_id=1622830955]
 visible = false
 z_index = -2
 layout_mode = 1

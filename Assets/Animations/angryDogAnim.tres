@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dtci15yb371cm"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dtci15yb371cm"]
 
 [ext_resource type="Texture2D" uid="uid://c87o2mnll85xe" path="res://Assets/Obstacles/NPC_dogs/rottweiller_angryface.png" id="1_6vh43"]
 [ext_resource type="Texture2D" uid="uid://b2b7gnhbdr4tr" path="res://Assets/Obstacles/NPC_dogs/rottweiller_frame1.png" id="2_m8e0g"]

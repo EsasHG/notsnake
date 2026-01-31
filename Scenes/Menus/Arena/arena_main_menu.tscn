@@ -1,8 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bo42loyctrla7"]
+[gd_scene format=3 uid="uid://bo42loyctrla7"]
 
 [ext_resource type="Script" uid="uid://csbd7v1lu5ia4" path="res://Scenes/Menus/Arena/arena_main_menu.gd" id="1_iw7kp"]
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="2_l1pdr"]
-[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/Map.gd" id="3_v1cxu"]
+[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="3_v1cxu"]
 [ext_resource type="Resource" uid="uid://sctscfmi6mda" path="res://Scenes/Maps/Arena/Arena.tres" id="4_uqunw"]
 [ext_resource type="Resource" uid="uid://dcj6sgelx8ixk" path="res://Scenes/Maps/Arena/Square_Arena.tres" id="5_mrvwy"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="6_x1slo"]
@@ -10,7 +10,7 @@
 [ext_resource type="FontFile" uid="uid://37gbdvnlba5u" path="res://Assets/UI/Fonts/Herofire-Regular.ttf" id="8_3jh0s"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="9_tnk5f"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="10_bhhod"]
-[ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/settings.tscn" id="11_gbl5x"]
+[ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/Settings.tscn" id="11_gbl5x"]
 [ext_resource type="PackedScene" uid="uid://df6v31n3ooicl" path="res://Scenes/Menus/back_button.tscn" id="12_l1pdr"]
 [ext_resource type="PackedScene" uid="uid://dgcfowugwe1op" path="res://Scenes/Menus/Arena/player_slot.tscn" id="12_mjnm4"]
 [ext_resource type="Script" uid="uid://c180npg2ssksp" path="res://Scripts/game_settings_container.gd" id="13_pdc06"]
@@ -33,7 +33,7 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 0.270588)
 
-[node name="ArenaMainMenu" type="Control" node_paths=PackedStringArray("playerSlots")]
+[node name="ArenaMainMenu" type="Control" unique_id=855916111 node_paths=PackedStringArray("playerSlots")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,7 +48,7 @@ playerSlots = [NodePath("PlayerSlots/PlayerSlot"), NodePath("PlayerSlots/PlayerS
 buttonTheme = ExtResource("2_l1pdr")
 levels = Array[ExtResource("3_v1cxu")]([ExtResource("4_uqunw"), ExtResource("5_mrvwy")])
 
-[node name="Logo" type="TextureRect" parent="."]
+[node name="Logo" type="TextureRect" parent="." unique_id=955066783]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -63,7 +63,7 @@ texture = ExtResource("6_x1slo")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="ArenaLabel" type="Label" parent="Logo"]
+[node name="ArenaLabel" type="Label" parent="Logo" unique_id=1429016825]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -86,7 +86,7 @@ text = "ARENA"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1158324224]
 visible = false
 z_index = -4
 layout_mode = 0
@@ -96,7 +96,7 @@ mouse_filter = 2
 texture = ExtResource("9_tnk5f")
 expand_mode = 1
 
-[node name="Panel2" type="Panel" parent="."]
+[node name="Panel2" type="Panel" parent="." unique_id=260484466]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -107,7 +107,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cy8ve")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2036306269]
 visible = false
 z_index = -4
 layout_mode = 0
@@ -117,7 +117,7 @@ mouse_filter = 2
 texture = ExtResource("9_tnk5f")
 expand_mode = 1
 
-[node name="MainButtons" type="HBoxContainer" parent="."]
+[node name="MainButtons" type="HBoxContainer" parent="." unique_id=815885084]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -132,14 +132,14 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="Start" type="Button" parent="MainButtons"]
+[node name="Start" type="Button" parent="MainButtons" unique_id=552726079]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("7_dnubf")
 text = "Start"
 script = ExtResource("10_bhhod")
 
-[node name="Settings" type="Button" parent="MainButtons"]
+[node name="Settings" type="Button" parent="MainButtons" unique_id=645497661]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("7_dnubf")
@@ -147,7 +147,7 @@ theme_override_font_sizes/font_size = 19
 text = "Settings"
 script = ExtResource("10_bhhod")
 
-[node name="Quit" type="Button" parent="MainButtons"]
+[node name="Quit" type="Button" parent="MainButtons" unique_id=311710765]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("7_dnubf")
@@ -155,7 +155,7 @@ theme_override_font_sizes/font_size = 19
 text = "Quit"
 script = ExtResource("10_bhhod")
 
-[node name="SettingsContainer" type="PanelContainer" parent="."]
+[node name="SettingsContainer" type="PanelContainer" parent="." unique_id=1220086847]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -171,16 +171,16 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_cp0ys")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsContainer" unique_id=1710921389]
 layout_mode = 2
 
-[node name="SettingsScreen" parent="SettingsContainer/VBoxContainer" instance=ExtResource("11_gbl5x")]
+[node name="SettingsScreen" parent="SettingsContainer/VBoxContainer" unique_id=18665542 instance=ExtResource("11_gbl5x")]
 layout_mode = 2
 
-[node name="Back" parent="SettingsContainer/VBoxContainer" instance=ExtResource("12_l1pdr")]
+[node name="Back" parent="SettingsContainer/VBoxContainer" unique_id=658188843 instance=ExtResource("12_l1pdr")]
 layout_mode = 2
 
-[node name="LevelSelectScreen" type="Control" parent="."]
+[node name="LevelSelectScreen" type="Control" parent="." unique_id=166319414]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -189,7 +189,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelectScreen"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelectScreen" unique_id=2143626783]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -200,24 +200,24 @@ offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="LevelSelectScreen/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="LevelSelectScreen/VBoxContainer" unique_id=953477930]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_yhxw7")
 
-[node name="LevelButtons" type="HFlowContainer" parent="LevelSelectScreen/VBoxContainer/PanelContainer"]
+[node name="LevelButtons" type="HFlowContainer" parent="LevelSelectScreen/VBoxContainer/PanelContainer" unique_id=61260464]
 layout_mode = 2
 alignment = 1
 last_wrap_alignment = 2
 
-[node name="ButtonContainer" type="HBoxContainer" parent="LevelSelectScreen/VBoxContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="LevelSelectScreen/VBoxContainer" unique_id=648730193]
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
 
-[node name="Back" parent="LevelSelectScreen/VBoxContainer/ButtonContainer" instance=ExtResource("12_l1pdr")]
+[node name="Back" parent="LevelSelectScreen/VBoxContainer/ButtonContainer" unique_id=891755550 instance=ExtResource("12_l1pdr")]
 layout_mode = 2
 
-[node name="PlayerSlots" type="HBoxContainer" parent="."]
+[node name="PlayerSlots" type="HBoxContainer" parent="." unique_id=932700732]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -233,22 +233,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="PlayerSlot" parent="PlayerSlots" instance=ExtResource("12_mjnm4")]
+[node name="PlayerSlot" parent="PlayerSlots" unique_id=538392290 instance=ExtResource("12_mjnm4")]
 layout_mode = 2
 
-[node name="PlayerSlot2" parent="PlayerSlots" instance=ExtResource("12_mjnm4")]
+[node name="PlayerSlot2" parent="PlayerSlots" unique_id=547044816 instance=ExtResource("12_mjnm4")]
 layout_mode = 2
 playerNr = 1
 
-[node name="PlayerSlot3" parent="PlayerSlots" instance=ExtResource("12_mjnm4")]
+[node name="PlayerSlot3" parent="PlayerSlots" unique_id=1817834768 instance=ExtResource("12_mjnm4")]
 layout_mode = 2
 playerNr = 2
 
-[node name="PlayerSlot4" parent="PlayerSlots" instance=ExtResource("12_mjnm4")]
+[node name="PlayerSlot4" parent="PlayerSlots" unique_id=395945388 instance=ExtResource("12_mjnm4")]
 layout_mode = 2
 playerNr = 3
 
-[node name="GameSettingsContainer" type="Panel" parent="."]
+[node name="GameSettingsContainer" type="Panel" parent="." unique_id=1316603712]
 visible = false
 custom_minimum_size = Vector2(400, 500)
 layout_mode = 1
@@ -265,7 +265,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("13_pdc06")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameSettingsContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameSettingsContainer" unique_id=1422485033]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -280,13 +280,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="GameSettingsContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="GameSettingsContainer/VBoxContainer" unique_id=2019139061]
 layout_mode = 2
 theme = ExtResource("7_dnubf")
 text = "Game mode:"
 horizontal_alignment = 1
 
-[node name="OptionButton" type="OptionButton" parent="GameSettingsContainer/VBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="GameSettingsContainer/VBoxContainer" unique_id=1389758065]
 layout_mode = 2
 theme = ExtResource("7_dnubf")
 selected = 0
@@ -299,28 +299,28 @@ popup/item_1/id = 1
 popup/item_2/text = "High score"
 popup/item_2/id = 2
 
-[node name="LivesContainer" type="VBoxContainer" parent="GameSettingsContainer/VBoxContainer"]
+[node name="LivesContainer" type="VBoxContainer" parent="GameSettingsContainer/VBoxContainer" unique_id=755524237]
 layout_mode = 2
 
-[node name="Lives" type="Label" parent="GameSettingsContainer/VBoxContainer/LivesContainer"]
+[node name="Lives" type="Label" parent="GameSettingsContainer/VBoxContainer/LivesContainer" unique_id=742951871]
 layout_mode = 2
 theme = ExtResource("7_dnubf")
 text = "Lives:"
 horizontal_alignment = 1
 
-[node name="LivesSelector" type="HBoxContainer" parent="GameSettingsContainer/VBoxContainer/LivesContainer"]
+[node name="LivesSelector" type="HBoxContainer" parent="GameSettingsContainer/VBoxContainer/LivesContainer" unique_id=835809317]
 layout_mode = 2
 theme_override_constants/separation = 19
 alignment = 1
 
-[node name="Button_minus" type="Button" parent="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector"]
+[node name="Button_minus" type="Button" parent="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector" unique_id=1782331780]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 focus_neighbor_right = NodePath("../Button_plus")
 theme = ExtResource("7_dnubf")
 text = "-"
 
-[node name="LivesLabel" type="Label" parent="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector"]
+[node name="LivesLabel" type="Label" parent="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector" unique_id=1160573279]
 layout_mode = 2
 theme = ExtResource("7_dnubf")
 theme_override_font_sizes/font_size = 40
@@ -328,7 +328,7 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button_plus" type="Button" parent="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector"]
+[node name="Button_plus" type="Button" parent="GameSettingsContainer/VBoxContainer/LivesContainer/LivesSelector" unique_id=125035215]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 focus_neighbor_left = NodePath("../Button_minus")
@@ -336,28 +336,28 @@ theme = ExtResource("7_dnubf")
 text = "+
 "
 
-[node name="TimeContainer" type="VBoxContainer" parent="GameSettingsContainer/VBoxContainer"]
+[node name="TimeContainer" type="VBoxContainer" parent="GameSettingsContainer/VBoxContainer" unique_id=1556444249]
 layout_mode = 2
 
-[node name="Time" type="Label" parent="GameSettingsContainer/VBoxContainer/TimeContainer"]
+[node name="Time" type="Label" parent="GameSettingsContainer/VBoxContainer/TimeContainer" unique_id=196496678]
 layout_mode = 2
 theme = ExtResource("7_dnubf")
 text = "Round Length:"
 horizontal_alignment = 1
 
-[node name="TimeSelector" type="HBoxContainer" parent="GameSettingsContainer/VBoxContainer/TimeContainer"]
+[node name="TimeSelector" type="HBoxContainer" parent="GameSettingsContainer/VBoxContainer/TimeContainer" unique_id=664744871]
 layout_mode = 2
 theme_override_constants/separation = 19
 alignment = 1
 
-[node name="TimeButton_minus" type="Button" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector"]
+[node name="TimeButton_minus" type="Button" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector" unique_id=374805008]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 focus_neighbor_right = NodePath("../TimeButton_plus")
 theme = ExtResource("7_dnubf")
 text = "-"
 
-[node name="TimeLabel" type="Label" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector"]
+[node name="TimeLabel" type="Label" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector" unique_id=1272626647]
 layout_mode = 2
 theme = ExtResource("7_dnubf")
 theme_override_font_sizes/font_size = 40
@@ -365,7 +365,7 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Minutes" type="Label" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector"]
+[node name="Minutes" type="Label" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector" unique_id=675937837]
 layout_mode = 2
 theme = ExtResource("7_dnubf")
 theme_override_font_sizes/font_size = 28
@@ -373,7 +373,7 @@ text = "minute"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimeButton_plus" type="Button" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector"]
+[node name="TimeButton_plus" type="Button" parent="GameSettingsContainer/VBoxContainer/TimeContainer/TimeSelector" unique_id=1276405884]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 focus_neighbor_left = NodePath("../TimeButton_minus")
@@ -381,17 +381,17 @@ theme = ExtResource("7_dnubf")
 text = "+
 "
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GameSettingsContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GameSettingsContainer/VBoxContainer" unique_id=1318852433]
 layout_mode = 2
 
-[node name="StartButton" type="Button" parent="GameSettingsContainer/VBoxContainer/HBoxContainer"]
+[node name="StartButton" type="Button" parent="GameSettingsContainer/VBoxContainer/HBoxContainer" unique_id=998754163]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("7_dnubf")
 text = "Start"
 script = ExtResource("10_bhhod")
 
-[node name="Back" parent="GameSettingsContainer/VBoxContainer/HBoxContainer" instance=ExtResource("12_l1pdr")]
+[node name="Back" parent="GameSettingsContainer/VBoxContainer/HBoxContainer" unique_id=1583269478 instance=ExtResource("12_l1pdr")]
 layout_mode = 2
 
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]

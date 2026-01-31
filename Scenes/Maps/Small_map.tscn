@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dw8vjc4lovnfv"]
+[gd_scene format=3 uid="uid://dw8vjc4lovnfv"]
 
 [ext_resource type="Script" uid="uid://be5gopm2b1v5a" path="res://Scripts/player_spawner.gd" id="1_iugb5"]
 [ext_resource type="Script" uid="uid://cgcpju57f0k1c" path="res://Scripts/follow_camera.gd" id="2_0io2e"]
@@ -8,14 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://dnq1hhrmswccv" path="res://Scenes/Obstacles/chiweewee.tscn" id="10_1andm"]
 [ext_resource type="PackedScene" uid="uid://c0h220kvrr0mb" path="res://Scenes/Obstacles/angry_dog.tscn" id="11_lqxm4"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=2017652508]
 
-[node name="PlayerStart" type="Node2D" parent="."]
+[node name="PlayerStart" type="Node2D" parent="." unique_id=1130359554]
 position = Vector2(-722, 263)
 script = ExtResource("1_iugb5")
 spawn_on_start = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1527838523]
 position = Vector2(-722, 263)
 limit_left = -1303
 limit_top = -10
@@ -26,227 +26,227 @@ position_smoothing_speed = 10.0
 editor_draw_limits = true
 script = ExtResource("2_0io2e")
 
-[node name="MapmaybeBase" type="Sprite2D" parent="."]
+[node name="MapmaybeBase" type="Sprite2D" parent="." unique_id=1605629228]
 z_index = -3
 position = Vector2(-672, 306)
 scale = Vector2(0.420003, 0.655205)
 texture = ExtResource("2_jsq6t")
 
-[node name="PickupSpawner" type="Node2D" parent="."]
+[node name="PickupSpawner" type="Node2D" parent="." unique_id=1333515444]
 script = ExtResource("3_5p3d3")
 
-[node name="PickupPoints" type="Node2D" parent="PickupSpawner"]
+[node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=1590717433]
 
-[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1698926073]
 position = Vector2(-524, 420)
 
-[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1714412874]
 position = Vector2(-487, 201)
 
-[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1713189383]
 position = Vector2(-380, 496)
 
-[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=902470244]
 position = Vector2(-800, 308)
 
-[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=866183658]
 position = Vector2(-798, 160)
 
-[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1558258349]
 position = Vector2(-586, 183)
 
-[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=439245152]
 position = Vector2(-917, 527)
 
-[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=279970318]
 position = Vector2(-718, 493)
 
-[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1572208160]
 position = Vector2(-944, 285)
 
-[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=241435153]
 position = Vector2(-302, 228)
 
-[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1699805684]
 position = Vector2(-1066, 388)
 
-[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1062136815]
 position = Vector2(-247, 312)
 
-[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=728653590]
 position = Vector2(-248, 244)
 
-[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1934728521]
 position = Vector2(-697, 133)
 
-[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1239450725]
 position = Vector2(-1074, 173)
 
-[node name="Obstacles" type="Node2D" parent="."]
+[node name="Obstacles" type="Node2D" parent="." unique_id=396127746]
 
-[node name="Bench" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench" parent="Obstacles" unique_id=303901448 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1194, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench2" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench2" parent="Obstacles" unique_id=639462471 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1104, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench3" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench3" parent="Obstacles" unique_id=1269765966 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1015, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench4" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench4" parent="Obstacles" unique_id=714018387 instance=ExtResource("4_4y7p2")]
 position = Vector2(-923, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench5" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench5" parent="Obstacles" unique_id=1665403577 instance=ExtResource("4_4y7p2")]
 position = Vector2(-833, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench6" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench6" parent="Obstacles" unique_id=393230869 instance=ExtResource("4_4y7p2")]
 position = Vector2(-744, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench7" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench7" parent="Obstacles" unique_id=604127204 instance=ExtResource("4_4y7p2")]
 position = Vector2(-652, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench8" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench8" parent="Obstacles" unique_id=1772100827 instance=ExtResource("4_4y7p2")]
 position = Vector2(-562, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench9" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench9" parent="Obstacles" unique_id=1913490177 instance=ExtResource("4_4y7p2")]
 position = Vector2(-473, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench10" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench10" parent="Obstacles" unique_id=1930207256 instance=ExtResource("4_4y7p2")]
 position = Vector2(-390, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench11" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench11" parent="Obstacles" unique_id=331435081 instance=ExtResource("4_4y7p2")]
 position = Vector2(-300, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench12" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench12" parent="Obstacles" unique_id=1296596367 instance=ExtResource("4_4y7p2")]
 position = Vector2(-211, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench13" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench13" parent="Obstacles" unique_id=1102233033 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1246, 54)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench25" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench25" parent="Obstacles" unique_id=425523543 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1260, 93.9999)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench26" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench26" parent="Obstacles" unique_id=1728426394 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1260, 176)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench27" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench27" parent="Obstacles" unique_id=1939007337 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1260, 257)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench28" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench28" parent="Obstacles" unique_id=1947553440 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1260, 339)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench29" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench29" parent="Obstacles" unique_id=943112826 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1260, 423)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench30" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench30" parent="Obstacles" unique_id=639240653 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1260, 505)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench33" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench33" parent="Obstacles" unique_id=995766871 instance=ExtResource("4_4y7p2")]
 position = Vector2(-153, 174)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench40" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench40" parent="Obstacles" unique_id=797873325 instance=ExtResource("4_4y7p2")]
 position = Vector2(-153, 86)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench34" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench34" parent="Obstacles" unique_id=1208454426 instance=ExtResource("4_4y7p2")]
 position = Vector2(-153, 256)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench35" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench35" parent="Obstacles" unique_id=634918860 instance=ExtResource("4_4y7p2")]
 position = Vector2(-153, 337)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench39" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench39" parent="Obstacles" unique_id=282199439 instance=ExtResource("4_4y7p2")]
 position = Vector2(-126, 668)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench36" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench36" parent="Obstacles" unique_id=621909076 instance=ExtResource("4_4y7p2")]
 position = Vector2(-153, 419)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench37" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench37" parent="Obstacles" unique_id=1941340181 instance=ExtResource("4_4y7p2")]
 position = Vector2(-153, 503)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench38" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench38" parent="Obstacles" unique_id=76881663 instance=ExtResource("4_4y7p2")]
 position = Vector2(-153, 585)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench31" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench31" parent="Obstacles" unique_id=706751935 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1276, 592)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench32" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench32" parent="Obstacles" unique_id=2037634453 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1213, 664)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench14" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench14" parent="Obstacles" unique_id=1536070239 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1127, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench15" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench15" parent="Obstacles" unique_id=496126822 instance=ExtResource("4_4y7p2")]
 position = Vector2(-1038, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench16" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench16" parent="Obstacles" unique_id=625892273 instance=ExtResource("4_4y7p2")]
 position = Vector2(-946, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench17" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench17" parent="Obstacles" unique_id=1565847059 instance=ExtResource("4_4y7p2")]
 position = Vector2(-856, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench18" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench18" parent="Obstacles" unique_id=343917436 instance=ExtResource("4_4y7p2")]
 position = Vector2(-767, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench19" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench19" parent="Obstacles" unique_id=778942981 instance=ExtResource("4_4y7p2")]
 position = Vector2(-675, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench20" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench20" parent="Obstacles" unique_id=463494601 instance=ExtResource("4_4y7p2")]
 position = Vector2(-585, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench21" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench21" parent="Obstacles" unique_id=1443158307 instance=ExtResource("4_4y7p2")]
 position = Vector2(-496, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench22" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench22" parent="Obstacles" unique_id=999342467 instance=ExtResource("4_4y7p2")]
 position = Vector2(-413, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench23" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench23" parent="Obstacles" unique_id=249830331 instance=ExtResource("4_4y7p2")]
 position = Vector2(-323, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Bench24" parent="Obstacles" instance=ExtResource("4_4y7p2")]
+[node name="Bench24" parent="Obstacles" unique_id=35856478 instance=ExtResource("4_4y7p2")]
 position = Vector2(-234, 23.0001)
 scale = Vector2(0.372073, 0.372073)
 
-[node name="Chiweewee" parent="." instance=ExtResource("10_1andm")]
+[node name="Chiweewee" parent="." unique_id=700898048 instance=ExtResource("10_1andm")]
 position = Vector2(-257, 32)
 
-[node name="AngryDog" parent="." instance=ExtResource("11_lqxm4")]
+[node name="AngryDog" parent="." unique_id=1444988607 instance=ExtResource("11_lqxm4")]
 position = Vector2(-908.0001, 757)
 rotation = 3.2798004

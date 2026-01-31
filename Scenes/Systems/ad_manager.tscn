@@ -1,12 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://ck01dnrayeqyd"]
+[gd_scene format=3 uid="uid://ck01dnrayeqyd"]
 
 [ext_resource type="Script" uid="uid://ccmc352d6i6js" path="res://Scripts/ad_manager.gd" id="1_eyngg"]
 [ext_resource type="Script" uid="uid://d2ekpef26q3vr" path="res://addons/AdmobPlugin/Admob.gd" id="2_nuc1s"]
 
-[node name="AdManager" type="Node2D"]
+[node name="AdManager" type="Node2D" unique_id=2111872399]
 script = ExtResource("1_eyngg")
 
-[node name="Admob" type="Node" parent="."]
+[node name="Admob" type="Node" parent="." unique_id=647124894]
 script = ExtResource("2_nuc1s")
 under_age_of_consent = 1
 debug_application_id = "ca-app-pub-3940256099942544~3347511713"
@@ -17,7 +17,7 @@ debug_rewarded_interstitial_id = "ca-app-pub-3940256099942544/5354046379"
 real_application_id = "ca-app-pub-1333268640689716~3036536539"
 metadata/_custom_type_script = "uid://d2ekpef26q3vr"
 
-[node name="Interstitial Ad Timer" type="Timer" parent="."]
+[node name="Interstitial Ad Timer" type="Timer" parent="." unique_id=45894705]
 wait_time = 180.0
 one_shot = true
 ignore_time_scale = true

@@ -1,26 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgndgpv6ds1ja"]
+[gd_scene format=3 uid="uid://cgndgpv6ds1ja"]
 
 [ext_resource type="Texture2D" uid="uid://of66bep112e8" path="res://Assets/UI/thought_bubble/comic_bubble_small.png" id="1_criwp"]
-[ext_resource type="Script" path="res://Scripts/thought_bubble.gd" id="1_ojcxs"]
+[ext_resource type="Script" uid="uid://cmeiej72lndqa" path="res://Scripts/thought_bubble.gd" id="1_ojcxs"]
 [ext_resource type="Texture2D" uid="uid://bih0o3akae0et" path="res://Assets/UI/thought_bubble/comic_bubble_medium.png" id="2_tt4ij"]
 [ext_resource type="Texture2D" uid="uid://bue4pgemu7ewo" path="res://Assets/UI/thought_bubble/comic_bubble_Sadface.png" id="3_ktdrf"]
 
-[node name="ThoughtBubble_Sad" type="Node2D"]
+[node name="ThoughtBubble_Sad" type="Node2D" unique_id=561809208]
 z_index = 4
 z_as_relative = false
 script = ExtResource("1_ojcxs")
 
-[node name="ComicBubbleSmall" type="Sprite2D" parent="."]
+[node name="ComicBubbleSmall" type="Sprite2D" parent="." unique_id=492871482]
 z_index = 12
 position = Vector2(-167, 140)
 texture = ExtResource("1_criwp")
 
-[node name="ComicBubbleMedium" type="Sprite2D" parent="."]
+[node name="ComicBubbleMedium" type="Sprite2D" parent="." unique_id=1942168515]
 z_index = 12
 position = Vector2(-104, 111)
 texture = ExtResource("2_tt4ij")
 
-[node name="ComicBubbleSadface" type="Sprite2D" parent="."]
+[node name="ComicBubbleSadface" type="Sprite2D" parent="." unique_id=1516008259]
 z_index = 12
 position = Vector2(-9, 22)
 texture = ExtResource("3_ktdrf")

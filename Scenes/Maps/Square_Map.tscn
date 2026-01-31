@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d0lv3j2ywaltm"]
+[gd_scene format=3 uid="uid://d0lv3j2ywaltm"]
 
 [ext_resource type="Script" uid="uid://cgcpju57f0k1c" path="res://Scripts/follow_camera.gd" id="1_ibhqy"]
 [ext_resource type="Texture2D" uid="uid://bmqbm1vvrgv8b" path="res://Assets/Map/mapmaybe_base_BIGGER_2.png" id="2_f04s8"]
@@ -24,14 +24,14 @@ distance = -914.25
 normal = Vector2(-1, 0)
 distance = -898.5
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=1982682506]
 
-[node name="PlayerStart" type="Node2D" parent="."]
+[node name="PlayerStart" type="Node2D" parent="." unique_id=1240386517]
 position = Vector2(-9, 466)
 script = ExtResource("2_qtlb6")
 spawn_on_start = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1602730042]
 position = Vector2(-9, 466)
 zoom = Vector2(1.1, 1.1)
 limit_left = -953
@@ -43,118 +43,118 @@ position_smoothing_speed = 10.0
 editor_draw_limits = true
 script = ExtResource("1_ibhqy")
 
-[node name="MapmaybeBase" type="Sprite2D" parent="."]
+[node name="MapmaybeBase" type="Sprite2D" parent="." unique_id=1455872765]
 z_index = -3
 scale = Vector2(0.5, 0.780001)
 texture = ExtResource("2_f04s8")
 
-[node name="Walls" type="Node2D" parent="."]
+[node name="Walls" type="Node2D" parent="." unique_id=116800306]
 
-[node name="Area2D" type="Area2D" parent="Walls" groups=["Dangers"]]
+[node name="Area2D" type="Area2D" parent="Walls" unique_id=1158797294 groups=["Dangers"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D" unique_id=935236148]
 position = Vector2(0, -16)
 shape = SubResource("WorldBoundaryShape2D_fj0g7")
 
-[node name="Area2D2" type="Area2D" parent="Walls" groups=["Dangers"]]
+[node name="Area2D2" type="Area2D" parent="Walls" unique_id=742828181 groups=["Dangers"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D2" unique_id=683539491]
 position = Vector2(0, 4)
 shape = SubResource("WorldBoundaryShape2D_6ntvb")
 
-[node name="Area2D3" type="Area2D" parent="Walls" groups=["Dangers"]]
+[node name="Area2D3" type="Area2D" parent="Walls" unique_id=2039347498 groups=["Dangers"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D3" unique_id=2009282742]
 shape = SubResource("WorldBoundaryShape2D_hivew")
 
-[node name="Area2D4" type="Area2D" parent="Walls" groups=["Dangers"]]
+[node name="Area2D4" type="Area2D" parent="Walls" unique_id=1651132342 groups=["Dangers"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D4" unique_id=2062072020]
 shape = SubResource("WorldBoundaryShape2D_rkj8e")
 
-[node name="PickupSpawner" type="Node2D" parent="."]
+[node name="PickupSpawner" type="Node2D" parent="." unique_id=1196181118]
 script = ExtResource("4_0edyt")
 
-[node name="PickupPoints" type="Node2D" parent="PickupSpawner"]
+[node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=753454815]
 
-[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=479219709]
 position = Vector2(104, 432)
 
-[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=303823406]
 position = Vector2(-487, 201)
 
-[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1060234306]
 position = Vector2(353, -647)
 
-[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=694210179]
 position = Vector2(-202, 374)
 
-[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=344752024]
 position = Vector2(38, -602)
 
-[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1908212310]
 position = Vector2(-576, -239)
 
-[node name="Node2D16" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D16" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=646452688]
 position = Vector2(-760, 494)
 
-[node name="Node2D17" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D17" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1547148812]
 position = Vector2(496, 627)
 
-[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=818457596]
 position = Vector2(-297, -609)
 
-[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1514687866]
 position = Vector2(698, 176)
 
-[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1059162028]
 position = Vector2(408, -173)
 
-[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1817890562]
 position = Vector2(623, -49)
 
-[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1007120130]
 position = Vector2(-48, -334)
 
-[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=542778406]
 position = Vector2(245, -412)
 
-[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1772705215]
 position = Vector2(278, 276)
 
-[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=992707304]
 position = Vector2(-706, 119)
 
-[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1106237560]
 position = Vector2(-139, 651)
 
-[node name="Node2D18" type="Node2D" parent="PickupSpawner/PickupPoints"]
+[node name="Node2D18" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1848949185]
 position = Vector2(-752, -644)
 
-[node name="Obstacles" type="Node2D" parent="."]
+[node name="Obstacles" type="Node2D" parent="." unique_id=2011743699]
 
-[node name="Bench" parent="Obstacles" instance=ExtResource("5_lun00")]
+[node name="Bench" parent="Obstacles" unique_id=853921076 instance=ExtResource("5_lun00")]
 position = Vector2(583, 439)
 scale = Vector2(0.6, 0.6)
 
-[node name="Bench2" parent="Obstacles" instance=ExtResource("5_lun00")]
+[node name="Bench2" parent="Obstacles" unique_id=1690042697 instance=ExtResource("5_lun00")]
 position = Vector2(-544, 442)
 scale = Vector2(0.6, 0.6)
 
-[node name="Bench3" parent="Obstacles" instance=ExtResource("5_lun00")]
+[node name="Bench3" parent="Obstacles" unique_id=1360770279 instance=ExtResource("5_lun00")]
 position = Vector2(-578, -493)
 scale = Vector2(0.6, 0.6)
 
-[node name="Bench4" parent="Obstacles" instance=ExtResource("5_lun00")]
+[node name="Bench4" parent="Obstacles" unique_id=208555260 instance=ExtResource("5_lun00")]
 position = Vector2(572, -480)
 scale = Vector2(0.6, 0.6)
 
-[node name="Fountain" parent="Obstacles" instance=ExtResource("6_h7je3")]
+[node name="Fountain" parent="Obstacles" unique_id=1835045559 instance=ExtResource("6_h7je3")]
 position = Vector2(6, 2)
 scale = Vector2(1.59165, 1.59165)
 
-[node name="Chiweewee" parent="." instance=ExtResource("11_36vit")]
+[node name="Chiweewee" parent="." unique_id=1475903775 instance=ExtResource("11_36vit")]
 position = Vector2(-556, -469)
 
-[node name="AngryDog" parent="." instance=ExtResource("12_ok1i3")]
+[node name="AngryDog" parent="." unique_id=1703690847 instance=ExtResource("12_ok1i3")]
 position = Vector2(866, -449)

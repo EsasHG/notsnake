@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0eb6heqgmexf"]
+[gd_scene format=3 uid="uid://d0eb6heqgmexf"]
 
 [ext_resource type="Script" uid="uid://bksp4hitp0rwk" path="res://Scripts/pause_menu.gd" id="1_ekn4r"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="1_vms7i"]
-[ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/settings.tscn" id="2_tf3q2"]
+[ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/Settings.tscn" id="2_tf3q2"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="4_yeo1y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yeo1y"]
@@ -17,7 +17,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" unique_id=266338194]
 process_mode = 2
 layout_mode = 3
 anchors_preset = 15
@@ -28,7 +28,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_ekn4r")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." unique_id=629416023]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +38,7 @@ grow_vertical = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_yeo1y")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=809679882]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,23 +53,23 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer" unique_id=975482024]
 layout_mode = 2
 size_flags_vertical = 0
 theme = ExtResource("1_vms7i")
 theme_override_font_sizes/font_size = 60
 text = "Game Paused!"
 
-[node name="SettingsScreen" parent="Panel/VBoxContainer" instance=ExtResource("2_tf3q2")]
+[node name="SettingsScreen" parent="Panel/VBoxContainer" unique_id=1975726742 instance=ExtResource("2_tf3q2")]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=551465420]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Resume" type="Button" parent="Panel/VBoxContainer/HBoxContainer2"]
+[node name="Resume" type="Button" parent="Panel/VBoxContainer/HBoxContainer2" unique_id=1669568375]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -78,7 +78,7 @@ theme = ExtResource("1_vms7i")
 text = "Resume"
 script = ExtResource("4_yeo1y")
 
-[node name="MainMenu" type="Button" parent="Panel/VBoxContainer/HBoxContainer2"]
+[node name="MainMenu" type="Button" parent="Panel/VBoxContainer/HBoxContainer2" unique_id=1141066283]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -88,7 +88,7 @@ theme_override_font_sizes/font_size = 25
 text = "Main Menu"
 script = ExtResource("4_yeo1y")
 
-[node name="Countdown" type="Label" parent="."]
+[node name="Countdown" type="Label" parent="." unique_id=1734751149]
 visible = false
 custom_minimum_size = Vector2(74, 0)
 layout_mode = 1

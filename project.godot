@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Loop Dog"
 run/main_scene="uid://2rjb4w7s6uto"
-config/features=PackedStringArray("4.5", "Mobile")
+config/features=PackedStringArray("4.6", "Mobile")
 boot_splash/use_filter=false
 boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
 
@@ -21,7 +21,7 @@ boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
 GameSettings="*res://Scripts/game_settings.gd"
 Logging="*res://Scripts/logging.gd"
 GlobalInputMap="*res://Scenes/Menus/Arena/global_input_map.gd"
-GodotPlayGameServices="*res://addons/GodotPlayGameServices/scripts/autoloads/godot_play_game_services.gd"
+GodotPlayGameServices="*uid://cdeud4neqclc6"
 UINavigator="*res://Scripts/ui_navigator.gd"
 
 [display]

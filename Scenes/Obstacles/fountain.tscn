@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://cek8fr66labht"]
+[gd_scene format=3 uid="uid://cek8fr66labht"]
 
 [ext_resource type="Texture2D" uid="uid://eiupnhgm8tou" path="res://Assets/Obstacles/obstacles/fountain.png" id="1_ymubp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vis6b"]
 radius = 153.003
 
-[node name="Fountain" type="Area2D" groups=["Dangers"]]
+[node name="Fountain" type="Area2D" unique_id=139964454 groups=["Dangers"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1053740141]
 shape = SubResource("CircleShape2D_vis6b")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2010363252]
 position = Vector2(-4, -3)
 texture = ExtResource("1_ymubp")

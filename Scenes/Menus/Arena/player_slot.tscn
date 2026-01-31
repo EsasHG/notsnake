@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dgcfowugwe1op"]
+[gd_scene format=3 uid="uid://dgcfowugwe1op"]
 
 [ext_resource type="Script" uid="uid://ckpdumpv2ic5t" path="res://Scenes/Menus/Arena/player_slot.gd" id="1_ks1p2"]
 [ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="2_aup6r"]
@@ -116,7 +116,7 @@ _data = {
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_u55o0"]
 
-[node name="PlayerSlot" type="Control"]
+[node name="PlayerSlot" type="Control" unique_id=1363454228]
 custom_minimum_size = Vector2(250, 200)
 layout_mode = 3
 anchor_left = 0.44791666
@@ -131,7 +131,7 @@ size_flags_vertical = 4
 script = ExtResource("1_ks1p2")
 metadata/_edit_use_anchors_ = true
 
-[node name="Dog" type="Control" parent="."]
+[node name="Dog" type="Control" parent="." unique_id=1196614833]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -141,51 +141,51 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Head" type="AnimatedSprite2D" parent="Dog"]
+[node name="Head" type="AnimatedSprite2D" parent="Dog" unique_id=2129227041]
 z_index = 1
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_yg18o")
 
-[node name="Legs" type="AnimatedSprite2D" parent="Dog/Head"]
+[node name="Legs" type="AnimatedSprite2D" parent="Dog/Head" unique_id=1264111994]
 z_index = -1
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_tsio3")
 
-[node name="BarkSound" type="AudioStreamPlayer2D" parent="Dog/Head"]
+[node name="BarkSound" type="AudioStreamPlayer2D" parent="Dog/Head" unique_id=1022992040]
 stream = ExtResource("4_wdt0y")
 bus = &"SFX"
 
-[node name="Hats" type="Node2D" parent="Dog/Head"]
+[node name="Hats" type="Node2D" parent="Dog/Head" unique_id=977860965]
 
-[node name="HatNone" type="Node2D" parent="Dog/Head/Hats"]
+[node name="HatNone" type="Node2D" parent="Dog/Head/Hats" unique_id=1695060827]
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="HatChristmas" type="Sprite2D" parent="Dog/Head/Hats"]
+[node name="HatChristmas" type="Sprite2D" parent="Dog/Head/Hats" unique_id=741988398]
 visible = false
 z_index = 1
 position = Vector2(1, -17)
 texture = ExtResource("5_c45sk")
 
-[node name="HatCowboy" type="Sprite2D" parent="Dog/Head/Hats"]
+[node name="HatCowboy" type="Sprite2D" parent="Dog/Head/Hats" unique_id=1754085519]
 visible = false
 z_index = 1
 position = Vector2(1, -11)
 texture = ExtResource("6_kcd4c")
 
-[node name="HatCrashdummyDot" type="Sprite2D" parent="Dog/Head/Hats"]
+[node name="HatCrashdummyDot" type="Sprite2D" parent="Dog/Head/Hats" unique_id=625092641]
 visible = false
 z_index = 1
 position = Vector2(-6, -6)
 texture = ExtResource("7_u55o0")
 
-[node name="HatHelmet" type="Sprite2D" parent="Dog/Head/Hats"]
+[node name="HatHelmet" type="Sprite2D" parent="Dog/Head/Hats" unique_id=342075092]
 visible = false
 z_index = 1
 position = Vector2(1, -4)
 texture = ExtResource("8_wmlh6")
 
-[node name="Arrows" type="Control" parent="."]
+[node name="Arrows" type="Control" parent="." unique_id=1251824947]
 visible = false
 z_index = 1
 layout_mode = 1
@@ -201,7 +201,7 @@ offset_bottom = 19.999992
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Arrows"]
+[node name="TextureRect" type="TextureRect" parent="Arrows" unique_id=1325444760]
 z_index = 1
 layout_mode = 0
 offset_left = -100.0
@@ -209,7 +209,7 @@ offset_right = -50.0
 offset_bottom = 50.0
 texture = ExtResource("9_b17ae")
 
-[node name="TextureRect2" type="TextureRect" parent="Arrows"]
+[node name="TextureRect2" type="TextureRect" parent="Arrows" unique_id=1206703659]
 z_index = 1
 layout_mode = 0
 offset_left = 95.0
@@ -218,12 +218,10 @@ offset_bottom = 50.0
 texture = ExtResource("9_b17ae")
 flip_h = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_wdt0y")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=678135172]
+libraries/ = SubResource("AnimationLibrary_wdt0y")
 
-[node name="OptionsPanel" type="PanelContainer" parent="."]
+[node name="OptionsPanel" type="PanelContainer" parent="." unique_id=1421785236]
 visible = false
 z_index = 1
 custom_minimum_size = Vector2(200, 200)
@@ -240,19 +238,19 @@ offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Controls" type="VBoxContainer" parent="OptionsPanel"]
+[node name="Controls" type="VBoxContainer" parent="OptionsPanel" unique_id=1269280779]
 z_index = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="OptionsPanel/Controls"]
+[node name="Label" type="Label" parent="OptionsPanel/Controls" unique_id=1130415359]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("10_c45sk")
 text = "Controls:"
 
-[node name="HoldControls" type="CheckBox" parent="OptionsPanel/Controls"]
+[node name="HoldControls" type="CheckBox" parent="OptionsPanel/Controls" unique_id=1348212056]
 layout_mode = 2
 size_flags_horizontal = 4
 focus_neighbor_bottom = NodePath("../TapControls")
@@ -262,7 +260,7 @@ button_group = SubResource("ButtonGroup_u55o0")
 text = "Hold"
 script = ExtResource("11_kcd4c")
 
-[node name="TapControls" type="CheckBox" parent="OptionsPanel/Controls"]
+[node name="TapControls" type="CheckBox" parent="OptionsPanel/Controls" unique_id=277179605]
 layout_mode = 2
 size_flags_horizontal = 4
 focus_neighbor_top = NodePath("../HoldControls")
@@ -273,7 +271,7 @@ text = "Tap
 "
 script = ExtResource("11_kcd4c")
 
-[node name="Ready" type="Button" parent="OptionsPanel/Controls"]
+[node name="Ready" type="Button" parent="OptionsPanel/Controls" unique_id=1601600741]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 focus_neighbor_top = NodePath("../TapControls")
@@ -281,7 +279,7 @@ theme = ExtResource("10_c45sk")
 text = "Ready!"
 script = ExtResource("11_kcd4c")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=883227869]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -289,13 +287,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="JoinLabel" type="Label" parent="PanelContainer"]
+[node name="JoinLabel" type="Label" parent="PanelContainer" unique_id=424937525]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("10_c45sk")
 text = "Press X/A to join!"
 
-[node name="ReadyLabel" type="Label" parent="PanelContainer"]
+[node name="ReadyLabel" type="Label" parent="PanelContainer" unique_id=1242413932]
 z_index = 2
 layout_mode = 2
 size_flags_horizontal = 4

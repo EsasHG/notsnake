@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bkjd5mneny7c1"]
+[gd_scene format=3 uid="uid://bkjd5mneny7c1"]
 
 [ext_resource type="Script" uid="uid://b78ceum26wnjq" path="res://Scripts/simple_player_character.gd" id="1_hgq6l"]
 [ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="2_nccp2"]
@@ -186,82 +186,82 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="PlayerDog" type="Area2D" groups=["Dangers"]]
+[node name="PlayerDog" type="Area2D" unique_id=1420059897 groups=["Dangers"]]
 script = ExtResource("1_hgq6l")
 MOVE_SPEED = 300
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Dangers"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=137496318 groups=["Dangers"]]
 position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_7we7l")
 
-[node name="Head" type="AnimatedSprite2D" parent="."]
+[node name="Head" type="AnimatedSprite2D" parent="." unique_id=1133492690]
 z_index = 1
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_2kam3")
 frame_progress = 0.897358
 
-[node name="Legs" type="AnimatedSprite2D" parent="Head"]
+[node name="Legs" type="AnimatedSprite2D" parent="Head" unique_id=1387958937]
 z_index = -1
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_rudug")
 frame_progress = 0.515546
 
-[node name="BarkSound" type="AudioStreamPlayer2D" parent="Head"]
+[node name="BarkSound" type="AudioStreamPlayer2D" parent="Head" unique_id=1187651775]
 stream = ExtResource("4_7e683")
 bus = &"SFX"
 
-[node name="Hats" type="Node2D" parent="Head"]
+[node name="Hats" type="Node2D" parent="Head" unique_id=1131824743]
 
-[node name="HatNone" type="Sprite2D" parent="Head/Hats"]
+[node name="HatNone" type="Sprite2D" parent="Head/Hats" unique_id=358678174]
 visible = false
 
-[node name="HatChristmas" type="Sprite2D" parent="Head/Hats"]
+[node name="HatChristmas" type="Sprite2D" parent="Head/Hats" unique_id=1072882123]
 visible = false
 z_index = 1
 position = Vector2(1, -17)
 texture = ExtResource("5_ddf6l")
 
-[node name="HatCowboy" type="Sprite2D" parent="Head/Hats"]
+[node name="HatCowboy" type="Sprite2D" parent="Head/Hats" unique_id=1915035583]
 visible = false
 z_index = 1
 position = Vector2(1, -11)
 texture = ExtResource("6_82a65")
 
-[node name="HatCrashdummyDot" type="Sprite2D" parent="Head/Hats"]
+[node name="HatCrashdummyDot" type="Sprite2D" parent="Head/Hats" unique_id=560476500]
 visible = false
 z_index = 1
 position = Vector2(-6, -6)
 texture = ExtResource("7_105w1")
 
-[node name="HatHelmet" type="Sprite2D" parent="Head/Hats"]
+[node name="HatHelmet" type="Sprite2D" parent="Head/Hats" unique_id=1801449873]
 visible = false
 z_index = 1
 position = Vector2(1, -4)
 texture = ExtResource("8_l1xol")
 
-[node name="ArrowHolder" type="Node2D" parent="Head"]
+[node name="ArrowHolder" type="Node2D" parent="Head" unique_id=1674398659]
 visible = false
 
-[node name="Arrow" type="Sprite2D" parent="Head/ArrowHolder"]
+[node name="Arrow" type="Sprite2D" parent="Head/ArrowHolder" unique_id=1888289966]
 position = Vector2(0, 43.465)
 rotation = 1.5708
 scale = Vector2(0.03, 0.04)
 texture = ExtResource("9_50el2")
 
-[node name="Butt" type="Area2D" parent="."]
+[node name="Butt" type="Area2D" parent="." unique_id=889073207]
 position = Vector2(0, -27)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Butt"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Butt" unique_id=768490806]
 position = Vector2(0, -5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qqgea")
 
-[node name="ButtSprite" type="Sprite2D" parent="Butt"]
+[node name="ButtSprite" type="Sprite2D" parent="Butt" unique_id=1241723961]
 z_index = 1
 texture_filter = 1
 texture = ExtResource("10_m7s8p")
 
-[node name="Tail2" type="Sprite2D" parent="Butt/ButtSprite"]
+[node name="Tail2" type="Sprite2D" parent="Butt/ButtSprite" unique_id=259912928]
 z_index = -2
 texture_filter = 1
 position = Vector2(0, -11)
@@ -269,7 +269,7 @@ texture = ExtResource("11_ei6el")
 region_enabled = true
 region_rect = Rect2(7, 3, 6, 14)
 
-[node name="Tail" type="AnimatedSprite2D" parent="Butt/ButtSprite"]
+[node name="Tail" type="AnimatedSprite2D" parent="Butt/ButtSprite" unique_id=990181900]
 visible = false
 z_index = -1
 texture_filter = 1
@@ -278,13 +278,13 @@ sprite_frames = SubResource("SpriteFrames_4dxs5")
 frame = 2
 frame_progress = 0.490707
 
-[node name="Legs_back" type="AnimatedSprite2D" parent="Butt/ButtSprite"]
+[node name="Legs_back" type="AnimatedSprite2D" parent="Butt/ButtSprite" unique_id=291010464]
 z_index = -1
 position = Vector2(0, 13)
 sprite_frames = SubResource("SpriteFrames_d51rk")
 frame_progress = 0.618145
 
-[node name="PausedInputBuffer" type="Node2D" parent="."]
+[node name="PausedInputBuffer" type="Node2D" parent="." unique_id=2135115763]
 process_mode = 2
 script = ExtResource("14_x26c4")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://di83hh7jce01j"]
+[gd_scene format=3 uid="uid://di83hh7jce01j"]
 
 [ext_resource type="Script" uid="uid://so22cqtbwsq6" path="res://Scripts/billing_manager.gd" id="1_wqdxx"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_qogck"]
@@ -15,7 +15,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[node name="BillingManager" type="Control"]
+[node name="BillingManager" type="Control" unique_id=925113656]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ size_flags_vertical = 6
 mouse_filter = 2
 script = ExtResource("1_wqdxx")
 
-[node name="Ad_removal_popup" type="Panel" parent="."]
+[node name="Ad_removal_popup" type="Panel" parent="." unique_id=1517365989]
 visible = false
 z_index = 2
 layout_mode = 1
@@ -38,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Ad_removal_popup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Ad_removal_popup" unique_id=924465060]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,7 +53,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="TitleLabel" type="Label" parent="Ad_removal_popup/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="Ad_removal_popup/VBoxContainer" unique_id=1173256860]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -61,7 +61,7 @@ theme = ExtResource("2_qogck")
 text = "Tired of ads?"
 autowrap_mode = 3
 
-[node name="DescriptionLabel" type="Label" parent="Ad_removal_popup/VBoxContainer"]
+[node name="DescriptionLabel" type="Label" parent="Ad_removal_popup/VBoxContainer" unique_id=831205530]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -69,7 +69,7 @@ theme = ExtResource("2_qogck")
 text = "Purchase ad removal"
 autowrap_mode = 3
 
-[node name="PriceLabel" type="Label" parent="Ad_removal_popup/VBoxContainer"]
+[node name="PriceLabel" type="Label" parent="Ad_removal_popup/VBoxContainer" unique_id=1781595080]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -77,17 +77,17 @@ theme = ExtResource("2_qogck")
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Ad_removal_popup/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Ad_removal_popup/VBoxContainer" unique_id=28312240]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Button_Yes" type="Button" parent="Ad_removal_popup/VBoxContainer/HBoxContainer"]
+[node name="Button_Yes" type="Button" parent="Ad_removal_popup/VBoxContainer/HBoxContainer" unique_id=193359577]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("2_qogck")
 text = "Yes pls"
 
-[node name="Button_No" type="Button" parent="Ad_removal_popup/VBoxContainer/HBoxContainer"]
+[node name="Button_No" type="Button" parent="Ad_removal_popup/VBoxContainer/HBoxContainer" unique_id=890305990]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -95,7 +95,7 @@ theme = ExtResource("2_qogck")
 text = "No thx
 "
 
-[node name="Purchased_popup" type="Panel" parent="."]
+[node name="Purchased_popup" type="Panel" parent="." unique_id=779448828]
 visible = false
 z_index = 2
 layout_mode = 1
@@ -106,7 +106,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Purchased_popup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Purchased_popup" unique_id=757266046]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -121,7 +121,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="TitleLabel" type="Label" parent="Purchased_popup/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="Purchased_popup/VBoxContainer" unique_id=1963148136]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -129,7 +129,7 @@ theme = ExtResource("2_qogck")
 text = "Thank you!"
 autowrap_mode = 3
 
-[node name="DescriptionLabel" type="Label" parent="Purchased_popup/VBoxContainer"]
+[node name="DescriptionLabel" type="Label" parent="Purchased_popup/VBoxContainer" unique_id=392743120]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -137,18 +137,18 @@ theme = ExtResource("2_qogck")
 text = "You will no longer see ads"
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Purchased_popup/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Purchased_popup/VBoxContainer" unique_id=1051892497]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Button_Close_Purchased" type="Button" parent="Purchased_popup/VBoxContainer/HBoxContainer"]
+[node name="Button_Close_Purchased" type="Button" parent="Purchased_popup/VBoxContainer/HBoxContainer" unique_id=1638509402]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("2_qogck")
 text = "Close"
 
-[node name="Error_popup" type="Panel" parent="."]
+[node name="Error_popup" type="Panel" parent="." unique_id=1714905671]
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -158,7 +158,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Error_popup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Error_popup" unique_id=1678336764]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -173,7 +173,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="TitleLabel" type="Label" parent="Error_popup/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="Error_popup/VBoxContainer" unique_id=500168885]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -181,7 +181,7 @@ theme = ExtResource("2_qogck")
 text = "Something went wrong with your purchase"
 autowrap_mode = 3
 
-[node name="DescriptionLabel" type="Label" parent="Error_popup/VBoxContainer"]
+[node name="DescriptionLabel" type="Label" parent="Error_popup/VBoxContainer" unique_id=654465303]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -189,25 +189,25 @@ theme = ExtResource("2_qogck")
 text = "Try again?"
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Error_popup/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Error_popup/VBoxContainer" unique_id=1786030705]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Button_Retry_Purchase" type="Button" parent="Error_popup/VBoxContainer/HBoxContainer"]
+[node name="Button_Retry_Purchase" type="Button" parent="Error_popup/VBoxContainer/HBoxContainer" unique_id=1352607981]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("2_qogck")
 text = "Retry"
 
-[node name="Button_Close_Error" type="Button" parent="Error_popup/VBoxContainer/HBoxContainer"]
+[node name="Button_Close_Error" type="Button" parent="Error_popup/VBoxContainer/HBoxContainer" unique_id=1565821935]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("2_qogck")
 text = "Close"
 
-[node name="Pending_popup" type="Panel" parent="."]
+[node name="Pending_popup" type="Panel" parent="." unique_id=1054916801]
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -217,7 +217,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Pending_popup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pending_popup" unique_id=869590011]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -232,7 +232,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="TitleLabel" type="Label" parent="Pending_popup/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="Pending_popup/VBoxContainer" unique_id=659780151]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -240,7 +240,7 @@ theme = ExtResource("2_qogck")
 text = "Waiting for purchase to finish..."
 autowrap_mode = 3
 
-[node name="DescriptionLabel" type="Label" parent="Pending_popup/VBoxContainer"]
+[node name="DescriptionLabel" type="Label" parent="Pending_popup/VBoxContainer" unique_id=118593845]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -249,11 +249,11 @@ text = "Do you need to do something in another app?
 You can close this and keep playing the game in the meantime"
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Pending_popup/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pending_popup/VBoxContainer" unique_id=1922132663]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Button_Close_Pending" type="Button" parent="Pending_popup/VBoxContainer/HBoxContainer"]
+[node name="Button_Close_Pending" type="Button" parent="Pending_popup/VBoxContainer/HBoxContainer" unique_id=105984578]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 10

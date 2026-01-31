@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cuenmscfk4h76"]
 
-[node name="LogWindow" type="Control"]
+[node name="LogWindow" type="Control" unique_id=1608066377]
 process_mode = 3
 visible = false
 layout_mode = 3
@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=305932382]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 9
@@ -20,7 +20,7 @@ offset_right = 500.0
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="LogLabel" type="RichTextLabel" parent="PanelContainer"]
+[node name="LogLabel" type="RichTextLabel" parent="PanelContainer" unique_id=913935720]
 process_mode = 3
 z_index = 5
 layout_mode = 2

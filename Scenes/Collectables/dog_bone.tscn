@@ -1,16 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7508ame74p7h"]
+[gd_scene format=3 uid="uid://c7508ame74p7h"]
 
 [ext_resource type="Texture2D" uid="uid://bp0o2jb1c2gsx" path="res://Assets/Items/ITEMS_DOGBONE_BIGGEST.png" id="1_k36pv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_df3dv"]
 size = Vector2(48, 24)
 
-[node name="DogBone" type="Area2D" groups=["Treats"]]
+[node name="DogBone" type="Area2D" unique_id=438534952 groups=["Treats"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1375887012]
 shape = SubResource("RectangleShape2D_df3dv")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=755253125]
 z_index = 1
 texture_filter = 1
 scale = Vector2(0.7, 0.7)
