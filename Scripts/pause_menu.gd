@@ -1,13 +1,14 @@
 extends Control
 
 @onready var resume: Button = $Panel/VBoxContainer/HBoxContainer2/Resume
+const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
 
 func _ready() -> void:
 	visibility_changed.connect(func():
 		if visible: 
-			resume.grab_focus())
-	resume.grab_focus()
-	pass
+			resume.grab_focus(true))
+	resume.grab_focus(true)
+
 
 func _on_resume_pressed() -> void:
 	$Panel.visible = false
@@ -55,3 +56,8 @@ func _on_main_menu_pressed() -> void:
 	GameSettings.mainMenu()
 	get_tree().paused = false
 	queue_free()
+
+
+func _on_settings_pressed() -> void:
+	UINavigator.open_from_scene(SETTINGS_SCREEN, true)
+	pass # Replace with function body.

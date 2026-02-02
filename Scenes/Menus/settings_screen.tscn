@@ -1,0 +1,190 @@
+[gd_scene format=3 uid="uid://b2gf7obd6wwhk"]
+
+[ext_resource type="Script" uid="uid://ihu4evvvu1ue" path="res://Scripts/settings_screen.gd" id="1_u03vw"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_nfl8x"]
+[ext_resource type="Texture2D" uid="uid://5ut7n13w7gl0" path="res://Assets/UI/options_icons_etc/musicnote_1.png" id="3_2b6r5"]
+[ext_resource type="Texture2D" uid="uid://dj5ymgtujgle6" path="res://Assets/UI/options_icons_etc/musicnote_2.png" id="4_qwjhj"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="5_64y2j"]
+[ext_resource type="Texture2D" uid="uid://cwr3xy00vr1xt" path="res://Assets/UI/options_icons_etc/musicnote_1_small.png" id="6_c0uh7"]
+[ext_resource type="Texture2D" uid="uid://csa2i730dryet" path="res://Assets/UI/options_icons_etc/musicnote_2_small.png" id="7_gs3il"]
+[ext_resource type="Texture2D" uid="uid://biwe7c60f6r35" path="res://Assets/UI/options_icons_etc/speaker_3_small.png" id="8_q2fcu"]
+[ext_resource type="Texture2D" uid="uid://b5y0sal86emi0" path="res://Assets/UI/options_icons_etc/speaker_off_2_small.png" id="9_ondax"]
+[ext_resource type="Texture2D" uid="uid://c7viv7v30veef" path="res://Assets/UI/options_icons_etc/speaker_3.png" id="10_7jkpl"]
+[ext_resource type="Texture2D" uid="uid://n0icqrejpobn" path="res://Assets/UI/options_icons_etc/speaker_off_2.png" id="11_whg11"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u03vw"]
+bg_color = Color(0, 0, 0, 0.1764706)
+expand_margin_left = 20.0
+expand_margin_top = 20.0
+expand_margin_right = 20.0
+expand_margin_bottom = 20.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_umxxc"]
+texture = ExtResource("3_2b6r5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ovcku"]
+texture = ExtResource("4_qwjhj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g648p"]
+texture = ExtResource("10_7jkpl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t7vc4"]
+texture = ExtResource("11_whg11")
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_7smr3"]
+
+[node name="SettingsContainer" type="PanelContainer" unique_id=1316018813]
+process_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.0
+offset_top = -211.0
+offset_right = 137.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u03vw")
+
+[node name="SettingsScreen" type="VBoxContainer" parent="." unique_id=1148790409]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 2
+script = ExtResource("1_u03vw")
+
+[node name="Label" type="Label" parent="SettingsScreen" unique_id=542016325]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_nfl8x")
+text = "Settings:"
+
+[node name="MusicMute" type="Button" parent="SettingsScreen" unique_id=2030959185]
+z_index = 3
+z_as_relative = false
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 4
+theme_override_constants/line_spacing = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_umxxc")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ovcku")
+theme_override_styles/hover = SubResource("StyleBoxTexture_umxxc")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_ovcku")
+toggle_mode = true
+script = ExtResource("5_64y2j")
+metadata/_edit_use_anchors_ = true
+
+[node name="MusicCheckbox" type="CheckBox" parent="SettingsScreen" unique_id=471842037]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_nfl8x")
+theme_override_icons/checked = ExtResource("6_c0uh7")
+theme_override_icons/unchecked = ExtResource("7_gs3il")
+button_pressed = true
+text = "Music"
+
+[node name="SFXCheckbox" type="CheckBox" parent="SettingsScreen" unique_id=1639377762]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_nfl8x")
+theme_override_icons/checked = ExtResource("8_q2fcu")
+theme_override_icons/unchecked = ExtResource("9_ondax")
+button_pressed = true
+text = "SFX
+"
+
+[node name="SFXMute" type="Button" parent="SettingsScreen" unique_id=1741998612]
+z_index = 3
+z_as_relative = false
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_g648p")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_t7vc4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_g648p")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_t7vc4")
+toggle_mode = true
+script = ExtResource("5_64y2j")
+metadata/_edit_use_anchors_ = true
+
+[node name="ShowLog" type="CheckButton" parent="SettingsScreen" unique_id=636195925]
+layout_mode = 2
+theme = ExtResource("2_nfl8x")
+text = "Show log window"
+script = ExtResource("5_64y2j")
+
+[node name="ShowFramerate" type="CheckButton" parent="SettingsScreen" unique_id=1888874711]
+layout_mode = 2
+theme = ExtResource("2_nfl8x")
+text = "Show Framerate"
+script = ExtResource("5_64y2j")
+
+[node name="Controls" type="VBoxContainer" parent="SettingsScreen" unique_id=1190870806]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsScreen/Controls" unique_id=320440196]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_nfl8x")
+text = "Controls:"
+
+[node name="HoldControls" type="CheckBox" parent="SettingsScreen/Controls" unique_id=1943575057]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_nfl8x")
+button_pressed = true
+button_group = SubResource("ButtonGroup_7smr3")
+text = "Hold"
+script = ExtResource("5_64y2j")
+
+[node name="TapControls" type="CheckBox" parent="SettingsScreen/Controls" unique_id=1700117276]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_nfl8x")
+button_group = SubResource("ButtonGroup_7smr3")
+text = "Tap
+"
+script = ExtResource("5_64y2j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsScreen" unique_id=1768239325]
+layout_mode = 2
+
+[node name="AchievementsButton" type="Button" parent="SettingsScreen/HBoxContainer" unique_id=2009678036]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("2_nfl8x")
+theme_override_font_sizes/font_size = 20
+text = "Achievements"
+script = ExtResource("5_64y2j")
+
+[node name="LeaderboardsButton" type="Button" parent="SettingsScreen/HBoxContainer" unique_id=1644430493]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("2_nfl8x")
+theme_override_font_sizes/font_size = 20
+text = "Leaderboards"
+script = ExtResource("5_64y2j")
+
+[node name="Back" type="Button" parent="SettingsScreen" unique_id=752013187]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_nfl8x")
+text = "Back"
+script = ExtResource("5_64y2j")
+
+[connection signal="toggled" from="SettingsScreen/MusicMute" to="SettingsScreen" method="_on_music_mute_toggled"]
+[connection signal="toggled" from="SettingsScreen/SFXMute" to="SettingsScreen" method="_on_sfx_mute_toggled"]
+[connection signal="toggled" from="SettingsScreen/ShowLog" to="SettingsScreen" method="_on_show_log_toggled"]
+[connection signal="toggled" from="SettingsScreen/ShowFramerate" to="SettingsScreen" method="_on_show_framerate_toggled"]
+[connection signal="toggled" from="SettingsScreen/Controls/HoldControls" to="SettingsScreen" method="_on_hold_controls_toggled"]
+[connection signal="pressed" from="SettingsScreen/HBoxContainer/AchievementsButton" to="SettingsScreen" method="_on_achievements_button_pressed"]
+[connection signal="pressed" from="SettingsScreen/HBoxContainer/LeaderboardsButton" to="SettingsScreen" method="_on_leaderboards_button_pressed"]
+[connection signal="pressed" from="SettingsScreen/Back" to="SettingsScreen" method="_on_back_pressed"]

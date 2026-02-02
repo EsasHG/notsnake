@@ -19,6 +19,7 @@ func _ready() -> void:
 		prevPoint = -1
 		)
 
+
 func SpawnPickup():
 	if(GameSettings.currentScore == 10):
 		SpawnPresent()

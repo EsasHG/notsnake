@@ -10,7 +10,7 @@
 [ext_resource type="FontFile" uid="uid://37gbdvnlba5u" path="res://Assets/UI/Fonts/Herofire-Regular.ttf" id="8_3jh0s"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="9_tnk5f"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="10_bhhod"]
-[ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/Settings.tscn" id="11_gbl5x"]
+[ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/settings_screen.tscn" id="11_gbl5x"]
 [ext_resource type="PackedScene" uid="uid://df6v31n3ooicl" path="res://Scenes/Menus/back_button.tscn" id="12_l1pdr"]
 [ext_resource type="PackedScene" uid="uid://dgcfowugwe1op" path="res://Scenes/Menus/Arena/player_slot.tscn" id="12_mjnm4"]
 [ext_resource type="Script" uid="uid://c180npg2ssksp" path="res://Scripts/game_settings_container.gd" id="13_pdc06"]

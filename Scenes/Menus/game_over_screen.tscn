@@ -77,16 +77,6 @@ theme = ExtResource("2_3eorv")
 text = "Retry"
 script = ExtResource("3_3eq00")
 
-[node name="LevelSelectButton" type="Button" parent="ButtonContainer" unique_id=1249506116]
-z_index = -1
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-theme = ExtResource("2_3eorv")
-theme_override_font_sizes/font_size = 23
-text = "Level 
-Select"
-script = ExtResource("3_3eq00")
-
 [node name="MainMenuButton" type="Button" parent="ButtonContainer" unique_id=884263697]
 z_index = -1
 custom_minimum_size = Vector2(130, 50)
@@ -147,6 +137,5 @@ expand_mode = 1
 stretch_mode = 5
 
 [connection signal="pressed" from="ButtonContainer/RetryButton" to="." method="_on_retry_button_pressed"]
-[connection signal="pressed" from="ButtonContainer/LevelSelectButton" to="." method="_on_level_select_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]

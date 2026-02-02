@@ -14,16 +14,18 @@ class_name  GameOverScreen
 @onready var hiddenButtonYOffset : float = 150
 var buttons_enabled = false
 
+
 func _ready():
 	if OS.has_feature("mobile") and GameSettings.userAuthenticated:
 		$ButtonContainer/Leaderboard.visible = true
 	else:
 		$ButtonContainer/Leaderboard.visible = false
-		$ButtonContainer/RetryButton.grab_focus()
+		retry_button.grab_focus(true)
 
 	button_container.position.y = visibleButtonYPos+hiddenButtonYOffset
 	disable_buttons()
 	
+
 func _set_score(score : int):
 	Logging.logMessage("Setting Scores in game over screen!")
 	var highScore : int = GameSettings.getCurrentMapHighScore()
@@ -31,6 +33,7 @@ func _set_score(score : int):
 	$ScoreLabels/ScoreLabel.text = "Score: " + var_to_str(score)
 	$ScoreLabels/HighScoreLabel.text = "Best: " + var_to_str(highScore)
 	
+
 func game_over(players:Array[PlayerDog]):
 	
 	if OS.has_feature("mobile") and GameSettings.userAuthenticated:
@@ -58,7 +61,7 @@ func game_over(players:Array[PlayerDog]):
 		$WinnerTex.visible = false
 		$GameOverTex.visible = true
 	
-	
+
 func show_buttons() -> void:
 	Logging.logMessage("Showing buttons in game over!")
 	disable_buttons()
@@ -67,8 +70,10 @@ func show_buttons() -> void:
 	tween.tween_property(button_container,"position:y",visibleButtonYPos,0.2)
 	tween.finished.connect(enable_buttons)
 	
+
 func enable_buttons() -> void:
 	buttons_enabled = true
+
 
 func disable_buttons() -> void:
 	buttons_enabled = false
@@ -84,19 +89,6 @@ func _on_retry_button_pressed() -> void:
 	BGmusic.play()
 	GameSettings.startGame()
 	GameSettings.on_gameBegin.connect(queue_free)
-	#queue_free()
-
-func _on_level_select_button_pressed() -> void:
-	if !buttons_enabled:
-		return
-		
-	disable_buttons()
-	
-	var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
-	loseMusic.stop()
-	GameSettings.levelSelect()
-	queue_free()
-	pass # Replace with function body.
 
 
 func _on_main_menu_button_pressed() -> void:
@@ -108,6 +100,7 @@ func _on_main_menu_button_pressed() -> void:
 	loseMusic.stop()
 	GameSettings.mainMenu()
 	queue_free()
+
 
 func _on_leaderboard_pressed() -> void:	
 	GameSettings.showLeaderboard()

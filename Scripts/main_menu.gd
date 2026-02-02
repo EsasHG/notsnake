@@ -3,9 +3,8 @@ extends Control
 class_name MainMenu
 
 var menu_active = true;
+const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
 
-@onready var settings_container: PanelContainer = $SettingsContainer
-@onready var settings_back: Button = $SettingsContainer/VBoxContainer/Back
 @onready var buttons: HBoxContainer = $MainButtons
 @onready var level_select_screen: Control = $LevelSelectScreen
 @onready var level_buttons: HFlowContainer = $LevelSelectScreen/VBoxContainer/PanelContainer/LevelButtons
@@ -21,6 +20,8 @@ var menu_active = true;
 
 
 func _ready() -> void:
+	UINavigator.open(buttons)
+	
 	if OS.has_feature("mobile"):
 		quit_button.visible = false;
 		_on_user_authenticated(GameSettings.userAuthenticated)
@@ -33,6 +34,7 @@ func _ready() -> void:
 		quit_button.visible = true;
 		if sign_in_button:
 			sign_in_button.visible = false
+		start_button.grab_focus(true)
 	visible = true
 	buttons.visible = true
 	get_tree().create_timer(0.5).timeout.connect(func():	
@@ -41,8 +43,14 @@ func _ready() -> void:
 		blackPanelTween.tween_property($Panel2, "modulate:a", 0, 1.5)
 		)
 	
-	if(!OS.has_feature("mobile")):
-		start_button.grab_focus()
+	start_button.visibility_changed.connect(func(): 
+			if start_button.visible:
+				start_button.grab_focus(true)
+			)
+	level_buttons.visibility_changed.connect(func():
+			if level_buttons.visible:
+				level_buttons.get_child(0).grab_focus(true)
+				)
 	
 	var music = get_tree().root.find_child("BGMusic", true, false)
 	if(music):
@@ -60,11 +68,6 @@ func _ready() -> void:
 		button.focus_neighbor_bottom = level_select_back.get_path()
 		level_buttons.add_child(button)
 		button.pressed.connect(_on_map_selected.bind(s))
-	
-	settings_container.visibility_changed.connect(func():
-		if settings_container.visible == true:
-			settings_back.grab_focus()
-			)
 
 
 ##TODO: do we need this method here?
@@ -81,33 +84,39 @@ func _input(event: InputEvent) -> void:
 		while GlobalInputMap.ControllerIds[index] != -1 && index < 4:
 			index += 1;
 
+
 func start_game() -> void:
 	GlobalInputMap.ControllerIds = [0,-1,-1,-1]
 	GlobalInputMap.Player_Hats_Selected[0] = 0
 	GlobalInputMap.Player_Color_Selected[0] = 0
-	GlobalInputMap.Player_Controls_Selected[0] = true
 	GameSettings.startGame()
 	queue_free()
+
 
 func menu_out():
 	$Logo.visible = false
 	start_button.visible = false
 	quit_button.visible = false
 
+
 func _on_user_authenticated(is_authenticated: bool) -> void:
 	Logging.logMessage("Main menu: On user authenticated: " + str(is_authenticated))
 	sign_in_button.visible = !is_authenticated
 	
+
 func _on_start_button_pressed() -> void:
 	open_level_select()
 	
+
 func open_level_select():
 	level_buttons.get_children()[0].grab_focus()
 	#hide_all()
 	UINavigator.open(level_select_screen,true)
 	
+
 func _on_settings_pressed() -> void:
-	UINavigator.open(settings_container,true)
+	UINavigator.open_from_scene(SETTINGS_SCREEN,true)
+
 
 func _on_map_selected(scene:Map): 
 	level_selected_sound.play()
@@ -115,14 +124,17 @@ func _on_map_selected(scene:Map):
 	menu_active = false
 	start_game()
 
+
 func _on_quit_pressed() -> void:
 	get_tree().quit();
+
 
 func _on_sign_in_pressed() -> void:
 	if(GameSettings.signInClient):
 		Logging.logMessage("Main menu: Signing in")
 		GameSettings.signInClient.sign_in()
 	pass # Replace with function body.
+
 
 func _on_leaderboard_pressed() -> void:
 	GameSettings.showAllLeaderboards()

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bksp4hitp0rwk" path="res://Scripts/pause_menu.gd" id="1_ekn4r"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="1_vms7i"]
-[ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/Settings.tscn" id="2_tf3q2"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="4_yeo1y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yeo1y"]
@@ -60,9 +59,14 @@ theme = ExtResource("1_vms7i")
 theme_override_font_sizes/font_size = 60
 text = "Game Paused!"
 
-[node name="SettingsScreen" parent="Panel/VBoxContainer" unique_id=1975726742 instance=ExtResource("2_tf3q2")]
+[node name="Settings" type="Button" parent="Panel/VBoxContainer" unique_id=1416615550]
+custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_vms7i")
+text = "Settings"
+script = ExtResource("4_yeo1y")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=551465420]
 layout_mode = 2
@@ -110,5 +114,6 @@ text = "Loop!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="pressed" from="Panel/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer2/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer2/MainMenu" to="." method="_on_main_menu_pressed"]

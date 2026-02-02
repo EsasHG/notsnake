@@ -46,7 +46,6 @@ var musicVol = linear_to_db(0.8)
 var musicMuted : bool = false
 var sfxMuted : bool = false
 var userAuthenticated = false
-var holdControls:bool = true
 var pauseButton:Button
 
 var achievementsClient : PlayGamesAchievementsClient = null
@@ -133,21 +132,6 @@ func _do_deferred_setup():
 	get_tree().create_timer(1.5).timeout.connect(func(): scene_transition.transition_out())
 
 
-func levelSelect():
-	if(currentWorld != null):
-		currentWorld.queue_free()
-		currentWorld = null
-	var b = BUBBLE_CUTSCENE.instantiate()
-	b.skipEntireCutscene = true
-	b.levelSelect = true
-	currentWorld = b
-	get_tree().root.add_child(b)
-	game_running = false
-	on_mainMenuOpened.emit()
-	if adManager && adManager.is_node_ready() && adManager.admob_initialized:
-		adManager.setup_interstitial_ad()
-
-
 func mainMenu():
 	#TODO: Pause button dissapears when going back to the menu from a level, then back into a level
 	#not sure there's anything here doing it, just needed to write it somewhere.
@@ -228,7 +212,7 @@ func _actually_start_game():
 			GlobalInputMap.Player_Score[p.playerID] = 0
 			GlobalInputMap.Player_Lives[p.playerID] = lives
 			
-			
+
 func game_over():
 	if ! game_running: 
 		return
@@ -265,9 +249,11 @@ func game_over():
 	
 	game_running = false
 
+
 func increaseScore():
 	currentScore+=1
-		
+
+
 func saveScore():
 	Logging.logMessage("Saving!")
 	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
@@ -276,12 +262,18 @@ func saveScore():
 	saveFile.store_line(JSON.stringify(saveDict))
 	Logging.logMessage("Saved!")
 	
-	
+
 func saveSettings(): #TODO finish this
 	Logging.logMessage("Saving!")
 	var saveFile = FileAccess.open("user://settings.save", FileAccess.WRITE)
 	
-	var saveDict = {"musicVol" = db_to_linear(musicVol), "sfxVol" = db_to_linear(sfxVol), "musicMuted" = musicMuted, "sfxMuted" = sfxMuted, "controls" = holdControls} 
+	var saveDict = {
+			"musicVol" = db_to_linear(musicVol), 
+			"sfxVol" = db_to_linear(sfxVol), 
+			"musicMuted" = musicMuted, 
+			"sfxMuted" = sfxMuted, 
+			"controls" = GlobalInputMap.Player_Controls_Selected[0]
+			} 
 	saveFile.store_line(JSON.stringify(saveDict))
 	Logging.logMessage("Saved!")
 	
@@ -341,6 +333,7 @@ func loadSettings() -> bool:
 		else:
 			Logging.error("Could not load SFX volume from save file!")
 			sfxVol = linear_to_db(0.8)
+			
 		if node_data.has("musicVol"):
 			musicVol = linear_to_db(node_data["musicVol"])
 		else:
@@ -349,22 +342,22 @@ func loadSettings() -> bool:
 			
 		if node_data.has("sfxMuted"):
 			sfxMuted = node_data["sfxMuted"]
-			setSFXMuted(sfxMuted)
 		else:
 			Logging.error("Could not load SFX muted from save file!")
 			sfxMuted = false
+		setSFXMuted(sfxMuted)
 	
 		if node_data.has("musicMuted"):
 			musicMuted = node_data["musicMuted"]
-			setMusicMuted(musicMuted)
 		else:
 			Logging.error("Could not load music muted from save file!")
 			musicMuted = false
-
+		setMusicMuted(musicMuted)
+		
 		if node_data.has("controls"):
-			holdControls = node_data["controls"]
+			setControls(node_data["controls"])
 		else:
-			holdControls = true
+			setControls(true)
 	Logging.logMessage("Finished loading settings")
 	return true
 			
@@ -391,8 +384,8 @@ func setMusicMuted(muted:bool):
 	if musicMuted: 
 		vol = linear_to_db(0)
 	setMusicVol(vol)
-	saveSettings()
-	
+
+
 func setSFXMuted(muted:bool):
 	Logging.logMessage("Setting sfx muted to " + str(muted))
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"),muted)
@@ -401,13 +394,13 @@ func setSFXMuted(muted:bool):
 	if sfxMuted: 
 		vol = linear_to_db(0)
 	setSFXVol(vol)
-	saveSettings()
-	
+
+
 func setControls(hold:bool):
-	holdControls = hold
-	on_controls_changed.emit(holdControls)
-	saveSettings()
+	GlobalInputMap.Player_Controls_Selected[0] = hold
+	on_controls_changed.emit(hold)
 	
+
 func remove_all_ads():
 	adManager.remove_banner_ad()
 	adManager.queue_free()

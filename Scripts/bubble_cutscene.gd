@@ -115,10 +115,12 @@ func deleteBubble():
 func showMenu():
 	var mainMenu = null
 	if GameSettings.game_mode == GameSettings.GAME_MODE.SINGLE_PLAYER:
-		mainMenu = MAIN_MENU.instantiate()
+		mainMenu = UINavigator.open_from_scene(MAIN_MENU)
+		#mainMenu = MAIN_MENU.instantiate()
 	else:
-		mainMenu = ARENA_MENU.instantiate()
+		mainMenu = UINavigator.open_from_scene(ARENA_MENU)
+		#mainMenu = ARENA_MENU.instantiate()
 		
-	get_tree().root.find_child("Gui",true, false).add_child(mainMenu)
+	#UINavigator.open(mainMenu, false)
 	if levelSelect:
 		mainMenu.open_level_select()

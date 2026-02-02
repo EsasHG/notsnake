@@ -30,7 +30,6 @@ var timer : float = 0.0
 var spawnTime : float = 0.02
 var prevLeft : Vector2 = Vector2(1,0)
 var prevDir : int = -1
-var holdControls = true
 var _invulnerable = true 
 var score = 0
 var grabbed_tail : bool = false
@@ -42,7 +41,7 @@ var move = true
 var rotateRight = false
 var arrowTarget : Vector2
 
-	
+
 func _ready() -> void:
 	Logging.logMessage("Player ready!")
 	
@@ -79,13 +78,15 @@ func _ready() -> void:
 	GameSettings.on_controls_changed.connect(_on_controls_changed)
 	GameSettings.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
 	visibility_changed.connect(func(): segmentParent.visible =visible) 
-	
+
+
 func add_sprite():
 	if(canAddSprites):
 		spritesToAdd+=segmentsPerSection
 		canAddSprites = false
 		get_tree().create_timer(0.1).timeout.connect(resetSpriteTimer)
 		hindLegs.pause()
+
 
 func add_segment():
 	if(canAddSprites):
@@ -97,10 +98,11 @@ func add_segment():
 func resetSpriteTimer():
 	canAddSprites = true
 
+
 func _input(event: InputEvent) -> void:
 	if event.device != GlobalInputMap.ControllerIds[playerID]:
 		return
-	if holdControls:
+	if GlobalInputMap.Player_Controls_Selected[playerID]:
 		if(event.is_action("Press")):
 			if(event.is_pressed()):
 				rotateRight = true
@@ -112,7 +114,8 @@ func _input(event: InputEvent) -> void:
 			
 	if event.is_action("Pause"):
 		GameSettings._on_pause_pressed()
-			
+
+
 func _process(delta: float) -> void:
 	if(!move): return
 	var dir : int = -1
@@ -181,6 +184,7 @@ func _process(delta: float) -> void:
 	var lerped = (arrowDist-MIN_ARROW_DIST)/MAX_ARROW_DIST
 	$Head/ArrowHolder/Arrow.modulate.a = lerped
 
+
 func _on_area_entered(area: Area2D) -> void:
 	if(_invulnerable or playerControl == false or not GameSettings.game_running):
 		return
@@ -238,9 +242,12 @@ func _on_area_entered(area: Area2D) -> void:
 func bark():
 	$Head/BarkSound.pitch_scale = randf_range(0.9,1.1)
 	$Head/BarkSound.play()
-	
+
+
 func set_arrow_target(target:Node2D):
 	arrowTarget = target.global_position
-	
-func _on_controls_changed(_holdControls:bool):
-	rotateRight = false
+
+
+#why is this here
+func _on_controls_changed(_hold_controls:bool):
+	rotateRight = false 

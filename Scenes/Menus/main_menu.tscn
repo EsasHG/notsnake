@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_f6ncm"]
-[ext_resource type="PackedScene" uid="uid://b2gf7obd6wwhk" path="res://Scenes/Menus/Settings.tscn" id="6_opfnp"]
 [ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="8_5egv6"]
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="8_vtepg"]
 [ext_resource type="Resource" uid="uid://cibsfp4rd5p5b" path="res://Scenes/Maps/Field.tres" id="9_vtepg"]
@@ -18,13 +17,6 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
 bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cp0ys"]
-bg_color = Color(0, 0, 0, 0.1764706)
-expand_margin_left = 20.0
-expand_margin_top = 20.0
-expand_margin_right = 20.0
-expand_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhxw7"]
 bg_color = Color(0, 0, 0, 0.270588)
@@ -132,31 +124,6 @@ layout_mode = 2
 theme = ExtResource("3_f6ncm")
 text = "Quit"
 script = ExtResource("13_vtepg")
-
-[node name="SettingsContainer" type="PanelContainer" parent="." unique_id=478325933]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -113.5
-offset_right = 68.5
-offset_bottom = 113.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_cp0ys")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="SettingsContainer" unique_id=1149772230]
-layout_mode = 2
-
-[node name="SettingsScreen" parent="SettingsContainer/VBoxContainer" unique_id=1575176149 instance=ExtResource("6_opfnp")]
-layout_mode = 2
-
-[node name="Back" parent="SettingsContainer/VBoxContainer" unique_id=918342225 instance=ExtResource("15_0xbgx")]
-layout_mode = 2
 
 [node name="LevelSelectScreen" type="Control" parent="." unique_id=1518533289]
 visible = false
