@@ -46,13 +46,13 @@ offset_bottom = 292.0
 layout_mode = 2
 theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 60
-text = "Score:"
+text = "SCORE"
 
 [node name="HighScoreLabel" type="Label" parent="ScoreLabels" unique_id=295813944]
 layout_mode = 2
 theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 40
-text = "Best:"
+text = "BEST_SCORE"
 
 [node name="ButtonContainer" type="HBoxContainer" parent="." unique_id=2069789025]
 layout_mode = 1
@@ -74,7 +74,7 @@ z_index = -1
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("2_3eorv")
-text = "Retry"
+text = "RETRY"
 script = ExtResource("3_3eq00")
 
 [node name="MainMenuButton" type="Button" parent="ButtonContainer" unique_id=884263697]
@@ -83,7 +83,7 @@ custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 23
-text = "Main Menu"
+text = "MAIN_MENU"
 script = ExtResource("3_3eq00")
 
 [node name="Leaderboard" type="Button" parent="ButtonContainer" unique_id=147126916]

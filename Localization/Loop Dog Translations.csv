@@ -1,0 +1,45 @@
+keys,en,no
+START,Start,Start
+QUIT,Quit,Avslutt
+PAUSE,Pause,Pause
+LEADERBOARDS,Leaderboards,Poengtavler
+LEADERBOARD,Leaderboard,Poengtavle
+ACHIEVEMENTS,Achievements,Prestasjoner
+RETRY,Retry,Prøv igjen
+MAIN_MENU,Main menu,Hovedmeny
+LOADING,Loading...,Laster...
+SCORE,Score:,Poeng:
+BEST_SCORE,Best:,Høyeste:
+SETTINGS,Settings,Innstillinger
+BACK,Back,Tilbake
+CONTROLS,Controls:,Styring:
+SIGN_IN,Sign in to Google Play,Logg inn med Google Play
+LANGUAGE,Language:,Språk:
+GAME_PAUSED,Game paused!,Pauset!
+END_RUN,End run,Avslutt runden
+RESUME,Resume,Tilbake
+LOOP,Loop!,Loop!
+SHOW_LOG,Show log window,Vis loggvindu
+SHOW_FRAMERATE,Show Framerate,Vis FPS
+HOLD,Hold,Hold
+TAP,Tap,Trykk
+READY,Ready!,Klar!
+PRESS_JOIN,Press X/A to join!,Trykk X/A for å bli med!
+FIELD,Field,Engen
+PARK,Park,Parken
+SQUARE,Square,Torget
+SMALL,Small,Lillebanen
+FOREST,Forest,Skogen
+AD_REMOVAL_TITLE,Tired of ads?,Lei av reklamer?
+AD_REMOCAL_DESCRIPTION,Purchase ad removal,Kjøp reklamefjerning
+AD_REMOVAL_YES,Yes pls,Ja takk
+AD_REMOVAL_NO,No thx,Nei takk
+AD_REMOVAL_PURCHASED_TITLE,Thank you!,Tusen takk!
+AD_REMOVAL_PURCHASED_DESCRIPTION,You will no longer see ads,Du vil ikke lenger se reklamer
+CLOSE,Close,Lukk
+BILLING_PURCHASE_ERROR_TITLE,Something went wrong with your purchase,Noe gikk galt med betalingen
+BILLING_PURCHASE_ERROR_DESCRIPTION,Try again?,Prøv på nytt?
+BILLING_PENDING_TITLE,Waiting for purchase to finish...,Venter på at betalingen gjennomføres...
+BILLING_PENDING_DESCRIPTION,"Do you need to do something in another app? 
+You can close this and keep playing the game in the meantime","Trenger du å gjøre noe i et annet program?
+Du kan lukke denne meldingen og fortsette å spille mens du venter."

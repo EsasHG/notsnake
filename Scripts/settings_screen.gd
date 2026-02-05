@@ -10,6 +10,7 @@ extends VBoxContainer
 @onready var show_log: CheckButton = $ShowLog
 @onready var googlePlayButtonsContainer: HBoxContainer = $HBoxContainer
 @onready var back_button: AudioButton = $Back
+@onready var language_selector: OptionButton = $Controls/VBoxContainer/LanguageSelector
 
 var _changes_made = false
 
@@ -26,7 +27,17 @@ func _ready() -> void:
 		googlePlayButtonsContainer.visible = false
 		
 	back_button.grab_focus(true)
-
+	language_selector.clear()
+	for locale in TranslationServer.get_loaded_locales():
+		## the method below returned "Norwegian bokmål" for "nb", and that didn't feel right to me.
+		var lang = TranslationServer.get_language_name(locale)
+		if locale == "nb":
+			language_selector.add_item("Norsk")	
+		else:
+			language_selector.add_item(lang)
+			
+		if GameSettings.language == locale:
+			language_selector.select(language_selector.item_count-1)
 
 func _on_music_mute_toggled(toggled_on: bool) -> void:
 	GameSettings.setMusicMuted(toggled_on)
@@ -70,3 +81,10 @@ func _on_back_pressed() -> void:
 		GameSettings.saveSettings()
 	UINavigator.back()
 	pass # Replace with function body.
+
+
+func _on_language_selector_item_selected(index: int) -> void:
+	var locale = TranslationServer.get_loaded_locales()[index]
+	TranslationServer.set_locale(locale)
+	GameSettings.language = locale
+	_changes_made = true

@@ -9,6 +9,9 @@ func _ready() -> void:
 	
 func _findLogWindow():
 	_logWindow = get_tree().root.find_child("LogWindow",true,false)
+	if !_logWindow:
+		error("Log window not found!")
+		return
 	_logLabel = _logWindow.find_child("LogLabel",true,false)
 	_logLabel.get_v_scroll_bar().custom_minimum_size = Vector2(40,40)
 	_logLabel.process_mode = Node.PROCESS_MODE_ALWAYS

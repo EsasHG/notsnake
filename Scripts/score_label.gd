@@ -10,4 +10,4 @@ func _ready() -> void:
 
 func _set_score():
 	#Ugly, just to make sure the score has updated.
-	get_tree().process_frame.connect(func(): text = "Score: " + var_to_str(GameSettings.currentScore))
+	get_tree().process_frame.connect(func(): text = tr("SCORE") + ": " + var_to_str(GameSettings.currentScore))

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cdkbde3312tvm"
+
+[deps]
+
+files=["res://Localization/Loop Dog Translations.en.translation", "res://Localization/Loop Dog Translations.nb.translation"]
+
+source_file="res://Localization/Loop Dog Translations.csv"
+dest_files=["res://Localization/Loop Dog Translations.en.translation", "res://Localization/Loop Dog Translations.nb.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

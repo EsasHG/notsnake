@@ -100,8 +100,12 @@ func resetSpriteTimer():
 
 
 func _input(event: InputEvent) -> void:
-	if event.device != GlobalInputMap.ControllerIds[playerID]:
+	if playerID == -1:
 		return
+	
+	if GameSettings.game_mode != GameSettings.GAME_MODE.SINGLE_PLAYER:
+		if event.device != GlobalInputMap.ControllerIds[playerID]:
+			return
 	if GlobalInputMap.Player_Controls_Selected[playerID]:
 		if(event.is_action("Press")):
 			if(event.is_pressed()):

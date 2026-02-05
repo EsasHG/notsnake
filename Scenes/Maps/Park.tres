@@ -7,5 +7,5 @@
 [resource]
 script = ExtResource("1_bsn4t")
 Scene = ExtResource("1_08ppb")
-name = "Park"
+name = "PARK"
 icon = ExtResource("2_rietx")

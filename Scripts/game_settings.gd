@@ -20,7 +20,7 @@ var game_mode :GAME_MODE = GAME_MODE.SINGLE_PLAYER
 var round_time_seconds:int = 60 
 var lives = 1
 var game_running:bool = false
-
+var language = "automatic"
 const SCENE_TRANSITION = preload("uid://gsu5a1hu0rjf")
 const GAME_OVER_SCREEN = preload("uid://ck7vl8h740cpk")
 const ARENA_GAME_OVER_SCREEN = preload("uid://u1gfn45v12yd")
@@ -46,7 +46,6 @@ var musicVol = linear_to_db(0.8)
 var musicMuted : bool = false
 var sfxMuted : bool = false
 var userAuthenticated = false
-var pauseButton:Button
 
 var achievementsClient : PlayGamesAchievementsClient = null
 var leaderboardsClient : PlayGamesLeaderboardsClient = null
@@ -94,10 +93,13 @@ func _do_deferred_setup():
 	if OS.has_feature("mobile"):
 		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
 		
-		billingManager = BILLING_MANAGER.instantiate()
-		billingManager.loading_finished.connect(_on_billing_manager_loading_finished)
-		get_tree().root.find_child("Gui",true,false).call_deferred("add_child", billingManager)
 		
+		if mainGuiNode:
+			billingManager = BILLING_MANAGER.instantiate()
+			billingManager.loading_finished.connect(_on_billing_manager_loading_finished)
+			mainGuiNode.call_deferred("add_child", billingManager)
+		else: 
+			print("Main gui node not found! Not adding billing manager...")
 		if GodotPlayGameServices.android_plugin:
 			if(signInClient):
 				signInClient.user_authenticated.connect(_on_user_authenticated)
@@ -121,21 +123,22 @@ func _do_deferred_setup():
 		button.toggled.connect(_on_sfx_mute_toggled)
 		button.set_pressed_no_signal(sfxMuted)
 	setSFXVol(sfxVol)
-
-	pauseButton = get_tree().root.find_child("PauseButton", true, false)
-	if(is_instance_valid(pauseButton)):
-		pauseButton.pressed.connect(_on_pause_pressed)
-	else:
-		Logging.error("Pause button not found in game settings!")
 		
 	var scene_transition:SceneTransition = get_tree().root.find_child("SceneTransition",true,false)
-	get_tree().create_timer(1.5).timeout.connect(func(): scene_transition.transition_out())
+	get_tree().create_timer(1.5).timeout.connect(func(): if scene_transition: scene_transition.transition_out())
 
+func end_run() -> void:
+	if !game_running:
+		Logging.error("End run called, but game is not running!")
+	else:
+		on_gameOver.emit()
+	
 
 func mainMenu():
 	#TODO: Pause button dissapears when going back to the menu from a level, then back into a level
 	#not sure there's anything here doing it, just needed to write it somewhere.
 	if game_running:
+		Logging.error("main_menu called, but game is running! Stopping game...")
 		on_gameOver.emit()
 	else:
 		if(currentWorld != null):
@@ -272,7 +275,8 @@ func saveSettings(): #TODO finish this
 			"sfxVol" = db_to_linear(sfxVol), 
 			"musicMuted" = musicMuted, 
 			"sfxMuted" = sfxMuted, 
-			"controls" = GlobalInputMap.Player_Controls_Selected[0]
+			"controls" = GlobalInputMap.Player_Controls_Selected[0],
+			"language" = language,
 			} 
 	saveFile.store_line(JSON.stringify(saveDict))
 	Logging.logMessage("Saved!")
@@ -358,6 +362,16 @@ func loadSettings() -> bool:
 			setControls(node_data["controls"])
 		else:
 			setControls(true)
+			
+		if node_data.has("language"):
+			language = node_data["language"]
+			
+	if language == "automatic":
+		var preferred_language = OS.get_locale_language()
+		TranslationServer.set_locale(preferred_language)
+	else:
+		TranslationServer.set_locale(language)
+		
 	Logging.logMessage("Finished loading settings")
 	return true
 			
@@ -417,7 +431,11 @@ func _on_music_mute_toggled(toggled_on: bool) -> void:
 func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 	setSFXMuted(toggled_on)
 
-func _on_pause_pressed():
+
+func unpause_game() -> void:
+	get_tree().paused = false
+
+func pause_game():
 	Logging.logMessage("Pausing game")
 	
 	#var pauseScreen = PAUSE_MENU.instantiate()

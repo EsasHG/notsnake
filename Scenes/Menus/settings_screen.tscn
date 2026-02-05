@@ -58,7 +58,7 @@ script = ExtResource("1_u03vw")
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_nfl8x")
-text = "Settings:"
+text = "SETTINGS"
 
 [node name="MusicMute" type="Button" parent="SettingsScreen" unique_id=2030959185]
 z_index = 3
@@ -116,13 +116,13 @@ metadata/_edit_use_anchors_ = true
 [node name="ShowLog" type="CheckButton" parent="SettingsScreen" unique_id=636195925]
 layout_mode = 2
 theme = ExtResource("2_nfl8x")
-text = "Show log window"
+text = "SHOW_LOG"
 script = ExtResource("5_64y2j")
 
 [node name="ShowFramerate" type="CheckButton" parent="SettingsScreen" unique_id=1888874711]
 layout_mode = 2
 theme = ExtResource("2_nfl8x")
-text = "Show Framerate"
+text = "SHOW_FRAMERATE"
 script = ExtResource("5_64y2j")
 
 [node name="Controls" type="VBoxContainer" parent="SettingsScreen" unique_id=1190870806]
@@ -132,7 +132,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_nfl8x")
-text = "Controls:"
+text = "CONTROLS"
 
 [node name="HoldControls" type="CheckBox" parent="SettingsScreen/Controls" unique_id=1943575057]
 layout_mode = 2
@@ -140,7 +140,7 @@ size_flags_horizontal = 4
 theme = ExtResource("2_nfl8x")
 button_pressed = true
 button_group = SubResource("ButtonGroup_7smr3")
-text = "Hold"
+text = "HOLD"
 script = ExtResource("5_64y2j")
 
 [node name="TapControls" type="CheckBox" parent="SettingsScreen/Controls" unique_id=1700117276]
@@ -148,9 +148,30 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_nfl8x")
 button_group = SubResource("ButtonGroup_7smr3")
-text = "Tap
-"
+text = "TAP"
 script = ExtResource("5_64y2j")
+
+[node name="VBoxContainer" type="HBoxContainer" parent="SettingsScreen/Controls" unique_id=477237773]
+layout_mode = 2
+
+[node name="LanguageLabel" type="Label" parent="SettingsScreen/Controls/VBoxContainer" unique_id=1948724054]
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("2_nfl8x")
+theme_override_font_sizes/font_size = 26
+text = "LANGUAGE"
+
+[node name="LanguageSelector" type="OptionButton" parent="SettingsScreen/Controls/VBoxContainer" unique_id=812837733]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_nfl8x")
+selected = 0
+allow_reselect = true
+item_count = 2
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "Norsk"
+popup/item_1/id = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SettingsScreen" unique_id=1768239325]
 layout_mode = 2
@@ -160,7 +181,7 @@ custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("2_nfl8x")
 theme_override_font_sizes/font_size = 20
-text = "Achievements"
+text = "ACHIEVEMENTS"
 script = ExtResource("5_64y2j")
 
 [node name="LeaderboardsButton" type="Button" parent="SettingsScreen/HBoxContainer" unique_id=1644430493]
@@ -168,7 +189,7 @@ custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("2_nfl8x")
 theme_override_font_sizes/font_size = 20
-text = "Leaderboards"
+text = "LEADERBOARDS"
 script = ExtResource("5_64y2j")
 
 [node name="Back" type="Button" parent="SettingsScreen" unique_id=752013187]
@@ -177,7 +198,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_nfl8x")
-text = "Back"
+text = "BACK"
 script = ExtResource("5_64y2j")
 
 [connection signal="toggled" from="SettingsScreen/MusicMute" to="SettingsScreen" method="_on_music_mute_toggled"]
@@ -185,6 +206,7 @@ script = ExtResource("5_64y2j")
 [connection signal="toggled" from="SettingsScreen/ShowLog" to="SettingsScreen" method="_on_show_log_toggled"]
 [connection signal="toggled" from="SettingsScreen/ShowFramerate" to="SettingsScreen" method="_on_show_framerate_toggled"]
 [connection signal="toggled" from="SettingsScreen/Controls/HoldControls" to="SettingsScreen" method="_on_hold_controls_toggled"]
+[connection signal="item_selected" from="SettingsScreen/Controls/VBoxContainer/LanguageSelector" to="SettingsScreen" method="_on_language_selector_item_selected"]
 [connection signal="pressed" from="SettingsScreen/HBoxContainer/AchievementsButton" to="SettingsScreen" method="_on_achievements_button_pressed"]
 [connection signal="pressed" from="SettingsScreen/HBoxContainer/LeaderboardsButton" to="SettingsScreen" method="_on_leaderboards_button_pressed"]
 [connection signal="pressed" from="SettingsScreen/Back" to="SettingsScreen" method="_on_back_pressed"]

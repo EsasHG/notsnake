@@ -21,8 +21,8 @@ boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
 GameSettings="*res://Scripts/game_settings.gd"
 Logging="*res://Scripts/logging.gd"
 GlobalInputMap="*res://Scenes/Menus/Arena/global_input_map.gd"
-GodotPlayGameServices="*uid://cdeud4neqclc6"
 UINavigator="*res://Scripts/ui_navigator.gd"
+GodotPlayGameServices="*uid://cdeud4neqclc6"
 
 [display]
 
@@ -120,6 +120,10 @@ Pause={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":4,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Localization/Loop Dog Translations.en.translation", "res://Localization/Loop Dog Translations.nb.translation")
 
 [rendering]
 

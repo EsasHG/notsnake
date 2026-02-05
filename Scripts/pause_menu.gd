@@ -2,6 +2,9 @@ extends Control
 
 @onready var resume: Button = $Panel/VBoxContainer/HBoxContainer2/Resume
 const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
+@onready var close_button: Button = $Close
+
+
 
 func _ready() -> void:
 	visibility_changed.connect(func():
@@ -10,39 +13,29 @@ func _ready() -> void:
 	resume.grab_focus(true)
 
 
+#do we really want this here?
 func _on_resume_pressed() -> void:
 	$Panel.visible = false
-	$Countdown.visible = true
-	var tween = CreateCountdownTween()
+	close_button.visible = false
+	next_count(3)
 	
-	$Countdown.text = "3"
-	tween.tween_callback(func():
-		$Countdown.text = "2"
-		$Countdown.scale = Vector2(2,2)
-		$Countdown.modulate.a = 1
-		var t2 = CreateCountdownTween()
-		t2.tween_callback(func():
-			$Countdown.text = "1"
-			$Countdown.scale = Vector2(2,2)
-			$Countdown.modulate.a = 1
-			
-			var t1 = CreateCountdownTween()
-			t1.tween_callback(func():
-				$Countdown.text = "Loop!"
-				$Countdown.scale = Vector2(2,2)
-				$Countdown.modulate.a = 1
-				
-				var tGo = CreateCountdownTween()
-				get_tree().paused = false
-				
-				tGo.tween_callback(func():
-					UINavigator.back()
-				)
-			)
-		)
-	)
 
-func CreateCountdownTween():
+func next_count(count : int) -> void:
+	$Countdown.scale = Vector2(2,2)
+	$Countdown.modulate.a = 1
+	
+	if count > 0:
+		$Countdown.text = str(count)
+		var t = create_countdown_tween()
+		t.tween_callback(next_count.bind(count-1))
+	else:
+		$Countdown.text = "Loop!"
+		GameSettings.unpause_game()
+		var t = create_countdown_tween()
+		t.tween_callback(UINavigator.back)
+
+
+func create_countdown_tween():
 	$Countdown.visible = true
 	var tween = get_tree().create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
@@ -52,12 +45,12 @@ func CreateCountdownTween():
 	return tween
 
 
-func _on_main_menu_pressed() -> void:
-	GameSettings.mainMenu()
-	get_tree().paused = false
-	queue_free()
-
-
 func _on_settings_pressed() -> void:
 	UINavigator.open_from_scene(SETTINGS_SCREEN, true)
 	pass # Replace with function body.
+
+
+func _on_end_run_pressed() -> void:
+	GameSettings.end_run()
+	get_tree().paused = false
+	queue_free()

@@ -6,5 +6,5 @@
 [node name="Back" type="Button" unique_id=7349764]
 custom_minimum_size = Vector2(130, 50)
 theme = ExtResource("1_bxlk4")
-text = "Back"
+text = "BACK"
 script = ExtResource("2_5l65n")

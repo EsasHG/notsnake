@@ -7,7 +7,7 @@ class_name  GameOverScreen
 @onready var BGmusic = get_tree().root.find_child("BGMusic", true, false)
 @onready var button_container: HBoxContainer = $ButtonContainer
 @onready var retry_button: Button = $ButtonContainer/RetryButton
-@onready var level_select_button: Button = $ButtonContainer/LevelSelectButton
+
 @onready var main_menu_button: Button = $ButtonContainer/MainMenuButton
 
 @onready var visibleButtonYPos : float = button_container.position.y
