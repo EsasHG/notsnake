@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d0lv3j2ywaltm" path="res://Scenes/Maps/Square_Map.tscn" id="3_s3aig"]
 [ext_resource type="PackedScene" uid="uid://dw8vjc4lovnfv" path="res://Scenes/Maps/Small_map.tscn" id="4_iqgwl"]
 [ext_resource type="PackedScene" uid="uid://bmtfcin4sha1p" path="res://Scenes/Maps/Field_Map.tscn" id="5_yvmfn"]
+[ext_resource type="PackedScene" uid="uid://c614biqieqsc1" path="res://Scenes/Maps/Winter.tscn" id="6_et6r3"]
 
 [node name="Node2D" type="Node2D" unique_id=1521112127]
 script = ExtResource("1_fliql")
@@ -40,3 +41,10 @@ render_target_update_mode = 4
 
 [node name="World" parent="Tutorial_Map" unique_id=1746856591 instance=ExtResource("5_yvmfn")]
 position = Vector2(800, 800)
+
+[node name="Winter_Map" type="SubViewport" parent="." unique_id=810366351]
+size_2d_override = Vector2i(1600, 1600)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="World" parent="Winter_Map" unique_id=554824267 instance=ExtResource("6_et6r3")]

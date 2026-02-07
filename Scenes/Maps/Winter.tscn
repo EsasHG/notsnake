@@ -1,0 +1,401 @@
+[gd_scene format=3 uid="uid://c614biqieqsc1"]
+
+[ext_resource type="Script" uid="uid://be5gopm2b1v5a" path="res://Scripts/player_spawner.gd" id="1_egh7q"]
+[ext_resource type="Script" uid="uid://cgcpju57f0k1c" path="res://Scripts/follow_camera.gd" id="2_evikb"]
+[ext_resource type="Texture2D" uid="uid://ce0vakc3v7d0v" path="res://Assets/Map/map_winter_ver1.2.png" id="3_vwobk"]
+[ext_resource type="Texture2D" uid="uid://bngbpr0eyfhux" path="res://Assets/Map/map_winter_ver1.png" id="4_4wp3y"]
+[ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/dog_cracker_spawner.gd" id="4_7chi8"]
+[ext_resource type="PackedScene" uid="uid://daexxm4sj5vkr" path="res://Scenes/Obstacles/snowboard_dog.tscn" id="6_ek5u6"]
+[ext_resource type="PackedScene" uid="uid://dkxn6cnoxgw01" path="res://Scenes/Obstacles/pine_tree_snow.tscn" id="7_c4dbm"]
+[ext_resource type="PackedScene" uid="uid://cqun8ke8u0wr2" path="res://Scenes/Obstacles/snowman.tscn" id="8_7t428"]
+[ext_resource type="PackedScene" uid="uid://bygts4fc5i55k" path="res://Scenes/Obstacles/snowlump.tscn" id="9_nbekc"]
+[ext_resource type="Texture2D" uid="uid://b6acpybwkl3r0" path="res://Assets/Obstacles/snow_decor/footprint_snow.png" id="10_dfuy5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k13ou"]
+size = Vector2(1980, 323.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xehlq"]
+size = Vector2(261, 1561)
+
+[node name="World" type="Node2D" unique_id=554824267]
+texture_filter = 1
+
+[node name="PlayerStart" type="Node2D" parent="." unique_id=557701062]
+script = ExtResource("1_egh7q")
+spawn_on_start = false
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=302707558]
+zoom = Vector2(1.1, 1.1)
+limit_left = -944
+limit_top = -519
+limit_right = 941
+limit_bottom = 518
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+editor_draw_limits = true
+script = ExtResource("2_evikb")
+
+[node name="MapWinter2" type="Sprite2D" parent="." unique_id=7457091]
+z_index = -3
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_vwobk")
+
+[node name="MapWinter" type="Sprite2D" parent="." unique_id=1548087415]
+visible = false
+z_index = -3
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_4wp3y")
+
+[node name="Walls" type="Node2D" parent="." unique_id=1506167604]
+visible = false
+
+[node name="TopWall" type="Area2D" parent="Walls" unique_id=1599001459 groups=["Dangers"]]
+position = Vector2(0, -685)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall" unique_id=368565764]
+shape = SubResource("RectangleShape2D_k13ou")
+
+[node name="BottomWall" type="Area2D" parent="Walls" unique_id=54878614 groups=["Dangers"]]
+position = Vector2(0, 585)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall" unique_id=1626353343]
+position = Vector2(0, 102)
+shape = SubResource("RectangleShape2D_k13ou")
+
+[node name="RightWall" type="Area2D" parent="Walls" unique_id=1263114699 groups=["Dangers"]]
+position = Vector2(1081, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall" unique_id=1332378509]
+shape = SubResource("RectangleShape2D_xehlq")
+
+[node name="LeftWall" type="Area2D" parent="Walls" unique_id=210221069 groups=["Dangers"]]
+position = Vector2(-954, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall" unique_id=1331786193]
+position = Vector2(-127, 0)
+shape = SubResource("RectangleShape2D_xehlq")
+
+[node name="PickupSpawner" type="Node2D" parent="." unique_id=744027442]
+script = ExtResource("4_7chi8")
+
+[node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=1175377144]
+scale = Vector2(1.22042, 0.916599)
+
+[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1189594935]
+position = Vector2(569.4761, 431.99994)
+
+[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1236532740]
+position = Vector2(-594.87714, 430.94098)
+
+[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=878140580]
+position = Vector2(646.4987, -280.3844)
+
+[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1593626617]
+position = Vector2(-326.9366, 162.5575)
+
+[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=420808521]
+position = Vector2(68.828766, 145.10158)
+
+[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1697160055]
+position = Vector2(-476.885, -230.19878)
+
+[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=539336681]
+position = Vector2(-526.8678, -396.02924)
+
+[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=967751832]
+position = Vector2(234.34555, -196.37816)
+
+[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1102952469]
+position = Vector2(474.42685, 174.55829)
+
+[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=478754803]
+position = Vector2(480.98193, -232.38086)
+
+[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=874794211]
+position = Vector2(-139.29633, -327.2969)
+
+[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=2114822175]
+position = Vector2(154.0453, -439.66885)
+
+[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1732959054]
+position = Vector2(350.69897, 385.1193)
+
+[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=654534659]
+position = Vector2(-575.2118, 87.27922)
+
+[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=955176210]
+position = Vector2(-249.09456, 320.75098)
+
+[node name="SnowboardDog" parent="." unique_id=99716063 instance=ExtResource("6_ek5u6")]
+position = Vector2(-435, -443)
+
+[node name="PineTreeSnow" parent="." unique_id=1610173503 instance=ExtResource("7_c4dbm")]
+position = Vector2(-830, -316)
+
+[node name="PineTreeSnow2" parent="." unique_id=854993681 instance=ExtResource("7_c4dbm")]
+position = Vector2(-873, -186)
+
+[node name="PineTreeSnow3" parent="." unique_id=1005028362 instance=ExtResource("7_c4dbm")]
+position = Vector2(846, 464)
+scale = Vector2(-1, 1)
+
+[node name="PineTreeSnow4" parent="." unique_id=1382533307 instance=ExtResource("7_c4dbm")]
+position = Vector2(760, 414)
+
+[node name="Bench" parent="." unique_id=806199856 instance=ExtResource("8_7t428")]
+position = Vector2(294, 164)
+
+[node name="Bench2" parent="." unique_id=1098912475 instance=ExtResource("9_nbekc")]
+position = Vector2(39, -396)
+
+[node name="PineTreeSnow5" parent="." unique_id=556670586 instance=ExtResource("7_c4dbm")]
+position = Vector2(911, -93)
+
+[node name="PineTreeSnow6" parent="." unique_id=430544953 instance=ExtResource("7_c4dbm")]
+position = Vector2(-89, -346)
+
+[node name="Footprints" type="Node2D" parent="." unique_id=2053508899]
+
+[node name="FootprintSnow" type="Sprite2D" parent="Footprints" unique_id=274345727]
+texture_filter = 1
+position = Vector2(303, 260)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow2" type="Sprite2D" parent="Footprints" unique_id=1728931112]
+texture_filter = 1
+position = Vector2(319, 242)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow3" type="Sprite2D" parent="Footprints" unique_id=999282680]
+texture_filter = 1
+position = Vector2(245, 245)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow4" type="Sprite2D" parent="Footprints" unique_id=1031414290]
+texture_filter = 1
+position = Vector2(223, 258)
+rotation = 1.9957616
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow6" type="Sprite2D" parent="Footprints" unique_id=1907468559]
+texture_filter = 1
+position = Vector2(279.99997, 240)
+rotation = 2.876455
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow7" type="Sprite2D" parent="Footprints" unique_id=1010754038]
+texture_filter = 1
+position = Vector2(261, 247)
+rotation = -2.5201232
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow8" type="Sprite2D" parent="Footprints" unique_id=1897457253]
+texture_filter = 1
+position = Vector2(218, 230)
+rotation = -2.5201232
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow9" type="Sprite2D" parent="Footprints" unique_id=1382300612]
+texture_filter = 1
+position = Vector2(242.00003, 266)
+rotation = -2.5201232
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow10" type="Sprite2D" parent="Footprints" unique_id=1301699135]
+texture_filter = 1
+position = Vector2(215, 203.00002)
+rotation = -2.5201232
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow11" type="Sprite2D" parent="Footprints" unique_id=1266313694]
+texture_filter = 1
+position = Vector2(336, 231)
+rotation = 1.7065856
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow12" type="Sprite2D" parent="Footprints" unique_id=1391122977]
+texture_filter = 1
+position = Vector2(300, 238)
+rotation = 2.8523526
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow13" type="Sprite2D" parent="Footprints" unique_id=392655832]
+texture_filter = 1
+position = Vector2(234, 290)
+rotation = 2.8523526
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow14" type="Sprite2D" parent="Footprints" unique_id=1784991928]
+texture_filter = 1
+position = Vector2(209, 318)
+rotation = 2.8523526
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow15" type="Sprite2D" parent="Footprints" unique_id=1178734648]
+texture_filter = 1
+position = Vector2(220, 348)
+rotation = -3.1328986
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow16" type="Sprite2D" parent="Footprints" unique_id=1184066215]
+texture_filter = 1
+position = Vector2(202, 366)
+rotation = 2.6530259
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow17" type="Sprite2D" parent="Footprints" unique_id=765255106]
+texture_filter = 1
+position = Vector2(219, 387.00003)
+rotation = 2.8820145
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow18" type="Sprite2D" parent="Footprints" unique_id=2080000229]
+texture_filter = 1
+position = Vector2(197, 409)
+rotation = 2.8820145
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow19" type="Sprite2D" parent="Footprints" unique_id=1308865809]
+texture_filter = 1
+position = Vector2(207, 440)
+rotation = -3.1324363
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow20" type="Sprite2D" parent="Footprints" unique_id=1478776963]
+texture_filter = 1
+position = Vector2(186, 452.99997)
+rotation = 2.631989
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow22" type="Sprite2D" parent="Footprints" unique_id=1786579606]
+texture_filter = 1
+position = Vector2(174, 502.00003)
+rotation = 2.774994
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow23" type="Sprite2D" parent="Footprints" unique_id=1035309745]
+texture_filter = 1
+position = Vector2(191.99997, 523.99994)
+rotation = 2.774994
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow24" type="Sprite2D" parent="Footprints" unique_id=164039568]
+texture_filter = 1
+position = Vector2(326, 259.99997)
+rotation = -1.4644014
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow25" type="Sprite2D" parent="Footprints" unique_id=1171870793]
+texture_filter = 1
+position = Vector2(350, 285)
+rotation = -0.89059037
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow26" type="Sprite2D" parent="Footprints" unique_id=1280730230]
+texture_filter = 1
+position = Vector2(333.99997, 299)
+rotation = -0.5107853
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow27" type="Sprite2D" parent="Footprints" unique_id=575969663]
+texture_filter = 1
+position = Vector2(360, 332)
+rotation = -0.58191526
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow28" type="Sprite2D" parent="Footprints" unique_id=1209059274]
+texture_filter = 1
+position = Vector2(339, 369)
+rotation = -0.58191526
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow29" type="Sprite2D" parent="Footprints" unique_id=818286127]
+texture_filter = 1
+position = Vector2(365, 391)
+rotation = -0.58191526
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow30" type="Sprite2D" parent="Footprints" unique_id=1940633670]
+texture_filter = 1
+position = Vector2(342.00003, 423)
+rotation = -0.58191526
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow31" type="Sprite2D" parent="Footprints" unique_id=1462131058]
+texture_filter = 1
+position = Vector2(370, 442)
+rotation = -0.58191526
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow32" type="Sprite2D" parent="Footprints" unique_id=568252303]
+texture_filter = 1
+position = Vector2(353, 466.99994)
+rotation = -0.58191526
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow33" type="Sprite2D" parent="Footprints" unique_id=1770928759]
+texture_filter = 1
+position = Vector2(380, 478.99997)
+rotation = -0.58191526
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow34" type="Sprite2D" parent="Footprints" unique_id=1524807885]
+texture_filter = 1
+position = Vector2(368.00003, 507)
+rotation = -0.58191526
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow35" type="Sprite2D" parent="Footprints" unique_id=1427631446]
+texture_filter = 1
+position = Vector2(399.99997, 523)
+rotation = -0.58191526
+scale = Vector2(0.99999994, -0.99999994)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow21" type="Sprite2D" parent="Footprints" unique_id=2054467437]
+texture_filter = 1
+position = Vector2(196.00002, 481)
+rotation = 2.7932646
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")
+
+[node name="FootprintSnow5" type="Sprite2D" parent="Footprints" unique_id=1322432184]
+texture_filter = 1
+position = Vector2(267, 268)
+rotation = 1.5707963
+scale = Vector2(1, -1)
+texture = ExtResource("10_dfuy5")

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cqun8ke8u0wr2"]
+
+[ext_resource type="Texture2D" uid="uid://c52a3tpmfqr4u" path="res://Assets/Obstacles/snowman_redhat.png" id="1_64pfd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epadd"]
+size = Vector2(87, 49)
+
+[node name="Bench" type="Area2D" unique_id=806199856 groups=["Dangers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1874798745]
+position = Vector2(-11.5, 21.5)
+shape = SubResource("RectangleShape2D_epadd")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=347394369]
+texture_filter = 1
+texture = ExtResource("1_64pfd")
+region_rect = Rect2(70, 10, 52, 19)

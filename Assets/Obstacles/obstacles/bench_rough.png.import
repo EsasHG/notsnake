@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxbsc1j5m8rc6"
-path="res://.godot/imported/bulldog_snowboard.png-0290bf6cc39fbe22b7a61add8aad6786.ctex"
+uid="uid://ci8pynx8oxsjr"
+path="res://.godot/imported/bench_rough.png-104cbfc6c40e8c9c9c3392a70825d77a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Dogs/bulldog_snowboard.png"
-dest_files=["res://.godot/imported/bulldog_snowboard.png-0290bf6cc39fbe22b7a61add8aad6786.ctex"]
+source_file="res://Assets/Obstacles/obstacles/bench_rough.png"
+dest_files=["res://.godot/imported/bench_rough.png-104cbfc6c40e8c9c9c3392a70825d77a.ctex"]
 
 [params]
 

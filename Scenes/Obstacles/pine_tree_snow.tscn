@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dkxn6cnoxgw01"]
+
+[ext_resource type="Texture2D" uid="uid://lffqp3dkd7ib" path="res://Assets/Obstacles/tree_pine_snow.png" id="1_lpx20"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hc7wb"]
+size = Vector2(46, 140)
+
+[node name="PineTreeSnow" type="Area2D" unique_id=1610173503 groups=["Dangers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1758111290]
+position = Vector2(-5, -71.5)
+shape = SubResource("RectangleShape2D_hc7wb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1812515374]
+position = Vector2(-4, -144.5)
+texture = ExtResource("1_lpx20")

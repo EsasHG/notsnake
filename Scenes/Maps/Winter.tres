@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Map" format=3 uid="uid://csf486hunk2iy"]
+
+[ext_resource type="PackedScene" uid="uid://c614biqieqsc1" path="res://Scenes/Maps/Winter.tscn" id="1_j1hts"]
+[ext_resource type="Texture2D" uid="uid://bl67y044ajrki" path="res://Assets/Icons/Winter_Map.png" id="2_fu2w4"]
+[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/Map.gd" id="3_wb7hd"]
+
+[resource]
+script = ExtResource("3_wb7hd")
+Scene = ExtResource("1_j1hts")
+name = "WINTER"
+icon = ExtResource("2_fu2w4")

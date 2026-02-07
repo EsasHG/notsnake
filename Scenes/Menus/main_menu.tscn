@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_f6ncm"]
 [ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/Map.gd" id="8_5egv6"]
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="8_vtepg"]
+[ext_resource type="Resource" uid="uid://csf486hunk2iy" path="res://Scenes/Maps/Winter.tres" id="9_0xbgx"]
 [ext_resource type="Resource" uid="uid://cibsfp4rd5p5b" path="res://Scenes/Maps/Field.tres" id="9_vtepg"]
 [ext_resource type="Resource" uid="uid://ce2xllrb7yjod" path="res://Scenes/Maps/Park.tres" id="10_8dnnj"]
 [ext_resource type="Resource" uid="uid://br6kp3c2pxqet" path="res://Scenes/Maps/Square.tres" id="11_m3bi6"]
@@ -36,7 +37,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_jrsic")
 buttonTheme = ExtResource("8_vtepg")
-levels = Array[ExtResource("8_5egv6")]([ExtResource("9_vtepg"), ExtResource("10_8dnnj"), ExtResource("11_m3bi6"), ExtResource("12_wyh8j"), ExtResource("13_ujyyl")])
+levels = Array[ExtResource("8_5egv6")]([ExtResource("9_vtepg"), ExtResource("10_8dnnj"), ExtResource("11_m3bi6"), ExtResource("12_wyh8j"), ExtResource("13_ujyyl"), ExtResource("9_0xbgx")])
 
 [node name="Logo" type="TextureRect" parent="." unique_id=307307508]
 layout_mode = 1

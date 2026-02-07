@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bygts4fc5i55k"]
+
+[ext_resource type="Texture2D" uid="uid://ockmfhn7pxui" path="res://Assets/Obstacles/snowlump_small.png" id="1_v4hfq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epadd"]
+size = Vector2(31, 17)
+
+[node name="Bench" type="Area2D" unique_id=806199856 groups=["Dangers"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1874798745]
+visible = false
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_epadd")
+disabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=347394369]
+texture_filter = 1
+texture = ExtResource("1_v4hfq")
+region_rect = Rect2(70, 10, 52, 19)

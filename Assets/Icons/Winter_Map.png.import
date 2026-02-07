@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ch0ddw1a0nqj3"
-path="res://.godot/imported/fountain_rough.png-ea4d6625439bf144f5fa84680db4da79.ctex"
+uid="uid://bl67y044ajrki"
+path="res://.godot/imported/Winter_Map.png-fa5cbd2da33f029f761f8fdb8135c3d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Obstacles/fountain_rough.png"
-dest_files=["res://.godot/imported/fountain_rough.png-ea4d6625439bf144f5fa84680db4da79.ctex"]
+source_file="res://Assets/Icons/Winter_Map.png"
+dest_files=["res://.godot/imported/Winter_Map.png-fa5cbd2da33f029f761f8fdb8135c3d7.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci8pynx8oxsjr"
-path="res://.godot/imported/bench_rough.png-1543c04a272907a932da8292dbd5e386.ctex"
+uid="uid://ch0ddw1a0nqj3"
+path="res://.godot/imported/fountain_rough.png-c411bdc47789c04b0b476b7ed5c37f6d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Obstacles/bench_rough.png"
-dest_files=["res://.godot/imported/bench_rough.png-1543c04a272907a932da8292dbd5e386.ctex"]
+source_file="res://Assets/Obstacles/obstacles/fountain_rough.png"
+dest_files=["res://.godot/imported/fountain_rough.png-c411bdc47789c04b0b476b7ed5c37f6d.ctex"]
 
 [params]
 
