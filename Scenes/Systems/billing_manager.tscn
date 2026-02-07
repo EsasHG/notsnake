@@ -16,6 +16,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="BillingManager" type="Control" unique_id=925113656]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,6 +60,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_qogck")
 text = "AD_REMOVAL_TITLE"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="DescriptionLabel" type="Label" parent="Ad_removal_popup/VBoxContainer" unique_id=831205530]
@@ -66,7 +68,8 @@ custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_qogck")
-text = "AD_REMOCAL_DESC"
+text = "AD_REMOVAL_DESCRIPTION"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="PriceLabel" type="Label" parent="Ad_removal_popup/VBoxContainer" unique_id=1781595080]
@@ -85,7 +88,7 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("2_qogck")
-text = "AD_REMOVAL_YESv"
+text = "AD_REMOVAL_YES"
 
 [node name="Button_No" type="Button" parent="Ad_removal_popup/VBoxContainer/HBoxContainer" unique_id=890305990]
 custom_minimum_size = Vector2(130, 50)
@@ -126,6 +129,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_qogck")
 text = "AD_REMOVAL_PURCHASED_TITLE"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="DescriptionLabel" type="Label" parent="Purchased_popup/VBoxContainer" unique_id=392743120]
@@ -134,6 +138,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_qogck")
 text = "AD_REMOVAL_PURCHASED_DESCRIPTION"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Purchased_popup/VBoxContainer" unique_id=1051892497]
@@ -145,7 +150,7 @@ custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("2_qogck")
-text = "CLOSE	"
+text = "CLOSE"
 
 [node name="Error_popup" type="Panel" parent="." unique_id=1714905671]
 visible = false
@@ -179,6 +184,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_qogck")
 text = "BILLING_PURCHASE_ERROR_TITLE"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="DescriptionLabel" type="Label" parent="Error_popup/VBoxContainer" unique_id=654465303]
@@ -187,6 +193,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_qogck")
 text = "BILLING_PURCHASE_ERROR_DESCRIPTION"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Error_popup/VBoxContainer" unique_id=1786030705]
@@ -208,6 +215,7 @@ theme = ExtResource("2_qogck")
 text = "CLOSE"
 
 [node name="Pending_popup" type="Panel" parent="." unique_id=1054916801]
+visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 15
@@ -238,6 +246,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_qogck")
 text = "BILLING_PENDING_TITLE"
+horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="DescriptionLabel" type="Label" parent="Pending_popup/VBoxContainer" unique_id=118593845]

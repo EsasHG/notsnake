@@ -18,7 +18,7 @@ real_application_id = "ca-app-pub-1333268640689716~3036536539"
 metadata/_custom_type_script = "uid://d2ekpef26q3vr"
 
 [node name="Interstitial Ad Timer" type="Timer" parent="." unique_id=45894705]
-wait_time = 180.0
+wait_time = 300.0
 one_shot = true
 ignore_time_scale = true
 

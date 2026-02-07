@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_f6ncm"]
-[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="8_5egv6"]
+[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/Map.gd" id="8_5egv6"]
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="8_vtepg"]
 [ext_resource type="Resource" uid="uid://cibsfp4rd5p5b" path="res://Scenes/Maps/Field.tres" id="9_vtepg"]
 [ext_resource type="Resource" uid="uid://ce2xllrb7yjod" path="res://Scenes/Maps/Park.tres" id="10_8dnnj"]
 [ext_resource type="Resource" uid="uid://br6kp3c2pxqet" path="res://Scenes/Maps/Square.tres" id="11_m3bi6"]
+[ext_resource type="Texture2D" uid="uid://dmooo72cslhph" path="res://Assets/UI/Google Branding/android_dark_rd_SI@1x.png" id="12_6t1rs"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="12_12hqc"]
 [ext_resource type="Resource" uid="uid://c786inhs2hhtg" path="res://Scenes/Maps/Small.tres" id="12_wyh8j"]
 [ext_resource type="Resource" uid="uid://oa287witflah" path="res://Scenes/Maps/Forest.tres" id="13_ujyyl"]
@@ -89,11 +90,12 @@ grow_vertical = 0
 alignment = 1
 
 [node name="Sign In" type="Button" parent="MainButtons" unique_id=458228861]
-custom_minimum_size = Vector2(130, 50)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("3_f6ncm")
 theme_override_font_sizes/font_size = 20
-text = "SIGN_IN"
+icon = ExtResource("12_6t1rs")
+flat = true
 script = ExtResource("13_vtepg")
 
 [node name="Start" type="Button" parent="MainButtons" unique_id=918679550]
@@ -155,7 +157,6 @@ alignment = 1
 
 [node name="Back" parent="LevelSelectScreen/VBoxContainer/ButtonContainer" unique_id=80016652 instance=ExtResource("15_0xbgx")]
 layout_mode = 2
-text = "BACK"
 
 [connection signal="pressed" from="MainButtons/Sign In" to="." method="_on_sign_in_pressed"]
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]

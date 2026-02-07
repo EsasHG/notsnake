@@ -6,6 +6,8 @@ signal on_gameBegin()
 signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
 signal on_controls_changed(holdControls:bool)
+signal on_dogColorChanged(color:Color)
+signal on_dogHatChanged(hat:int)
 
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 const AD_MANAGER = preload("uid://ck01dnrayeqyd")
@@ -258,122 +260,18 @@ func increaseScore():
 
 
 func saveScore():
-	Logging.logMessage("Saving!")
-	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
-	
-	var saveDict = {"highScores" = highScores} 
-	saveFile.store_line(JSON.stringify(saveDict))
-	Logging.logMessage("Saved!")
+	SaveManager.save_score()
 	
 
 func saveSettings(): #TODO finish this
-	Logging.logMessage("Saving!")
-	var saveFile = FileAccess.open("user://settings.save", FileAccess.WRITE)
-	
-	var saveDict = {
-			"musicVol" = db_to_linear(musicVol), 
-			"sfxVol" = db_to_linear(sfxVol), 
-			"musicMuted" = musicMuted, 
-			"sfxMuted" = sfxMuted, 
-			"controls" = GlobalInputMap.Player_Controls_Selected[0],
-			"language" = language,
-			} 
-	saveFile.store_line(JSON.stringify(saveDict))
-	Logging.logMessage("Saved!")
+	SaveManager.save_settings()
 	
 func loadScore() -> bool:
-	Logging.logMessage("Loading")
-	if not FileAccess.file_exists("user://savegame.save"):
-		Logging.logMessage("Error! Trying to load a non-existing save file!")	
-		return false
-		
-	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
-	while save_file.get_position() < save_file.get_length():
-		var json_str = save_file.get_line()	
-		var json = JSON.new()
-		var parse_result = json.parse(json_str)
-		if not parse_result == OK:
-			Logging.error("JSON Parse Error: " + json.get_error_message() + " in " + json_str + " at line " + str(json.get_error_line()))
-
-			continue
-		var node_data : Dictionary = json.data
-		
-		if node_data.has("highScore"):
-			highScores["Park"] = node_data["highScore"]
-		elif node_data.has("highScores"):
-			highScores = node_data["highScores"]
-			
-	Logging.logMessage("Finished loading high scores")
-	return true
+	return SaveManager.load_score()
 	
 	
 func loadSettings() -> bool:
-	Logging.logMessage("Loading")
-	var possibleFileNames: Array[String] = ["user://settings.save","user://savegame.save"]
-	var fileName:String = ""
-	
-	for possibleName:String in possibleFileNames:
-		if FileAccess.file_exists(possibleName):
-			fileName = possibleName
-			break
-			
-	if fileName.is_empty():
-		Logging.warn("Could not find a settings file!")
-		return false
-		
-	var save_file = FileAccess.open(fileName, FileAccess.READ)
-	while save_file.get_position() < save_file.get_length():
-		var json_str = save_file.get_line()	
-		var json = JSON.new()
-		var parse_result = json.parse(json_str)
-		if not parse_result == OK:
-			Logging.error("JSON Parse Error: " + json.get_error_message() + " in " + json_str + " at line " + str(json.get_error_line()))
-
-			continue
-		var node_data : Dictionary = json.data
-		
-		if node_data.has("sfxVol"):
-			sfxVol = linear_to_db(node_data["sfxVol"])
-		else:
-			Logging.error("Could not load SFX volume from save file!")
-			sfxVol = linear_to_db(0.8)
-			
-		if node_data.has("musicVol"):
-			musicVol = linear_to_db(node_data["musicVol"])
-		else:
-			Logging.error("Could not load music volume from save file!")
-			musicVol = linear_to_db(0.8)
-			
-		if node_data.has("sfxMuted"):
-			sfxMuted = node_data["sfxMuted"]
-		else:
-			Logging.error("Could not load SFX muted from save file!")
-			sfxMuted = false
-		setSFXMuted(sfxMuted)
-	
-		if node_data.has("musicMuted"):
-			musicMuted = node_data["musicMuted"]
-		else:
-			Logging.error("Could not load music muted from save file!")
-			musicMuted = false
-		setMusicMuted(musicMuted)
-		
-		if node_data.has("controls"):
-			setControls(node_data["controls"])
-		else:
-			setControls(true)
-			
-		if node_data.has("language"):
-			language = node_data["language"]
-			
-	if language == "automatic":
-		var preferred_language = OS.get_locale_language()
-		TranslationServer.set_locale(preferred_language)
-	else:
-		TranslationServer.set_locale(language)
-		
-	Logging.logMessage("Finished loading settings")
-	return true
+	return SaveManager.load_settings()
 			
 		
 func getCurrentMapHighScore():

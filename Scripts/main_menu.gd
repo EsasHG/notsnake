@@ -20,7 +20,7 @@ const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
 
 
 func _ready() -> void:
-	UINavigator.open(buttons)
+	UINavigator.open.call_deferred(buttons,false)
 	
 	if OS.has_feature("mobile"):
 		quit_button.visible = false;
@@ -87,7 +87,6 @@ func _input(event: InputEvent) -> void:
 
 func start_game() -> void:
 	GlobalInputMap.ControllerIds = [0,-1,-1,-1]
-	GlobalInputMap.Player_Hats_Selected[0] = 0
 	GlobalInputMap.Player_Color_Selected[0] = 0
 	GameSettings.startGame()
 	queue_free()
@@ -115,7 +114,7 @@ func open_level_select():
 	
 
 func _on_settings_pressed() -> void:
-	UINavigator.open_from_scene(SETTINGS_SCREEN,true)
+	UINavigator.open_from_scene(SETTINGS_SCREEN)
 
 
 func _on_map_selected(scene:Map): 

@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://b5y0sal86emi0" path="res://Assets/UI/options_icons_etc/speaker_off_2_small.png" id="9_ondax"]
 [ext_resource type="Texture2D" uid="uid://c7viv7v30veef" path="res://Assets/UI/options_icons_etc/speaker_3.png" id="10_7jkpl"]
 [ext_resource type="Texture2D" uid="uid://n0icqrejpobn" path="res://Assets/UI/options_icons_etc/speaker_off_2.png" id="11_whg11"]
+[ext_resource type="Texture2D" uid="uid://1c7arj57sx2i" path="res://Assets/UI/Google Branding/Play Games/games_achievements_white.png" id="12_2b6r5"]
+[ext_resource type="Texture2D" uid="uid://ylcsjr7l3m4j" path="res://Assets/UI/Google Branding/Play Games/games_leaderboards_white.png" id="13_qwjhj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u03vw"]
 bg_color = Color(0, 0, 0, 0.1764706)
@@ -175,21 +177,36 @@ popup/item_1/id = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SettingsScreen" unique_id=1768239325]
 layout_mode = 2
+alignment = 1
 
 [node name="AchievementsButton" type="Button" parent="SettingsScreen/HBoxContainer" unique_id=2009678036]
-custom_minimum_size = Vector2(130, 50)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("2_nfl8x")
 theme_override_font_sizes/font_size = 20
-text = "ACHIEVEMENTS"
+icon = ExtResource("12_2b6r5")
+flat = true
+icon_alignment = 1
+expand_icon = true
 script = ExtResource("5_64y2j")
 
 [node name="LeaderboardsButton" type="Button" parent="SettingsScreen/HBoxContainer" unique_id=1644430493]
-custom_minimum_size = Vector2(130, 50)
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 theme = ExtResource("2_nfl8x")
 theme_override_font_sizes/font_size = 20
-text = "LEADERBOARDS"
+icon = ExtResource("13_qwjhj")
+flat = true
+expand_icon = true
+script = ExtResource("5_64y2j")
+
+[node name="SkinSelect" type="Button" parent="SettingsScreen" unique_id=1013354946]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_nfl8x")
+text = "CHANGE_DOG"
 script = ExtResource("5_64y2j")
 
 [node name="Back" type="Button" parent="SettingsScreen" unique_id=752013187]
@@ -209,4 +226,5 @@ script = ExtResource("5_64y2j")
 [connection signal="item_selected" from="SettingsScreen/Controls/VBoxContainer/LanguageSelector" to="SettingsScreen" method="_on_language_selector_item_selected"]
 [connection signal="pressed" from="SettingsScreen/HBoxContainer/AchievementsButton" to="SettingsScreen" method="_on_achievements_button_pressed"]
 [connection signal="pressed" from="SettingsScreen/HBoxContainer/LeaderboardsButton" to="SettingsScreen" method="_on_leaderboards_button_pressed"]
+[connection signal="pressed" from="SettingsScreen/SkinSelect" to="SettingsScreen" method="_on_skin_select_pressed"]
 [connection signal="pressed" from="SettingsScreen/Back" to="SettingsScreen" method="_on_back_pressed"]

@@ -44,6 +44,7 @@ var arrowTarget : Vector2
 
 func _ready() -> void:
 	Logging.logMessage("Player ready!")
+	hats = $Head/Hats.get_children(true)
 	
 	_invulnerable = true
 	iframes_timer = Timer.new()	
@@ -61,22 +62,19 @@ func _ready() -> void:
 
 	add_sibling.call_deferred(segmentParent)
 	butt.reparent(segmentParent)
-	$Head.self_modulate = self_modulate
-	$Head/Legs.modulate = self_modulate
-	segmentParent.modulate = self_modulate
+	
+	if GameSettings.game_mode == GameSettings.GAME_MODE.SINGLE_PLAYER:
+		set_color(GlobalInputMap.player_colors[0])
+		set_hat(GlobalInputMap.Player_Hats_Selected[0])
 	$Head/BarkSound.volume_db = GameSettings.sfxVol
 	Input.emulate_mouse_from_touch = true
-	hats = $Head/Hats.get_children(true)
-	for hat in hats:
-		hat.visible = false
-		
-	if currentHat <0 || currentHat > hats.size()-1:
-		currentHat = 0
-		
-	hats[currentHat].visible = true
+	
 	GameSettings.on_pickupSpawned.connect(set_arrow_target)
 	GameSettings.on_controls_changed.connect(_on_controls_changed)
 	GameSettings.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
+	GameSettings.on_dogColorChanged.connect(set_color)
+	GameSettings.on_dogHatChanged.connect(set_hat)
+
 	visibility_changed.connect(func(): segmentParent.visible =visible) 
 
 
@@ -251,6 +249,20 @@ func bark():
 func set_arrow_target(target:Node2D):
 	arrowTarget = target.global_position
 
+
+func set_color(color:Color) -> void:
+	self_modulate = color
+	$Head.self_modulate = self_modulate
+	$Head/Legs.modulate = self_modulate
+	segmentParent.modulate = self_modulate
+
+func set_hat(id:int):
+	currentHat = id
+	for hat in hats:
+		hat.visible = false
+	if currentHat <0 || currentHat > hats.size()-1:
+		currentHat = 0
+	hats[currentHat].visible = true
 
 #why is this here
 func _on_controls_changed(_hold_controls:bool):

@@ -31,7 +31,7 @@ SQUARE,Square,Torget
 SMALL,Small,Lillebanen
 FOREST,Forest,Skogen
 AD_REMOVAL_TITLE,Tired of ads?,Lei av reklamer?
-AD_REMOCAL_DESCRIPTION,Purchase ad removal,Kjøp reklamefjerning
+AD_REMOVAL_DESCRIPTION,Purchase ad removal,Kjøp reklamefjerning
 AD_REMOVAL_YES,Yes pls,Ja takk
 AD_REMOVAL_NO,No thx,Nei takk
 AD_REMOVAL_PURCHASED_TITLE,Thank you!,Tusen takk!
@@ -43,3 +43,6 @@ BILLING_PENDING_TITLE,Waiting for purchase to finish...,Venter på at betalingen
 BILLING_PENDING_DESCRIPTION,"Do you need to do something in another app? 
 You can close this and keep playing the game in the meantime","Trenger du å gjøre noe i et annet program?
 Du kan lukke denne meldingen og fortsette å spille mens du venter."
+SELECT_COLOR,Change your dog's color!,Endre fargen til hunden din! 
+CHANGE_DOG,Change dog,Bytt Hund
+SKIN_SELECTION_BACK,Looks great!,Ser bra ut!
