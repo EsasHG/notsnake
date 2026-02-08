@@ -4,11 +4,38 @@ extends Node
 var ControllerIds: Array[int] = [0, 1, 2, 3]
 var player_colors : Array[Color] = [Color.WHITE, Color("ffe0ab"), Color.GOLD, Color("e8c5b8"),Color.INDIAN_RED,Color("d9965aff"),Color("a97d59ff"), Color.SADDLE_BROWN, Color.BROWN,Color("ba93a2ff"), Color.VIOLET,Color.AQUA, Color.AQUAMARINE, Color.OLIVE];
 var Player_Color_Selected : Dictionary[int, int] = {}
-var Player_Hats_Selected : Dictionary[int, int] = {}
+var Player_Hats_Selected : Dictionary[int, String] = {}
 var Player_Controls_Selected : Dictionary[int, bool] = {0:true}
 var Player_Lives: Dictionary[int,int] = {}
 var Player_Score: Dictionary[int,int] = {}
 var Player_Placement: Dictionary[int,int] = {}
+var Player_Hats: Dictionary = {
+	"NONE": {
+		player_hat = null,
+		icon_hat = null,
+		unlocked = true,
+	},
+	"SANTA": {
+		player_hat = preload("uid://ctddhm73vg7xu"),
+		icon_hat = preload("uid://cxm52e0c581yk"),
+		unlocked = true,
+	},
+	"COWBOY": {
+		player_hat = preload("uid://bto27x7qmr5d"),
+		icon_hat = preload("uid://baisbs5c35f4g"),
+		unlocked = true,
+	},
+	"TEST": {
+		player_hat = preload("uid://b3wm7tpo1omk6"),
+		icon_hat = preload("uid://dvj0pjlmvqwve"),
+		unlocked = true,
+	},
+	"HELMET": {
+		player_hat = preload("uid://bcsu113pmwt3r"),
+		icon_hat = preload("uid://bmdnyc2fq6qg7"),
+		unlocked = true,
+	},
+}
 # Color.BEIGE,  
 #  Color("f0c68a"),
 #  Color("f0b28bff"),

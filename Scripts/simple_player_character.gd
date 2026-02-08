@@ -7,7 +7,6 @@ class_name PlayerDog
 @export var OVERALL_SPEED = 0.9
 @export var MIN_ARROW_DIST = 120
 @export var MAX_ARROW_DIST = 150
-@export var hats : Array[Node]
 @export var playerControl = false
 @export var iframes_time : float = 0.3
 
@@ -18,6 +17,7 @@ class_name PlayerDog
 @onready var segmentParent : Node2D = Node2D.new()
 @onready var hindLegs = find_child("Legs_back", true, false)
 @onready var butt = $Butt
+@onready var hat: Sprite2D = $Head/Hat
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 var iframes_timer : Timer
@@ -44,7 +44,6 @@ var arrowTarget : Vector2
 
 func _ready() -> void:
 	Logging.logMessage("Player ready!")
-	hats = $Head/Hats.get_children(true)
 	
 	_invulnerable = true
 	iframes_timer = Timer.new()	
@@ -224,23 +223,13 @@ func _on_area_entered(area: Area2D) -> void:
 				GlobalInputMap.Player_Score[playerID] = 1
 			area.queue_free()
 			
-	elif(area.is_in_group("Present")):
+	if(area.is_in_group("Present")):
 		if(canAddSprites):
-			var hatRand : int = currentHat
-			while hatRand == currentHat:
-				hatRand = randi_range(0, hats.size()-1)
-			if(currentHat != -1):
-				hats[currentHat].visible = false
-			hats[hatRand].visible = true
-			currentHat = hatRand
-			bark()
+			Logging.logMessage("Present picked up!")
 			GameSettings.unlock_achievement("Dapper dog")
-			for i : int in segmentsPerSection:
-				add_segment()
-			GameSettings.on_pickup.emit()
-			area.queue_free()
+			## TODO: Add hat unlock logic here?
 			
-			
+
 func bark():
 	$Head/BarkSound.pitch_scale = randf_range(0.9,1.1)
 	$Head/BarkSound.play()
@@ -256,13 +245,9 @@ func set_color(color:Color) -> void:
 	$Head/Legs.modulate = self_modulate
 	segmentParent.modulate = self_modulate
 
-func set_hat(id:int):
-	currentHat = id
-	for hat in hats:
-		hat.visible = false
-	if currentHat <0 || currentHat > hats.size()-1:
-		currentHat = 0
-	hats[currentHat].visible = true
+func set_hat(hat_id:String):
+	currentHat = hat_id
+	hat.texture = GlobalInputMap.Player_Hats[hat_id].player_hat
 
 #why is this here
 func _on_controls_changed(_hold_controls:bool):

@@ -104,5 +104,6 @@ func _on_skin_select_pressed() -> void:
 func _on_color_changed(_col: Color):
 	_changes_made = true
 
-func _on_hat_changed(_id: int):
+
+func _on_hat_changed(_hat: String):
 	_changes_made = true

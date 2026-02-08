@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bq331b3dfslw5"]
+
+[ext_resource type="Texture2D" uid="uid://cuigu5qeg76n2" path="res://Assets/UI/cross_transparent.png" id="1_ydmm5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydmm5"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="LockedIcon" type="PanelContainer" unique_id=1782783043]
+texture_filter = 1
+clip_contents = true
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ydmm5")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=84382579]
+clip_contents = true
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_ydmm5")

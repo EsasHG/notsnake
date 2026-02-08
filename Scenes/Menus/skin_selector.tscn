@@ -5,11 +5,40 @@
 [ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="3_6fsxm"]
 [ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="4_k52lc"]
 [ext_resource type="AudioStream" uid="uid://bj3kggw0gs3xi" path="res://Assets/Sound/bark.wav" id="5_6msm5"]
-[ext_resource type="Texture2D" uid="uid://cxm52e0c581yk" path="res://Assets/Dogs/cosmetics/hat_christmas.png" id="6_i25uj"]
-[ext_resource type="Texture2D" uid="uid://baisbs5c35f4g" path="res://Assets/Dogs/cosmetics/hat_cowboy.png" id="7_heghs"]
-[ext_resource type="Texture2D" uid="uid://dvj0pjlmvqwve" path="res://Assets/Dogs/cosmetics/hat_crashdummyDot.png" id="8_l0rio"]
-[ext_resource type="Texture2D" uid="uid://bmdnyc2fq6qg7" path="res://Assets/Dogs/cosmetics/hat_helmet.png" id="9_c1sd7"]
 [ext_resource type="PackedScene" uid="uid://df6v31n3ooicl" path="res://Scenes/Menus/back_button.tscn" id="10_cmbhx"]
+
+[sub_resource type="Gradient" id="Gradient_cmbhx"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6fsxm"]
+gradient = SubResource("Gradient_cmbhx")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k52lc"]
+texture = SubResource("GradientTexture1D_6fsxm")
+texture_margin_top = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="Gradient" id="Gradient_6msm5"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i25uj"]
+gradient = SubResource("Gradient_6msm5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_heghs"]
+texture = SubResource("GradientTexture1D_i25uj")
+texture_margin_top = 5.0
+texture_margin_bottom = 5.0
+
+[sub_resource type="Gradient" id="Gradient_l0rio"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c1sd7"]
+gradient = SubResource("Gradient_l0rio")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6xsso"]
+texture = SubResource("GradientTexture1D_c1sd7")
+texture_margin_top = 5.0
+texture_margin_bottom = 5.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_45bpw"]
 atlas = ExtResource("3_6fsxm")
@@ -78,11 +107,21 @@ animations = [{
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cmbhx"]
 bg_color = Color(0, 0, 0, 0.270588)
-border_width_left = 5
+border_width_left = 50
 border_width_top = 5
-border_width_right = 5
+border_width_right = 50
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 0.270588)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qogck"]
+content_margin_top = 50.0
+content_margin_bottom = 50.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [node name="SkinSelector" type="PanelContainer" unique_id=1577442381]
 process_mode = 3
@@ -94,53 +133,120 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_dimmy")
-hats = Array[CompressedTexture2D]([null, ExtResource("6_i25uj"), ExtResource("7_heghs"), ExtResource("8_l0rio"), ExtResource("9_c1sd7")])
 
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2005089000]
+[node name="MainScreen" type="PanelContainer" parent="." unique_id=2005089000]
 process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_cmbhx")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=860431152]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainScreen" unique_id=860431152]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=85068292]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "SELECT_COLOR"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=97191362]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=191960741]
+[node name="Label" type="Label" parent="MainScreen/VBoxContainer" unique_id=85068292]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "SELECT_COLOR"
 horizontal_alignment = 1
 
-[node name="ColorPickerButton" type="ColorPickerButton" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1937386427]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainScreen/VBoxContainer" unique_id=97191362]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="MainScreen/VBoxContainer/HBoxContainer" unique_id=191960741]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SELECT_COLOR"
+horizontal_alignment = 1
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="MainScreen/VBoxContainer/HBoxContainer" unique_id=1937386427]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ChangeHat" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1142329269]
+[node name="Red" type="HBoxContainer" parent="MainScreen/VBoxContainer" unique_id=900032430]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainScreen/VBoxContainer/Red" unique_id=450694821]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "R:"
+horizontal_alignment = 1
+
+[node name="RedSlider" type="HSlider" parent="MainScreen/VBoxContainer/Red" unique_id=1851604760]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxTexture_k52lc")
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="Green" type="HBoxContainer" parent="MainScreen/VBoxContainer" unique_id=1899568866]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainScreen/VBoxContainer/Green" unique_id=337190328]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "G:"
+horizontal_alignment = 1
+
+[node name="GreenSlider" type="HSlider" parent="MainScreen/VBoxContainer/Green" unique_id=1287174916]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxTexture_heghs")
+max_value = 1.0
+step = 0.05
+
+[node name="Blue" type="HBoxContainer" parent="MainScreen/VBoxContainer" unique_id=1270094479]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainScreen/VBoxContainer/Blue" unique_id=915081284]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "B:"
+horizontal_alignment = 1
+
+[node name="BlueSlider" type="HSlider" parent="MainScreen/VBoxContainer/Blue" unique_id=2141675291]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxTexture_6xsso")
+max_value = 1.0
+step = 0.05
+
+[node name="HexEdit" type="HBoxContainer" parent="MainScreen/VBoxContainer" unique_id=894286634]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainScreen/VBoxContainer/HexEdit" unique_id=95559799]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Hex:"
+horizontal_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="MainScreen/VBoxContainer/HexEdit" unique_id=293086894]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "yrcy"
+
+[node name="ChangeHat" type="Button" parent="MainScreen/VBoxContainer" unique_id=1142329269]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_cmbhx")
 text = "CHANGE_HAT"
 
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer" unique_id=1528918680]
+[node name="Control" type="Control" parent="MainScreen/VBoxContainer" unique_id=1528918680]
 custom_minimum_size = Vector2(200, 300)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Control" type="Control" parent="PanelContainer/VBoxContainer/Control" unique_id=429658124]
+[node name="Control" type="Control" parent="MainScreen/VBoxContainer/Control" unique_id=429658124]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -150,51 +256,25 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Head" type="AnimatedSprite2D" parent="PanelContainer/VBoxContainer/Control/Control" unique_id=991204301]
+[node name="Head" type="AnimatedSprite2D" parent="MainScreen/VBoxContainer/Control/Control" unique_id=991204301]
 z_index = 1
 texture_filter = 1
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_6xsso")
 
-[node name="Legs" type="AnimatedSprite2D" parent="PanelContainer/VBoxContainer/Control/Control/Head" unique_id=1402050307]
+[node name="Legs" type="AnimatedSprite2D" parent="MainScreen/VBoxContainer/Control/Control/Head" unique_id=1402050307]
 z_index = -1
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_nf6su")
 
-[node name="BarkSound" type="AudioStreamPlayer2D" parent="PanelContainer/VBoxContainer/Control/Control/Head" unique_id=566287524]
+[node name="BarkSound" type="AudioStreamPlayer2D" parent="MainScreen/VBoxContainer/Control/Control/Head" unique_id=566287524]
 stream = ExtResource("5_6msm5")
 bus = &"SFX"
 
-[node name="Hats" type="Node2D" parent="PanelContainer/VBoxContainer/Control/Control/Head" unique_id=832293937]
+[node name="Hat" type="Sprite2D" parent="MainScreen/VBoxContainer/Control/Control/Head" unique_id=975928397]
+position = Vector2(1, -18)
 
-[node name="HatNone" type="Node2D" parent="PanelContainer/VBoxContainer/Control/Control/Head/Hats" unique_id=864931709]
-visible = false
-scale = Vector2(0.99999994, 0.99999994)
-
-[node name="HatChristmas" type="Sprite2D" parent="PanelContainer/VBoxContainer/Control/Control/Head/Hats" unique_id=872947272]
-z_index = 1
-position = Vector2(1, -17)
-texture = ExtResource("6_i25uj")
-
-[node name="HatCowboy" type="Sprite2D" parent="PanelContainer/VBoxContainer/Control/Control/Head/Hats" unique_id=138215640]
-visible = false
-z_index = 1
-position = Vector2(1, -11)
-texture = ExtResource("7_heghs")
-
-[node name="HatCrashdummyDot" type="Sprite2D" parent="PanelContainer/VBoxContainer/Control/Control/Head/Hats" unique_id=126227882]
-visible = false
-z_index = 1
-position = Vector2(-6, -6)
-texture = ExtResource("8_l0rio")
-
-[node name="HatHelmet" type="Sprite2D" parent="PanelContainer/VBoxContainer/Control/Control/Head/Hats" unique_id=157409755]
-visible = false
-z_index = 1
-position = Vector2(1, -4)
-texture = ExtResource("9_c1sd7")
-
-[node name="Back" parent="PanelContainer/VBoxContainer" unique_id=7349764 instance=ExtResource("10_cmbhx")]
+[node name="Back" parent="MainScreen/VBoxContainer" unique_id=7349764 instance=ExtResource("10_cmbhx")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -232,5 +312,47 @@ alignment = 1
 [node name="Back" parent="HatSelectScreen/VBoxContainer/ButtonContainer" unique_id=842997207 instance=ExtResource("10_cmbhx")]
 layout_mode = 2
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/ChangeHat" to="." method="_on_change_hat_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[node name="LockedMessageContainer" type="PanelContainer" parent="." unique_id=1381619436]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LockedMessageContainer" unique_id=917958291]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="LockedMessageContainer/VBoxContainer" unique_id=265588679]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_cmbhx")
+text = "HAT_LOCKED"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="LockedMessageContainer/VBoxContainer" unique_id=1786024529]
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_cmbhx")
+text = "HAT_UNLOCK_CONDITION"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LockedMessageContainer/VBoxContainer" unique_id=1169251312]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Back" parent="LockedMessageContainer/VBoxContainer/HBoxContainer" unique_id=120046010 instance=ExtResource("10_cmbhx")]
+layout_mode = 2
+
+[connection signal="value_changed" from="MainScreen/VBoxContainer/Red/RedSlider" to="." method="_on_red_slider_value_changed"]
+[connection signal="value_changed" from="MainScreen/VBoxContainer/Green/GreenSlider" to="." method="_on_green_slider_value_changed"]
+[connection signal="value_changed" from="MainScreen/VBoxContainer/Blue/BlueSlider" to="." method="_on_blue_slider_value_changed"]
+[connection signal="text_changed" from="MainScreen/VBoxContainer/HexEdit/TextEdit" to="." method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="MainScreen/VBoxContainer/ChangeHat" to="." method="_on_change_hat_pressed"]
+[connection signal="pressed" from="MainScreen/VBoxContainer/Back" to="." method="_on_back_pressed"]

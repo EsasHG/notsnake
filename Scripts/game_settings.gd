@@ -7,7 +7,7 @@ signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
 signal on_controls_changed(holdControls:bool)
 signal on_dogColorChanged(color:Color)
-signal on_dogHatChanged(hat:int)
+signal on_dogHatChanged(hat:String)
 
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 const AD_MANAGER = preload("uid://ck01dnrayeqyd")

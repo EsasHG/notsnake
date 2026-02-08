@@ -83,10 +83,11 @@ func load_settings() -> bool:
 			GlobalInputMap.player_colors[0] = Color(node_data["dogColor"])
 			
 		if node_data.has("hat"):
+			
 			GlobalInputMap.Player_Hats_Selected[0] = node_data["hat"]
 			GameSettings.on_dogHatChanged.emit(node_data["hat"])
 		else: 
-			GlobalInputMap.Player_Hats_Selected[0] = 0
+			GlobalInputMap.Player_Hats_Selected[0] = "NONE"
 			
 			
 	if GameSettings.language == "automatic":
