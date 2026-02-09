@@ -30,6 +30,7 @@ PARK,Park,Parken
 SQUARE,Square,Torget
 SMALL,Small,Lillebanen
 FOREST,Forest,Skogen
+WINTER,Winter,Vinterland
 AD_REMOVAL_TITLE,Tired of ads?,Lei av reklamer?
 AD_REMOVAL_DESCRIPTION,Purchase ad removal,Kjøp reklamefjerning
 AD_REMOVAL_YES,Yes pls,Ja takk
@@ -46,3 +47,8 @@ Du kan lukke denne meldingen og fortsette å spille mens du venter."
 SELECT_COLOR,Change your dog's color!,Endre fargen til hunden din! 
 CHANGE_DOG,Change dog,Bytt Hund
 SKIN_SELECTION_BACK,Looks great!,Ser bra ut!
+CHANGE_HAT,Change hat,Bytt hatt
+HAT_LOCKED,You haven't unlocked this hat yet,Du har ikke låst opp denne hatten enda
+RED,Red,Rød
+BLUE,Blue,Blå
+GREEN,Green,Grønn

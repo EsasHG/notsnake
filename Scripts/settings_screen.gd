@@ -84,7 +84,7 @@ func _on_show_framerate_toggled(toggled_on: bool) -> void:
 
 func _on_back_pressed() -> void:
 	if _changes_made:
-		GameSettings.saveSettings()
+		SaveManager.save_settings()
 	UINavigator.back()
 	pass # Replace with function body.
 

@@ -5,17 +5,25 @@
 [ext_resource type="Texture2D" uid="uid://ce0vakc3v7d0v" path="res://Assets/Map/map_winter_ver1.2.png" id="3_vwobk"]
 [ext_resource type="Texture2D" uid="uid://bngbpr0eyfhux" path="res://Assets/Map/map_winter_ver1.png" id="4_4wp3y"]
 [ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/dog_cracker_spawner.gd" id="4_7chi8"]
+[ext_resource type="Script" uid="uid://dwr8up6e4yjig" path="res://Scenes/Maps/path_follower.gd" id="6_4wp3y"]
 [ext_resource type="PackedScene" uid="uid://daexxm4sj5vkr" path="res://Scenes/Obstacles/snowboard_dog.tscn" id="6_ek5u6"]
 [ext_resource type="PackedScene" uid="uid://dkxn6cnoxgw01" path="res://Scenes/Obstacles/pine_tree_snow.tscn" id="7_c4dbm"]
 [ext_resource type="PackedScene" uid="uid://cqun8ke8u0wr2" path="res://Scenes/Obstacles/snowman.tscn" id="8_7t428"]
 [ext_resource type="PackedScene" uid="uid://bygts4fc5i55k" path="res://Scenes/Obstacles/snowlump.tscn" id="9_nbekc"]
 [ext_resource type="Texture2D" uid="uid://b6acpybwkl3r0" path="res://Assets/Obstacles/snow_decor/footprint_snow.png" id="10_dfuy5"]
+[ext_resource type="AudioStream" uid="uid://c8b7f2c3p4m0d" path="res://Assets/Sound/tanweraman-blizzard.wav" id="12_ek5u6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k13ou"]
 size = Vector2(1980, 323.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xehlq"]
 size = Vector2(261, 1561)
+
+[sub_resource type="Curve2D" id="Curve2D_vwobk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 131.94481, -57.794662, -131.94481, 57.794662, -1533, 46, 150.81497, -68.30992, -150.81497, 68.30992, -1883, 372, 204.13416, -110.426285, -204.13416, 110.426285, -2477, 498, 0, 0, 0, 0, -2873, 1745)
+}
+point_count = 5
 
 [node name="World" type="Node2D" unique_id=554824267]
 texture_filter = 1
@@ -83,19 +91,19 @@ script = ExtResource("4_7chi8")
 scale = Vector2(1.22042, 0.916599)
 
 [node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1189594935]
-position = Vector2(569.4761, 431.99994)
+position = Vector2(518.6739, 499.67325)
 
 [node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1236532740]
 position = Vector2(-594.87714, 430.94098)
 
 [node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=878140580]
-position = Vector2(646.4987, -280.3844)
+position = Vector2(584.2251, -376.39142)
 
 [node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1593626617]
-position = Vector2(-326.9366, 162.5575)
+position = Vector2(-367.90613, 126.55481)
 
 [node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=420808521]
-position = Vector2(68.828766, 145.10158)
+position = Vector2(48.344017, 272.7474)
 
 [node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1697160055]
 position = Vector2(-476.885, -230.19878)
@@ -116,7 +124,7 @@ position = Vector2(480.98193, -232.38086)
 position = Vector2(-139.29633, -327.2969)
 
 [node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=2114822175]
-position = Vector2(154.0453, -439.66885)
+position = Vector2(-195.83421, -157.10251)
 
 [node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1732959054]
 position = Vector2(350.69897, 385.1193)
@@ -125,10 +133,22 @@ position = Vector2(350.69897, 385.1193)
 position = Vector2(-575.2118, 87.27922)
 
 [node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=955176210]
-position = Vector2(-249.09456, 320.75098)
+position = Vector2(-210.58325, 331.66083)
 
-[node name="SnowboardDog" parent="." unique_id=99716063 instance=ExtResource("6_ek5u6")]
-position = Vector2(-435, -443)
+[node name="Path2D" type="Path2D" parent="." unique_id=680032768]
+position = Vector2(2207, -18)
+curve = SubResource("Curve2D_vwobk")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=464221949]
+rotation = -3.1331744
+script = ExtResource("6_4wp3y")
+speed = 800.0
+
+[node name="SnowboardDog" parent="Path2D/PathFollow2D" unique_id=99716063 instance=ExtResource("6_ek5u6")]
+rotation = 3.1415927
+
+[node name="Node2D" type="Node2D" parent="Path2D" unique_id=1469355738]
+position = Vector2(-259, 724)
 
 [node name="PineTreeSnow" parent="." unique_id=1610173503 instance=ExtResource("7_c4dbm")]
 position = Vector2(-830, -316)
@@ -399,3 +419,9 @@ position = Vector2(267, 268)
 rotation = 1.5707963
 scale = Vector2(1, -1)
 texture = ExtResource("10_dfuy5")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=209233366]
+stream = ExtResource("12_ek5u6")
+volume_db = -20.0
+autoplay = true
+bus = &"SFX"

@@ -67,9 +67,9 @@ func _enter_tree() -> void:
 		game_mode = GAME_MODE.SINGLE_PLAYER
 		
 func _ready() -> void:
-	loadScore()	
+	SaveManager.load_score()	
 	
-	if not loadSettings():
+	if not SaveManager.load_settings():
 		sfxMuted = false
 		musicMuted = false
 		setSFXMuted(sfxMuted)
@@ -221,16 +221,31 @@ func _actually_start_game():
 func game_over():
 	if ! game_running: 
 		return
-	if OS.has_feature("mobile"):	
-		increment_achievement("Hungry dog", currentScore)
-		increment_achievement("Insatiable dog", currentScore)
-
+		
 	if currentWorld != null:
 		currentWorld.queue_free()
 		currentWorld = null
+		
 	if currentScore > highScores.get_or_add(currentMap.name,0):
 		highScores[currentMap.name] = currentScore
-		saveScore()
+		SaveManager.save_score()
+		
+	if OS.has_feature("mobile") && userAuthenticated && game_mode == GAME_MODE.SINGLE_PLAYER:	
+		increment_achievement("Hungry dog", currentScore)
+		increment_achievement("Insatiable dog", currentScore)
+		
+		if leaderboardsClient:
+			Logging.logMessage("Trying to submit score: " + var_to_str(currentScore))
+			var submitted : bool = false
+			for board in leaderboardArray:
+				if board.leaderboard_id == PlayGamesIDs.leaderboards[currentMap.name]:
+					scoreBoard = board
+					Logging.logMessage("Leaderboard found. Submitting Score: " + var_to_str(currentScore))
+					leaderboardsClient.submit_score(scoreBoard.leaderboard_id,currentScore)
+					submitted = true
+			if !submitted:
+				Logging.error("Could not find a leaderboard with name "+ currentMap.name + "! Score was never submitted!")
+	
 	var ui : GameOverScreen = null
 	if game_mode == GAME_MODE.SINGLE_PLAYER:
 		ui = GAME_OVER_SCREEN.instantiate()
@@ -251,7 +266,6 @@ func game_over():
 	GlobalInputMap.Player_Placement.clear()
 	get_tree().create_timer(0.3).timeout.connect(ui.show_buttons)
 	currentScore = 0
-	
 	game_running = false
 
 
@@ -259,20 +273,6 @@ func increaseScore():
 	currentScore+=1
 
 
-func saveScore():
-	SaveManager.save_score()
-	
-
-func saveSettings(): #TODO finish this
-	SaveManager.save_settings()
-	
-func loadScore() -> bool:
-	return SaveManager.load_score()
-	
-	
-func loadSettings() -> bool:
-	return SaveManager.load_settings()
-			
 		
 func getCurrentMapHighScore():
 	return highScores[currentMap.name]
@@ -416,6 +416,7 @@ func _all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void
 		Logging.error("No leaderboards found!")
 	pass # Replace with function body.
 
+
 func _on_player_score_loaded(leaderboard_id: String, score: PlayGamesLeaderboardScore):
 	var leaderboard = leaderboardArray[leaderboardArray.find_custom(func(l:PlayGamesLeaderboard): return l.leaderboard_id == leaderboard_id)]
 	Logging.logMessage("Score loaded for leaderboard " + leaderboard.display_name + ". Score: " + score.display_score)
@@ -428,6 +429,7 @@ func _on_player_score_loaded(leaderboard_id: String, score: PlayGamesLeaderboard
 		leaderboardsClient.submit_score(leaderboard_id,highScores[leaderboard.display_name])
 	if highScores[leaderboard.display_name] >= 20:
 		unlock_achievement(leaderboard.display_name)
+
 
 func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
 	if is_submitted:
@@ -469,6 +471,8 @@ func showAchievements():
 func _get_achievement(achievementName:String) -> PlayGamesAchievement:
 		var achievementNum = achievementsCache.find_custom(func(a:PlayGamesAchievement): return a.achievement_name.contains(achievementName))
 		return achievementsCache[achievementNum]
+
+
 #Should probably do something like save achievement unlocks and progress locally, 
 #so we can instantly unlock things if players authenticate after playing for a while?
 func unlock_achievement(achievementName:String):
@@ -479,6 +483,7 @@ func unlock_achievement(achievementName:String):
 			achievementsClient.unlock_achievement(ach.achievement_id)
 		else:
 			Logging.logMessage("Score is high enough for achievement, and achievement is already unlocked! " + ach.achievement_name)
+
 
 func increment_achievement(achievementName:String, amount:int):
 	if userAuthenticated and achievementsClient and achievementsCache.size()>0:

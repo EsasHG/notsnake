@@ -151,7 +151,6 @@ text = "SELECT_COLOR"
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainScreen/VBoxContainer" unique_id=97191362]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 
