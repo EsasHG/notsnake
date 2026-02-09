@@ -2,7 +2,7 @@ extends Node
 
 
 func save_settings() -> void:
-	Logging.logMessage("Saving!")
+	Logging.logMessage("Saving settings!")
 	var saveFile = FileAccess.open("user://settings.save", FileAccess.WRITE)
 	
 	var saveDict = {
@@ -13,15 +13,16 @@ func save_settings() -> void:
 			"controls" = GlobalInputMap.Player_Controls_Selected[0],
 			"language" = GameSettings.language,
 			"dogColor" = GlobalInputMap.player_colors[0].to_html(),
-			"hat" = GlobalInputMap.Player_Hats_Selected[0],
+			"hat" = GlobalInputMap.Player_Hats_Selected[0]
 			} 
+			
 	saveFile.store_line(JSON.stringify(saveDict))
-	Logging.logMessage("Saved!")
+	Logging.logMessage("Settings saved!")
 	pass
 	
 
 func load_settings() -> bool:
-	Logging.logMessage("Loading")
+	Logging.logMessage("Loading settings")
 	var possibleFileNames: Array[String] = ["user://settings.save","user://savegame.save"]
 	var fileName:String = ""
 	
@@ -83,7 +84,6 @@ func load_settings() -> bool:
 			GlobalInputMap.player_colors[0] = Color(node_data["dogColor"])
 			
 		if node_data.has("hat"):
-			
 			GlobalInputMap.Player_Hats_Selected[0] = node_data["hat"]
 			GameSettings.on_dogHatChanged.emit(node_data["hat"])
 		else: 
@@ -101,7 +101,7 @@ func load_settings() -> bool:
 	
 
 func save_score() -> void:
-	Logging.logMessage("Saving!")
+	Logging.logMessage("Saving high scores!")
 	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	
 	var saveDict = {"highScores" = GameSettings.highScores} 
@@ -110,7 +110,7 @@ func save_score() -> void:
 
 
 func load_score() -> bool:
-	Logging.logMessage("Loading")
+	Logging.logMessage("Loading high scores")
 	if not FileAccess.file_exists("user://savegame.save"):
 		Logging.logMessage("Error! Trying to load a non-existing save file!")	
 		return false
@@ -132,4 +132,60 @@ func load_score() -> bool:
 			GameSettings.highScores = node_data["highScores"]
 			
 	Logging.logMessage("Finished loading high scores")
+	return true
+
+
+func save_unlocks():
+	Logging.logMessage("Saving unlocks!")
+	var saveFile = FileAccess.open("user://unlocks.save", FileAccess.WRITE)
+	
+	##Find unlocked maps
+	var unlocked_maps :Array[String]
+	for map: String in GlobalInputMap.Maps:
+		if GlobalInputMap.Maps[map].unlocked:
+			unlocked_maps.append(map)
+			
+				
+	##Find unlocked hats:
+	var unlocked_hats : Array[String]
+	for hat: String in GlobalInputMap.Player_Hats:
+		if GlobalInputMap.Player_Hats[hat].unlocked:
+			unlocked_hats.append(hat)
+	var saveDict = {
+			"unlocked_maps" = unlocked_maps,
+			"unlocked_hats" = unlocked_hats,
+			} 
+			
+	saveFile.store_line(JSON.stringify(saveDict))
+	Logging.logMessage("Saved!")
+	pass
+
+
+func load_unlocks():
+	Logging.logMessage("Loading unlocks")
+	if not FileAccess.file_exists("user://unlocks.save"):
+		Logging.logMessage("Error! Trying to load a non-existing save file!")	
+		return false
+		
+	var save_file = FileAccess.open("user://unlocks.save", FileAccess.READ)
+	while save_file.get_position() < save_file.get_length():
+		var json_str = save_file.get_line()	
+		var json = JSON.new()
+		var parse_result = json.parse(json_str)
+		if not parse_result == OK:
+			Logging.error("JSON Parse Error: " + json.get_error_message() + " in " + json_str + " at line " + str(json.get_error_line()))
+			continue
+		var node_data : Dictionary = json.data
+		
+		if node_data.has("unlocked_maps"):
+			var unlocked_maps : Array = node_data["unlocked_maps"]
+			for map in unlocked_maps:
+				GlobalInputMap.Maps[map].unlocked = true
+		
+		if node_data.has("unlocked_hats"):
+			var unlocked_hats : Array = node_data["unlocked_hats"]
+			for hat in unlocked_hats:
+				GlobalInputMap.Player_Hats[hat].unlocked = true
+			
+	Logging.logMessage("Finished loading unlocks")
 	return true

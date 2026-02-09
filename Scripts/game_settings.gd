@@ -75,6 +75,8 @@ func _ready() -> void:
 		setSFXMuted(sfxMuted)
 		setMusicMuted(musicMuted)
 	
+	SaveManager.load_unlocks()
+	
 	on_pickup.connect(increaseScore)
 	on_gameOver.connect(game_over)
 	on_gameBegin.connect(func(): 
@@ -228,8 +230,20 @@ func game_over():
 		
 	if currentScore > highScores.get_or_add(currentMap.name,0):
 		highScores[currentMap.name] = currentScore
-		SaveManager.save_score()
-		
+		SaveManager.save_unlocks()
+	
+	## This should work, but only if the maps in GlobalInputMap are in the right order, 
+	## and unlock condition is always 20 points on the previous map...
+	if currentScore >= 20:
+		var unlock_map: bool = false
+		for map in GlobalInputMap.Maps:
+			if unlock_map:
+				GlobalInputMap.Maps[map].unlocked = true
+				SaveManager.save_unlocks()
+				break
+			if map == currentMap.name:
+				unlock_map = true
+	
 	if OS.has_feature("mobile") && userAuthenticated && game_mode == GAME_MODE.SINGLE_PLAYER:	
 		increment_achievement("Hungry dog", currentScore)
 		increment_achievement("Insatiable dog", currentScore)
