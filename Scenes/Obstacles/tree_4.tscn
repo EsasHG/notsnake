@@ -2,15 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://8sk1okil76nj" path="res://Assets/Obstacles/obstacles/tree_4.png" id="1_xtrwr"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wje06"]
-radius = 151.003
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4llex"]
+size = Vector2(52, 48)
 
 [node name="Tree_4" type="Area2D" unique_id=660394672 groups=["Dangers"]]
+z_index = 2
+y_sort_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1442437446]
-position = Vector2(10, 40)
-shape = SubResource("CircleShape2D_wje06")
+position = Vector2(25, -22)
+shape = SubResource("RectangleShape2D_4llex")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1717401128]
-position = Vector2(-4, -3)
+y_sort_enabled = true
+position = Vector2(-4, -206)
 texture = ExtResource("1_xtrwr")

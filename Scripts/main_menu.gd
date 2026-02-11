@@ -41,6 +41,7 @@ func _ready() -> void:
 		start_button.grab_focus(true)
 	visible = true
 	buttons.visible = true
+	level_select_screen.visible = false
 	locked_message_container.visible = false
 	get_tree().create_timer(0.5).timeout.connect(func():	
 		var blackPanelTween = get_tree().create_tween()
@@ -70,7 +71,7 @@ func _ready() -> void:
 		button.text = s.name
 		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		button.expand_icon = true
-		button.custom_minimum_size = Vector2(100,100)
+		button.custom_minimum_size = Vector2(180,180)
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		button.focus_neighbor_bottom = level_select_back.get_path()
 		level_buttons.add_child(button)

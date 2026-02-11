@@ -59,7 +59,7 @@ func _on_admob_interstitial_ad_loaded(_ad_id: String) -> void:
 	Logging.logMessage("Interstitial ad loaded!")
 	interstitial_ad_loaded = true
 
-##returns false if interstitial ad can't be shown
+## returns false if interstitial ad can't be shown
 func show_interstitial_ad() -> bool:
 	if rounds_played < rounds_between_ad:
 		Logging.logMessage("Too few rounds played to show an interstitial ad!")

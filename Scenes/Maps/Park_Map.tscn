@@ -93,13 +93,13 @@ script = ExtResource("4_mcotw")
 [node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=568650179]
 
 [node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=280551736]
-position = Vector2(104, 431)
+position = Vector2(-129, 406)
 
 [node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=641552107]
 position = Vector2(-623, -3)
 
 [node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1512033920]
-position = Vector2(579, -421)
+position = Vector2(408, 318)
 
 [node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=865557511]
 position = Vector2(140, 247)
@@ -148,39 +148,39 @@ position = Vector2(-581, -153)
 scale = Vector2(0.6, 0.6)
 
 [node name="Tree_1" parent="Obstacles" unique_id=1268340520 instance=ExtResource("7_b2nkx")]
-position = Vector2(719, -417)
+position = Vector2(719, -413)
 scale = Vector2(0.6, 0.6)
 
 [node name="Tree_9" parent="Obstacles" unique_id=337056624 instance=ExtResource("7_b2nkx")]
-position = Vector2(750, 335)
+position = Vector2(750, 395)
 scale = Vector2(-0.6, 0.6)
 
 [node name="Tree_7" parent="Obstacles" unique_id=1378776657 instance=ExtResource("7_b2nkx")]
-position = Vector2(-658, -384)
+position = Vector2(-658, -324)
 scale = Vector2(0.6, 0.6)
 
 [node name="Tree_2" parent="Obstacles" unique_id=2093279573 instance=ExtResource("8_j258f")]
-position = Vector2(804, -415)
+position = Vector2(804, -355)
 scale = Vector2(0.6, 0.6)
 
 [node name="Tree_3" parent="Obstacles" unique_id=398434231 instance=ExtResource("9_ms87f")]
-position = Vector2(-264, -224)
+position = Vector2(-264, -164)
 scale = Vector2(-0.6, 0.6)
 
 [node name="Tree_6" parent="Obstacles" unique_id=1080493610 instance=ExtResource("9_ms87f")]
-position = Vector2(-768, -448)
+position = Vector2(-768, -388)
 scale = Vector2(0.6, 0.6)
 
 [node name="Tree_5" parent="Obstacles" unique_id=1045881093 instance=ExtResource("9_ms87f")]
-position = Vector2(-830, 343)
+position = Vector2(-830, 403)
 scale = Vector2(0.6, 0.6)
 
 [node name="Tree_8" parent="Obstacles" unique_id=260068767 instance=ExtResource("9_ms87f")]
-position = Vector2(845, 288)
+position = Vector2(845, 348)
 scale = Vector2(0.6, 0.6)
 
 [node name="Tree_4" parent="Obstacles" unique_id=1046873749 instance=ExtResource("10_svlru")]
-position = Vector2(560, 137)
+position = Vector2(560, 182)
 scale = Vector2(0.468075, 0.468075)
 
 [node name="Chiweewee" parent="." unique_id=321257300 instance=ExtResource("11_yqw8p")]

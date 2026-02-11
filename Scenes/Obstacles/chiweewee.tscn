@@ -32,6 +32,7 @@ script = ExtResource("1_bkt5k")
 distThreshold = 200
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2112940869]
+visible = false
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_8dfl1")
 

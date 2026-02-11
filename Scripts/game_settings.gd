@@ -3,14 +3,15 @@ extends Node
 signal on_pickup()
 signal on_gameOver()
 signal on_gameBegin()
+signal on_gamePaused()
+signal on_gameUnpaused()
 signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
 signal on_controls_changed(holdControls:bool)
 signal on_dogColorChanged(color:Color)
 signal on_dogHatChanged(hat:String)
-
+signal on_somethingUnlocked(unlock:String)
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
-const AD_MANAGER = preload("uid://ck01dnrayeqyd")
 
 @export var currentScore : int = 0 
 
@@ -54,6 +55,10 @@ var leaderboardsClient : PlayGamesLeaderboardsClient = null
 var scoreBoard : PlayGamesLeaderboard
 var leaderboardArray : Array[PlayGamesLeaderboard]
 var achievementsCache: Array[PlayGamesAchievement]
+var times_crashed : int = 0
+
+## So we can notify the player when convenient
+var _new_unlocks: Array[String]
 
 var currentWorld : Node2D = null
 
@@ -66,6 +71,7 @@ func _enter_tree() -> void:
 			Logging.error("Could not initialize godot play games services plugin!")
 		game_mode = GAME_MODE.SINGLE_PLAYER
 		
+	
 func _ready() -> void:
 	SaveManager.load_score()	
 	
@@ -82,6 +88,7 @@ func _ready() -> void:
 	on_gameBegin.connect(func(): 
 		game_running = true	
 		)
+	on_somethingUnlocked.connect(_on_something_unlocked)
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 	call_deferred("_do_deferred_setup")	
 	game_timer.autostart = false
@@ -224,41 +231,35 @@ func game_over():
 	if ! game_running: 
 		return
 		
+	var save_unlocks : bool = false
 	if currentWorld != null:
 		currentWorld.queue_free()
 		currentWorld = null
 		
 	if currentScore > highScores.get_or_add(currentMap.name,0):
 		highScores[currentMap.name] = currentScore
-		SaveManager.save_unlocks()
-	
+		SaveManager.save_score()
 	## This should work, but only if the maps in GlobalInputMap are in the right order, 
 	## and unlock condition is always 20 points on the previous map...
 	if currentScore >= 20:
 		var unlock_map: bool = false
 		for map in GlobalInputMap.Maps:
 			if unlock_map:
+				on_somethingUnlocked.emit(map)
 				GlobalInputMap.Maps[map].unlocked = true
-				SaveManager.save_unlocks()
+				save_unlocks = true
 				break
 			if map == currentMap.name:
 				unlock_map = true
 	
-	if OS.has_feature("mobile") && userAuthenticated && game_mode == GAME_MODE.SINGLE_PLAYER:	
-		increment_achievement("Hungry dog", currentScore)
-		increment_achievement("Insatiable dog", currentScore)
-		
-		if leaderboardsClient:
-			Logging.logMessage("Trying to submit score: " + var_to_str(currentScore))
-			var submitted : bool = false
-			for board in leaderboardArray:
-				if board.leaderboard_id == PlayGamesIDs.leaderboards[currentMap.name]:
-					scoreBoard = board
-					Logging.logMessage("Leaderboard found. Submitting Score: " + var_to_str(currentScore))
-					leaderboardsClient.submit_score(scoreBoard.leaderboard_id,currentScore)
-					submitted = true
-			if !submitted:
-				Logging.error("Could not find a leaderboard with name "+ currentMap.name + "! Score was never submitted!")
+	if times_crashed > 100 and not GlobalInputMap.Player_Hats["HELMET"].unlocked:
+		GlobalInputMap.Player_Hats["HELMET"].unlocked = true
+		on_somethingUnlocked.emit("HELMET")
+	
+	if save_unlocks:
+		SaveManager.save_unlocks()
+	
+	SaveManager.save_settings() ## Doing this so times_crashed gets saved.
 	
 	var ui : GameOverScreen = null
 	if game_mode == GAME_MODE.SINGLE_PLAYER:
@@ -278,14 +279,44 @@ func game_over():
 	GlobalInputMap.Player_Lives.clear()
 	GlobalInputMap.Player_Score.clear()
 	GlobalInputMap.Player_Placement.clear()
-	get_tree().create_timer(0.3).timeout.connect(ui.show_buttons)
-	currentScore = 0
+	
 	game_running = false
+	
+	if OS.has_feature("mobile") && game_mode == GAME_MODE.SINGLE_PLAYER:
+		if userAuthenticated:
+			increment_achievement("Hungry dog", currentScore)
+			increment_achievement("Insatiable dog", currentScore)
+			
+			if leaderboardsClient:
+				Logging.logMessage("Trying to submit score: " + var_to_str(currentScore))
+				var submitted : bool = false
+				for board in leaderboardArray:
+					if board.leaderboard_id == PlayGamesIDs.leaderboards[currentMap.name]:
+						scoreBoard = board
+						Logging.logMessage("Leaderboard found. Submitting Score: " + var_to_str(currentScore))
+						leaderboardsClient.submit_score(scoreBoard.leaderboard_id,currentScore)
+						submitted = true
+				if !submitted:
+					Logging.error("Could not find a leaderboard with name "+ currentMap.name + "! Score was never submitted!")
+		if adManager:
+			adManager.rounds_played+=1
+			if adManager.admob_initialized and adManager._can_show_interstitial_ad and adManager.interstitial_ad_loaded:
+				get_tree().create_timer(0.6).timeout.connect(func(): 
+					adManager.show_interstitial_ad()
+					)
+				get_tree().create_timer(0.75).timeout.connect(ui.show_buttons) # i migth want different wait times in the future
+			else: 
+				get_tree().create_timer(0.3).timeout.connect(ui.show_buttons)
+		else: 
+			get_tree().create_timer(0.3).timeout.connect(ui.show_buttons)
+	else:
+		get_tree().create_timer(0.3).timeout.connect(ui.show_buttons)
+		
+	currentScore = 0
 
 
 func increaseScore():
 	currentScore+=1
-
 
 		
 func getCurrentMapHighScore():
@@ -305,6 +336,7 @@ func setSFXVol(in_vol : float):
 func setMusicMuted(muted:bool):
 	Logging.logMessage("Setting music muted to " + str(muted))
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"),muted)
+	
 	musicMuted = muted
 	var vol : float = linear_to_db(0.8)
 	if musicMuted: 
@@ -332,13 +364,19 @@ func remove_all_ads():
 	adManager.queue_free()
 	adManager = null
 	
+func _on_something_unlocked(unlock:String):
+	_new_unlocks.append(unlock)
+	
+
 func _create_transition() -> SceneTransition:
 	var transition : SceneTransition = SCENE_TRANSITION.instantiate()
 	mainGuiNode.add_child.call_deferred(transition)
 	return transition
-	
+
+
 func _on_music_mute_toggled(toggled_on: bool) -> void:
 	setMusicMuted(toggled_on)
+
 
 func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 	setSFXMuted(toggled_on)
@@ -346,14 +384,21 @@ func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 
 func unpause_game() -> void:
 	get_tree().paused = false
+	Engine.time_scale = 0
+	var t = get_tree().create_tween()
+	t.set_ignore_time_scale(true)
+	t.set_ease(Tween.EASE_IN)
+	
+	t.tween_property(Engine, "time_scale", 1, 2)
+	on_gameUnpaused.emit()
 
 func pause_game():
 	Logging.logMessage("Pausing game")
-	
 	#var pauseScreen = PAUSE_MENU.instantiate()
 	#$"../Main/CanvasLayer/Gui".add_child(pauseScreen)
 	UINavigator.open_from_scene(PAUSE_MENU)
 	get_tree().paused = true
+	on_gamePaused.emit()
 
 
 func _on_viewport_size_changed():
@@ -384,6 +429,7 @@ func player_lost(player : PlayerDog) -> void:
 			player_spawners[player.playerID].start_timer()
 			players.erase(player)
 		GAME_MODE.SINGLE_PLAYER:
+			times_crashed += 1
 			on_gameOver.emit()
 			
 	

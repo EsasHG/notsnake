@@ -197,7 +197,12 @@ func _on_area_entered(area: Area2D) -> void:
 		playerControl = false
 		GameSettings.player_lost(self)
 		segmentParent.queue_free()
-		GameSettings.unlock_achievement("Wi(e)nner")
+		if not GlobalInputMap.Player_Hats["COWBOY"].unlocked:
+			GameSettings.on_somethingUnlocked.emit("COWBOY")
+			GlobalInputMap.Player_Hats["COWBOY"].unlocked = true
+			SaveManager.save_unlocks()
+			GameSettings.unlock_achievement("Wi(e)nner")	##TODO: Fix so this gets unlocked if player logs in later.
+			
 		queue_free()
 		
 	elif(area.is_in_group("Dangers")):
@@ -222,12 +227,6 @@ func _on_area_entered(area: Area2D) -> void:
 			else:
 				GlobalInputMap.Player_Score[playerID] = 1
 			area.queue_free()
-			
-	if(area.is_in_group("Present")):
-		if(canAddSprites):
-			Logging.logMessage("Present picked up!")
-			GameSettings.unlock_achievement("Dapper dog")
-			## TODO: Add hat unlock logic here?
 			
 
 func bark():

@@ -38,7 +38,7 @@ func _ready() -> void:
 		button.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		button.expand_icon = true
-		button.custom_minimum_size = Vector2(100,100)
+		button.custom_minimum_size = Vector2(180,180)
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		button.focus_neighbor_bottom = hat_select_back.get_path()
 		hat_buttons.add_child(button)

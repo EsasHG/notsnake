@@ -3,14 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://cgethm75bf1jk" path="res://Assets/Obstacles/obstacles/tree_3.png" id="1_4lmvj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hc7wb"]
-size = Vector2(95, 157)
+size = Vector2(24, 39)
 
 [node name="Tree_3" type="Area2D" unique_id=1574563575 groups=["Dangers"]]
+z_index = 2
+y_sort_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2121426353]
-position = Vector2(-6.5, 38.5)
+position = Vector2(-7, -19)
 shape = SubResource("RectangleShape2D_hc7wb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=691337571]
-position = Vector2(-4, -3)
+y_sort_enabled = true
+position = Vector2(-4, -120)
 texture = ExtResource("1_4lmvj")

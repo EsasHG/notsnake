@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Map" format=3 uid="uid://oa287witflah"]
 
 [ext_resource type="PackedScene" uid="uid://dxkydv08bbemt" path="res://Scenes/Maps/Forest_Map.tscn" id="1_h3l7p"]
-[ext_resource type="Texture2D" uid="uid://dqg0n4l7w438o" path="res://Assets/Icons/Tutorial_Map.png" id="2_hfjif"]
+[ext_resource type="Texture2D" uid="uid://b4572rmxqqsak" path="res://Assets/Icons/Forest_Map.png" id="2_0q2ni"]
 [ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="3_6djsl"]
 
 [resource]
 script = ExtResource("3_6djsl")
 Scene = ExtResource("1_h3l7p")
 name = "FOREST"
-icon = ExtResource("2_hfjif")
+icon = ExtResource("2_0q2ni")

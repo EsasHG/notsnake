@@ -14,5 +14,6 @@ texture_filter = 1
 texture = ExtResource("1_tc4b4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=248151780]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_gieqm")

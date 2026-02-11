@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://tcsre6epm8ss" path="res://Scenes/Maps/Park_Map.tscn" id="1_08ppb"]
 [ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="1_bsn4t"]
-[ext_resource type="Texture2D" uid="uid://dto7sml4al4sb" path="res://Assets/Icons/Park.png" id="2_rietx"]
+[ext_resource type="Texture2D" uid="uid://csxqseoegqggj" path="res://Assets/Icons/Park_Map_good.png" id="2_6cpi4"]
 
 [resource]
 script = ExtResource("1_bsn4t")
 Scene = ExtResource("1_08ppb")
 name = "PARK"
-icon = ExtResource("2_rietx")
+icon = ExtResource("2_6cpi4")

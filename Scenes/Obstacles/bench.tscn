@@ -8,6 +8,7 @@ size = Vector2(235, 220)
 [node name="Bench" type="Area2D" unique_id=806199856 groups=["Dangers"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1874798745]
+visible = false
 position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_epadd")
 

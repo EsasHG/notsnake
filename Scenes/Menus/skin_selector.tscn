@@ -334,11 +334,11 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="DescriptionLabel" type="Label" parent="LockedMessageContainer/VBoxContainer" unique_id=1786024529]
-visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_cmbhx")
+theme_override_font_sizes/font_size = 25
 text = "HAT_UNLOCK_CONDITION"
 autowrap_mode = 3
 

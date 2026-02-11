@@ -84,13 +84,13 @@ position = Vector2(104, 432)
 position = Vector2(-487, 201)
 
 [node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1060234306]
-position = Vector2(353, -647)
+position = Vector2(667, -284)
 
 [node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=694210179]
 position = Vector2(-202, 374)
 
 [node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=344752024]
-position = Vector2(38, -602)
+position = Vector2(463, 119)
 
 [node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1908212310]
 position = Vector2(-576, -239)
@@ -101,8 +101,11 @@ position = Vector2(-760, 494)
 [node name="Node2D17" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1547148812]
 position = Vector2(496, 627)
 
+[node name="Node2D19" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=59484706]
+position = Vector2(792, 438)
+
 [node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=818457596]
-position = Vector2(-297, -609)
+position = Vector2(-302, -536)
 
 [node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1514687866]
 position = Vector2(698, 176)
@@ -129,7 +132,7 @@ position = Vector2(-706, 119)
 position = Vector2(-139, 651)
 
 [node name="Node2D18" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1848949185]
-position = Vector2(-752, -644)
+position = Vector2(-775, -509)
 
 [node name="Obstacles" type="Node2D" parent="." unique_id=2011743699]
 

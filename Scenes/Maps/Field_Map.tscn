@@ -66,28 +66,27 @@ shape = SubResource("RectangleShape2D_xehlq")
 script = ExtResource("4_oe0c1")
 
 [node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=1175377144]
-scale = Vector2(1.22042, 0.916599)
 
 [node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1189594935]
-position = Vector2(104, 432)
+position = Vector2(262, 437)
 
 [node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1236532740]
-position = Vector2(-487, 201)
+position = Vector2(-638, -122)
 
 [node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=878140580]
-position = Vector2(579, -421)
+position = Vector2(697, -397)
 
 [node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1593626617]
-position = Vector2(-202, 374)
+position = Vector2(-181, 435)
 
 [node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=420808521]
-position = Vector2(38, -602)
+position = Vector2(451, -213)
 
 [node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1697160055]
-position = Vector2(-469.51, -255.292)
+position = Vector2(-402, 386)
 
 [node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=539336681]
-position = Vector2(-374.461, -464.762)
+position = Vector2(-570, -401)
 
 [node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=967751832]
 position = Vector2(292.522, -100.371)
@@ -96,19 +95,19 @@ position = Vector2(292.522, -100.371)
 position = Vector2(393, 100)
 
 [node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=478754803]
-position = Vector2(473.607, -133.101)
+position = Vector2(653, -39)
 
 [node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=874794211]
-position = Vector2(-48, -334)
+position = Vector2(-171, -435)
 
 [node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=2114822175]
 position = Vector2(245, -412)
 
 [node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1732959054]
-position = Vector2(278, 276)
+position = Vector2(633, 359)
 
 [node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=654534659]
-position = Vector2(-381.016, -130.919)
+position = Vector2(-461, -182)
 
 [node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=955176210]
-position = Vector2(-28.6786, 538.949)
+position = Vector2(-666, 202)

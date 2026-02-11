@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dto7sml4al4sb"
-path="res://.godot/imported/Park.png-243f425d1e089da419a3d5c7ef006c0e.ctex"
+uid="uid://du77hyx4apsb3"
+path="res://.godot/imported/Forest_Map_good.png-dd56054582cfd19036061ae43e261ecd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icons/Park.png"
-dest_files=["res://.godot/imported/Park.png-243f425d1e089da419a3d5c7ef006c0e.ctex"]
+source_file="res://Assets/Icons/Forest_Map_good.png"
+dest_files=["res://.godot/imported/Forest_Map_good.png-dd56054582cfd19036061ae43e261ecd.ctex"]
 
 [params]
 

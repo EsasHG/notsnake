@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://b5l6l66r28cs4"]
+
+[ext_resource type="Script" uid="uid://be5gopm2b1v5a" path="res://Scripts/player_spawner.gd" id="1_revxk"]
+[ext_resource type="Script" uid="uid://cgcpju57f0k1c" path="res://Scripts/follow_camera.gd" id="2_lul6d"]
+[ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="3_rd45l"]
+[ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/dog_cracker_spawner.gd" id="4_n28lb"]
+[ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/Obstacles/fountain.tscn" id="5_mjjcx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k13ou"]
+size = Vector2(1980, 163.375)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xehlq"]
+size = Vector2(261, 1561)
+
+[node name="World" type="Node2D" unique_id=1059412979]
+
+[node name="PlayerStart" type="Node2D" parent="." unique_id=2133896961]
+script = ExtResource("1_revxk")
+spawn_on_start = false
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=444639869]
+zoom = Vector2(1.1, 1.1)
+limit_left = -900
+limit_top = -710
+limit_right = 900
+limit_bottom = 710
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+editor_draw_limits = true
+script = ExtResource("2_lul6d")
+
+[node name="MapTutorial1" type="Sprite2D" parent="." unique_id=1421790600]
+z_index = -3
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_rd45l")
+
+[node name="Walls" type="Node2D" parent="." unique_id=658282560]
+
+[node name="TopWall" type="Area2D" parent="Walls" unique_id=767049504 groups=["Dangers"]]
+position = Vector2(0, -828)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/TopWall" unique_id=79481401]
+shape = SubResource("RectangleShape2D_k13ou")
+
+[node name="BottomWall" type="Area2D" parent="Walls" unique_id=1418823989 groups=["Dangers"]]
+position = Vector2(0, 826)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall" unique_id=1992017692]
+shape = SubResource("RectangleShape2D_k13ou")
+
+[node name="RightWall" type="Area2D" parent="Walls" unique_id=1710857174 groups=["Dangers"]]
+position = Vector2(1075, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/RightWall" unique_id=1864578813]
+shape = SubResource("RectangleShape2D_xehlq")
+
+[node name="LeftWall" type="Area2D" parent="Walls" unique_id=2135185468 groups=["Dangers"]]
+position = Vector2(-1075, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall" unique_id=674876988]
+shape = SubResource("RectangleShape2D_xehlq")
+
+[node name="PickupSpawner" type="Node2D" parent="." unique_id=1740783979]
+script = ExtResource("4_n28lb")
+
+[node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=1516816558]
+scale = Vector2(1.22042, 0.916599)
+
+[node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=924768790]
+position = Vector2(104, 432)
+
+[node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1729600112]
+position = Vector2(-510.48, 108.00797)
+
+[node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1351783743]
+position = Vector2(544.075, -376.391)
+
+[node name="Node2D18" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=523023703]
+position = Vector2(377.7388, -214.92496)
+
+[node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=643371760]
+position = Vector2(-202, 374)
+
+[node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=2078445894]
+position = Vector2(95.86864, -494.21832)
+
+[node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1154555530]
+position = Vector2(-510.48, -177.831)
+
+[node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1351733530]
+position = Vector2(-322.8397, -459.30664)
+
+[node name="Node2D16" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1294087038]
+position = Vector2(-598.1547, -468.03455)
+
+[node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=938735879]
+position = Vector2(426.902, 426.577)
+
+[node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1869729189]
+position = Vector2(393, 100)
+
+[node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1884378360]
+position = Vector2(593, -100)
+
+[node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1764384819]
+position = Vector2(-48, -334)
+
+[node name="Node2D19" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=153653980]
+position = Vector2(-213.04141, -91.64316)
+
+[node name="Node2D20" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1913608843]
+position = Vector2(229.42923, -57.822456)
+
+[node name="Node2D17" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=539100437]
+position = Vector2(-430.99918, 507.31012)
+
+[node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=2022284724]
+position = Vector2(245, -412)
+
+[node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=829482838]
+position = Vector2(278, 276)
+
+[node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1699210735]
+position = Vector2(-606.34863, 389.4833)
+
+[node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1000302291]
+position = Vector2(1.63878, 585.861)
+
+[node name="Fountain" parent="." unique_id=53010009 instance=ExtResource("5_mjjcx")]
+position = Vector2(341, 81)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain2" parent="." unique_id=595421416 instance=ExtResource("5_mjjcx")]
+position = Vector2(610, -176)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain11" parent="." unique_id=2077258326 instance=ExtResource("5_mjjcx")]
+position = Vector2(518, -457)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain12" parent="." unique_id=85337681 instance=ExtResource("5_mjjcx")]
+position = Vector2(629, 289)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain3" parent="." unique_id=1610111046 instance=ExtResource("5_mjjcx")]
+position = Vector2(-65, -401)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain4" parent="." unique_id=1015796005 instance=ExtResource("5_mjjcx")]
+position = Vector2(298, -519)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain5" parent="." unique_id=1032470528 instance=ExtResource("5_mjjcx")]
+position = Vector2(69, -159)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain19" parent="." unique_id=1856934359 instance=ExtResource("5_mjjcx")]
+position = Vector2(247, -196)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain20" parent="." unique_id=1872117915 instance=ExtResource("5_mjjcx")]
+position = Vector2(273, -240)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain21" parent="." unique_id=365365847 instance=ExtResource("5_mjjcx")]
+position = Vector2(303, -200)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain6" parent="." unique_id=619880596 instance=ExtResource("5_mjjcx")]
+position = Vector2(-467, 53)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain7" parent="." unique_id=1895428977 instance=ExtResource("5_mjjcx")]
+position = Vector2(-371, -238)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain8" parent="." unique_id=1676371260 instance=ExtResource("5_mjjcx")]
+position = Vector2(-492, 340)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain13" parent="." unique_id=514359275 instance=ExtResource("5_mjjcx")]
+position = Vector2(-282, 181)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain14" parent="." unique_id=468987320 instance=ExtResource("5_mjjcx")]
+position = Vector2(-566, -389)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain16" parent="." unique_id=741863729 instance=ExtResource("5_mjjcx")]
+position = Vector2(-105, 413)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain17" parent="." unique_id=2012698195 instance=ExtResource("5_mjjcx")]
+position = Vector2(-335, 513)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain18" parent="." unique_id=2029060983 instance=ExtResource("5_mjjcx")]
+position = Vector2(701, 92)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain15" parent="." unique_id=2004810094 instance=ExtResource("5_mjjcx")]
+position = Vector2(-705, -546)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain9" parent="." unique_id=601717038 instance=ExtResource("5_mjjcx")]
+position = Vector2(350, 410)
+scale = Vector2(0.132989, 0.132989)
+
+[node name="Fountain10" parent="." unique_id=170317634 instance=ExtResource("5_mjjcx")]
+position = Vector2(639, 467)
+scale = Vector2(0.132989, 0.132989)

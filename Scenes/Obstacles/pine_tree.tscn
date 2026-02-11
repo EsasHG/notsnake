@@ -3,14 +3,17 @@
 [ext_resource type="Texture2D" uid="uid://c81m7s3rnopmj" path="res://Assets/Obstacles/tree_pine_base.png" id="1_rap6m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hc7wb"]
-size = Vector2(57, 139)
+size = Vector2(28, 46.5)
 
-[node name="PineTreeSnow" type="Area2D" unique_id=1610173503 groups=["Dangers"]]
+[node name="PineTree" type="Area2D" unique_id=1610173503 groups=["Dangers"]]
+z_index = 2
+y_sort_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1758111290]
-position = Vector2(-5.5, -67)
+position = Vector2(-4, -24.75)
 shape = SubResource("RectangleShape2D_hc7wb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1812515374]
-position = Vector2(-4, -137.5)
+y_sort_enabled = true
+position = Vector2(-4, -144)
 texture = ExtResource("1_rap6m")

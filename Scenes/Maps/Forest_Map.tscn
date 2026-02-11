@@ -4,7 +4,11 @@
 [ext_resource type="Script" uid="uid://cgcpju57f0k1c" path="res://Scripts/follow_camera.gd" id="2_1wnyp"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="3_t6jc5"]
 [ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/dog_cracker_spawner.gd" id="4_looaj"]
-[ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/Obstacles/fountain.tscn" id="5_si64d"]
+[ext_resource type="PackedScene" uid="uid://bdgut8fsafskf" path="res://Scenes/Obstacles/tree_1.tscn" id="5_si64d"]
+[ext_resource type="PackedScene" uid="uid://b2vvgcdqie4wf" path="res://Scenes/Obstacles/tree_2.tscn" id="6_tlrih"]
+[ext_resource type="PackedScene" uid="uid://bnepouvao7645" path="res://Scenes/Obstacles/tree_3.tscn" id="7_4ibbc"]
+[ext_resource type="PackedScene" uid="uid://bob8kh4co86nl" path="res://Scenes/Obstacles/tree_4.tscn" id="8_rki3u"]
+[ext_resource type="PackedScene" uid="uid://bqme06c1kc0l8" path="res://Scenes/Obstacles/pine_tree.tscn" id="9_fpe7f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k13ou"]
 size = Vector2(1980, 163.375)
@@ -65,133 +69,251 @@ shape = SubResource("RectangleShape2D_xehlq")
 script = ExtResource("4_looaj")
 
 [node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=1516816558]
-scale = Vector2(1.22042, 0.916599)
 
 [node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=924768790]
-position = Vector2(104, 432)
+position = Vector2(46, 394)
 
 [node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1729600112]
-position = Vector2(-487, 201)
+position = Vector2(-620, 177)
 
 [node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1351783743]
-position = Vector2(544.075, -376.391)
+position = Vector2(694, -427)
+
+[node name="Node2D18" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=523023703]
+position = Vector2(412, -244)
 
 [node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=643371760]
-position = Vector2(-202, 374)
+position = Vector2(-275, 362)
 
 [node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=2078445894]
-position = Vector2(73.7451, -528.039)
+position = Vector2(78, -483)
 
 [node name="Node2D6" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1154555530]
-position = Vector2(-510.48, -177.831)
+position = Vector2(-634, -244)
 
 [node name="Node2D7" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1351733530]
-position = Vector2(-236.804, -471.307)
+position = Vector2(-348, -357)
+
+[node name="Node2D16" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1294087038]
+position = Vector2(-711, -418)
 
 [node name="Node2D8" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=938735879]
-position = Vector2(426.902, 426.577)
+position = Vector2(424, 393)
 
 [node name="Node2D9" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1869729189]
-position = Vector2(393, 100)
+position = Vector2(652, 436)
 
 [node name="Node2D10" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1884378360]
 position = Vector2(593, -100)
 
 [node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1764384819]
-position = Vector2(-48, -334)
+position = Vector2(-95, -275)
+
+[node name="Node2D19" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=153653980]
+position = Vector2(-238, -130)
+
+[node name="Node2D20" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1913608843]
+position = Vector2(229.42923, -57.822456)
+
+[node name="Node2D17" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=539100437]
+position = Vector2(-503, 514)
 
 [node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=2022284724]
 position = Vector2(245, -412)
 
 [node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=829482838]
-position = Vector2(278, 276)
+position = Vector2(226, 183)
 
 [node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1699210735]
-position = Vector2(-553.908, 357.845)
+position = Vector2(-517, 367)
 
 [node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1000302291]
-position = Vector2(1.63878, 585.861)
+position = Vector2(-1.0000001, 527)
 
-[node name="Fountain" parent="." unique_id=53010009 instance=ExtResource("5_si64d")]
-position = Vector2(341, 81)
-scale = Vector2(0.132989, 0.132989)
+[node name="Trees" type="Node2D" parent="." unique_id=1781455581]
+y_sort_enabled = true
 
-[node name="Fountain2" parent="." unique_id=595421416 instance=ExtResource("5_si64d")]
-position = Vector2(610, -176)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_1" parent="Trees" unique_id=1610173503 instance=ExtResource("5_si64d")]
+position = Vector2(-639, 516)
 
-[node name="Fountain11" parent="." unique_id=2077258326 instance=ExtResource("5_si64d")]
-position = Vector2(518, -457)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_34" parent="Trees" unique_id=1838941021 instance=ExtResource("5_si64d")]
+position = Vector2(-708, 762)
 
-[node name="Fountain12" parent="." unique_id=85337681 instance=ExtResource("5_si64d")]
-position = Vector2(629, 289)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_6" parent="Trees" unique_id=2074990781 instance=ExtResource("5_si64d")]
+position = Vector2(162, -232)
+scale = Vector2(-1, 1)
 
-[node name="Fountain3" parent="." unique_id=1610111046 instance=ExtResource("5_si64d")]
-position = Vector2(-65, -401)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_32" parent="Trees" unique_id=370781761 instance=ExtResource("5_si64d")]
+position = Vector2(900, -409)
 
-[node name="Fountain4" parent="." unique_id=1015796005 instance=ExtResource("5_si64d")]
-position = Vector2(298, -519)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_19" parent="Trees" unique_id=1694873590 instance=ExtResource("5_si64d")]
+position = Vector2(363, 161)
 
-[node name="Fountain5" parent="." unique_id=1032470528 instance=ExtResource("5_si64d")]
-position = Vector2(69, -159)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_41" parent="Trees" unique_id=695528252 instance=ExtResource("5_si64d")]
+position = Vector2(653, 730)
 
-[node name="Fountain19" parent="." unique_id=1856934359 instance=ExtResource("5_si64d")]
-position = Vector2(247, -196)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_20" parent="Trees" unique_id=1553532716 instance=ExtResource("5_si64d")]
+position = Vector2(78, 291)
 
-[node name="Fountain20" parent="." unique_id=1872117915 instance=ExtResource("5_si64d")]
-position = Vector2(273, -240)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_36" parent="Trees" unique_id=2042418583 instance=ExtResource("5_si64d")]
+position = Vector2(-197, 743)
 
-[node name="Fountain21" parent="." unique_id=365365847 instance=ExtResource("5_si64d")]
-position = Vector2(303, -200)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_37" parent="Trees" unique_id=772041061 instance=ExtResource("5_si64d")]
+position = Vector2(-107, 693)
 
-[node name="Fountain6" parent="." unique_id=619880596 instance=ExtResource("5_si64d")]
-position = Vector2(-467, 53)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_38" parent="Trees" unique_id=1195502723 instance=ExtResource("5_si64d")]
+position = Vector2(118, 742)
 
-[node name="Fountain7" parent="." unique_id=1895428977 instance=ExtResource("5_si64d")]
-position = Vector2(-371, -238)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_21" parent="Trees" unique_id=285798113 instance=ExtResource("5_si64d")]
+position = Vector2(-436, -185)
 
-[node name="Fountain8" parent="." unique_id=1676371260 instance=ExtResource("5_si64d")]
-position = Vector2(-492, 340)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_23" parent="Trees" unique_id=390647222 instance=ExtResource("5_si64d")]
+position = Vector2(-701, -660)
 
-[node name="Fountain13" parent="." unique_id=514359275 instance=ExtResource("5_si64d")]
-position = Vector2(-282, 181)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_2" parent="Trees" unique_id=1773030208 instance=ExtResource("6_tlrih")]
+position = Vector2(-943, -7)
 
-[node name="Fountain14" parent="." unique_id=468987320 instance=ExtResource("5_si64d")]
-position = Vector2(-566, -389)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_18" parent="Trees" unique_id=583973556 instance=ExtResource("6_tlrih")]
+position = Vector2(544, 669)
 
-[node name="Fountain16" parent="." unique_id=741863729 instance=ExtResource("5_si64d")]
-position = Vector2(-105, 413)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_40" parent="Trees" unique_id=1742697351 instance=ExtResource("6_tlrih")]
+position = Vector2(544, 669)
 
-[node name="Fountain17" parent="." unique_id=2012698195 instance=ExtResource("5_si64d")]
-position = Vector2(-335, 513)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_39" parent="Trees" unique_id=1020584138 instance=ExtResource("6_tlrih")]
+position = Vector2(-40, 811)
 
-[node name="Fountain18" parent="." unique_id=2029060983 instance=ExtResource("5_si64d")]
-position = Vector2(701, 92)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_7" parent="Trees" unique_id=1617135384 instance=ExtResource("6_tlrih")]
+position = Vector2(478, -476)
 
-[node name="Fountain15" parent="." unique_id=2004810094 instance=ExtResource("5_si64d")]
-position = Vector2(-705, -546)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_13" parent="Trees" unique_id=205837872 instance=ExtResource("6_tlrih")]
+position = Vector2(-804, -673)
 
-[node name="Fountain9" parent="." unique_id=601717038 instance=ExtResource("5_si64d")]
-position = Vector2(350, 410)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_24" parent="Trees" unique_id=393882515 instance=ExtResource("6_tlrih")]
+position = Vector2(-129, -693)
 
-[node name="Fountain10" parent="." unique_id=170317634 instance=ExtResource("5_si64d")]
-position = Vector2(639, 467)
-scale = Vector2(0.132989, 0.132989)
+[node name="Tree_25" parent="Trees" unique_id=791759137 instance=ExtResource("6_tlrih")]
+position = Vector2(-356, -689)
+
+[node name="Tree_26" parent="Trees" unique_id=1110522140 instance=ExtResource("6_tlrih")]
+position = Vector2(962, -97)
+
+[node name="Tree_27" parent="Trees" unique_id=1836222206 instance=ExtResource("6_tlrih")]
+position = Vector2(944, 280)
+
+[node name="Tree_12" parent="Trees" unique_id=1715290448 instance=ExtResource("6_tlrih")]
+position = Vector2(726, -658)
+
+[node name="Tree_31" parent="Trees" unique_id=406527127 instance=ExtResource("6_tlrih")]
+position = Vector2(-862, -353)
+
+[node name="Tree_3" parent="Trees" unique_id=1574563575 instance=ExtResource("7_4ibbc")]
+position = Vector2(261, 487)
+
+[node name="Tree_33" parent="Trees" unique_id=191987957 instance=ExtResource("7_4ibbc")]
+position = Vector2(-908, 723)
+
+[node name="Tree_17" parent="Trees" unique_id=1712262602 instance=ExtResource("7_4ibbc")]
+position = Vector2(831, -216)
+
+[node name="Tree_29" parent="Trees" unique_id=2060836167 instance=ExtResource("7_4ibbc")]
+position = Vector2(926, -235)
+scale = Vector2(-1, 1)
+
+[node name="Tree_30" parent="Trees" unique_id=297068990 instance=ExtResource("7_4ibbc")]
+position = Vector2(-918, 325)
+
+[node name="Tree_8" parent="Trees" unique_id=1364021427 instance=ExtResource("7_4ibbc")]
+position = Vector2(-599, -703)
+
+[node name="Tree_14" parent="Trees" unique_id=1104898914 instance=ExtResource("7_4ibbc")]
+position = Vector2(-190, -632)
+
+[node name="Tree_11" parent="Trees" unique_id=2084487196 instance=ExtResource("7_4ibbc")]
+position = Vector2(298, -641)
+
+[node name="Tree_9" parent="Trees" unique_id=1682620753 instance=ExtResource("7_4ibbc")]
+position = Vector2(-125, 501)
+
+[node name="Tree_48" parent="Trees" unique_id=959816728 instance=ExtResource("7_4ibbc")]
+position = Vector2(-478, 127)
+
+[node name="Tree_4" parent="Trees" unique_id=660394672 instance=ExtResource("8_rki3u")]
+position = Vector2(-524, -413)
+
+[node name="Tree_42" parent="Trees" unique_id=653434301 instance=ExtResource("8_rki3u")]
+position = Vector2(-524, -413)
+
+[node name="Tree_46" parent="Trees" unique_id=2141773296 instance=ExtResource("8_rki3u")]
+position = Vector2(-1025, -553)
+
+[node name="Tree_22" parent="Trees" unique_id=1716881572 instance=ExtResource("8_rki3u")]
+position = Vector2(-820, 209)
+
+[node name="Tree_15" parent="Trees" unique_id=883962370 instance=ExtResource("8_rki3u")]
+position = Vector2(-983, -113)
+
+[node name="Tree_16" parent="Trees" unique_id=1881291522 instance=ExtResource("8_rki3u")]
+position = Vector2(875, 742)
+
+[node name="Tree_49" parent="Trees" unique_id=882688679 instance=ExtResource("8_rki3u")]
+position = Vector2(444, 1020)
+
+[node name="Tree_5" parent="Trees" unique_id=190404182 instance=ExtResource("8_rki3u")]
+position = Vector2(632, 369)
+
+[node name="Tree_28" parent="Trees" unique_id=52560223 instance=ExtResource("8_rki3u")]
+position = Vector2(959, 70)
+scale = Vector2(-1, 1)
+
+[node name="Tree_47" parent="Trees" unique_id=2020083273 instance=ExtResource("8_rki3u")]
+position = Vector2(1026, -394)
+
+[node name="Tree_43" parent="Trees" unique_id=2134302731 instance=ExtResource("8_rki3u")]
+position = Vector2(126, -553)
+scale = Vector2(-1, 1)
+
+[node name="Tree_44" parent="Trees" unique_id=684031308 instance=ExtResource("8_rki3u")]
+position = Vector2(516, -660)
+scale = Vector2(-1, 1)
+
+[node name="Tree_45" parent="Trees" unique_id=1557811517 instance=ExtResource("8_rki3u")]
+position = Vector2(916, -545)
+scale = Vector2(-1, 1)
+
+[node name="Tree_10" parent="Trees" unique_id=1444919699 instance=ExtResource("8_rki3u")]
+position = Vector2(-411, 865)
+
+[node name="Tree_35" parent="Trees" unique_id=1731790951 instance=ExtResource("8_rki3u")]
+position = Vector2(246, 798)
+scale = Vector2(-1, 1)
+
+[node name="PineTree" parent="Trees" unique_id=1330674811 instance=ExtResource("9_fpe7f")]
+position = Vector2(-812, 779)
+
+[node name="PineTree4" parent="Trees" unique_id=347580676 instance=ExtResource("9_fpe7f")]
+position = Vector2(890, 469)
+
+[node name="PineTree5" parent="Trees" unique_id=1147457215 instance=ExtResource("9_fpe7f")]
+position = Vector2(867, 153)
+
+[node name="PineTree6" parent="Trees" unique_id=25978583 instance=ExtResource("9_fpe7f")]
+position = Vector2(355, -672)
+
+[node name="PineTree2" parent="Trees" unique_id=2046737903 instance=ExtResource("9_fpe7f")]
+position = Vector2(-270, 247)
+scale = Vector2(-1, 1)
+
+[node name="PineTree3" parent="Trees" unique_id=896815369 instance=ExtResource("9_fpe7f")]
+position = Vector2(579, -224)
+
+[node name="PineTree10" parent="Trees" unique_id=307884485 instance=ExtResource("9_fpe7f")]
+position = Vector2(-154, -388)
+
+[node name="PineTree7" parent="Trees" unique_id=218555084 instance=ExtResource("9_fpe7f")]
+position = Vector2(-915, -531)
+
+[node name="PineTree8" parent="Trees" unique_id=64188549 instance=ExtResource("9_fpe7f")]
+position = Vector2(-906, 519)
+
+[node name="PineTree9" parent="Trees" unique_id=1625183477 instance=ExtResource("9_fpe7f")]
+position = Vector2(406, 725)

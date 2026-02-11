@@ -13,7 +13,8 @@ func save_settings() -> void:
 			"controls" = GlobalInputMap.Player_Controls_Selected[0],
 			"language" = GameSettings.language,
 			"dogColor" = GlobalInputMap.player_colors[0].to_html(),
-			"hat" = GlobalInputMap.Player_Hats_Selected[0]
+			"hat" = GlobalInputMap.Player_Hats_Selected[0],
+			"times_crashed" = GameSettings.times_crashed,
 			} 
 			
 	saveFile.store_line(JSON.stringify(saveDict))
@@ -89,6 +90,8 @@ func load_settings() -> bool:
 		else: 
 			GlobalInputMap.Player_Hats_Selected[0] = "NONE"
 			
+		if node_data.has("times_crashed"):
+			GameSettings.times_crashed = node_data["times_crashed"]
 			
 	if GameSettings.language == "automatic":
 		var preferred_language = OS.get_locale_language()

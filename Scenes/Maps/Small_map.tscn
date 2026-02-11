@@ -38,16 +38,16 @@ script = ExtResource("3_5p3d3")
 [node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=1590717433]
 
 [node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1698926073]
-position = Vector2(-524, 420)
+position = Vector2(-531, 326)
 
 [node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1714412874]
 position = Vector2(-487, 201)
 
 [node name="Node2D3" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1713189383]
-position = Vector2(-380, 496)
+position = Vector2(-353, 513)
 
 [node name="Node2D4" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=902470244]
-position = Vector2(-800, 308)
+position = Vector2(-825, 400)
 
 [node name="Node2D5" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=866183658]
 position = Vector2(-798, 160)
@@ -68,16 +68,16 @@ position = Vector2(-944, 285)
 position = Vector2(-302, 228)
 
 [node name="Node2D11" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1699805684]
-position = Vector2(-1066, 388)
+position = Vector2(-1115, 304)
 
 [node name="Node2D12" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1062136815]
-position = Vector2(-247, 312)
+position = Vector2(-282, 428)
 
 [node name="Node2D13" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=728653590]
-position = Vector2(-248, 244)
+position = Vector2(-1096, 473)
 
 [node name="Node2D14" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1934728521]
-position = Vector2(-697, 133)
+position = Vector2(-568, 503)
 
 [node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=1239450725]
 position = Vector2(-1074, 173)

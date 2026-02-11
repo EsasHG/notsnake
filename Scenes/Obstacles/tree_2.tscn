@@ -3,15 +3,18 @@
 [ext_resource type="Texture2D" uid="uid://f3n5ljssuck6" path="res://Assets/Obstacles/obstacles/tree_2.png" id="1_m1tg0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0px40"]
-radius = 92.5
-height = 199.0
+radius = 23.0
+height = 56.0
 
 [node name="Tree_2" type="Area2D" unique_id=1773030208 groups=["Dangers"]]
+z_index = 2
+y_sort_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1087669510]
-position = Vector2(5, 16)
+position = Vector2(9, -27)
 shape = SubResource("CapsuleShape2D_0px40")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1733934963]
-position = Vector2(-4, -3)
+y_sort_enabled = true
+position = Vector2(-4, -117)
 texture = ExtResource("1_m1tg0")

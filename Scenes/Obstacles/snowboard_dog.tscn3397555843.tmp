@@ -10,7 +10,7 @@ size = Vector2(66.5, 48)
 
 [node name="SnowboardDog" type="Area2D" unique_id=99716063 groups=["Dangers"]]
 script = ExtResource("1_v3dyd")
-distThreshold = 350
+flip_time = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=787216436]
 position = Vector2(-4.25, -21)
@@ -24,8 +24,6 @@ bus = &"SFX"
 [node name="SnowboardSound" type="AudioStreamPlayer2D" parent="." unique_id=1410708392]
 stream = ExtResource("3_aiqs7")
 autoplay = true
-max_distance = 1500.0
-attenuation = 1.5157169
 bus = &"SFX"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1456218780]
