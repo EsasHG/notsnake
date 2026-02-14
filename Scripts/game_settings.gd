@@ -40,11 +40,11 @@ var billingManager : BillingManager = null
 var player_spawners : Array[Node]
 
 var players : Array[PlayerDog]
-enum ViewportMode {PORTRAIT, LANDSCAPE}
-var viewMode:ViewportMode = ViewportMode.LANDSCAPE
+enum VIEWPORT_MODE {PORTRAIT, LANDSCAPE}
+var viewport_mode:VIEWPORT_MODE = VIEWPORT_MODE.LANDSCAPE
 
 var currentMap :Map
-var highScores = {"Field":0, "Park": 0, "Square": 0, "Small":0, "Forest":0}
+var highScores = {"Field":0, "Park": 0, "Square": 0, "Small":0, "Forest":0, "Winter":0}
 var sfxVol = linear_to_db(0.8)
 var musicVol = linear_to_db(0.8)
 var musicMuted : bool = false
@@ -91,6 +91,7 @@ func _ready() -> void:
 		)
 	on_somethingUnlocked.connect(_on_something_unlocked)
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
+	_on_viewport_size_changed()
 	call_deferred("_do_deferred_setup")	
 	game_timer.autostart = false
 	game_timer.one_shot = true
@@ -262,16 +263,16 @@ func game_over():
 	
 	SaveManager.save_settings() ## Doing this so times_crashed gets saved.
 	
-	var ui : GameOverScreen = null
+	var game_over_screen : GameOverScreen = null
 	if game_mode == GAME_MODE.SINGLE_PLAYER:
-		ui = GAME_OVER_SCREEN.instantiate()
+		game_over_screen = GAME_OVER_SCREEN.instantiate()
 	else:
-		ui = ARENA_GAME_OVER_SCREEN.instantiate()
+		game_over_screen = ARENA_GAME_OVER_SCREEN.instantiate()
 		
-	mainGuiNode.add_child(ui)
+	mainGuiNode.add_child(game_over_screen)
 	
 	Logging.logMessage("Game over!")
-	ui.game_over(players)
+	game_over_screen.game_over(players)
 	players.clear()
 	
 	for s in player_spawners:
@@ -305,13 +306,13 @@ func game_over():
 				get_tree().create_timer(0.6).timeout.connect(func(): 
 					adManager.show_interstitial_ad()
 					)
-				get_tree().create_timer(0.75).timeout.connect(ui.show_buttons) # i migth want different wait times in the future
+				get_tree().create_timer(0.75).timeout.connect(game_over_screen.check_unlocks) # i migth want different wait times in the future
 			else: 
-				get_tree().create_timer(0.3).timeout.connect(ui.show_buttons)
+				get_tree().create_timer(0.3).timeout.connect(game_over_screen.check_unlocks)
 		else: 
-			get_tree().create_timer(0.3).timeout.connect(ui.show_buttons)
+			get_tree().create_timer(0.3).timeout.connect(game_over_screen.check_unlocks)
 	else:
-		get_tree().create_timer(0.3).timeout.connect(ui.show_buttons)
+		get_tree().create_timer(0.3).timeout.connect(game_over_screen.check_unlocks)
 		
 	currentScore = 0
 
@@ -405,10 +406,10 @@ func pause_game():
 func _on_viewport_size_changed():
 	var viewportSize:Vector2 = get_viewport().size
 	Logging.logMessage("Viewport size: " + str(get_viewport().size))
-	if viewportSize.x > viewportSize.y:
-		viewMode = ViewportMode.LANDSCAPE
+	if viewportSize.x >= viewportSize.y:
+		viewport_mode = VIEWPORT_MODE.LANDSCAPE
 	else:
-		viewMode = ViewportMode.PORTRAIT
+		viewport_mode = VIEWPORT_MODE.PORTRAIT
 		
 		
 func player_lost(player : PlayerDog) -> void:

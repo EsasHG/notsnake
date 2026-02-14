@@ -3,8 +3,8 @@ extends Control
 class_name  SceneTransition
 @onready var panel: Panel = $Panel
 @onready var start_x: float = panel.position.x
-@onready var dog_control: Control = $Panel/Control
-@onready var dog: PlayerDog = $Panel/Control/BubbleDog
+@onready var dog_control: Control = $Panel/AdLayoutContainer/Control
+@onready var dog: PlayerDog = $Panel/AdLayoutContainer/Control/BubbleDog
 
 @export var skip_transition_in:bool = false
 var transitionTime: float = 0.1

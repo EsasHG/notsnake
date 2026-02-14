@@ -12,3 +12,4 @@ func _on_area_entered(area: Area2D) -> void:
 		GlobalInputMap.Player_Hats_Selected[0] = "SANTA"
 		GameSettings.on_dogHatChanged.emit("SANTA")
 		queue_free()
+pass # Replace with function body.

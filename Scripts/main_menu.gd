@@ -17,13 +17,13 @@ const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 @onready var locked_message_container: PanelContainer = $AdLayoutContainer/LockedMessageContainer
 @onready var locked_message_description: Label = $AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer/DescriptionLabel
 
-
 @export var buttonTheme:Theme
+## TODO: Use global input map instead of this...
 @export var levels : Array[Map]
 
 
 func _ready() -> void:
-	UINavigator.open.call_deferred(buttons,false)
+	UINavigator.open.call_deferred(buttons,false, true)
 	
 	if OS.has_feature("mobile"):
 		quit_button.visible = false;

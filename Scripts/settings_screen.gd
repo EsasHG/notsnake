@@ -39,6 +39,7 @@ func _ready() -> void:
 			
 	GameSettings.on_dogColorChanged.connect(_on_color_changed)
 	GameSettings.on_dogHatChanged.connect(_on_hat_changed)
+	UINavigator.add_callable.call_deferred(_on_back)
 
 
 func _on_music_mute_toggled(toggled_on: bool) -> void:
@@ -68,11 +69,9 @@ func _on_visibility_changed():
 		googlePlayButtonsContainer.visible = GameSettings.userAuthenticated
 
 
-func _on_back_pressed() -> void:
+func _on_back() -> void:
 	if _changes_made:
 		SaveManager.save_settings()
-	UINavigator.back()
-	pass # Replace with function body.
 
 
 func _on_language_selector_item_selected(index: int) -> void:

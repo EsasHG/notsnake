@@ -113,7 +113,7 @@ texture = ExtResource("6_dgp11")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AdLayoutContainer" type="VBoxContainer" parent="." unique_id=742566856]
+[node name="UnlocksContainer" type="VBoxContainer" parent="." unique_id=742566856]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -123,14 +123,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_htq65")
 
-[node name="OuterPanelContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1354738231]
+[node name="OuterPanelContainer" type="PanelContainer" parent="UnlocksContainer" unique_id=1354738231]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("2_3eorv")
 theme_override_styles/panel = SubResource("StyleBoxFlat_nfl8x")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/OuterPanelContainer" unique_id=1217507080]
+[node name="ScrollContainer" type="ScrollContainer" parent="UnlocksContainer/OuterPanelContainer" unique_id=1217507080]
 custom_minimum_size = Vector2(610, 400)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -139,18 +139,46 @@ theme = ExtResource("2_3eorv")
 horizontal_scroll_mode = 0
 script = ExtResource("7_j3nvf")
 
-[node name="PanelContainer" type="PanelContainer" parent="AdLayoutContainer/OuterPanelContainer/ScrollContainer" unique_id=246446738]
+[node name="InnerContainer" type="PanelContainer" parent="UnlocksContainer/OuterPanelContainer/ScrollContainer" unique_id=246446738]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
 theme = SubResource("Theme_x8dhy")
+theme_type_variation = &"InnerContainer"
 
-[node name="CloseButton" parent="AdLayoutContainer/OuterPanelContainer" unique_id=998217422 instance=ExtResource("8_dgp11")]
+[node name="VBoxContainer" type="VBoxContainer" parent="UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer" unique_id=854756816]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=562144559]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "LEVEL_UNLOCKED"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1084489137]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand_mode = 1
+
+[node name="DescriptionLabel" type="Label" parent="UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=658962811]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+text = "LEVEL_UNLOCKED_DESCRIPTION"
+horizontal_alignment = 1
+
+[node name="CloseButton" parent="UnlocksContainer/OuterPanelContainer" unique_id=998217422 instance=ExtResource("8_dgp11")]
 layout_mode = 2
 
-[node name="ButtonContainer" type="HBoxContainer" parent="AdLayoutContainer" unique_id=2069789025]
+[node name="ButtonContainer" type="HBoxContainer" parent="UnlocksContainer" unique_id=2069789025]
 layout_mode = 2
 alignment = 1
 
-[node name="AdPanel" type="Panel" parent="AdLayoutContainer" unique_id=800514159]
+[node name="AdPanel" type="Panel" parent="UnlocksContainer" unique_id=800514159]
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 size_flags_vertical = 8

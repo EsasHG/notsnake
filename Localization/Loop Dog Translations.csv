@@ -44,10 +44,11 @@ BILLING_PENDING_TITLE,Waiting for purchase to finish...,Venter på at betalingen
 BILLING_PENDING_DESCRIPTION,"Do you need to do something in another app? 
 You can close this and keep playing the game in the meantime","Trenger du å gjøre noe i et annet program?
 Du kan lukke denne meldingen og fortsette å spille mens du venter."
-SELECT_COLOR,Change your dog's color!,Endre fargen til hunden din! 
-CHANGE_DOG,Change dog,Bytt Hund
+SELECT_COLOR,Choose color,Velg farge
+CHANGE_DOG,Change dog,Bytt hund
 SKIN_SELECTION_BACK,Looks great!,Ser bra ut!
 CHANGE_HAT,Change hat,Bytt hatt
+SELECT_HAT,Choose a hat,Velg en hatt
 HAT_LOCKED,You haven't unlocked this hat yet,Du har ikke låst opp denne hatten enda
 MAP_LOCKED,You haven't unlocked this level yet,Du har ikke låst opp denne banen enda
 RED,Red,Rød
@@ -58,7 +59,7 @@ WINTER_UNLOCK_CONDITION,Get at least 20 points on Park to unlock this level,Få 
 SQUARE_UNLOCK_CONDITION,Get at least 20 points on Winter to unlock this level,Få minst 20 poeng på Vinterland for å låse opp denne banen
 SMALL_UNLOCK_CONDITION,Get at least 20 points on Square to unlock this level,Få minst 20 poeng på Torget for å låse opp denne banen
 FOREST_UNLOCK_CONDITION,Get at least 20 points on Small to unlock this level,Få minst 20 poeng på Lillebanen for å låse opp denne banen
-SANTA_UNLOCK_CONDITION,Find the hidden present on Winter to unlock this hat,Finn den gjemte gaven i Vinterland foir å låse opp denne hatten
+SANTA_UNLOCK_CONDITION,Find the hidden present on Winter to unlock this hat,Finn den gjemte gaven i Vinterland for å låse opp denne hatten
 COWBOY_UNLOCK_CONDITION,Catch your own tail to unlock this hat,Fang din egen hale for å låse opp denne hatten
 HELMET_UNLOCK_CONDITION,Crash into something 100 times to unlock this hat,Treff noe 100 ganger for å låse opp denne hatten
 DEBUG_SETTINGS,Debug settings,Debug settings
@@ -66,3 +67,8 @@ UNLOCK_MAPS,Unlock all maps,Lås opp baner
 UNLOCK_HATS,Unlock all hats,Lås opp alle hatter
 LOCK_MAPS,Lock maps,Lås baner
 LOCK_HATS,Lock hats,Lås hatter
+LEVEL_SELECT,Select level,Velg bane
+LEVEL_UNLOCKED_TITLE,New level!,Ny bane!
+HAT_UNLOCKED_TITLE,New hat!,Ny hatt!
+LEVEL_UNLOCKED_DESCRIPTION,is now avaliable!,er nå tilgjengelig!
+HAT_UNLOCKED_DESCRIPTION,is now avaliable!,er nå tilgjengelig!

@@ -1,16 +1,14 @@
-extends PanelContainer
-@onready var color_picker_button: ColorPickerButton = $MainScreen/VBoxContainer/HBoxContainer/ColorPickerButton
-@onready var _head: AnimatedSprite2D = $MainScreen/VBoxContainer/Control/Control/Head
-@onready var _legs: AnimatedSprite2D = $MainScreen/VBoxContainer/Control/Control/Head/Legs
-@onready var _hat: Sprite2D = $MainScreen/VBoxContainer/Control/Control/Head/Hat
-@onready var back: Button = $MainScreen/VBoxContainer/Back
-@onready var hat_select_screen: Control = $HatSelectScreen
-@onready var hat_select_back: Button = $HatSelectScreen/VBoxContainer/ButtonContainer/Back
-@onready var hat_buttons: HFlowContainer = $HatSelectScreen/VBoxContainer/PanelContainer/HatButtons
-@onready var main_screen_container: PanelContainer = $MainScreen
-@onready var locked_message_container: PanelContainer = $LockedMessageContainer
-@onready var text_edit: TextEdit = $MainScreen/VBoxContainer/HexEdit/TextEdit
-@onready var locked_message_description_label: Label = $LockedMessageContainer/VBoxContainer/DescriptionLabel
+extends Control
+@onready var main_screen_container: PanelContainer = $AdLayoutContainer/MainScreen
+@onready var color_picker_button: ColorPickerButton = $AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/ColorPickerButton
+@onready var text_edit: TextEdit = $AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HexEdit/TextEdit
+@onready var _head: AnimatedSprite2D = $AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Control/Control/Head
+@onready var _legs: AnimatedSprite2D = $AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Control/Control/Head/Legs
+@onready var _hat: Sprite2D = $AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Control/Control/Head/Hat
+@onready var hat_select_screen: PanelContainer = $AdLayoutContainer/HatSelectContainer
+@onready var hat_buttons: HFlowContainer = $AdLayoutContainer/HatSelectContainer/ScrollContainer/InnerContainer/VBoxContainer/HatButtons
+@onready var locked_message_container: PanelContainer = $AdLayoutContainer/LockedMessageContainer
+@onready var locked_message_description_label: Label = $AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer/DescriptionLabel
 
 const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 const LEVEL_SELECT_THEME = preload("uid://dayndqrmaoq3i")
@@ -22,9 +20,14 @@ func _ready() -> void:
 	_current_hat = GlobalInputMap.Player_Hats_Selected[0]
 	_hat.texture = GlobalInputMap.Player_Hats[_current_hat].player_hat
 	update_visuals(GlobalInputMap.player_colors[0])
-	back.grab_focus(false)
 	
 	locked_message_container.visible = false
+
+	UINavigator.open.call_deferred(main_screen_container,false, false, _on_main_screen_back)
+	hat_select_screen.visible = false
+	hat_select_screen.visibility_changed.connect(_on_child_visibility_changed)
+	locked_message_container.visibility_changed.connect(_on_child_visibility_changed)
+	main_screen_container.visibility_changed.connect(_on_child_visibility_changed)
 	
 	var keys = GlobalInputMap.Player_Hats.keys()
 	keys.sort_custom(func(a,b): 
@@ -41,7 +44,6 @@ func _ready() -> void:
 		button.expand_icon = true
 		button.custom_minimum_size = Vector2(180,180)
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		button.focus_neighbor_bottom = hat_select_back.get_path()
 		hat_buttons.add_child(button)
 		
 		if !hat_info.unlocked: ##TODO: add actual logic here
@@ -51,32 +53,21 @@ func _ready() -> void:
 		else:
 			button.pressed.connect(_on_hat_selected.bind(key))
 	hat_select_screen.visible = false
-	UINavigator.open.call_deferred(main_screen_container,false)
-	
+
+
 func update_visuals(new_color:Color) -> void:
 	color_picker_button.color = new_color
 	_head.self_modulate = new_color
 	_legs.self_modulate = new_color
 	text_edit.text = new_color.to_html()
 	
+func _on_main_screen_back() -> void:
+	_confirm_choices()
+	
 	
 func _on_color_changed(color:Color) -> void:
 	update_visuals(color)
 	
-
-func _on_back_pressed() -> void:
-	if _head.self_modulate != GlobalInputMap.player_colors[0]:
-		var new_color: Color = _head.self_modulate
-		GlobalInputMap.player_colors.clear()
-		GlobalInputMap.player_colors.append(new_color)
-		GlobalInputMap.Player_Color_Selected[0] = 0
-		GameSettings.on_dogColorChanged.emit(new_color)
-		
-	if _current_hat != GlobalInputMap.Player_Hats_Selected[0]:
-		GlobalInputMap.Player_Hats_Selected[0] = _current_hat
-		GameSettings.on_dogHatChanged.emit(_current_hat)
-	UINavigator.back()
-
 
 func _on_hat_selected(_hat_id:String) -> void:
 	_current_hat = _hat_id
@@ -86,7 +77,7 @@ func _on_hat_selected(_hat_id:String) -> void:
 
 func _on_locked_hat_pressed(_hat_id:String) -> void:
 	locked_message_description_label.text = tr(_hat_id + "_UNLOCK_CONDITION")
-	UINavigator.open(locked_message_container, false)
+	UINavigator.open(locked_message_container)
 
 
 func _on_change_hat_pressed() -> void:
@@ -118,4 +109,20 @@ func _on_text_edit_text_changed() -> void:
 	_head.self_modulate = new_color
 	_legs.self_modulate = new_color
 
+func _on_child_visibility_changed() -> void:
+	if !main_screen_container.visible and !hat_select_screen.visible and !locked_message_container.visible:
+		pass #_confirm_choices()
+		
 	
+func _confirm_choices() -> void:
+	if _head.self_modulate != GlobalInputMap.player_colors[0]:
+		var new_color: Color = _head.self_modulate
+		GlobalInputMap.player_colors.clear()
+		GlobalInputMap.player_colors.append(new_color)
+		GlobalInputMap.Player_Color_Selected[0] = 0
+		GameSettings.on_dogColorChanged.emit(new_color)
+		
+	if _current_hat != GlobalInputMap.Player_Hats_Selected[0]:
+		GlobalInputMap.Player_Hats_Selected[0] = _current_hat
+		GameSettings.on_dogHatChanged.emit(_current_hat)
+	UINavigator.back()

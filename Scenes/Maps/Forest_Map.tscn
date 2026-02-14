@@ -67,7 +67,6 @@ position = Vector2(-1075, 0)
 shape = SubResource("RectangleShape2D_xehlq")
 
 [node name="PickupSpawner" type="Node2D" parent="." unique_id=1740783979]
-visible = false
 script = ExtResource("4_looaj")
 
 [node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=1516816558]

@@ -182,6 +182,9 @@ expand_margin_bottom = 2.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fpaq5"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c0c0i"]
+content_margin_top = 50.0
+
 [sub_resource type="DPITexture" id="DPITexture_4dyya"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\"><path fill=\"none\" stroke=\"#b2b2b2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-opacity=\".85\" stroke-width=\"2\" d=\"m2 4 4 4 4-4\"/></svg>
 "
@@ -304,7 +307,6 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_34ovf"]
-content_margin_top = 50.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxpfo"]
 content_margin_left = 4.0
@@ -460,6 +462,8 @@ HeaderMedium/font_sizes/font_size = 30
 InnerContainer/base_type = &"PanelContainer"
 InnerContainer/styles/panel = SubResource("StyleBoxEmpty_fpaq5")
 Label/constants/outline_size = 6
+LowerScrollContainer/base_type = &"ScrollContainer"
+LowerScrollContainer/styles/panel = SubResource("StyleBoxEmpty_c0c0i")
 OptionButton/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 OptionButton/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 OptionButton/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
@@ -471,7 +475,7 @@ OptionButton/constants/arrow_margin = 4
 OptionButton/constants/h_separation = 4
 OptionButton/constants/modulate_arrow = 0
 OptionButton/constants/outline_size = 0
-OptionButton/font_sizes/font_size = 22
+OptionButton/font_sizes/font_size = 30
 OptionButton/fonts/font = ExtResource("1_sw1jp")
 OptionButton/icons/arrow = SubResource("DPITexture_4dyya")
 OptionButton/styles/disabled = SubResource("StyleBoxFlat_x48sq")
@@ -484,6 +488,7 @@ OptionButton/styles/normal_mirrored = SubResource("StyleBoxFlat_og6c5")
 OptionButton/styles/pressed = SubResource("StyleBoxFlat_ednbb")
 OptionButton/styles/pressed_mirrored = SubResource("StyleBoxFlat_np3kh")
 PanelContainer/styles/panel = ExtResource("3_fpaq5")
+PopupMenu/font_sizes/font_size = 30
 ScrollContainer/colors/scroll_hint_horizontal_color = Color(0, 0, 0, 1)
 ScrollContainer/colors/scroll_hint_vertical_color = Color(0, 0, 0, 1)
 ScrollContainer/icons/scroll_hint_horizontal = null

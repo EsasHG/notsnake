@@ -8,7 +8,7 @@ func _ready() -> void:
 	
 
 func _on_game_begin() -> void:
-	UINavigator.open(self)
+	UINavigator.open(self, false, true)
 
 
 func _on_game_over() -> void:

@@ -22,6 +22,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="AdLayoutContainer" type="VBoxContainer" unique_id=742566856]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -114,15 +115,6 @@ theme = ExtResource("1_5j8qy")
 text = "LOCK_HATS"
 script = ExtResource("3_5j8qy")
 
-[node name="Back" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=752013187]
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("1_5j8qy")
-theme_override_styles/normal = ExtResource("4_ikqh6")
-text = "BACK"
-script = ExtResource("3_5j8qy")
-
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("7_ikqh6")]
 layout_mode = 2
 
@@ -137,4 +129,3 @@ size_flags_vertical = 8
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/LockMaps" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_maps_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/UnlockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_hats_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/LockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_hats_pressed"]
-[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/Back" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_back_pressed"]

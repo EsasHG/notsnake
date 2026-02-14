@@ -12,21 +12,34 @@ var Player_Placement: Dictionary[int,int] = {}
 var Maps: Dictionary = {
 	"FIELD": {
 		unlocked = true,
+		scene = load("uid://bmtfcin4sha1p"),
+		icon = load("uid://doqp1jkdlm1dk"),
+
 	},
 	"PARK": {
 		unlocked = false,
+		scene = load("uid://tcsre6epm8ss"),
+		icon = load("uid://csxqseoegqggj"),
 	},	
 	"WINTER": {
 		unlocked = false,
+		scene = load("uid://c614biqieqsc1"),
+		icon = load("uid://cacud1mwfip70"),
 	},
 	"SQUARE": {
 		unlocked = false,
+		scene = load("uid://d0lv3j2ywaltm"),
+		icon = load("uid://slufqb1sxm5c"),
 	},
 	"SMALL": {
 		unlocked = false,
+		scene = load("uid://dw8vjc4lovnfv"),
+		icon = load("uid://8hode20lka2d"),
 	},
 	"FOREST": {
 		unlocked = false,
+		scene = load("uid://dxkydv08bbemt"),
+		icon = load("uid://bhh584wkrqnpi"),
 	},
 }
 var Player_Hats: Dictionary = {
@@ -36,23 +49,23 @@ var Player_Hats: Dictionary = {
 		unlocked = true,
 	},
 	"SANTA": {
-		player_hat = preload("uid://ctddhm73vg7xu"),
-		icon_hat = preload("uid://cxm52e0c581yk"),
+		player_hat = load("uid://ctddhm73vg7xu"),
+		icon_hat = load("uid://cxm52e0c581yk"),
 		unlocked = false,
 	},
 	"COWBOY": {
-		player_hat = preload("uid://bto27x7qmr5d"),
-		icon_hat = preload("uid://baisbs5c35f4g"),
+		player_hat = load("uid://bto27x7qmr5d"),
+		icon_hat = load("uid://baisbs5c35f4g"),
 		unlocked = false,
 	},
 	"TEST": {
-		player_hat = preload("uid://b3wm7tpo1omk6"),
-		icon_hat = preload("uid://dvj0pjlmvqwve"),
+		player_hat = load("uid://b3wm7tpo1omk6"),
+		icon_hat = load("uid://dvj0pjlmvqwve"),
 		unlocked = true,
 	},
 	"HELMET": {
-		player_hat = preload("uid://bcsu113pmwt3r"),
-		icon_hat = preload("uid://bmdnyc2fq6qg7"),
+		player_hat = load("uid://bcsu113pmwt3r"),
+		icon_hat = load("uid://bmdnyc2fq6qg7"),
 		unlocked = false,
 	},
 }

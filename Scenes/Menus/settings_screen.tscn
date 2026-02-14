@@ -27,7 +27,7 @@ corner_radius_bottom_left = 3
 corner_detail = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2b6r5"]
-content_margin_top = 40.0
+content_margin_top = 50.0
 content_margin_bottom = 10.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_umxxc"]
@@ -45,6 +45,7 @@ texture = ExtResource("11_whg11")
 [sub_resource type="ButtonGroup" id="ButtonGroup_7smr3"]
 
 [node name="AdLayoutContainer" type="VBoxContainer" unique_id=742566856]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -164,12 +165,13 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 2
 theme = ExtResource("1_nfl8x")
-theme_override_font_sizes/font_size = 26
+theme_type_variation = &"HeaderMedium"
 text = "LANGUAGE"
 
 [node name="LanguageSelector" type="OptionButton" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Controls/VBoxContainer" unique_id=812837733]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 theme = ExtResource("1_nfl8x")
 selected = 0
 allow_reselect = true
@@ -225,7 +227,6 @@ script = ExtResource("5_64y2j")
 layout_mode = 2
 
 [node name="AdPanel" type="Panel" parent="." unique_id=800514159]
-visible = false
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 size_flags_vertical = 8
