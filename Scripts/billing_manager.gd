@@ -2,11 +2,11 @@ extends Control
 
 class_name BillingManager
 
-@onready var ad_removal_popup: Panel = $Ad_removal_popup
-@onready var purchased_popup: Panel = $Purchased_popup
-@onready var error_popup: Panel = $Error_popup
+@onready var ad_removal_popup: PanelContainer = $Ad_removal_popup
+@onready var purchased_popup: PanelContainer = $Purchased_popup
+@onready var error_popup: PanelContainer = $Error_popup
 @onready var error_description_label: Label = $Error_popup/VBoxContainer/DescriptionLabel
-@onready var pending_popup: Panel = $Pending_popup
+@onready var pending_popup: PanelContainer = $Pending_popup
 @onready var billing_client:BillingClient = BillingClient.new()
 
 ##For testing purposes only
@@ -58,7 +58,7 @@ func update_popup():
 		$Ad_removal_popup/VBoxContainer/TitleLabel.text = remove_ads_product.name
 		$Ad_removal_popup/VBoxContainer/DescriptionLabel.text = remove_ads_product.description
 		$Ad_removal_popup/VBoxContainer/PriceLabel.text = currency + " " + price
-		ad_removal_popup.visible = true
+		#ad_removal_popup.visible = true
 
 func _on_connected():
 	Logging.logMessage("Connected to billing!")

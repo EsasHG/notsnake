@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Map" format=3 uid="uid://oa287witflah"]
 
 [ext_resource type="PackedScene" uid="uid://dxkydv08bbemt" path="res://Scenes/Maps/Forest_Map.tscn" id="1_h3l7p"]
-[ext_resource type="Texture2D" uid="uid://b4572rmxqqsak" path="res://Assets/Icons/Forest_Map.png" id="2_0q2ni"]
+[ext_resource type="Texture2D" uid="uid://bhh584wkrqnpi" path="res://Assets/Icons/Forest_Map_good.png" id="2_0q2ni"]
 [ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="3_6djsl"]
 
 [resource]

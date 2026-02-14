@@ -2,48 +2,39 @@
 
 [ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
-[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_f6ncm"]
 [ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="8_5egv6"]
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="8_vtepg"]
 [ext_resource type="Resource" uid="uid://csf486hunk2iy" path="res://Scenes/Maps/Winter.tres" id="9_0xbgx"]
 [ext_resource type="Resource" uid="uid://cibsfp4rd5p5b" path="res://Scenes/Maps/Field.tres" id="9_vtepg"]
 [ext_resource type="Resource" uid="uid://ce2xllrb7yjod" path="res://Scenes/Maps/Park.tres" id="10_8dnnj"]
 [ext_resource type="Resource" uid="uid://br6kp3c2pxqet" path="res://Scenes/Maps/Square.tres" id="11_m3bi6"]
-[ext_resource type="Texture2D" uid="uid://dmooo72cslhph" path="res://Assets/UI/Google Branding/android_dark_rd_SI@1x.png" id="12_6t1rs"]
+[ext_resource type="Texture2D" uid="uid://dkyh4xej7v1d7" path="res://Assets/UI/Google Branding/android_dark_rd_SI@2x.png" id="11_s0gno"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="12_12hqc"]
 [ext_resource type="Resource" uid="uid://c786inhs2hhtg" path="res://Scenes/Maps/Small.tres" id="12_wyh8j"]
 [ext_resource type="Resource" uid="uid://oa287witflah" path="res://Scenes/Maps/Forest.tres" id="13_ujyyl"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="13_vtepg"]
-[ext_resource type="PackedScene" uid="uid://df6v31n3ooicl" path="res://Scenes/Menus/back_button.tscn" id="15_0xbgx"]
+[ext_resource type="Script" uid="uid://1dr1kq5ex2bw" path="res://Scenes/Menus/ad_layout.gd" id="15_8bdjp"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="15_8dws6"]
+[ext_resource type="PackedScene" uid="uid://dve3ihhfdxc3w" path="res://Scenes/Menus/close_button.tscn" id="17_fx838"]
+[ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="18_0rh2w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhxw7"]
-bg_color = Color(0, 0, 0, 0.270588)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfl8x"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0, 0, 0, 0.270588)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xbgx"]
-content_margin_left = 30.0
-content_margin_top = 50.0
-content_margin_right = 30.0
-content_margin_bottom = 50.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
-expand_margin_left = 10.0
-expand_margin_top = 10.0
-expand_margin_right = 10.0
-expand_margin_bottom = 10.0
 
-[node name="MainMenu" type="Control" unique_id=1644317146]
+[node name="MainMenu" type="Control" unique_id=1644317146 node_paths=PackedStringArray("sign_in_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,8 +43,25 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_jrsic")
+sign_in_button = NodePath("Sign In")
 buttonTheme = ExtResource("8_vtepg")
 levels = Array[ExtResource("8_5egv6")]([ExtResource("9_vtepg"), ExtResource("10_8dnnj"), ExtResource("9_0xbgx"), ExtResource("11_m3bi6"), ExtResource("12_wyh8j"), ExtResource("13_ujyyl")])
+
+[node name="Sign In" type="Button" parent="." unique_id=458228861]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -215.0
+offset_top = 223.0
+offset_bottom = 293.0
+grow_horizontal = 0
+theme = ExtResource("15_8dws6")
+theme_override_font_sizes/font_size = 20
+icon = ExtResource("11_s0gno")
+flat = true
+script = ExtResource("13_vtepg")
 
 [node name="Logo" type="TextureRect" parent="." unique_id=307307508]
 layout_mode = 1
@@ -61,9 +69,8 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -225.0
-offset_top = 150.0
 offset_right = 225.0
-offset_bottom = 450.0
+offset_bottom = 300.0
 grow_horizontal = 2
 mouse_filter = 2
 texture = ExtResource("2_5vvlb")
@@ -91,7 +98,119 @@ mouse_filter = 2
 texture = ExtResource("12_12hqc")
 expand_mode = 1
 
-[node name="MainButtons" type="HBoxContainer" parent="." unique_id=1196597555]
+[node name="AdLayoutContainer" type="VBoxContainer" parent="." unique_id=742566856]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_8bdjp")
+
+[node name="LevelSelectContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1354738231]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("15_8dws6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nfl8x")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/LevelSelectContainer" unique_id=1217507080]
+custom_minimum_size = Vector2(610, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("15_8dws6")
+horizontal_scroll_mode = 0
+script = ExtResource("18_0rh2w")
+
+[node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/LevelSelectContainer/ScrollContainer" unique_id=83918249]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"InnerContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/LevelSelectContainer/ScrollContainer/InnerContainer" unique_id=1563362695]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="AdLayoutContainer/LevelSelectContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=387330869]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+text = "LEVEL_SELECT"
+horizontal_alignment = 1
+
+[node name="LevelButtons" type="HFlowContainer" parent="AdLayoutContainer/LevelSelectContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=92469686]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme = ExtResource("8_vtepg")
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="CloseButton" parent="AdLayoutContainer/LevelSelectContainer" unique_id=1482271093 instance=ExtResource("17_fx838")]
+layout_mode = 2
+
+[node name="LockedMessageContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1459852420]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("15_8dws6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nfl8x")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/LockedMessageContainer" unique_id=1208609797]
+custom_minimum_size = Vector2(610, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("15_8dws6")
+horizontal_scroll_mode = 0
+script = ExtResource("18_0rh2w")
+
+[node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer" unique_id=1385008297]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"InnerContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer" unique_id=2036565710]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=438673340]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("15_8dws6")
+text = "MAP_LOCKED"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=259746839]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("15_8dws6")
+theme_override_font_sizes/font_size = 30
+text = "PARK_UNLOCK_CONDITION"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CloseButton" parent="AdLayoutContainer/LockedMessageContainer" unique_id=998217422 instance=ExtResource("17_fx838")]
+layout_mode = 2
+
+[node name="AdPanel" type="Panel" parent="AdLayoutContainer" unique_id=800514159]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"EmptyPanel"
+
+[node name="MainButtons" type="VBoxContainer" parent="." unique_id=880943489]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -99,133 +218,35 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -199.0
-offset_top = -214.0
+offset_top = -380.0
 offset_right = 199.0
-offset_bottom = -164.0
+offset_bottom = -159.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
-[node name="Sign In" type="Button" parent="MainButtons" unique_id=458228861]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme = ExtResource("3_f6ncm")
-theme_override_font_sizes/font_size = 20
-icon = ExtResource("12_6t1rs")
-flat = true
-script = ExtResource("13_vtepg")
-
 [node name="Start" type="Button" parent="MainButtons" unique_id=918679550]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("3_f6ncm")
+theme = ExtResource("15_8dws6")
 text = "START"
 script = ExtResource("13_vtepg")
 
 [node name="Settings" type="Button" parent="MainButtons" unique_id=65590118]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("3_f6ncm")
-theme_override_font_sizes/font_size = 19
+theme = ExtResource("15_8dws6")
 text = "SETTINGS"
 script = ExtResource("13_vtepg")
 
 [node name="Quit" type="Button" parent="MainButtons" unique_id=2066028076]
-visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("3_f6ncm")
+theme = ExtResource("15_8dws6")
 text = "QUIT"
 script = ExtResource("13_vtepg")
 
-[node name="LevelSelectScreen" type="Control" parent="." unique_id=1518533289]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelectScreen" unique_id=1789326947]
-layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -32.0
-offset_bottom = 32.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="LevelSelectScreen/VBoxContainer" unique_id=83918249]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_yhxw7")
-
-[node name="LevelButtons" type="HFlowContainer" parent="LevelSelectScreen/VBoxContainer/PanelContainer" unique_id=92469686]
-layout_mode = 2
-alignment = 1
-last_wrap_alignment = 2
-
-[node name="ButtonContainer" type="HBoxContainer" parent="LevelSelectScreen/VBoxContainer" unique_id=1783847020]
-layout_mode = 2
-mouse_filter = 2
-alignment = 1
-
-[node name="Back" parent="LevelSelectScreen/VBoxContainer/ButtonContainer" unique_id=80016652 instance=ExtResource("15_0xbgx")]
-layout_mode = 2
-
-[node name="LockedMessageContainer" type="PanelContainer" parent="." unique_id=1385008297]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -115.0
-offset_right = 250.0
-offset_bottom = 115.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_0xbgx")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LockedMessageContainer" unique_id=2036565710]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 15
-
-[node name="TitleLabel" type="Label" parent="LockedMessageContainer/VBoxContainer" unique_id=438673340]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("3_f6ncm")
-text = "MAP_LOCKED"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="DescriptionLabel" type="Label" parent="LockedMessageContainer/VBoxContainer" unique_id=259746839]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("3_f6ncm")
-theme_override_font_sizes/font_size = 25
-text = "PARK_UNLOCK_CONDITION"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="LockedMessageContainer/VBoxContainer" unique_id=881927826]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Back" parent="LockedMessageContainer/VBoxContainer/HBoxContainer" unique_id=7349764 instance=ExtResource("15_0xbgx")]
-layout_mode = 2
-
-[connection signal="pressed" from="MainButtons/Sign In" to="." method="_on_sign_in_pressed"]
+[connection signal="pressed" from="Sign In" to="." method="_on_sign_in_pressed"]
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MainButtons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_pressed"]

@@ -1,22 +1,9 @@
 [gd_scene format=3 uid="uid://di83hh7jce01j"]
 
 [ext_resource type="Script" uid="uid://so22cqtbwsq6" path="res://Scripts/billing_manager.gd" id="1_wqdxx"]
-[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_qogck"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qogck"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_mmd68"]
 
 [node name="BillingManager" type="Control" unique_id=925113656]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,37 +15,33 @@ size_flags_vertical = 6
 mouse_filter = 2
 script = ExtResource("1_wqdxx")
 
-[node name="Ad_removal_popup" type="Panel" parent="." unique_id=1517365989]
+[node name="Ad_removal_popup" type="PanelContainer" parent="." unique_id=1492161946]
 visible = false
 z_index = 2
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Ad_removal_popup" unique_id=924465060]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -93.5
-offset_top = -20.0
-offset_right = 93.5
-offset_bottom = 20.0
+offset_left = -266.0
+offset_top = -92.5
+offset_right = 266.0
+offset_bottom = 92.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_mmd68")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Ad_removal_popup" unique_id=924465060]
+layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="TitleLabel" type="Label" parent="Ad_removal_popup/VBoxContainer" unique_id=1173256860]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
+theme_type_variation = &"HeaderLarge"
 text = "AD_REMOVAL_TITLE"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -67,7 +50,8 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
+theme_type_variation = &"HeaderMedium"
 text = "AD_REMOVAL_DESCRIPTION"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -76,7 +60,7 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -87,47 +71,44 @@ size_flags_horizontal = 4
 [node name="Button_Yes" type="Button" parent="Ad_removal_popup/VBoxContainer/HBoxContainer" unique_id=193359577]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-theme = ExtResource("2_qogck")
+size_flags_horizontal = 4
+theme = ExtResource("2_mmd68")
 text = "AD_REMOVAL_YES"
 
 [node name="Button_No" type="Button" parent="Ad_removal_popup/VBoxContainer/HBoxContainer" unique_id=890305990]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-size_flags_horizontal = 10
-theme = ExtResource("2_qogck")
+size_flags_horizontal = 6
+theme = ExtResource("2_mmd68")
 text = "AD_REMOVAL_NO"
 
-[node name="Purchased_popup" type="Panel" parent="." unique_id=779448828]
+[node name="Purchased_popup" type="PanelContainer" parent="." unique_id=1676125727]
 visible = false
 z_index = 2
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Purchased_popup" unique_id=757266046]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -93.5
-offset_top = -20.0
-offset_right = 93.5
-offset_bottom = 20.0
+offset_left = -250.0
+offset_top = -67.5
+offset_right = 250.0
+offset_bottom = 67.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_mmd68")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Purchased_popup" unique_id=757266046]
+layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="TitleLabel" type="Label" parent="Purchased_popup/VBoxContainer" unique_id=1963148136]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
+theme_type_variation = &"HeaderLarge"
 text = "AD_REMOVAL_PURCHASED_TITLE"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -136,7 +117,8 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
+theme_type_variation = &"HeaderMedium"
 text = "AD_REMOVAL_PURCHASED_DESCRIPTION"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -149,40 +131,36 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 10
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
 text = "CLOSE"
 
-[node name="Error_popup" type="Panel" parent="." unique_id=1714905671]
+[node name="Error_popup" type="PanelContainer" parent="." unique_id=1781685591]
 visible = false
 z_index = 2
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Error_popup" unique_id=1678336764]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -93.5
-offset_top = -20.0
-offset_right = 93.5
-offset_bottom = 20.0
+offset_left = -255.0
+offset_top = -86.5
+offset_right = 255.0
+offset_bottom = 86.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_mmd68")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Error_popup" unique_id=1678336764]
+layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="TitleLabel" type="Label" parent="Error_popup/VBoxContainer" unique_id=500168885]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
+theme_type_variation = &"HeaderLarge"
 text = "BILLING_PURCHASE_ERROR_TITLE"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -191,7 +169,8 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
+theme_type_variation = &"HeaderMedium"
 text = "BILLING_PURCHASE_ERROR_DESCRIPTION"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -204,47 +183,42 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 10
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
 text = "RETRY"
 
 [node name="Button_Close_Error" type="Button" parent="Error_popup/VBoxContainer/HBoxContainer" unique_id=1565821935]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 10
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
 text = "CLOSE"
 
-[node name="Pending_popup" type="Panel" parent="." unique_id=1054916801]
-visible = false
+[node name="Pending_popup" type="PanelContainer" parent="." unique_id=1633145843]
 z_index = 2
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_qogck")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Pending_popup" unique_id=869590011]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -93.5
-offset_top = -20.0
-offset_right = 93.5
-offset_bottom = 20.0
+offset_left = -250.0
+offset_top = -109.5
+offset_right = 250.0
+offset_bottom = 109.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_mmd68")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pending_popup" unique_id=869590011]
+layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="TitleLabel" type="Label" parent="Pending_popup/VBoxContainer" unique_id=659780151]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
+theme_type_variation = &"HeaderLarge"
 text = "BILLING_PENDING_TITLE"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -253,7 +227,8 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
+theme_type_variation = &"HeaderMedium"
 text = "BILLING_PENDING_DESCRIPTION"
 autowrap_mode = 3
 
@@ -265,7 +240,7 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 10
-theme = ExtResource("2_qogck")
+theme = ExtResource("2_mmd68")
 text = "CLOSE"
 
 [connection signal="pressed" from="Ad_removal_popup/VBoxContainer/HBoxContainer/Button_Yes" to="." method="_on_button_yes_pressed"]

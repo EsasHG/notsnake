@@ -31,7 +31,7 @@ limit_bottom = 710
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-editor_draw_limits = true
+editor_draw_screen = false
 script = ExtResource("2_1wnyp")
 
 [node name="MapTutorial1" type="Sprite2D" parent="." unique_id=1421790600]
@@ -40,6 +40,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_t6jc5")
 
 [node name="Walls" type="Node2D" parent="." unique_id=658282560]
+visible = false
 
 [node name="TopWall" type="Area2D" parent="Walls" unique_id=767049504 groups=["Dangers"]]
 position = Vector2(0, -828)
@@ -66,6 +67,7 @@ position = Vector2(-1075, 0)
 shape = SubResource("RectangleShape2D_xehlq")
 
 [node name="PickupSpawner" type="Node2D" parent="." unique_id=1740783979]
+visible = false
 script = ExtResource("4_looaj")
 
 [node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=1516816558]

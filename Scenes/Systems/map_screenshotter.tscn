@@ -76,15 +76,6 @@ render_target_update_mode = 4
 position = Vector2(248, 257)
 scale = Vector2(0.33461562, 0.33461562)
 
-[node name="Forest_Map" type="SubViewport" parent="." unique_id=1193424460]
-handle_input_locally = false
-size_2d_override_stretch = true
-render_target_update_mode = 4
-
-[node name="World" parent="Forest_Map" unique_id=1059412979 instance=ExtResource("7_q3st8")]
-position = Vector2(181, 290)
-scale = Vector2(0.43248042, 0.43248042)
-
 [node name="Park_Map" type="SubViewport" parent="." unique_id=1520286535]
 handle_input_locally = false
 render_target_update_mode = 4
@@ -99,6 +90,15 @@ editor_draw_limits = false
 
 [node name="Walls" parent="Park_Map/World2" index="4" unique_id=149375035]
 visible = false
+
+[node name="Forest_Map" type="SubViewport" parent="." unique_id=1193424460]
+handle_input_locally = false
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="World" parent="Forest_Map" unique_id=1059412979 instance=ExtResource("7_q3st8")]
+position = Vector2(286, 317)
+scale = Vector2(0.43248042, 0.43248042)
 
 [editable path="Winter_Map/World"]
 [editable path="Tutorial_Map/World"]

@@ -9,7 +9,7 @@ const ARENA = preload("uid://sctscfmi6mda")
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("MenuCancel") and event.device not in GlobalInputMap.ControllerIds:
-		if level_select_screen.visible or game_settings_container.visible:
+		if level_select_container.visible or game_settings_container.visible:
 			UINavigator.back()
 		elif ! menu_active:
 			UINavigator.back()
@@ -44,5 +44,5 @@ func _on_map_selected(scene:Map):
 
 
 func _on_game_settings_start_button_pressed() -> void:
-	UINavigator.open(level_select_screen,true)
+	UINavigator.open(level_select_container,true)
 	#open_level_select()

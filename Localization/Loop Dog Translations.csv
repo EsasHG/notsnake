@@ -61,3 +61,8 @@ FOREST_UNLOCK_CONDITION,Get at least 20 points on Small to unlock this level,Få
 SANTA_UNLOCK_CONDITION,Find the hidden present on Winter to unlock this hat,Finn den gjemte gaven i Vinterland foir å låse opp denne hatten
 COWBOY_UNLOCK_CONDITION,Catch your own tail to unlock this hat,Fang din egen hale for å låse opp denne hatten
 HELMET_UNLOCK_CONDITION,Crash into something 100 times to unlock this hat,Treff noe 100 ganger for å låse opp denne hatten
+DEBUG_SETTINGS,Debug settings,Debug settings
+UNLOCK_MAPS,Unlock all maps,Lås opp baner
+UNLOCK_HATS,Unlock all hats,Lås opp alle hatter
+LOCK_MAPS,Lock maps,Lås baner
+LOCK_HATS,Lock hats,Lås hatter

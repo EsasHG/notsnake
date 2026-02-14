@@ -6,17 +6,16 @@ var menu_active = true;
 const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
 const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 
-@onready var buttons: HBoxContainer = $MainButtons
-@onready var level_select_screen: Control = $LevelSelectScreen
-@onready var level_buttons: HFlowContainer = $LevelSelectScreen/VBoxContainer/PanelContainer/LevelButtons
+@export var sign_in_button: AudioButton 
+@onready var buttons: VBoxContainer = $MainButtons
+@onready var level_select_container: PanelContainer = $AdLayoutContainer/LevelSelectContainer
+@onready var level_buttons: HFlowContainer = $AdLayoutContainer/LevelSelectContainer/ScrollContainer/InnerContainer/VBoxContainer/LevelButtons
 @onready var level_selected_sound: AudioStreamPlayer = get_tree().root.find_child("LevelSelected", true, false)
-@onready var level_select_back: Button = $LevelSelectScreen/VBoxContainer/ButtonContainer/Back
 @onready var start_button: Button = $MainButtons/Start
-@onready var quit_button: Button = $MainButtons/Quit
-@onready var sign_in_button: Button = $"MainButtons/Sign In"
 @onready var settings_button: Button = $MainButtons/Settings
-@onready var locked_message_container: PanelContainer = $LockedMessageContainer
-@onready var locked_message_description: Label = $LockedMessageContainer/VBoxContainer/DescriptionLabel
+@onready var quit_button: Button = $MainButtons/Quit
+@onready var locked_message_container: PanelContainer = $AdLayoutContainer/LockedMessageContainer
+@onready var locked_message_description: Label = $AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer/DescriptionLabel
 
 
 @export var buttonTheme:Theme
@@ -41,7 +40,7 @@ func _ready() -> void:
 		start_button.grab_focus(true)
 	visible = true
 	buttons.visible = true
-	level_select_screen.visible = false
+	level_select_container.visible = false
 	locked_message_container.visible = false
 	get_tree().create_timer(0.5).timeout.connect(func():	
 		var blackPanelTween = get_tree().create_tween()
@@ -61,7 +60,12 @@ func _ready() -> void:
 	var music = get_tree().root.find_child("BGMusic", true, false)
 	if(music):
 		music.play()
+	create_level_buttons()
 	
+
+func create_level_buttons() -> void:
+	for c in level_buttons.get_children():
+		c.queue_free()
 	for s : Map in levels:
 		var map_info = GlobalInputMap.Maps[s.name]
 
@@ -73,7 +77,6 @@ func _ready() -> void:
 		button.expand_icon = true
 		button.custom_minimum_size = Vector2(180,180)
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		button.focus_neighbor_bottom = level_select_back.get_path()
 		level_buttons.add_child(button)
 		
 		if !map_info.unlocked: ##TODO: add actual logic here
@@ -82,12 +85,12 @@ func _ready() -> void:
 			button.pressed.connect(_on_locked_map_selected.bind(s))
 		else:
 			button.pressed.connect(_on_map_selected.bind(s))
-		
+
 
 ##TODO: do we need this method here?
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("MenuCancel") and event.device not in GlobalInputMap.ControllerIds:
-		if level_select_screen.visible:
+		if level_select_container.visible:
 			UINavigator.back()
 		elif ! menu_active:
 			menu_active = true
@@ -123,8 +126,7 @@ func _on_start_button_pressed() -> void:
 
 func open_level_select():
 	level_buttons.get_children()[0].grab_focus()
-	#hide_all()
-	UINavigator.open(level_select_screen,true)
+	UINavigator.open(level_select_container,true)
 	
 
 func _on_settings_pressed() -> void:
@@ -141,7 +143,6 @@ func _on_map_selected(scene:Map):
 func _on_locked_map_selected(scene:Map):
 	UINavigator.open(locked_message_container)
 	locked_message_description.text = tr(scene.name + "_UNLOCK_CONDITION")
-	
 	
 
 func _on_quit_pressed() -> void:

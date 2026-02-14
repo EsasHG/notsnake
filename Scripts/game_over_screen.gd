@@ -5,24 +5,25 @@ class_name  GameOverScreen
 @export var bonusScreenThreshold = 30
 
 @onready var BGmusic = get_tree().root.find_child("BGMusic", true, false)
-@onready var button_container: HBoxContainer = $ButtonContainer
+@onready var button_container: VBoxContainer = $ButtonContainer
 @onready var retry_button: Button = $ButtonContainer/RetryButton
-
 @onready var main_menu_button: Button = $ButtonContainer/MainMenuButton
+@onready var leaderboard_button: AudioButton = $ButtonContainer/Leaderboard
+
 
 @onready var visibleButtonYPos : float = button_container.position.y
-@onready var hiddenButtonYOffset : float = 150
+@export var hiddenButtonYPos : float = 747.0
 var buttons_enabled = false
 
 
 func _ready():
 	if OS.has_feature("mobile") and GameSettings.userAuthenticated:
-		$ButtonContainer/Leaderboard.visible = true
+		leaderboard_button.visible = true
 	else:
-		$ButtonContainer/Leaderboard.visible = false
+		leaderboard_button.visible = false
 		retry_button.grab_focus(true)
 
-	button_container.position.y = visibleButtonYPos+hiddenButtonYOffset
+	button_container.position.y = hiddenButtonYPos
 	disable_buttons()
 	
 
@@ -37,9 +38,9 @@ func _set_score(score : int):
 func game_over(players:Array[PlayerDog]):
 	
 	if OS.has_feature("mobile") and GameSettings.userAuthenticated:
-		$ButtonContainer/Leaderboard.visible = true
+		leaderboard_button.visible = true
 	else:
-		$ButtonContainer/Leaderboard.visible = false
+		leaderboard_button.visible = false
 	Logging.logMessage("Game over!")
 	
 	var player : PlayerDog = players[0]

@@ -8,6 +8,6 @@ shader_parameter/points = Array[Vector2]([Vector2(832.00006, -1376), Vector2(830
 shader_parameter/pos = Vector2(0, 0)
 shader_parameter/num_points = 1074
 shader_parameter/strong_dist = 0.0
-shader_parameter/weak_dist = 20.0
+shader_parameter/weak_dist = 40.0
 shader_parameter/strong_color = Vector4(0.694, 0.753, 0.827, 1)
 shader_parameter/weak_color = Vector4(0.769, 0.816, 0.859, 1)

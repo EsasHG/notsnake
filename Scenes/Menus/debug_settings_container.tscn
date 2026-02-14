@@ -1,0 +1,140 @@
+[gd_scene format=3 uid="uid://d0dfdlrxfu8iw"]
+
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="1_5j8qy"]
+[ext_resource type="Script" uid="uid://1dr1kq5ex2bw" path="res://Scenes/Menus/ad_layout.gd" id="1_ikqh6"]
+[ext_resource type="Script" uid="uid://dw828di5jqfqp" path="res://Scenes/Menus/debug_settings_container.gd" id="1_qs44x"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="3_5j8qy"]
+[ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="3_ijau0"]
+[ext_resource type="StyleBox" uid="uid://cur2omqlkol8p" path="res://Assets/Styles/normal_button_stylebox_flat.tres" id="4_ikqh6"]
+[ext_resource type="PackedScene" uid="uid://dve3ihhfdxc3w" path="res://Scenes/Menus/close_button.tscn" id="7_ikqh6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfl8x"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="AdLayoutContainer" type="VBoxContainer" unique_id=742566856]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ikqh6")
+
+[node name="OuterPanelContainer" type="PanelContainer" parent="." unique_id=1354738231]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("1_5j8qy")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nfl8x")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="OuterPanelContainer" unique_id=1217507080]
+custom_minimum_size = Vector2(610, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_5j8qy")
+horizontal_scroll_mode = 0
+script = ExtResource("3_ijau0")
+
+[node name="DebugSettingsContainer" type="PanelContainer" parent="OuterPanelContainer/ScrollContainer" unique_id=1316018813]
+process_mode = 3
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_5j8qy")
+theme_type_variation = &"InnerContainer"
+script = ExtResource("1_qs44x")
+
+[node name="DebugScreen" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" unique_id=1148790409]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="Label" type="Label" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=542016325]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_5j8qy")
+text = "DEBUG_SETTINGS"
+
+[node name="ShowLog" type="CheckButton" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=636195925]
+layout_mode = 2
+theme = ExtResource("1_5j8qy")
+text = "SHOW_LOG"
+script = ExtResource("3_5j8qy")
+
+[node name="ShowFramerate" type="CheckButton" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1888874711]
+layout_mode = 2
+theme = ExtResource("1_5j8qy")
+text = "SHOW_FRAMERATE"
+script = ExtResource("3_5j8qy")
+
+[node name="UnlockMaps" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1511026282]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_5j8qy")
+text = "UNLOCK_MAPS"
+script = ExtResource("3_5j8qy")
+
+[node name="LockMaps" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1409006129]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_5j8qy")
+theme_override_styles/normal = ExtResource("4_ikqh6")
+text = "LOCK_MAPS"
+script = ExtResource("3_5j8qy")
+
+[node name="UnlockHats" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1013354946]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_5j8qy")
+theme_override_styles/normal = ExtResource("4_ikqh6")
+text = "UNLOCK_HATS"
+script = ExtResource("3_5j8qy")
+
+[node name="LockHats" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1084038263]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_5j8qy")
+text = "LOCK_HATS"
+script = ExtResource("3_5j8qy")
+
+[node name="Back" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=752013187]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_5j8qy")
+theme_override_styles/normal = ExtResource("4_ikqh6")
+text = "BACK"
+script = ExtResource("3_5j8qy")
+
+[node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("7_ikqh6")]
+layout_mode = 2
+
+[node name="AdPanel" type="Panel" parent="." unique_id=800514159]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+size_flags_vertical = 8
+
+[connection signal="toggled" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/ShowLog" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_show_log_toggled"]
+[connection signal="toggled" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/ShowFramerate" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_show_framerate_toggled"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/UnlockMaps" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_maps_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/LockMaps" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_maps_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/UnlockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_hats_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/LockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_hats_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/Back" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_back_pressed"]

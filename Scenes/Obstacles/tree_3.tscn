@@ -10,6 +10,7 @@ z_index = 2
 y_sort_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2121426353]
+visible = false
 position = Vector2(-7, -19)
 shape = SubResource("RectangleShape2D_hc7wb")
 

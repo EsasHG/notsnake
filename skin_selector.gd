@@ -10,6 +10,7 @@ extends PanelContainer
 @onready var main_screen_container: PanelContainer = $MainScreen
 @onready var locked_message_container: PanelContainer = $LockedMessageContainer
 @onready var text_edit: TextEdit = $MainScreen/VBoxContainer/HexEdit/TextEdit
+@onready var locked_message_description_label: Label = $LockedMessageContainer/VBoxContainer/DescriptionLabel
 
 const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 const LEVEL_SELECT_THEME = preload("uid://dayndqrmaoq3i")
@@ -84,6 +85,7 @@ func _on_hat_selected(_hat_id:String) -> void:
 	
 
 func _on_locked_hat_pressed(_hat_id:String) -> void:
+	locked_message_description_label.text = tr(_hat_id + "_UNLOCK_CONDITION")
 	UINavigator.open(locked_message_container, false)
 
 

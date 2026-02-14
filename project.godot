@@ -27,8 +27,9 @@ SaveManager="*uid://de2jnqrou7h18"
 
 [display]
 
-window/size/viewport_width=700
-window/stretch/mode="viewport"
+window/size/viewport_width=720
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=6
 

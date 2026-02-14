@@ -1,17 +1,15 @@
 extends VBoxContainer
 
-@onready var music_mute: Button = $MusicMute
-@onready var sfx_mute: Button = $SFXMute
+@onready var music_mute: AudioButton = $SoundButtons/MusicMute
+@onready var sfx_mute: AudioButton = $SoundButtons/SFXMute
 @onready var hold_controls: CheckBox = $Controls/HoldControls
 @onready var tap_controls: CheckBox = $Controls/TapControls
 
-@onready var music_checkbox: CheckBox = $MusicCheckbox
-@onready var sfx_checkbox: CheckBox = $SFXCheckbox
-@onready var show_log: CheckButton = $ShowLog
 @onready var googlePlayButtonsContainer: HBoxContainer = $HBoxContainer
-@onready var back_button: AudioButton = $Back
 @onready var language_selector: OptionButton = $Controls/VBoxContainer/LanguageSelector
+
 const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
+const DEBUG_SETTINGS_CONTAINER = preload("uid://d0dfdlrxfu8iw")
 
 var _changes_made = false
 
@@ -20,15 +18,13 @@ func _ready() -> void:
 	sfx_mute.set_pressed_no_signal(GameSettings.sfxMuted)
 	hold_controls.set_pressed_no_signal(GlobalInputMap.Player_Controls_Selected[0])
 	tap_controls.set_pressed_no_signal(!GlobalInputMap.Player_Controls_Selected[0])
-	show_log.set_pressed_no_signal(Logging.isLogWindowVisible())
 	
 	visibility_changed.connect(_on_visibility_changed)
 	if OS.has_feature("mobile") and GameSettings.userAuthenticated:
 		googlePlayButtonsContainer.visible = true
 	else:
 		googlePlayButtonsContainer.visible = false
-		
-	back_button.grab_focus(true)
+	
 	language_selector.clear()
 	for locale in TranslationServer.get_loaded_locales():
 		## the method below returned "Norwegian bokmål" for "nb", and that didn't feel right to me.
@@ -67,19 +63,9 @@ func _on_leaderboards_button_pressed() -> void:
 	GameSettings.showAllLeaderboards()
 
 
-func _on_show_log_toggled(toggled_on: bool) -> void:
-	Logging.showLogWindow(toggled_on)
-
-
 func _on_visibility_changed():
 	if OS.has_feature("mobile"):
 		googlePlayButtonsContainer.visible = GameSettings.userAuthenticated
-
-
-func _on_show_framerate_toggled(toggled_on: bool) -> void:
-	var node = get_tree().root.find_child("FPS_Tracker",true, false)
-	node.visible = toggled_on
-	pass # Replace with function body.
 
 
 func _on_back_pressed() -> void:
@@ -107,3 +93,7 @@ func _on_color_changed(_col: Color):
 
 func _on_hat_changed(_hat: String):
 	_changes_made = true
+
+
+func _on_debug_settings_pressed() -> void:
+	UINavigator.open_from_scene(DEBUG_SETTINGS_CONTAINER)

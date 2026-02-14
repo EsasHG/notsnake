@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://dve3ihhfdxc3w"]
+
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="1_2atrq"]
+[ext_resource type="Texture2D" uid="uid://cuigu5qeg76n2" path="res://Assets/UI/cross_transparent.png" id="1_u63i4"]
+[ext_resource type="Script" uid="uid://drepaxmc1i3o1" path="res://Scripts/back_button.gd" id="3_2atrq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2b6r5"]
+bg_color = Color(0.1331965, 0.13319635, 0.13319644, 1)
+border_width_left = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwjhj"]
+bg_color = Color(0.19076231, 0.19076234, 0.19076231, 1)
+border_width_left = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="CloseButton" type="Button" unique_id=998217422]
+texture_filter = 1
+custom_minimum_size = Vector2(50, 50)
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme = ExtResource("1_2atrq")
+theme_type_variation = &"EmptyButton"
+theme_override_styles/normal = SubResource("StyleBoxFlat_2b6r5")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_2b6r5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qwjhj")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_2b6r5")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qwjhj")
+icon = ExtResource("1_u63i4")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("3_2atrq")

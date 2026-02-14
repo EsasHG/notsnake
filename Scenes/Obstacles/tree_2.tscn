@@ -11,6 +11,7 @@ z_index = 2
 y_sort_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1087669510]
+visible = false
 position = Vector2(9, -27)
 shape = SubResource("CapsuleShape2D_0px40")
 

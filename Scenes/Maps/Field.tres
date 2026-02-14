@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Map" format=3 uid="uid://cibsfp4rd5p5b"]
 
 [ext_resource type="PackedScene" uid="uid://bmtfcin4sha1p" path="res://Scenes/Maps/Field_Map.tscn" id="1_b05gc"]
-[ext_resource type="Texture2D" uid="uid://dqg0n4l7w438o" path="res://Assets/Icons/Tutorial_Map.png" id="2_hohf5"]
+[ext_resource type="Texture2D" uid="uid://doqp1jkdlm1dk" path="res://Assets/Icons/Tutorial_Map_good.png" id="2_y2oaq"]
 [ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="3_q7ys8"]
 
 [resource]
 script = ExtResource("3_q7ys8")
 Scene = ExtResource("1_b05gc")
 name = "FIELD"
-icon = ExtResource("2_hohf5")
+icon = ExtResource("2_y2oaq")

@@ -6,12 +6,30 @@
 [ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="4_htq65"]
 [ext_resource type="Texture2D" uid="uid://c02fkdaroc7h7" path="res://Assets/UI/GAME_HIGHSCORE.png" id="5_j3nvf"]
 [ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="6_dgp11"]
+[ext_resource type="Script" uid="uid://1dr1kq5ex2bw" path="res://Scenes/Menus/ad_layout.gd" id="6_htq65"]
+[ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="7_j3nvf"]
+[ext_resource type="PackedScene" uid="uid://dve3ihhfdxc3w" path="res://Scenes/Menus/close_button.tscn" id="8_dgp11"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jx1af"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yr1h0"]
 texture = SubResource("CanvasTexture_jx1af")
 modulate_color = Color(0.886275, 0.878431, 0.87451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfl8x"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_x8dhy"]
 
 [node name="GameOverScreen" type="Control" unique_id=742327613]
 layout_mode = 3
@@ -37,10 +55,10 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_yr1h0")
 
 [node name="ScoreLabels" type="VBoxContainer" parent="." unique_id=1789853997]
 layout_mode = 1
-offset_left = 40.0
-offset_top = 150.0
-offset_right = 224.0
-offset_bottom = 292.0
+offset_left = 38.0
+offset_top = 44.0
+offset_right = 248.0
+offset_bottom = 186.0
 
 [node name="ScoreLabel" type="Label" parent="ScoreLabels" unique_id=1652480004]
 layout_mode = 2
@@ -53,47 +71,6 @@ layout_mode = 2
 theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 40
 text = "BEST_SCORE"
-
-[node name="ButtonContainer" type="HBoxContainer" parent="." unique_id=2069789025]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -199.0
-offset_top = -120.0
-offset_right = 199.0
-offset_bottom = -70.0
-grow_horizontal = 2
-grow_vertical = 0
-alignment = 1
-
-[node name="RetryButton" type="Button" parent="ButtonContainer" unique_id=1455811056]
-z_index = -1
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-theme = ExtResource("2_3eorv")
-text = "RETRY"
-script = ExtResource("3_3eq00")
-
-[node name="MainMenuButton" type="Button" parent="ButtonContainer" unique_id=884263697]
-z_index = -1
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-theme = ExtResource("2_3eorv")
-theme_override_font_sizes/font_size = 23
-text = "MAIN_MENU"
-script = ExtResource("3_3eq00")
-
-[node name="Leaderboard" type="Button" parent="ButtonContainer" unique_id=147126916]
-visible = false
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-theme = ExtResource("2_3eorv")
-theme_override_font_sizes/font_size = 19
-text = "Leaderboard"
-script = ExtResource("3_3eq00")
 
 [node name="GameOverTex" type="TextureRect" parent="." unique_id=1096799978]
 z_index = -2
@@ -135,6 +112,87 @@ mouse_filter = 2
 texture = ExtResource("6_dgp11")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="AdLayoutContainer" type="VBoxContainer" parent="." unique_id=742566856]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_htq65")
+
+[node name="OuterPanelContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1354738231]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_3eorv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_nfl8x")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/OuterPanelContainer" unique_id=1217507080]
+custom_minimum_size = Vector2(610, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_3eorv")
+horizontal_scroll_mode = 0
+script = ExtResource("7_j3nvf")
+
+[node name="PanelContainer" type="PanelContainer" parent="AdLayoutContainer/OuterPanelContainer/ScrollContainer" unique_id=246446738]
+layout_mode = 2
+theme = SubResource("Theme_x8dhy")
+
+[node name="CloseButton" parent="AdLayoutContainer/OuterPanelContainer" unique_id=998217422 instance=ExtResource("8_dgp11")]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="AdLayoutContainer" unique_id=2069789025]
+layout_mode = 2
+alignment = 1
+
+[node name="AdPanel" type="Panel" parent="AdLayoutContainer" unique_id=800514159]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("2_3eorv")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="." unique_id=853223382]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -199.0
+offset_top = -351.0
+offset_right = 199.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="RetryButton" type="Button" parent="ButtonContainer" unique_id=1455811056]
+z_index = -1
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("2_3eorv")
+text = "RETRY"
+script = ExtResource("3_3eq00")
+
+[node name="MainMenuButton" type="Button" parent="ButtonContainer" unique_id=884263697]
+z_index = -1
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("2_3eorv")
+text = "MAIN_MENU"
+script = ExtResource("3_3eq00")
+
+[node name="Leaderboard" type="Button" parent="ButtonContainer" unique_id=147126916]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("2_3eorv")
+text = "Leaderboard"
+script = ExtResource("3_3eq00")
 
 [connection signal="pressed" from="ButtonContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

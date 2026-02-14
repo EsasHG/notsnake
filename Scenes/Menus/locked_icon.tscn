@@ -17,7 +17,7 @@ corner_detail = 5
 [node name="LockedIcon" type="PanelContainer" unique_id=1782783043]
 texture_filter = 1
 clip_contents = true
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(180, 180)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -29,6 +29,8 @@ offset_right = 50.0
 offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ydmm5")
 

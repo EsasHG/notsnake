@@ -14,16 +14,17 @@ void vertex() {
 	
 	// Called for every vertex the material is visible on.
 	global_pos = (MODEL_MATRIX * vec4(VERTEX, 0.0, 1.0)).xy;
+	global_pos -= vec2(1900,3150);
+	//global_pos = vec2(0,0);
 }
 
 void fragment() {
 	// Called for every pixel the material is visible on.
 	
     float min_dist = 10000.0; // Initialize with a large value
-
     for (int i = 0; i < num_points; i++) {
         float d = distance(global_pos,pos + points[i]);
-    	
+		
 	    min_dist = abs(min(min_dist, d));
     }
 	//if (min_dist < strong_dist)
@@ -39,7 +40,8 @@ void fragment() {
 	}
 	else
 	{
-    	COLOR = texture(TEXTURE,UV);
+		COLOR =vec4(0,0,0,0);
+  	//COLOR =vec4(UV.x, UV.y,0,1);
 	}
 }
 
