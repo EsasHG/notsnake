@@ -2,7 +2,7 @@ extends Node
 @onready var bg_music: AudioStreamPlayer = $BGMusic
 #var pitch_shift : AudioEffectPitchShift
 # Called when the node enters the scene tree for the first time.
-
+var pitch_tween : Tween
 
 func _ready() -> void:
 	GameSettings.on_gameOver.connect(stopMusic)
@@ -14,27 +14,36 @@ func _ready() -> void:
 	
 	
 func stopMusic():
+	if pitch_tween and pitch_tween.is_valid():
+		pitch_tween.kill()
+	
 	if !bg_music:
 		bg_music = find_child("BGMusic", true, false)
 	
+	bg_music.pitch_scale = 1
 	bg_music.stop()
 	bg_music.stream_paused = true
-	bg_music.pitch_scale = 1
 	var loseMusic = find_child("LoseMusic", true, false)
 	loseMusic.play()
 
 func pause_music(): 
-	var t = get_tree().create_tween()
-	t.set_ease(Tween.EASE_IN)
-	t.set_pause_mode(Tween.TweenPauseMode.TWEEN_PAUSE_PROCESS)
-	t.set_ignore_time_scale(true)
-	t.tween_property(bg_music, "pitch_scale", 0.1, 1)
-	t.tween_callback(func(): bg_music.stream_paused = true)
+	if pitch_tween and pitch_tween.is_valid():
+		pitch_tween.kill()
+	pitch_tween = get_tree().create_tween()
+	pitch_tween.set_ease(Tween.EASE_IN)
+	pitch_tween.set_pause_mode(Tween.TweenPauseMode.TWEEN_PAUSE_PROCESS)
+	pitch_tween.set_ignore_time_scale(true)
+	pitch_tween.tween_property(bg_music, "pitch_scale", 0.1, 1)
+	pitch_tween.tween_callback(func(): bg_music.stream_paused = true)
 	
 	
 func unpause_music():
-	var t = get_tree().create_tween()
-	t.set_ease(Tween.EASE_IN_OUT)
-	t.set_ignore_time_scale(true)
+	if pitch_tween and pitch_tween.is_valid():
+		pitch_tween.kill()
+	
+	pitch_tween = get_tree().create_tween()
+	pitch_tween.set_ease(Tween.EASE_IN_OUT)
+	pitch_tween.set_pause_mode(Tween.TweenPauseMode.TWEEN_PAUSE_PROCESS)
+	pitch_tween.set_ignore_time_scale(true)
 	bg_music.stream_paused = false
-	t.tween_property(bg_music, "pitch_scale", 1, 1)
+	pitch_tween.tween_property(bg_music, "pitch_scale", 1, 1)

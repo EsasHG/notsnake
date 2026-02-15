@@ -15,6 +15,7 @@ run/main_scene="uid://2rjb4w7s6uto"
 config/features=PackedStringArray("4.6", "Mobile")
 boot_splash/use_filter=false
 boot_splash/image="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png"
+config/icon="uid://bp1qs2tnveae5"
 
 [autoload]
 

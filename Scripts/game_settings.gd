@@ -13,6 +13,8 @@ signal on_dogHatChanged(hat:String)
 signal on_somethingUnlocked(unlock:String)
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 
+var time_scale_tween : Tween
+
 @export var currentScore : int = 0 
 
 enum GAME_MODE {LAST_DOG_STANDING, TIME, SCORE, SINGLE_PLAYER}
@@ -28,6 +30,8 @@ var banner_ad_showing = false
 const SCENE_TRANSITION = preload("uid://gsu5a1hu0rjf")
 const GAME_OVER_SCREEN = preload("uid://ck7vl8h740cpk")
 const ARENA_GAME_OVER_SCREEN = preload("uid://u1gfn45v12yd")
+
+#const PAUSE_OVERLAY = preload("uid://ba4bi555qsw1v")
 
 const PAUSE_MENU = preload("uid://d0eb6heqgmexf")
 const BUBBLE_CUTSCENE = preload("uid://3va5fhmx5hn4")
@@ -384,24 +388,27 @@ func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 	setSFXMuted(toggled_on)
 
 
-func unpause_game() -> void:
-	get_tree().paused = false
-	Engine.time_scale = 0
-	var t = get_tree().create_tween()
-	t.set_ignore_time_scale(true)
-	t.set_ease(Tween.EASE_IN)
-	
-	t.tween_property(Engine, "time_scale", 1, 2)
-	on_gameUnpaused.emit()
-
 func pause_game():
 	Logging.logMessage("Pausing game")
 	#var pauseScreen = PAUSE_MENU.instantiate()
 	#$"../Main/CanvasLayer/Gui".add_child(pauseScreen)
-	UINavigator.open_from_scene(PAUSE_MENU)
+	UINavigator.open_from_scene(PAUSE_MENU,true, false, unpause_game)
 	get_tree().paused = true
 	on_gamePaused.emit()
 
+
+func unpause_game() -> void:
+	if time_scale_tween and time_scale_tween.is_valid():
+		time_scale_tween.kill()
+	
+	get_tree().paused = false
+	Engine.time_scale = 0
+	time_scale_tween = get_tree().create_tween()
+	time_scale_tween.set_ignore_time_scale(true)
+	time_scale_tween.set_ease(Tween.EASE_IN)
+	time_scale_tween.tween_property(Engine, "time_scale", 1, 2)
+	on_gameUnpaused.emit()
+	
 
 func _on_viewport_size_changed():
 	var viewportSize:Vector2 = get_viewport().size

@@ -14,12 +14,13 @@ class UI_Helper:
 func _ready() -> void:
 	GameSettings.on_gameBegin.connect(_reset)
 	GameSettings.on_mainMenuOpened.connect(_reset)
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 ## Makes a new Control visible, and adds it to the top of the stack (aka it'll be the one hidden next time back() is called
 ## new_layer: the new control to open
 ## hide_previous: If true, the previous node's visibility will be set to hidden
 ## root: stops this node from being hidden or deleted when back() is called, as long as it's still valid
-func open(new_layer:Control, hide_previous:bool = true, root = false,  back_callback:Callable = Callable()) -> void:
+func open(new_layer:Control, hide_previous:bool = true, root:bool = false,  back_callback:Callable = Callable()) -> void:
 	_cleanup()
 	
 	new_layer.visible = true
@@ -93,7 +94,9 @@ func _cleanup() -> bool:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Press"):
+		Logging.logMessage("Unhandled press input in UINavigator!")
 		UINavigator.back()
+		
 
 func add_callable(callable:Callable) -> void:
 	_ui_stack.back().callback = callable

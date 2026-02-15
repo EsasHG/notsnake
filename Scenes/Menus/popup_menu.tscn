@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://chupiwnqy5234"]
+
+[ext_resource type="Script" uid="uid://1dr1kq5ex2bw" path="res://Scenes/Menus/ad_layout.gd" id="1_oya0u"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_0qd7f"]
+[ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="3_3cwhk"]
+[ext_resource type="PackedScene" uid="uid://dve3ihhfdxc3w" path="res://Scenes/Menus/close_button.tscn" id="4_tdtuj"]
+
+[node name="PopupMenu" type="VBoxContainer" unique_id=742566856]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oya0u")
+
+[node name="OuterPanelContainer" type="PanelContainer" parent="." unique_id=1354738231]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_0qd7f")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="OuterPanelContainer" unique_id=910289530]
+clip_children = 1
+custom_minimum_size = Vector2(610, 200)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_0qd7f")
+theme_type_variation = &"LowerScrollContainer"
+script = ExtResource("3_3cwhk")
+
+[node name="InnerContainer" type="PanelContainer" parent="OuterPanelContainer/ScrollContainer" unique_id=1316018813]
+process_mode = 3
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = ExtResource("2_0qd7f")
+theme_type_variation = &"InnerContainer"
+
+[node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("4_tdtuj")]
+layout_mode = 2
+
+[node name="AdPanel" type="Panel" parent="." unique_id=800514159]
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("2_0qd7f")
+theme_type_variation = &"EmptyPanel"

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bq331b3dfslw5"]
 
-[ext_resource type="Texture2D" uid="uid://cuigu5qeg76n2" path="res://Assets/UI/cross_transparent.png" id="1_ydmm5"]
+[ext_resource type="Texture2D" uid="uid://ba5uo5674ki5v" path="res://Assets/UI/lock_icon_bordered.png" id="1_ydmm5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydmm5"]
 content_margin_left = 20.0
@@ -35,7 +35,10 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ydmm5")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=84382579]
+modulate = Color(0.827451, 0.5921569, 0.08235294, 1)
+texture_filter = 2
 clip_contents = true
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("1_ydmm5")
+expand_mode = 1

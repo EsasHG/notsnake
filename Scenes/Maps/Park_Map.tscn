@@ -38,6 +38,7 @@ script = ExtResource("2_bjmuw")
 spawn_on_start = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1382221587]
+process_mode = 3
 position = Vector2(-256, 115)
 zoom = Vector2(1.1, 1.1)
 limit_left = -953

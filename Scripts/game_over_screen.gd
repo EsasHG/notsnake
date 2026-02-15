@@ -8,7 +8,7 @@ class_name  GameOverScreen
 @onready var button_container: VBoxContainer = $ButtonContainer
 @onready var retry_button: Button = $ButtonContainer/RetryButton
 @onready var main_menu_button: Button = $ButtonContainer/MainMenuButton
-@onready var leaderboard_button: AudioButton = $ButtonContainer/Leaderboard
+@onready var leaderboard_button: AudioButton = $ScoreLabels/Leaderboard
 @onready var unlocks_container: VBoxContainer = $UnlocksContainer
 @onready var unlock_title_label: Label = $UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/TitleLabel
 @onready var unlock_description_label: Label = $UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DescriptionLabel
@@ -16,8 +16,7 @@ class_name  GameOverScreen
 
 
 @onready var visibleButtonYPos : float = button_container.position.y
-@export var hiddenButtonYPos_landscape : float = 747.0
-var hiddenButtonYPos_portrait: float = hiddenButtonYPos_landscape + 560
+@export var hiddenButtonYPos_offset : float = 375 #this needs to be an offset so it works on either orientation
 var buttons_enabled = false
 
 
@@ -27,22 +26,24 @@ func _ready():
 	else:
 		leaderboard_button.visible = false
 		retry_button.grab_focus(true)
-	
-	if GameSettings.viewport_mode == GameSettings.VIEWPORT_MODE.PORTRAIT:
-		button_container.position.y = hiddenButtonYPos_landscape
-	else:
-		button_container.position.y = hiddenButtonYPos_landscape
+	button_container.position.y += hiddenButtonYPos_offset
+	#if GameSettings.viewport_mode == GameSettings.VIEWPORT_MODE.PORTRAIT:
+		#button_container.position.y = hiddenButtonYPos_landscape
+	#else:
+		#button_container.position.y = hiddenButtonYPos_landscape
 	unlocks_container.visible = false
+	button_container.visible = true
 	disable_buttons()
 	get_viewport().size_changed.connect(_on_viewport_changed)
 
 
 func _on_viewport_changed() -> void:
-	var viewportSize:Vector2 = get_viewport().size
-	if viewportSize.x >= viewportSize.y:	
-		button_container.position.y = hiddenButtonYPos_landscape
-	else:
-		button_container.position.y = hiddenButtonYPos_landscape
+	pass
+	#var viewportSize:Vector2 = get_viewport().size
+	#if viewportSize.x >= viewportSize.y:	
+		#button_container.position.y = hiddenButtonYPos_offset
+	#else:
+		#button_container.position.y = hiddenButtonYPos_landscape
 	
 
 func _set_score(score : int):

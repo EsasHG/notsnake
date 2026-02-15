@@ -1,12 +1,13 @@
 extends VBoxContainer
 
-@onready var music_mute: AudioButton = $SoundButtons/MusicMute
-@onready var sfx_mute: AudioButton = $SoundButtons/SFXMute
-@onready var hold_controls: CheckBox = $Controls/HoldControls
-@onready var tap_controls: CheckBox = $Controls/TapControls
+@export var music_mute: AudioButton 
+@export var sfx_mute: AudioButton
 
-@onready var googlePlayButtonsContainer: HBoxContainer = $HBoxContainer
-@onready var language_selector: OptionButton = $Controls/VBoxContainer/LanguageSelector
+@export var hold_controls: CheckBox
+@export var tap_controls: CheckBox
+
+@export var language_selector: OptionButton 
+@export var googlePlayButtonsContainer: HBoxContainer 
 
 const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
 const DEBUG_SETTINGS_CONTAINER = preload("uid://d0dfdlrxfu8iw")

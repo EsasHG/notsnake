@@ -41,6 +41,7 @@ script = ExtResource("1_egh7q")
 spawn_on_start = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=302707558]
+process_mode = 3
 zoom = Vector2(1.1, 1.1)
 limit_left = -944
 limit_top = -700

@@ -3,12 +3,14 @@
 [ext_resource type="Script" uid="uid://dt85v1n4h7vqg" path="res://Scripts/game_over_screen.gd" id="1_st1k0"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_3eorv"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="3_3eq00"]
+[ext_resource type="Texture2D" uid="uid://317y7x3f6njm" path="res://Assets/UI/Google Branding/Play Games/games_leaderboards.png" id="3_j3nvf"]
 [ext_resource type="Texture2D" uid="uid://b8brtnmkw0arq" path="res://Assets/UI/GAME_OVER.png" id="4_htq65"]
 [ext_resource type="Texture2D" uid="uid://c02fkdaroc7h7" path="res://Assets/UI/GAME_HIGHSCORE.png" id="5_j3nvf"]
 [ext_resource type="Texture2D" uid="uid://c851qixiss2k1" path="res://Assets/UI/GAME WINNER_draft.png" id="6_dgp11"]
 [ext_resource type="Script" uid="uid://1dr1kq5ex2bw" path="res://Scenes/Menus/ad_layout.gd" id="6_htq65"]
 [ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="7_j3nvf"]
 [ext_resource type="PackedScene" uid="uid://dve3ihhfdxc3w" path="res://Scenes/Menus/close_button.tscn" id="8_dgp11"]
+[ext_resource type="Texture2D" uid="uid://cacud1mwfip70" path="res://Assets/Icons/Winter_Map_good.png" id="10_dgp11"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jx1af"]
 
@@ -16,20 +18,8 @@
 texture = SubResource("CanvasTexture_jx1af")
 modulate_color = Color(0.886275, 0.878431, 0.87451, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfl8x"]
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
-[sub_resource type="Theme" id="Theme_x8dhy"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x8dhy"]
+content_margin_top = 20.0
 
 [node name="GameOverScreen" type="Control" unique_id=742327613]
 layout_mode = 3
@@ -55,10 +45,10 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_yr1h0")
 
 [node name="ScoreLabels" type="VBoxContainer" parent="." unique_id=1789853997]
 layout_mode = 1
-offset_left = 38.0
-offset_top = 44.0
-offset_right = 248.0
-offset_bottom = 186.0
+offset_left = 55.0
+offset_top = 55.0
+offset_right = 265.0
+offset_bottom = 197.0
 
 [node name="ScoreLabel" type="Label" parent="ScoreLabels" unique_id=1652480004]
 layout_mode = 2
@@ -72,17 +62,29 @@ theme = ExtResource("2_3eorv")
 theme_override_font_sizes/font_size = 40
 text = "BEST_SCORE"
 
+[node name="Leaderboard" type="Button" parent="ScoreLabels" unique_id=147126916]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("2_3eorv")
+theme_type_variation = &"EmptyButton"
+icon = ExtResource("3_j3nvf")
+expand_icon = true
+script = ExtResource("3_3eq00")
+
 [node name="GameOverTex" type="TextureRect" parent="." unique_id=1096799978]
 z_index = -2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -307.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("4_htq65")
-expand_mode = 1
+expand_mode = 2
 stretch_mode = 5
 
 [node name="LongDogTex" type="TextureRect" parent="." unique_id=1373034331]
@@ -92,11 +94,12 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -209.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("5_j3nvf")
-expand_mode = 1
+expand_mode = 2
 stretch_mode = 5
 
 [node name="WinnerTex" type="TextureRect" parent="." unique_id=1622830955]
@@ -106,15 +109,15 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -250.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("6_dgp11")
-expand_mode = 1
+expand_mode = 2
 stretch_mode = 5
 
 [node name="UnlocksContainer" type="VBoxContainer" parent="." unique_id=742566856]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -128,31 +131,34 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("2_3eorv")
-theme_override_styles/panel = SubResource("StyleBoxFlat_nfl8x")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UnlocksContainer/OuterPanelContainer" unique_id=1217507080]
+clip_children = 1
 custom_minimum_size = Vector2(610, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_3eorv")
+theme_type_variation = &"LowerScrollContainer"
 horizontal_scroll_mode = 0
 script = ExtResource("7_j3nvf")
 
 [node name="InnerContainer" type="PanelContainer" parent="UnlocksContainer/OuterPanelContainer/ScrollContainer" unique_id=246446738]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 6
-theme = SubResource("Theme_x8dhy")
+size_flags_vertical = 4
+theme = ExtResource("2_3eorv")
 theme_type_variation = &"InnerContainer"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer" unique_id=854756816]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 8
 
 [node name="TitleLabel" type="Label" parent="UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=562144559]
 layout_mode = 2
+size_flags_vertical = 0
 theme_type_variation = &"HeaderLarge"
 text = "LEVEL_UNLOCKED"
 horizontal_alignment = 1
@@ -163,26 +169,26 @@ custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+texture = ExtResource("10_dgp11")
 expand_mode = 1
 
 [node name="DescriptionLabel" type="Label" parent="UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=658962811]
 layout_mode = 2
 theme_type_variation = &"HeaderMedium"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x8dhy")
 text = "LEVEL_UNLOCKED_DESCRIPTION"
 horizontal_alignment = 1
 
 [node name="CloseButton" parent="UnlocksContainer/OuterPanelContainer" unique_id=998217422 instance=ExtResource("8_dgp11")]
 layout_mode = 2
 
-[node name="ButtonContainer" type="HBoxContainer" parent="UnlocksContainer" unique_id=2069789025]
-layout_mode = 2
-alignment = 1
-
 [node name="AdPanel" type="Panel" parent="UnlocksContainer" unique_id=800514159]
+visible = false
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("2_3eorv")
+theme_type_variation = &"EmptyPanel"
 
 [node name="ButtonContainer" type="VBoxContainer" parent="." unique_id=853223382]
 layout_mode = 1
@@ -192,9 +198,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -199.0
-offset_top = -351.0
+offset_top = -326.0
 offset_right = 199.0
-offset_bottom = -130.0
+offset_bottom = -178.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
@@ -215,13 +221,6 @@ theme = ExtResource("2_3eorv")
 text = "MAIN_MENU"
 script = ExtResource("3_3eq00")
 
-[node name="Leaderboard" type="Button" parent="ButtonContainer" unique_id=147126916]
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-theme = ExtResource("2_3eorv")
-text = "Leaderboard"
-script = ExtResource("3_3eq00")
-
+[connection signal="pressed" from="ScoreLabels/Leaderboard" to="." method="_on_leaderboard_pressed"]
 [connection signal="pressed" from="ButtonContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="ButtonContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="ButtonContainer/Leaderboard" to="." method="_on_leaderboard_pressed"]

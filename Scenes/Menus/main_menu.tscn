@@ -21,19 +21,6 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nfl8x"]
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
-
 [node name="MainMenu" type="Control" unique_id=1644317146 node_paths=PackedStringArray("sign_in_button")]
 layout_mode = 3
 anchors_preset = 15
@@ -108,18 +95,20 @@ grow_vertical = 2
 script = ExtResource("15_8bdjp")
 
 [node name="LevelSelectContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1354738231]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("15_8dws6")
-theme_override_styles/panel = SubResource("StyleBoxFlat_nfl8x")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/LevelSelectContainer" unique_id=1217507080]
+clip_children = 1
 custom_minimum_size = Vector2(610, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("15_8dws6")
+theme_type_variation = &"LowerScrollContainer"
 horizontal_scroll_mode = 0
 script = ExtResource("18_0rh2w")
 
@@ -151,19 +140,19 @@ last_wrap_alignment = 2
 layout_mode = 2
 
 [node name="LockedMessageContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1459852420]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("15_8dws6")
-theme_override_styles/panel = SubResource("StyleBoxFlat_nfl8x")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/LockedMessageContainer" unique_id=1208609797]
+clip_children = 1
 custom_minimum_size = Vector2(610, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("15_8dws6")
+theme_type_variation = &"LowerScrollContainer"
 horizontal_scroll_mode = 0
 script = ExtResource("18_0rh2w")
 
@@ -210,7 +199,6 @@ theme = ExtResource("15_8dws6")
 theme_type_variation = &"EmptyPanel"
 
 [node name="MainButtons" type="VBoxContainer" parent="." unique_id=880943489]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

@@ -1,15 +1,18 @@
 extends ScrollContainer
 
-@export var max_size_landscape: float = 570.0
+@export var max_size_landscape: float = 575.0
 @export var max_size_portrait: float = 1160.0
 @export var scrollbar_size_x : float = 32
-@export var padding : float = 65
+@export var padding : float = 100
 
 var child : PanelContainer
 
 func _ready() -> void:
 	update_size()
-	get_v_scroll_bar().custom_minimum_size.x = scrollbar_size_x
+	var scrollbar = get_v_scroll_bar()
+	scrollbar.theme_type_variation = "CustomScrollBar"
+	scrollbar.custom_minimum_size.x = scrollbar_size_x
+	scrollbar.scale.y = 0.9
 	child = get_child(0) as PanelContainer
 	child.minimum_size_changed.connect(update_size)
 	get_viewport().size_changed.connect(_on_viewport_changed)

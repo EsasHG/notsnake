@@ -1,9 +1,9 @@
 extends Control
 @onready var resume: AudioButton = $Panel/VBoxContainer/HBoxContainer2/VBoxContainer/Resume
+@onready var v_box_container: VBoxContainer = $Panel/VBoxContainer
 
 const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
 @onready var close_button: Button = $Close
-
 
 
 func _ready() -> void:
@@ -11,14 +11,15 @@ func _ready() -> void:
 		if visible: 
 			resume.grab_focus(true))
 	resume.grab_focus(true)
-
+	UINavigator.open.call_deferred(v_box_container,false, false, _on_buttons_back)
 
 #do we really want this here?
-func _on_resume_pressed() -> void:
+func _on_buttons_back() -> void:
 	$Panel.visible = false
 	close_button.visible = false
 	next_count(3)
-	
+	GameSettings.unpause_game()
+	UINavigator.back()
 
 func next_count(count : int) -> void:
 	$Countdown.scale = Vector2(2,2)

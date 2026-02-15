@@ -16,6 +16,7 @@ script = ExtResource("1_iugb5")
 spawn_on_start = false
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1527838523]
+process_mode = 3
 position = Vector2(-722, 263)
 limit_left = -1303
 limit_top = -10

@@ -11,6 +11,8 @@ var transitionTime: float = 0.1
 
 signal transition_in_finished
 signal transition_out_finished
+
+
 func _ready() -> void:
 	Logging.logMessage("Scene transition ready")
 	dog.visible = false
@@ -33,6 +35,7 @@ func _ready() -> void:
 	else:
 		transition_in()
 	
+
 func _process(_delta: float) -> void:
 	pass#dog.rotateRight = ! dog.rotateRight
 	
@@ -48,8 +51,10 @@ func transition_in() -> void:
 	tween.tween_property(panel, "modulate:a", 1, transitionTime)
 	tween.tween_callback(_transition_in_finished)
 
+
 func _transition_in_finished():
 	transition_in_finished.emit()
+
 
 func transition_out() -> void:
 	Logging.logMessage("transitioning out!")
@@ -58,6 +63,7 @@ func transition_out() -> void:
 	tween.tween_property(panel, "modulate:a", 0, transitionTime) #TODO: something fancy to find a better end point?
 	#tween.tween_property(panel, "position", Vector2(-start_x,0), transitionTime) #TODO: something fancy to find a better end point?
 	tween.tween_callback(_transition_out_finished)
+
 
 func _transition_out_finished() -> void:
 	transition_out_finished.emit()

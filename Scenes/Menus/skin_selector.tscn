@@ -130,18 +130,19 @@ size_flags_horizontal = 4
 script = ExtResource("1_cmbhx")
 
 [node name="MainScreen" type="PanelContainer" parent="AdLayoutContainer" unique_id=1354738231]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("2_dimmy")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/MainScreen" unique_id=1217507080]
+clip_children = 1
 custom_minimum_size = Vector2(610, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_dimmy")
+theme_type_variation = &"LowerScrollContainer"
 horizontal_scroll_mode = 0
 script = ExtResource("3_k52lc")
 
@@ -156,10 +157,12 @@ theme_type_variation = &"InnerContainer"
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=85068292]
+[node name="Label" type="Label" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=246434906]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 0
 theme = ExtResource("2_dimmy")
+theme_type_variation = &"HeaderLarge"
 text = "SELECT_COLOR"
 horizontal_alignment = 1
 
@@ -299,17 +302,20 @@ text = "SKIN_SELECTION_BACK"
 layout_mode = 2
 
 [node name="HatSelectContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1793867525]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("2_dimmy")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/HatSelectContainer" unique_id=77916419]
+clip_children = 1
 custom_minimum_size = Vector2(610, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_dimmy")
+theme_type_variation = &"LowerScrollContainer"
 horizontal_scroll_mode = 0
 script = ExtResource("3_k52lc")
 
@@ -349,11 +355,13 @@ size_flags_vertical = 6
 theme = ExtResource("2_dimmy")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/LockedMessageContainer" unique_id=2030964247]
+clip_children = 1
 custom_minimum_size = Vector2(610, 200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("2_dimmy")
+theme_type_variation = &"LowerScrollContainer"
 horizontal_scroll_mode = 0
 script = ExtResource("3_k52lc")
 

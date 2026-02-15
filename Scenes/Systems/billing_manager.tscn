@@ -16,7 +16,6 @@ mouse_filter = 2
 script = ExtResource("1_wqdxx")
 
 [node name="Ad_removal_popup" type="PanelContainer" parent="." unique_id=1492161946]
-visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 8
@@ -194,6 +193,7 @@ theme = ExtResource("2_mmd68")
 text = "CLOSE"
 
 [node name="Pending_popup" type="PanelContainer" parent="." unique_id=1633145843]
+visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 8
