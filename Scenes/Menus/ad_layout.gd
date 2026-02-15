@@ -1,4 +1,6 @@
 extends VBoxContainer
+
+class_name AdLayout
 @onready var ad_panel: Panel = $AdPanel
 
 func _ready() -> void:

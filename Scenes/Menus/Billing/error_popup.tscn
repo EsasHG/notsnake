@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ttkw6vhl0p8c"]
+
+[ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_tlv08"]
+[ext_resource type="Script" uid="uid://dsitvt5ebuxin" path="res://Scenes/Menus/popup_container.gd" id="2_fd3t0"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_dk35g"]
+
+[node name="ErrorPopup" unique_id=742566856 instance=ExtResource("1_tlv08")]
+script = ExtResource("2_fd3t0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer" parent_id_path=PackedInt32Array(1316018813) index="0" unique_id=1728039926]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="0" unique_id=1420130666]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_dk35g")
+theme_type_variation = &"HeaderLarge"
+text = "BILLING_PURCHASE_ERROR_TITLE"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="1" unique_id=1315631346]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_dk35g")
+theme_type_variation = &"HeaderMedium"
+text = "BILLING_PURCHASE_ERROR_DESCRIPTION"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="2" unique_id=1295097847]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Button_Retry_Purchase" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="0" unique_id=920107707]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("3_dk35g")
+text = "RETRY"
+
+[node name="Button_Close_Error" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="1" unique_id=1781184082]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 10
+theme = ExtResource("3_dk35g")
+text = "CLOSE"
