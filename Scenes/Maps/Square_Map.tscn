@@ -79,7 +79,7 @@ script = ExtResource("4_0edyt")
 [node name="PickupPoints" type="Node2D" parent="PickupSpawner" unique_id=753454815]
 
 [node name="Node2D" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=479219709]
-position = Vector2(104, 432)
+position = Vector2(260, 548)
 
 [node name="Node2D2" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=303823406]
 position = Vector2(-487, 201)

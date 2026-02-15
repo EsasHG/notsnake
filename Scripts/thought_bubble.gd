@@ -13,11 +13,12 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	var playerPos : Vector2 = dog.global_position
+	if is_instance_valid(dog):
+		var playerPos : Vector2 = dog.global_position
 	
-	var q0 = playerPos.lerp(pointPos, min(t1, 1.0))
-	var q1 = pointPos.lerp(global_position, min(t1, 1.0))
-	$ComicBubbleSmall.global_position = q0.lerp(q1, min(t1, 1.0))
-	
-	var q1_2 = pointPos.lerp(global_position, min(t2, 1.0))
-	$ComicBubbleMedium.global_position = q0.lerp(q1_2, min(t2, 1.0))
+		var q0 = playerPos.lerp(pointPos, min(t1, 1.0))
+		var q1 = pointPos.lerp(global_position, min(t1, 1.0))
+		$ComicBubbleSmall.global_position = q0.lerp(q1, min(t1, 1.0))
+		
+		var q1_2 = pointPos.lerp(global_position, min(t2, 1.0))
+		$ComicBubbleMedium.global_position = q0.lerp(q1_2, min(t2, 1.0))

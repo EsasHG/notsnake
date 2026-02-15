@@ -158,16 +158,25 @@ func mainMenu():
 		Logging.error("main_menu called, but game is running! Stopping game...")
 		on_gameOver.emit()
 	else:
-		if(currentWorld != null):
-			currentWorld.queue_free()
-			currentWorld = null
-		var b = BUBBLE_CUTSCENE.instantiate()
-		b.skipEntireCutscene = true
-		b.levelSelect = false
-		currentWorld = b
-		get_tree().root.add_child(b)
-		on_mainMenuOpened.emit()
-		game_running = false
+		var transition: SceneTransition = _create_transition()
+		
+		transition.transition_in_finished.connect(func():
+				if(currentWorld != null):
+					currentWorld.queue_free()
+					currentWorld = null
+				var b = BUBBLE_CUTSCENE.instantiate()
+				b.skipEntireCutscene = true
+				b.levelSelect = false
+				currentWorld = b
+				get_tree().root.add_child(b)
+				on_mainMenuOpened.emit()
+				game_running = false
+				get_tree().create_timer(1).timeout.connect(func(): 
+						transition.transition_out()
+						)
+				)
+		
+		
 
 
 func startGame():
