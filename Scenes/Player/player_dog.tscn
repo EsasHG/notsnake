@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b78ceum26wnjq" path="res://Scripts/simple_player_character.gd" id="1_hgq6l"]
 [ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="2_nccp2"]
 [ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="3_cyf8n"]
-[ext_resource type="AudioStream" uid="uid://bj3kggw0gs3xi" path="res://Assets/Sound/bark.wav" id="4_7e683"]
+[ext_resource type="AudioStream" uid="uid://vsxwvpth1gna" path="res://Assets/Sound/bark.mp3" id="4_it6ej"]
 [ext_resource type="Texture2D" uid="uid://bcsu113pmwt3r" path="res://Assets/Dogs/cosmetics/hat_helmet_fix.png" id="8_6hox4"]
 [ext_resource type="Texture2D" uid="uid://bywajg5yonlif" path="res://Assets/UI/arrow.png" id="9_50el2"]
 [ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="10_m7s8p"]
@@ -204,7 +204,7 @@ sprite_frames = SubResource("SpriteFrames_rudug")
 frame_progress = 0.515546
 
 [node name="BarkSound" type="AudioStreamPlayer2D" parent="Head" unique_id=1187651775]
-stream = ExtResource("4_7e683")
+stream = ExtResource("4_it6ej")
 bus = &"SFX"
 
 [node name="Hat" type="Sprite2D" parent="Head" unique_id=1801449873]

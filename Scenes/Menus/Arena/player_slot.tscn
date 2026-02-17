@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ckpdumpv2ic5t" path="res://Scenes/Menus/Arena/player_slot.gd" id="1_ks1p2"]
 [ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="2_aup6r"]
 [ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="3_b17ae"]
-[ext_resource type="AudioStream" uid="uid://bj3kggw0gs3xi" path="res://Assets/Sound/bark.wav" id="4_wdt0y"]
+[ext_resource type="AudioStream" uid="uid://vsxwvpth1gna" path="res://Assets/Sound/bark.mp3" id="4_c45sk"]
 [ext_resource type="Texture2D" uid="uid://cxm52e0c581yk" path="res://Assets/Dogs/cosmetics/hat_christmas.png" id="5_c45sk"]
 [ext_resource type="Texture2D" uid="uid://baisbs5c35f4g" path="res://Assets/Dogs/cosmetics/hat_cowboy.png" id="6_kcd4c"]
 [ext_resource type="Texture2D" uid="uid://dvj0pjlmvqwve" path="res://Assets/Dogs/cosmetics/hat_crashdummyDot.png" id="7_u55o0"]
@@ -153,7 +153,7 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_tsio3")
 
 [node name="BarkSound" type="AudioStreamPlayer2D" parent="Dog/Head" unique_id=1022992040]
-stream = ExtResource("4_wdt0y")
+stream = ExtResource("4_c45sk")
 bus = &"SFX"
 
 [node name="Hats" type="Node2D" parent="Dog/Head" unique_id=977860965]

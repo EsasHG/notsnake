@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://du7fvm0p2wnua" path="res://Scripts/angry_dog.gd" id="1_bkt5k"]
 [ext_resource type="Texture2D" uid="uid://corpw8wghq02i" path="res://Assets/Obstacles/NPC_dogs/chiweewee_2.png" id="1_snvbi"]
 [ext_resource type="Texture2D" uid="uid://1cnr858o0wj2" path="res://Assets/Obstacles/NPC_dogs/chiweewee_1.png" id="2_b1v44"]
-[ext_resource type="AudioStream" uid="uid://i378i3hla5nk" path="res://Assets/Sound/bark_looping.wav" id="4_3h6uo"]
+[ext_resource type="AudioStream" uid="uid://cwsw4knyeur7r" path="res://Assets/Sound/bark_looping.mp3" id="4_na2xi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8dfl1"]
 size = Vector2(20, 42)
@@ -40,6 +40,6 @@ shape = SubResource("RectangleShape2D_8dfl1")
 sprite_frames = SubResource("SpriteFrames_eip46")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=720091256]
-stream = ExtResource("4_3h6uo")
+stream = ExtResource("4_na2xi")
 pitch_scale = 1.4
 bus = &"SFX"

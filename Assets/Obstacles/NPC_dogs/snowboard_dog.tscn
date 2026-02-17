@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://daexxm4sj5vkr"]
+
+[ext_resource type="Script" uid="uid://bj4jt8vvwiblr" path="res://Assets/Obstacles/NPC_dogs/snowboard_dog.gd" id="1_v3dyd"]
+[ext_resource type="AudioStream" uid="uid://cwsw4knyeur7r" path="res://Assets/Sound/bark_looping.mp3" id="2_v3dyd"]
+[ext_resource type="AudioStream" uid="uid://be17k0e6vj2u7" path="res://Assets/Obstacles/NPC_dogs/dog_snowboard/dog_snowboard.mp3" id="3_f2rwy"]
+[ext_resource type="Texture2D" uid="uid://cxbsc1j5m8rc6" path="res://Assets/Obstacles/NPC_dogs/dog_snowboard/bulldog_snowboard.png" id="3_f5hsj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xavxj"]
+size = Vector2(66.5, 48)
+
+[node name="SnowboardDog" type="Area2D" unique_id=99716063 groups=["Dangers"]]
+script = ExtResource("1_v3dyd")
+distThreshold = 350
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=787216436]
+position = Vector2(-4.25, -21)
+shape = SubResource("RectangleShape2D_xavxj")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1718366933]
+stream = ExtResource("2_v3dyd")
+pitch_scale = 0.86
+bus = &"SFX"
+
+[node name="SnowboardSound" type="AudioStreamPlayer2D" parent="." unique_id=1410708392]
+stream = ExtResource("3_f2rwy")
+autoplay = true
+max_distance = 1500.0
+attenuation = 1.5157169
+bus = &"SFX"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1456218780]
+position = Vector2(0, -33.5)
+texture = ExtResource("3_f5hsj")

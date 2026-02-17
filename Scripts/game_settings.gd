@@ -259,7 +259,7 @@ func game_over():
 	if currentScore >= 20:
 		var unlock_map: bool = false
 		for map in GlobalInputMap.Maps:
-			if unlock_map:
+			if unlock_map and not GlobalInputMap.Maps[map].unlocked:
 				on_somethingUnlocked.emit(map)
 				GlobalInputMap.Maps[map].unlocked = true
 				save_unlocks = true

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="3_6fsxm"]
 [ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="3_k52lc"]
 [ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="4_k52lc"]
-[ext_resource type="AudioStream" uid="uid://bj3kggw0gs3xi" path="res://Assets/Sound/bark.wav" id="5_6msm5"]
+[ext_resource type="AudioStream" uid="uid://vsxwvpth1gna" path="res://Assets/Sound/bark.mp3" id="7_dimmy"]
 [ext_resource type="PackedScene" uid="uid://dve3ihhfdxc3w" path="res://Scenes/Menus/close_button.tscn" id="9_dimmy"]
 [ext_resource type="PackedScene" uid="uid://df6v31n3ooicl" path="res://Scenes/Menus/back_button.tscn" id="10_cmbhx"]
 
@@ -286,7 +286,7 @@ position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_nf6su")
 
 [node name="BarkSound" type="AudioStreamPlayer2D" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Control/Control/Head" unique_id=566287524]
-stream = ExtResource("5_6msm5")
+stream = ExtResource("7_dimmy")
 bus = &"SFX"
 
 [node name="Hat" type="Sprite2D" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Control/Control/Head" unique_id=975928397]
