@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b711k5qmt7ath"
-path="res://.godot/imported/snapshots_client.svg-9116cd64a2c8e19ea06890e59b7bb425.ctex"
+uid="uid://dlmej3odigsqv"
+path="res://.godot/imported/3.svg-a23c2900df03e2d9098d26416d2193fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/GodotPlayGameServices/assets/icons/snapshots_client.svg"
-dest_files=["res://.godot/imported/snapshots_client.svg-9116cd64a2c8e19ea06890e59b7bb425.ctex"]
+source_file="res://addons/GodotPlayGameServices/assets/icons/3.svg"
+dest_files=["res://.godot/imported/3.svg-a23c2900df03e2d9098d26416d2193fa.ctex"]
 
 [params]
 

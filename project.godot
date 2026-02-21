@@ -23,7 +23,7 @@ GameSettings="*res://Scripts/game_settings.gd"
 Logging="*res://Scripts/logging.gd"
 GlobalInputMap="*res://Scenes/Menus/Arena/global_input_map.gd"
 UINavigator="*res://Scripts/ui_navigator.gd"
-GodotPlayGameServices="*uid://cdeud4neqclc6"
+GodotPlayGameServices="*uid://bxrtbgaehoa0y"
 SaveManager="*uid://de2jnqrou7h18"
 
 [display]

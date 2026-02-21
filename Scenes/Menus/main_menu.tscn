@@ -34,22 +34,6 @@ sign_in_button = NodePath("Sign In")
 buttonTheme = ExtResource("8_vtepg")
 levels = Array[ExtResource("8_5egv6")]([ExtResource("9_vtepg"), ExtResource("10_8dnnj"), ExtResource("9_0xbgx"), ExtResource("11_m3bi6"), ExtResource("12_wyh8j"), ExtResource("13_ujyyl")])
 
-[node name="Sign In" type="Button" parent="." unique_id=458228861]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -215.0
-offset_top = 223.0
-offset_bottom = 293.0
-grow_horizontal = 0
-theme = ExtResource("15_8dws6")
-theme_override_font_sizes/font_size = 20
-icon = ExtResource("11_s0gno")
-flat = true
-script = ExtResource("13_vtepg")
-
 [node name="Logo" type="TextureRect" parent="." unique_id=307307508]
 layout_mode = 1
 anchors_preset = 5
@@ -236,7 +220,23 @@ theme = ExtResource("15_8dws6")
 text = "QUIT"
 script = ExtResource("13_vtepg")
 
-[connection signal="pressed" from="Sign In" to="." method="_on_sign_in_pressed"]
+[node name="Sign In" type="Button" parent="." unique_id=458228861]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -390.0
+offset_top = 223.0
+offset_bottom = 333.0
+grow_horizontal = 0
+theme = ExtResource("15_8dws6")
+theme_override_font_sizes/font_size = 20
+icon = ExtResource("11_s0gno")
+flat = true
+script = ExtResource("13_vtepg")
+
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MainButtons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Sign In" to="." method="_on_sign_in_pressed"]

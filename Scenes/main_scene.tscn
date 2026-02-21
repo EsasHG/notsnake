@@ -14,10 +14,11 @@
 [ext_resource type="AudioStream" uid="uid://d3ie6s5w1q3qy" path="res://Assets/Sound/loopydog_maintheme_intro.mp3" id="11_2ebs2"]
 [ext_resource type="AudioStream" uid="uid://by3n7gshx8426" path="res://Assets/Sound/loopydog_maintheme_v2_main.mp3" id="12_2ebs2"]
 [ext_resource type="AudioStream" uid="uid://b0nnqd7hp5bi0" path="res://Assets/Sound/wall_hit_sound.mp3" id="13_2ebs2"]
-[ext_resource type="Script" uid="uid://d0td4u4d05wup" path="res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd" id="13_s8qe6"]
-[ext_resource type="Script" uid="uid://dwanyal5j0j23" path="res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd" id="14_yb0ja"]
-[ext_resource type="Script" uid="uid://b8e7mo16ebjn" path="res://addons/GodotPlayGameServices/scripts/achievements/achievements_client.gd" id="15_15kh8"]
+[ext_resource type="Script" uid="uid://81txo1x6t53a" path="res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd" id="15_2ebs2"]
+[ext_resource type="Script" uid="uid://cg02bndeeo2mg" path="res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd" id="16_oyb3p"]
 [ext_resource type="PackedScene" uid="uid://ck01dnrayeqyd" path="res://Scenes/Systems/ad_manager.tscn" id="16_viu5a"]
+[ext_resource type="Script" uid="uid://glagih2j03pk" path="res://addons/GodotPlayGameServices/scripts/achievements/achievements_client.gd" id="17_jvnna"]
+[ext_resource type="Script" uid="uid://c7rjippj2i4of" path="res://addons/GodotPlayGameServices/scripts/snapshots/snapshots_client.gd" id="18_oyb3p"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_oyb3p"]
 clip_count = 2
@@ -172,18 +173,25 @@ volume_db = -10.0
 pitch_scale = 35.0
 bus = &"SFX"
 
-[node name="PlayGamesLeaderboardsClient" type="Node" parent="." unique_id=1001275502]
+[node name="PlayGamesSignInClient" type="Node" parent="." unique_id=1243093303]
 unique_name_in_owner = true
-script = ExtResource("13_s8qe6")
+script = ExtResource("15_2ebs2")
+metadata/_custom_type_script = "uid://81txo1x6t53a"
 
-[node name="PlayGamesSignInClient" type="Node" parent="." unique_id=376011106]
+[node name="PlayGamesLeaderboardsClient" type="Node" parent="." unique_id=94784161]
 unique_name_in_owner = true
-script = ExtResource("14_yb0ja")
+script = ExtResource("16_oyb3p")
+metadata/_custom_type_script = "uid://cg02bndeeo2mg"
 
-[node name="PlayGamesAchievementsClient" type="Node" parent="." unique_id=530065013]
+[node name="PlayGamesAchievementsClient" type="Node" parent="." unique_id=1810156240]
 unique_name_in_owner = true
-script = ExtResource("15_15kh8")
-metadata/_custom_type_script = "uid://b8e7mo16ebjn"
+script = ExtResource("17_jvnna")
+metadata/_custom_type_script = "uid://glagih2j03pk"
+
+[node name="PlayGamesSnapshotsClient" type="Node" parent="." unique_id=946544497]
+unique_name_in_owner = true
+script = ExtResource("18_oyb3p")
+metadata/_custom_type_script = "uid://c7rjippj2i4of"
 
 [node name="AdManager" parent="." unique_id=1227274275 instance=ExtResource("16_viu5a")]
 visible = false

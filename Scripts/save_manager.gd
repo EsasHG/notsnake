@@ -1,9 +1,16 @@
 extends Node
 
+@onready var snapshotClient : PlayGamesSnapshotsClient = get_tree().root.find_child("PlayGamesSnapshotsClient", true, false)
+
+const SETTINGS_FILE = "settings.save"
+const SCORES_FILE = "savegame.save"
+const UNLOCKS_FILE = "unlocks.save"
+func _ready() -> void:
+	pass#snapshotClient.load_game(SETTINGS_FILE)
 
 func save_settings() -> void:
 	Logging.logMessage("Saving settings!")
-	var saveFile = FileAccess.open("user://settings.save", FileAccess.WRITE)
+	var saveFile = FileAccess.open("user://" + SETTINGS_FILE, FileAccess.WRITE)
 	
 	var saveDict = {
 			"musicVol" = db_to_linear(GameSettings.musicVol), 
@@ -24,7 +31,7 @@ func save_settings() -> void:
 
 func load_settings() -> bool:
 	Logging.logMessage("Loading settings")
-	var possibleFileNames: Array[String] = ["user://settings.save","user://savegame.save"]
+	var possibleFileNames: Array[String] = ["user://" + SETTINGS_FILE,"user://" + SCORES_FILE]
 	var fileName:String = ""
 	
 	for possibleName:String in possibleFileNames:
@@ -105,7 +112,7 @@ func load_settings() -> bool:
 
 func save_score() -> void:
 	Logging.logMessage("Saving high scores!")
-	var saveFile = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	var saveFile = FileAccess.open("user://" + SCORES_FILE, FileAccess.WRITE)
 	
 	var saveDict = {"highScores" = GameSettings.highScores} 
 	saveFile.store_line(JSON.stringify(saveDict))
@@ -114,11 +121,11 @@ func save_score() -> void:
 
 func load_score() -> bool:
 	Logging.logMessage("Loading high scores")
-	if not FileAccess.file_exists("user://savegame.save"):
+	if not FileAccess.file_exists("user://" + SCORES_FILE):
 		Logging.logMessage("Error! Trying to load a non-existing save file!")	
 		return false
 		
-	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var save_file = FileAccess.open("user://" + SCORES_FILE, FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_str = save_file.get_line()	
 		var json = JSON.new()
@@ -140,7 +147,7 @@ func load_score() -> bool:
 
 func save_unlocks():
 	Logging.logMessage("Saving unlocks!")
-	var saveFile = FileAccess.open("user://unlocks.save", FileAccess.WRITE)
+	var saveFile = FileAccess.open("user://" + UNLOCKS_FILE, FileAccess.WRITE)
 	
 	##Find unlocked maps
 	var unlocked_maps :Array[String]
@@ -166,11 +173,11 @@ func save_unlocks():
 
 func load_unlocks():
 	Logging.logMessage("Loading unlocks")
-	if not FileAccess.file_exists("user://unlocks.save"):
+	if not FileAccess.file_exists("user://" + UNLOCKS_FILE):
 		Logging.logMessage("Error! Trying to load a non-existing save file!")	
 		return false
 		
-	var save_file = FileAccess.open("user://unlocks.save", FileAccess.READ)
+	var save_file = FileAccess.open("user://" + UNLOCKS_FILE, FileAccess.READ)
 	while save_file.get_position() < save_file.get_length():
 		var json_str = save_file.get_line()	
 		var json = JSON.new()
