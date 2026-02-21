@@ -68,3 +68,5 @@ visible = false
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 size_flags_vertical = 8
+theme = ExtResource("3_a84u6")
+theme_type_variation = &"EmptyPanel"

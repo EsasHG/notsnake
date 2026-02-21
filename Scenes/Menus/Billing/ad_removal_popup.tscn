@@ -3,12 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_hxpan"]
 [ext_resource type="Script" uid="uid://cocwfdxjwc40w" path="res://Scenes/Menus/Billing/ad_removal_popup.gd" id="2_2uel7"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_4cmwp"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="4_2uel7"]
 
 [node name="AdRemovalPopup" unique_id=742566856 instance=ExtResource("1_hxpan")]
 script = ExtResource("2_2uel7")
 
 [node name="ScrollContainer" parent="OuterPanelContainer" parent_id_path=PackedInt32Array(1354738231) index="0" unique_id=910289530]
 custom_minimum_size = Vector2(610, 350)
+horizontal_scroll_mode = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer" parent_id_path=PackedInt32Array(1316018813) index="0" unique_id=1857447480]
 layout_mode = 2
@@ -52,6 +54,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("3_4cmwp")
 text = "AD_REMOVAL_YES"
+script = ExtResource("4_2uel7")
 
 [node name="Button_No" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="1" unique_id=255784658]
 custom_minimum_size = Vector2(130, 50)
@@ -59,3 +62,4 @@ layout_mode = 2
 size_flags_horizontal = 6
 theme = ExtResource("3_4cmwp")
 text = "AD_REMOVAL_NO"
+script = ExtResource("4_2uel7")

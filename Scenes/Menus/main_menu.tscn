@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
-[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/Map.gd" id="8_5egv6"]
+[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="8_5egv6"]
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="8_vtepg"]
 [ext_resource type="Resource" uid="uid://csf486hunk2iy" path="res://Scenes/Maps/Winter.tres" id="9_0xbgx"]
 [ext_resource type="Resource" uid="uid://cibsfp4rd5p5b" path="res://Scenes/Maps/Field.tres" id="9_vtepg"]
@@ -140,6 +140,7 @@ last_wrap_alignment = 2
 layout_mode = 2
 
 [node name="LockedMessageContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1459852420]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -174,6 +175,7 @@ custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("15_8dws6")
+theme_type_variation = &"HeaderLarge"
 text = "MAP_LOCKED"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -183,7 +185,7 @@ custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("15_8dws6")
-theme_override_font_sizes/font_size = 30
+theme_type_variation = &"HeaderMedium"
 text = "PARK_UNLOCK_CONDITION"
 horizontal_alignment = 1
 autowrap_mode = 3

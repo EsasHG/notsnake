@@ -30,21 +30,3 @@ theme_type_variation = &"HeaderMedium"
 text = "BILLING_PURCHASE_ERROR_DESCRIPTION"
 horizontal_alignment = 1
 autowrap_mode = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="2" unique_id=1295097847]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Button_Retry_Purchase" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="0" unique_id=920107707]
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-size_flags_horizontal = 10
-theme = ExtResource("3_dk35g")
-text = "RETRY"
-
-[node name="Button_Close_Error" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="1" unique_id=1781184082]
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-size_flags_horizontal = 10
-theme = ExtResource("3_dk35g")
-text = "CLOSE"

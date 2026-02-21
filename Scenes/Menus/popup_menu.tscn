@@ -43,6 +43,7 @@ theme_type_variation = &"InnerContainer"
 layout_mode = 2
 
 [node name="AdPanel" type="Panel" parent="." unique_id=800514159]
+visible = false
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 size_flags_vertical = 8

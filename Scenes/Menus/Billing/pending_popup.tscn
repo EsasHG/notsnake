@@ -29,14 +29,3 @@ theme = ExtResource("3_ygjnt")
 theme_type_variation = &"HeaderMedium"
 text = "BILLING_PENDING_DESCRIPTION"
 autowrap_mode = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="2" unique_id=528087730]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Button_Close_Pending" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="0" unique_id=1651992339]
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-size_flags_horizontal = 10
-theme = ExtResource("3_ygjnt")
-text = "CLOSE"

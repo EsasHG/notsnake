@@ -21,7 +21,7 @@ var no_ads_purchased: bool = false
 
 var ad_removal_popup : PopupContainer
 var remove_ads_product
-
+var _ad_removal_purchase
 func _ready() -> void:
 	Logging.logMessage("Billing manager getting ready")
 	if enable:
@@ -34,16 +34,17 @@ func _ready() -> void:
 		billing_client.consume_purchase_response.connect(_on_consume_purchase_response) # response: Dictionary
 		billing_client.acknowledge_purchase_response.connect(_on_acknowledge_purchase_response) # response: Dictionary
 		billing_client.start_connection()
-		ad_removal_popup = AD_REMOVAL_POPUP.instantiate()
-		ad_removal_popup.visible = false
-		add_child(ad_removal_popup)
+		#ad_removal_popup.visible = false
+
 	else:
 		loading_finished.emit()
 	
+
 func query_product_details():
 	Logging.logMessage("Querying product details!")
 	
 	billing_client.query_product_details([remove_ads_id],BillingClient.ProductType.INAPP)
+
 
 func query_purchases():
 	Logging.logMessage("Querying purchases!")
@@ -51,13 +52,21 @@ func query_purchases():
 
 
 func update_popup():
-	if products_loaded and purchases_checked and !no_ads_purchased:
+	if products_loaded and purchases_checked and !no_ads_purchased and is_instance_valid(ad_removal_popup):
+		ad_removal_popup.button_yes.pressed.connect.call_deferred(_on_button_yes_pressed)
+		ad_removal_popup.button_no.pressed.connect.call_deferred(_on_button_no_pressed)
 		var currency = remove_ads_product.one_time_purchase_offer_details.price_currency_code
 		var price : String = remove_ads_product.one_time_purchase_offer_details.formatted_price
 		ad_removal_popup.title.text = remove_ads_product.name
 		ad_removal_popup.description.text = remove_ads_product.description
-		ad_removal_popup.price.text = currency + " " + price
-		#ad_removal_popup.visible = true
+		ad_removal_popup.price_label.text = currency + " " + price
+
+
+func show_ad_removal_popup() -> void:
+	ad_removal_popup = UINavigator.open_from_scene(AD_REMOVAL_POPUP)
+	update_popup()
+	
+#	UINavigator.open(ad_removal_popup)
 
 func _on_connected():
 	Logging.logMessage("Connected to billing!")
@@ -90,18 +99,19 @@ func _on_query_purchases_response(query_result: Dictionary):
 				Logging.logMessage(str(purchase))
 				for id in purchase.product_ids:
 					if id == remove_ads_id:
+						_ad_removal_purchase = purchase
 						no_ads_purchased = true
 						GameSettings.remove_all_ads()
 						if not purchase.is_acknowledged:
 							billing_client.acknowledge_purchase(purchase.purchase_token)
-						if consume_ad_removal_purchase:
-							billing_client.consume_purchase(purchase.purchase_token)
+
 		purchases_checked = true
 		update_popup()	
 		checkLoadingFinished()
 	else:
 		Logging.error("Purchase query failed")
 		Logging.error("response_code: "+ query_result.response_code + " debug_message: " + query_result.debug_message)
+
 
 func checkLoadingFinished() -> void:
 	if(purchases_checked and products_loaded):
@@ -121,14 +131,14 @@ func _on_purchase_updated(response: Dictionary):
 						billing_client.PurchaseState.PURCHASED:
 							for id in purchase.product_ids:
 								if id == remove_ads_id:
-									UINavigator.back() ##TODO: does this work?
 									GameSettings.remove_all_ads()
 									billing_client.acknowledge_purchase(purchase.purchase_token)
+									_ad_removal_purchase = purchase
 						billing_client.PurchaseState.PENDING:
-							UINavigator.open_from_scene(PENDING_POPUP,false)
+							UINavigator.open_from_scene(PENDING_POPUP)
 								
 	else:
-		var error_popup : PopupContainer = UINavigator.open_from_scene(ERROR_POPUP,false)
+		var error_popup : PopupContainer = UINavigator.open_from_scene(ERROR_POPUP)
 		var error_description_label = error_popup.description
 		match response.response_code:
 			billing_client.BillingResponseCode.ITEM_ALREADY_OWNED:
@@ -157,11 +167,20 @@ func _on_purchase_updated(response: Dictionary):
 	if not response_ok:
 		Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 	
-	
+func _consume_purchase() -> void:
+	Logging.logMessage("Trying to consume purchase")	
+	if consume_ad_removal_purchase and _ad_removal_purchase:
+		billing_client.consume_purchase(_ad_removal_purchase.purchase_token)
+	elif !_ad_removal_purchase:
+		Logging.error("No purchase to consume!")
+		
+
 func _on_consume_purchase_response(response: Dictionary):
 	Logging.logMessage("Consume purchase response")
 	if response.response_code == billing_client.BillingResponseCode.OK:
 		Logging.logMessage("Purchase consumed!")
+		no_ads_purchased = false
+		_ad_removal_purchase = null
 	else:
 		Logging.error("Could not consume purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 		
@@ -170,7 +189,7 @@ func _on_acknowledge_purchase_response(response: Dictionary):
 	Logging.logMessage("Acknowledge purchase response")
 	match response.response_code:
 		billing_client.BillingResponseCode.OK:
-			UINavigator.open_from_scene(PURCHASED_POPUP,false)
+			UINavigator.open_from_scene(PURCHASED_POPUP)
 			Logging.logMessage("Purchase acknowledged!")
 		_:
 			Logging.logMessage("Error acknowledging purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
@@ -179,7 +198,6 @@ func _on_acknowledge_purchase_response(response: Dictionary):
 func _on_button_yes_pressed() -> void:
 	Logging.logMessage("Trying to purchase ad removal!")
 	billing_client.purchase(remove_ads_id)
-	UINavigator.back()
 
 
 func _on_button_no_pressed() -> void:

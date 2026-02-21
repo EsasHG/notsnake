@@ -28,7 +28,6 @@ func update_size() -> void:
 	if not is_instance_valid(child):
 		child = get_child(0) as Control
 	var desired_size_y:float = child.size.y + padding
-	Logging.logMessage("Desired size: " + str(desired_size_y))
 	custom_minimum_size.y =  desired_size_y if desired_size_y < max_y else max_y
 
 

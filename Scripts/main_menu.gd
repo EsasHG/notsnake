@@ -57,9 +57,9 @@ func _ready() -> void:
 				level_buttons.get_child(0).grab_focus(true)
 				)
 	
-	var music = get_tree().root.find_child("BGMusic", true, false)
-	if(music):
-		music.play()
+	var audioManager = get_tree().root.find_child("Audio", true, false)
+	if(audioManager):
+		audioManager.startMusic()
 	create_level_buttons()
 	
 

@@ -69,7 +69,10 @@ theme = ExtResource("1_5j8qy")
 text = "SHOW_FRAMERATE"
 script = ExtResource("3_5j8qy")
 
-[node name="UnlockMaps" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1511026282]
+[node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1915856693]
+layout_mode = 2
+
+[node name="UnlockMaps" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer" unique_id=1511026282]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
@@ -77,7 +80,7 @@ theme = ExtResource("1_5j8qy")
 text = "UNLOCK_MAPS"
 script = ExtResource("3_5j8qy")
 
-[node name="LockMaps" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1409006129]
+[node name="LockMaps" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer" unique_id=1409006129]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
@@ -86,21 +89,45 @@ theme_override_styles/normal = ExtResource("4_ikqh6")
 text = "LOCK_MAPS"
 script = ExtResource("3_5j8qy")
 
-[node name="UnlockHats" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1013354946]
+[node name="HBoxContainer2" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1114939059]
+layout_mode = 2
+
+[node name="UnlockHats" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer2" unique_id=1013354946]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = ExtResource("1_5j8qy")
 theme_override_styles/normal = ExtResource("4_ikqh6")
 text = "UNLOCK_HATS"
 script = ExtResource("3_5j8qy")
 
-[node name="LockHats" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1084038263]
+[node name="LockHats" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer2" unique_id=1084038263]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("1_5j8qy")
 text = "LOCK_HATS"
+script = ExtResource("3_5j8qy")
+
+[node name="PurchaseAdRemoval" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1942155899]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_5j8qy")
+theme_override_styles/normal = ExtResource("4_ikqh6")
+text = "PURCHASE_AD_REMOVAL"
+script = ExtResource("3_5j8qy")
+
+[node name="ConsumePurchase" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=976496151]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = ExtResource("1_5j8qy")
+theme_override_styles/normal = ExtResource("4_ikqh6")
+text = "CONSUME_PURCHASE"
 script = ExtResource("3_5j8qy")
 
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("7_ikqh6")]
@@ -111,10 +138,14 @@ visible = false
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 size_flags_vertical = 8
+theme = ExtResource("1_5j8qy")
+theme_type_variation = &"EmptyPanel"
 
 [connection signal="toggled" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/ShowLog" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_show_log_toggled"]
 [connection signal="toggled" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/ShowFramerate" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_show_framerate_toggled"]
-[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/UnlockMaps" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_maps_pressed"]
-[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/LockMaps" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_maps_pressed"]
-[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/UnlockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_hats_pressed"]
-[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/LockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_hats_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer/UnlockMaps" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_maps_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer/LockMaps" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_maps_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer2/UnlockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_hats_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer2/LockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_hats_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/PurchaseAdRemoval" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_purchase_ad_removal_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/ConsumePurchase" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_consume_purchase_pressed"]

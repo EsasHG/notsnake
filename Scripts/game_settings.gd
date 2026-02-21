@@ -487,9 +487,9 @@ func _all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void
 		leaderboardArray = leaderboards
 		scoreBoard = leaderboardArray.front()
 		
-		for board in leaderboardArray:
-			Logging.logMessage("Loading player score for leaderboard " + board.display_name)
-			leaderboardsClient.load_player_score(board.leaderboard_id,PlayGamesLeaderboardVariant.TimeSpan.TIME_SPAN_ALL_TIME,PlayGamesLeaderboardVariant.Collection.COLLECTION_FRIENDS)
+		#for board in leaderboardArray:
+			#Logging.logMessage("Loading player score for leaderboard " + board.display_name)
+			#leaderboardsClient.load_player_score(board.leaderboard_id,PlayGamesLeaderboardVariant.TimeSpan.TIME_SPAN_ALL_TIME,PlayGamesLeaderboardVariant.Collection.COLLECTION_FRIENDS)
 	else:
 		Logging.error("No leaderboards found!")
 	pass # Replace with function body.

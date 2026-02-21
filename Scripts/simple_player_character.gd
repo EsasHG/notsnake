@@ -65,7 +65,6 @@ func _ready() -> void:
 	if GameSettings.game_mode == GameSettings.GAME_MODE.SINGLE_PLAYER:
 		set_color(GlobalInputMap.player_colors[0])
 		set_hat(GlobalInputMap.Player_Hats_Selected[0])
-	$Head/BarkSound.volume_db = GameSettings.sfxVol
 	Input.emulate_mouse_from_touch = true
 	
 	GameSettings.on_pickupSpawned.connect(set_arrow_target)

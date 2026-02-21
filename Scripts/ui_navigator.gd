@@ -1,6 +1,6 @@
 extends Node
 
-
+@onready var streamPlayer: AudioStreamPlayer = get_tree().root.find_child("UI_Back", true,false)
 @onready var _mainGuiNode = get_tree().root.find_child("Gui", true, false)
 var _ui_stack : Array[UI_Helper]
 
@@ -59,7 +59,8 @@ func open_from_scene(new_layer:PackedScene, hide_previous:bool = true, root:bool
 	return s
 
 
-func back() -> void:
+func back() -> bool:
+	var valid_removal = false
 	if !_cleanup() && _ui_stack.size() > 0:
 		if not _ui_stack.back().root:
 			var move_from : UI_Helper = _ui_stack.pop_back()
@@ -69,8 +70,10 @@ func back() -> void:
 				move_from.control.visible = false
 				if move_from.destroy_on_pop:
 					move_from.control.queue_free()
+				valid_removal = true
 		if _ui_stack.size() > 0:
 			_cleanup()
+	return valid_removal
 
 
 func _reset() -> void:
@@ -94,9 +97,9 @@ func _cleanup() -> bool:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("Press"):
-		Logging.logMessage("Unhandled press input in UINavigator!")
-		UINavigator.back()
-		
+		var moved_back = back()
+		if moved_back and streamPlayer:
+			streamPlayer.play()	#is this ok?
 
 func add_callable(callable:Callable) -> void:
 	_ui_stack.back().callback = callable

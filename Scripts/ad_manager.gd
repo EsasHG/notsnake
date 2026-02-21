@@ -22,20 +22,6 @@ func initialize() -> void:
 		)
 	interstitial_ad_timer.start()
 	
-func setup_banner_ad() -> void:
-	if admob_initialized:
-		Logging.logMessage("Loading banner ad")
-		admob.set_banner_position(LoadAdRequest.AdPosition.BOTTOM)
-		#admob.set_banner_size(LoadAdRequest.AdSize.BANNER)
-		admob.set_banner_size(LoadAdRequest.AdSize.FULL_BANNER)
-		admob.load_banner_ad()
-
-func remove_banner_ad() -> void:
-	if admob_initialized:
-		admob.hide_banner_ad()
-		admob.remove_banner_ad()
-		banner_ad_showing = false
-		
 
 func _on_admob_initialization_completed(_status_data: InitializationStatus) -> void:
 	admob_initialized = true
@@ -44,6 +30,24 @@ func _on_admob_initialization_completed(_status_data: InitializationStatus) -> v
 	#Logging.logMessage("Loading consent form")
 	#admob.load_consent_form()
 	
+	
+func setup_banner_ad() -> void:
+	if admob_initialized:
+		Logging.logMessage("Loading banner ad")
+		admob.set_banner_position(LoadAdRequest.AdPosition.BOTTOM)
+		#admob.set_banner_size(LoadAdRequest.AdSize.BANNER)
+		admob.set_banner_size(LoadAdRequest.AdSize.FULL_BANNER)
+		admob.load_banner_ad()
+
+
+func remove_banner_ad() -> void:
+	if admob_initialized:
+		admob.hide_banner_ad()
+		admob.remove_banner_ad()
+		banner_ad_showing = false
+		
+
+
 func _on_admob_banner_ad_failed_to_load(_ad_id: String, error_data: LoadAdError) -> void:
 	Logging.error("Banner ad failed to load! " + error_data.get_response_info())
 	
