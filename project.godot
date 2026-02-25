@@ -122,9 +122,17 @@ Pause={
 ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [internationalization]
 
 locale/translations=PackedStringArray("res://Localization/Loop Dog Translations.en.translation", "res://Localization/Loop Dog Translations.nb.translation")
+
+[layer_names]
+
+2d_physics/layer_2="PlayerDog"
 
 [rendering]
 

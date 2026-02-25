@@ -1,0 +1,200 @@
+[gd_scene format=3 uid="uid://2rjb4w7s6uto"]
+
+[ext_resource type="PackedScene" uid="uid://3va5fhmx5hn4" path="res://Scenes/Bubble Cutscene/bubble_cutscene.tscn" id="1_gnsmo"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_psl12"]
+[ext_resource type="Script" uid="uid://brq0l2fygvy7n" path="res://Scripts/fps_tracker.gd" id="3_2ebs2"]
+[ext_resource type="Script" uid="uid://dk0kh7s0cylgw" path="res://Scripts/game_visible_ui.gd" id="4_oyb3p"]
+[ext_resource type="Script" uid="uid://b75fda18bi5h3" path="res://Scenes/Menus/pause_button.gd" id="5_psl12"]
+[ext_resource type="Script" uid="uid://70vyyvp51k8q" path="res://Scenes/Menus/Arena/round_timer_display.gd" id="6_76v2p"]
+[ext_resource type="Script" uid="uid://bk38lwjwmwmqo" path="res://Scripts/score_label.gd" id="6_b48ew"]
+[ext_resource type="PackedScene" uid="uid://cuenmscfk4h76" path="res://Scenes/Menus/log_window.tscn" id="7_8edxt"]
+[ext_resource type="PackedScene" uid="uid://gsu5a1hu0rjf" path="res://Scenes/Menus/scene_transition.tscn" id="8_5oxhp"]
+[ext_resource type="Script" uid="uid://c1ktgg75y0rmt" path="res://Scripts/audio_manager.gd" id="9_nt2eh"]
+[ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="10_76v2p"]
+[ext_resource type="AudioStream" uid="uid://d3ie6s5w1q3qy" path="res://Assets/Sound/loopydog_maintheme_intro.mp3" id="11_2ebs2"]
+[ext_resource type="AudioStream" uid="uid://by3n7gshx8426" path="res://Assets/Sound/loopydog_maintheme_v2_main.mp3" id="12_2ebs2"]
+[ext_resource type="AudioStream" uid="uid://b0nnqd7hp5bi0" path="res://Assets/Sound/wall_hit_sound.mp3" id="13_2ebs2"]
+[ext_resource type="Script" uid="uid://81txo1x6t53a" path="res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd" id="15_2ebs2"]
+[ext_resource type="Script" uid="uid://cg02bndeeo2mg" path="res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd" id="16_oyb3p"]
+[ext_resource type="PackedScene" uid="uid://ck01dnrayeqyd" path="res://Scenes/Systems/ad_manager.tscn" id="16_viu5a"]
+[ext_resource type="Script" uid="uid://glagih2j03pk" path="res://addons/GodotPlayGameServices/scripts/achievements/achievements_client.gd" id="17_jvnna"]
+[ext_resource type="Script" uid="uid://c7rjippj2i4of" path="res://addons/GodotPlayGameServices/scripts/snapshots/snapshots_client.gd" id="18_oyb3p"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_oyb3p"]
+clip_count = 2
+clip_0/name = &"Loopydog Maintheme Intro"
+clip_0/stream = ExtResource("11_2ebs2")
+clip_0/auto_advance = 1
+clip_0/next_clip = 1
+clip_1/name = &"Loopydog Maintheme V 2"
+clip_1/stream = ExtResource("12_2ebs2")
+clip_1/auto_advance = 0
+_transitions = {
+Vector2i(0, 0): {
+"fade_beats": 0.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(1, 0): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 0
+}
+}
+
+[node name="Main" type="Node" unique_id=1937019595]
+
+[node name="BubbleCutscene" parent="." unique_id=1365938795 instance=ExtResource("1_gnsmo")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=107664094]
+
+[node name="Gui" type="Control" parent="CanvasLayer" unique_id=1278489184]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="FPS_Tracker" type="Label" parent="CanvasLayer/Gui" unique_id=630340280]
+visible = false
+layout_mode = 0
+offset_top = 234.0
+offset_right = 105.0
+offset_bottom = 259.0
+theme = ExtResource("2_psl12")
+script = ExtResource("3_2ebs2")
+
+[node name="AudioButtons" type="Control" parent="CanvasLayer/Gui" unique_id=548944593]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_oyb3p")
+
+[node name="PauseButton" type="Button" parent="CanvasLayer/Gui/AudioButtons" unique_id=530047473]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -107.0
+offset_top = 65.0
+offset_right = -70.0
+offset_bottom = 115.0
+grow_horizontal = 0
+size_flags_vertical = 3
+theme = ExtResource("2_psl12")
+theme_type_variation = &"EmptyButton"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 60
+text = "II"
+script = ExtResource("5_psl12")
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Gui" unique_id=936554379]
+visible = false
+layout_mode = 0
+offset_left = 40.0
+offset_top = 65.0
+offset_right = 275.0
+offset_bottom = 148.0
+theme = ExtResource("2_psl12")
+theme_override_font_sizes/font_size = 60
+text = "SCORE"
+script = ExtResource("6_b48ew")
+
+[node name="LogWindow" parent="CanvasLayer/Gui" unique_id=812355967 instance=ExtResource("7_8edxt")]
+layout_mode = 1
+
+[node name="RoundTimer" type="Label" parent="CanvasLayer/Gui" unique_id=1134551780]
+visible = false
+z_index = 4
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -84.5
+offset_top = 74.0
+offset_right = 84.5
+offset_bottom = 196.0
+grow_horizontal = 2
+theme = ExtResource("2_psl12")
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 150
+text = "60"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_76v2p")
+
+[node name="SceneTransition" parent="CanvasLayer" unique_id=1227316617 instance=ExtResource("8_5oxhp")]
+skip_transition_in = true
+
+[node name="TransitionDelayTimer" type="Timer" parent="CanvasLayer/SceneTransition" unique_id=1651698113]
+wait_time = 20.0
+
+[node name="Audio" type="Node" parent="." unique_id=300929421]
+process_mode = 3
+script = ExtResource("9_nt2eh")
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="Audio" unique_id=566357893]
+process_mode = 3
+stream = SubResource("AudioStreamInteractive_oyb3p")
+volume_db = -5.0
+bus = &"Music"
+
+[node name="LoseMusic" type="AudioStreamPlayer" parent="Audio" unique_id=1681515358]
+process_mode = 3
+stream = ExtResource("10_76v2p")
+volume_db = -15.0
+bus = &"Music"
+
+[node name="UI_Click" type="AudioStreamPlayer" parent="Audio" unique_id=1700737852]
+stream = ExtResource("13_2ebs2")
+volume_db = -15.0
+pitch_scale = 35.0
+bus = &"SFX"
+
+[node name="UI_Back" type="AudioStreamPlayer" parent="Audio" unique_id=1085926165]
+stream = ExtResource("13_2ebs2")
+volume_db = -15.0
+pitch_scale = 15.0
+bus = &"SFX"
+
+[node name="LevelSelected" type="AudioStreamPlayer" parent="Audio" unique_id=1911255710]
+stream = ExtResource("13_2ebs2")
+volume_db = -10.0
+pitch_scale = 35.0
+bus = &"SFX"
+
+[node name="PlayGamesSignInClient" type="Node" parent="." unique_id=1243093303]
+unique_name_in_owner = true
+script = ExtResource("15_2ebs2")
+metadata/_custom_type_script = "uid://81txo1x6t53a"
+
+[node name="PlayGamesLeaderboardsClient" type="Node" parent="." unique_id=94784161]
+unique_name_in_owner = true
+script = ExtResource("16_oyb3p")
+metadata/_custom_type_script = "uid://cg02bndeeo2mg"
+
+[node name="PlayGamesAchievementsClient" type="Node" parent="." unique_id=1810156240]
+unique_name_in_owner = true
+script = ExtResource("17_jvnna")
+metadata/_custom_type_script = "uid://glagih2j03pk"
+
+[node name="PlayGamesSnapshotsClient" type="Node" parent="." unique_id=946544497]
+unique_name_in_owner = true
+script = ExtResource("18_oyb3p")
+metadata/_custom_type_script = "uid://c7rjippj2i4of"
+
+[node name="AdManager" parent="." unique_id=1227274275 instance=ExtResource("16_viu5a")]
+visible = false
+
+[connection signal="pressed" from="CanvasLayer/Gui/AudioButtons/PauseButton" to="CanvasLayer/Gui/AudioButtons/PauseButton" method="_on_pressed"]
+[connection signal="transition_out_finished" from="CanvasLayer/SceneTransition" to="BubbleCutscene" method="startBubbleCutscene"]

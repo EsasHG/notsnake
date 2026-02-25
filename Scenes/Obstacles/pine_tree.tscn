@@ -8,6 +8,7 @@ size = Vector2(28, 46.5)
 [node name="PineTree" type="Area2D" unique_id=1610173503 groups=["Dangers"]]
 z_index = 2
 y_sort_enabled = true
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1758111290]
 visible = false

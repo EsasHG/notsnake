@@ -9,6 +9,8 @@ class UI_Helper:
 	var destroy_on_pop : bool = false
 	var root: bool = false
 	var callback : Callable = Callable()
+	
+
 
 
 func _ready() -> void:
@@ -41,7 +43,6 @@ func open(new_layer:Control, hide_previous:bool = true, root:bool = false,  back
 ## root: stops this node from being hidden or deleted when back() is called, as long as it's still valid
 func open_from_scene(new_layer:PackedScene, hide_previous:bool = true, root:bool = false, back_callback:Callable = Callable()) -> Node:
 	_cleanup()
-	
 	var s : Control = new_layer.instantiate()
 	s.visible = true
 	var newHelper : UI_Helper = UI_Helper.new()

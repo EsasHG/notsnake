@@ -7,6 +7,7 @@
 size = Vector2(120, 47)
 
 [node name="Running_Dog" type="Area2D" unique_id=1405850103 groups=["Dangers"]]
+collision_mask = 2
 script = ExtResource("1_cokb8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=971301649]

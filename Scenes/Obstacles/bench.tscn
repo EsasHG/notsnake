@@ -6,6 +6,7 @@
 size = Vector2(235, 220)
 
 [node name="Bench" type="Area2D" unique_id=806199856 groups=["Dangers"]]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1874798745]
 visible = false

@@ -8,6 +8,7 @@
 size = Vector2(65, 160)
 
 [node name="AngryDog" type="Area2D" unique_id=99716063 groups=["Dangers"]]
+collision_mask = 2
 script = ExtResource("1_u6g5v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=787216436]

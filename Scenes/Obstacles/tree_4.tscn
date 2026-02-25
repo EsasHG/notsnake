@@ -8,6 +8,7 @@ size = Vector2(52, 48)
 [node name="Tree_4" type="Area2D" unique_id=660394672 groups=["Dangers"]]
 z_index = 2
 y_sort_enabled = true
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1442437446]
 visible = false

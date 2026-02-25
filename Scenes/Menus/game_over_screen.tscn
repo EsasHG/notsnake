@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ck7vl8h740cpk"]
 
-[ext_resource type="Script" uid="uid://dt85v1n4h7vqg" path="res://Scripts/game_over_screen.gd" id="1_st1k0"]
+[ext_resource type="Script" uid="uid://dt85v1n4h7vqg" path="res://Scenes/Menus/game_over_screen.gd" id="1_st1k0"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_3eorv"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="3_3eq00"]
 [ext_resource type="Texture2D" uid="uid://317y7x3f6njm" path="res://Assets/UI/Google Branding/Play Games/games_leaderboards.png" id="3_j3nvf"]
@@ -118,6 +118,7 @@ expand_mode = 2
 stretch_mode = 5
 
 [node name="UnlocksContainer" type="VBoxContainer" parent="." unique_id=742566856]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

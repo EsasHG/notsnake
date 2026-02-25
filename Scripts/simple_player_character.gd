@@ -199,7 +199,7 @@ func _on_area_entered(area: Area2D) -> void:
 		if not GlobalInputMap.Player_Hats["COWBOY"].unlocked:
 			GameSettings.on_somethingUnlocked.emit("COWBOY")
 			GlobalInputMap.Player_Hats["COWBOY"].unlocked = true
-			SaveManager.save_unlocks()
+			SaveManager.save_game()
 			GameSettings.unlock_achievement("Wi(e)nner")	##TODO: Fix so this gets unlocked if player logs in later.
 			
 		queue_free()

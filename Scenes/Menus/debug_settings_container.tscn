@@ -40,6 +40,7 @@ custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 1
 theme = ExtResource("1_5j8qy")
 theme_type_variation = &"InnerContainer"
 script = ExtResource("1_qs44x")
@@ -59,12 +60,14 @@ text = "DEBUG_SETTINGS"
 
 [node name="ShowLog" type="CheckButton" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=636195925]
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_5j8qy")
 text = "SHOW_LOG"
 script = ExtResource("3_5j8qy")
 
 [node name="ShowFramerate" type="CheckButton" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1888874711]
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_5j8qy")
 text = "SHOW_FRAMERATE"
 script = ExtResource("3_5j8qy")
@@ -76,6 +79,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 theme = ExtResource("1_5j8qy")
 text = "UNLOCK_MAPS"
 script = ExtResource("3_5j8qy")
@@ -84,8 +88,8 @@ script = ExtResource("3_5j8qy")
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 theme = ExtResource("1_5j8qy")
-theme_override_styles/normal = ExtResource("4_ikqh6")
 text = "LOCK_MAPS"
 script = ExtResource("3_5j8qy")
 
@@ -97,8 +101,8 @@ custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+mouse_filter = 1
 theme = ExtResource("1_5j8qy")
-theme_override_styles/normal = ExtResource("4_ikqh6")
 text = "UNLOCK_HATS"
 script = ExtResource("3_5j8qy")
 
@@ -106,25 +110,30 @@ script = ExtResource("3_5j8qy")
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 theme = ExtResource("1_5j8qy")
 text = "LOCK_HATS"
 script = ExtResource("3_5j8qy")
 
 [node name="PurchaseAdRemoval" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1942155899]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+mouse_filter = 1
 theme = ExtResource("1_5j8qy")
 theme_override_styles/normal = ExtResource("4_ikqh6")
 text = "PURCHASE_AD_REMOVAL"
 script = ExtResource("3_5j8qy")
 
 [node name="ConsumePurchase" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=976496151]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
+mouse_filter = 1
 theme = ExtResource("1_5j8qy")
 theme_override_styles/normal = ExtResource("4_ikqh6")
 text = "CONSUME_PURCHASE"
@@ -132,6 +141,7 @@ script = ExtResource("3_5j8qy")
 
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("7_ikqh6")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="AdPanel" type="Panel" parent="." unique_id=800514159]
 visible = false

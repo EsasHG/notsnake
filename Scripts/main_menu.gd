@@ -66,25 +66,26 @@ func _ready() -> void:
 func create_level_buttons() -> void:
 	for c in level_buttons.get_children():
 		c.queue_free()
-	for s : Map in levels:
-		var map_info = GlobalInputMap.Maps[s.name]
+	for map_name: String in GlobalInputMap.Maps:
+		var map_info :Dictionary = GlobalInputMap.Maps[map_name]
 
 		var button : Button = Button.new()
 		button.theme = buttonTheme
-		button.icon = s.icon
-		button.text = s.name
+		button.icon = map_info.icon
+		button.text = tr(map_name)
 		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		button.expand_icon = true
 		button.custom_minimum_size = Vector2(180,180)
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		button.mouse_filter = Control.MOUSE_FILTER_PASS
 		level_buttons.add_child(button)
 		
 		if !map_info.unlocked: ##TODO: add actual logic here
 			var locked = LOCKED_ICON.instantiate()
 			button.add_child(locked)
-			button.pressed.connect(_on_locked_map_selected.bind(s))
+			button.pressed.connect(_on_locked_map_selected.bind(map_name))
 		else:
-			button.pressed.connect(_on_map_selected.bind(s))
+			button.pressed.connect(_on_map_selected.bind(map_name))
 
 
 ##TODO: do we need this method here?
@@ -133,16 +134,16 @@ func _on_settings_pressed() -> void:
 	UINavigator.open_from_scene(SETTINGS_SCREEN)
 
 
-func _on_map_selected(scene:Map): 
+func _on_map_selected(map_name:String): 
 	level_selected_sound.play()
-	GameSettings.currentMap = scene
+	GameSettings.currentMap = map_name
 	menu_active = false
 	start_game()
 
 
-func _on_locked_map_selected(scene:Map):
+func _on_locked_map_selected(map_name:String):
 	UINavigator.open(locked_message_container)
-	locked_message_description.text = tr(scene.name + "_UNLOCK_CONDITION")
+	locked_message_description.text = tr(map_name + "_UNLOCK_CONDITION")
 	
 
 func _on_quit_pressed() -> void:

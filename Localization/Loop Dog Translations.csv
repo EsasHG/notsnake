@@ -65,8 +65,8 @@ SANTA_UNLOCK_CONDITION,Find the hidden present on Winter to unlock this hat,Finn
 COWBOY_UNLOCK_CONDITION,Catch your own tail to unlock this hat,Fang din egen hale for å låse opp denne hatten
 HELMET_UNLOCK_CONDITION,Crash into something 100 times to unlock this hat,Treff noe 100 ganger for å låse opp denne hatten
 DEBUG_SETTINGS,Debug settings,Debug settings
-UNLOCK_MAPS,Unlock all maps,Lås opp baner
-UNLOCK_HATS,Unlock all hats,Lås opp alle hatter
+UNLOCK_MAPS,Unlock maps,Lås opp baner
+UNLOCK_HATS,Unlock hats,Lås opp hatter
 LOCK_MAPS,Lock maps,Lås baner
 LOCK_HATS,Lock hats,Lås hatter
 LEVEL_SELECT,Select level,Velg bane
@@ -75,3 +75,10 @@ HAT_UNLOCKED_TITLE,New hat!,Ny hatt!
 LEVEL_UNLOCKED_DESCRIPTION,is now avaliable!,er nå tilgjengelig!
 HAT_UNLOCKED_DESCRIPTION,is now avaliable!,er nå tilgjengelig!
 SOUND,Sound:,Lyd:
+SHOW_CLOUD_SAVES,Show cloud saves,Vis skylagring
+ERROR,Error,Noe gikk galt
+CLOUD_SAVES_UNAVALIABLE,Could not show cloud saves.,Kan ikke vise skylagring
+SAVE_CONFLICT_TITLE,Conflicting save files,Motstridende lagringsfiler
+SAVE_CONFLICT_DESCRIPTION,There is a discrepancy between the locally saved file and the file retrieved from cloud. Which do you want to keep?,"Det er en forskjell mellom den lokalt lagrede filen, og filen hentet fra skyen. Hvilken vil du beholde?"
+LAST_MODIFIED,Last modified:,Sist endret:
+CONFLICT_SAVE_SELECT,Choose,Behold

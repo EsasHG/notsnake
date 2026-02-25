@@ -8,3 +8,16 @@ static var leaderboards : Dictionary = {
 	"FOREST" = "CgkIso_-xZsLEAIQBg",
 	"WINTER" = "CgkIso_-xZsLEAIQEQ",
 }
+
+static var achievements : Dictionary = {
+achievementFieldDog = "CgkIso_-xZsLEAIQCA",
+achievementSquareDog = "CgkIso_-xZsLEAIQCQ",
+achievementParkDog = "CgkIso_-xZsLEAIQCg",
+achievementForestDog = "CgkIso_-xZsLEAIQCw",
+achievementSmallDog = "CgkIso_-xZsLEAIQDA",
+achievementWienner = "CgkIso_-xZsLEAIQBw",
+achievementDogKnot = "CgkIso_-xZsLEAIQDQ",
+achievementDapperDog = "CgkIso_-xZsLEAIQDg",
+achievementHungryDog = "CgkIso_-xZsLEAIQDw",
+achievementInsatiableDog = "CgkIso_-xZsLEAIQEA",
+}

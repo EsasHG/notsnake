@@ -1,6 +1,6 @@
 extends Node
 
-##in single player, player 1 will always be 0 (I hope) (i mean i thing ive hardcoded it like that but deviceID is deffo not always 0 lmaooo)
+##in single player, player 1 will always be 0 (I hope) (i mean i think ive hardcoded it like that but deviceID is absolutely not always 0...)
 var ControllerIds: Array[int] = [0, 1, 2, 3]
 var player_colors : Array[Color] = [Color.WHITE, Color("ffe0ab"), Color.GOLD, Color("e8c5b8"),Color.INDIAN_RED,Color("d9965aff"),Color("a97d59ff"), Color.SADDLE_BROWN, Color.BROWN,Color("ba93a2ff"), Color.VIOLET,Color.AQUA, Color.AQUAMARINE, Color.OLIVE];
 var Player_Color_Selected : Dictionary[int, int] = {}
@@ -14,32 +14,37 @@ var Maps: Dictionary = {
 		unlocked = true,
 		scene = load("uid://bmtfcin4sha1p"),
 		icon = load("uid://doqp1jkdlm1dk"),
-
+		high_score = 0,
 	},
 	"PARK": {
 		unlocked = false,
 		scene = load("uid://tcsre6epm8ss"),
 		icon = load("uid://csxqseoegqggj"),
+		high_score = 0,
 	},	
 	"WINTER": {
 		unlocked = false,
 		scene = load("uid://c614biqieqsc1"),
 		icon = load("uid://cacud1mwfip70"),
+		high_score = 0,
 	},
 	"SQUARE": {
 		unlocked = false,
 		scene = load("uid://d0lv3j2ywaltm"),
 		icon = load("uid://slufqb1sxm5c"),
+		high_score = 0,
 	},
 	"SMALL": {
 		unlocked = false,
 		scene = load("uid://dw8vjc4lovnfv"),
 		icon = load("uid://8hode20lka2d"),
+		high_score = 0,
 	},
 	"FOREST": {
 		unlocked = false,
 		scene = load("uid://dxkydv08bbemt"),
 		icon = load("uid://bhh584wkrqnpi"),
+		high_score = 0,
 	},
 }
 var Player_Hats: Dictionary = {

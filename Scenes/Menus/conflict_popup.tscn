@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://chylx0i6w8on4"]
+
+[ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_22i1u"]
+[ext_resource type="Script" uid="uid://c4ybiuyt6qka4" path="res://Scenes/Menus/conflict_popup.gd" id="2_mi2t1"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_y1kef"]
+
+[node name="ConflictPopup" unique_id=742566856 instance=ExtResource("1_22i1u")]
+script = ExtResource("2_mi2t1")
+
+[node name="ScrollContainer" parent="OuterPanelContainer" parent_id_path=PackedInt32Array(1354738231) index="0" unique_id=910289530]
+custom_minimum_size = Vector2(610, 510)
+horizontal_scroll_mode = 0
+
+[node name="TitleLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="0" unique_id=368940186]
+text = "SAVE_CONFLICT_TITLE"
+
+[node name="DescriptionLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="1" unique_id=1464836269]
+text = "SAVE_CONFLICT_DESCRIPTION"
+
+[node name="HSplitContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="2" unique_id=1626202017]
+layout_mode = 2
+
+[node name="LocalSaveContainer" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HSplitContainer" index="0" unique_id=1877499095]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HSplitContainer/LocalSaveContainer" index="0" unique_id=1904365841]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_y1kef")
+theme_type_variation = &"HeaderMedium"
+text = "DEFAULT_TITLE"
+horizontal_alignment = 1
+
+[node name="TimestampLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HSplitContainer/LocalSaveContainer" index="1" unique_id=2140768425]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_y1kef")
+theme_type_variation = &"HeaderSmall"
+text = "LAST_MODIFIED"
+horizontal_alignment = 1
+
+[node name="ChooseButton" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HSplitContainer/LocalSaveContainer" index="2" unique_id=1108863032]
+layout_mode = 2
+text = "CONFLICT_SAVE_SELECT"
+
+[node name="ServerSaveContainer" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HSplitContainer" index="1" unique_id=720809670]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HSplitContainer/ServerSaveContainer" index="0" unique_id=483983013]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_y1kef")
+theme_type_variation = &"HeaderMedium"
+text = "DEFAULT_TITLE"
+horizontal_alignment = 1
+
+[node name="TimestampLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HSplitContainer/ServerSaveContainer" index="1" unique_id=463185763]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_y1kef")
+theme_type_variation = &"HeaderSmall"
+text = "LAST_MODIFIED"
+horizontal_alignment = 1
+
+[node name="ChooseButton" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HSplitContainer/ServerSaveContainer" index="2" unique_id=1012914861]
+layout_mode = 2
+text = "CONFLICT_SAVE_SELECT"

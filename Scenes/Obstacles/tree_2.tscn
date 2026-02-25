@@ -9,6 +9,7 @@ height = 56.0
 [node name="Tree_2" type="Area2D" unique_id=1773030208 groups=["Dangers"]]
 z_index = 2
 y_sort_enabled = true
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1087669510]
 visible = false

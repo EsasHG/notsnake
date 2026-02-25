@@ -59,6 +59,7 @@ custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"InnerContainer"
 
@@ -102,6 +103,7 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
+mouse_filter = 1
 theme_override_constants/h_separation = 4
 theme_override_constants/line_spacing = 0
 theme_override_styles/normal = SubResource("StyleBoxTexture_umxxc")
@@ -119,6 +121,7 @@ custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxTexture_g648p")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_t7vc4")
 theme_override_styles/hover = SubResource("StyleBoxTexture_g648p")
@@ -140,6 +143,7 @@ text = "CONTROLS"
 [node name="HoldControls" type="CheckBox" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer2" unique_id=1943575057]
 layout_mode = 2
 size_flags_horizontal = 10
+mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 button_pressed = true
 button_group = SubResource("ButtonGroup_7smr3")
@@ -149,6 +153,7 @@ script = ExtResource("5_64y2j")
 [node name="TapControls" type="CheckBox" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer2" unique_id=1700117276]
 layout_mode = 2
 size_flags_horizontal = 8
+mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 button_group = SubResource("ButtonGroup_7smr3")
 text = "TAP"
@@ -168,6 +173,7 @@ text = "LANGUAGE"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 selected = 0
 allow_reselect = true
@@ -184,6 +190,7 @@ alignment = 1
 [node name="AchievementsButton" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer" unique_id=2009678036]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"EmptyButton"
 icon = ExtResource("12_2b6r5")
@@ -195,6 +202,7 @@ script = ExtResource("5_64y2j")
 [node name="LeaderboardsButton" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer" unique_id=1644430493]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"EmptyButton"
 theme_override_font_sizes/font_size = 20
@@ -207,6 +215,7 @@ script = ExtResource("5_64y2j")
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 text = "CHANGE_DOG"
 script = ExtResource("5_64y2j")
@@ -215,12 +224,23 @@ script = ExtResource("5_64y2j")
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 text = "DEBUG_SETTINGS"
 script = ExtResource("5_64y2j")
 
+[node name="Cloud saves" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1522160970]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+text = "SHOW_CLOUD_SAVES"
+script = ExtResource("5_64y2j")
+
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("2_u03vw")]
 layout_mode = 2
+mouse_filter = 1
 
 [node name="AdPanel" type="Panel" parent="." unique_id=800514159]
 visible = false
@@ -238,3 +258,4 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer/LeaderboardsButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_leaderboards_button_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SkinSelect" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_skin_select_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DebugSettings" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_debug_settings_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Cloud saves" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_cloud_saves_pressed"]

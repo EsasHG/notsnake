@@ -50,8 +50,8 @@ func _set_score(score : int):
 	Logging.logMessage("Setting Scores in game over screen!")
 	var highScore : int = GameSettings.getCurrentMapHighScore()
 	
-	$ScoreLabels/ScoreLabel.text = "Score: " + var_to_str(score)
-	$ScoreLabels/HighScoreLabel.text = "Best: " + var_to_str(highScore)
+	$ScoreLabels/ScoreLabel.text = tr("SCORE") + " " + var_to_str(score)
+	$ScoreLabels/HighScoreLabel.text =  tr("BEST_SCORE") + " " + var_to_str(highScore)
 	
 
 func game_over(players:Array[PlayerDog]):

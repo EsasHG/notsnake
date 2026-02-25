@@ -7,6 +7,7 @@ size = Vector2(24, 20)
 
 [node name="DogSegment" type="Area2D" unique_id=1142040480 groups=["Dangers", "DogSegment"]]
 scale = Vector2(1, 0.4)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=149250928]
 shape = SubResource("RectangleShape2D_kj1qg")

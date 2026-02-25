@@ -28,6 +28,7 @@ animations = [{
 }]
 
 [node name="Chiweewee" type="Area2D" unique_id=590626592]
+collision_mask = 2
 script = ExtResource("1_bkt5k")
 distThreshold = 200
 

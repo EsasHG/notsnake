@@ -36,9 +36,9 @@ func _on_start_button_pressed() -> void:
 func open_game_settings() -> void:
 	UINavigator.open(game_settings_container,true)
 
-func _on_map_selected(scene:Map): 
+func _on_map_selected(map_name:String): 
 	level_selected_sound.play()
-	GameSettings.currentMap = scene
+	GameSettings.currentMap = map_name
 	menu_active = false
 	UINavigator.open(player_slots_container,true)
 

@@ -72,7 +72,7 @@ func _on_visibility_changed():
 
 func _on_back() -> void:
 	if _changes_made:
-		SaveManager.save_settings()
+		SaveManager.save_game()
 
 
 func _on_language_selector_item_selected(index: int) -> void:
@@ -97,3 +97,8 @@ func _on_hat_changed(_hat: String):
 
 func _on_debug_settings_pressed() -> void:
 	UINavigator.open_from_scene(DEBUG_SETTINGS_CONTAINER)
+
+
+func _on_cloud_saves_pressed() -> void:
+	SaveManager.show_cloud_saves()
+	pass # Replace with function body.

@@ -41,7 +41,8 @@ func _ready() -> void:
 		button.icon = hat_info.icon_hat
 		button.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		button.expand_icon = true
+		button.expand_icon = true		
+		button.mouse_filter = Control.MOUSE_FILTER_PASS
 		button.custom_minimum_size = Vector2(180,180)
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		hat_buttons.add_child(button)

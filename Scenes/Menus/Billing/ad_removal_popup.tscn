@@ -12,31 +12,7 @@ script = ExtResource("2_2uel7")
 custom_minimum_size = Vector2(610, 350)
 horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer" parent_id_path=PackedInt32Array(1316018813) index="0" unique_id=1857447480]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="TitleLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="0" unique_id=1172669977]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("3_4cmwp")
-theme_type_variation = &"HeaderLarge"
-text = "AD_REMOVAL_TITLE"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="DescriptionLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="1" unique_id=378930257]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("3_4cmwp")
-theme_type_variation = &"HeaderMedium"
-text = "AD_REMOVAL_DESCRIPTION"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="PriceLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="2" unique_id=432982813]
+[node name="PriceLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="2" unique_id=432982813]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -44,7 +20,7 @@ theme = ExtResource("3_4cmwp")
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="3" unique_id=971621022]
+[node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="3" unique_id=971621022]
 layout_mode = 2
 size_flags_horizontal = 4
 
@@ -52,6 +28,7 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 1
 theme = ExtResource("3_4cmwp")
 text = "AD_REMOVAL_YES"
 script = ExtResource("4_2uel7")
@@ -60,6 +37,7 @@ script = ExtResource("4_2uel7")
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 6
+mouse_filter = 1
 theme = ExtResource("3_4cmwp")
 text = "AD_REMOVAL_NO"
 script = ExtResource("4_2uel7")

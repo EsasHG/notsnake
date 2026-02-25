@@ -32,22 +32,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34ovf"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-bg_color = Color(0.91764706, 0.78039217, 0.3137255, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
 [sub_resource type="DPITexture" id="DPITexture_fpaq5"]
 _source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"#fff\" fill-opacity=\".75\" rx=\"2.333\"/><path fill=\"#1a1a1a\" d=\"m11.5 3.75-5.6 5.6-1.7-1.7-1.5 1.5 3.2 3.2 7.1-7.1z\"/></svg>
 "
@@ -454,10 +438,10 @@ corner_detail = 6
 [resource]
 default_font = ExtResource("1_sw1jp")
 default_font_size = 50
-Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
 Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 Button/colors/font_outline_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(1, 1, 1, 1)
@@ -474,9 +458,11 @@ Button/constants/outline_size = 6
 Button/font_sizes/font_size = 40
 Button/styles/disabled = SubResource("StyleBoxFlat_0p04y")
 Button/styles/focus = SubResource("StyleBoxFlat_fpaq5")
-Button/styles/hover = SubResource("StyleBoxFlat_34ovf")
+Button/styles/hover = ExtResource("1_nsiks")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_fpaq5")
+Button/styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_fpaq5")
 Button/styles/normal = ExtResource("1_nsiks")
-Button/styles/pressed = ExtResource("1_nsiks")
+Button/styles/pressed = SubResource("StyleBoxFlat_fpaq5")
 CheckBox/colors/checkbox_checked_color = Color(1, 1, 1, 1)
 CheckBox/colors/checkbox_unchecked_color = Color(1, 1, 1, 1)
 CheckBox/colors/font_color = Color(0.875, 0.875, 0.875, 1)
@@ -551,6 +537,7 @@ HeaderLarge/font_sizes/font_size = 60
 HeaderLarge/styles/normal = SubResource("StyleBoxEmpty_q72ri")
 HeaderMedium/base_type = &"Label"
 HeaderMedium/font_sizes/font_size = 40
+HeaderSmall/font_sizes/font_size = 35
 InnerContainer/base_type = &"PanelContainer"
 InnerContainer/styles/panel = SubResource("StyleBoxFlat_rhglh")
 Label/constants/outline_size = 6

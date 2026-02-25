@@ -99,6 +99,7 @@ script = ExtResource("18_0rh2w")
 [node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/LevelSelectContainer/ScrollContainer" unique_id=83918249]
 custom_minimum_size = Vector2(650, 0)
 layout_mode = 2
+mouse_filter = 1
 theme = ExtResource("15_8dws6")
 theme_type_variation = &"InnerContainer"
 

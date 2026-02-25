@@ -15,7 +15,7 @@ const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 
 var time_scale_tween : Tween
 
-@export var currentScore : int = 0 
+var currentScore : int = 0 
 
 enum GAME_MODE {LAST_DOG_STANDING, TIME, SCORE, SINGLE_PLAYER}
 #var game_mode :GAME_MODE = GAME_MODE.LAST_DOG_STANDING
@@ -27,6 +27,8 @@ var lives = 1
 var game_running:bool = false
 var language = "automatic"
 var banner_ad_showing = false
+var game_startup_loading_screen:SceneTransition = null
+
 const SCENE_TRANSITION = preload("uid://gsu5a1hu0rjf")
 const GAME_OVER_SCREEN = preload("uid://ck7vl8h740cpk")
 const ARENA_GAME_OVER_SCREEN = preload("uid://u1gfn45v12yd")
@@ -47,13 +49,14 @@ var players : Array[PlayerDog]
 enum VIEWPORT_MODE {PORTRAIT, LANDSCAPE}
 var viewport_mode:VIEWPORT_MODE = VIEWPORT_MODE.LANDSCAPE
 
-var currentMap :Map
-var highScores = {"Field":0, "Park": 0, "Square": 0, "Small":0, "Forest":0, "Winter":0}
+var currentMap :String
 var sfxVol = linear_to_db(0.8)
 var musicVol = linear_to_db(0.8)
 var musicMuted : bool = false
 var sfxMuted : bool = false
 var userAuthenticated = false
+# if true, await _on_authenticated before removing loading screen.
+var _await_authentication = false
 
 var achievementsClient : PlayGamesAchievementsClient = null
 var leaderboardsClient : PlayGamesLeaderboardsClient = null
@@ -72,22 +75,20 @@ func _enter_tree() -> void:
 	if OS.has_feature("mobile"):
 		if GodotPlayGameServices.initialize() == GodotPlayGameServices.PlayGamesPluginError.OK:
 			Logging.logMessage("Godot play games services initialized successfully")
+			_await_authentication = true
 		else:
 			Logging.error("Could not initialize godot play games services plugin!")
+			_await_authentication = false
 		game_mode = GAME_MODE.SINGLE_PLAYER
 		
 	
-func _ready() -> void:
-	SaveManager.load_score()	
+func _ready() -> void:			
+	SaveManager._files_loaded.connect(_on_files_loaded)
 	
-	if not SaveManager.load_settings():
-		sfxMuted = false
-		musicMuted = false
-		setSFXMuted(sfxMuted)
-		setMusicMuted(musicMuted)
-	
-	SaveManager.load_unlocks()
-	
+	if _await_authentication:
+		_check_authentication()
+	else:
+		SaveManager.load_game()
 	on_pickup.connect(increaseScore)
 	on_gameOver.connect(game_over)
 	on_gameBegin.connect(func(): 
@@ -102,14 +103,37 @@ func _ready() -> void:
 	game_timer.wait_time = round_time_seconds
 	game_timer.timeout.connect(func(): on_gameOver.emit())
 	get_tree().root.add_child.call_deferred(game_timer)
+
+
+func _on_files_loaded(success : bool) -> void:
+	if not success:
+		sfxMuted = false
+		musicMuted = false
+		setSFXMuted(sfxMuted)
+		setMusicMuted(musicMuted)
+	if _await_authentication:
+		_exit_game_startup_loading_screen()
 	
+
+func _check_authentication() -> void:
+	if GodotPlayGameServices.android_plugin:
+		if(signInClient):
+			signInClient.user_authenticated.connect(_on_user_authenticated)
+			signInClient.is_authenticated()
+		else:
+			Logging.error("No sign in client found!")
+	else:
+		Logging.error("Could not find Google Play Games Services plugin!")
+		signInClient = null
+		leaderboardsClient = null
+		achievementsClient = null
 	
+
 func _do_deferred_setup():
 	if(currentWorld == null):
 		currentWorld = get_tree().root.find_child("BubbleCutscene",true,false)
 	if OS.has_feature("mobile"):
 		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
-		
 		
 		if mainGuiNode:
 			billingManager = BILLING_MANAGER.instantiate()
@@ -117,17 +141,6 @@ func _do_deferred_setup():
 			mainGuiNode.call_deferred("add_child", billingManager)
 		else: 
 			print("Main gui node not found! Not adding billing manager...")
-		if GodotPlayGameServices.android_plugin:
-			if(signInClient):
-				signInClient.user_authenticated.connect(_on_user_authenticated)
-				signInClient.is_authenticated()
-			else:
-				Logging.error("No sign in client found!")
-		else:
-			Logging.error("Could not find Google Play Games Services plugin!")
-			signInClient = null
-			leaderboardsClient = null
-			achievementsClient = null
 	
 	var button : Button = get_tree().root.find_child("MusicMute", true, false)
 	if(is_instance_valid(button)):
@@ -141,8 +154,10 @@ func _do_deferred_setup():
 		button.set_pressed_no_signal(sfxMuted)
 	setSFXVol(sfxVol)
 		
-	var scene_transition:SceneTransition = get_tree().root.find_child("SceneTransition",true,false)
-	get_tree().create_timer(1.5).timeout.connect(func(): if scene_transition: scene_transition.transition_out())
+	game_startup_loading_screen = get_tree().root.find_child("SceneTransition",true,false)
+	if not _await_authentication:
+		get_tree().create_timer(1.5).timeout.connect(_exit_game_startup_loading_screen)
+
 
 func end_run() -> void:
 	if !game_running:
@@ -175,8 +190,6 @@ func mainMenu():
 						transition.transition_out()
 						)
 				)
-		
-		
 
 
 func startGame():
@@ -197,7 +210,7 @@ func _actually_start_game():
 		currentWorld = null
 	else:
 		Logging.logMessage("No existing world")
-	currentWorld = currentMap.Scene.instantiate()
+	currentWorld = GlobalInputMap.Maps[currentMap].scene.instantiate()
 	get_tree().root.add_child(currentWorld)
 	
 	player_spawners = get_tree().root.find_children("PlayerStart*","Node2D",true,false)
@@ -246,14 +259,13 @@ func game_over():
 	if ! game_running: 
 		return
 		
-	var save_unlocks : bool = false
 	if currentWorld != null:
 		currentWorld.queue_free()
 		currentWorld = null
 		
-	if currentScore > highScores.get_or_add(currentMap.name,0):
-		highScores[currentMap.name] = currentScore
-		SaveManager.save_score()
+	if currentScore > GlobalInputMap.Maps[currentMap].high_score:
+		GlobalInputMap.Maps[currentMap].high_score = currentScore
+
 	## This should work, but only if the maps in GlobalInputMap are in the right order, 
 	## and unlock condition is always 20 points on the previous map...
 	if currentScore >= 20:
@@ -262,19 +274,15 @@ func game_over():
 			if unlock_map and not GlobalInputMap.Maps[map].unlocked:
 				on_somethingUnlocked.emit(map)
 				GlobalInputMap.Maps[map].unlocked = true
-				save_unlocks = true
 				break
-			if map == currentMap.name:
+			if map == currentMap:
 				unlock_map = true
 	
 	if times_crashed > 100 and not GlobalInputMap.Player_Hats["HELMET"].unlocked:
 		GlobalInputMap.Player_Hats["HELMET"].unlocked = true
 		on_somethingUnlocked.emit("HELMET")
 	
-	if save_unlocks:
-		SaveManager.save_unlocks()
-	
-	SaveManager.save_settings() ## Doing this so times_crashed gets saved.
+	SaveManager.save_game() ## Doing this so times_crashed gets saved.
 	
 	var game_over_screen : GameOverScreen = null
 	if game_mode == GAME_MODE.SINGLE_PLAYER:
@@ -306,13 +314,13 @@ func game_over():
 				Logging.logMessage("Trying to submit score: " + var_to_str(currentScore))
 				var submitted : bool = false
 				for board in leaderboardArray:
-					if board.leaderboard_id == PlayGamesIDs.leaderboards[currentMap.name]:
+					if board.leaderboard_id == PlayGamesIDs.leaderboards[currentMap]: #why all this...
 						scoreBoard = board
 						Logging.logMessage("Leaderboard found. Submitting Score: " + var_to_str(currentScore))
 						leaderboardsClient.submit_score(scoreBoard.leaderboard_id,currentScore)
 						submitted = true
 				if !submitted:
-					Logging.error("Could not find a leaderboard with name "+ currentMap.name + "! Score was never submitted!")
+					Logging.error("Could not find a leaderboard for map "+ currentMap + "! Score was never submitted!")
 		if adManager:
 			adManager.rounds_played+=1
 			if adManager.admob_initialized and adManager._can_show_interstitial_ad and adManager.interstitial_ad_loaded:
@@ -335,7 +343,7 @@ func increaseScore():
 
 		
 func getCurrentMapHighScore():
-	return highScores[currentMap.name]
+	return GlobalInputMap.Maps[currentMap].high_score
 
 
 func setMusicVol(in_vol : float):
@@ -456,7 +464,7 @@ func _on_user_authenticated(is_authenticated: bool) -> void:
 		#$Leaderboard.visible = true
 		Logging.logMessage("Authenticated!")
 		
-		# If user was not authenticated before, setup leaderboard and achievements.
+		# If user was not authenticated before, setup leaderboards, achievements and load cloud save.
 		if not userAuthenticated: 
 			leaderboardsClient = get_tree().root.find_child("PlayGamesLeaderboardsClient", true, false)
 			if leaderboardsClient:
@@ -474,12 +482,13 @@ func _on_user_authenticated(is_authenticated: bool) -> void:
 				achievementsClient.load_achievements(true)
 			else:
 				Logging.error("No achievement client found!")
-		
+			SaveManager.load_game()
 	else:
 		#$Leaderboard.visible = false
 		Logging.warn("User not authenticated!")
-
 	userAuthenticated = is_authenticated
+	if _await_authentication:
+		_exit_game_startup_loading_screen()
 
 func _all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void:
 	Logging.logMessage("All leaderboards loaded!")
@@ -498,14 +507,14 @@ func _all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void
 func _on_player_score_loaded(leaderboard_id: String, score: PlayGamesLeaderboardScore):
 	var leaderboard = leaderboardArray[leaderboardArray.find_custom(func(l:PlayGamesLeaderboard): return l.leaderboard_id == leaderboard_id)]
 	Logging.logMessage("Score loaded for leaderboard " + leaderboard.display_name + ". Score: " + score.display_score)
-	
-	if highScores[leaderboard.display_name] < score.raw_score:
-		Logging.warn("Found higher highscore from leaderboard! Overwriting locally saved score of" + str(highScores[leaderboard.display_name]) + " with " + str(score.raw_score))
-		highScores[leaderboard.display_name] = score.raw_score
-	elif highScores[leaderboard.display_name] > score.raw_score and score.raw_score > 0:
-		Logging.warn("Found higher highscore in local save! submitting score of " + str(highScores[leaderboard.display_name]) + " to leaderboard " + leaderboard.display_name)
-		leaderboardsClient.submit_score(leaderboard_id,highScores[leaderboard.display_name])
-	if highScores[leaderboard.display_name] >= 20:
+	var map_name = PlayGamesIDs.leaderboards.find_key(leaderboard_id)
+	if GlobalInputMap.Maps[map_name].high_score < score.raw_score:
+		Logging.warn("Found higher highscore from leaderboard! Overwriting locally saved score of" + str(GlobalInputMap.Maps[map_name].high_score) + " with " + str(score.raw_score))
+		GlobalInputMap.Maps[map_name].high_score = score.raw_score
+	elif GlobalInputMap.Maps[map_name].high_score > score.raw_score and score.raw_score > 0:
+		Logging.warn("Found higher highscore in local save! submitting score of " + str(GlobalInputMap.Maps[map_name].high_score) + " to leaderboard " + leaderboard.display_name)
+		leaderboardsClient.submit_score(leaderboard_id,GlobalInputMap.Maps[map_name].high_score)
+	if GlobalInputMap.Maps[map_name].high_score >= 20:
 		unlock_achievement(leaderboard.display_name)
 
 
@@ -522,23 +531,26 @@ func _score_submitted(is_submitted: bool, leaderboard_id: String) -> void:
 func _on_achievements_loaded(achievements: Array[PlayGamesAchievement]) -> void:
 	Logging.logMessage("Achievements loaded!")
 	achievementsCache = achievements
-	for key in highScores:
-		if highScores[key] >= 20:
-			unlock_achievement(key)
+	for map_name in GlobalInputMap.Maps:
+		if GlobalInputMap.Maps[map_name].high_score >= 20:
+			unlock_achievement(map_name)
 			
 func _on_billing_manager_loading_finished() -> void:
 	if adManager:
 		adManager.initialize() 
+
 
 func showLeaderboard():
 	if(leaderboardsClient):
 		Logging.logMessage("Showing leaderboard " + scoreBoard.display_name)
 		leaderboardsClient.show_leaderboard(scoreBoard.leaderboard_id)
 	
+
 func showAllLeaderboards():
 	if(leaderboardsClient):
 		Logging.logMessage("Showing all leaderboards")
 		leaderboardsClient.show_all_leaderboards()
+
 
 func showAchievements():
 	if(achievementsClient):
@@ -569,3 +581,7 @@ func increment_achievement(achievementName:String, amount:int):
 		if ach.state != PlayGamesAchievement.State.STATE_UNLOCKED:
 			Logging.logMessage("Incrementing achievement " + ach.achievement_name)
 			achievementsClient.increment_achievement(ach.achievement_id, amount)
+
+func _exit_game_startup_loading_screen() -> void:
+	if game_startup_loading_screen: 
+		game_startup_loading_screen.transition_out()

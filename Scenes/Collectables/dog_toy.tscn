@@ -6,6 +6,7 @@
 size = Vector2(52, 20)
 
 [node name="DogToy" type="Area2D" unique_id=379774797 groups=["Treats"]]
+collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=715446377]
 z_index = 1

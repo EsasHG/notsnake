@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bngbpr0eyfhux" path="res://Assets/Map/map_winter_ver1.png" id="4_4wp3y"]
 [ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/dog_cracker_spawner.gd" id="4_7chi8"]
 [ext_resource type="Script" uid="uid://dwr8up6e4yjig" path="res://Scenes/Maps/path_follower.gd" id="6_4wp3y"]
-[ext_resource type="PackedScene" uid="uid://daexxm4sj5vkr" path="res://Assets/Obstacles/NPC_dogs/snowboard_dog.tscn" id="6_ek5u6"]
+[ext_resource type="PackedScene" uid="uid://daexxm4sj5vkr" path="res://Assets/Obstacles/NPC_dogs/dog_snowboard/snowboard_dog.tscn" id="6_ek5u6"]
 [ext_resource type="Script" uid="uid://0qp648ven5n2" path="res://Scenes/Maps/shader_setter.gd" id="6_nbekc"]
 [ext_resource type="PackedScene" uid="uid://dkxn6cnoxgw01" path="res://Scenes/Obstacles/pine_tree_snow.tscn" id="7_c4dbm"]
 [ext_resource type="PackedScene" uid="uid://cqun8ke8u0wr2" path="res://Scenes/Obstacles/snowman.tscn" id="8_7t428"]
