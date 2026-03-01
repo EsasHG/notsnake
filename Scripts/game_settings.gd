@@ -156,7 +156,7 @@ func _do_deferred_setup():
 		
 	game_startup_loading_screen = get_tree().root.find_child("SceneTransition",true,false)
 	if not _await_authentication:
-		get_tree().create_timer(1.5).timeout.connect(_exit_game_startup_loading_screen)
+		_exit_game_startup_loading_screen()
 
 
 func end_run() -> void:
@@ -584,4 +584,4 @@ func increment_achievement(achievementName:String, amount:int):
 
 func _exit_game_startup_loading_screen() -> void:
 	if game_startup_loading_screen: 
-		game_startup_loading_screen.transition_out()
+		get_tree().create_timer(1.5).timeout.connect(game_startup_loading_screen.transition_out)

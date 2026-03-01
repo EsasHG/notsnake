@@ -63,7 +63,7 @@ mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"InnerContainer"
 
-[node name="SettingsScreen" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer" unique_id=1148790409 node_paths=PackedStringArray("music_mute", "sfx_mute", "hold_controls", "tap_controls", "language_selector", "googlePlayButtonsContainer")]
+[node name="SettingsScreen" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer" unique_id=1148790409 node_paths=PackedStringArray("music_mute", "sfx_mute", "hold_controls", "tap_controls", "language_selector", "googlePlayButtonsContainer", "show_cloud_saves_button", "create_cloud_saves_button")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -76,6 +76,8 @@ hold_controls = NodePath("HBoxContainer2/HoldControls")
 tap_controls = NodePath("HBoxContainer2/TapControls")
 language_selector = NodePath("VBoxContainer/LanguageSelector")
 googlePlayButtonsContainer = NodePath("HBoxContainer")
+show_cloud_saves_button = NodePath("ShowCloudsaves")
+create_cloud_saves_button = NodePath("EnableCloud")
 
 [node name="Label" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=542016325]
 layout_mode = 2
@@ -229,13 +231,22 @@ theme = ExtResource("1_nfl8x")
 text = "DEBUG_SETTINGS"
 script = ExtResource("5_64y2j")
 
-[node name="Cloud saves" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1522160970]
+[node name="ShowCloudsaves" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1522160970]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 text = "SHOW_CLOUD_SAVES"
+script = ExtResource("5_64y2j")
+
+[node name="EnableCloud" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=505666261]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+text = "ENABLE_CLOUD_SAVES"
 script = ExtResource("5_64y2j")
 
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("2_u03vw")]
@@ -258,4 +269,5 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer/LeaderboardsButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_leaderboards_button_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SkinSelect" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_skin_select_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DebugSettings" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_debug_settings_pressed"]
-[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Cloud saves" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_cloud_saves_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/ShowCloudsaves" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_cloud_saves_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/EnableCloud" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_enable_cloud_pressed"]

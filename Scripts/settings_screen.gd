@@ -9,8 +9,13 @@ extends VBoxContainer
 @export var language_selector: OptionButton 
 @export var googlePlayButtonsContainer: HBoxContainer 
 
+@export var show_cloud_saves_button : AudioButton
+@export var create_cloud_saves_button : AudioButton
+
+
 const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
 const DEBUG_SETTINGS_CONTAINER = preload("uid://d0dfdlrxfu8iw")
+const CLOUD_MENU = preload("uid://kyb2ynbcw74p")
 
 var _changes_made = false
 
@@ -23,9 +28,18 @@ func _ready() -> void:
 	visibility_changed.connect(_on_visibility_changed)
 	if OS.has_feature("mobile") and GameSettings.userAuthenticated:
 		googlePlayButtonsContainer.visible = true
+		if !GameSettings.game_running:
+			show_cloud_saves_button.visible = true
+			create_cloud_saves_button.visible = true
+		else:
+			show_cloud_saves_button.visible = false
+			create_cloud_saves_button.visible = false
 	else:
 		googlePlayButtonsContainer.visible = false
-	
+		show_cloud_saves_button.visible = false
+		create_cloud_saves_button.visible = false
+
+
 	language_selector.clear()
 	for locale in TranslationServer.get_loaded_locales():
 		## the method below returned "Norwegian bokmål" for "nb", and that didn't feel right to me.
@@ -101,4 +115,7 @@ func _on_debug_settings_pressed() -> void:
 
 func _on_cloud_saves_pressed() -> void:
 	SaveManager.show_cloud_saves()
-	pass # Replace with function body.
+
+
+func _on_enable_cloud_pressed() -> void:
+	UINavigator.open_from_scene(CLOUD_MENU)

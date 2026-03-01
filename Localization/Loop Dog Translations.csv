@@ -1,84 +1,93 @@
-keys,en,no
-START,Start,Start
-QUIT,Quit,Avslutt
-PAUSE,Pause,Pause
-LEADERBOARDS,Leaderboards,Poengtavler
-LEADERBOARD,Leaderboard,Poengtavle
-ACHIEVEMENTS,Achievements,Prestasjoner
-RETRY,Retry,Prøv igjen
-MAIN_MENU,Main menu,Hovedmeny
-LOADING,Loading...,Laster...
-SCORE,Score:,Poeng:
-BEST_SCORE,Best:,Høyeste:
-SETTINGS,Settings,Innstillinger
-BACK,Back,Tilbake
-CONTROLS,Controls:,Styring:
-SIGN_IN,Sign in to Google Play,Logg inn med Google Play
-LANGUAGE,Language:,Språk:
-GAME_PAUSED,Game paused!,Pauset!
-END_RUN,End run,Avslutt runden
-RESUME,Resume,Fortsett
-LOOP,Loop!,Loop!
-SHOW_LOG,Show log window,Vis loggvindu
-SHOW_FRAMERATE,Show Framerate,Vis FPS
-HOLD,Hold,Hold
-TAP,Tap,Trykk
-READY,Ready!,Klar!
-PRESS_JOIN,Press X/A to join!,Trykk X/A for å bli med!
-FIELD,Field,Engen
-PARK,Park,Parken
-SQUARE,Square,Torget
-SMALL,Small,Lillebanen
-FOREST,Forest,Skogen
-WINTER,Winter,Vinterland
-AD_REMOVAL_TITLE,Tired of ads?,Lei av reklamer?
-AD_REMOVAL_DESCRIPTION,Purchase ad removal,Kjøp reklamefjerning
-AD_REMOVAL_YES,Yes pls,Ja takk
-AD_REMOVAL_NO,No thx,Nei takk
-AD_REMOVAL_PURCHASED_TITLE,Thank you!,Tusen takk!
-AD_REMOVAL_PURCHASED_DESCRIPTION,You will no longer see ads,Du vil ikke lenger se reklamer
-CLOSE,Close,Lukk
-BILLING_PURCHASE_ERROR_TITLE,Something went wrong with your purchase,Noe gikk galt med betalingen
-BILLING_PURCHASE_ERROR_DESCRIPTION,Try again?,Prøv på nytt?
-BILLING_PENDING_TITLE,Waiting for purchase to finish...,Venter på at betalingen gjennomføres...
+keys,en,no,_comment
+START,Start,Start,
+QUIT,Quit,Avslutt,
+PAUSE,Pause,Pause,
+LEADERBOARDS,Leaderboards,Poengtavler,
+LEADERBOARD,Leaderboard,Poengtavle,
+ACHIEVEMENTS,Achievements,Prestasjoner,
+RETRY,Retry,Prøv igjen,
+MAIN_MENU,Main menu,Hovedmeny,
+LOADING,Loading...,Laster...,
+SCORE,Score:,Poeng:,
+BEST_SCORE,Best:,Høyeste:,
+SETTINGS,Settings,Innstillinger,
+BACK,Back,Tilbake,
+CONTROLS,Controls:,Styring:,
+SIGN_IN,Sign in to Google Play,Logg inn med Google Play,
+LANGUAGE,Language:,Språk:,
+GAME_PAUSED,Game paused!,Pauset!,
+END_RUN,End run,Avslutt runden,
+RESUME,Resume,Fortsett,
+LOOP,Loop!,Loop!,
+SHOW_LOG,Show log window,Vis loggvindu,
+SHOW_FRAMERATE,Show Framerate,Vis FPS,
+HOLD,Hold,Hold,
+TAP,Tap,Trykk,
+READY,Ready!,Klar!,
+PRESS_JOIN,Press X/A to join!,Trykk X/A for å bli med!,
+FIELD,Field,Engen,level names must also be updated in play console (for leaderboards)
+PARK,Park,Parken,level names must also be updated in play console (for leaderboards)
+SQUARE,Square,Torget,level names must also be updated in play console (for leaderboards)
+SMALL,Small,Lillebanen,level names must also be updated in play console (for leaderboards)
+FOREST,Forest,Skogen,level names must also be updated in play console (for leaderboards)
+WINTER,Winter,Vinterland,level names must also be updated in play console (for leaderboards)
+AD_REMOVAL_TITLE,Tired of ads?,Lei av reklamer?,this is actually controlled in the play console I think
+AD_REMOVAL_DESCRIPTION,Purchase ad removal,Kjøp reklamefjerning,this is actually controlled in the play console I think
+AD_REMOVAL_YES,Yes pls,Ja takk,
+AD_REMOVAL_NO,No thx,Nei takk,
+AD_REMOVAL_PURCHASED_TITLE,Thank you!,Tusen takk!,
+AD_REMOVAL_PURCHASED_DESCRIPTION,You will no longer see ads,Du vil ikke lenger se reklamer,
+CLOSE,Close,Lukk,
+BILLING_PURCHASE_ERROR_TITLE,Something went wrong with your purchase,Noe gikk galt med betalingen,
+BILLING_PURCHASE_ERROR_DESCRIPTION,Try again?,Prøv på nytt?,
+BILLING_PENDING_TITLE,Waiting for purchase to finish...,Venter på at betalingen gjennomføres...,
 BILLING_PENDING_DESCRIPTION,"Do you need to do something in another app? 
 You can close this and keep playing the game in the meantime","Trenger du å gjøre noe i et annet program?
-Du kan lukke denne meldingen og fortsette å spille mens du venter."
-SELECT_COLOR,Choose color,Velg farge
-CHANGE_DOG,Change dog,Bytt hund
-SKIN_SELECTION_BACK,Looks great!,Ser bra ut!
-CHANGE_HAT,Change hat,Bytt hatt
-SELECT_HAT,Choose a hat,Velg en hatt
-RED,Red,Rød
-BLUE,Blue,Blå
-GREEN,Green,Grønn
-HAT_LOCKED,This hat is locked,Denne hatten er låst
-MAP_LOCKED,This level is locked,Denne banen er låst
-PARK_UNLOCK_CONDITION,Get at least 20 points on Field to unlock this level,Få minst 20 poeng på Engen for å låse opp denne banen
-WINTER_UNLOCK_CONDITION,Get at least 20 points on Park to unlock this level,Få minst 20 poeng på Parken for å låse opp denne banen
-SQUARE_UNLOCK_CONDITION,Get at least 20 points on Winter to unlock this level,Få minst 20 poeng på Vinterland for å låse opp denne banen
-SMALL_UNLOCK_CONDITION,Get at least 20 points on Square to unlock this level,Få minst 20 poeng på Torget for å låse opp denne banen
-FOREST_UNLOCK_CONDITION,Get at least 20 points on Small to unlock this level,Få minst 20 poeng på Lillebanen for å låse opp denne banen
-SANTA,Santa hat,Nissehatten
-COWBOY,Cowboy hat,Cowboy-hatt
-SANTA_UNLOCK_CONDITION,Find the hidden present on Winter to unlock this hat,Finn den gjemte gaven i Vinterland for å låse opp denne hatten
-COWBOY_UNLOCK_CONDITION,Catch your own tail to unlock this hat,Fang din egen hale for å låse opp denne hatten
-HELMET_UNLOCK_CONDITION,Crash into something 100 times to unlock this hat,Treff noe 100 ganger for å låse opp denne hatten
-DEBUG_SETTINGS,Debug settings,Debug settings
-UNLOCK_MAPS,Unlock maps,Lås opp baner
-UNLOCK_HATS,Unlock hats,Lås opp hatter
-LOCK_MAPS,Lock maps,Lås baner
-LOCK_HATS,Lock hats,Lås hatter
-LEVEL_SELECT,Select level,Velg bane
-LEVEL_UNLOCKED_TITLE,New level!,Ny bane!
-HAT_UNLOCKED_TITLE,New hat!,Ny hatt!
-LEVEL_UNLOCKED_DESCRIPTION,is now avaliable!,er nå tilgjengelig!
-HAT_UNLOCKED_DESCRIPTION,is now avaliable!,er nå tilgjengelig!
-SOUND,Sound:,Lyd:
-SHOW_CLOUD_SAVES,Show cloud saves,Vis skylagring
-ERROR,Error,Noe gikk galt
-CLOUD_SAVES_UNAVALIABLE,Could not show cloud saves.,Kan ikke vise skylagring
-SAVE_CONFLICT_TITLE,Conflicting save files,Motstridende lagringsfiler
-SAVE_CONFLICT_DESCRIPTION,There is a discrepancy between the locally saved file and the file retrieved from cloud. Which do you want to keep?,"Det er en forskjell mellom den lokalt lagrede filen, og filen hentet fra skyen. Hvilken vil du beholde?"
-LAST_MODIFIED,Last modified:,Sist endret:
-CONFLICT_SAVE_SELECT,Choose,Behold
+Du kan lukke denne meldingen og fortsette å spille mens du venter.",
+SELECT_COLOR,Choose color,Velg farge,
+CHANGE_DOG,Change dog,Bytt hund,
+SKIN_SELECTION_BACK,Looks great!,Ser bra ut!,
+CHANGE_HAT,Change hat,Bytt hatt,
+SELECT_HAT,Choose a hat,Velg en hatt,
+RED,Red,Rød,
+BLUE,Blue,Blå,
+GREEN,Green,Grønn,
+HAT_LOCKED,This hat is locked,Denne hatten er låst,
+MAP_LOCKED,This level is locked,Denne banen er låst,
+PARK_UNLOCK_CONDITION,Get at least 20 points on Field to unlock this level,Få minst 20 poeng på Engen for å låse opp denne banen,
+WINTER_UNLOCK_CONDITION,Get at least 20 points on Park to unlock this level,Få minst 20 poeng på Parken for å låse opp denne banen,
+SQUARE_UNLOCK_CONDITION,Get at least 20 points on Winter to unlock this level,Få minst 20 poeng på Vinterland for å låse opp denne banen,
+SMALL_UNLOCK_CONDITION,Get at least 20 points on Square to unlock this level,Få minst 20 poeng på Torget for å låse opp denne banen,
+FOREST_UNLOCK_CONDITION,Get at least 20 points on Small to unlock this level,Få minst 20 poeng på Lillebanen for å låse opp denne banen,
+SANTA,Santa hat,Nissehatten,
+COWBOY,Cowboy hat,Cowboy-hatt,
+SANTA_UNLOCK_CONDITION,Find the hidden present on Winter to unlock this hat,Finn den gjemte gaven i Vinterland for å låse opp denne hatten,
+COWBOY_UNLOCK_CONDITION,Catch your own tail to unlock this hat,Fang din egen hale for å låse opp denne hatten,
+HELMET_UNLOCK_CONDITION,Crash into something 100 times to unlock this hat,Treff noe 100 ganger for å låse opp denne hatten,
+DEBUG_SETTINGS,Debug settings,Debug settings,
+UNLOCK_MAPS,Unlock maps,Lås opp baner,
+UNLOCK_HATS,Unlock hats,Lås opp hatter,
+LOCK_MAPS,Lock maps,Lås baner,
+LOCK_HATS,Lock hats,Lås hatter,
+LEVEL_SELECT,Select level,Velg bane,
+LEVEL_UNLOCKED_TITLE,New level!,Ny bane!,
+HAT_UNLOCKED_TITLE,New hat!,Ny hatt!,
+LEVEL_UNLOCKED_DESCRIPTION,is now avaliable!,er nå tilgjengelig!,
+HAT_UNLOCKED_DESCRIPTION,is now avaliable!,er nå tilgjengelig!,
+SOUND,Sound:,Lyd:,
+SHOW_CLOUD_SAVES,Show cloud saves,Vis skylagring,
+ERROR,Error,Noe gikk galt,
+CLOUD_SAVES_UNAVALIABLE,Could not show cloud saves.,Kan ikke vise skylagring,
+SAVE_CONFLICT_TITLE,Conflicting saves,Motstridende lagringsfiler,
+SAVE_CONFLICT_DESCRIPTION,There is a discrepancy between the locally saved file and the file retrieved from cloud. Which do you want to keep?,"Det er en forskjell mellom den lokalt lagrede filen, og filen hentet fra skyen. Hvilken vil du beholde?",
+LAST_MODIFIED,Last modified:,Sist endret:,
+CONFLICT_SAVE_SELECT,Choose,Behold,
+ENABLE_CLOUD_SAVES,Enable cloud saves,Slå på skylagring,
+ENABLE_CLOUD_SAVES_DESCRIPTION,Create a cloud save to be able to sync your progress between devices,Lag en skylagringsfil for å beholde fremdriften din mellom forskjellige enheter.,
+CREATE_SAVE,Create,Ok,
+FILE_NAME,Filename: ,Filnavn:,
+SAVE_CREATE_ERROR,Error creating save,Kunne ikke lage filen,
+SAVE_FILE_EXISTS_DESCRIPTION,A save with this name already exists!,En fil med dette navnet eksisterer allerede!,
+SAVE_CREATE_UNKNOWN_ERROR_DESCRIPTION,An unknown error occurred,En ukjent feil oppstod,
+SAVE_CREATED,Save created!,Lagringsfil laget!,
+SAVE_CREATED_DESCRIPTION,The save file was successfully created,Filen ble laget vellykket.,

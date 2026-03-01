@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://kyb2ynbcw74p"]
+
+[ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_jy7t0"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_byvyk"]
+[ext_resource type="Script" uid="uid://bkker5v7fllil" path="res://Scenes/Menus/cloud_menu.gd" id="2_fklci"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="4_fklci"]
+
+[node name="CloudMenu" unique_id=742566856 instance=ExtResource("1_jy7t0")]
+script = ExtResource("2_fklci")
+
+[node name="ScrollContainer" parent="OuterPanelContainer" parent_id_path=PackedInt32Array(1354738231) index="0" unique_id=910289530]
+custom_minimum_size = Vector2(610, 400)
+
+[node name="TitleLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="0" unique_id=368940186]
+text = "ENABLE_CLOUD_SAVES"
+
+[node name="DescriptionLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="1" unique_id=1464836269]
+text = "ENABLE_CLOUD_SAVES_DESCRIPTION"
+
+[node name="SaveNameLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="2" unique_id=1493491373]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_byvyk")
+theme_type_variation = &"HeaderSmall"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="3" unique_id=548150905]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="SaveNameLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="0" unique_id=329234190]
+layout_mode = 2
+theme = ExtResource("2_byvyk")
+theme_type_variation = &"HeaderSmall"
+text = "FILE_NAME"
+
+[node name="SaveNameLineEdit" type="LineEdit" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="1" unique_id=1868211690]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+placeholder_text = "Save 1"
+
+[node name="CreateSave" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="4" unique_id=927215402]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "CREATE_SAVE"
+script = ExtResource("4_fklci")
+
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/CreateSave" to="." method="_on_create_save_pressed"]

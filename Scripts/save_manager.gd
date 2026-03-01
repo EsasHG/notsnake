@@ -3,18 +3,32 @@ extends Node
 @onready var snapshotClient : PlayGamesSnapshotsClient = get_tree().root.find_child("PlayGamesSnapshotsClient", true, false)
 
 signal _files_loaded(success:bool)
+signal game_saved(success:bool,to_cloud:bool)
 
 const SETTINGS_FILE = "settings.save"
 const SCORES_FILE = "savegame.save"
 const UNLOCKS_FILE = "unlocks.save"
+const CLOUD_SETTINGS_FILE = "user://cloud_settings.save"
 
 const CONFLICT_POPUP = preload("uid://chylx0i6w8on4")
 const POPUP_CONTAINER = preload("uid://b3m2an3pchd8w")
 const POPUP_MENU = preload("uid://chupiwnqy5234")
+
 var cloud_save_enabled = true
 
 var _conflict : PlayGamesSnapshotConflict = null
 var _force_cloudsave_reload : bool = true
+
+
+var _things_unlocked : int
+var _time_started : float
+var _save_file_name : String = "Save_1"
+var _save_file_description : String = "Save 1"
+var _save_names : Array[String]
+
+func _init() -> void:
+	_load_cloud_settings()
+	
 
 func _ready() -> void:
 	#GameSettings.signInClient.user_authenticated.connect(_on_user_authenticated)	
@@ -22,12 +36,54 @@ func _ready() -> void:
 	snapshotClient.game_loaded.connect(_on_game_loaded)
 	snapshotClient.game_saved.connect(_on_game_saved)
 	snapshotClient.conflict_emitted.connect(_on_conflict)
+	_time_started = Time.get_unix_time_from_system()
+
+
+func _save_cloud_settings() -> void:
+	var saveJson : Dictionary = {
+		"cloud_save_enabled" = cloud_save_enabled,
+		"save_file" = _save_file_name,
+		"save_description" = _save_file_description,
+	}
+	var save_bytes = var_to_bytes(saveJson)
+	var save_file = FileAccess.open(CLOUD_SETTINGS_FILE, FileAccess.WRITE)
+	save_file.store_buffer(save_bytes)
+
+
+func _load_cloud_settings() -> void:
+	var save_file = FileAccess.open(CLOUD_SETTINGS_FILE, FileAccess.READ)
+	if save_file == null:
+		Logging.error("Error opening file: " + error_string(FileAccess.get_open_error()))
+		cloud_save_enabled = true
+	else:
+		var buffer = save_file.get_buffer(save_file.get_length())
+		var node_data : Dictionary = bytes_to_var(buffer)
+		cloud_save_enabled = node_data["cloud_save_enabled"]
+		_save_file_name = node_data["save_file"]
+		_save_file_description = node_data["save_description"]
+
+
+func create_cloud_save(save_name : String) -> void:
+	var edited_name = save_name.replace(" ", "_")
+	
+	if _save_names.has(edited_name):
+		Logging.error("A save with name " + save_name + " already exists!")
+		var popup : PopupContainer = UINavigator.open_from_scene(POPUP_CONTAINER)
+		popup.title.text = tr("SAVE_CREATE_ERROR")
+		popup.description.text = tr("SAVE_FILE_EXISTS_DESCRIPTION")
+	else:
+		cloud_save_enabled = true
+		_save_file_name = edited_name
+		_save_file_description = save_name
+		_save_names.append(_save_file_name)
+		_save_cloud_settings()
+		save_game()
 
 
 func show_cloud_saves() -> void:
 	if GameSettings.userAuthenticated:
 		Logging.logMessage("Showing cloud saves!")
-		snapshotClient.show_saved_games("Saves",true,true,3)
+		snapshotClient.show_saved_games("Saves",false,true,3)
 	else:
 		var popup = UINavigator.open_from_scene(POPUP_MENU)
 		popup.title.text = tr("ERROR")
@@ -62,6 +118,7 @@ func _load_from_cloud() -> bool:
 		
 	
 func _load_from_local() -> bool: 
+	Logging.logMessage("Looking for locally saved file.")
 	var result : bool
 	var save_file = FileAccess.open("user://cloud_save.save", FileAccess.READ)
 	if save_file == null:
@@ -124,6 +181,8 @@ func _set_settings_save_content(node_data: Dictionary) -> void:
 		GameSettings.language = node_data["language"]
 	if node_data.has("dogColor"):
 		GlobalInputMap.player_colors[0] = Color(node_data["dogColor"])
+		GameSettings.on_dogColorChanged.emit(Color(node_data["dogColor"]))
+		
 	if node_data.has("hat"):
 		GlobalInputMap.Player_Hats_Selected[0] = node_data["hat"]
 		GameSettings.on_dogHatChanged.emit(node_data["hat"])
@@ -163,6 +222,7 @@ func _get_unlocks_save_content() -> Dictionary:
 			"unlocked_maps" = unlocked_maps,
 			"unlocked_hats" = unlocked_hats,
 			} 
+	_things_unlocked = unlocked_maps.size() + unlocked_hats.size()
 	return unlocks
 
 
@@ -178,8 +238,6 @@ func _set_unlocks_save_content(node_data: Dictionary) -> void:
 			GlobalInputMap.Player_Hats[hat].unlocked = true
 
 
-
-
 func _create_save_content() -> PackedByteArray:
 	var settings = _get_settings_save_content()
 	var scores = _get_score_save_content()
@@ -193,11 +251,28 @@ func _create_save_content() -> PackedByteArray:
 	
 
 func _on_snapshots_loaded(snapshots: Array[PlayGamesSnapshotMetadata]) -> void:
-	if snapshots.size() == 1:
-		snapshotClient.load_game(snapshots.back().unique_name)
-	else:
-		Logging.warn("Unexpected snapshot amount in _on_snapshots_loaded! Expected 1, got " + str(snapshots.size()) + ". Looking for locally saved file instead.")
-		_load_from_local()
+	match snapshots.size():
+		0:
+			Logging.logMessage("No snapshots found! Disabling cloud saves.")
+			cloud_save_enabled = false
+			_load_from_local()
+		1: 
+			_save_file_name = snapshots.back().unique_name
+			_save_file_description = snapshots.back().description
+			if not _save_names.has(_save_file_name):
+				_save_names.append(_save_file_name) 
+			snapshotClient.load_game(_save_file_name)
+		_:
+			var snapshot_to_load : PlayGamesSnapshotMetadata = null
+			for s in snapshots:
+				_save_names.append(s.unique_name) 
+				if s.unique_name == _save_file_name:
+					snapshot_to_load = s
+			if snapshot_to_load == null :
+				Logging.error("Could not find snapshot with name " + _save_file_name)
+				_load_from_local()
+			else:
+				snapshotClient.load_game(snapshot_to_load.unique_name)
 		
 
 func _on_game_loaded(snapshot: PlayGamesSnapshot) -> void:
@@ -206,9 +281,11 @@ func _on_game_loaded(snapshot: PlayGamesSnapshot) -> void:
 		Logging.warn("Cloud snapshot not found! Looking for locally saved file.")
 		_load_from_local()
 	else:
+		_save_file_name = snapshot.metadata.unique_name
+		_save_file_description = snapshot.metadata.description
 		save = bytes_to_var(snapshot.content)
 		_set_settings_save_content(save["settings"])
-		_set_score_save_content(save["score"])
+		_set_score_save_content(save["scores"])
 		_set_unlocks_save_content(save["unlocks"])
 		_files_loaded.emit(true)
 	
@@ -217,7 +294,12 @@ func _save_to_cloud() -> bool:
 	var save_bytes:PackedByteArray  = _create_save_content()
 	if GameSettings.userAuthenticated and is_instance_valid(snapshotClient):
 		##TODO: add time played, and the player's dog as an icon??? that could be cool.
-		snapshotClient.save_game("save_1", "Save 1", save_bytes)
+		var time_msec : int = Time.get_ticks_msec()
+		var unix_time = Time.get_unix_time_from_system()
+		Logging.logMessage("Seconds played (get_ticks_msec): " + str(time_msec/1000.0))
+		Logging.logMessage("Seconds played (unix time cache): " + str(unix_time-_time_started))
+		snapshotClient.save_game(_save_file_name, _save_file_description, save_bytes, time_msec,_things_unlocked)
+		
 		return true
 	else:
 		Logging.error("snapshotClient is unavaliable!")
@@ -228,6 +310,7 @@ func _on_game_saved(is_saved: bool, save_data_name: String, save_data_descriptio
 	Logging.logMessage("Game saved emitted!")
 	if is_saved:
 		Logging.logMessage("Game saved to file " + save_data_name + " with description " + save_data_description)
+		game_saved.emit(true, true)
 	else:
 		Logging.error("Game not saved! Saving file locally")
 		_save_to_local()
@@ -237,6 +320,8 @@ func _save_to_local() -> void:
 	var save_bytes:PackedByteArray  = _create_save_content()
 	var save_file = FileAccess.open("user://cloud_save.save", FileAccess.WRITE)
 	save_file.store_buffer(save_bytes)
+	game_saved.emit(true,false)
+
 
 	
 func _on_conflict(conflict: PlayGamesSnapshotConflict) -> void:
