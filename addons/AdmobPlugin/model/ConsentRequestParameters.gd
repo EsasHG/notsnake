@@ -5,11 +5,12 @@
 class_name ConsentRequestParameters extends RefCounted
 
 enum DebugGeography {
-	DEBUG_GEOGRAPHY_DISABLED = 0,
-	DEBUG_GEOGRAPHY_EEA = 1,
-	DEBUG_GEOGRAPHY_NOT_EEA = 2, # deprecated
-	DEBUG_GEOGRAPHY_REGULATED_US_STATE = 3,
-	DEBUG_GEOGRAPHY_OTHER = 4
+	NOT_SET = -1, ## Don't specify location. (Actual location will be used.)
+	DISABLED = 0, ## Use actual location.
+	EEA = 1, ## Use European Economic Area.
+	NOT_EEA = 2, ## Deprecated.
+	REGULATED_US_STATE = 3, ## Use a regulated state of USA. (ie. California)
+	OTHER = 4 ## Use any non-regulated location.
 }
 
 const IS_REAL_PROPERTY: String = "is_real"
@@ -21,8 +22,9 @@ var _data: Dictionary
 
 
 func _init():
-	_data = {}
-	_data[TEST_DEVICE_HASHED_IDS_PROPERTY] = []
+	_data = {
+		TEST_DEVICE_HASHED_IDS_PROPERTY: []
+	}
 
 
 func set_is_real(a_value: bool) -> ConsentRequestParameters:
@@ -31,8 +33,12 @@ func set_is_real(a_value: bool) -> ConsentRequestParameters:
 	return self
 
 
-func set_tag_for_under_age_of_consent(a_value: bool) -> ConsentRequestParameters:
-	_data[TAG_FOR_UNDER_AGE_OF_CONSENT_PROPERTY] = a_value
+func set_tag_for_under_age_of_consent(a_value: AdmobConfig.TagForUnderAgeOfConsent) -> ConsentRequestParameters:
+	match a_value:
+		AdmobConfig.TagForChildDirectedTreatment.TRUE:
+			_data[TAG_FOR_UNDER_AGE_OF_CONSENT_PROPERTY] = true
+		AdmobConfig.TagForChildDirectedTreatment.FALSE:
+			_data[TAG_FOR_UNDER_AGE_OF_CONSENT_PROPERTY] = false
 
 	return self
 

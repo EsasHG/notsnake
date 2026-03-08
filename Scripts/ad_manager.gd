@@ -36,7 +36,7 @@ func setup_banner_ad() -> void:
 		Logging.logMessage("Loading banner ad")
 		admob.set_banner_position(LoadAdRequest.AdPosition.BOTTOM)
 		#admob.set_banner_size(LoadAdRequest.AdSize.BANNER)
-		admob.set_banner_size(LoadAdRequest.AdSize.FULL_BANNER)
+		admob.set_banner_size(LoadAdRequest.RequestedAdSize.FULL_BANNER)
 		admob.load_banner_ad()
 
 
@@ -49,8 +49,13 @@ func remove_banner_ad() -> void:
 
 
 func _on_admob_banner_ad_failed_to_load(_ad_id: String, error_data: LoadAdError) -> void:
-	Logging.error("Banner ad failed to load! " + error_data.get_response_info())
-	
+	var response_infos:Array[AdapterResponseInfo] = error_data.get_response_info().get_adapter_responses()
+	Logging.error("Banner ad failed to load!")
+	for response:AdapterResponseInfo in response_infos:
+		var ad_error : AdError = response.get_ad_error()
+		if ad_error:
+			Logging.error("Banner ad error: " + str(ad_error.get_code()) + " " + ad_error.get_message())
+		
 
 func _on_admob_banner_ad_loaded(ad_id: String) -> void:
 	Logging.logMessage("Banner ad loaded! Showing ad")

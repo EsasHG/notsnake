@@ -11,8 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://gsu5a1hu0rjf" path="res://Scenes/Menus/scene_transition.tscn" id="8_5oxhp"]
 [ext_resource type="Script" uid="uid://c1ktgg75y0rmt" path="res://Scripts/audio_manager.gd" id="9_nt2eh"]
 [ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="10_76v2p"]
-[ext_resource type="AudioStream" uid="uid://d3ie6s5w1q3qy" path="res://Assets/Sound/loopydog_maintheme_intro.mp3" id="11_2ebs2"]
-[ext_resource type="AudioStream" uid="uid://by3n7gshx8426" path="res://Assets/Sound/loopydog_maintheme_v2_main.mp3" id="12_2ebs2"]
+[ext_resource type="AudioStream" uid="uid://1toubqyuya0x" path="res://Assets/Sound/Running in circles is good actually.mp3" id="11_2ebs2"]
 [ext_resource type="AudioStream" uid="uid://b0nnqd7hp5bi0" path="res://Assets/Sound/wall_hit_sound.mp3" id="13_2ebs2"]
 [ext_resource type="Script" uid="uid://81txo1x6t53a" path="res://addons/GodotPlayGameServices/scripts/sign_in/sign_in_client.gd" id="15_2ebs2"]
 [ext_resource type="Script" uid="uid://cg02bndeeo2mg" path="res://addons/GodotPlayGameServices/scripts/leaderboards/leaderboards_client.gd" id="16_oyb3p"]
@@ -27,7 +26,7 @@ clip_0/stream = ExtResource("11_2ebs2")
 clip_0/auto_advance = 1
 clip_0/next_clip = 1
 clip_1/name = &"Loopydog Maintheme V 2"
-clip_1/stream = ExtResource("12_2ebs2")
+clip_1/stream = ExtResource("11_2ebs2")
 clip_1/auto_advance = 0
 _transitions = {
 Vector2i(0, 0): {
