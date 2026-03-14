@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bob8kh4co86nl" path="res://Scenes/Obstacles/tree_4.tscn" id="10_svlru"]
 [ext_resource type="PackedScene" uid="uid://dnq1hhrmswccv" path="res://Scenes/Obstacles/chiweewee.tscn" id="11_yqw8p"]
 [ext_resource type="PackedScene" uid="uid://c0h220kvrr0mb" path="res://Scenes/Obstacles/angry_dog.tscn" id="12_7qfw4"]
+[ext_resource type="PackedScene" uid="uid://cth1jabpfpcm1" path="res://Assets/Sound/Bird sfx/bird_sfx_player.tscn" id="15_qvk5j"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_fj0g7"]
 distance = -509.11
@@ -189,3 +190,5 @@ position = Vector2(-514, 166)
 
 [node name="AngryDog" parent="." unique_id=367099800 instance=ExtResource("12_7qfw4")]
 position = Vector2(847, -274)
+
+[node name="BirdSfxPlayer" parent="." unique_id=552848213 instance=ExtResource("15_qvk5j")]

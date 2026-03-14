@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dlbknraooa4bi"]
+
+[ext_resource type="Script" uid="uid://dhix3ekcnx630" path="res://Scenes/Player/footstep_player.gd" id="1_wfw68"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xuah4"]
+streams_count = 1
+
+[node name="FootstepPlayer" type="AudioStreamPlayer2D" unique_id=377680260]
+stream = SubResource("AudioStreamRandomizer_xuah4")
+volume_db = -15.0
+script = ExtResource("1_wfw68")

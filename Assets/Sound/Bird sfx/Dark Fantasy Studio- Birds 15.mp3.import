@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://wki3pvgki68x"
+path="res://.godot/imported/Dark Fantasy Studio- Birds 15.mp3-09046717e586f248cf1b386f68e5308a.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 15.mp3"
+dest_files=["res://.godot/imported/Dark Fantasy Studio- Birds 15.mp3-09046717e586f248cf1b386f68e5308a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cth1jabpfpcm1"]
+
+[ext_resource type="AudioStream" uid="uid://cvd226lhy028p" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 4.mp3" id="1_d8kpb"]
+[ext_resource type="AudioStream" uid="uid://dmeev82mtc22c" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 5.mp3" id="2_uwsgx"]
+[ext_resource type="AudioStream" uid="uid://yx82c302pqnx" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 16.mp3" id="3_fr5wd"]
+[ext_resource type="AudioStream" uid="uid://bbk4nc7byknt3" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 17.mp3" id="4_1lt3y"]
+[ext_resource type="AudioStream" uid="uid://dscsj6nx8q5c6" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 18.mp3" id="5_siduo"]
+[ext_resource type="AudioStream" uid="uid://bfxllyoamrm4y" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 22.mp3" id="6_51uia"]
+[ext_resource type="AudioStream" uid="uid://cyh831lu1hs1u" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 23.mp3" id="7_nxufr"]
+[ext_resource type="AudioStream" uid="uid://cjvnjf7idd7we" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 24.mp3" id="8_dl2vw"]
+[ext_resource type="AudioStream" uid="uid://dnkngtvstgqlo" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 6.mp3" id="9_qgult"]
+[ext_resource type="AudioStream" uid="uid://cqlyevb6yvy6w" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 7.mp3" id="10_5lm5x"]
+[ext_resource type="AudioStream" uid="uid://b23v1e1kp4aka" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 8.mp3" id="11_xcyug"]
+[ext_resource type="AudioStream" uid="uid://byk6rdvlgb1hq" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 9.mp3" id="12_eppwb"]
+[ext_resource type="AudioStream" uid="uid://bg7cv6odacx1b" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 12.mp3" id="13_8jnqb"]
+[ext_resource type="AudioStream" uid="uid://p22itw8ki32s" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 13.mp3" id="14_m0j3o"]
+[ext_resource type="AudioStream" uid="uid://cov54wletcxrd" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 11.mp3" id="14_uwsgx"]
+[ext_resource type="AudioStream" uid="uid://qjvl7nglbog1" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 14.mp3" id="15_xaskf"]
+[ext_resource type="AudioStream" uid="uid://wki3pvgki68x" path="res://Assets/Sound/Bird sfx/Dark Fantasy Studio- Birds 15.mp3" id="16_1d5cs"]
+[ext_resource type="Script" uid="uid://cdhgdli6srm82" path="res://Assets/Sound/Bird sfx/bird_sfx_player.gd" id="17_nn0u6"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_84rit"]
+random_pitch = 1.0594631
+random_volume_offset_db = 3.0
+streams_count = 17
+stream_0/stream = ExtResource("1_d8kpb")
+stream_1/stream = ExtResource("2_uwsgx")
+stream_2/stream = ExtResource("9_qgult")
+stream_3/stream = ExtResource("10_5lm5x")
+stream_4/stream = ExtResource("11_xcyug")
+stream_5/stream = ExtResource("12_eppwb")
+stream_6/stream = ExtResource("14_uwsgx")
+stream_7/stream = ExtResource("13_8jnqb")
+stream_8/stream = ExtResource("14_m0j3o")
+stream_9/stream = ExtResource("15_xaskf")
+stream_10/stream = ExtResource("16_1d5cs")
+stream_11/stream = ExtResource("3_fr5wd")
+stream_12/stream = ExtResource("4_1lt3y")
+stream_13/stream = ExtResource("5_siduo")
+stream_14/stream = ExtResource("6_51uia")
+stream_15/stream = ExtResource("7_nxufr")
+stream_16/stream = ExtResource("8_dl2vw")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uwsgx"]
+streams_count = 16
+stream_0/stream = ExtResource("1_d8kpb")
+stream_1/stream = ExtResource("2_uwsgx")
+stream_2/stream = ExtResource("9_qgult")
+stream_3/stream = ExtResource("10_5lm5x")
+stream_4/stream = ExtResource("11_xcyug")
+stream_5/stream = ExtResource("12_eppwb")
+stream_6/stream = ExtResource("13_8jnqb")
+stream_7/stream = ExtResource("14_m0j3o")
+stream_8/stream = ExtResource("15_xaskf")
+stream_9/stream = ExtResource("16_1d5cs")
+stream_10/stream = ExtResource("3_fr5wd")
+stream_11/stream = ExtResource("4_1lt3y")
+stream_12/stream = ExtResource("5_siduo")
+stream_13/stream = ExtResource("6_51uia")
+stream_14/stream = ExtResource("7_nxufr")
+stream_15/stream = ExtResource("8_dl2vw")
+
+[node name="BirdSfxPlayer" type="AudioStreamPlayer" unique_id=552848213]
+stream = SubResource("AudioStreamRandomizer_84rit")
+volume_db = -20.0
+bus = &"SFX"
+script = ExtResource("17_nn0u6")
+min_rest_time = 2.0
+max_rest_time = 7.0
+
+[node name="BirdSfxPlayer" type="AudioStreamPlayer" parent="." unique_id=718441423]
+stream = SubResource("AudioStreamRandomizer_uwsgx")
+volume_db = -20.0
+bus = &"SFX"
+script = ExtResource("17_nn0u6")

@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/dog_cracker_spawner.gd" id="4_0edyt"]
 [ext_resource type="PackedScene" uid="uid://clgtvb1djen1s" path="res://Scenes/Obstacles/bench.tscn" id="5_lun00"]
 [ext_resource type="PackedScene" uid="uid://cek8fr66labht" path="res://Scenes/Obstacles/fountain.tscn" id="6_h7je3"]
+[ext_resource type="PackedScene" uid="uid://cth1jabpfpcm1" path="res://Assets/Sound/Bird sfx/bird_sfx_player.tscn" id="9_exk1y"]
 [ext_resource type="PackedScene" uid="uid://dnq1hhrmswccv" path="res://Scenes/Obstacles/chiweewee.tscn" id="11_36vit"]
 [ext_resource type="PackedScene" uid="uid://c0h220kvrr0mb" path="res://Scenes/Obstacles/angry_dog.tscn" id="12_ok1i3"]
 
@@ -162,3 +163,5 @@ position = Vector2(-556, -469)
 
 [node name="AngryDog" parent="." unique_id=1703690847 instance=ExtResource("12_ok1i3")]
 position = Vector2(866, -449)
+
+[node name="BirdSfxPlayer" parent="." unique_id=552848213 instance=ExtResource("9_exk1y")]

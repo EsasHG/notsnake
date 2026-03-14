@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cgcpju57f0k1c" path="res://Scripts/follow_camera.gd" id="2_rcecb"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="3_t8aqm"]
 [ext_resource type="Script" uid="uid://dvqf2cofw0fm7" path="res://Scripts/dog_cracker_spawner.gd" id="4_oe0c1"]
+[ext_resource type="PackedScene" uid="uid://cth1jabpfpcm1" path="res://Assets/Sound/Bird sfx/bird_sfx_player.tscn" id="5_rcecb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k13ou"]
 size = Vector2(1980, 323.5)
@@ -112,3 +113,5 @@ position = Vector2(-461, -182)
 
 [node name="Node2D15" type="Node2D" parent="PickupSpawner/PickupPoints" unique_id=955176210]
 position = Vector2(-666, 202)
+
+[node name="BirdSfxPlayer" parent="." unique_id=552848213 instance=ExtResource("5_rcecb")]

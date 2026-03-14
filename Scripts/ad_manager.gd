@@ -10,6 +10,8 @@ var _can_show_interstitial_ad : bool = false
 var rounds_between_ad:int = 3
 var rounds_played:int = 0
 var banner_ad_showing : bool = false
+
+
 func _ready() -> void:
 	pass
 	
@@ -23,7 +25,7 @@ func initialize() -> void:
 	interstitial_ad_timer.start()
 	
 
-func _on_admob_initialization_completed(_status_data: InitializationStatus) -> void:
+func _on_admob_initialization_completed(status_data: InitializationStatus) -> void:
 	admob_initialized = true
 	setup_banner_ad()
 	setup_interstitial_ad()
@@ -47,19 +49,18 @@ func remove_banner_ad() -> void:
 		banner_ad_showing = false
 		
 
-
-func _on_admob_banner_ad_failed_to_load(_ad_id: String, error_data: LoadAdError) -> void:
+func _on_admob_banner_ad_failed_to_load(ad_info: AdInfo, error_data: LoadAdError) -> void:
 	var response_infos:Array[AdapterResponseInfo] = error_data.get_response_info().get_adapter_responses()
 	Logging.error("Banner ad failed to load!")
 	for response:AdapterResponseInfo in response_infos:
 		var ad_error : AdError = response.get_ad_error()
 		if ad_error:
 			Logging.error("Banner ad error: " + str(ad_error.get_code()) + " " + ad_error.get_message())
-		
+	
 
-func _on_admob_banner_ad_loaded(ad_id: String) -> void:
+func _on_admob_banner_ad_loaded(ad_info: AdInfo, _response_info: ResponseInfo) -> void:
 	Logging.logMessage("Banner ad loaded! Showing ad")
-	admob.show_banner_ad(ad_id)
+	admob.show_banner_ad(ad_info.get_ad_id())
 	banner_ad_showing = true
 	
 
@@ -69,7 +70,7 @@ func setup_interstitial_ad() -> void:
 		admob.load_interstitial_ad()
 
 
-func _on_admob_interstitial_ad_loaded(_ad_id: String) -> void:
+func _on_admob_interstitial_ad_loaded(_ad_info: AdInfo, _response_info: ResponseInfo) -> void:
 	Logging.logMessage("Interstitial ad loaded!")
 	interstitial_ad_loaded = true
 
@@ -94,11 +95,11 @@ func show_interstitial_ad() -> bool:
 		return false
 		
 
-func _on_admob_consent_form_loaded() -> void:
-	Logging.logMessage("Consent form loaded! Showing...")
-	admob.show_consent_form()
-
-
 func _on_admob_consent_form_failed_to_load(error_data: FormError) -> void:
 	Logging.error("Consent form failed to load! Status Code: " + str(error_data.get_code()) + ". Message: " + error_data.get_message())
 	pass # Replace with function body.
+
+
+func _on_admob_consent_form_loaded() -> void:
+	Logging.logMessage("Consent form loaded! Showing...")
+	admob.show_consent_form()

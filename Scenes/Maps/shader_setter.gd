@@ -13,13 +13,6 @@ func _ready() -> void:
 	await RenderingServer.frame_post_draw
 	var my_texture = sub_viewport.get_texture()
 	texture = my_texture
-
-
-func _process(delta: float) -> void:
-	#set_shader()
-	pass	
-	#await RenderingServer.frame_post_draw
-	#var my_texture = sub_viewport.get_texture()
 	
 	
 func set_shader() -> void:

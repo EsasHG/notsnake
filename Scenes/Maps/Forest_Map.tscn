@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bnepouvao7645" path="res://Scenes/Obstacles/tree_3.tscn" id="7_4ibbc"]
 [ext_resource type="PackedScene" uid="uid://bob8kh4co86nl" path="res://Scenes/Obstacles/tree_4.tscn" id="8_rki3u"]
 [ext_resource type="PackedScene" uid="uid://bqme06c1kc0l8" path="res://Scenes/Obstacles/pine_tree.tscn" id="9_fpe7f"]
+[ext_resource type="PackedScene" uid="uid://cth1jabpfpcm1" path="res://Assets/Sound/Bird sfx/bird_sfx_player.tscn" id="10_tlrih"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k13ou"]
 size = Vector2(1980, 163.375)
@@ -319,3 +320,5 @@ position = Vector2(-906, 519)
 
 [node name="PineTree9" parent="Trees" unique_id=1625183477 instance=ExtResource("9_fpe7f")]
 position = Vector2(406, 725)
+
+[node name="BirdSfxPlayer" parent="." unique_id=552848213 instance=ExtResource("10_tlrih")]

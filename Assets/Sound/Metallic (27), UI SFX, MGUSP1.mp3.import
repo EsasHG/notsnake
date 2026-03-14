@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c5sy5r30tinae"
+path="res://.godot/imported/Metallic (27), UI SFX, MGUSP1.mp3-b8b787a2b75a2bf951e9923daf9ca086.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Metallic (27), UI SFX, MGUSP1.mp3"
+dest_files=["res://.godot/imported/Metallic (27), UI SFX, MGUSP1.mp3-b8b787a2b75a2bf951e9923daf9ca086.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
