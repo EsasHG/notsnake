@@ -42,8 +42,7 @@ script = ExtResource("4_fklci")
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "DISABLE_CLOUD_BUTTON
-"
+text = "DISABLE_CLOUD_BUTTON"
 script = ExtResource("4_fklci")
 
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/CreateSave" to="." method="_on_create_save_pressed"]

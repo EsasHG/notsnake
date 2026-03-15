@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://ttkw6vhl0p8c"]
-
-[ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_tlv08"]
-
-[node name="ErrorPopup" unique_id=742566856 instance=ExtResource("1_tlv08")]

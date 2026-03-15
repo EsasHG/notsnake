@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://cuvjnv1d6p5wc"]
-
-[ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_ex178"]
-
-[node name="PendingPopup" unique_id=742566856 instance=ExtResource("1_ex178")]

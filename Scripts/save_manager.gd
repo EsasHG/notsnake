@@ -256,8 +256,9 @@ func _on_snapshots_loaded(snapshots: Array[PlayGamesSnapshotMetadata]) -> void:
 			var snapshot_to_load : PlayGamesSnapshotMetadata = null
 			for s in snapshots:
 				if s.unique_name != _save_file_name:
+					Logging.warn("Deleting snapshot " + s.unique_name + ". ID: " + s.snapshot_id)
 					
-					snapshotClient.delete_snapshot(s.unique_name)
+					snapshotClient.delete_snapshot(s.snapshot_id)
 				else:
 					snapshot_to_load = s
 			if snapshot_to_load == null :

@@ -2,9 +2,7 @@ extends Control
 
 class_name BillingManager
 const AD_REMOVAL_POPUP = preload("uid://o1ojbpayppki")
-const ERROR_POPUP = preload("uid://ttkw6vhl0p8c")
-const PENDING_POPUP = preload("uid://cuvjnv1d6p5wc")
-const PURCHASED_POPUP = preload("uid://b3m2an3pchd8w")
+const POPUP_MENU = preload("uid://chupiwnqy5234")
 
 @onready var billing_client:BillingClient = BillingClient.new()
 
@@ -135,16 +133,21 @@ func _on_purchase_updated(response: Dictionary):
 									billing_client.acknowledge_purchase(purchase.purchase_token)
 									_ad_removal_purchase = purchase
 						billing_client.PurchaseState.PENDING:
-							UINavigator.open_from_scene(PENDING_POPUP)
+							var pending_popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU)
+							pending_popup.title.text = tr("BILLING_PENDING_TITLE")
+							pending_popup.description.text = tr("BILLING_PENDING_DESCRIPTION")
 								
 	else:
-		var error_popup : PopupContainer = UINavigator.open_from_scene(ERROR_POPUP)
+		var error_popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU)
+		error_popup.title.text = tr("ERROR")
 		var error_description_label = error_popup.description
 		match response.response_code:
 			billing_client.BillingResponseCode.ITEM_ALREADY_OWNED:
 				error_description_label.text = "You seem to already own this."
 			billing_client.BillingResponseCode.USER_CANCELED:
 				error_description_label.text = "The purchase was cancelled by the user."
+				UINavigator.back()
+				UINavigator.back()
 			billing_client.BillingResponseCode.SERVICE_UNAVAILABLE:
 				error_description_label.text = "The service is currently unavaliable. Try again later."
 			billing_client.BillingResponseCode.BILLING_UNAVAILABLE:
@@ -189,7 +192,9 @@ func _on_acknowledge_purchase_response(response: Dictionary):
 	Logging.logMessage("Acknowledge purchase response")
 	match response.response_code:
 		billing_client.BillingResponseCode.OK:
-			UINavigator.open_from_scene(PURCHASED_POPUP)
+			var popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU)
+			popup.title.text = tr("AD_REMOVAL_PURCHASED_TITLE")
+			popup.description.text = tr("AD_REMOVAL_PURCHASED_DESCRIPTION")
 			Logging.logMessage("Purchase acknowledged!")
 		_:
 			Logging.logMessage("Error acknowledging purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
@@ -198,7 +203,7 @@ func _on_acknowledge_purchase_response(response: Dictionary):
 func _on_button_yes_pressed() -> void:
 	Logging.logMessage("Trying to purchase ad removal!")
 	billing_client.purchase(remove_ads_id)
-
+	
 
 func _on_button_no_pressed() -> void:
 	UINavigator.back()

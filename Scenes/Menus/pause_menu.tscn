@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bksp4hitp0rwk" path="res://Scripts/pause_menu.gd" id="1_ekn4r"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="1_vms7i"]
 [ext_resource type="Script" uid="uid://drepaxmc1i3o1" path="res://Scripts/back_button.gd" id="4_7smr3"]
-[ext_resource type="FontFile" uid="uid://d25pq68vko2rn" path="res://Assets/UI/testfont.ttf" id="4_pw12o"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="4_yeo1y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yeo1y"]
@@ -120,28 +119,6 @@ theme = ExtResource("1_vms7i")
 text = "LOOP"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Close" type="Button" parent="." unique_id=953548959]
-process_mode = 3
-z_index = 3
-z_as_relative = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -85.0
-offset_top = 44.0
-offset_right = -44.0
-offset_bottom = 84.0
-grow_horizontal = 0
-size_flags_vertical = 3
-theme = ExtResource("1_vms7i")
-theme_type_variation = &"EmptyButton"
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_pw12o")
-text = "P"
-flat = true
-script = ExtResource("4_7smr3")
 
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer2/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer2/VBoxContainer/EndRun" to="." method="_on_end_run_pressed"]

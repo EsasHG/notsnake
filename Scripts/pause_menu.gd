@@ -3,7 +3,6 @@ extends Control
 @onready var v_box_container: VBoxContainer = $Panel/VBoxContainer
 
 const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
-@onready var close_button: Button = $Close
 
 
 func _ready() -> void:
@@ -16,7 +15,6 @@ func _ready() -> void:
 #do we really want this here?
 func _on_buttons_back() -> void:
 	$Panel.visible = false
-	close_button.visible = false
 	next_count(3)
 	GameSettings.unpause_game()
 	UINavigator.back()
