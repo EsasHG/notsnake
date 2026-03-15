@@ -24,7 +24,7 @@ var _things_unlocked : int
 var _time_started : float
 var _save_file_name : String = "Save_1"
 var _save_file_description : String = "Save 1"
-var _save_names : Array[String]
+var _loaded_time_played : int = 0
 
 func _init() -> void:
 	_load_cloud_settings()
@@ -63,21 +63,10 @@ func _load_cloud_settings() -> void:
 		_save_file_description = node_data["save_description"]
 
 
-func create_cloud_save(save_name : String) -> void:
-	var edited_name = save_name.replace(" ", "_")
-	
-	if _save_names.has(edited_name):
-		Logging.error("A save with name " + save_name + " already exists!")
-		var popup : PopupContainer = UINavigator.open_from_scene(POPUP_CONTAINER)
-		popup.title.text = tr("SAVE_CREATE_ERROR")
-		popup.description.text = tr("SAVE_FILE_EXISTS_DESCRIPTION")
-	else:
-		cloud_save_enabled = true
-		_save_file_name = edited_name
-		_save_file_description = save_name
-		_save_names.append(_save_file_name)
-		_save_cloud_settings()
-		save_game()
+func create_cloud_save() -> void:
+	cloud_save_enabled = true
+	_save_cloud_settings()
+	save_game()
 
 
 func show_cloud_saves() -> void:
@@ -255,18 +244,21 @@ func _on_snapshots_loaded(snapshots: Array[PlayGamesSnapshotMetadata]) -> void:
 		0:
 			Logging.logMessage("No snapshots found! Disabling cloud saves.")
 			cloud_save_enabled = false
+			_save_cloud_settings()
 			_load_from_local()
 		1: 
 			_save_file_name = snapshots.back().unique_name
 			_save_file_description = snapshots.back().description
-			if not _save_names.has(_save_file_name):
-				_save_names.append(_save_file_name) 
 			snapshotClient.load_game(_save_file_name)
 		_:
+			Logging.error("Multiple snapshots found! Deleting unexpected snapshots... " + _save_file_name)
+
 			var snapshot_to_load : PlayGamesSnapshotMetadata = null
 			for s in snapshots:
-				_save_names.append(s.unique_name) 
-				if s.unique_name == _save_file_name:
+				if s.unique_name != _save_file_name:
+					
+					snapshotClient.delete_snapshot(s.unique_name)
+				else:
 					snapshot_to_load = s
 			if snapshot_to_load == null :
 				Logging.error("Could not find snapshot with name " + _save_file_name)
@@ -283,6 +275,7 @@ func _on_game_loaded(snapshot: PlayGamesSnapshot) -> void:
 	else:
 		_save_file_name = snapshot.metadata.unique_name
 		_save_file_description = snapshot.metadata.description
+		_loaded_time_played = snapshot.metadata.played_time
 		save = bytes_to_var(snapshot.content)
 		_set_settings_save_content(save["settings"])
 		_set_score_save_content(save["scores"])
@@ -293,12 +286,12 @@ func _on_game_loaded(snapshot: PlayGamesSnapshot) -> void:
 func _save_to_cloud() -> bool:
 	var save_bytes:PackedByteArray  = _create_save_content()
 	if GameSettings.userAuthenticated and is_instance_valid(snapshotClient):
-		##TODO: add time played, and the player's dog as an icon??? that could be cool.
 		var time_msec : int = Time.get_ticks_msec()
 		var unix_time = Time.get_unix_time_from_system()
-		Logging.logMessage("Seconds played (get_ticks_msec): " + str(time_msec/1000.0))
+		var total_time_played = time_msec+_loaded_time_played
+		Logging.logMessage("Seconds played total (get_ticks_msec): " + str(time_msec/1000.0))
 		Logging.logMessage("Seconds played (unix time cache): " + str(unix_time-_time_started))
-		snapshotClient.save_game(_save_file_name, _save_file_description, save_bytes, time_msec,_things_unlocked)
+		snapshotClient.save_game(_save_file_name, _save_file_description, save_bytes, time_msec+total_time_played,_things_unlocked)
 		
 		return true
 	else:

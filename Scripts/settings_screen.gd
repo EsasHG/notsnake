@@ -9,8 +9,7 @@ extends VBoxContainer
 @export var language_selector: OptionButton 
 @export var googlePlayButtonsContainer: HBoxContainer 
 
-@export var show_cloud_saves_button : AudioButton
-@export var create_cloud_saves_button : AudioButton
+@export var enable_cloud_button : AudioButton
 
 
 const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
@@ -29,15 +28,12 @@ func _ready() -> void:
 	if OS.has_feature("mobile") and GameSettings.userAuthenticated:
 		googlePlayButtonsContainer.visible = true
 		if !GameSettings.game_running:
-			show_cloud_saves_button.visible = true
-			create_cloud_saves_button.visible = true
+			enable_cloud_button.visible = !SaveManager.cloud_save_enabled
 		else:
-			show_cloud_saves_button.visible = false
-			create_cloud_saves_button.visible = false
+			enable_cloud_button.visible = false
 	else:
 		googlePlayButtonsContainer.visible = false
-		show_cloud_saves_button.visible = false
-		create_cloud_saves_button.visible = false
+		enable_cloud_button.visible = false
 
 
 	language_selector.clear()
@@ -111,11 +107,6 @@ func _on_hat_changed(_hat: String):
 
 func _on_debug_settings_pressed() -> void:
 	UINavigator.open_from_scene(DEBUG_SETTINGS_CONTAINER)
-
-
-func _on_cloud_saves_pressed() -> void:
-	SaveManager.show_cloud_saves()
-
 
 func _on_enable_cloud_pressed() -> void:
 	UINavigator.open_from_scene(CLOUD_MENU)

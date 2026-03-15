@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="3_5j8qy"]
 [ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="3_ijau0"]
 [ext_resource type="StyleBox" uid="uid://cur2omqlkol8p" path="res://Assets/Styles/normal_button_stylebox_flat.tres" id="4_ikqh6"]
+[ext_resource type="Script" uid="uid://bmvk53p1kjwj0" path="res://Scenes/Menus/show_cloudsaves.gd" id="7_ijau0"]
 [ext_resource type="PackedScene" uid="uid://dve3ihhfdxc3w" path="res://Scenes/Menus/close_button.tscn" id="7_ikqh6"]
 
 [node name="AdLayoutContainer" type="VBoxContainer" unique_id=742566856]
@@ -136,6 +137,15 @@ theme = ExtResource("1_5j8qy")
 theme_override_styles/normal = ExtResource("4_ikqh6")
 text = "CONSUME_PURCHASE"
 script = ExtResource("3_5j8qy")
+
+[node name="ShowCloudsaves" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1694078274]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_5j8qy")
+text = "SHOW_CLOUD_SAVES"
+script = ExtResource("7_ijau0")
 
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("7_ikqh6")]
 layout_mode = 2

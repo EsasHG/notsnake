@@ -26,29 +26,25 @@ theme_type_variation = &"HeaderSmall"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="3" unique_id=548150905]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 10
-
-[node name="SaveNameLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="0" unique_id=329234190]
-layout_mode = 2
-theme = ExtResource("2_byvyk")
-theme_type_variation = &"HeaderSmall"
-text = "FILE_NAME"
-
-[node name="SaveNameLineEdit" type="LineEdit" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="1" unique_id=1868211690]
-custom_minimum_size = Vector2(300, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="3" unique_id=131185941]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-placeholder_text = "Save 1"
 
-[node name="CreateSave" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="4" unique_id=927215402]
+[node name="CreateSave" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="0" unique_id=927215402]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 4
-text = "CREATE_SAVE"
+text = "ENABLE_CLOUD_BUTTON"
 script = ExtResource("4_fklci")
 
-[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/CreateSave" to="." method="_on_create_save_pressed"]
+[node name="DisableCloud" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="1" unique_id=1313364410]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "DISABLE_CLOUD_BUTTON
+"
+script = ExtResource("4_fklci")
+
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/CreateSave" to="." method="_on_create_save_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/DisableCloud" to="." method="_on_disable_cloud_pressed"]

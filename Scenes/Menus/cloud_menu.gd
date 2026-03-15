@@ -9,6 +9,7 @@ func _ready() -> void:
 	super()
 	visibility_changed.connect(_on_visibility_changed)
 
+
 func _on_visibility_changed() -> void:
 	if visible: 
 		create_save_button.disabled = false
@@ -16,13 +17,12 @@ func _on_visibility_changed() -> void:
 
 func _on_create_save_pressed() -> void:
 	create_save_button.disabled = true
-	
 	var save_name =  save_name_line_edit.text.strip_edges().strip_escapes()
 	save_name.is_valid_ascii_identifier()
 	if save_name.is_empty():
 		save_name = save_name_line_edit.placeholder_text.strip_edges().strip_escapes()
 	SaveManager.game_saved.connect(_on_game_saved)
-	SaveManager.create_cloud_save(save_name)
+	SaveManager.create_cloud_save()
 
 
 func _on_game_saved(success:bool, to_cloud:bool) -> void:
@@ -34,3 +34,8 @@ func _on_game_saved(success:bool, to_cloud:bool) -> void:
 		popup.title.text = tr("SAVE_CREATED")
 		popup.description.text = tr("SAVE_CREATED_DESCRIPTION")
 		
+
+
+func _on_disable_cloud_pressed() -> void:
+	UINavigator.back()
+	pass # Replace with function body.
