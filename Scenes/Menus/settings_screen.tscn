@@ -239,6 +239,15 @@ theme = ExtResource("1_nfl8x")
 text = "DEBUG_SETTINGS"
 script = ExtResource("5_64y2j")
 
+[node name="LinkButton" type="LinkButton" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=325287330]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 30
+text = "Privacy Policy"
+uri = "https://doc-hosting.flycricket.io/loop-dog-privacy-policy/bb0eea96-6884-4224-b62f-37ede4835942/privacy"
+
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("2_u03vw")]
 layout_mode = 2
 mouse_filter = 1

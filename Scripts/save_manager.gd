@@ -11,7 +11,6 @@ const UNLOCKS_FILE = "unlocks.save"
 const CLOUD_SETTINGS_FILE = "user://cloud_settings.save"
 
 const CONFLICT_POPUP = preload("uid://chylx0i6w8on4")
-const POPUP_CONTAINER = preload("uid://b3m2an3pchd8w")
 const POPUP_MENU = preload("uid://chupiwnqy5234")
 
 var cloud_save_enabled = true
