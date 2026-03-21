@@ -29,7 +29,6 @@ func _ready() -> void:
 		billing_client.query_product_details_response.connect(_on_query_product_details_response) # response: Dictionary
 		billing_client.query_purchases_response.connect(_on_query_purchases_response) # response: Dictionary
 		billing_client.on_purchase_updated.connect(_on_purchase_updated) # response: Dictionary
-		billing_client.consume_purchase_response.connect(_on_consume_purchase_response) # response: Dictionary
 		billing_client.acknowledge_purchase_response.connect(_on_acknowledge_purchase_response) # response: Dictionary
 		billing_client.start_connection()
 		#ad_removal_popup.visible = false
@@ -169,23 +168,6 @@ func _on_purchase_updated(response: Dictionary):
 			
 	if not response_ok:
 		Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
-	
-func _consume_purchase() -> void:
-	Logging.logMessage("Trying to consume purchase")	
-	if consume_ad_removal_purchase and _ad_removal_purchase:
-		billing_client.consume_purchase(_ad_removal_purchase.purchase_token)
-	elif !_ad_removal_purchase:
-		Logging.error("No purchase to consume!")
-		
-
-func _on_consume_purchase_response(response: Dictionary):
-	Logging.logMessage("Consume purchase response")
-	if response.response_code == billing_client.BillingResponseCode.OK:
-		Logging.logMessage("Purchase consumed!")
-		no_ads_purchased = false
-		_ad_removal_purchase = null
-	else:
-		Logging.error("Could not consume purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
 		
 	
 func _on_acknowledge_purchase_response(response: Dictionary):

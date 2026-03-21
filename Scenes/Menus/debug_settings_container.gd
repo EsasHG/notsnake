@@ -57,9 +57,3 @@ func _on_purchase_ad_removal_pressed() -> void:
 		GameSettings.billingManager.show_ad_removal_popup()
 	else:
 		Logging.error("Billing manager not found in GameSettings!")
-
-func _on_consume_purchase_pressed() -> void:
-	if GameSettings.billingManager:
-		GameSettings.billingManager._consume_purchase()
-	else:
-		Logging.error("Billing manager not found in GameSettings!")
