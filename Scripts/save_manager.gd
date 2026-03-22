@@ -134,6 +134,8 @@ func _get_settings_save_content() -> Dictionary:
 		"dogColor" = GlobalInputMap.player_colors[0].to_html(),
 		"hat" = GlobalInputMap.Player_Hats_Selected[0],
 		"times_crashed" = GameSettings.times_crashed,
+		"skip_intro" = GameSettings.skip_intro,
+		
 		} 
 	return settings
 
@@ -174,11 +176,12 @@ func _set_settings_save_content(node_data: Dictionary) -> void:
 	if node_data.has("hat"):
 		GlobalInputMap.Player_Hats_Selected[0] = node_data["hat"]
 		GameSettings.on_dogHatChanged.emit(node_data["hat"])
-	else: 
+	else:
 		GlobalInputMap.Player_Hats_Selected[0] = "NONE"
 	if node_data.has("times_crashed"):
 		GameSettings.times_crashed = node_data["times_crashed"]
-
+	if node_data.has("skip_intro"):
+		GameSettings.skip_intro = node_data["skip_intro"]
 
 func _get_score_save_content() -> Dictionary:
 	var scores:Dictionary
@@ -314,7 +317,6 @@ func _save_to_local() -> void:
 	var save_file = FileAccess.open("user://cloud_save.save", FileAccess.WRITE)
 	save_file.store_buffer(save_bytes)
 	game_saved.emit(true,false)
-
 
 	
 func _on_conflict(conflict: PlayGamesSnapshotConflict) -> void:

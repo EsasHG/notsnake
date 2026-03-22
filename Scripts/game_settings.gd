@@ -29,7 +29,7 @@ var game_running:bool = false
 var language = "automatic"
 var banner_ad_showing = false
 var game_startup_loading_screen:SceneTransition = null
-
+var skip_intro:bool = false
 const SCENE_TRANSITION = preload("uid://gsu5a1hu0rjf")
 const GAME_OVER_SCREEN = preload("uid://ck7vl8h740cpk")
 const ARENA_GAME_OVER_SCREEN = preload("uid://u1gfn45v12yd")

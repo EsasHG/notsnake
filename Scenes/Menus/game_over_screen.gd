@@ -37,7 +37,7 @@ func _ready():
 	GameSettings.on_viewportChanged.connect(_on_viewport_changed)
 
 
-func _on_viewport_changed(_viewport_mode : GameSettings.VIEWPORT_MODE) -> void:
+func _on_viewport_changed() -> void:
 	pass
 	#var viewportSize:Vector2 = get_viewport().size
 	#if viewportSize.x >= viewportSize.y:	
