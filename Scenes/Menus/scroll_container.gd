@@ -15,7 +15,7 @@ func _ready() -> void:
 	scrollbar.scale.y = 0.9
 	child = get_child(0) as PanelContainer
 	child.minimum_size_changed.connect(update_size)
-	get_viewport().size_changed.connect(_on_viewport_changed)
+	GameSettings.on_viewportChanged.connect(update_size)
 	
 	
 func update_size() -> void:
@@ -29,8 +29,3 @@ func update_size() -> void:
 		child = get_child(0) as Control
 	var desired_size_y:float = child.size.y + padding
 	custom_minimum_size.y =  desired_size_y if desired_size_y < max_y else max_y
-
-
-func _on_viewport_changed() -> void:
-	# Deferred to make sure GameSettings.viewport_mode is updated
-	update_size.call_deferred()

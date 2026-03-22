@@ -10,6 +10,7 @@ signal on_mainMenuOpened()
 signal on_controls_changed(holdControls:bool)
 signal on_dogColorChanged(color:Color)
 signal on_dogHatChanged(hat:String)
+signal on_viewportChanged()
 signal on_somethingUnlocked(unlock:String)
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 
@@ -434,7 +435,7 @@ func _on_viewport_size_changed():
 		viewport_mode = VIEWPORT_MODE.LANDSCAPE
 	else:
 		viewport_mode = VIEWPORT_MODE.PORTRAIT
-		
+	on_viewportChanged.emit()
 		
 func player_lost(player : PlayerDog) -> void:
 	if !game_running:

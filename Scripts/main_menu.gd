@@ -16,6 +16,7 @@ const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 @onready var quit_button: Button = $MainButtons/Quit
 @onready var locked_message_container: PanelContainer = $AdLayoutContainer/LockedMessageContainer
 @onready var locked_message_description: Label = $AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer/DescriptionLabel
+@onready var logo: TextureRect = $Logo
 
 @export var buttonTheme:Theme
 ## TODO: Use global input map instead of this...
@@ -61,7 +62,8 @@ func _ready() -> void:
 	if(audioManager):
 		audioManager.startMusic()
 	create_level_buttons()
-	
+	GameSettings.on_viewportChanged.connect(_on_viewport_changed)
+	_on_viewport_changed()
 
 func create_level_buttons() -> void:
 	for c in level_buttons.get_children():
@@ -87,6 +89,21 @@ func create_level_buttons() -> void:
 		else:
 			button.pressed.connect(_on_map_selected.bind(map_name))
 
+
+func _on_viewport_changed() -> void:
+	if GameSettings.viewport_mode == GameSettings.VIEWPORT_MODE.PORTRAIT:
+		logo.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP,Control.PRESET_MODE_KEEP_SIZE)
+		logo.position.y += 50
+		buttons.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM,Control.PRESET_MODE_KEEP_SIZE)
+		buttons.position.y -= 160
+		#buttons.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+	
+	else:
+		logo.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT,Control.PRESET_MODE_KEEP_SIZE)
+		logo.position.y += 50
+		buttons.set_anchors_and_offsets_preset(Control.PRESET_CENTER_RIGHT,Control.PRESET_MODE_KEEP_SIZE)
+		#buttons.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
+		buttons.position.x -= 160
 
 ##TODO: do we need this method here?
 func _input(event: InputEvent) -> void:
