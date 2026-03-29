@@ -136,6 +136,15 @@ theme = ExtResource("1_5j8qy")
 text = "SHOW_CLOUD_SAVES"
 script = ExtResource("7_ijau0")
 
+[node name="ShowAgeScreen" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1109719925]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_5j8qy")
+text = "SHOW_AGE_SCREEN"
+script = ExtResource("3_5j8qy")
+
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("7_ikqh6")]
 layout_mode = 2
 mouse_filter = 1
@@ -155,3 +164,4 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer2/UnlockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_hats_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer2/LockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_hats_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/PurchaseAdRemoval" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_purchase_ad_removal_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/ShowAgeScreen" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_show_age_screen_pressed"]

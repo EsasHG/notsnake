@@ -1,5 +1,6 @@
 extends PanelContainer
 @onready var show_log: AudioButton = $DebugScreen/ShowLog
+const NEUTRAL_AGE_SCREEN = preload("uid://emgwix3cnmhe")
 
 func _ready() -> void:
 	show_log.set_pressed_no_signal(Logging.isLogWindowVisible())
@@ -57,3 +58,8 @@ func _on_purchase_ad_removal_pressed() -> void:
 		GameSettings.billingManager.show_ad_removal_popup()
 	else:
 		Logging.error("Billing manager not found in GameSettings!")
+
+
+func _on_show_age_screen_pressed() -> void:
+	UINavigator.open_from_scene(NEUTRAL_AGE_SCREEN)
+	pass # Replace with function body.

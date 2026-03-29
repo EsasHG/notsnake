@@ -9,6 +9,7 @@ const SETTINGS_FILE = "settings.save"
 const SCORES_FILE = "savegame.save"
 const UNLOCKS_FILE = "unlocks.save"
 const CLOUD_SETTINGS_FILE = "user://cloud_settings.save"
+const AGE_GROUP_FILE = "user://age_group.save"
 
 const CONFLICT_POPUP = preload("uid://chylx0i6w8on4")
 const POPUP_MENU = preload("uid://chupiwnqy5234")
@@ -17,7 +18,6 @@ var cloud_save_enabled = true
 
 var _conflict : PlayGamesSnapshotConflict = null
 var _force_cloudsave_reload : bool = true
-
 
 var _things_unlocked : int
 var _time_started : float
@@ -61,6 +61,25 @@ func _load_cloud_settings() -> void:
 		_save_file_name = node_data["save_file"]
 		_save_file_description = node_data["save_description"]
 
+
+func _save_age_group() -> void:
+	var saveJson : Dictionary = {
+		"age_group" = GameSettings.age_group
+	}
+	var save_bytes = var_to_bytes(saveJson)
+	var save_file = FileAccess.open(AGE_GROUP_FILE, FileAccess.WRITE)
+	save_file.store_buffer(save_bytes)
+	
+	
+func _load_age_group() -> void:
+	var save_file = FileAccess.open(AGE_GROUP_FILE, FileAccess.READ)
+	if save_file == null:
+		Logging.error("Error opening file: " + error_string(FileAccess.get_open_error()))
+	else:
+		var buffer = save_file.get_buffer(save_file.get_length())
+		var node_data : Dictionary = bytes_to_var(buffer)
+		GameSettings.set_age_group(node_data["age_group"])
+	
 
 func create_cloud_save() -> void:
 	cloud_save_enabled = true

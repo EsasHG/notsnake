@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://chpsai0xuu3vn"]
+
+[ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_strk8"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_y52f8"]
+[ext_resource type="Script" uid="uid://fr6e71055xy7" path="res://Scenes/Menus/Credits/made_in_godot_label.gd" id="3_lr1bk"]
+
+[node name="Credits" unique_id=742566856 instance=ExtResource("1_strk8")]
+
+[node name="ScrollContainer" parent="OuterPanelContainer" parent_id_path=PackedInt32Array(1354738231) index="0" unique_id=910289530]
+custom_minimum_size = Vector2(610, 400)
+
+[node name="TitleLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="0" unique_id=368940186]
+text = "MADE_BY"
+
+[node name="DescriptionLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="1" unique_id=1464836269]
+text = "Espen Haftorn Gonzalez
+Silas Gystad"
+
+[node name="MadeInGodotLabel" type="RichTextLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="2" unique_id=1419325888]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_y52f8")
+bbcode_enabled = true
+text = "MADE_IN_GODOT[img=64]res://icon.svg[/img]"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("3_lr1bk")

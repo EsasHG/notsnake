@@ -21,6 +21,7 @@ var currentScore : int = 0
 enum GAME_MODE {LAST_DOG_STANDING, TIME, SCORE, SINGLE_PLAYER}
 #var game_mode :GAME_MODE = GAME_MODE.LAST_DOG_STANDING
 var game_mode :GAME_MODE = GAME_MODE.SINGLE_PLAYER
+var age_group : AdManager.AGE_GROUP = AdManager.AGE_GROUP.UNSPECIFIED
 
 @onready var game_timer : Timer = Timer.new()
 var round_time_seconds:int = 60 
@@ -33,6 +34,7 @@ var skip_intro:bool = false
 const SCENE_TRANSITION = preload("uid://gsu5a1hu0rjf")
 const GAME_OVER_SCREEN = preload("uid://ck7vl8h740cpk")
 const ARENA_GAME_OVER_SCREEN = preload("uid://u1gfn45v12yd")
+const NEUTRAL_AGE_SCREEN = preload("uid://emgwix3cnmhe")
 
 #const PAUSE_OVERLAY = preload("uid://ba4bi555qsw1v")
 
@@ -70,6 +72,10 @@ var times_crashed : int = 0
 var _new_unlocks: Array[String]
 
 var currentWorld : Node2D = null
+#1. _enter_tree()
+#2. _ready() (starts loading files)
+#3. _do_deferred_setup
+
 
 func _enter_tree() -> void:
 	Logging.logMessage("GameSettings Entered tree!")
@@ -113,7 +119,7 @@ func _on_files_loaded(success : bool) -> void:
 		setSFXMuted(sfxMuted)
 		setMusicMuted(musicMuted)
 	if _await_authentication:
-		_exit_game_startup_loading_screen()
+		_check_show_neutral_age_screen()
 	
 
 func _check_authentication() -> void:
@@ -134,7 +140,6 @@ func _do_deferred_setup():
 	if(currentWorld == null):
 		currentWorld = get_tree().root.find_child("BubbleCutscene",true,false)
 	if OS.has_feature("mobile"):
-		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
 		
 		if mainGuiNode:
 			billingManager = BILLING_MANAGER.instantiate()
@@ -157,7 +162,7 @@ func _do_deferred_setup():
 		
 	game_startup_loading_screen = get_tree().root.find_child("SceneTransition",true,false)
 	if not _await_authentication:
-		_exit_game_startup_loading_screen()
+		_check_show_neutral_age_screen()
 
 
 func end_run() -> void:
@@ -489,7 +494,7 @@ func _on_user_authenticated(is_authenticated: bool) -> void:
 		Logging.warn("User not authenticated!")
 	userAuthenticated = is_authenticated
 	if _await_authentication:
-		_exit_game_startup_loading_screen()
+		_check_show_neutral_age_screen()
 
 func _all_leaderboards_loaded(leaderboards: Array[PlayGamesLeaderboard]) -> void:
 	Logging.logMessage("All leaderboards loaded!")
@@ -583,6 +588,24 @@ func increment_achievement(achievementName:String, amount:int):
 			Logging.logMessage("Incrementing achievement " + ach.achievement_name)
 			achievementsClient.increment_achievement(ach.achievement_id, amount)
 
+func _check_show_neutral_age_screen() -> void:
+	if age_group == AdManager.AGE_GROUP.UNSPECIFIED:
+		game_startup_loading_screen.visible = false
+		UINavigator.open_from_scene(NEUTRAL_AGE_SCREEN,false,true,_exit_game_startup_loading_screen)
+	else:
+		_exit_game_startup_loading_screen()
+		
+
 func _exit_game_startup_loading_screen() -> void:
-	if game_startup_loading_screen: 
+	if  game_startup_loading_screen: 
+		game_startup_loading_screen.visible = true
 		get_tree().create_timer(1.5).timeout.connect(game_startup_loading_screen.transition_out)
+
+
+func set_age_group(group : AdManager.AGE_GROUP) -> void:
+	age_group = group
+	if adManager == null:
+		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
+	adManager.set_age_group(group)
+		
+	

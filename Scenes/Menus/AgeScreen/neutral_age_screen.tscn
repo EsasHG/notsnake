@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://emgwix3cnmhe"]
+
+[ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_8aigy"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_je2ai"]
+[ext_resource type="Script" uid="uid://bupqjkp0yq37t" path="res://Scenes/Menus/AgeScreen/neutral_age_screen.gd" id="2_n04jj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_je2ai"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="NeutralAgeScreen" unique_id=742566856 instance=ExtResource("1_8aigy")]
+
+[node name="Panel" type="Panel" parent="." index="0" unique_id=1928302524]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_je2ai")
+
+[node name="ScrollContainer" parent="OuterPanelContainer" parent_id_path=PackedInt32Array(1354738231) index="0" unique_id=910289530]
+custom_minimum_size = Vector2(610, 400)
+
+[node name="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer" parent_id_path=PackedInt32Array(1316018813) index="0" unique_id=920526114]
+script = ExtResource("2_n04jj")
+
+[node name="TitleLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="0" unique_id=368940186]
+text = "ENTER_BIRTHDAY"
+
+[node name="ErrorLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="1" unique_id=180062205]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_je2ai")
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(0.79800195, 0.1769912, 0.13351974, 1)
+text = "INVALID_DATE_ERROR"
+
+[node name="DropdownBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="2" unique_id=190098928]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AgeLabelsBoxContainer" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer" index="0" unique_id=1239672058]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="LanguageLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer" index="0" unique_id=911840242]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("2_je2ai")
+theme_type_variation = &"HeaderMedium"
+text = "YEAR"
+
+[node name="MonthLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer" index="1" unique_id=342477812]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("2_je2ai")
+theme_type_variation = &"HeaderMedium"
+text = "MONTH"
+
+[node name="DayLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer" index="2" unique_id=997062931]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("2_je2ai")
+theme_type_variation = &"HeaderMedium"
+text = "DAY"
+
+[node name="AgeDrowpdownBoxContainer" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer" index="1" unique_id=161462032]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="YearDropdown" type="OptionButton" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer" index="0" unique_id=135229834]
+layout_mode = 2
+size_flags_vertical = 8
+selected = 0
+item_count = 1
+popup/item_0/text = "--"
+popup/item_0/id = 0
+
+[node name="MonthDropdown" type="OptionButton" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer" index="1" unique_id=606015101]
+layout_mode = 2
+size_flags_vertical = 8
+selected = 0
+item_count = 1
+popup/item_0/text = "--"
+popup/item_0/id = 0
+
+[node name="DayDropdown" type="OptionButton" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer" index="2" unique_id=1657054651]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Confirm" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="3" unique_id=36265875]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_je2ai")
+text = "CONFIRM"
+
+[node name="DescriptionLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="4" unique_id=1464836269]
+text = "AGE_SCREEN_NOTE"
+
+[connection signal="item_selected" from="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/YearDropdown" to="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_year_dropdown_item_selected"]
+[connection signal="item_selected" from="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/MonthDropdown" to="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_month_dropdown_item_selected"]
+[connection signal="item_selected" from="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/DayDropdown" to="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_day_dropdown_item_selected"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/Confirm" to="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_confirm_pressed"]

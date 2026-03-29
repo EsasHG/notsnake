@@ -14,7 +14,7 @@ func _ready() -> void:
 	else:
 		_hide_banner_panel()
 		
-
+ 
 func _show_banner_panel() -> void:
 	ad_panel.visible = true
 

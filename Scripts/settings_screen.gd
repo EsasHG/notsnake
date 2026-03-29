@@ -15,7 +15,7 @@ extends VBoxContainer
 const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
 const DEBUG_SETTINGS_CONTAINER = preload("uid://d0dfdlrxfu8iw")
 const CLOUD_MENU = preload("uid://kyb2ynbcw74p")
-
+const CREDITS = preload("uid://chpsai0xuu3vn")
 var _changes_made = false
 
 func _ready() -> void:
@@ -108,5 +108,10 @@ func _on_hat_changed(_hat: String):
 func _on_debug_settings_pressed() -> void:
 	UINavigator.open_from_scene(DEBUG_SETTINGS_CONTAINER)
 
+
 func _on_enable_cloud_pressed() -> void:
 	UINavigator.open_from_scene(CLOUD_MENU)
+
+
+func _on_credits_pressed() -> void:
+	UINavigator.open_from_scene(CREDITS) # Replace with function body.

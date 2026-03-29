@@ -11,9 +11,36 @@ var rounds_between_ad:int = 3
 var rounds_played:int = 0
 var banner_ad_showing : bool = false
 
-
+enum AGE_GROUP {UNSPECIFIED,UNDER_13, UNDER_16, UNDER_18, ADULT}
+var user_age_group : AGE_GROUP
 func _ready() -> void:
 	pass
+	
+func set_age_group(age_group : AGE_GROUP) -> void:
+	user_age_group = age_group
+	match age_group:
+		AGE_GROUP.UNSPECIFIED: 
+			admob.max_ad_content_rating = AdmobConfig.ContentRating.G
+			admob.under_age_of_consent = AdmobConfig.TagForUnderAgeOfConsent.TRUE
+			admob.personalization_state = AdmobConfig.PersonalizationState.DISABLED
+		AGE_GROUP.UNDER_13:
+			admob.max_ad_content_rating = AdmobConfig.ContentRating.G
+			admob.under_age_of_consent = AdmobConfig.TagForUnderAgeOfConsent.TRUE
+			admob.personalization_state = AdmobConfig.PersonalizationState.DISABLED
+		AGE_GROUP.UNDER_16:
+			admob.max_ad_content_rating = AdmobConfig.ContentRating.T
+			admob.under_age_of_consent = AdmobConfig.TagForUnderAgeOfConsent.TRUE
+			admob.personalization_state = AdmobConfig.PersonalizationState.DISABLED
+		AGE_GROUP.UNDER_18:
+			admob.max_ad_content_rating = AdmobConfig.ContentRating.T
+			admob.under_age_of_consent = AdmobConfig.TagForUnderAgeOfConsent.FALSE
+			admob.load_consent_form()
+		AGE_GROUP.ADULT:
+			admob.max_ad_content_rating = AdmobConfig.ContentRating.MA
+			admob.under_age_of_consent = AdmobConfig.TagForUnderAgeOfConsent.FALSE
+			admob.load_consent_form()
+			
+			
 	
 
 func initialize() -> void:
@@ -97,9 +124,20 @@ func show_interstitial_ad() -> bool:
 
 func _on_admob_consent_form_failed_to_load(error_data: FormError) -> void:
 	Logging.error("Consent form failed to load! Status Code: " + str(error_data.get_code()) + ". Message: " + error_data.get_message())
+	admob.personalization_state = AdmobConfig.PersonalizationState.DISABLED
 	pass # Replace with function body.
 
 
 func _on_admob_consent_form_loaded() -> void:
 	Logging.logMessage("Consent form loaded! Showing...")
 	admob.show_consent_form()
+	
+
+func _on_admob_consent_info_update_failed(error_data: FormError) -> void:
+	Logging.error("Error updating consent info! " + error_data.get_message())
+	pass # Replace with function body.
+
+
+func _on_admob_consent_info_updated() -> void:
+	admob.get_consent_status()
+	pass # Replace with function body.
