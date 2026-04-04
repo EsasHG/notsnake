@@ -11,8 +11,6 @@ class UI_Helper:
 	var callback : Callable = Callable()
 	
 
-
-
 func _ready() -> void:
 	GameSettings.on_gameBegin.connect(_reset)
 	GameSettings.on_mainMenuOpened.connect(_reset)
@@ -76,6 +74,21 @@ func back() -> bool:
 			_cleanup()
 	return valid_removal
 
+## Removes a node, even if root = true
+func force_back() -> bool:
+	var valid_removal = false
+	if !_cleanup() && _ui_stack.size() > 0:
+		var move_from : UI_Helper = _ui_stack.pop_back()
+		if move_from.callback.is_valid():
+			move_from.callback.call()
+		if move_from:
+			move_from.control.visible = false
+			if move_from.destroy_on_pop:
+				move_from.control.queue_free()
+			valid_removal = true
+		if _ui_stack.size() > 0:
+			_cleanup()
+	return valid_removal
 
 func _reset() -> void:
 	_ui_stack.clear()

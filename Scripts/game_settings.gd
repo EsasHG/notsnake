@@ -389,9 +389,10 @@ func setControls(hold:bool):
 	
 
 func remove_all_ads():
-	adManager.remove_banner_ad()
-	adManager.queue_free()
-	adManager = null
+	if adManager:
+		adManager.remove_banner_ad()
+		adManager.queue_free()
+		adManager = null
 	
 func _on_something_unlocked(unlock:String):
 	_new_unlocks.append(unlock)
@@ -542,8 +543,9 @@ func _on_achievements_loaded(achievements: Array[PlayGamesAchievement]) -> void:
 			unlock_achievement(map_name)
 			
 func _on_billing_manager_loading_finished() -> void:
-	if adManager:
-		adManager.initialize() 
+	pass
+	#if adManager:
+		#adManager.initialize() 
 
 
 func showLeaderboard():
@@ -606,6 +608,6 @@ func set_age_group(group : AdManager.AGE_GROUP) -> void:
 	age_group = group
 	if adManager == null:
 		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
-	adManager.set_age_group(group)
+	adManager.set_age_group.call_deferred(group)
 		
 	

@@ -13,10 +13,16 @@ var banner_ad_showing : bool = false
 
 enum AGE_GROUP {UNSPECIFIED,UNDER_13, UNDER_16, UNDER_18, ADULT}
 var user_age_group : AGE_GROUP
+
+var wait_consent: bool = true
+
+
 func _ready() -> void:
 	pass
 	
 func set_age_group(age_group : AGE_GROUP) -> void:
+	Logging.error("WARNING: Resetting consent info! Should never be done outside of testing.")
+	admob.reset_consent_info()
 	user_age_group = age_group
 	match age_group:
 		AGE_GROUP.UNSPECIFIED: 
@@ -34,30 +40,63 @@ func set_age_group(age_group : AGE_GROUP) -> void:
 		AGE_GROUP.UNDER_18:
 			admob.max_ad_content_rating = AdmobConfig.ContentRating.T
 			admob.under_age_of_consent = AdmobConfig.TagForUnderAgeOfConsent.FALSE
-			admob.load_consent_form()
 		AGE_GROUP.ADULT:
 			admob.max_ad_content_rating = AdmobConfig.ContentRating.MA
 			admob.under_age_of_consent = AdmobConfig.TagForUnderAgeOfConsent.FALSE
-			admob.load_consent_form()
-			
+	check_consent_status()
 			
 	
 
 func initialize() -> void:
-	admob.initialize()
-	interstitial_ad_timer.timeout.connect(func(): 
-		Logging.logMessage("Can show ad!")
-		_can_show_interstitial_ad = true
-		)
-	interstitial_ad_timer.start()
+	if !admob_initialized:
+		#admob.get_consent_status()
+		admob.initialize()
+		interstitial_ad_timer.timeout.connect(func(): 
+			Logging.logMessage("Can show ad!")
+			_can_show_interstitial_ad = true
+			)
+		interstitial_ad_timer.start()
 	
 
 func _on_admob_initialization_completed(status_data: InitializationStatus) -> void:
 	admob_initialized = true
+	#check_consent_status()
+	setup_ads()
+
+	#Logging.logMessage("Loading consent form")
+	
+func check_consent_status() -> void:
+	var consentStatus : UserConsent.Status = admob.get_consent_status().status
+	Logging.logMessage("Consent status: " + UserConsent.status_to_string(consentStatus))
+	
+	match consentStatus:
+		UserConsent.Status.UNKNOWN:
+			Logging.warn("Unknown consent status!")
+			admob.update_consent_info()
+			#admob.load_consent_form()
+		UserConsent.Status.REQUIRED:
+			Logging.warn("Consent required!")
+			wait_consent = true
+			if admob.is_consent_form_available():
+				Logging.logMessage("Consent form is already avaliable. Showing..")
+				#admob.show_consent_form()
+				admob.load_consent_form()
+			else:
+				Logging.logMessage("Consent form not avaliable. Loading..")
+				admob.load_consent_form()
+		UserConsent.Status.OBTAINED:
+			Logging.logMessage("Consent obtained. Setting up ads.")
+			#setup_ads()
+			initialize()
+		UserConsent.Status.NOT_REQUIRED:
+			Logging.logMessage("Consent not required. Setting up ads.")
+			#setup_ads()
+			initialize()
+			
+
+func setup_ads():
 	setup_banner_ad()
 	setup_interstitial_ad()
-	#Logging.logMessage("Loading consent form")
-	#admob.load_consent_form()
 	
 	
 func setup_banner_ad() -> void:
@@ -139,5 +178,10 @@ func _on_admob_consent_info_update_failed(error_data: FormError) -> void:
 
 
 func _on_admob_consent_info_updated() -> void:
-	admob.get_consent_status()
-	pass # Replace with function body.
+	Logging.logMessage("Consent info updated!")
+	check_consent_status()
+
+
+func _on_admob_consent_form_dismissed(error_data: FormError) -> void:
+	Logging.warn("Consent form dismissed! Error: " + error_data.get_message())
+	admob.update_consent_info()

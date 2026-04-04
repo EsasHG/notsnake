@@ -12,6 +12,8 @@ child_directed = 1
 under_age_of_consent = 1
 android_debug_application_id = "ca-app-pub-3940256099942544~3347511713"
 android_real_application_id = "ca-app-pub-1333268640689716~3036536539"
+remove_interstitial_ads_after_displayed = true
+test_device_hashed_ids = Array[String](["ee326b21-924e-4aae-a548-f65d31fadb9a "])
 
 [node name="Interstitial Ad Timer" type="Timer" parent="." unique_id=45894705]
 wait_time = 300.0
@@ -20,6 +22,7 @@ ignore_time_scale = true
 
 [connection signal="banner_ad_failed_to_load" from="Admob" to="." method="_on_admob_banner_ad_failed_to_load"]
 [connection signal="banner_ad_loaded" from="Admob" to="." method="_on_admob_banner_ad_loaded"]
+[connection signal="consent_form_dismissed" from="Admob" to="." method="_on_admob_consent_form_dismissed"]
 [connection signal="consent_form_failed_to_load" from="Admob" to="." method="_on_admob_consent_form_failed_to_load"]
 [connection signal="consent_form_loaded" from="Admob" to="." method="_on_admob_consent_form_loaded"]
 [connection signal="consent_info_update_failed" from="Admob" to="." method="_on_admob_consent_info_update_failed"]

@@ -68,10 +68,28 @@ func _check_hide_error_label() -> void:
 	if _selected_year >= 0 and _selected_month >= 0 and _selected_day >= 0:
 		error_label.visible = false  
 
-
+func _check_date_valid() -> bool:
+	if 1900 > _selected_year or _selected_year > _current_date.year:
+		return false
+		
+	var max_month:int = 12 if _selected_year != _current_date.year else _current_date.month
+	if _selected_month < 1 or _selected_month > max_month:	
+		return false
+		
+	var max_day: int = days_in_month[_selected_month-1]
+	if _is_leap_year(_selected_year) and _selected_month == 2:
+		max_day+=1
+	if _selected_year == _current_date.year and _selected_month == _current_date.month:
+		max_day = _current_date.day
+	if _selected_day < 1 or _selected_day > max_day:
+		return false
+		
+	return true
+	
+	
 func _on_confirm_pressed() -> void:
 	
-	if _selected_year < 0 || _selected_month < 0 || _selected_day < 0:
+	if !_check_date_valid():
 		error_label.visible = true
 	else:
 		var year = _selected_year
@@ -92,10 +110,9 @@ func _on_confirm_pressed() -> void:
 			age_group = AdManager.AGE_GROUP.UNDER_18
 		else:
 			age_group = AdManager.AGE_GROUP.ADULT
-		var ad_manager = get_tree().root.find_child("AdManager",true, false)
 		GameSettings.set_age_group(age_group)
 		SaveManager._save_age_group()
-		UINavigator.back()
+		UINavigator.force_back()
 		
 
 func _on_year_dropdown_item_selected(index: int) -> void:
@@ -116,3 +133,25 @@ func _on_month_dropdown_item_selected(index: int) -> void:
 func _on_day_dropdown_item_selected(index: int) -> void:
 	_selected_day = index
 	_check_hide_error_label()
+
+
+func _on_year_line_edit_text_changed(new_text: String) -> void:
+	
+	if new_text.is_valid_int() and new_text.length() == 4:
+		_selected_year = int(new_text)
+	else:
+		_selected_year = 0
+
+
+func _on_month_line_edit_text_changed(new_text: String) -> void:
+	if new_text.is_valid_int() and new_text.length() == 2:
+		_selected_month = int(new_text)
+	else:
+		_selected_month = 0
+
+
+func _on_day_line_edit_text_changed(new_text: String) -> void:
+	if new_text.is_valid_int() and new_text.length() == 2:
+		_selected_day = int(new_text)
+	else:
+		_selected_day = 0

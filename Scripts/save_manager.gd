@@ -27,7 +27,6 @@ var _loaded_time_played : int = 0
 
 func _init() -> void:
 	_load_cloud_settings()
-	
 
 func _ready() -> void:
 	#GameSettings.signInClient.user_authenticated.connect(_on_user_authenticated)	
@@ -36,7 +35,8 @@ func _ready() -> void:
 	snapshotClient.game_saved.connect(_on_game_saved)
 	snapshotClient.conflict_emitted.connect(_on_conflict)
 	_time_started = Time.get_unix_time_from_system()
-
+	_load_age_group()
+	 
 
 func _save_cloud_settings() -> void:
 	var saveJson : Dictionary = {
@@ -74,7 +74,7 @@ func _save_age_group() -> void:
 func _load_age_group() -> void:
 	var save_file = FileAccess.open(AGE_GROUP_FILE, FileAccess.READ)
 	if save_file == null:
-		Logging.error("Error opening file: " + error_string(FileAccess.get_open_error()))
+		Logging.error("Error opening file " + AGE_GROUP_FILE + ": " + error_string(FileAccess.get_open_error()))
 	else:
 		var buffer = save_file.get_buffer(save_file.get_length())
 		var node_data : Dictionary = bytes_to_var(buffer)
@@ -129,7 +129,7 @@ func _load_from_local() -> bool:
 	var result : bool
 	var save_file = FileAccess.open("user://cloud_save.save", FileAccess.READ)
 	if save_file == null:
-		Logging.error("Error opening file: " + error_string(FileAccess.get_open_error()))
+		Logging.error("Error opening file user://cloud_save.save: " + error_string(FileAccess.get_open_error()))
 		result = false
 	else:
 		var buffer = save_file.get_buffer(save_file.get_length())
