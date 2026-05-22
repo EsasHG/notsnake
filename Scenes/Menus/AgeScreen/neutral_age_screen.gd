@@ -2,6 +2,9 @@ extends VBoxContainer
 @onready var year_dropdown: OptionButton = $DropdownBoxContainer/AgeDrowpdownBoxContainer/YearDropdown
 @onready var month_dropdown: OptionButton = $DropdownBoxContainer/AgeDrowpdownBoxContainer/MonthDropdown
 @onready var day_dropdown: OptionButton = $DropdownBoxContainer/AgeDrowpdownBoxContainer/DayDropdown
+@export var day_line_edit: LineEdit
+@export var month_line_edit: LineEdit 
+@export var year_line_edit: LineEdit 
 @onready var error_label: Label = $ErrorLabel
 
 var days_in_month :Array[int] = [31,28,31,30,31,30,31,31,30,31,30,31]
@@ -20,8 +23,8 @@ func _ready() -> void:
 	month_dropdown.select(-1)
 	day_dropdown.select(-1)
 	error_label.visible = false
-
-
+	day_line_edit.text_submitted.connect(month_line_edit.grab_focus)
+	month_line_edit.text_submitted.connect(year_line_edit.grab_focus)
 func _create_year_dropdown() -> void:
 	year_dropdown.clear()
 	for year in range(_current_date.year,1899,-1):
@@ -86,7 +89,7 @@ func _check_date_valid() -> bool:
 		
 	return true
 	
-	
+
 func _on_confirm_pressed() -> void:
 	
 	if !_check_date_valid():
@@ -136,7 +139,7 @@ func _on_day_dropdown_item_selected(index: int) -> void:
 
 
 func _on_year_line_edit_text_changed(new_text: String) -> void:
-	
+	error_label.visible = false
 	if new_text.is_valid_int() and new_text.length() == 4:
 		_selected_year = int(new_text)
 	else:
@@ -144,14 +147,16 @@ func _on_year_line_edit_text_changed(new_text: String) -> void:
 
 
 func _on_month_line_edit_text_changed(new_text: String) -> void:
-	if new_text.is_valid_int() and new_text.length() == 2:
+	error_label.visible = false
+	if new_text.is_valid_int() and (new_text.length() == 1 or new_text.length() == 2):
 		_selected_month = int(new_text)
 	else:
 		_selected_month = 0
 
 
 func _on_day_line_edit_text_changed(new_text: String) -> void:
-	if new_text.is_valid_int() and new_text.length() == 2:
+	error_label.visible = false
+	if new_text.is_valid_int() and (new_text.length() == 1 or new_text.length() == 2):
 		_selected_day = int(new_text)
 	else:
 		_selected_day = 0

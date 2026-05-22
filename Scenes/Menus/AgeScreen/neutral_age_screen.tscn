@@ -8,6 +8,9 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kk3gh"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kk3gh"]
+content_margin_top = 30.0
+
 [node name="Panel" type="Panel" unique_id=1928302524]
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,10 +56,13 @@ mouse_filter = 1
 theme = ExtResource("2_je2ai")
 theme_type_variation = &"InnerContainer"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer" unique_id=920526114]
+[node name="VBoxContainer" type="VBoxContainer" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer" unique_id=920526114 node_paths=PackedStringArray("day_line_edit", "month_line_edit", "year_line_edit")]
 layout_mode = 2
 theme_override_constants/separation = 15
 script = ExtResource("2_n04jj")
+day_line_edit = NodePath("DropdownBoxContainer/AgeLabelsBoxContainer/DayLineEdit")
+month_line_edit = NodePath("DropdownBoxContainer/AgeLabelsBoxContainer2/MonthLineEdit")
+year_line_edit = NodePath("DropdownBoxContainer/AgeLabelsBoxContainer3/YearLineEdit")
 
 [node name="TitleLabel" type="Label" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=368940186]
 custom_minimum_size = Vector2(500, 0)
@@ -84,8 +90,13 @@ size_flags_vertical = 4
 
 [node name="AgeLabelsBoxContainer" type="VBoxContainer" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer" unique_id=1239672058]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 theme_override_constants/separation = 10
+
+[node name="DayLineEdit" type="LineEdit" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer" unique_id=488418837]
+layout_mode = 2
+size_flags_horizontal = 4
+max_length = 2
 
 [node name="DayLabel" type="Label" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer" unique_id=997062931]
 layout_mode = 2
@@ -94,36 +105,14 @@ theme = ExtResource("2_je2ai")
 theme_type_variation = &"HeaderMedium"
 text = "DAY"
 
-[node name="MonthLabel" type="Label" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer" unique_id=342477812]
+[node name="HBoxContainer" type="HBoxContainer" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer" unique_id=1342405349]
 layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("2_je2ai")
-theme_type_variation = &"HeaderMedium"
-text = "MONTH"
-
-[node name="YearLabel" type="Label" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer" unique_id=911840242]
-layout_mode = 2
-size_flags_horizontal = 6
-theme = ExtResource("2_je2ai")
-theme_type_variation = &"HeaderMedium"
-text = "YEAR"
 
 [node name="AgeDrowpdownBoxContainer" type="VBoxContainer" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer" unique_id=161462032]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
-
-[node name="DayLineEdit" type="LineEdit" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer" unique_id=488418837]
-layout_mode = 2
-max_length = 2
-
-[node name="MonthLineEdit" type="LineEdit" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer" unique_id=580356029]
-layout_mode = 2
-max_length = 2
-
-[node name="YearLineEdit" type="LineEdit" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer" unique_id=1673653467]
-layout_mode = 2
-max_length = 4
 
 [node name="DayDropdown" type="OptionButton" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer" unique_id=1657054651]
 visible = false
@@ -148,6 +137,48 @@ item_count = 1
 popup/item_0/text = "--"
 popup/item_0/id = 0
 
+[node name="AgeLabelsBoxContainer2" type="VBoxContainer" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer" unique_id=1419773131]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="MonthLineEdit" type="LineEdit" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer2" unique_id=580356029]
+layout_mode = 2
+size_flags_horizontal = 4
+max_length = 2
+
+[node name="MonthLabel" type="Label" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer2" unique_id=2074016023]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("2_je2ai")
+theme_type_variation = &"HeaderMedium"
+text = "MONTH"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer2" unique_id=99250635]
+layout_mode = 2
+
+[node name="AgeLabelsBoxContainer3" type="VBoxContainer" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer" unique_id=3912527]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="YearLineEdit" type="LineEdit" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer3" unique_id=1673653467]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_length = 4
+
+[node name="YearLabel" type="Label" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer3" unique_id=1673568346]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("2_je2ai")
+theme_type_variation = &"HeaderMedium"
+text = "YEAR"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer3" unique_id=412360997]
+visible = false
+layout_mode = 2
+
 [node name="Confirm" type="Button" parent="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=36265875]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -161,6 +192,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_je2ai")
 theme_type_variation = &"HeaderSmall"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kk3gh")
 text = "AGE_SCREEN_NOTE"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -177,10 +209,10 @@ size_flags_vertical = 8
 theme = ExtResource("2_je2ai")
 theme_type_variation = &"EmptyPanel"
 
-[connection signal="text_changed" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/DayLineEdit" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_day_line_edit_text_changed"]
-[connection signal="text_changed" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/MonthLineEdit" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_month_line_edit_text_changed"]
-[connection signal="text_changed" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/YearLineEdit" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_year_line_edit_text_changed"]
+[connection signal="text_changed" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer/DayLineEdit" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_day_line_edit_text_changed"]
 [connection signal="item_selected" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/DayDropdown" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_day_dropdown_item_selected"]
 [connection signal="item_selected" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/MonthDropdown" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_month_dropdown_item_selected"]
 [connection signal="item_selected" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/YearDropdown" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_year_dropdown_item_selected"]
+[connection signal="text_changed" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer2/MonthLineEdit" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_month_line_edit_text_changed"]
+[connection signal="text_changed" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeLabelsBoxContainer3/YearLineEdit" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_year_line_edit_text_changed"]
 [connection signal="pressed" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/Confirm" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_confirm_pressed"]
