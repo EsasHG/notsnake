@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://csw1duo5yljwy"]
+
+[ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="1_6c253"]
+
+[node name="Control" type="Button" unique_id=699283025]
+texture_filter = 1
+custom_minimum_size = Vector2(180, 180)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -540.0
+offset_bottom = -540.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme = ExtResource("1_6c253")
+icon_alignment = 1
+expand_icon = true

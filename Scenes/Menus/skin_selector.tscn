@@ -173,12 +173,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="Label" type="Label" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=191960741]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "SELECT_COLOR"
 horizontal_alignment = 1
 
 [node name="ColorPickerButton" type="ColorPickerButton" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=1937386427]
+visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_vertical = 3
@@ -243,6 +245,7 @@ max_value = 1.0
 step = 0.05
 
 [node name="HexEdit" type="HBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=894286634]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HexEdit" unique_id=95559799]
@@ -264,6 +267,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_dimmy")
 text = "CHANGE_HAT"
+script = ExtResource("5_cmbhx")
+
+[node name="ChangeColor" type="Button" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=395902031]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_dimmy")
+text = "SELECT_COLOR"
 script = ExtResource("5_cmbhx")
 
 [node name="Control" type="Control" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1528918680]
@@ -361,6 +372,54 @@ last_wrap_alignment = 2
 layout_mode = 2
 mouse_filter = 1
 
+[node name="SkinSelectContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1662271931]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("2_dimmy")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/SkinSelectContainer" unique_id=1973945556]
+clip_children = 1
+custom_minimum_size = Vector2(610, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_dimmy")
+theme_type_variation = &"LowerScrollContainer"
+horizontal_scroll_mode = 0
+script = ExtResource("3_k52lc")
+
+[node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/SkinSelectContainer/ScrollContainer" unique_id=619401063]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("2_dimmy")
+theme_type_variation = &"InnerContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/SkinSelectContainer/ScrollContainer/InnerContainer" unique_id=904589898]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="AdLayoutContainer/SkinSelectContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1939445138]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_dimmy")
+theme_type_variation = &"HeaderLarge"
+text = "SELECT_HAT"
+
+[node name="SkinButtons" type="HFlowContainer" parent="AdLayoutContainer/SkinSelectContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=914148361]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="HatSelectCloseButton" parent="AdLayoutContainer/SkinSelectContainer" unique_id=998217422 instance=ExtResource("9_dimmy")]
+layout_mode = 2
+mouse_filter = 1
+
 [node name="LockedMessageContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1699088321]
 visible = false
 layout_mode = 2
@@ -416,7 +475,7 @@ autowrap_mode = 3
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="CloseButton" parent="AdLayoutContainer/LockedMessageContainer" unique_id=998217422 instance=ExtResource("9_dimmy")]
+[node name="CloseButton" parent="AdLayoutContainer/LockedMessageContainer" unique_id=1674878102 instance=ExtResource("9_dimmy")]
 layout_mode = 2
 
 [node name="AdPanel" type="Panel" parent="AdLayoutContainer" unique_id=800514159]
@@ -432,4 +491,5 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="value_changed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Blue/BlueSlider" to="." method="_on_blue_slider_value_changed"]
 [connection signal="text_changed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HexEdit/TextEdit" to="." method="_on_text_edit_text_changed"]
 [connection signal="pressed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/ChangeHat" to="." method="_on_change_hat_pressed"]
+[connection signal="pressed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/ChangeColor" to="." method="_on_change_color_pressed"]
 [connection signal="pressed" from="AdLayoutContainer/HatSelectContainer/HatSelectCloseButton" to="." method="_on_hat_select_close_button_pressed"]

@@ -5,13 +5,19 @@ extends Control
 @onready var _head: AnimatedSprite2D = $AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Control/Control/Head
 @onready var _legs: AnimatedSprite2D = $AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Control/Control/Head/Legs
 @onready var _hat: Sprite2D = $AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Control/Control/Head/Hat
+
 @onready var hat_select_screen: PanelContainer = $AdLayoutContainer/HatSelectContainer
 @onready var hat_buttons: HFlowContainer = $AdLayoutContainer/HatSelectContainer/ScrollContainer/InnerContainer/VBoxContainer/HatButtons
+@onready var skin_select_screen: PanelContainer = $AdLayoutContainer/SkinSelectContainer
+@onready var skin_buttons: HFlowContainer = $AdLayoutContainer/SkinSelectContainer/ScrollContainer/InnerContainer/VBoxContainer/SkinButtons
+
 @onready var locked_message_container: PanelContainer = $AdLayoutContainer/LockedMessageContainer
 @onready var locked_message_description_label: Label = $AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer/DescriptionLabel
 
+const ICON_BUTTON = preload("uid://csw1duo5yljwy")
 const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 const LEVEL_SELECT_THEME = preload("uid://dayndqrmaoq3i")
+const DOG_THUMBNAIL = preload("uid://bp1qs2tnveae5")
 
 var _current_hat : String
 
@@ -29,6 +35,10 @@ func _ready() -> void:
 	locked_message_container.visibility_changed.connect(_on_child_visibility_changed)
 	main_screen_container.visibility_changed.connect(_on_child_visibility_changed)
 	
+	_create_hat_buttons()
+	_create_skin_buttons()
+
+func _create_hat_buttons() -> void: 	
 	var keys = GlobalInputMap.Player_Hats.keys()
 	keys.sort_custom(func(a,b): 
 			return GlobalInputMap.Player_Hats[a].unlocked > GlobalInputMap.Player_Hats[b].unlocked
@@ -36,18 +46,12 @@ func _ready() -> void:
 	
 	for key:String in keys:
 		var hat_info = GlobalInputMap.Player_Hats[key]
-		var button : Button = Button.new()
-		button.theme = LEVEL_SELECT_THEME
+		var button : Button = ICON_BUTTON.instantiate()
 		button.icon = hat_info.icon_hat
-		button.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		button.expand_icon = true		
-		button.mouse_filter = Control.MOUSE_FILTER_PASS
-		button.custom_minimum_size = Vector2(180,180)
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		hat_buttons.add_child(button)
 		
-		if !hat_info.unlocked: ##TODO: add actual logic here
+		if !hat_info.unlocked: 
 			var locked = LOCKED_ICON.instantiate()
 			button.add_child(locked)
 			button.pressed.connect(_on_locked_hat_pressed.bind(key))
@@ -55,7 +59,26 @@ func _ready() -> void:
 			button.pressed.connect(_on_hat_selected.bind(key))
 	hat_select_screen.visible = false
 
-
+func _create_skin_buttons() -> void:
+	var colors = GlobalInputMap.player_colors
+	#colors.sort_custom(func(a,b): 
+			#return GlobalInputMap.Player_Hats[a].unlocked > GlobalInputMap.Player_Hats[b].unlocked
+			#)
+	
+	for c:Color in colors:
+		var button : Button = ICON_BUTTON.instantiate()
+		button.icon = DOG_THUMBNAIL
+		button.modulate = c
+		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		skin_buttons.add_child(button)
+		
+		#if !hat_info.unlocked: 
+			#var locked = LOCKED_ICON.instantiate()
+			#button.add_child(locked)
+			#button.pressed.connect(_on_locked_hat_pressed.bind(key))
+		#else:
+		button.pressed.connect(_on_color_changed.bind(c))
+	hat_select_screen.visible = false
 func update_visuals(new_color:Color) -> void:
 	color_picker_button.color = new_color
 	_head.self_modulate = new_color
@@ -68,6 +91,7 @@ func _on_main_screen_back() -> void:
 	
 func _on_color_changed(color:Color) -> void:
 	update_visuals(color)
+	UINavigator.back()
 	
 
 func _on_hat_selected(_hat_id:String) -> void:
@@ -84,6 +108,10 @@ func _on_locked_hat_pressed(_hat_id:String) -> void:
 func _on_change_hat_pressed() -> void:
 	UINavigator.open(hat_select_screen)
 	
+
+func _on_change_color_pressed() -> void:
+	UINavigator.open(skin_select_screen)
+
 
 func _on_red_slider_value_changed(value: float) -> void:
 	var new_color: Color = _head.self_modulate

@@ -152,6 +152,30 @@ expand_margin_top = 2.0
 expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34ovf"]
+bg_color = Color(0.26244184, 0.26244184, 0.26244184, 0.404)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nhk8d"]
+bg_color = Color(0.26244184, 0.26244184, 0.26244184, 0.404)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xhklp"]
+bg_color = Color(0.26244184, 0.26244184, 0.26244184, 0.404)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pyi2q"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -519,6 +543,9 @@ CheckButton/styles/hover = SubResource("StyleBoxEmpty_4dyya")
 CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_4dyya")
 CheckButton/styles/normal = SubResource("StyleBoxEmpty_4dyya")
 CheckButton/styles/pressed = SubResource("StyleBoxEmpty_4dyya")
+ColorPickerButton/styles/hover = SubResource("StyleBoxFlat_34ovf")
+ColorPickerButton/styles/normal = SubResource("StyleBoxFlat_nhk8d")
+ColorPickerButton/styles/pressed = SubResource("StyleBoxFlat_xhklp")
 CustomScrollBar/base_type = &"VScrollBar"
 CustomScrollBar/styles/grabber = SubResource("StyleBoxFlat_pyi2q")
 CustomScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_7yt47")

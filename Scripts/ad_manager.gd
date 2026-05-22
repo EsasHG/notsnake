@@ -72,7 +72,12 @@ func _on_admob_initialization_completed(status_data: InitializationStatus) -> vo
 	#Logging.logMessage("Loading consent form")
 	
 func check_consent_status() -> void:
-	var consentStatus : UserConsent.Status = admob.get_consent_status().status
+	var user_consent : UserConsent = admob.get_consent_status()
+	var consentStatus : UserConsent.Status
+	if user_consent:
+		consentStatus = user_consent.status
+	else:
+		consentStatus = UserConsent.Status.UNKNOWN
 	Logging.logMessage("Consent status: " + UserConsent.status_to_string(consentStatus))
 	
 	match consentStatus:

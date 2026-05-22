@@ -113,7 +113,7 @@ func _input(event: InputEvent) -> void:
 			rotateRight = !rotateRight
 			
 	if event.is_action("Pause"):
-		GameSettings._on_pause_pressed()
+		GameSettings.pause_game()
 
 
 func _process(delta: float) -> void:
