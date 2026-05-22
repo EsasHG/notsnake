@@ -6,8 +6,7 @@
 [ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="3_wdb8e"]
 [ext_resource type="PackedScene" uid="uid://dve3ihhfdxc3w" path="res://Scenes/Menus/close_button.tscn" id="5_lbxd7"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_je2ai"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kk3gh"]
 
 [node name="Panel" type="Panel" unique_id=1928302524]
 anchors_preset = 15
@@ -16,7 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_je2ai")
+theme_override_styles/panel = SubResource("StyleBoxTexture_kk3gh")
 
 [node name="NeutralAgeScreen" type="VBoxContainer" parent="." unique_id=742566856]
 process_mode = 3
@@ -177,11 +176,6 @@ layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("2_je2ai")
 theme_type_variation = &"EmptyPanel"
-
-[node name="LineEdit" type="LineEdit" parent="." unique_id=176798880]
-layout_mode = 0
-offset_right = 68.5
-offset_bottom = 31.0
 
 [connection signal="text_changed" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/DayLineEdit" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_day_line_edit_text_changed"]
 [connection signal="text_changed" from="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DropdownBoxContainer/AgeDrowpdownBoxContainer/MonthLineEdit" to="NeutralAgeScreen/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" method="_on_month_line_edit_text_changed"]

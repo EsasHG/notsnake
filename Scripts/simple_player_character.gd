@@ -200,7 +200,7 @@ func _on_area_entered(area: Area2D) -> void:
 			GameSettings.on_somethingUnlocked.emit("COWBOY")
 			GlobalInputMap.Player_Hats["COWBOY"].unlocked = true
 			SaveManager.save_game()
-			GameSettings.unlock_achievement("Wi(e)nner")	##TODO: Fix so this gets unlocked if player logs in later.
+			AchievementManager.unlock_achievement("Wi(e)nner")	##TODO: Fix so this gets unlocked if player logs in later.
 			
 		queue_free()
 		

@@ -254,8 +254,16 @@ size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 1, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 30
-text = "Privacy Policy"
+text = "PRIVACY_POLICY"
 uri = "https://doc-hosting.flycricket.io/loop-dog-privacy-policy/bb0eea96-6884-4224-b62f-37ede4835942/privacy"
+
+[node name="ConsentFormButton" type="LinkButton" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1823303729]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0, 0, 1, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 30
+text = "MANAGE_CONSENT"
 
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("2_u03vw")]
 layout_mode = 2
@@ -279,3 +287,4 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/EnableCloud" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_enable_cloud_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DebugSettings" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_debug_settings_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Credits" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_credits_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/ConsentFormButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_consent_form_button_pressed"]

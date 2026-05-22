@@ -10,6 +10,7 @@ extends VBoxContainer
 @export var googlePlayButtonsContainer: HBoxContainer 
 
 @export var enable_cloud_button : AudioButton
+@onready var consent_form_button: LinkButton = $ConsentFormButton
 
 
 const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
@@ -34,7 +35,10 @@ func _ready() -> void:
 	else:
 		googlePlayButtonsContainer.visible = false
 		enable_cloud_button.visible = false
-
+	if GameSettings.age_group >= AdManager.AGE_GROUP.UNDER_16:
+		consent_form_button.visible = true
+	else:
+		consent_form_button.visible = false
 
 	language_selector.clear()
 	for locale in TranslationServer.get_loaded_locales():
@@ -68,11 +72,11 @@ func _on_hold_controls_toggled(toggled_on: bool) -> void:
 
 
 func _on_achievements_button_pressed() -> void:
-	GameSettings.showAchievements()
+	AchievementManager.show_achievements()
 
 
 func _on_leaderboards_button_pressed() -> void:
-	GameSettings.showAllLeaderboards()
+	LeaderboardManager.show_all_leaderboards()
 
 
 func _on_visibility_changed():
@@ -115,3 +119,8 @@ func _on_enable_cloud_pressed() -> void:
 
 func _on_credits_pressed() -> void:
 	UINavigator.open_from_scene(CREDITS) # Replace with function body.
+
+
+func _on_consent_form_button_pressed() -> void:
+	GameSettings.adManager.show_consent_form()
+	pass # Replace with function body.

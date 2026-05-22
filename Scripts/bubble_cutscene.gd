@@ -7,6 +7,7 @@ extends Node2D
 @onready var thoughtBubble1 = $ThoughtBubble_1
 @onready var thoughtBubble2 = $ThoughtBubble_2
 @onready var thoughtBubble3 = $ThoughtBubble_3
+@onready var bubble_dog: PlayerDog = $BubbleDog
 
 var bubblesSpawned : int = 0
 var activeBubble : Node2D
@@ -22,6 +23,7 @@ var skip : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	bubble_dog.visible = false
 	activeBubble = thoughtBubble
 	thoughtBubble1.visible = false
 	thoughtBubble2.visible = false
@@ -30,8 +32,9 @@ func _ready() -> void:
 	GameSettings.on_gameBegin.connect(queue_free)
 	if(skipEntireCutscene):
 		showMenu()
-
+		bubble_dog.visible = true
 func startBubbleCutscene():
+	bubble_dog.visible = true
 	if not skipEntireCutscene:
 		activeBubbleTimer = get_tree().create_timer(1)
 		activeBubbleTimer.timeout.connect(func():

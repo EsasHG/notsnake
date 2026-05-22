@@ -175,4 +175,4 @@ func _on_sign_in_pressed() -> void:
 
 
 func _on_leaderboard_pressed() -> void:
-	GameSettings.showAllLeaderboards()
+	LeaderboardManager.showAllLeaderboards()

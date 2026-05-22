@@ -25,6 +25,8 @@ GlobalInputMap="*res://Scenes/Menus/Arena/global_input_map.gd"
 UINavigator="*res://Scripts/ui_navigator.gd"
 GodotPlayGameServices="*uid://bxrtbgaehoa0y"
 SaveManager="*uid://de2jnqrou7h18"
+LeaderboardManager="*uid://8alkp22o1sc0"
+AchievementManager="*uid://dmbyu01vitl2d"
 
 [display]
 

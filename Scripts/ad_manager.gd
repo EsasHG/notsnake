@@ -1,6 +1,8 @@
 extends Node2D
-
 class_name  AdManager
+
+signal on_admob_initialized
+
 @onready var admob: Admob = $Admob
 @onready var interstitial_ad_timer: Timer = $"Interstitial Ad Timer"
 
@@ -21,8 +23,8 @@ func _ready() -> void:
 	pass
 	
 func set_age_group(age_group : AGE_GROUP) -> void:
-	Logging.error("WARNING: Resetting consent info! Should never be done outside of testing.")
-	admob.reset_consent_info()
+	#Logging.error("WARNING: Resetting consent info! Should never be done outside of testing.")
+	#admob.reset_consent_info()
 	user_age_group = age_group
 	match age_group:
 		AGE_GROUP.UNSPECIFIED: 
@@ -49,6 +51,8 @@ func set_age_group(age_group : AGE_GROUP) -> void:
 
 func initialize() -> void:
 	if !admob_initialized:
+		Logging.logMessage("Initializing admob")
+		
 		#admob.get_consent_status()
 		admob.initialize()
 		interstitial_ad_timer.timeout.connect(func(): 
@@ -59,8 +63,10 @@ func initialize() -> void:
 	
 
 func _on_admob_initialization_completed(status_data: InitializationStatus) -> void:
+	Logging.logMessage("Admob initialized")
 	admob_initialized = true
 	#check_consent_status()
+	on_admob_initialized.emit()
 	setup_ads()
 
 	#Logging.logMessage("Loading consent form")
@@ -78,6 +84,7 @@ func check_consent_status() -> void:
 			Logging.warn("Consent required!")
 			wait_consent = true
 			if admob.is_consent_form_available():
+				
 				Logging.logMessage("Consent form is already avaliable. Showing..")
 				#admob.show_consent_form()
 				admob.load_consent_form()
@@ -114,6 +121,17 @@ func remove_banner_ad() -> void:
 		admob.remove_banner_ad()
 		banner_ad_showing = false
 		
+
+func show_consent_form() -> void:
+	if admob_initialized:
+		if admob.is_consent_form_available():
+			Logging.logMessage("Consent form is already avaliable. Showing..")
+			admob.load_consent_form()
+			#admob.show_consent_form()
+		else:			
+			Logging.logMessage("Loading consent form..")
+			
+			admob.load_consent_form()
 
 func _on_admob_banner_ad_failed_to_load(ad_info: AdInfo, error_data: LoadAdError) -> void:
 	var response_infos:Array[AdapterResponseInfo] = error_data.get_response_info().get_adapter_responses()
@@ -183,5 +201,8 @@ func _on_admob_consent_info_updated() -> void:
 
 
 func _on_admob_consent_form_dismissed(error_data: FormError) -> void:
-	Logging.warn("Consent form dismissed! Error: " + error_data.get_message())
+	Logging.logMessage("Consent form dismissed!" )
+	var error_message : String = error_data.get_message()
+	if not error_message.is_empty():
+		Logging.error(error_message)
 	admob.update_consent_info()

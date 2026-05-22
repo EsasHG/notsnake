@@ -8,7 +8,7 @@ func _on_area_entered(area: Area2D) -> void:
 			GameSettings.on_somethingUnlocked.emit("SANTA")
 			GlobalInputMap.Player_Hats["SANTA"].unlocked = true
 			SaveManager.save_game()
-			GameSettings.unlock_achievement("Dapper dog")
+			AchievementManager.unlock_achievement("Dapper dog")
 		GlobalInputMap.Player_Hats_Selected[0] = "SANTA"
 		GameSettings.on_dogHatChanged.emit("SANTA")
 		queue_free()

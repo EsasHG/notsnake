@@ -91,6 +91,7 @@ func force_back() -> bool:
 	return valid_removal
 
 func _reset() -> void:
+	#Should this delete things that are in it, if there are any?? I guess?
 	_ui_stack.clear()
 
 
