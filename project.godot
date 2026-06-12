@@ -27,6 +27,7 @@ GodotPlayGameServices="*uid://bxrtbgaehoa0y"
 SaveManager="*uid://de2jnqrou7h18"
 LeaderboardManager="*uid://8alkp22o1sc0"
 AchievementManager="*uid://dmbyu01vitl2d"
+Firebase="*uid://cvb26atjckwlq"
 
 [display]
 
@@ -42,7 +43,7 @@ project/assembly_name="NotSnake"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/GodotGooglePlayBilling/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg")
+enabled=PackedStringArray("res://addons/AdmobPlugin/plugin.cfg", "res://addons/GodotGooglePlayBilling/plugin.cfg", "res://addons/GodotPlayGameServices/plugin.cfg", "res://addons/godot-firebase/plugin.cfg", "res://addons/http-sse-client/plugin.cfg")
 
 [global_group]
 

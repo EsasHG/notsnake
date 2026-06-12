@@ -35,6 +35,9 @@ const GAME_OVER_SCREEN = preload("uid://ck7vl8h740cpk")
 const ARENA_GAME_OVER_SCREEN = preload("uid://u1gfn45v12yd")
 const NEUTRAL_AGE_SCREEN = preload("uid://emgwix3cnmhe")
 
+var max_retries = 3
+var consecutive_exceptions = 0
+
 #const PAUSE_OVERLAY = preload("uid://ba4bi555qsw1v")
 
 const PAUSE_MENU = preload("uid://d0eb6heqgmexf")
@@ -93,7 +96,7 @@ func _ready() -> void:
 	SaveManager._files_loaded.connect(_on_files_loaded)
 	
 	if _await_authentication:
-		_check_authentication()
+		_check_authentication.call_deferred()
 	else:
 		SaveManager.load_game()
 	on_pickup.connect(increaseScore)
@@ -132,7 +135,9 @@ func _check_authentication() -> void:
 	else:
 		Logging.error("Could not find Google Play Games Services plugin!")
 		signInClient = null
-		
+	Firebase.Auth.signup_succeeded.connect(_on_signup_succeeded)
+	Firebase.Auth.login_failed.connect(_on_login_failed)
+	Firebase.Auth.login_anonymous()
 		##Should probably still do this somehow
 		#leaderboardsClient = null
 		#achievementsClient = null
@@ -506,3 +511,20 @@ func _exit_game_startup_loading_screen() -> void:
 		##Why was this delay here..?
 		#get_tree().create_timer(0.5).timeout.connect(game_startup_loading_screen.transition_out)
 		game_startup_loading_screen.transition_out()
+
+
+func _on_signup_succeeded(auth_info:Dictionary) -> void:
+	Logging.logMessage("Firebase signup succeeded!")
+	pass
+	
+
+func _on_login_failed(code, message:String) -> void:
+	Logging.error("Firebase login failed! Code: " + str(code) + ". Message: " + message)
+	consecutive_exceptions+=1
+	Logging.logMessage("Consecutive exceptions: " + str(consecutive_exceptions))
+	if consecutive_exceptions <= max_retries:
+		Logging.logMessage("Retrying firebase login...")
+		Firebase.Auth.login_anonymous()
+	else:
+		Logging.error("Max consecutive exceptions reached. Could not login to firebase.")
+		
