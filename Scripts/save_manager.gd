@@ -52,7 +52,7 @@ func _save_cloud_settings() -> void:
 func _load_cloud_settings() -> void:
 	var save_file = FileAccess.open(CLOUD_SETTINGS_FILE, FileAccess.READ)
 	if save_file == null:
-		Logging.error("Error opening file: " + error_string(FileAccess.get_open_error()))
+		Logging.error("Could not open file: " + CLOUD_SETTINGS_FILE + ". Error: " + error_string(FileAccess.get_open_error()))
 		cloud_save_enabled = true
 	else:
 		var buffer = save_file.get_buffer(save_file.get_length())

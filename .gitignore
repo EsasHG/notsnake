@@ -18,5 +18,8 @@ build/*
 #Android build ignore
 android/build/*
 
+*.env
+addons/godot-firebase/.env
+
 #Shortcut ignore
 *.lnk
