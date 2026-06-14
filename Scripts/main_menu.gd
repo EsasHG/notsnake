@@ -25,7 +25,7 @@ const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 
 func _ready() -> void:
 	UINavigator.open.call_deferred(buttons,false, true)
-	
+	GameSettings.on_gameBegin.connect(queue_free)
 	if OS.has_feature("mobile"):
 		quit_button.visible = false;
 		_on_user_authenticated(GameSettings.userAuthenticated)

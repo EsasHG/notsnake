@@ -19,6 +19,7 @@ class_name PlayerDog
 @onready var butt = $Butt
 @onready var hat: Sprite2D = $Head/Hat
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var arrow: Sprite2D = $Head/ArrowHolder/Arrow
 
 var iframes_timer : Timer
 
@@ -74,7 +75,8 @@ func _ready() -> void:
 	GameSettings.on_dogHatChanged.connect(set_hat)
 
 	visibility_changed.connect(func(): segmentParent.visible =visible) 
-
+	if GameSettings.play_tutorial: 
+		arrow.visible = false
 
 func add_sprite():
 	if(canAddSprites):

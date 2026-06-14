@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bm0hlhehn7a7v"]
+
+[ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_202dl"]
+[ext_resource type="Script" uid="uid://b4l4i1yxnplbs" path="res://Scenes/Menus/Tutorial/tutorial.gd" id="1_sxgna"]
+
+[node name="Tutorial" type="Control" unique_id=1187576760]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 66.0
+offset_bottom = -348.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_sxgna")
+
+[node name="PopupMenu" parent="." unique_id=742566856 instance=ExtResource("1_202dl")]
+layout_mode = 1
+offset_bottom = -81.0

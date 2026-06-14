@@ -34,10 +34,11 @@ const SCENE_TRANSITION = preload("uid://gsu5a1hu0rjf")
 const GAME_OVER_SCREEN = preload("uid://ck7vl8h740cpk")
 const ARENA_GAME_OVER_SCREEN = preload("uid://u1gfn45v12yd")
 const NEUTRAL_AGE_SCREEN = preload("uid://emgwix3cnmhe")
+const TUTORIAL = preload("uid://bm0hlhehn7a7v")
 
 var max_retries = 3
 var consecutive_exceptions = 0
-
+var play_tutorial = false
 #const PAUSE_OVERLAY = preload("uid://ba4bi555qsw1v")
 
 const PAUSE_MENU = preload("uid://d0eb6heqgmexf")
@@ -213,6 +214,10 @@ func startGame():
 	get_tree().create_timer(1).timeout.connect(func(): 
 		transition.transition_out()
 		on_gameBegin.emit.call_deferred()
+		if play_tutorial:
+			play_tutorial = false
+			UINavigator.open_from_scene.call_deferred(TUTORIAL)
+
 		)
 
 
@@ -224,7 +229,6 @@ func _actually_start_game():
 		Logging.logMessage("No existing world")
 	currentWorld = GlobalInputMap.Maps[currentMap].scene.instantiate()
 	get_tree().root.add_child(currentWorld)
-	
 	player_spawners = get_tree().root.find_children("PlayerStart*","Node2D",true,false)
 	
 	var playerIndex = -1

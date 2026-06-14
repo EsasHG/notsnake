@@ -44,7 +44,7 @@ theme = ExtResource("1_nfl8x")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="OuterPanelContainer" unique_id=910289530]
 clip_children = 1
-custom_minimum_size = Vector2(610, 400)
+custom_minimum_size = Vector2(610, 1200)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -239,6 +239,15 @@ theme = ExtResource("1_nfl8x")
 text = "DEBUG_SETTINGS"
 script = ExtResource("5_64y2j")
 
+[node name="Tutorial" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=275893717]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+text = "HOW_TO_PLAY"
+script = ExtResource("5_64y2j")
+
 [node name="Credits" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1116451543]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -286,5 +295,6 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SkinSelect" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_skin_select_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/EnableCloud" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_enable_cloud_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DebugSettings" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_debug_settings_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Tutorial" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_tutorial_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Credits" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_credits_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/ConsentFormButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_consent_form_button_pressed"]
