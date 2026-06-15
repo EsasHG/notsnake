@@ -1,20 +1,116 @@
 [gd_scene format=3 uid="uid://bm0hlhehn7a7v"]
 
-[ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_202dl"]
 [ext_resource type="Script" uid="uid://b4l4i1yxnplbs" path="res://Scenes/Menus/Tutorial/tutorial.gd" id="1_sxgna"]
+[ext_resource type="Script" uid="uid://dsitvt5ebuxin" path="res://Scenes/Menus/popup_container.gd" id="2_i1ajk"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_k4rrp"]
+[ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="4_ap1mg"]
 
 [node name="Tutorial" type="Control" unique_id=1187576760]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 66.0
-offset_bottom = -348.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_sxgna")
 
-[node name="PopupMenu" parent="." unique_id=742566856 instance=ExtResource("1_202dl")]
+[node name="PopupMenu" type="VBoxContainer" parent="." unique_id=742566856]
+process_mode = 3
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_bottom = -81.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_i1ajk")
+
+[node name="OuterPanelContainer" type="PanelContainer" parent="PopupMenu" unique_id=1354738231]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("3_k4rrp")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PopupMenu/OuterPanelContainer" unique_id=910289530]
+clip_children = 1
+custom_minimum_size = Vector2(610, 250)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("3_k4rrp")
+theme_type_variation = &"LowerScrollContainer"
+script = ExtResource("4_ap1mg")
+
+[node name="InnerContainer" type="PanelContainer" parent="PopupMenu/OuterPanelContainer/ScrollContainer" unique_id=1316018813]
+process_mode = 3
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("3_k4rrp")
+theme_type_variation = &"InnerContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer" unique_id=920526114]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=368940186]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_k4rrp")
+theme_type_variation = &"HeaderLarge"
+text = "DEFAULT_TITLE"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1464836269]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_k4rrp")
+theme_type_variation = &"HeaderSmall"
+text = "DEFAULT_DESCRIPTION"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1584388327]
+layout_mode = 2
+theme = ExtResource("3_k4rrp")
+alignment = 2
+
+[node name="BackButton" type="Button" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=1768412794]
+layout_mode = 2
+size_flags_horizontal = 3
+action_mode = 0
+text = "BACK"
+
+[node name="Panel2" type="Panel" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=566270272]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_type_variation = &"EmptyPanel"
+
+[node name="Panel" type="Panel" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=497917514]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+theme_type_variation = &"EmptyPanel"
+
+[node name="NextButton" type="Button" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=276295631]
+layout_mode = 2
+size_flags_horizontal = 3
+action_mode = 0
+text = "NEXT"
+
+[node name="AdPanel" type="Panel" parent="PopupMenu" unique_id=800514159]
+visible = false
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("3_k4rrp")
+theme_type_variation = &"EmptyPanel"
+
+[connection signal="pressed" from="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]

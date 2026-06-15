@@ -498,6 +498,7 @@ func _on_billing_manager_loading_finished() -> void:
 
 func _check_show_neutral_age_screen() -> void:
 	if age_group == AdManager.AGE_GROUP.UNSPECIFIED:
+		play_tutorial = true
 		game_startup_loading_screen.visible = false
 		UINavigator.open_from_scene(NEUTRAL_AGE_SCREEN,false,true,func(): game_startup_loading_screen.visible = true)
 		if adManager:

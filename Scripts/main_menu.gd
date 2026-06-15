@@ -7,6 +7,7 @@ const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
 const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 
 @export var sign_in_button: AudioButton 
+@onready var tutorial_question_container: PanelContainer = $AdLayoutContainer/TutorialQuestionContainer
 @onready var buttons: VBoxContainer = $MainButtons
 @onready var level_select_container: PanelContainer = $AdLayoutContainer/LevelSelectContainer
 @onready var level_buttons: HFlowContainer = $AdLayoutContainer/LevelSelectContainer/ScrollContainer/InnerContainer/VBoxContainer/LevelButtons
@@ -43,6 +44,7 @@ func _ready() -> void:
 	buttons.visible = true
 	level_select_container.visible = false
 	locked_message_container.visible = false
+	tutorial_question_container.visible = false
 	get_tree().create_timer(0.5).timeout.connect(func():	
 		var blackPanelTween = get_tree().create_tween()
 		blackPanelTween.set_ease(Tween.EASE_IN)
@@ -139,8 +141,10 @@ func _on_user_authenticated(is_authenticated: bool) -> void:
 	
 
 func _on_start_button_pressed() -> void:
-	open_level_select()
-	
+	if not GameSettings.play_tutorial:
+		open_level_select()
+	else:
+		UINavigator.open(tutorial_question_container)
 
 func open_level_select():
 	level_buttons.get_children()[0].grab_focus()
@@ -176,3 +180,17 @@ func _on_sign_in_pressed() -> void:
 
 func _on_leaderboard_pressed() -> void:
 	LeaderboardManager.showAllLeaderboards()
+
+
+func _on_tutorial_yes_pressed() -> void:
+	level_selected_sound.play()
+	GameSettings.currentMap = "FIELD"
+	menu_active = false
+	start_game()
+
+
+func _on_no_pressed() -> void:
+	UINavigator.back()
+	GameSettings.play_tutorial = false
+	open_level_select()
+	pass # Replace with function body.

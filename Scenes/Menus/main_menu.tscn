@@ -178,6 +178,77 @@ autowrap_mode = 3
 [node name="CloseButton" parent="AdLayoutContainer/LockedMessageContainer" unique_id=998217422 instance=ExtResource("17_fx838")]
 layout_mode = 2
 
+[node name="TutorialQuestionContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1863596701]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("15_8dws6")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/TutorialQuestionContainer" unique_id=910289530]
+clip_children = 1
+custom_minimum_size = Vector2(610, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"LowerScrollContainer"
+script = ExtResource("18_0rh2w")
+
+[node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer" unique_id=1316018813]
+process_mode = 3
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_filter = 1
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"InnerContainer"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer" unique_id=920526114]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=368940186]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"HeaderLarge"
+text = "SHOW_TUTORIAL_QUESTION_TITLE"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1464836269]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"HeaderSmall"
+text = "tutorial_question_container"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=984753234]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Yes" type="Button" parent="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=543065048]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("15_8dws6")
+text = "YES"
+script = ExtResource("13_vtepg")
+
+[node name="No" type="Button" parent="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=1055200519]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("15_8dws6")
+text = "NO"
+script = ExtResource("13_vtepg")
+
+[node name="CloseButton" parent="AdLayoutContainer/TutorialQuestionContainer" unique_id=907585837 instance=ExtResource("17_fx838")]
+layout_mode = 2
+
 [node name="AdPanel" type="Panel" parent="AdLayoutContainer" unique_id=800514159]
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
@@ -186,6 +257,7 @@ theme = ExtResource("15_8dws6")
 theme_type_variation = &"EmptyPanel"
 
 [node name="MainButtons" type="VBoxContainer" parent="." unique_id=880943489]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -237,6 +309,8 @@ icon = ExtResource("11_s0gno")
 flat = true
 script = ExtResource("13_vtepg")
 
+[connection signal="pressed" from="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_on_tutorial_yes_pressed"]
+[connection signal="pressed" from="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/No" to="." method="_on_no_pressed"]
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MainButtons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_pressed"]
