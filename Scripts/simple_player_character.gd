@@ -97,7 +97,7 @@ func resetSpriteTimer():
 	canAddSprites = true
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if playerID == -1:
 		return
 	

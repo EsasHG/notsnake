@@ -3,6 +3,7 @@ extends ScrollContainer
 @export var max_size_landscape: float = 575.0
 @export var max_size_portrait: float = 1160.0
 @export var scrollbar_size_x : float = 32
+@export var min_size_y : float
 @export var padding : float = 100
 
 var child : PanelContainer
@@ -28,4 +29,6 @@ func update_size() -> void:
 	if not is_instance_valid(child):
 		child = get_child(0) as Control
 	var desired_size_y:float = child.size.y + padding
+	if desired_size_y < min_size_y:
+		desired_size_y = min_size_y 
 	custom_minimum_size.y =  desired_size_y if desired_size_y < max_y else max_y

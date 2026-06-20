@@ -7,12 +7,14 @@
 
 [node name="Tutorial" type="Control" unique_id=1187576760]
 layout_mode = 3
-anchors_preset = 15
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
+anchor_bottom = 0.5
+grow_horizontal = 0
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("1_sxgna")
 
 [node name="PopupMenu" type="VBoxContainer" parent="." unique_id=742566856]
@@ -21,7 +23,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_bottom = -81.0
+offset_top = 164.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_i1ajk")
@@ -29,25 +31,26 @@ script = ExtResource("2_i1ajk")
 [node name="OuterPanelContainer" type="PanelContainer" parent="PopupMenu" unique_id=1354738231]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 2
 theme = ExtResource("3_k4rrp")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PopupMenu/OuterPanelContainer" unique_id=910289530]
 clip_children = 1
-custom_minimum_size = Vector2(610, 250)
+custom_minimum_size = Vector2(610, 272)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("3_k4rrp")
 theme_type_variation = &"LowerScrollContainer"
 script = ExtResource("4_ap1mg")
+min_size_y = 272.0
 
 [node name="InnerContainer" type="PanelContainer" parent="PopupMenu/OuterPanelContainer/ScrollContainer" unique_id=1316018813]
 process_mode = 3
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 6
-size_flags_vertical = 4
+size_flags_vertical = 3
 mouse_filter = 1
 theme = ExtResource("3_k4rrp")
 theme_type_variation = &"InnerContainer"
@@ -57,6 +60,7 @@ layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="TitleLabel" type="Label" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=368940186]
+visible = false
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -70,6 +74,7 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 3
 theme = ExtResource("3_k4rrp")
 theme_type_variation = &"HeaderSmall"
 text = "DEFAULT_DESCRIPTION"
@@ -84,6 +89,7 @@ alignment = 2
 [node name="BackButton" type="Button" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=1768412794]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_behavior_recursive = 2
 action_mode = 0
 text = "BACK"
 
@@ -101,6 +107,7 @@ theme_type_variation = &"EmptyPanel"
 [node name="NextButton" type="Button" parent="PopupMenu/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=276295631]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_behavior_recursive = 2
 action_mode = 0
 text = "NEXT"
 
