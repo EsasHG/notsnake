@@ -52,7 +52,7 @@ func _ready() -> void:
 		if GameSettings.language == locale:
 			language_selector.select(language_selector.item_count-1)
 			
-	GameSettings.on_dogColorChanged.connect(_on_color_changed)
+	GameSettings.on_dogSkinChanged.connect(_on_skin_changed)
 	GameSettings.on_dogHatChanged.connect(_on_hat_changed)
 	UINavigator.add_callable.call_deferred(_on_back)
 
@@ -101,7 +101,7 @@ func _on_skin_select_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_color_changed(_col: Color):
+func _on_skin_changed(_skin_id:String) -> void:
 	_changes_made = true
 
 

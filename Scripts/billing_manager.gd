@@ -112,7 +112,6 @@ func _on_query_purchases_response(query_result: Dictionary):
 		Logging.logMessage("Purchase query success")
 		for purchase in query_result.purchases:
 			if purchase.purchase_state == billing_client.PurchaseState.PURCHASED:
-				Logging.logMessage(str(purchase))
 				for id in purchase.product_ids:
 					if id == remove_ads_id:
 						_ad_removal_purchase = purchase

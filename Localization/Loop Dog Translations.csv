@@ -47,8 +47,14 @@ BILLING_PENDING_TITLE,Waiting for purchase to finish...,Venter på at betalingen
 BILLING_PENDING_DESCRIPTION,"Do you need to do something in another app? 
 You can close this and keep playing the game in the meantime","Trenger du å gjøre noe i et annet program?
 Du kan lukke denne meldingen og fortsette å spille mens du venter.",
+EDIT_DOG,Edit dog,Endre hund,
+CURRENCY,Treats,Godbiter,
+SELECT_SKIN,Change dog,Bytt hund,
 SELECT_COLOR,Change color,Bytt farge,
 CHANGE_DOG,Change dog,Bytt hund,
+SKIN_LOCKED,,,
+UNLOCK_SKIN,Spend %d treats to unlock this skin?,Vil du bruke %d godbiter til å låse opp dette utseendet?,
+SKIN_UNAFFORDABLE,You need %d treats to unlock this skin,Du trenger %d godbiter for å låse opp dette utseendet,
 SKIN_SELECTION_BACK,Looks great!,Ser bra ut!,
 CHANGE_HAT,Change hat,Bytt hatt,
 SELECT_HAT,Choose a hat,Velg en hatt,

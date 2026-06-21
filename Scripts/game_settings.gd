@@ -8,7 +8,7 @@ signal on_gameUnpaused()
 signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
 signal on_controls_changed(holdControls:bool)
-signal on_dogColorChanged(color:Color)
+signal on_dogSkinChanged(skin_id:String)
 signal on_dogHatChanged(hat:String)
 signal on_viewportChanged()
 signal on_somethingUnlocked(unlock:String)
@@ -67,6 +67,7 @@ var _await_authentication = false
 
 var times_crashed : int = 0
 
+var total_treats : int = 0
 ## So we can notify the player when convenient
 var _new_unlocks: Array[String]
 
@@ -346,7 +347,7 @@ func game_over():
 
 func increaseScore():
 	currentScore+=1
-
+	total_treats+=1
 
 func getCurrentMapHighScore():
 	return GlobalInputMap.Maps[currentMap].high_score

@@ -1,0 +1,51 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bdhta2cfuy4pa"]
+
+[ext_resource type="Texture2D" uid="uid://cei1ujchc6jtc" path="res://Assets/Dogs/TAILS-sheet_v2.png" id="1_1fyhl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3r4k"]
+atlas = ExtResource("1_1fyhl")
+region = Rect2(23, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bax07"]
+atlas = ExtResource("1_1fyhl")
+region = Rect2(46, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5ksd"]
+atlas = ExtResource("1_1fyhl")
+region = Rect2(69, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_858hx"]
+atlas = ExtResource("1_1fyhl")
+region = Rect2(92, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cqae"]
+atlas = ExtResource("1_1fyhl")
+region = Rect2(0, 0, 23, 21)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_c3r4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bax07")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_l5ksd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_858hx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cqae")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

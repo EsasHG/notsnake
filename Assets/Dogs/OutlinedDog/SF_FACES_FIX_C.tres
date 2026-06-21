@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cxuyio7lhhtp0"]
+
+[ext_resource type="Texture2D" uid="uid://c0qmq2jnc73kj" path="res://Assets/Dogs/OutlinedDog/FACES_FIX_C.png" id="1_iosac"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0rg4"]
+atlas = ExtResource("1_iosac")
+region = Rect2(43, 0, 43, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygjl1"]
+atlas = ExtResource("1_iosac")
+region = Rect2(0, 0, 43, 37)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0rg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygjl1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

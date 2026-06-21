@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="DogSkin" format=3 uid="uid://bhv5fouypr0i8"]
+
+[ext_resource type="Texture2D" uid="uid://crg2lxujxhynp" path="res://Assets/Dogs/dachs/dachs_spritesheet_middlebody_ROUGH.png" id="1_s478h"]
+[ext_resource type="SpriteFrames" uid="uid://oviwgdg6g7h" path="res://Assets/Dogs/dachs/dachs_legs_back.tres" id="2_36mky"]
+[ext_resource type="SpriteFrames" uid="uid://bdi6wsb0t31k7" path="res://Assets/Dogs/dachs/dachs_head.tres" id="3_n5bh1"]
+[ext_resource type="Script" uid="uid://b7y2kj325h7uv" path="res://Assets/Dogs/Skins/dog_skin.gd" id="6_r82xr"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s478h"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_36mky"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vjiey"]
+
+[resource]
+script = ExtResource("6_r82xr")
+head = SubResource("SpriteFrames_36mky")
+legs_front = ExtResource("3_n5bh1")
+legs_back = ExtResource("2_36mky")
+butt = SubResource("CompressedTexture2D_s478h")
+tail = SubResource("SpriteFrames_vjiey")
+body_segment = ExtResource("1_s478h")
+legs_back_offset = Vector2(-1.975, -86.945)
+body_offset = Vector2(0, -65.57)
+modulate = Color(0.72960865, 0.00021793605, 0.6731273, 1)
+price = 16
+metadata/_custom_type_script = "uid://b7y2kj325h7uv"

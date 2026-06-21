@@ -11,39 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://dve3ihhfdxc3w" path="res://Scenes/Menus/close_button.tscn" id="9_dimmy"]
 [ext_resource type="PackedScene" uid="uid://df6v31n3ooicl" path="res://Scenes/Menus/back_button.tscn" id="10_cmbhx"]
 
-[sub_resource type="Gradient" id="Gradient_cmbhx"]
-colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6fsxm"]
-gradient = SubResource("Gradient_cmbhx")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k52lc"]
-texture = SubResource("GradientTexture1D_6fsxm")
-texture_margin_top = 5.0
-texture_margin_bottom = 5.0
-
-[sub_resource type="Gradient" id="Gradient_6msm5"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 1, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_i25uj"]
-gradient = SubResource("Gradient_6msm5")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_heghs"]
-texture = SubResource("GradientTexture1D_i25uj")
-texture_margin_top = 5.0
-texture_margin_bottom = 5.0
-
-[sub_resource type="Gradient" id="Gradient_l0rio"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_c1sd7"]
-gradient = SubResource("Gradient_l0rio")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6xsso"]
-texture = SubResource("GradientTexture1D_c1sd7")
-texture_margin_top = 5.0
-texture_margin_bottom = 5.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_45bpw"]
 atlas = ExtResource("3_6fsxm")
 region = Rect2(43, 0, 43, 37)
@@ -131,6 +98,7 @@ size_flags_horizontal = 4
 script = ExtResource("1_cmbhx")
 
 [node name="MainScreen" type="PanelContainer" parent="AdLayoutContainer" unique_id=1354738231]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -165,114 +133,23 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 theme = ExtResource("2_dimmy")
 theme_type_variation = &"HeaderLarge"
-text = "SELECT_COLOR"
+text = "EDIT_DOG"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=97191362]
+[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1731919654]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=191960741]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-text = "SELECT_COLOR"
-horizontal_alignment = 1
-
-[node name="ColorPickerButton" type="ColorPickerButton" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" unique_id=1937386427]
-visible = false
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 1
-
-[node name="Red" type="HBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=900032430]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Red" unique_id=450694821]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "R:"
-horizontal_alignment = 1
-
-[node name="RedSlider" type="HSlider" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Red" unique_id=1851604760]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-mouse_filter = 1
-theme_override_styles/slider = SubResource("StyleBoxTexture_k52lc")
-max_value = 1.0
-step = 0.05
-value = 0.5
-
-[node name="Green" type="HBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1899568866]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Green" unique_id=337190328]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "G:"
-horizontal_alignment = 1
-
-[node name="GreenSlider" type="HSlider" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Green" unique_id=1287174916]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-mouse_filter = 1
-theme_override_styles/slider = SubResource("StyleBoxTexture_heghs")
-max_value = 1.0
-step = 0.05
-
-[node name="Blue" type="HBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1270094479]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Blue" unique_id=915081284]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "B:"
-horizontal_alignment = 1
-
-[node name="BlueSlider" type="HSlider" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Blue" unique_id=2141675291]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-mouse_filter = 1
-theme_override_styles/slider = SubResource("StyleBoxTexture_6xsso")
-max_value = 1.0
-step = 0.05
-
-[node name="HexEdit" type="HBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=894286634]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HexEdit" unique_id=95559799]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Hex:"
-horizontal_alignment = 1
-
-[node name="TextEdit" type="TextEdit" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HexEdit" unique_id=293086894]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 1
-theme_override_font_sizes/font_size = 16
-text = "yrcy"
-
-[node name="ChangeHat" type="Button" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1142329269]
+[node name="ChangeHat" type="Button" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/VBoxContainer" unique_id=1142329269]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-size_flags_horizontal = 4
 theme = ExtResource("2_dimmy")
 text = "CHANGE_HAT"
 script = ExtResource("5_cmbhx")
 
-[node name="ChangeColor" type="Button" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer" unique_id=395902031]
+[node name="ChangeColor" type="Button" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/VBoxContainer" unique_id=395902031]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-size_flags_horizontal = 4
 theme = ExtResource("2_dimmy")
 text = "SELECT_COLOR"
 script = ExtResource("5_cmbhx")
@@ -408,7 +285,16 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_dimmy")
 theme_type_variation = &"HeaderLarge"
-text = "SELECT_HAT"
+text = "SELECT_SKIN"
+horizontal_alignment = 1
+
+[node name="TreatLabel" type="Label" parent="AdLayoutContainer/SkinSelectContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=123993580]
+z_index = 1
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("2_dimmy")
+text = "TREATS: 300"
+horizontal_alignment = 1
 
 [node name="SkinButtons" type="HFlowContainer" parent="AdLayoutContainer/SkinSelectContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=914148361]
 custom_minimum_size = Vector2(180, 180)
@@ -421,7 +307,6 @@ layout_mode = 2
 mouse_filter = 1
 
 [node name="LockedMessageContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1699088321]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -429,7 +314,7 @@ theme = ExtResource("2_dimmy")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/LockedMessageContainer" unique_id=2030964247]
 clip_children = 1
-custom_minimum_size = Vector2(610, 200)
+custom_minimum_size = Vector2(610, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -441,7 +326,7 @@ script = ExtResource("3_k52lc")
 [node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer" unique_id=1573413006]
 layout_mode = 2
 size_flags_horizontal = 6
-size_flags_vertical = 4
+size_flags_vertical = 3
 mouse_filter = 1
 theme = ExtResource("2_dimmy")
 theme_type_variation = &"InnerContainer"
@@ -449,7 +334,6 @@ theme_type_variation = &"InnerContainer"
 [node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer" unique_id=1741683526]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 theme_override_constants/separation = 15
 
 [node name="TitleLabel" type="Label" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=617456170]
@@ -458,7 +342,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_dimmy")
 theme_type_variation = &"HeaderLarge"
-text = "HAT_LOCKED"
+text = "SKIN_LOCKED"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -474,6 +358,33 @@ autowrap_mode = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1452365062]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="SkinPurchaseButtons" type="HBoxContainer" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1598105209]
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("2_dimmy")
+alignment = 2
+
+[node name="YesButton" type="Button" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer/SkinPurchaseButtons" unique_id=1148719675]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_behavior_recursive = 2
+action_mode = 0
+text = "YES"
+
+[node name="Panel" type="Panel" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer/SkinPurchaseButtons" unique_id=31018091]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_type_variation = &"EmptyPanel"
+
+[node name="NoButton" type="Button" parent="AdLayoutContainer/LockedMessageContainer/ScrollContainer/InnerContainer/VBoxContainer/SkinPurchaseButtons" unique_id=511609142]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_behavior_recursive = 2
+action_mode = 0
+text = "NO"
 
 [node name="CloseButton" parent="AdLayoutContainer/LockedMessageContainer" unique_id=1674878102 instance=ExtResource("9_dimmy")]
 layout_mode = 2
@@ -486,10 +397,5 @@ size_flags_vertical = 8
 theme = ExtResource("2_dimmy")
 theme_type_variation = &"EmptyPanel"
 
-[connection signal="value_changed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Red/RedSlider" to="." method="_on_red_slider_value_changed"]
-[connection signal="value_changed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Green/GreenSlider" to="." method="_on_green_slider_value_changed"]
-[connection signal="value_changed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/Blue/BlueSlider" to="." method="_on_blue_slider_value_changed"]
-[connection signal="text_changed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/HexEdit/TextEdit" to="." method="_on_text_edit_text_changed"]
-[connection signal="pressed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/ChangeHat" to="." method="_on_change_hat_pressed"]
-[connection signal="pressed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/ChangeColor" to="." method="_on_change_color_pressed"]
-[connection signal="pressed" from="AdLayoutContainer/HatSelectContainer/HatSelectCloseButton" to="." method="_on_hat_select_close_button_pressed"]
+[connection signal="pressed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/VBoxContainer/ChangeHat" to="." method="_on_change_hat_pressed"]
+[connection signal="pressed" from="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/VBoxContainer/VBoxContainer/ChangeColor" to="." method="_on_change_color_pressed"]

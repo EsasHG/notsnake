@@ -1,0 +1,53 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://oviwgdg6g7h"]
+
+[ext_resource type="Texture2D" uid="uid://bcijwi8xjra7c" path="res://Assets/Dogs/dachs/dachs_spritesheet_butt_ROUGH.png" id="1_w11hd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtmui"]
+atlas = ExtResource("1_w11hd")
+region = Rect2(0, 0, 105, 149)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2a156"]
+atlas = ExtResource("1_w11hd")
+region = Rect2(105, 0, 105, 149)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bai41"]
+atlas = ExtResource("1_w11hd")
+region = Rect2(210, 0, 105, 149)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvgtx"]
+atlas = ExtResource("1_w11hd")
+region = Rect2(315, 0, 105, 149)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ab3c6"]
+atlas = ExtResource("1_w11hd")
+region = Rect2(420, 0, 105, 149)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2lec"]
+atlas = ExtResource("1_w11hd")
+region = Rect2(525, 0, 105, 149)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtmui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2a156")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bai41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvgtx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ab3c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2lec")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

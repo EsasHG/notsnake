@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="DogSkin" format=3 uid="uid://d1r7ugtokkbku"]
+
+[ext_resource type="Texture2D" uid="uid://c84i47m2lf0ea" path="res://Assets/Dogs/OutlinedDog/BODY_SEGMENT_C.png" id="1_d13v3"]
+[ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="2_c3tnp"]
+[ext_resource type="SpriteFrames" uid="uid://cf3jfyr4idhji" path="res://Assets/Dogs/OutlinedDog/SF_FACES_C.tres" id="3_5f6ty"]
+[ext_resource type="SpriteFrames" uid="uid://dwpt678tie3co" path="res://Assets/Dogs/NewDog/SF_newdog_legsBACK_C.tres" id="4_x4jal"]
+[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT_C.tres" id="5_d53vx"]
+[ext_resource type="Script" uid="uid://b7y2kj325h7uv" path="res://Assets/Dogs/Skins/dog_skin.gd" id="6_cwbkk"]
+[ext_resource type="SpriteFrames" uid="uid://bdhta2cfuy4pa" path="res://Assets/Dogs/SF_TAILS-sheet.tres" id="7_a33q1"]
+
+[resource]
+script = ExtResource("6_cwbkk")
+head = ExtResource("3_5f6ty")
+legs_front = ExtResource("5_d53vx")
+legs_back = ExtResource("4_x4jal")
+butt = ExtResource("2_c3tnp")
+tail = ExtResource("7_a33q1")
+body_segment = ExtResource("1_d13v3")
+legs_front_offset = Vector2(0, -5)
+legs_back_offset = Vector2(0, 15.145)
+body_offset = Vector2(0, -16.105)
+butt_offset = Vector2(0, -30.945)
+tail_offset = Vector2(0, -11.47)
+modulate = Color(1, 0.8784314, 0.67058825, 1)
+unlocked = true
+metadata/_custom_type_script = "uid://b7y2kj325h7uv"

@@ -150,11 +150,11 @@ func _get_settings_save_content() -> Dictionary:
 		"sfxMuted" = GameSettings.sfxMuted, 
 		"controls" = GlobalInputMap.Player_Controls_Selected[0],
 		"language" = GameSettings.language,
-		"dogColor" = GlobalInputMap.player_colors[0].to_html(),
+		"dogSkin" = GlobalInputMap.Player_Skins_Selected[0],
 		"hat" = GlobalInputMap.Player_Hats_Selected[0],
 		"times_crashed" = GameSettings.times_crashed,
 		"skip_intro" = GameSettings.skip_intro,
-		
+		"total_treats" = GameSettings.total_treats,
 		} 
 	return settings
 
@@ -188,9 +188,9 @@ func _set_settings_save_content(node_data: Dictionary) -> void:
 		GameSettings.setControls(true)
 	if node_data.has("language"):
 		GameSettings.language = node_data["language"]
-	if node_data.has("dogColor"):
-		GlobalInputMap.player_colors[0] = Color(node_data["dogColor"])
-		GameSettings.on_dogColorChanged.emit(Color(node_data["dogColor"]))
+	if node_data.has("dogSkin"):
+		GlobalInputMap.Player_Skins_Selected[0] = node_data["dogSkin"]
+		GameSettings.on_dogSkinChanged.emit(node_data["dogSkin"])
 		
 	if node_data.has("hat"):
 		GlobalInputMap.Player_Hats_Selected[0] = node_data["hat"]
@@ -201,6 +201,9 @@ func _set_settings_save_content(node_data: Dictionary) -> void:
 		GameSettings.times_crashed = node_data["times_crashed"]
 	if node_data.has("skip_intro"):
 		GameSettings.skip_intro = node_data["skip_intro"]
+	if node_data.has("total_treats"):
+		GameSettings.total_treats = node_data["total_treats"]
+		
 
 func _get_score_save_content() -> Dictionary:
 	var scores:Dictionary
@@ -228,9 +231,16 @@ func _get_unlocks_save_content() -> Dictionary:
 	for hat: String in GlobalInputMap.Player_Hats:
 		if GlobalInputMap.Player_Hats[hat].unlocked:
 			unlocked_hats.append(hat)
+			
+	##Find unlocked skins:
+	var unlocked_skins : Array[String]
+	for skin_id: String in GlobalInputMap.player_skins:
+		if GlobalInputMap.player_skins[skin_id].unlocked:
+			unlocked_skins.append(skin_id)
 	var unlocks = {
 			"unlocked_maps" = unlocked_maps,
 			"unlocked_hats" = unlocked_hats,
+			"unlocked_skins" = unlocked_skins,
 			} 
 	_things_unlocked = unlocked_maps.size() + unlocked_hats.size()
 	return unlocks
@@ -247,6 +257,10 @@ func _set_unlocks_save_content(node_data: Dictionary) -> void:
 		for hat in unlocked_hats:
 			GlobalInputMap.Player_Hats[hat].unlocked = true
 
+	if node_data.has("unlocked_skins"):
+		var unlocked_skins:Array = node_data["unlocked_skins"]
+		for skin in unlocked_skins:
+			GlobalInputMap.player_skins[skin].unlocked = true
 
 func _create_save_content() -> PackedByteArray:
 	var settings = _get_settings_save_content()

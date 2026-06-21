@@ -1,7 +1,6 @@
 extends Area2D
 
 class_name PlayerDog
-
 @export var ROTATE_SPEED = 5
 @export var MOVE_SPEED = 1
 @export var OVERALL_SPEED = 0.9
@@ -11,13 +10,17 @@ class_name PlayerDog
 @export var iframes_time : float = 0.3
 
 @onready var prevPos : Vector2 = position
-@onready var sprite = preload("res://Assets/Dogs/OutlinedDog/BODY_SEGMENT_C.png")
-@onready var segment = preload("uid://b64vm8vof02aj")
+const DOG_SEGMENT = preload("uid://b64vm8vof02aj")
+
 @onready var pickupSpawner : PickupSpawner = get_tree().root.find_child("PickupSpawner", true, false)
 @onready var segmentParent : Node2D = Node2D.new()
-@onready var hindLegs = find_child("Legs_back", true, false)
-@onready var butt = $Butt
+@onready var head: AnimatedSprite2D = $Head
+@onready var legs: AnimatedSprite2D = $Head/Legs
+@onready var hindLegs: AnimatedSprite2D = $Butt/ButtSprite/Legs_back
+@onready var butt_sprite: Sprite2D = $Butt/ButtSprite
+@onready var tail: AnimatedSprite2D = $Butt/ButtSprite/Tail
 @onready var hat: Sprite2D = $Head/Hat
+@onready var butt = $Butt
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var arrow: Sprite2D = $Head/ArrowHolder/Arrow
 
@@ -34,8 +37,9 @@ var prevDir : int = -1
 var _invulnerable = true 
 var score = 0
 var grabbed_tail : bool = false
-var segmentSprites : Array[Node2D]
+var segments : Array[Node2D]
 var canAddSprites = true
+var segment_sprite : Texture2D
 
 var segmentsPerSection = 20
 var move = true
@@ -64,16 +68,15 @@ func _ready() -> void:
 	butt.reparent(segmentParent)
 	
 	if GameSettings.game_mode == GameSettings.GAME_MODE.SINGLE_PLAYER:
-		set_color(GlobalInputMap.player_colors[0])
+		set_skin(GlobalInputMap.Player_Skins_Selected[0])
 		set_hat(GlobalInputMap.Player_Hats_Selected[0])
 	Input.emulate_mouse_from_touch = true
 	
 	GameSettings.on_pickupSpawned.connect(set_arrow_target)
 	GameSettings.on_controls_changed.connect(_on_controls_changed)
 	GameSettings.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
-	GameSettings.on_dogColorChanged.connect(set_color)
 	GameSettings.on_dogHatChanged.connect(set_hat)
-
+	GameSettings.on_dogSkinChanged.connect(set_skin)
 	visibility_changed.connect(func(): segmentParent.visible =visible) 
 	if GameSettings.play_tutorial: 
 		arrow.visible = false
@@ -146,20 +149,21 @@ func _process(delta: float) -> void:
 		var s 
 		
 		if(spritesToAdd > 0):
-			s = segment.instantiate()
+			s = DOG_SEGMENT.instantiate()
+			s.get_child(1).texture = segment_sprite
 			segmentParent.add_child.call_deferred(s)
 			spritesToAdd-=1
 			
 		else:
-			s = segmentSprites.pop_back()
+			s = segments.pop_back()
 			s.visible = true
 			s.get_child(0).disabled = true ##child 0 is collision shape
 			if(!hindLegs.is_playing()):
 				hindLegs.play()
 			
 		#why this??
-		if(segmentSprites.size() > 10):
-			segmentSprites[10].get_child(0).disabled = false
+		if(segments.size() > 10):
+			segments[10].get_child(0).disabled = false
 			
 		var t = timer/delta
 		var newPos = rotationCenter - left.rotated(ang*t)*dist
@@ -168,12 +172,12 @@ func _process(delta: float) -> void:
 		s.position = newPos
 		s.rotation = newRot.angle()
 		
-		segmentSprites.push_front(s)
+		segments.push_front(s)
 		
-		butt.position = segmentSprites.back().position
-		butt.rotation = segmentSprites.back().rotation
-		segmentSprites.back().visible = false
-		segmentSprites[segmentSprites.size()-2].visible = true
+		butt.position = segments.back().position
+		butt.rotation = segments.back().rotation
+		segments.back().visible = false
+		segments[segments.size()-2].visible = true
 	prevPositionsArr.push_front([position, rotation])
 	
 	prevPos = position
@@ -239,11 +243,21 @@ func set_arrow_target(target:Node2D):
 	arrowTarget = target.global_position
 
 
-func set_color(color:Color) -> void:
-	self_modulate = color
-	$Head.self_modulate = self_modulate
-	$Head/Legs.modulate = self_modulate
-	segmentParent.modulate = self_modulate
+func set_skin(skin_id:String) -> void:
+	var skin:DogSkin = GlobalInputMap.player_skins[skin_id]
+	self_modulate = skin.modulate
+	head.sprite_frames = skin.head
+	head.self_modulate = self_modulate
+	legs.sprite_frames = skin.legs_front
+	legs.modulate = skin.modulate
+	hindLegs.sprite_frames = skin.legs_back
+	butt_sprite.texture = skin.butt
+	tail.sprite_frames = skin.tail
+	
+	segment_sprite = skin.body_segment
+	segmentParent.modulate = skin.modulate
+	for seg in segments:
+		seg.get_child(1,true).texture = segment_sprite
 
 func set_hat(hat_id:String):
 	currentHat = hat_id
