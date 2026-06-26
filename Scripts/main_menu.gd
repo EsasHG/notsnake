@@ -124,7 +124,6 @@ func _input(event: InputEvent) -> void:
 
 func start_game() -> void:
 	GlobalInputMap.ControllerIds = [0,-1,-1,-1]
-	GlobalInputMap.Player_Color_Selected[0] = 0
 	GameSettings.startGame()
 	queue_free()
 

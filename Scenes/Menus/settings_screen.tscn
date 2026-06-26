@@ -218,7 +218,7 @@ layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 1
 theme = ExtResource("1_nfl8x")
-text = "CHANGE_DOG"
+text = "EDIT_DOG"
 script = ExtResource("5_64y2j")
 
 [node name="EnableCloud" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=505666261]

@@ -116,7 +116,30 @@ theme = ExtResource("1_5j8qy")
 text = "LOCK_HATS"
 script = ExtResource("3_5j8qy")
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1435697565]
+layout_mode = 2
+
+[node name="UnlockSkins" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer3" unique_id=1078013695]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_5j8qy")
+text = "UNLOCK_SKINS"
+script = ExtResource("3_5j8qy")
+
+[node name="LockSkins" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer3" unique_id=2011291668]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_5j8qy")
+text = "LOCK_SKINS"
+script = ExtResource("3_5j8qy")
+
 [node name="PurchaseAdRemoval" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1942155899]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -163,5 +186,7 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer/LockMaps" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_maps_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer2/UnlockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_hats_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer2/LockHats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_hats_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer3/UnlockSkins" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_skins_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer3/LockSkins" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_skins_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/PurchaseAdRemoval" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_purchase_ad_removal_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/ShowAgeScreen" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_show_age_screen_pressed"]

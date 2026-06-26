@@ -104,7 +104,7 @@ func check_unlocks() -> void:
 			icon = GlobalInputMap.Maps[unlock].icon
 		else:
 			type = "HAT" 
-			icon = GlobalInputMap.Player_Hats[unlock].icon_hat
+			icon = GlobalInputMap.hats[unlock].texture
 		if icon:
 			unlock_texture.texture = icon
 			unlock_texture.size_flags_vertical = Control.SIZE_SHRINK_CENTER

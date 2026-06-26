@@ -23,10 +23,8 @@ func spawn_player() -> PlayerDog:
 		var p : PlayerDog = player_scene.instantiate()
 		p.playerControl = true
 		p.playerID = playerID
-		var hat_id = GlobalInputMap.Player_Hats_Selected[playerID]
-		p.currentHat = hat_id
 		get_parent().add_child.call_deferred(p)
-		p.self_modulate = GlobalInputMap.player_colors[GlobalInputMap.Player_Color_Selected[playerID]]
+		#p.self_modulate = GlobalInputMap.player_colors[GlobalInputMap.Player_Color_Selected[playerID]]
 		p.global_position = global_position
 		return p
 	else:

@@ -224,7 +224,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("15_8dws6")
 theme_type_variation = &"HeaderSmall"
-text = "tutorial_question_container"
+text = "SHOW_TUTORIAL_QUESTION"
 horizontal_alignment = 1
 autowrap_mode = 3
 

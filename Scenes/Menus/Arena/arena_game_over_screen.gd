@@ -65,8 +65,8 @@ func game_over(players:Array[PlayerDog]):
 			if GameSettings.game_mode != GameSettings.GAME_MODE.LAST_DOG_STANDING:
 				score_label_winner.text = "Score: " + str(placements[p]["Score"])
 				score_label_winner.visible = true
-				score_label_winner.add_theme_color_override("font_color", 
-					GlobalInputMap.player_colors[GlobalInputMap.Player_Color_Selected[placements[p]["Player"]]])
+				#score_label_winner.add_theme_color_override("font_color", 
+					#GlobalInputMap.player_colors[GlobalInputMap.Player_Color_Selected[placements[p]["Player"]]])
 				
 			else:
 				score_label_winner.visible = false
@@ -82,7 +82,7 @@ func game_over(players:Array[PlayerDog]):
 
 
 func set_label_text(l:Label, player:int, score:int) -> void:
-	l.add_theme_color_override("font_color", GlobalInputMap.player_colors[GlobalInputMap.Player_Color_Selected[player]])
+	#l.add_theme_color_override("font_color", GlobalInputMap.player_colors[GlobalInputMap.Player_Color_Selected[player]])
 	if score > -1:
 		l.text = "Player " + str(player+1) + ". Score: " + str(score) 
 	else:

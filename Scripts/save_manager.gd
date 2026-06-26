@@ -150,8 +150,8 @@ func _get_settings_save_content() -> Dictionary:
 		"sfxMuted" = GameSettings.sfxMuted, 
 		"controls" = GlobalInputMap.Player_Controls_Selected[0],
 		"language" = GameSettings.language,
-		"dogSkin" = GlobalInputMap.Player_Skins_Selected[0],
-		"hat" = GlobalInputMap.Player_Hats_Selected[0],
+		"dogSkin" = GlobalInputMap.skins_selected[0],
+		"hat" = GlobalInputMap.hats_selected[0],
 		"times_crashed" = GameSettings.times_crashed,
 		"skip_intro" = GameSettings.skip_intro,
 		"total_treats" = GameSettings.total_treats,
@@ -189,14 +189,19 @@ func _set_settings_save_content(node_data: Dictionary) -> void:
 	if node_data.has("language"):
 		GameSettings.language = node_data["language"]
 	if node_data.has("dogSkin"):
-		GlobalInputMap.Player_Skins_Selected[0] = node_data["dogSkin"]
-		GameSettings.on_dogSkinChanged.emit(node_data["dogSkin"])
+		if not GlobalInputMap.skins.has(node_data["dogSkin"]):
+			Logging.error("Invalid skin found in save file: " + node_data["dogSkin"])
+			GlobalInputMap.skins_selected[0] = "DEFAULT"
+			GameSettings.on_dogSkinChanged.emit("DEFAULT")
+		else:
+			GlobalInputMap.skins_selected[0] = node_data["dogSkin"]
+			GameSettings.on_dogSkinChanged.emit(node_data["dogSkin"])
 		
 	if node_data.has("hat"):
-		GlobalInputMap.Player_Hats_Selected[0] = node_data["hat"]
+		GlobalInputMap.hats_selected[0] = node_data["hat"]
 		GameSettings.on_dogHatChanged.emit(node_data["hat"])
 	else:
-		GlobalInputMap.Player_Hats_Selected[0] = "NONE"
+		GlobalInputMap.hats_selected[0] = "NONE"
 	if node_data.has("times_crashed"):
 		GameSettings.times_crashed = node_data["times_crashed"]
 	if node_data.has("skip_intro"):
@@ -228,14 +233,14 @@ func _get_unlocks_save_content() -> Dictionary:
 				
 	##Find unlocked hats:
 	var unlocked_hats : Array[String]
-	for hat: String in GlobalInputMap.Player_Hats:
-		if GlobalInputMap.Player_Hats[hat].unlocked:
+	for hat: String in GlobalInputMap.hats:
+		if GlobalInputMap.hats[hat].unlocked:
 			unlocked_hats.append(hat)
 			
 	##Find unlocked skins:
 	var unlocked_skins : Array[String]
-	for skin_id: String in GlobalInputMap.player_skins:
-		if GlobalInputMap.player_skins[skin_id].unlocked:
+	for skin_id: String in GlobalInputMap.skins:
+		if GlobalInputMap.skins[skin_id].unlocked:
 			unlocked_skins.append(skin_id)
 	var unlocks = {
 			"unlocked_maps" = unlocked_maps,
@@ -255,12 +260,16 @@ func _set_unlocks_save_content(node_data: Dictionary) -> void:
 	if node_data.has("unlocked_hats"):
 		var unlocked_hats : Array = node_data["unlocked_hats"]
 		for hat in unlocked_hats:
-			GlobalInputMap.Player_Hats[hat].unlocked = true
+			GlobalInputMap.hats[hat].unlocked = true
 
 	if node_data.has("unlocked_skins"):
 		var unlocked_skins:Array = node_data["unlocked_skins"]
 		for skin in unlocked_skins:
-			GlobalInputMap.player_skins[skin].unlocked = true
+			if GlobalInputMap.skins.has(skin):
+				GlobalInputMap.skins[skin].unlocked = true
+			else:
+				Logging.warn("Could not find skin " + skin + " in skin dictionary!")
+
 
 func _create_save_content() -> PackedByteArray:
 	var settings = _get_settings_save_content()

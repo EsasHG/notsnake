@@ -28,7 +28,6 @@ var iframes_timer : Timer
 
 var prevPositionsArr = []
 var playerID = -1
-var currentHat = -1
 var spritesToAdd = 0
 var timer : float = 0.0
 var spawnTime : float = 0.02
@@ -68,8 +67,8 @@ func _ready() -> void:
 	butt.reparent(segmentParent)
 	
 	if GameSettings.game_mode == GameSettings.GAME_MODE.SINGLE_PLAYER:
-		set_skin(GlobalInputMap.Player_Skins_Selected[0])
-		set_hat(GlobalInputMap.Player_Hats_Selected[0])
+		set_skin(GlobalInputMap.skins_selected[0])
+		set_hat(GlobalInputMap.hats_selected[0])
 	Input.emulate_mouse_from_touch = true
 	
 	GameSettings.on_pickupSpawned.connect(set_arrow_target)
@@ -202,9 +201,9 @@ func _on_area_entered(area: Area2D) -> void:
 		playerControl = false
 		GameSettings.player_lost(self)
 		segmentParent.queue_free()
-		if not GlobalInputMap.Player_Hats["COWBOY"].unlocked:
+		if not GlobalInputMap.hats["COWBOY"].unlocked:
 			GameSettings.on_somethingUnlocked.emit("COWBOY")
-			GlobalInputMap.Player_Hats["COWBOY"].unlocked = true
+			GlobalInputMap.hats["COWBOY"].unlocked = true
 			SaveManager.save_game()
 			AchievementManager.unlock_achievement("Wi(e)nner")	##TODO: Fix so this gets unlocked if player logs in later.
 			
@@ -244,7 +243,10 @@ func set_arrow_target(target:Node2D):
 
 
 func set_skin(skin_id:String) -> void:
-	var skin:DogSkin = GlobalInputMap.player_skins[skin_id]
+	if not GlobalInputMap.skins.has(skin_id):
+		Logging.error("Trying to use skin '" + skin_id +"', but could not find it in the list of skins." )
+		skin_id = "DEFAULT"
+	var skin:DogSkin = GlobalInputMap.skins[skin_id]
 	self_modulate = skin.modulate
 	head.sprite_frames = skin.head
 	head.self_modulate = self_modulate
@@ -256,12 +258,16 @@ func set_skin(skin_id:String) -> void:
 	
 	segment_sprite = skin.body_segment
 	segmentParent.modulate = skin.modulate
+	hat.position = GlobalInputMap.hats[GlobalInputMap.hats_selected[0]].offset + skin.hat_offset
+	
 	for seg in segments:
 		seg.get_child(1,true).texture = segment_sprite
 
 func set_hat(hat_id:String):
-	currentHat = hat_id
-	hat.texture = GlobalInputMap.Player_Hats[hat_id].player_hat
+	var new_hat =  GlobalInputMap.hats[hat_id]
+
+	hat.texture = new_hat.texture
+	hat.position = new_hat.offset + GlobalInputMap.skins[GlobalInputMap.skins_selected[0]].hat_offset
 
 #why is this here
 func _on_controls_changed(_hold_controls:bool):

@@ -201,15 +201,15 @@ func select_character():
 	arrows.visible = false
 	options_panel.visible = true
 	
-	GlobalInputMap.Player_Color_Selected[playerNr] = dog_selection_index
-	GlobalInputMap.Player_Hats_Selected[playerNr] = hat_selection_index
+	GlobalInputMap.skins_selected[playerNr] = dog_selection_index
+	GlobalInputMap.hats_selected[playerNr] = hat_selection_index
 	character_selected = true
 
 func unselect_character():
 	arrows.visible = true
 	options_panel.visible = false
-	GlobalInputMap.Player_Color_Selected.erase(playerNr)
-	GlobalInputMap.Player_Hats_Selected.erase(playerNr)
+	GlobalInputMap.skins_selected.erase(playerNr)
+	GlobalInputMap.hats_selected.erase(playerNr)
 	character_selected = false
 	
 	

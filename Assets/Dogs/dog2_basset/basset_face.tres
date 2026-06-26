@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dhoxf66y7tyfi"]
+
+[ext_resource type="Texture2D" uid="uid://b2fuiq68260kb" path="res://Assets/Dogs/dog2_basset/basset_face1.png" id="1_rfhjo"]
+[ext_resource type="Texture2D" uid="uid://ihrema0y26vt" path="res://Assets/Dogs/dog2_basset/basset_face2.png" id="2_vsctn"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rfhjo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vsctn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

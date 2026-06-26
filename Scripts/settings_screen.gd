@@ -130,7 +130,6 @@ func _on_tutorial_pressed() -> void:
 	GameSettings.play_tutorial = true
 	GameSettings.currentMap = "FIELD"
 	GlobalInputMap.ControllerIds = [0,-1,-1,-1]
-	GlobalInputMap.Player_Color_Selected[0] = 0
 	GameSettings.startGame()
 	get_tree().root.find_child("MainMenu",true,false).queue_free.call_deferred()
 	UINavigator.back()

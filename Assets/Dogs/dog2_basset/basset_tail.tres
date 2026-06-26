@@ -1,0 +1,48 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://c7gxrq3nfrw5p"]
+
+[ext_resource type="Texture2D" uid="uid://dda08lmwklw5b" path="res://Assets/Dogs/dog2_basset/basset_TAILS-sheet.png" id="1_cmnr2"]
+[ext_resource type="Texture2D" uid="uid://cflvcdpbkat7v" path="res://Assets/Dogs/dog2_basset/basset_TAILS.png" id="1_sl6wt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_87awi"]
+atlas = ExtResource("1_cmnr2")
+region = Rect2(23, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4qpc"]
+atlas = ExtResource("1_sl6wt")
+region = Rect2(46, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1blv"]
+atlas = ExtResource("1_cmnr2")
+region = Rect2(69, 0, 23, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmnr2"]
+atlas = ExtResource("1_sl6wt")
+region = Rect2(0, 0, 23, 21)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_87awi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4qpc")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_d1blv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4qpc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmnr2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bkjd5mneny7c1"]
 
 [ext_resource type="Script" uid="uid://b78ceum26wnjq" path="res://Scripts/simple_player_character.gd" id="1_hgq6l"]
-[ext_resource type="SpriteFrames" uid="uid://cf3jfyr4idhji" path="res://Assets/Dogs/OutlinedDog/SF_FACES_C.tres" id="2_it6ej"]
+[ext_resource type="SpriteFrames" uid="uid://doe3fl7h31x3o" path="res://Assets/Dogs/CapitalDog/SF_CapitalDog_Head.tres" id="2_it6ej"]
 [ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT_C.tres" id="3_onfn8"]
 [ext_resource type="AudioStream" uid="uid://vsxwvpth1gna" path="res://Assets/Sound/bark.mp3" id="4_it6ej"]
-[ext_resource type="Texture2D" uid="uid://bcsu113pmwt3r" path="res://Assets/Dogs/cosmetics/hat_helmet_fix.png" id="8_6hox4"]
+[ext_resource type="Texture2D" uid="uid://espi8xvrclq6" path="res://Assets/Dogs/cosmetics/hat_crown.png" id="5_it6ej"]
 [ext_resource type="Texture2D" uid="uid://bywajg5yonlif" path="res://Assets/UI/arrow.png" id="9_50el2"]
 [ext_resource type="SpriteFrames" uid="uid://bdhta2cfuy4pa" path="res://Assets/Dogs/SF_TAILS-sheet.tres" id="9_xuah4"]
 [ext_resource type="SpriteFrames" uid="uid://dwpt678tie3co" path="res://Assets/Dogs/NewDog/SF_newdog_legsBACK_C.tres" id="10_it6ej"]
@@ -33,7 +33,6 @@ shape = SubResource("RectangleShape2D_7we7l")
 z_index = 1
 texture_filter = 1
 sprite_frames = ExtResource("2_it6ej")
-frame_progress = 0.897358
 
 [node name="Legs" type="AnimatedSprite2D" parent="Head" unique_id=1387958937]
 z_index = -1
@@ -46,8 +45,8 @@ stream = ExtResource("4_it6ej")
 bus = &"SFX"
 
 [node name="Hat" type="Sprite2D" parent="Head" unique_id=1801449873]
-position = Vector2(1, -18)
-texture = ExtResource("8_6hox4")
+position = Vector2(0, -12.5)
+texture = ExtResource("5_it6ej")
 
 [node name="ArrowHolder" type="Node2D" parent="Head" unique_id=1674398659]
 visible = false

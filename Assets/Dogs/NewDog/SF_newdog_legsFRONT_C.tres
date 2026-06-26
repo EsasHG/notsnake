@@ -1,24 +1,24 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://34v6av6vnn0i"]
 
-[ext_resource type="Texture2D" uid="uid://c1xp2p4lnown3" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet_C.png" id="1_p85cw"]
+[ext_resource type="Texture2D" uid="uid://y5w4acie56nb" path="res://Assets/Dogs/NewDog/newdog_legsFRONT_sheet.png" id="1_p85cw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dlucr"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrhu2"]
 atlas = ExtResource("1_p85cw")
 region = Rect2(0, 0, 32, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a0jc0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_18qjk"]
 atlas = ExtResource("1_p85cw")
 region = Rect2(32, 0, 32, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nqkaf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n11b5"]
 atlas = ExtResource("1_p85cw")
 region = Rect2(64, 0, 32, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bgbr8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8o8q"]
 atlas = ExtResource("1_p85cw")
 region = Rect2(96, 0, 32, 60)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qjwsp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_llq33"]
 atlas = ExtResource("1_p85cw")
 region = Rect2(128, 0, 32, 60)
 
@@ -26,19 +26,19 @@ region = Rect2(128, 0, 32, 60)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dlucr")
+"texture": SubResource("AtlasTexture_jrhu2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a0jc0")
+"texture": SubResource("AtlasTexture_18qjk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nqkaf")
+"texture": SubResource("AtlasTexture_n11b5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bgbr8")
+"texture": SubResource("AtlasTexture_v8o8q")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qjwsp")
+"texture": SubResource("AtlasTexture_llq33")
 }],
 "loop": true,
 "name": &"default",

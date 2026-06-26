@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://doe3fl7h31x3o"]
+
+[ext_resource type="Texture2D" uid="uid://d1lk2axyvh08y" path="res://Assets/Dogs/CapitalDog/FACE_MouthOpen.png" id="1_m416i"]
+[ext_resource type="Texture2D" uid="uid://cfabl6pc0shry" path="res://Assets/Dogs/CapitalDog/FACE_MouthClosed.png" id="2_qn6s5"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_m416i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qn6s5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

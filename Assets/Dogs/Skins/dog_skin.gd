@@ -53,7 +53,10 @@ class_name  DogSkin
 	set(value):
 		tail_offset = value
 		changed.emit()
-
+@export var hat_offset: Vector2 = Vector2(0,0):
+	set(value):
+		hat_offset = value
+		changed.emit()
 @export_group("")
 @export var modulate: Color = Color.WHITE:
 	set(value):

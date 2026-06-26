@@ -1,23 +1,16 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://cf3jfyr4idhji"]
 
-[ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="1_evrdj"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_45bpw"]
-atlas = ExtResource("1_evrdj")
-region = Rect2(43, 0, 43, 37)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1v2bu"]
-atlas = ExtResource("1_evrdj")
-region = Rect2(0, 0, 43, 37)
+[ext_resource type="Texture2D" uid="uid://csufidgswfd8" path="res://Assets/Dogs/OutlinedDog/FACE_C_MouthOpen.png" id="1_veuty"]
+[ext_resource type="Texture2D" uid="uid://dbiwx74ibdsqh" path="res://Assets/Dogs/OutlinedDog/FACE_C_MouthClosed.png" id="2_xcv33"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_45bpw")
+"texture": ExtResource("1_veuty")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1v2bu")
+"texture": ExtResource("2_xcv33")
 }],
 "loop": true,
 "name": &"default",

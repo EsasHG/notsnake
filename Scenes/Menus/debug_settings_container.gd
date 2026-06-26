@@ -16,8 +16,8 @@ func _on_show_log_toggled(toggled_on: bool) -> void:
 
 
 func _on_unlock_hats_pressed() -> void:
-	for key in GlobalInputMap.Player_Hats:
-		GlobalInputMap.Player_Hats[key].unlocked = true
+	for key in GlobalInputMap.hats:
+		GlobalInputMap.hats[key].unlocked = true
 
 
 func _on_unlock_maps_pressed() -> void:
@@ -30,11 +30,17 @@ func _on_unlock_maps_pressed() -> void:
 	else:
 		main_menu.create_level_buttons()
 
+func _on_unlock_skins_pressed() -> void:
+	for key in GlobalInputMap.skins:
+		GlobalInputMap.skins[key].unlocked = true
 
+
+	
+	
 func _on_lock_hats_pressed() -> void:
-	for key in GlobalInputMap.Player_Hats:
+	for key in GlobalInputMap.hats:
 		if key != "NONE" and key != "TEST":
-			GlobalInputMap.Player_Hats[key].unlocked = false
+			GlobalInputMap.hats[key].unlocked = false
 
 
 func _on_lock_maps_pressed() -> void:
@@ -49,6 +55,12 @@ func _on_lock_maps_pressed() -> void:
 		main_menu.create_level_buttons()
 
 
+func _on_lock_skins_pressed() -> void:
+	for key in GlobalInputMap.skins:
+		if key != "DEFAULT":
+			GlobalInputMap.skins[key].unlocked = false
+	
+
 func _on_back_pressed() -> void:
 	UINavigator.back()
 	
@@ -62,4 +74,3 @@ func _on_purchase_ad_removal_pressed() -> void:
 
 func _on_show_age_screen_pressed() -> void:
 	UINavigator.open_from_scene(NEUTRAL_AGE_SCREEN)
-	pass # Replace with function body.

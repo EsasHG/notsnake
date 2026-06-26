@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://wuegnx1jc224" path="res://addons/SkinViewerPlugin/skin_preview_window.gd" id="2_sf5s6"]
 [ext_resource type="SpriteFrames" uid="uid://cf3jfyr4idhji" path="res://Assets/Dogs/OutlinedDog/SF_FACES_C.tres" id="2_vuop0"]
 [ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT_C.tres" id="3_18gsr"]
+[ext_resource type="Texture2D" uid="uid://espi8xvrclq6" path="res://Assets/Dogs/cosmetics/hat_crown.png" id="5_vuop0"]
 [ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="5_y566a"]
 [ext_resource type="SpriteFrames" uid="uid://bdhta2cfuy4pa" path="res://Assets/Dogs/SF_TAILS-sheet.tres" id="7_bgp03"]
 [ext_resource type="SpriteFrames" uid="uid://oviwgdg6g7h" path="res://Assets/Dogs/dachs/dachs_legs_back.tres" id="7_sf5s6"]
@@ -41,6 +42,10 @@ position = Vector2(0, -8)
 sprite_frames = ExtResource("3_18gsr")
 frame_progress = 0.035183866
 
+[node name="Hat" type="Sprite2D" parent="SubViewportContainer/SubViewport/Dog/Head" unique_id=1220021735]
+position = Vector2(0, -12.5)
+texture = ExtResource("5_vuop0")
+
 [node name="ButtSprite" type="Sprite2D" parent="SubViewportContainer/SubViewport/Dog" unique_id=1241723961]
 texture_filter = 1
 position = Vector2(0, -31)
@@ -64,3 +69,9 @@ z_index = -1
 texture_filter = 1
 position = Vector2(0, -15)
 texture = ExtResource("9_6imq1")
+
+[node name="CheckButton" type="CheckButton" parent="." unique_id=1333838568]
+layout_mode = 2
+text = "Show Hat"
+
+[connection signal="toggled" from="CheckButton" to="." method="_on_check_button_toggled"]

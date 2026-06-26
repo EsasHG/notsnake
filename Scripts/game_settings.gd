@@ -295,8 +295,8 @@ func game_over():
 			if map == currentMap:
 				unlock_map = true
 	
-	if times_crashed > 100 and not GlobalInputMap.Player_Hats["HELMET"].unlocked:
-		GlobalInputMap.Player_Hats["HELMET"].unlocked = true
+	if times_crashed > 100 and not GlobalInputMap.hats["HELMET"].unlocked:
+		GlobalInputMap.hats["HELMET"].unlocked = true
 		on_somethingUnlocked.emit("HELMET")
 	
 	SaveManager.save_game() ## Doing this so times_crashed gets saved.

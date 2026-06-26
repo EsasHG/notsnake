@@ -22,5 +22,4 @@ body_offset = Vector2(0, -16.105)
 butt_offset = Vector2(0, -30.945)
 tail_offset = Vector2(0, -11.47)
 modulate = Color(1, 0.8784314, 0.67058825, 1)
-unlocked = true
 metadata/_custom_type_script = "uid://b7y2kj325h7uv"
