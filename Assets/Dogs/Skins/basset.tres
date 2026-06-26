@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://c242butwral0e" path="res://Assets/Dogs/dog2_basset/basset_BODY_SEGMENT.png" id="1_x686l"]
 [ext_resource type="Texture2D" uid="uid://2nuxpea5spvo" path="res://Assets/Dogs/dog2_basset/basset_BUTT.png" id="2_oju1b"]
 [ext_resource type="SpriteFrames" uid="uid://dhoxf66y7tyfi" path="res://Assets/Dogs/dog2_basset/basset_face.tres" id="3_ctbcu"]
-[ext_resource type="SpriteFrames" uid="uid://dwpt678tie3co" path="res://Assets/Dogs/NewDog/SF_newdog_legsBACK_C.tres" id="4_gy5dv"]
-[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT_C.tres" id="5_2xxle"]
+[ext_resource type="SpriteFrames" uid="uid://dwpt678tie3co" path="res://Assets/Dogs/NewDog/SF_newdog_legsBACK.tres" id="4_gy5dv"]
+[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT.tres" id="5_2xxle"]
 [ext_resource type="Script" uid="uid://b7y2kj325h7uv" path="res://Assets/Dogs/Skins/dog_skin.gd" id="6_562hn"]
 [ext_resource type="SpriteFrames" uid="uid://c7gxrq3nfrw5p" path="res://Assets/Dogs/dog2_basset/basset_tail.tres" id="7_gy5dv"]
 

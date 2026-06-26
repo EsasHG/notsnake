@@ -13,6 +13,7 @@ signal on_dogHatChanged(hat:String)
 signal on_viewportChanged()
 signal on_somethingUnlocked(unlock:String)
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
+const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 
 var time_scale_tween : Tween
 
@@ -38,6 +39,9 @@ const TUTORIAL = preload("uid://bm0hlhehn7a7v")
 
 var max_retries = 3
 var consecutive_exceptions = 0
+
+## Will be set to true if game is just installed,
+## and back to false if player don't want tutorial, or finishes it.  
 var play_tutorial = false
 #const PAUSE_OVERLAY = preload("uid://ba4bi555qsw1v")
 
@@ -109,7 +113,8 @@ func _ready() -> void:
 	on_somethingUnlocked.connect(_on_something_unlocked)
 	get_viewport().size_changed.connect(_on_viewport_size_changed)
 	_on_viewport_size_changed()
-	call_deferred("_do_deferred_setup")	
+	call_deferred("_do_deferred_setup")
+	game_timer.name = "GameTimer"
 	game_timer.autostart = false
 	game_timer.one_shot = true
 	game_timer.wait_time = round_time_seconds
@@ -123,6 +128,9 @@ func _on_files_loaded(success : bool) -> void:
 		musicMuted = false
 		setSFXMuted(sfxMuted)
 		setMusicMuted(musicMuted)
+		await get_tree().process_frame
+		var lang_menu = UINavigator.open_from_scene(LANGUAGE_SELECT_MENU)
+		await lang_menu.language_selected
 	if _await_authentication:
 		_check_show_neutral_age_screen()
 	
@@ -209,14 +217,12 @@ func mainMenu():
 func startGame():
 	assert(!game_running)
 	currentScore = 0
-
 	var transition : SceneTransition = _create_transition()
 	transition.transition_in_finished.connect(_actually_start_game)
 	get_tree().create_timer(1).timeout.connect(func(): 
 		transition.transition_out()
 		on_gameBegin.emit.call_deferred()
 		if play_tutorial:
-			play_tutorial = false
 			UINavigator.open_from_scene.call_deferred(TUTORIAL)
 
 		)
@@ -238,10 +244,11 @@ func _actually_start_game():
 		if(id != -1):
 			var spawner : PlayerSpawner = player_spawners[playerIndex]
 			spawner.playerID = playerIndex
-			var spawned_player : PlayerDog = spawner.spawn_player()
-			if spawned_player != null:
-				players.push_back(spawned_player)
-
+			spawner.player_spawned.connect(_player_spawned)
+			spawner.spawn_player()
+			
+		
+		
 	Logging.logMessage("Starting game!")
 	match game_mode:
 		GAME_MODE.LAST_DOG_STANDING:
@@ -436,16 +443,20 @@ func player_lost(player : PlayerDog) -> void:
 			player_spawners[player.playerID].start_timer()
 			players.erase(player)
 		GAME_MODE.SINGLE_PLAYER:
-			times_crashed += 1
-			on_gameOver.emit()
+			if play_tutorial:
+				players.erase(player)
+				var spawner : PlayerSpawner = player_spawners[player.playerID]
+				spawner.respawn_time = 1.0
+				spawner.start_timer()
+			else:
+				times_crashed += 1
+				on_gameOver.emit()
 			
 
-func set_age_group(group : AdManager.AGE_GROUP) -> void:
-	age_group = group
-	if adManager == null:
-		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
-	adManager.set_age_group.call_deferred(group)
-		
+func _player_spawned(player:PlayerDog) -> void:
+	if player != null:
+		players.push_back(player)
+
 
 func _on_something_unlocked(unlock:String):
 	_new_unlocks.append(unlock)
@@ -497,19 +508,28 @@ func _on_billing_manager_loading_finished() -> void:
 	#if adManager:
 		#adManager.initialize() 
 
+
 func _check_show_neutral_age_screen() -> void:
 	if age_group == AdManager.AGE_GROUP.UNSPECIFIED:
 		play_tutorial = true
 		game_startup_loading_screen.visible = false
 		UINavigator.open_from_scene(NEUTRAL_AGE_SCREEN,false,true,func(): game_startup_loading_screen.visible = true)
-		if adManager:
-			await adManager.on_admob_initialized
-		else: 
-			Logging.warn("No adManager to wait for!")
-		_exit_game_startup_loading_screen()
 	else:
 		_exit_game_startup_loading_screen()
 		
+
+func set_age_group(group : AdManager.AGE_GROUP) -> void:
+	age_group = group
+	if adManager == null:
+		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
+	if adManager and adManager.admob_initialized:
+		Logging.logMessage("Ad manager found. Setting age group in ad manager.")
+		adManager.set_age_group.call_deferred(group)
+		await adManager.on_admob_initialized
+	else: 
+		Logging.logMessage("Age group set, but ad manager was either not found or not initialized correctly.")
+	_exit_game_startup_loading_screen()
+	
 
 func _exit_game_startup_loading_screen() -> void:
 	if  game_startup_loading_screen: 

@@ -251,6 +251,38 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 6
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4dyya"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.84997284, 0.1627568, 0.08118575, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wliw"]
+content_margin_left = 20.0
+content_margin_top = 15.0
+content_margin_right = 20.0
+content_margin_bottom = 15.0
+bg_color = Color(0.7176471, 0.1254902, 0.05490196, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxpfo"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_odjph"]
@@ -552,6 +584,11 @@ CustomScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_7yt47")
 CustomScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_61qco")
 CustomScrollBar/styles/scroll = SubResource("StyleBoxFlat_q72ri")
 CustomScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_fuq5t")
+DangerButton/base_type = &"Button"
+DangerButton/styles/focus = SubResource("StyleBoxFlat_4dyya")
+DangerButton/styles/hover = SubResource("StyleBoxFlat_0wliw")
+DangerButton/styles/normal = SubResource("StyleBoxFlat_0wliw")
+DangerButton/styles/pressed = SubResource("StyleBoxFlat_4dyya")
 EmptyButton/base_type = &"Button"
 EmptyButton/styles/disabled = SubResource("StyleBoxEmpty_pxpfo")
 EmptyButton/styles/focus = SubResource("StyleBoxEmpty_odjph")

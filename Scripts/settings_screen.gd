@@ -13,6 +13,7 @@ extends VBoxContainer
 @onready var consent_form_button: LinkButton = $ConsentFormButton
 
 
+const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
 const DEBUG_SETTINGS_CONTAINER = preload("uid://d0dfdlrxfu8iw")
 const CLOUD_MENU = preload("uid://kyb2ynbcw74p")
@@ -45,7 +46,7 @@ func _ready() -> void:
 		## the method below returned "Norwegian bokmål" for "nb", and that didn't feel right to me.
 		var lang = TranslationServer.get_language_name(locale)
 		if locale == "nb":
-			language_selector.add_item("Norsk")	
+			language_selector.add_item("Norsk")
 		else:
 			language_selector.add_item(lang)
 			
@@ -98,7 +99,6 @@ func _on_language_selector_item_selected(index: int) -> void:
 
 func _on_skin_select_pressed() -> void:
 	UINavigator.open_from_scene(SKIN_SELECTOR)
-	pass # Replace with function body.
 
 
 func _on_skin_changed(_skin_id:String) -> void:
@@ -123,7 +123,6 @@ func _on_credits_pressed() -> void:
 
 func _on_consent_form_button_pressed() -> void:
 	GameSettings.adManager.show_consent_form()
-	pass # Replace with function body.
 
 
 func _on_tutorial_pressed() -> void:
@@ -133,3 +132,7 @@ func _on_tutorial_pressed() -> void:
 	GameSettings.startGame()
 	get_tree().root.find_child("MainMenu",true,false).queue_free.call_deferred()
 	UINavigator.back()
+
+
+func _on_language_select_pressed() -> void:
+	UINavigator.open_from_scene(LANGUAGE_SELECT_MENU)

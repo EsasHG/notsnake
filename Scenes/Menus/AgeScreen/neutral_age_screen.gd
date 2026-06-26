@@ -6,6 +6,7 @@ extends VBoxContainer
 @export var month_line_edit: LineEdit 
 @export var year_line_edit: LineEdit 
 @onready var error_label: Label = $ErrorLabel
+@onready var confirm: Button = $Confirm
 
 var days_in_month :Array[int] = [31,28,31,30,31,30,31,31,30,31,30,31]
 var _selected_year:int = -1
@@ -23,8 +24,9 @@ func _ready() -> void:
 	month_dropdown.select(-1)
 	day_dropdown.select(-1)
 	error_label.visible = false
-	day_line_edit.text_submitted.connect(month_line_edit.grab_focus)
-	month_line_edit.text_submitted.connect(year_line_edit.grab_focus)
+	day_line_edit.text_submitted.connect(func(_text): month_line_edit.grab_focus())
+	month_line_edit.text_submitted.connect(func(_text): year_line_edit.grab_focus())
+	year_line_edit.text_submitted.connect(func(_text): confirm.grab_focus(true))
 func _create_year_dropdown() -> void:
 	year_dropdown.clear()
 	for year in range(_current_date.year,1899,-1):

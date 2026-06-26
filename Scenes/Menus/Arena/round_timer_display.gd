@@ -3,6 +3,7 @@ var countdown : Timer
 var current_time = 60
 func _ready() -> void:
 	countdown = Timer.new()
+	countdown.name = "RoundTimer"
 	countdown.autostart = false
 	countdown.one_shot = false
 	countdown.timeout.connect(count_down)

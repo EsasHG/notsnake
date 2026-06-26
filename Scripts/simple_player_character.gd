@@ -50,7 +50,8 @@ func _ready() -> void:
 	Logging.logMessage("Player ready!")
 	
 	_invulnerable = true
-	iframes_timer = Timer.new()	
+	iframes_timer = Timer.new()
+	iframes_timer.name = "IFramesTimer"
 	iframes_timer.autostart = true
 	iframes_timer.one_shot = true
 	iframes_timer.timeout.connect(func(): _invulnerable = false)
@@ -73,12 +74,12 @@ func _ready() -> void:
 	
 	GameSettings.on_pickupSpawned.connect(set_arrow_target)
 	GameSettings.on_controls_changed.connect(_on_controls_changed)
-	GameSettings.on_gameBegin.connect(func(): $Head/ArrowHolder.visible = true)
+	if not GameSettings.play_tutorial:
+		GameSettings.on_gameBegin.connect(func(): arrow.visible = true)
 	GameSettings.on_dogHatChanged.connect(set_hat)
 	GameSettings.on_dogSkinChanged.connect(set_skin)
 	visibility_changed.connect(func(): segmentParent.visible =visible) 
-	if GameSettings.play_tutorial: 
-		arrow.visible = false
+	arrow.visible = false
 
 func add_sprite():
 	if(canAddSprites):
@@ -255,7 +256,9 @@ func set_skin(skin_id:String) -> void:
 	hindLegs.sprite_frames = skin.legs_back
 	butt_sprite.texture = skin.butt
 	tail.sprite_frames = skin.tail
-	
+	legs.play("default")
+	hindLegs.play("default")
+	tail.play("default")
 	segment_sprite = skin.body_segment
 	segmentParent.modulate = skin.modulate
 	hat.position = GlobalInputMap.hats[GlobalInputMap.hats_selected[0]].offset + skin.hat_offset

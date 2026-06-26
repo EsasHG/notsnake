@@ -188,6 +188,7 @@ func _set_settings_save_content(node_data: Dictionary) -> void:
 		GameSettings.setControls(true)
 	if node_data.has("language"):
 		GameSettings.language = node_data["language"]
+		TranslationServer.set_locale(GameSettings.language)
 	if node_data.has("dogSkin"):
 		if not GlobalInputMap.skins.has(node_data["dogSkin"]):
 			Logging.error("Invalid skin found in save file: " + node_data["dogSkin"])

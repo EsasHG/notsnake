@@ -220,6 +220,7 @@ func _on_acknowledge_purchase_response(response: Dictionary):
 	Logging.logMessage("Acknowledge purchase response")
 	match response.response_code:
 		billing_client.BillingResponseCode.OK:
+			UINavigator.back()
 			var popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU)
 			popup.title.text = tr("AD_REMOVAL_PURCHASED_TITLE")
 			popup.description.text = tr("AD_REMOVAL_PURCHASED_DESCRIPTION")

@@ -59,10 +59,10 @@ func _ready() -> void:
 			if level_buttons.visible:
 				level_buttons.get_child(0).grab_focus(true)
 				)
-	
-	var audioManager = get_tree().root.find_child("Audio", true, false)
-	if(audioManager):
-		audioManager.startMusic()
+	#
+	#var audioManager = get_tree().root.find_child("Audio", true, false)
+	#if(audioManager):
+		#audioManager.startMusic()
 	create_level_buttons()
 	GameSettings.on_viewportChanged.connect(_on_viewport_changed)
 	_on_viewport_changed()

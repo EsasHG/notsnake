@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://t85bt1r6sh3c" path="res://addons/SkinViewerPlugin/skin_preview.gd" id="1_oif7w"]
 [ext_resource type="Script" uid="uid://wuegnx1jc224" path="res://addons/SkinViewerPlugin/skin_preview_window.gd" id="2_sf5s6"]
 [ext_resource type="SpriteFrames" uid="uid://cf3jfyr4idhji" path="res://Assets/Dogs/OutlinedDog/SF_FACES_C.tres" id="2_vuop0"]
-[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT_C.tres" id="3_18gsr"]
+[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT.tres" id="3_18gsr"]
 [ext_resource type="Texture2D" uid="uid://espi8xvrclq6" path="res://Assets/Dogs/cosmetics/hat_crown.png" id="5_vuop0"]
 [ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="5_y566a"]
 [ext_resource type="SpriteFrames" uid="uid://bdhta2cfuy4pa" path="res://Assets/Dogs/SF_TAILS-sheet.tres" id="7_bgp03"]

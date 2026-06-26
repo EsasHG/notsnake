@@ -43,6 +43,8 @@ func _ready() -> void:
 	GlobalInputMap.ControllerIds = [-1, -1, -1, -1];
 	can_move_left_timer = Timer.new()
 	can_move_right_timer = Timer.new()
+	can_move_left_timer.name = "CanMoveLeftTimer"
+	can_move_right_timer.name = "CanMoveRightTimer"
 	add_child(can_move_left_timer)
 	add_child(can_move_right_timer)
 

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cy0to6qw5b3n2"]
+
+[ext_resource type="PackedScene" uid="uid://chupiwnqy5234" path="res://Scenes/Menus/popup_menu.tscn" id="1_c1qli"]
+[ext_resource type="Script" uid="uid://dymq44sp5xpdc" path="res://Scenes/Menus/language_select_menu.gd" id="2_u76nh"]
+[ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="3_0tx4o"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_u76nh"]
+
+[node name="PopupMenu" unique_id=742566856 instance=ExtResource("1_c1qli")]
+script = ExtResource("2_u76nh")
+language_cylce_duration = 3.0
+
+[node name="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer" parent_id_path=PackedInt32Array(1316018813) index="0" unique_id=920526114]
+theme = ExtResource("3_u76nh")
+
+[node name="TitleLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="0" unique_id=368940186]
+text = "SELECT_LANGUAGE"
+
+[node name="DescriptionLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="1" unique_id=1464836269]
+visible = false
+text = ""
+
+[node name="LanguageButtons" type="HFlowContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" index="2" unique_id=1950564227]
+layout_mode = 2
+theme = ExtResource("3_0tx4o")
+alignment = 1
+last_wrap_alignment = 2

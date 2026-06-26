@@ -4,8 +4,8 @@
 [ext_resource type="Script" uid="uid://b7y2kj325h7uv" path="res://Assets/Dogs/Skins/dog_skin.gd" id="1_uyc74"]
 [ext_resource type="Texture2D" uid="uid://bktg3cnlo4cpv" path="res://Assets/Dogs/CapitalDog/BUTT.png" id="2_ypfd1"]
 [ext_resource type="SpriteFrames" uid="uid://doe3fl7h31x3o" path="res://Assets/Dogs/CapitalDog/SF_CapitalDog_Head.tres" id="3_53yrb"]
-[ext_resource type="SpriteFrames" uid="uid://dwpt678tie3co" path="res://Assets/Dogs/NewDog/SF_newdog_legsBACK_C.tres" id="4_agw3f"]
-[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT_C.tres" id="5_fgowf"]
+[ext_resource type="SpriteFrames" uid="uid://dwpt678tie3co" path="res://Assets/Dogs/NewDog/SF_newdog_legsBACK.tres" id="4_agw3f"]
+[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT.tres" id="5_fgowf"]
 [ext_resource type="SpriteFrames" uid="uid://bdhta2cfuy4pa" path="res://Assets/Dogs/SF_TAILS-sheet.tres" id="7_hlpuf"]
 
 [resource]

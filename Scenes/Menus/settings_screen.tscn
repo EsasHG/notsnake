@@ -161,6 +161,7 @@ text = "TAP"
 script = ExtResource("5_64y2j")
 
 [node name="VBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=477237773]
+visible = false
 layout_mode = 2
 
 [node name="LanguageLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/VBoxContainer" unique_id=1948724054]
@@ -210,6 +211,15 @@ theme_override_font_sizes/font_size = 20
 icon = ExtResource("13_qwjhj")
 flat = true
 expand_icon = true
+script = ExtResource("5_64y2j")
+
+[node name="LanguageSelect" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=169140364]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+text = "LANGUAGE"
 script = ExtResource("5_64y2j")
 
 [node name="SkinSelect" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1013354946]
@@ -292,6 +302,7 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="item_selected" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/VBoxContainer/LanguageSelector" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_language_selector_item_selected"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer/AchievementsButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_achievements_button_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer/LeaderboardsButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_leaderboards_button_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/LanguageSelect" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_language_select_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SkinSelect" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_skin_select_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/EnableCloud" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_enable_cloud_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DebugSettings" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_debug_settings_pressed"]

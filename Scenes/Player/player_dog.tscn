@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://b78ceum26wnjq" path="res://Scripts/simple_player_character.gd" id="1_hgq6l"]
 [ext_resource type="SpriteFrames" uid="uid://doe3fl7h31x3o" path="res://Assets/Dogs/CapitalDog/SF_CapitalDog_Head.tres" id="2_it6ej"]
-[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT_C.tres" id="3_onfn8"]
+[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT.tres" id="3_onfn8"]
 [ext_resource type="AudioStream" uid="uid://vsxwvpth1gna" path="res://Assets/Sound/bark.mp3" id="4_it6ej"]
 [ext_resource type="Texture2D" uid="uid://espi8xvrclq6" path="res://Assets/Dogs/cosmetics/hat_crown.png" id="5_it6ej"]
 [ext_resource type="Texture2D" uid="uid://bywajg5yonlif" path="res://Assets/UI/arrow.png" id="9_50el2"]
 [ext_resource type="SpriteFrames" uid="uid://bdhta2cfuy4pa" path="res://Assets/Dogs/SF_TAILS-sheet.tres" id="9_xuah4"]
-[ext_resource type="SpriteFrames" uid="uid://dwpt678tie3co" path="res://Assets/Dogs/NewDog/SF_newdog_legsBACK_C.tres" id="10_it6ej"]
+[ext_resource type="SpriteFrames" uid="uid://dwpt678tie3co" path="res://Assets/Dogs/NewDog/SF_newdog_legsBACK.tres" id="10_it6ej"]
 [ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="10_m7s8p"]
 [ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/Dogs/OutlinedDog/TAIL_C.png" id="11_ei6el"]
 [ext_resource type="Script" uid="uid://brb1sob6alono" path="res://Scripts/paused_input_buffer.gd" id="14_x26c4"]
@@ -49,7 +49,6 @@ position = Vector2(0, -12.5)
 texture = ExtResource("5_it6ej")
 
 [node name="ArrowHolder" type="Node2D" parent="Head" unique_id=1674398659]
-visible = false
 rotation = -0.38020706
 
 [node name="Arrow" type="Sprite2D" parent="Head/ArrowHolder" unique_id=1888289966]

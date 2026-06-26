@@ -74,6 +74,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
+[node name="Resume" type="Button" parent="Panel/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1669568375]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_vms7i")
+text = "RESUME"
+script = ExtResource("4_7smr3")
+
 [node name="Settings" type="Button" parent="Panel/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1416615550]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -87,16 +95,9 @@ custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("1_vms7i")
+theme_type_variation = &"DangerButton"
 text = "END_RUN"
 script = ExtResource("4_yeo1y")
-
-[node name="Resume" type="Button" parent="Panel/VBoxContainer/HBoxContainer2/VBoxContainer" unique_id=1669568375]
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-size_flags_vertical = 4
-theme = ExtResource("1_vms7i")
-text = "RESUME"
-script = ExtResource("4_7smr3")
 
 [node name="Countdown" type="Label" parent="." unique_id=1734751149]
 visible = false

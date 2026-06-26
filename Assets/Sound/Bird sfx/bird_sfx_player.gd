@@ -8,6 +8,7 @@ var countdown : Timer
 
 func _ready() -> void:
 	countdown = Timer.new()
+	countdown.name = "BirdTimer"
 	countdown.autostart = false
 	countdown.one_shot = true
 	countdown.timeout.connect(play_bird_sfx)

@@ -15,7 +15,8 @@ NEXT,Next,Neste,
 BACK,Back,Tilbake,
 CONTROLS,Controls:,Styring:,
 SIGN_IN,Sign in to Google Play,Logg inn med Google Play,
-LANGUAGE,Language:,Språk:,
+SELECT_LANGUAGE,Select language,Velg språk,
+LANGUAGE,Language,Språk,
 GAME_PAUSED,Game paused!,Pauset!,
 END_RUN,End run,Avslutt runden,
 RESUME,Resume,Fortsett,
@@ -34,6 +35,7 @@ FOREST,Forest,Skogen,level names must also be updated in play console (for leade
 WINTER,Winter,Vinterland,level names must also be updated in play console (for leaderboards)
 YES,Yes,Ja,
 NO,No,Nei,
+PURCHASE_AD_REMOVAL,Remove Ads,Fjern Reklamer,
 AD_REMOVAL_TITLE,Tired of ads?,Lei av reklamer?,this is actually controlled in the play console I think
 AD_REMOVAL_DESCRIPTION,Purchase ad removal,Kjøp reklamefjerning,this is actually controlled in the play console I think
 AD_REMOVAL_YES,Yes pls,Ja takk,

@@ -79,7 +79,6 @@ grow_vertical = 2
 script = ExtResource("15_8bdjp")
 
 [node name="LevelSelectContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1354738231]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -179,6 +178,7 @@ autowrap_mode = 3
 layout_mode = 2
 
 [node name="TutorialQuestionContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1863596701]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -243,6 +243,7 @@ script = ExtResource("13_vtepg")
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("15_8dws6")
+theme_type_variation = &"DangerButton"
 text = "NO"
 script = ExtResource("13_vtepg")
 
@@ -290,6 +291,7 @@ script = ExtResource("13_vtepg")
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("15_8dws6")
+theme_type_variation = &"DangerButton"
 text = "QUIT"
 script = ExtResource("13_vtepg")
 

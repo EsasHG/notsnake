@@ -11,6 +11,8 @@ func _ready() -> void:
 	pitch_shift = AudioEffectPitchShift.new()
 	pitch_shift.fft_size = AudioEffectPitchShift.FFT_SIZE_1024
 	AudioServer.add_bus_effect(AudioServer.get_bus_index("Music"), pitch_shift)
+	startMusic()
+
 func startMusic():
 	if !bg_music:
 		bg_music = find_child("BGMusic", true, false)
