@@ -41,35 +41,12 @@ stream_14/stream = ExtResource("6_51uia")
 stream_15/stream = ExtResource("7_nxufr")
 stream_16/stream = ExtResource("8_dl2vw")
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uwsgx"]
-streams_count = 16
-stream_0/stream = ExtResource("1_d8kpb")
-stream_1/stream = ExtResource("2_uwsgx")
-stream_2/stream = ExtResource("9_qgult")
-stream_3/stream = ExtResource("10_5lm5x")
-stream_4/stream = ExtResource("11_xcyug")
-stream_5/stream = ExtResource("12_eppwb")
-stream_6/stream = ExtResource("13_8jnqb")
-stream_7/stream = ExtResource("14_m0j3o")
-stream_8/stream = ExtResource("15_xaskf")
-stream_9/stream = ExtResource("16_1d5cs")
-stream_10/stream = ExtResource("3_fr5wd")
-stream_11/stream = ExtResource("4_1lt3y")
-stream_12/stream = ExtResource("5_siduo")
-stream_13/stream = ExtResource("6_51uia")
-stream_14/stream = ExtResource("7_nxufr")
-stream_15/stream = ExtResource("8_dl2vw")
-
-[node name="BirdSfxPlayer" type="AudioStreamPlayer" unique_id=552848213]
+[node name="BirdSfxPlayer" type="AudioStreamPlayer2D" unique_id=1812720307]
 stream = SubResource("AudioStreamRandomizer_84rit")
 volume_db = -20.0
+max_distance = 1000.0
+attenuation = 3.0314324
 bus = &"SFX"
 script = ExtResource("17_nn0u6")
 min_rest_time = 2.0
 max_rest_time = 7.0
-
-[node name="BirdSfxPlayer" type="AudioStreamPlayer" parent="." unique_id=718441423]
-stream = SubResource("AudioStreamRandomizer_uwsgx")
-volume_db = -20.0
-bus = &"SFX"
-script = ExtResource("17_nn0u6")

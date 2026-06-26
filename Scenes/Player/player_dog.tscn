@@ -96,4 +96,7 @@ frame_progress = 0.3582303
 process_mode = 2
 script = ExtResource("14_x26c4")
 
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=1376190390]
+current = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

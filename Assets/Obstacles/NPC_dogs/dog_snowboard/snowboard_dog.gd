@@ -16,18 +16,17 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	
-	if(player != null && global_position.distance_squared_to(player.global_position) < distThreshold* distThreshold):
-		if(!playerCrossedThreshold):
-			playerCrossedThreshold = true
-			audio_stream_player_2d.play()
-	elif(player != null):
-		if(playerCrossedThreshold):
-			playerCrossedThreshold = false
-			audio_stream_player_2d.stop()
-	elif(player == null):
-		player = get_tree().root.find_child("PlayerDog", true, false)
-
-		audio_stream_player_2d.stop()
+	#if(player != null && global_position.distance_squared_to(player.global_position) < distThreshold* distThreshold):
+		#if(!playerCrossedThreshold):
+			#playerCrossedThreshold = true
+			#audio_stream_player_2d.play()
+	#elif(player != null):
+		#if(playerCrossedThreshold):
+			#playerCrossedThreshold = false
+			#audio_stream_player_2d.stop()
+	#elif(player == null):
+		#player = get_tree().root.find_child("PlayerDog", true, false)
+		#audio_stream_player_2d.stop()
 	
 	if global_rotation_degrees < -90 and not flipped:
 		get_tree().create_tween().tween_property(self,"scale:y", -scale_y, flip_time)

@@ -1,8 +1,8 @@
-extends AudioStreamPlayer
+extends AudioStreamPlayer2D
 
 @export var min_rest_time = 2.5
 @export var max_rest_time = 4.0
-
+@export var trees :Array[Node2D]
 var countdown : Timer
 
 
@@ -18,6 +18,7 @@ func _ready() -> void:
 
 
 func play_bird_sfx() -> void:
+	global_position = trees.pick_random().global_position
 	play()
 	countdown.start(randf_range(min_rest_time,max_rest_time))
 	

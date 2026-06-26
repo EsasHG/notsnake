@@ -17,7 +17,7 @@ const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 
 var time_scale_tween : Tween
 
-var currentScore : int = 0 
+var currentScore : int = 0
 
 enum GAME_MODE {LAST_DOG_STANDING, TIME, SCORE, SINGLE_PLAYER}
 var game_mode :GAME_MODE = GAME_MODE.SINGLE_PLAYER
@@ -448,6 +448,7 @@ func player_lost(player : PlayerDog) -> void:
 				var spawner : PlayerSpawner = player_spawners[player.playerID]
 				spawner.respawn_time = 1.0
 				spawner.start_timer()
+				currentScore = 0
 			else:
 				times_crashed += 1
 				on_gameOver.emit()

@@ -5,8 +5,10 @@ class_name PickupSpawner
 @onready var bone = preload("uid://c7508ame74p7h")
 @onready var present = preload("uid://b4ksiqva2w1ll")
 @onready var pickupPoints : Array[Node] = $PickupPoints.get_children()
+@export var tutorialPickups : Array[Node]
 var prevPoint : int = 14
 var currentPickup:Area2D
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameSettings.on_pickup.connect(SpawnPickup)
@@ -28,11 +30,12 @@ func SpawnPickup():
 	else:
 		pickup = toy.instantiate()
 	
+	var points = pickupPoints if not GameSettings.play_tutorial else tutorialPickups
 	var point : int = prevPoint
 	while point == prevPoint:
-		point =	randi_range(0, pickupPoints.size()-1)
+		point =	randi_range(0, points.size()-1)
 	prevPoint = point
-	pickup.position = pickupPoints[point].position
+	pickup.position = points[point].position
 	
 	Logging.logMessage("Adding pickup")
 	add_child.call_deferred(pickup)

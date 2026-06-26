@@ -90,7 +90,6 @@ func _on_back_button_pressed() -> void:
 				GameSettings.players[0].arrow.visible = true
 				GameSettings.on_pickup.connect(_on_next_button_pressed)
 			4:
-				#UINavigator.force_back()
 				GameSettings.on_pickup.disconnect(_on_next_button_pressed)
 				panel.visible = false
 				next_button.visible = true
