@@ -68,6 +68,12 @@ var userAuthenticated = false
 # if true, await _on_authenticated before removing loading screen.
 var _await_authentication = false
 
+var auth_checked : bool = false
+var firebase_init_finished : bool = false
+var billing_init_finished : bool = false
+var admob_init_finished : bool = false
+var file_loading_finished : bool = false
+var deferred_setup_complete : bool = false
 
 var times_crashed : int = 0
 
@@ -76,6 +82,17 @@ var total_treats : int = 0
 var _new_unlocks: Array[String]
 
 var currentWorld : Node2D = null
+
+#5 things happening on startup:
+#Loading files           PlayGames Init & Auth   Firebase Init & Auth    Billing Init & Auth     Admob Init & Auth
+#Await PlayGames         Can start               Can start?              Can start?              Await Age Group
+#(for cloud saves)                                                                               (Check if saved, and if not, show screen)
+																								#Await billing?
+#
+#
+#All must be completed before we move on
+
+#old thoughts:
 #1. _enter_tree()
 #2. _ready() 
 	#a)
@@ -96,6 +113,8 @@ func _enter_tree() -> void:
 			Logging.error("Could not initialize godot play games services plugin!")
 			_await_authentication = false
 		game_mode = GAME_MODE.SINGLE_PLAYER
+	else:
+		auth_checked = true
 		
 	
 func _ready() -> void:			
@@ -105,6 +124,7 @@ func _ready() -> void:
 		_check_authentication.call_deferred()
 	else:
 		SaveManager.load_game()
+		
 	on_pickup.connect(increaseScore)
 	on_gameOver.connect(game_over)
 	on_gameBegin.connect(func(): 
@@ -122,6 +142,7 @@ func _ready() -> void:
 	get_tree().root.add_child.call_deferred(game_timer)
 	adManager = get_tree().root.find_child("AdManager", true, false)
 
+
 func _on_files_loaded(success : bool) -> void:
 	if not success:
 		sfxMuted = false
@@ -130,9 +151,13 @@ func _on_files_loaded(success : bool) -> void:
 		setMusicMuted(musicMuted)
 		await get_tree().process_frame
 		var lang_menu = UINavigator.open_from_scene(LANGUAGE_SELECT_MENU)
+		game_startup_loading_screen.visible = false
 		await lang_menu.language_selected
-	if _await_authentication:
-		_check_show_neutral_age_screen()
+		game_startup_loading_screen.visible = true
+		
+		
+	file_loading_finished = true
+	_check_show_neutral_age_screen()
 	
 
 func _check_authentication() -> void:
@@ -142,17 +167,29 @@ func _check_authentication() -> void:
 			signInClient.is_authenticated()
 		else:
 			Logging.error("No sign in client found!")
+			playgames_auth_checked()
 	else:
 		Logging.error("Could not find Google Play Games Services plugin!")
 		signInClient = null
-	Firebase.Auth.signup_succeeded.connect(_on_signup_succeeded)
-	Firebase.Auth.login_failed.connect(_on_login_failed)
-	Firebase.Auth.login_anonymous()
+		playgames_auth_checked()
+
+
 		##Should probably still do this somehow
 		#leaderboardsClient = null
 		#achievementsClient = null
 
+
+func playgames_auth_checked() -> void:
+	auth_checked = true
+	SaveManager.load_game()
+	## Since doesn't start earlier, we don't have to check if everything is initialized here.
+	
+
 func _do_deferred_setup():
+	Firebase.Auth.signup_succeeded.connect(_on_signup_succeeded)
+	Firebase.Auth.login_failed.connect(_on_login_failed)
+	Firebase.Auth.login_anonymous()
+	
 	if(currentWorld == null):
 		currentWorld = get_tree().root.find_child("BubbleCutscene",true,false)
 	if OS.has_feature("mobile"):
@@ -163,7 +200,8 @@ func _do_deferred_setup():
 			mainGuiNode.call_deferred("add_child", billingManager)
 		else: 
 			print("Main gui node not found! Not adding billing manager...")
-	
+	else:
+		_on_billing_manager_loading_finished()
 	var button : Button = get_tree().root.find_child("MusicMute", true, false)
 	if(is_instance_valid(button)):
 		button.toggled.connect(_on_music_mute_toggled)
@@ -177,9 +215,9 @@ func _do_deferred_setup():
 	setSFXVol(sfxVol)
 		
 	game_startup_loading_screen = get_tree().root.find_child("SceneTransition",true,false)
-	if not _await_authentication:
+	deferred_setup_complete = true
+	if file_loading_finished:
 		_check_show_neutral_age_screen()
-
 
 func end_run() -> void:
 	if !game_running:
@@ -247,8 +285,6 @@ func _actually_start_game():
 			spawner.player_spawned.connect(_player_spawned)
 			spawner.spawn_player()
 			
-		
-		
 	Logging.logMessage("Starting game!")
 	match game_mode:
 		GAME_MODE.LAST_DOG_STANDING:
@@ -396,10 +432,14 @@ func setControls(hold:bool):
 	
 
 func remove_all_ads():
+	if adManager == null:
+		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
 	if adManager:
 		adManager.remove_banner_ad()
 		adManager.queue_free()
 		adManager = null
+		admob_init_finished = true
+		#_check_init_finisehed()
 	
 
 func pause_game():
@@ -497,40 +537,64 @@ func _on_user_authenticated(is_authenticated: bool) -> void:
 			LeaderboardManager.setup()
 			AchievementManager.setup()
 			
-			SaveManager.load_game()
 	else:
 		#$Leaderboard.visible = false
 		Logging.warn("User not authenticated!")
 	userAuthenticated = is_authenticated
+	playgames_auth_checked()
 
 
 func _on_billing_manager_loading_finished() -> void:
-	pass
-	#if adManager:
-		#adManager.initialize() 
+	billing_init_finished = true
+	_check_init_admob()
 
+
+func _check_init_admob() -> void:
+	if age_group != AdManager.AGE_GROUP.UNSPECIFIED && billing_init_finished:
+		if billingManager && billingManager.no_ads_purchased:
+			remove_all_ads()
+		else:
+			if adManager == null:
+				adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
+			if adManager:
+				Logging.logMessage("Ad manager found. Setting age group in ad manager.")
+				adManager.set_age_group.call_deferred(age_group)
+				await adManager.on_admob_initialized
+				admob_init_finished = true
+			else: 
+				Logging.logMessage("Age group set, but ad manager was either not found or not initialized correctly.")
+		_check_init_finisehed()
+		
 
 func _check_show_neutral_age_screen() -> void:
-	if age_group == AdManager.AGE_GROUP.UNSPECIFIED:
+	if deferred_setup_complete && age_group == AdManager.AGE_GROUP.UNSPECIFIED:
 		play_tutorial = true
 		game_startup_loading_screen.visible = false
 		UINavigator.open_from_scene(NEUTRAL_AGE_SCREEN,false,true,func(): game_startup_loading_screen.visible = true)
 	else:
-		_exit_game_startup_loading_screen()
-		
+		_check_init_finisehed()
+
 
 func set_age_group(group : AdManager.AGE_GROUP) -> void:
 	age_group = group
-	if adManager == null:
-		adManager = get_tree().root.find_child("AdManager",true,false)#AD_MANAGER.instantiate()
-	if adManager and adManager.admob_initialized:
-		Logging.logMessage("Ad manager found. Setting age group in ad manager.")
-		adManager.set_age_group.call_deferred(group)
-		await adManager.on_admob_initialized
-	else: 
-		Logging.logMessage("Age group set, but ad manager was either not found or not initialized correctly.")
-	_exit_game_startup_loading_screen()
+	Logging.logMessage("Age group set")
+	_check_init_admob()
 	
+	
+func _check_init_finisehed() -> void:
+	Logging.logMessage("Checking if init is finished!")
+	if billing_init_finished and file_loading_finished and admob_init_finished and auth_checked and firebase_init_finished:
+		_exit_game_startup_loading_screen()
+	else:
+		Logging.warn("Init is not finished!")
+		Logging.warn("Billing finished: " + str(billing_init_finished))
+		Logging.warn("File loading finished: " + str(file_loading_finished))
+		Logging.warn("Admob finished: " + str(admob_init_finished))
+		Logging.warn("PlayGames Auth finished: " + str(auth_checked))
+		Logging.warn("Firebase finished: " + str(firebase_init_finished))
+		Logging.warn("deferred setup finished: " + str(deferred_setup_complete))
+		
+		
 
 func _exit_game_startup_loading_screen() -> void:
 	if  game_startup_loading_screen: 
@@ -542,16 +606,22 @@ func _exit_game_startup_loading_screen() -> void:
 
 func _on_signup_succeeded(auth_info:Dictionary) -> void:
 	Logging.logMessage("Firebase signup succeeded!")
-	pass
-	
+	firebase_init_finished = true
+	_check_init_finisehed()
 
-func _on_login_failed(code, message:String) -> void:
+func _on_login_failed(code : String, message:String) -> void:
 	Logging.error("Firebase login failed! Code: " + str(code) + ". Message: " + message)
 	consecutive_exceptions+=1
+	match code:
+		403:
+			Logging.error("Unauthorized! Could not login to firebase.")
+			firebase_init_finished = true
+			return
 	Logging.logMessage("Consecutive exceptions: " + str(consecutive_exceptions))
 	if consecutive_exceptions <= max_retries:
 		Logging.logMessage("Retrying firebase login...")
 		Firebase.Auth.login_anonymous()
 	else:
 		Logging.error("Max consecutive exceptions reached. Could not login to firebase.")
+		firebase_init_finished = true
 		

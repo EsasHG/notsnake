@@ -83,7 +83,12 @@ func check_consent_status() -> void:
 	match consentStatus:
 		UserConsent.Status.UNKNOWN:
 			Logging.warn("Unknown consent status!")
-			admob.update_consent_info()
+			if OS.has_feature("mobile"):
+				admob.update_consent_info()
+			else:
+				Logging.warn("Admob only works on mobile devices. Setting to initialized")
+				on_admob_initialized.emit()
+				
 			#admob.load_consent_form()
 		UserConsent.Status.REQUIRED:
 			Logging.warn("Consent required!")

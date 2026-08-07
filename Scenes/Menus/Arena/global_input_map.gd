@@ -28,18 +28,18 @@ var Maps: Dictionary = {
 		icon = load("uid://cacud1mwfip70"),
 		high_score = 0,
 	},
-	"SQUARE": {
-		unlocked = false,
-		scene = load("uid://d0lv3j2ywaltm"),
-		icon = load("uid://slufqb1sxm5c"),
-		high_score = 0,
-	},
-	"SMALL": {
-		unlocked = false,
-		scene = load("uid://dw8vjc4lovnfv"),
-		icon = load("uid://8hode20lka2d"),
-		high_score = 0,
-	},
+	#"SQUARE": {
+		#unlocked = false,
+		#scene = load("uid://d0lv3j2ywaltm"),
+		#icon = load("uid://slufqb1sxm5c"),
+		#high_score = 0,
+	#},
+	#"SMALL": {
+		#unlocked = false,
+		#scene = load("uid://dw8vjc4lovnfv"),
+		#icon = load("uid://8hode20lka2d"),
+		#high_score = 0,
+	#},
 	"FOREST": {
 		unlocked = false,
 		scene = load("uid://dxkydv08bbemt"),
@@ -108,8 +108,8 @@ var hats: Dictionary = {
 	},
 }
 var skins : Dictionary = {
-	"DEFAULT" = preload("uid://b7af0yq15vqtw"),
-	"DEFAULT_V_2" = preload("uid://b4aj3wr1celdq"),
+	#"DEFAULT" = preload("uid://b7af0yq15vqtw"),
+	#"DEFAULT_V_2" = preload("uid://b4aj3wr1celdq"),
 	"OUTLINED" = preload("uid://cax0llp5vepyb"),
 	"BROWN" = preload("uid://ctck1prc87wmx"),
 	"GOLD" = preload("uid://ddnwrn4ojw666"),

@@ -34,11 +34,12 @@ func _ready() -> void:
 	
 
 func _set_language(locale) -> void:
+	timer.stop()
 	TranslationServer.set_locale(locale)
 	GameSettings.language = locale
+	UINavigator.back()
 	language_selected.emit()
 	SaveManager.save_game()
-	UINavigator.back()
 	
 
 func _cycle_language() -> void:

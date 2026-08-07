@@ -25,6 +25,7 @@ var _save_file_name : String = "Save_1"
 var _save_file_description : String = "Save 1"
 var _loaded_time_played : int = 0
 
+
 func _init() -> void:
 	_load_cloud_settings()
 
@@ -71,15 +72,16 @@ func _save_age_group() -> void:
 	save_file.store_buffer(save_bytes)
 	
 	
-func _load_age_group() -> void:
+func _load_age_group() -> bool:
 	var save_file = FileAccess.open(AGE_GROUP_FILE, FileAccess.READ)
 	if save_file == null:
 		Logging.error("Error opening file " + AGE_GROUP_FILE + ": " + error_string(FileAccess.get_open_error()))
+		return false
 	else:
 		var buffer = save_file.get_buffer(save_file.get_length())
 		var node_data : Dictionary = bytes_to_var(buffer)
 		GameSettings.set_age_group(node_data["age_group"])
-	
+		return true
 
 func create_cloud_save() -> void:
 	cloud_save_enabled = true
