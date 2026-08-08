@@ -60,11 +60,11 @@ func update_popup():
 	if products_loaded and purchases_checked and !no_ads_purchased and is_instance_valid(ad_removal_popup):
 		ad_removal_popup.button_yes.pressed.connect.call_deferred(_on_button_yes_pressed)
 		ad_removal_popup.button_no.pressed.connect.call_deferred(_on_button_no_pressed)
-		var currency = remove_ads_product.one_time_purchase_offer_details.price_currency_code
+		#var currency = remove_ads_product.one_time_purchase_offer_details.price_currency_code
 		var price : String = remove_ads_product.one_time_purchase_offer_details.formatted_price
-		ad_removal_popup.title.text = remove_ads_product.name
-		ad_removal_popup.description.text = remove_ads_product.description
-		ad_removal_popup.price_label.text = currency + " " + price
+		#ad_removal_popup.title.text = remove_ads_product.name
+		#ad_removal_popup.description.text = remove_ads_product.description
+		ad_removal_popup.price_label.text = price
 
 
 func show_ad_removal_popup() -> void:

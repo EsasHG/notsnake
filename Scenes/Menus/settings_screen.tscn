@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cujin12teacdj" path="res://Assets/UI/options_icons_etc/speaker_3_white.png" id="8_2b6r5"]
 [ext_resource type="Texture2D" uid="uid://n0icqrejpobn" path="res://Assets/UI/options_icons_etc/speaker_off_2.png" id="11_whg11"]
 [ext_resource type="Texture2D" uid="uid://1c7arj57sx2i" path="res://Assets/UI/Google Branding/Play Games/games_achievements_white.png" id="12_2b6r5"]
+[ext_resource type="StyleBox" uid="uid://cur2omqlkol8p" path="res://Assets/Styles/normal_button_stylebox_flat.tres" id="12_qwjhj"]
 [ext_resource type="Texture2D" uid="uid://ylcsjr7l3m4j" path="res://Assets/UI/Google Branding/Play Games/games_leaderboards_white.png" id="13_qwjhj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_umxxc"]
@@ -63,7 +64,7 @@ mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"InnerContainer"
 
-[node name="SettingsScreen" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer" unique_id=1148790409 node_paths=PackedStringArray("music_mute", "sfx_mute", "hold_controls", "tap_controls", "language_selector", "googlePlayButtonsContainer", "enable_cloud_button")]
+[node name="SettingsScreen" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer" unique_id=1148790409 node_paths=PackedStringArray("music_mute", "sfx_mute", "hold_controls", "tap_controls", "language_selector", "googlePlayButtonsContainer", "enable_cloud_button", "ad_removal_button")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -77,6 +78,7 @@ tap_controls = NodePath("HBoxContainer2/TapControls")
 language_selector = NodePath("VBoxContainer/LanguageSelector")
 googlePlayButtonsContainer = NodePath("HBoxContainer")
 enable_cloud_button = NodePath("EnableCloud")
+ad_removal_button = NodePath("PurchaseAdRemoval")
 
 [node name="Label" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=542016325]
 layout_mode = 2
@@ -241,6 +243,7 @@ text = "ENABLE_CLOUD_SAVES"
 script = ExtResource("5_64y2j")
 
 [node name="DebugSettings" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1629551732]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
@@ -258,6 +261,17 @@ theme = ExtResource("1_nfl8x")
 text = "HOW_TO_PLAY"
 script = ExtResource("5_64y2j")
 
+[node name="PurchaseAdRemoval" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=817169865]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+theme_override_styles/normal = ExtResource("12_qwjhj")
+text = "PURCHASE_AD_REMOVAL"
+script = ExtResource("5_64y2j")
+
 [node name="Credits" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1116451543]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -270,11 +284,9 @@ script = ExtResource("5_64y2j")
 [node name="LinkButton" type="LinkButton" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=325287330]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 1, 1)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 30
+theme = ExtResource("1_nfl8x")
 text = "PRIVACY_POLICY"
-uri = "https://tiredpaw-loopdog.web.app/privacy-policy.html"
+uri = "https://loopdog.app/privacy-policy"
 
 [node name="ConsentFormButton" type="LinkButton" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1823303729]
 layout_mode = 2
@@ -307,5 +319,6 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/EnableCloud" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_enable_cloud_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DebugSettings" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_debug_settings_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Tutorial" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_tutorial_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/PurchaseAdRemoval" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_purchase_ad_removal_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Credits" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_credits_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/ConsentFormButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_consent_form_button_pressed"]

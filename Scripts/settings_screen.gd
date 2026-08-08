@@ -10,6 +10,7 @@ extends VBoxContainer
 @export var googlePlayButtonsContainer: HBoxContainer 
 
 @export var enable_cloud_button : AudioButton
+@export var ad_removal_button : AudioButton
 @onready var consent_form_button: LinkButton = $ConsentFormButton
 
 
@@ -40,7 +41,14 @@ func _ready() -> void:
 		consent_form_button.visible = true
 	else:
 		consent_form_button.visible = false
-
+		
+	if not GameSettings.billingManager or GameSettings.billingManager.no_ads_purchased:
+		#ad_removal_button.visible = false
+		pass
+	else:
+		ad_removal_button.visible = true
+			
+	
 	language_selector.clear()
 	for locale in TranslationServer.get_loaded_locales():
 		## the method below returned "Norwegian bokmål" for "nb", and that didn't feel right to me.
@@ -136,3 +144,10 @@ func _on_tutorial_pressed() -> void:
 
 func _on_language_select_pressed() -> void:
 	UINavigator.open_from_scene(LANGUAGE_SELECT_MENU)
+
+
+func _on_purchase_ad_removal_pressed() -> void:
+	if GameSettings.billingManager:
+		GameSettings.billingManager.show_ad_removal_popup()
+	else:
+		Logging.error("Billing manager not found in GameSettings!")

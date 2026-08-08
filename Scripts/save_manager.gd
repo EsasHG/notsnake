@@ -258,7 +258,8 @@ func _set_unlocks_save_content(node_data: Dictionary) -> void:
 	if node_data.has("unlocked_maps"):
 		var unlocked_maps : Array = node_data["unlocked_maps"]
 		for map in unlocked_maps:
-			GlobalInputMap.Maps[map].unlocked = true
+			if GlobalInputMap.Maps.has(map):
+				GlobalInputMap.Maps[map].unlocked = true
 	
 	if node_data.has("unlocked_hats"):
 		var unlocked_hats : Array = node_data["unlocked_hats"]

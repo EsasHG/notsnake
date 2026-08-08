@@ -22,7 +22,12 @@ const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 @export var buttonTheme:Theme
 ## TODO: Use global input map instead of this...
 @export var levels : Array[Map]
-
+@export var level_buttons_size : float:
+	set(new_value):
+		level_buttons_size = new_value
+		create_level_buttons()
+		
+@export var feedback_link : String
 
 func _ready() -> void:
 	UINavigator.open.call_deferred(buttons,false, true)
@@ -40,6 +45,7 @@ func _ready() -> void:
 		if sign_in_button:
 			sign_in_button.visible = false
 		start_button.grab_focus(true)
+		
 	visible = true
 	buttons.visible = true
 	level_select_container.visible = false
@@ -64,10 +70,14 @@ func _ready() -> void:
 	#if(audioManager):
 		#audioManager.startMusic()
 	create_level_buttons()
+	GameSettings.on_languageSelected.connect(create_level_buttons)
 	GameSettings.on_viewportChanged.connect(_on_viewport_changed)
 	_on_viewport_changed()
 
+
 func create_level_buttons() -> void:
+	if !level_buttons:
+		return
 	for c in level_buttons.get_children():
 		c.queue_free()
 	for map_name: String in GlobalInputMap.Maps:
@@ -79,7 +89,7 @@ func create_level_buttons() -> void:
 		button.text = tr(map_name)
 		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		button.expand_icon = true
-		button.custom_minimum_size = Vector2(180,180)
+		button.custom_minimum_size = Vector2(level_buttons_size,level_buttons_size)
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		button.mouse_filter = Control.MOUSE_FILTER_PASS
 		level_buttons.add_child(button)
@@ -192,4 +202,9 @@ func _on_no_pressed() -> void:
 	UINavigator.back()
 	GameSettings.play_tutorial = false
 	open_level_select()
+	pass # Replace with function body.
+
+
+func _on_feedback_pressed() -> void:
+	OS.shell_open(feedback_link)
 	pass # Replace with function body.

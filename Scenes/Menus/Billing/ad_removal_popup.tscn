@@ -12,6 +12,12 @@ script = ExtResource("2_2uel7")
 custom_minimum_size = Vector2(610, 350)
 horizontal_scroll_mode = 0
 
+[node name="TitleLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="0" unique_id=368940186]
+text = "AD_REMOVAL_TITLE"
+
+[node name="DescriptionLabel" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="1" unique_id=1464836269]
+text = "AD_REMOVAL_DESCRIPTION"
+
 [node name="PriceLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="2" unique_id=432982813]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2

@@ -4,8 +4,6 @@ extends PopupContainer
 
 @onready var language_buttons: HFlowContainer = $OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/LanguageButtons
 
-signal language_selected
-
 const BUTTON_THEME = preload("uid://caljym4n8ghq8")
 
 var timer : Timer
@@ -34,11 +32,13 @@ func _ready() -> void:
 	
 
 func _set_language(locale) -> void:
-	timer.stop()
+	if timer: 
+		timer.stop()
+		timer.queue_free()
 	TranslationServer.set_locale(locale)
 	GameSettings.language = locale
 	UINavigator.back()
-	language_selected.emit()
+	GameSettings.on_languageSelected.emit()
 	SaveManager.save_game()
 	
 

@@ -21,6 +21,16 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s0gno"]
+content_margin_top = 50.0
+content_margin_bottom = 0.0
+corner_radius_top_left = 150
+corner_radius_bottom_right = 150
+corner_detail = 11
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s0gno"]
+content_margin_bottom = 20.0
+
 [node name="MainMenu" type="Control" unique_id=1644317146 node_paths=PackedStringArray("sign_in_button")]
 layout_mode = 3
 anchors_preset = 15
@@ -33,6 +43,8 @@ script = ExtResource("1_jrsic")
 sign_in_button = NodePath("Sign In")
 buttonTheme = ExtResource("8_vtepg")
 levels = Array[ExtResource("8_5egv6")]([ExtResource("9_vtepg"), ExtResource("10_8dnnj"), ExtResource("9_0xbgx"), ExtResource("11_m3bi6"), ExtResource("12_wyh8j"), ExtResource("13_ujyyl")])
+level_buttons_size = 215.0
+feedback_link = "https://forms.gle/R1QdRBykNZQTnVqdA"
 
 [node name="Logo" type="TextureRect" parent="." unique_id=307307508]
 layout_mode = 1
@@ -79,6 +91,7 @@ grow_vertical = 2
 script = ExtResource("15_8bdjp")
 
 [node name="LevelSelectContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1354738231]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -92,6 +105,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("15_8dws6")
 theme_type_variation = &"LowerScrollContainer"
+theme_override_styles/panel = SubResource("StyleBoxFlat_s0gno")
 horizontal_scroll_mode = 0
 script = ExtResource("18_0rh2w")
 
@@ -110,6 +124,7 @@ theme_override_constants/separation = 8
 [node name="Label" type="Label" parent="AdLayoutContainer/LevelSelectContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=387330869]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s0gno")
 text = "LEVEL_SELECT"
 horizontal_alignment = 1
 
@@ -258,7 +273,6 @@ theme = ExtResource("15_8dws6")
 theme_type_variation = &"EmptyPanel"
 
 [node name="MainButtons" type="VBoxContainer" parent="." unique_id=880943489]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -285,6 +299,13 @@ custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("15_8dws6")
 text = "SETTINGS"
+script = ExtResource("13_vtepg")
+
+[node name="Feedback" type="Button" parent="MainButtons" unique_id=518457150]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+theme = ExtResource("15_8dws6")
+text = "FEEDBACK_BUTTON"
 script = ExtResource("13_vtepg")
 
 [node name="Quit" type="Button" parent="MainButtons" unique_id=2066028076]
@@ -315,5 +336,6 @@ script = ExtResource("13_vtepg")
 [connection signal="pressed" from="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/No" to="." method="_on_no_pressed"]
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="MainButtons/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MainButtons/Feedback" to="." method="_on_feedback_pressed"]
 [connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Sign In" to="." method="_on_sign_in_pressed"]

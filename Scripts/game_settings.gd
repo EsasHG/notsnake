@@ -12,6 +12,7 @@ signal on_dogSkinChanged(skin_id:String)
 signal on_dogHatChanged(hat:String)
 signal on_viewportChanged()
 signal on_somethingUnlocked(unlock:String)
+signal on_languageSelected()
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 
@@ -150,9 +151,9 @@ func _on_files_loaded(success : bool) -> void:
 		setSFXMuted(sfxMuted)
 		setMusicMuted(musicMuted)
 		await get_tree().process_frame
-		var lang_menu = UINavigator.open_from_scene(LANGUAGE_SELECT_MENU)
+		UINavigator.open_from_scene(LANGUAGE_SELECT_MENU)
 		game_startup_loading_screen.visible = false
-		await lang_menu.language_selected
+		await on_languageSelected
 		game_startup_loading_screen.visible = true
 		
 		

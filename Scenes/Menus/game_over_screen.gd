@@ -100,7 +100,7 @@ func check_unlocks() -> void:
 		if GlobalInputMap.Maps.has(unlock):
 			type = "LEVEL"
 			if unlock == "WINTER":
-				icon = GlobalInputMap.Maps[unlock].res.icon
+				icon = GlobalInputMap.Maps[unlock].icon
 			icon = GlobalInputMap.Maps[unlock].icon
 		else:
 			type = "HAT" 

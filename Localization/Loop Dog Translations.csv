@@ -35,9 +35,9 @@ FOREST,Forest,Skogen,level names must also be updated in play console (for leade
 WINTER,Winter,Vinterland,level names must also be updated in play console (for leaderboards)
 YES,Yes,Ja,
 NO,No,Nei,
-PURCHASE_AD_REMOVAL,Remove Ads,Fjern Reklamer,
-AD_REMOVAL_TITLE,Tired of ads?,Lei av reklamer?,this is actually controlled in the play console I think
-AD_REMOVAL_DESCRIPTION,Purchase ad removal,Kjøp reklamefjerning,this is actually controlled in the play console I think
+PURCHASE_AD_REMOVAL,Remove ads,Fjern reklamer,
+AD_REMOVAL_TITLE,Remove ads,Fjern reklamer,"this is also set in the play console, but actually used from here in game."
+AD_REMOVAL_DESCRIPTION,Remove all advertisement from the game.,Fjern alle reklamer fra spillet.,"this is also set in the play console, but actually used from here in game."
 AD_REMOVAL_YES,Yes pls,Ja takk,
 AD_REMOVAL_NO,No thx,Nei takk,
 AD_REMOVAL_PURCHASED_TITLE,Thank you!,Tusen takk!,
@@ -125,6 +125,7 @@ TUTORIAL_3,Press and hold anywhere on the screen to change direction.,Trykk og h
 TUTORIAL_4,You are not long enough to reach your tail.,Du er ikke lang nok til å fange halen din.,
 TUTORIAL_5,The yellow arrow is pointing towards a treat! Eat it to grow longer.,Denne gule pilen vier veien til en godbit! Spis den for å vokse lenger.,
 TUTORIAL_6,Well done!,Fantastisk!,
-TUTORIAL_9,You can play this tutorial again from the settings menu.,,Should I include this???
+TUTORIAL_9,You can play this tutorial again from the settings menu.,,
 TUTORIAL_7,"Try to get as many treats as you can, and then catch your tail!","Prøv å få så mange godbiter du kan, og så fang halen din!",
 TUTORIAL_8,Good luck!,Lykke til!,
+FEEDBACK_BUTTON,Give Feedback,Gi Tilbakemelding,
