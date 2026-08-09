@@ -285,6 +285,7 @@ offset_right = 199.0
 offset_bottom = -159.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 12
 alignment = 1
 
 [node name="Start" type="Button" parent="MainButtons" unique_id=918679550]
