@@ -5,24 +5,28 @@ var pitch_shift : AudioEffectPitchShift
 var pitch_tween : Tween
 
 func _ready() -> void:
-	GameSettings.on_gameOver.connect(stopMusic)
+	GameSettings.on_gameOver.connect(stop_music)
 	GameSettings.on_gamePaused.connect(pause_music)
 	GameSettings.on_gameUnpaused.connect(unpause_music)
 	pitch_shift = AudioEffectPitchShift.new()
 	pitch_shift.fft_size = AudioEffectPitchShift.FFT_SIZE_1024
 	AudioServer.add_bus_effect(AudioServer.get_bus_index("Music"), pitch_shift)
 	if GameSettings.file_loading_finished:
-		startMusic()
+		start_music()
 	else:
-		SaveManager._files_loaded.connect(startMusic,ConnectFlags.CONNECT_DEFERRED)
+		SaveManager._files_loaded.connect(_after_files_loaded,ConnectFlags.CONNECT_DEFERRED)
 
-func startMusic():
+func _after_files_loaded(_success:bool) -> void:
+	start_music()
+
+
+func start_music():
 	if !bg_music:
 		bg_music = find_child("BGMusic", true, false)
 	bg_music.play(0)
 
 
-func stopMusic():
+func stop_music():
 	if pitch_tween and pitch_tween.is_valid():
 		pitch_tween.kill()
 	
