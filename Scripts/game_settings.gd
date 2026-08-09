@@ -595,7 +595,6 @@ func _check_init_finisehed() -> void:
 		Logging.warn("Firebase finished: " + str(firebase_init_finished))
 		Logging.warn("deferred setup finished: " + str(deferred_setup_complete))
 		
-		
 
 func _exit_game_startup_loading_screen() -> void:
 	if  game_startup_loading_screen: 
@@ -609,6 +608,7 @@ func _on_signup_succeeded(auth_info:Dictionary) -> void:
 	Logging.logMessage("Firebase signup succeeded!")
 	firebase_init_finished = true
 	_check_init_finisehed()
+
 
 func _on_login_failed(code : String, message:String) -> void:
 	Logging.error("Firebase login failed! Code: " + str(code) + ". Message: " + message)
