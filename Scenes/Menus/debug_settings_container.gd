@@ -35,8 +35,6 @@ func _on_unlock_skins_pressed() -> void:
 		GlobalInputMap.skins[key].unlocked = true
 
 
-	
-	
 func _on_lock_hats_pressed() -> void:
 	for key in GlobalInputMap.hats:
 		if key != "NONE" and key != "TEST":

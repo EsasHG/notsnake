@@ -31,6 +31,66 @@ corner_detail = 11
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s0gno"]
 content_margin_bottom = 20.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fx838"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.827451, 0.5921569, 0.08235294, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+corner_radius_top_left = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8bdjp"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.91764706, 0.78039217, 0.3137255, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+corner_radius_top_left = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0rh2w"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.91764706, 0.78039217, 0.3137255, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+corner_radius_top_left = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ou7d0"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.91764706, 0.78039217, 0.3137255, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_bottom = 4
+border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+corner_radius_top_left = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="Gradient" id="Gradient_47bqg"]
+offsets = PackedFloat32Array(0, 0.48818898, 0.5, 0.6, 0.60367453, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0.4788676, 0.09985284, 0.07846785, 0, 0.6392157, 0.12941177, 0.105882354, 1, 0.656353, 0.17076476, 0.14835298, 0.9524999, 0.74255604, 0.37804863, 0.36074692, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fx838"]
+gradient = SubResource("Gradient_47bqg")
+fill_from = Vector2(0, 1)
+
 [node name="MainMenu" type="Control" unique_id=1644317146 node_paths=PackedStringArray("sign_in_button")]
 layout_mode = 3
 anchors_preset = 15
@@ -332,6 +392,40 @@ theme_override_font_sizes/font_size = 20
 icon = ExtResource("11_s0gno")
 flat = true
 script = ExtResource("13_vtepg")
+
+[node name="Button" type="Button" parent="." unique_id=36558254]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -4.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 2
+theme = ExtResource("15_8dws6")
+theme_override_styles/normal = SubResource("StyleBoxFlat_fx838")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8bdjp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fx838")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0rh2w")
+theme_override_styles/focus = SubResource("StyleBoxFlat_ou7d0")
+text = "AD"
+
+[node name="TextureRect" type="TextureRect" parent="Button" unique_id=505928661]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -30.0
+offset_right = 74.0
+offset_bottom = 34.0
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_fx838")
 
 [connection signal="pressed" from="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_on_tutorial_yes_pressed"]
 [connection signal="pressed" from="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/No" to="." method="_on_no_pressed"]

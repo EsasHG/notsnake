@@ -169,7 +169,7 @@ func _on_map_selected(map_name:String):
 
 func _on_locked_map_selected(map_name:String):
 	UINavigator.open(locked_message_container)
-	locked_message_description.text = tr(map_name + "_UNLOCK_CONDITION")
+	locked_message_description.text = tr("MAP_UNLOCK_CONDITION")
 	
 
 func _on_quit_pressed() -> void:

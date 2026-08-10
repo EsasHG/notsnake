@@ -269,9 +269,9 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0wliw"]
 content_margin_left = 20.0
-content_margin_top = 15.0
+content_margin_top = 20.0
 content_margin_right = 20.0
-content_margin_bottom = 15.0
+content_margin_bottom = 20.0
 bg_color = Color(0.7176471, 0.1254902, 0.05490196, 1)
 border_width_left = 4
 border_width_top = 4
@@ -606,7 +606,7 @@ InnerContainer/base_type = &"PanelContainer"
 InnerContainer/styles/panel = SubResource("StyleBoxFlat_rhglh")
 Label/constants/outline_size = 6
 LineEdit/font_sizes/font_size = 35
-LinkButton/colors/font_color = Color(0.071057625, 0.3078626, 0.9999979, 1)
+LinkButton/colors/font_color = Color(0.114187814, 0.35188252, 1, 1)
 LinkButton/constants/outline_size = 6
 LinkButton/font_sizes/font_size = 35
 LowerScrollContainer/base_type = &"ScrollContainer"

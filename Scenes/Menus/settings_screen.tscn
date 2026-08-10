@@ -14,6 +14,8 @@
 [ext_resource type="StyleBox" uid="uid://cur2omqlkol8p" path="res://Assets/Styles/normal_button_stylebox_flat.tres" id="12_qwjhj"]
 [ext_resource type="Texture2D" uid="uid://ylcsjr7l3m4j" path="res://Assets/UI/Google Branding/Play Games/games_leaderboards_white.png" id="13_qwjhj"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b4as5"]
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_umxxc"]
 texture = ExtResource("5_nfl8x")
 
@@ -88,6 +90,24 @@ theme_type_variation = &"HeaderLarge"
 text = "SETTINGS"
 horizontal_alignment = 1
 
+[node name="Button" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Label" unique_id=1466089934]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 3.0
+offset_right = 340.0
+offset_bottom = 43.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b4as5")
+
 [node name="SoundButtons" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=359946672]
 layout_mode = 2
 size_flags_vertical = 3
@@ -98,6 +118,24 @@ size_flags_horizontal = 3
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"HeaderMedium"
 text = "SOUND"
+
+[node name="ConfirmDebug" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SoundButtons/SoundLabel" unique_id=868195158]
+layout_mode = 0
+offset_left = -7.0
+offset_top = -2.0
+offset_right = 33.0
+offset_bottom = 38.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_b4as5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_b4as5")
 
 [node name="MusicMute" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SoundButtons" unique_id=2030959185]
 z_index = 3
@@ -307,6 +345,8 @@ size_flags_vertical = 8
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"EmptyPanel"
 
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Label/Button" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_button_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SoundButtons/SoundLabel/ConfirmDebug" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_confirm_debug_pressed"]
 [connection signal="toggled" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SoundButtons/MusicMute" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_music_mute_toggled"]
 [connection signal="toggled" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SoundButtons/SFXMute" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_sfx_mute_toggled"]
 [connection signal="toggled" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer2/HoldControls" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_hold_controls_toggled"]

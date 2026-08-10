@@ -20,6 +20,8 @@ const DEBUG_SETTINGS_CONTAINER = preload("uid://d0dfdlrxfu8iw")
 const CLOUD_MENU = preload("uid://kyb2ynbcw74p")
 const CREDITS = preload("uid://chpsai0xuu3vn")
 var _changes_made = false
+var _debug_press_count = 0
+var timer : Timer
 
 func _ready() -> void:
 	music_mute.set_pressed_no_signal(GameSettings.musicMuted)
@@ -151,3 +153,22 @@ func _on_purchase_ad_removal_pressed() -> void:
 		GameSettings.billingManager.show_ad_removal_popup()
 	else:
 		Logging.error("Billing manager not found in GameSettings!")
+
+
+func _on_button_pressed() -> void:
+	if !timer:
+		timer = Timer.new()
+		timer.timeout.connect(func():
+			_debug_press_count = 0
+			timer.queue_free()
+			)
+		add_child(timer)
+	_debug_press_count +=1
+	timer.start.call_deferred(0.3)
+	pass # Replace with function body.
+
+
+func _on_confirm_debug_pressed() -> void:
+	if _debug_press_count == 5:
+		UINavigator.open_from_scene(DEBUG_SETTINGS_CONTAINER)
+	pass # Replace with function body.
