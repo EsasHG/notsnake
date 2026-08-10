@@ -91,7 +91,23 @@ func show_buttons() -> void:
 	tween.finished.connect(enable_buttons)
 	
 	
+func check_show_ad() -> void:
+	var adManager = GameSettings.adManager
+	if adManager:
+		adManager.rounds_played+=1
+		if adManager.admob_initialized and adManager._can_show_interstitial_ad and adManager.interstitial_ad_loaded:
+			adManager.admob.interstitial_ad_dismissed_full_screen_content.connect(on_ad_dismissed)
+			get_tree().create_timer(0.6).timeout.connect(func(): 
+				adManager.show_interstitial_ad()
+				)					
+		else: 
+			get_tree().create_timer(0.3).timeout.connect(check_unlocks)
+	else: 
+		get_tree().create_timer(0.3).timeout.connect(check_unlocks)
+
+
 func check_unlocks() -> void:
+	Logging.logMessage("Checking unlocks..")
 	if GameSettings._new_unlocks.size() > 0:
 		var unlock: String = GameSettings._new_unlocks.pop_front()
 		var type: String 
@@ -113,6 +129,18 @@ func check_unlocks() -> void:
 		UINavigator.open(unlocks_container, false, false, check_unlocks)
 	else:
 		show_buttons()
+
+
+func on_ad_dismissed(_ad_info):
+	#if GameSettings.adManager && GameSettings.adManager.interstitial_ads_shown == 3 && GameSettings.billingManager:
+		#GameSettings.billingManager.show_ad_removal_popup()
+		#GameSettings.billingManager.popup_dismissed.connect(func(): 
+			#get_tree().create_timer(0.3).timeout.connect(check_unlocks)
+			#)
+	#else:
+		#get_tree().create_timer(0.3).timeout.connect(check_unlocks)
+	get_tree().create_timer(0.3).timeout.connect(check_unlocks)
+
 
 
 func enable_buttons() -> void:

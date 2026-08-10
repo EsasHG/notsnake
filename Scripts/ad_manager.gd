@@ -9,9 +9,12 @@ signal on_admob_initialized
 var interstitial_ad_loaded : bool = false
 var admob_initialized:bool = false
 var _can_show_interstitial_ad : bool = false
-var rounds_between_ad:int = 3
+var rounds_between_ad:int = 1
 var rounds_played:int = 0
 var banner_ad_showing : bool = false
+var interstitial_ads_shown = 0
+var ad_points = 0
+
 
 enum AGE_GROUP {UNSPECIFIED,UNDER_13, UNDER_16, UNDER_18, ADULT}
 var user_age_group : AGE_GROUP
@@ -60,7 +63,16 @@ func initialize() -> void:
 			_can_show_interstitial_ad = true
 			)
 		interstitial_ad_timer.start()
-	
+		if !GameSettings.game_running:
+			interstitial_ad_timer.paused = true
+		GameSettings.on_gameBegin.connect(func(): 
+			Logging.logMessage("Unpausing ad timer")
+			interstitial_ad_timer.paused = false)
+		GameSettings.on_gameOver.connect(func(): 
+			Logging.logMessage("Pausing ad timer")
+			
+			interstitial_ad_timer.paused = true)
+
 
 func _on_admob_initialization_completed(status_data: InitializationStatus) -> void:
 	Logging.logMessage("Admob initialized")
@@ -184,6 +196,9 @@ func show_interstitial_ad() -> bool:
 		_can_show_interstitial_ad = false
 		interstitial_ad_timer.start()
 		admob.show_interstitial_ad()
+		interstitial_ads_shown +=1
+		ad_points = 0
+		setup_interstitial_ad()
 		return true
 	else:
 		return false
@@ -216,3 +231,11 @@ func _on_admob_consent_form_dismissed(error_data: FormError) -> void:
 	if not error_message.is_empty():
 		Logging.error(error_message)
 	admob.update_consent_info()
+
+
+func _on_admob_interstitial_ad_dismissed_full_screen_content(ad_info: AdInfo) -> void:
+	Logging.logMessage("Interstitial Ad Dismissed")
+
+
+func _on_admob_interstitial_ad_clicked(ad_info: AdInfo) -> void:
+	Logging.logMessage("Interstitial Ad Clicked")

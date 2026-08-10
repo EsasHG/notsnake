@@ -376,17 +376,7 @@ func game_over():
 			AchievementManager.increment_achievement("Insatiable dog", currentScore)
 			LeaderboardManager.submit_score(currentMap,currentScore)
 			
-		if adManager:
-			adManager.rounds_played+=1
-			if adManager.admob_initialized and adManager._can_show_interstitial_ad and adManager.interstitial_ad_loaded:
-				get_tree().create_timer(0.6).timeout.connect(func(): 
-					adManager.show_interstitial_ad()
-					)
-				get_tree().create_timer(0.75).timeout.connect(game_over_screen.check_unlocks) # i migth want different wait times in the future
-			else: 
-				get_tree().create_timer(0.3).timeout.connect(game_over_screen.check_unlocks)
-		else: 
-			get_tree().create_timer(0.3).timeout.connect(game_over_screen.check_unlocks)
+		game_over_screen.check_show_ad()
 	else:
 		get_tree().create_timer(0.3).timeout.connect(game_over_screen.check_unlocks)
 		
@@ -565,6 +555,7 @@ func _check_init_admob() -> void:
 				Logging.logMessage("Ad manager found. Setting age group in ad manager.")
 				adManager.set_age_group.call_deferred(age_group)
 				await adManager.on_admob_initialized
+				
 				admob_init_finished = true
 			else: 
 				Logging.logMessage("Age group set, but ad manager was either not found or not initialized correctly.")

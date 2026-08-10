@@ -9,6 +9,7 @@ const POPUP_MENU = preload("uid://chupiwnqy5234")
 @export var enable = true
 
 signal loading_finished
+signal popup_dismissed
 
 var remove_ads_id : String = "loopdog_remove_ads"
 var products_loaded : bool = false
@@ -229,10 +230,11 @@ func _on_acknowledge_purchase_response(response: Dictionary):
 			GameSettings.remove_all_ads()
 		_:
 			Logging.logMessage("Error acknowledging purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
+	popup_dismissed.emit()
 
 
 func _show_error_popup(description:String) -> void:
-	var error_popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU)
+	var error_popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU,true,false,popup_dismissed.emit)
 	error_popup.title.text = tr("ERROR")
 	error_popup.description.text = description
 
@@ -243,4 +245,5 @@ func _on_button_yes_pressed() -> void:
 	
 
 func _on_button_no_pressed() -> void:
+	popup_dismissed.emit()
 	UINavigator.back()
