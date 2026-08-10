@@ -13,12 +13,16 @@ signal on_dogHatChanged(hat:String)
 signal on_viewportChanged()
 signal on_somethingUnlocked(unlock:String)
 signal on_languageSelected()
+signal on_scoreChanged()
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 
 var time_scale_tween : Tween
 
-var currentScore : int = 0
+var currentScore : int = 0:
+	set(new_value):
+		currentScore = new_value
+		on_scoreChanged.emit()
 
 enum GAME_MODE {LAST_DOG_STANDING, TIME, SCORE, SINGLE_PLAYER}
 var game_mode :GAME_MODE = GAME_MODE.SINGLE_PLAYER
