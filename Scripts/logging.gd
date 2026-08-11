@@ -7,8 +7,16 @@ var missedTypes:Array[int]
 
 
 func _ready() -> void:
-	call_deferred("_findLogWindow")
+	_findLogWindow.call_deferred()
 	
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("_debug_log"):
+		if isLogWindowVisible():
+			showLogWindow(false)
+		else:
+			showLogWindow(true)
+			
 
 func _findLogWindow():
 	_logWindow = get_tree().root.find_child("LogWindow",true,false)

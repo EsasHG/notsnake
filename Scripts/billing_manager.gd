@@ -42,7 +42,6 @@ func _ready() -> void:
 
 func query_product_details():
 	Logging.logMessage("Querying product details!")
-	
 	billing_client.query_product_details([remove_ads_id],BillingClient.ProductType.INAPP)
 
 

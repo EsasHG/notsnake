@@ -164,11 +164,14 @@ position = Vector2(832.00006, -1376)
 curve = SubResource("Curve2D_vwobk")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=464221949]
-rotation = 2.2650385
+position = Vector2(-440.89157, 640.50323)
+rotation = 1.7048448
+progress = 787.4
 script = ExtResource("6_4wp3y")
 speed = 800.0
 
 [node name="SnowboardDog" parent="Path2D/PathFollow2D" unique_id=99716063 instance=ExtResource("6_ek5u6")]
+z_index = 3
 rotation = 3.1415927
 
 [node name="Node2D" type="Node2D" parent="Path2D" unique_id=1469355738]
