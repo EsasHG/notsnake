@@ -13,6 +13,9 @@ func _ready() -> void:
 	await RenderingServer.frame_post_draw
 	var my_texture = sub_viewport.get_texture()
 	texture = my_texture
+	var error = my_texture.get_image().save_png("res://Assets/Map/winter_pathsprite.png")
+	if error != OK:
+		Logging.error("Failure!" + error_string(error))
 	
 	
 func set_shader() -> void:
