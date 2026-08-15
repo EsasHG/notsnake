@@ -25,7 +25,7 @@ theme = ExtResource("1_5j8qy")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="OuterPanelContainer" unique_id=1217507080]
 clip_children = 1
-custom_minimum_size = Vector2(610, 400)
+custom_minimum_size = Vector2(610, 800)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -155,6 +155,24 @@ theme = ExtResource("1_5j8qy")
 text = "SHOW_AGE_SCREEN"
 script = ExtResource("3_5j8qy")
 
+[node name="GiveTreats" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1552264966]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_5j8qy")
+text = "Give treats"
+script = ExtResource("3_5j8qy")
+
+[node name="PlayAd" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=1392878718]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_5j8qy")
+text = "Play Ad"
+script = ExtResource("3_5j8qy")
+
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("7_ikqh6")]
 layout_mode = 2
 mouse_filter = 1
@@ -176,3 +194,5 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer3/UnlockSkins" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_unlock_skins_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/HBoxContainer3/LockSkins" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_lock_skins_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/ShowAgeScreen" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_show_age_screen_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/GiveTreats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_give_treats_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/PlayAd" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_play_ad_pressed"]

@@ -143,6 +143,7 @@ func menu_out():
 func _on_user_authenticated(is_authenticated: bool) -> void:
 	Logging.logMessage("Main menu: On user authenticated: " + str(is_authenticated))
 	sign_in_button.visible = !is_authenticated
+	GameSettings.signInClient.sign_in()
 	
 
 func _on_start_button_pressed() -> void:

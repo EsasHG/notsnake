@@ -50,6 +50,9 @@ func _ready() -> void:
 
 
 func _create_hat_buttons() -> void:
+	for c in hat_buttons.get_children():
+		c.queue_free()
+	
 	var keys = GlobalInputMap.hats.keys()
 	keys.sort_custom(func(a,b): 
 			return GlobalInputMap.hats[a].unlocked > GlobalInputMap.hats[b].unlocked
