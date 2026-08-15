@@ -196,6 +196,7 @@ func _item_purchased() -> void:
 	GameSettings.total_treats -= item.price
 	_create_skin_buttons()
 	_create_hat_buttons()
+	SaveManager.save_game()
 	UINavigator.back()
 	
 	

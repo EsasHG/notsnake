@@ -6,7 +6,7 @@ var menu_active = true;
 const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
 const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 
-@export var sign_in_button: AudioButton 
+@export var sign_in_button: TextureButton 
 @onready var tutorial_question_container: PanelContainer = $AdLayoutContainer/TutorialQuestionContainer
 @onready var buttons: VBoxContainer = $MainButtons
 @onready var level_select_container: PanelContainer = $AdLayoutContainer/LevelSelectContainer
@@ -68,6 +68,10 @@ func _ready() -> void:
 	create_level_buttons()
 	GameSettings.on_languageSelected.connect(create_level_buttons)
 	GameSettings.on_viewportChanged.connect(_on_viewport_changed)
+	buttons.visibility_changed.connect(func(): 
+		if !GameSettings.userAuthenticated: 
+			sign_in_button.visible = buttons.visible
+			)
 	_on_viewport_changed()
 
 
@@ -91,8 +95,9 @@ func create_level_buttons() -> void:
 		level_buttons.add_child(button)
 		
 		if !map_info.unlocked: ##TODO: add actual logic here
-			var locked = LOCKED_ICON.instantiate()
+			var locked = LOCKED_ICON.instantiate() as Container
 			button.add_child(locked)
+			locked.custom_minimum_size = button.custom_minimum_size
 			button.pressed.connect(_on_locked_map_selected.bind(map_name))
 		else:
 			button.pressed.connect(_on_map_selected.bind(map_name))
@@ -111,7 +116,7 @@ func _on_viewport_changed() -> void:
 		logo.position.y += 50
 		buttons.set_anchors_and_offsets_preset(Control.PRESET_CENTER_RIGHT,Control.PRESET_MODE_KEEP_SIZE)
 		#buttons.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
-		buttons.position.x -= 160
+		buttons.position.x -= 100
 
 ##TODO: do we need this method here?
 func _input(event: InputEvent) -> void:
@@ -143,7 +148,6 @@ func menu_out():
 func _on_user_authenticated(is_authenticated: bool) -> void:
 	Logging.logMessage("Main menu: On user authenticated: " + str(is_authenticated))
 	sign_in_button.visible = !is_authenticated
-	GameSettings.signInClient.sign_in()
 	
 
 func _on_start_button_pressed() -> void:

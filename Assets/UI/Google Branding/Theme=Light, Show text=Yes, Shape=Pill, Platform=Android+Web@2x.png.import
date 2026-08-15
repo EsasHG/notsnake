@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bki84nq505lby"
-path="res://.godot/imported/android_dark_rd_na@1x.png-e4d14566bf965cce44906e666c3c1300.ctex"
+uid="uid://cyv58jfdwkjpt"
+path="res://.godot/imported/Theme=Light, Show text=Yes, Shape=Pill, Platform=Android+Web@2x.png-91e89424c6283a8ccb0f3f700d6457a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Google Branding/android_dark_rd_na@1x.png"
-dest_files=["res://.godot/imported/android_dark_rd_na@1x.png-e4d14566bf965cce44906e666c3c1300.ctex"]
+source_file="res://Assets/UI/Google Branding/Theme=Light, Show text=Yes, Shape=Pill, Platform=Android+Web@2x.png"
+dest_files=["res://.godot/imported/Theme=Light, Show text=Yes, Shape=Pill, Platform=Android+Web@2x.png-91e89424c6283a8ccb0f3f700d6457a9.ctex"]
 
 [params]
 

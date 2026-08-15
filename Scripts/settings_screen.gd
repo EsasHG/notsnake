@@ -6,13 +6,11 @@ extends VBoxContainer
 @export var hold_controls: CheckBox
 @export var tap_controls: CheckBox
 
-@export var language_selector: OptionButton 
 @export var googlePlayButtonsContainer: HBoxContainer 
 
 @export var enable_cloud_button : AudioButton
 @export var ad_removal_button : AudioButton
 @onready var consent_form_button: LinkButton = $ConsentFormButton
-
 
 const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
@@ -49,19 +47,6 @@ func _ready() -> void:
 		pass
 	else:
 		ad_removal_button.visible = true
-			
-	
-	language_selector.clear()
-	for locale in TranslationServer.get_loaded_locales():
-		## the method below returned "Norwegian bokmål" for "nb", and that didn't feel right to me.
-		var lang = TranslationServer.get_language_name(locale)
-		if locale == "nb":
-			language_selector.add_item("Norsk")
-		else:
-			language_selector.add_item(lang)
-			
-		if GameSettings.language == locale:
-			language_selector.select(language_selector.item_count-1)
 			
 	GameSettings.on_dogSkinChanged.connect(_on_skin_changed)
 	GameSettings.on_dogHatChanged.connect(_on_hat_changed)

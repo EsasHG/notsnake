@@ -66,7 +66,7 @@ mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"InnerContainer"
 
-[node name="SettingsScreen" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer" unique_id=1148790409 node_paths=PackedStringArray("music_mute", "sfx_mute", "hold_controls", "tap_controls", "language_selector", "googlePlayButtonsContainer", "enable_cloud_button", "ad_removal_button")]
+[node name="SettingsScreen" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer" unique_id=1148790409 node_paths=PackedStringArray("music_mute", "sfx_mute", "hold_controls", "tap_controls", "googlePlayButtonsContainer", "enable_cloud_button", "ad_removal_button")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -77,7 +77,6 @@ music_mute = NodePath("SoundButtons/MusicMute")
 sfx_mute = NodePath("SoundButtons/SFXMute")
 hold_controls = NodePath("HBoxContainer2/HoldControls")
 tap_controls = NodePath("HBoxContainer2/TapControls")
-language_selector = NodePath("VBoxContainer/LanguageSelector")
 googlePlayButtonsContainer = NodePath("HBoxContainer")
 enable_cloud_button = NodePath("EnableCloud")
 ad_removal_button = NodePath("PurchaseAdRemoval")
@@ -201,29 +200,7 @@ text = "TAP"
 script = ExtResource("5_64y2j")
 
 [node name="VBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=477237773]
-visible = false
 layout_mode = 2
-
-[node name="LanguageLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/VBoxContainer" unique_id=1948724054]
-layout_mode = 2
-size_flags_horizontal = 2
-theme = ExtResource("1_nfl8x")
-theme_type_variation = &"HeaderMedium"
-text = "LANGUAGE"
-
-[node name="LanguageSelector" type="OptionButton" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/VBoxContainer" unique_id=812837733]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 0
-mouse_filter = 1
-theme = ExtResource("1_nfl8x")
-selected = 0
-allow_reselect = true
-item_count = 2
-popup/item_0/text = "English"
-popup/item_0/id = 0
-popup/item_1/text = "Norsk"
-popup/item_1/id = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1768239325]
 layout_mode = 2
@@ -350,7 +327,6 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="toggled" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SoundButtons/MusicMute" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_music_mute_toggled"]
 [connection signal="toggled" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/SoundButtons/SFXMute" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_sfx_mute_toggled"]
 [connection signal="toggled" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer2/HoldControls" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_hold_controls_toggled"]
-[connection signal="item_selected" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/VBoxContainer/LanguageSelector" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_language_selector_item_selected"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer/AchievementsButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_achievements_button_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer/LeaderboardsButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_leaderboards_button_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/LanguageSelect" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_language_select_pressed"]
