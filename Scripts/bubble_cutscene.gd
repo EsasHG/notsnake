@@ -41,7 +41,7 @@ func startBubbleCutscene():
 			activeBubble.visible = true
 			var tween = get_tree().create_tween()
 			activeBubbleTween = tween
-			tween.tween_property(activeBubble, "modulate:a", 1, 0.3)
+			tween.tween_property(activeBubble, "modulate:a", 1, 0.2)
 			tween.tween_callback(bubbleOut)
 		)
 
@@ -63,7 +63,7 @@ func bubbleOut():
 	if(skip):
 		deleteBubble()
 	else:
-		var timer = get_tree().create_timer(2.0)
+		var timer = get_tree().create_timer(1.4)
 		timer.timeout.connect(func():
 			if(skip):
 				activeBubble.modulate.a = 0
@@ -72,7 +72,7 @@ func bubbleOut():
 				var tween = get_tree().create_tween()
 				activeBubbleTween = tween
 				tween.set_ease(Tween.EASE_IN)
-				tween.tween_property(activeBubble, "modulate:a", 0, 0.3)
+				tween.tween_property(activeBubble, "modulate:a", 0, 0.2)
 				tween.tween_callback(deleteBubble)
 			)
 		activeBubbleTimer = timer
@@ -109,9 +109,10 @@ func deleteBubble():
 	else:
 		activeBubble.modulate.a = 0	
 		activeBubble.visible = true
+		await get_tree().create_timer(0.5).timeout
 		var tween = get_tree().create_tween()
 		activeBubbleTween = tween
-		tween.tween_property(activeBubble, "modulate:a", 1, 0.3)
+		tween.tween_property(activeBubble, "modulate:a", 1, 0.2)
 		tween.tween_callback(bubbleOut)
 
 

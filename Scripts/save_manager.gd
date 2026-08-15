@@ -31,10 +31,11 @@ func _init() -> void:
 
 func _ready() -> void:
 	#GameSettings.signInClient.user_authenticated.connect(_on_user_authenticated)	
-	snapshotClient.snapshots_loaded.connect(_on_snapshots_loaded)
-	snapshotClient.game_loaded.connect(_on_game_loaded)
-	snapshotClient.game_saved.connect(_on_game_saved)
-	snapshotClient.conflict_emitted.connect(_on_conflict)
+	if snapshotClient:
+		snapshotClient.snapshots_loaded.connect(_on_snapshots_loaded)
+		snapshotClient.game_loaded.connect(_on_game_loaded)
+		snapshotClient.game_saved.connect(_on_game_saved)
+		snapshotClient.conflict_emitted.connect(_on_conflict)
 	_time_started = Time.get_unix_time_from_system()
 	_load_age_group()
 	 

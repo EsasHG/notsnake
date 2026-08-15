@@ -164,7 +164,7 @@ func _on_button_pressed() -> void:
 			)
 		add_child(timer)
 	_debug_press_count +=1
-	timer.start.call_deferred(0.3)
+	timer.start.call_deferred(0.5)
 	pass # Replace with function body.
 
 
