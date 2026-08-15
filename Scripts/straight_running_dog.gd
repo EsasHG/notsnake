@@ -1,6 +1,6 @@
 extends Area2D
 
-class_name PlayerDog
+class_name StraigthDog
 @export var ROTATE_SPEED = 5
 @export var MOVE_SPEED = 1
 @export var OVERALL_SPEED = 0.9
@@ -8,7 +8,8 @@ class_name PlayerDog
 @export var MAX_ARROW_DIST = 150
 @export var playerControl = false
 @export var iframes_time : float = 0.3
-
+@onready var direction_change_timer: Timer = $Timer
+var rotationThreshold = 45
 @onready var prevPos : Vector2 = position
 const DOG_SEGMENT = preload("uid://b64vm8vof02aj")
 
@@ -41,7 +42,7 @@ var canAddSprites = true
 var segment_sprite : Texture2D
 
 var segmentsPerSection = 20
-var move = true
+var move = false
 var rotateRight = false
 var arrowTarget : Vector2
 
@@ -80,6 +81,7 @@ func _ready() -> void:
 	GameSettings.on_dogSkinChanged.connect(set_skin)
 	visibility_changed.connect(func(): segmentParent.visible =visible) 
 	arrow.visible = false
+	get_tree().create_timer(5.0).timeout.connect(func(): move=true)
 
 func add_sprite():
 	if(canAddSprites):
@@ -96,6 +98,7 @@ func add_segment():
 		get_tree().create_timer(0.1).timeout.connect(resetSpriteTimer)
 		hindLegs.pause()
 
+
 func resetSpriteTimer():
 	canAddSprites = true
 
@@ -103,29 +106,22 @@ func resetSpriteTimer():
 func _unhandled_input(event: InputEvent) -> void:
 	if playerID == -1:
 		return
-	
-	if GameSettings.game_mode != GameSettings.GAME_MODE.SINGLE_PLAYER:
-		if event.device != GlobalInputMap.ControllerIds[playerID]:
-			return
-	if GlobalInputMap.Player_Controls_Selected[playerID]:
-		if(event.is_action("Press")):
-			if(event.is_pressed()):
-				rotateRight = true
-			else:
-				rotateRight = false
-	else: 
-		if(event.is_action("Press") and event.is_pressed()):
-			rotateRight = !rotateRight
+
 			
 	if event.is_action("Pause"):
 		GameSettings.pause_game()
+
+
+func change_direction():
+	direction_change_timer.wait_time = 0.3
+	rotateRight = !rotateRight
 
 
 func _process(delta: float) -> void:
 	if(!move): return
 	var dir : int = -1
 	
-	if(rotateRight && playerControl):
+	if(rotateRight):
 		dir = 1
 		rotate(delta*ROTATE_SPEED*OVERALL_SPEED)
 	else:
@@ -189,50 +185,13 @@ func _process(delta: float) -> void:
 	var arrowDist = position.distance_to(arrowTarget)
 	var lerped = (arrowDist-MIN_ARROW_DIST)/MAX_ARROW_DIST
 	$Head/ArrowHolder/Arrow.modulate.a = lerped
-
-
-func _on_area_entered(area: Area2D) -> void:
-	if(_invulnerable or playerControl == false or not GameSettings.game_running):
-		return
-		
-	if(area == butt):
-		Logging.logMessage("Player won!")
-		grabbed_tail = true
-		move = false
-		playerControl = false
-		GameSettings.player_lost(self)
-		segmentParent.queue_free()
-		if not GlobalInputMap.hats["COWBOY"].unlocked:
-			GameSettings.on_somethingUnlocked.emit("COWBOY")
-			GlobalInputMap.hats["COWBOY"].unlocked = true
-			SaveManager.save_game()
-			AchievementManager.unlock_achievement("Wi(e)nner")	##TODO: Fix so this gets unlocked if player logs in later.
-			
-		queue_free()
-		
-	elif(area.is_in_group("Dangers")):
-		Logging.logMessage("Player Lost!")
-		GameSettings.player_lost(self)
-		if area.is_in_group("DogSegment"):
-			Logging.logMessage("Collided with self!")
-		move = false
-		playerControl = false
-		segmentParent.queue_free()
-		queue_free()
-		
-	elif(area.is_in_group("Treats")):
-		if(canAddSprites):
-			bark()
-			for i : int in segmentsPerSection:
-				add_segment()
-			GameSettings.on_pickup.emit()
-			score+=1
-			if GlobalInputMap.Player_Score.keys().has(playerID):
-				GlobalInputMap.Player_Score[playerID]+=1
-			else:
-				GlobalInputMap.Player_Score[playerID] = 1
-			area.queue_free()
-			
+	if rotateRight:
+		if rotation_degrees > rotationThreshold:
+			change_direction()
+	else:
+		if rotation_degrees < -rotationThreshold:
+			change_direction()
+	add_segment()
 
 func bark():
 	$Head/BarkSound.pitch_scale = randf_range(0.9,1.1)

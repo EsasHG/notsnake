@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c42607bux8gfh"]
+
+[ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="1_b4uxh"]
+[ext_resource type="PackedScene" uid="uid://b0cwtf22qwklb" path="res://Scenes/Player/straigt_running_dog.tscn" id="2_eanln"]
+
+[node name="Node2D" type="Node2D" unique_id=1064482477]
+
+[node name="MapTutorial1" type="Sprite2D" parent="." unique_id=966502314]
+z_index = -3
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_b4uxh")
+
+[node name="PlayerDog" parent="." unique_id=1420059897 instance=ExtResource("2_eanln")]
+position = Vector2(-735, -283)
+ROTATE_SPEED = 5
+OVERALL_SPEED = 0.9
+MIN_ARROW_DIST = 120
+MAX_ARROW_DIST = 150
+playerControl = false
+iframes_time = 0.3
+
+[node name="PlayerDog" parent="PlayerDog" unique_id=1025749230 instance=ExtResource("2_eanln")]
+position = Vector2(-1, 146)
+ROTATE_SPEED = 5
+OVERALL_SPEED = 0.9
+MIN_ARROW_DIST = 120
+MAX_ARROW_DIST = 150
+playerControl = false
+iframes_time = 0.3
+
+[node name="PlayerDog" parent="PlayerDog/PlayerDog" unique_id=71196288 instance=ExtResource("2_eanln")]
+position = Vector2(-1, 146)
+ROTATE_SPEED = 5
+OVERALL_SPEED = 0.9
+MIN_ARROW_DIST = 120
+MAX_ARROW_DIST = 150
+playerControl = false
+iframes_time = 0.3
+
+[node name="PlayerDog" parent="PlayerDog/PlayerDog/PlayerDog" unique_id=972254564 instance=ExtResource("2_eanln")]
+position = Vector2(-1, 146)
+ROTATE_SPEED = 5
+OVERALL_SPEED = 0.9
+MIN_ARROW_DIST = 120
+MAX_ARROW_DIST = 150
+playerControl = false
+iframes_time = 0.3
+
+[node name="PlayerDog" parent="PlayerDog/PlayerDog/PlayerDog/PlayerDog" unique_id=64474772 instance=ExtResource("2_eanln")]
+position = Vector2(-1, 146)
+ROTATE_SPEED = 5
+OVERALL_SPEED = 0.9
+MIN_ARROW_DIST = 120
+MAX_ARROW_DIST = 150
+playerControl = false
+iframes_time = 0.3
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=488071448]

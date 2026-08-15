@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dbamfbgi5p1hy"]
+
+[ext_resource type="PackedScene" uid="uid://bkjd5mneny7c1" path="res://Scenes/Player/player_dog.tscn" id="1_axify"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_b4as5"]
+
+[node name="Node2D" type="Node2D" unique_id=1013774130]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1011218197]
+modulate = Color(0, 0.9372549, 0, 1)
+scale = Vector2(2456.4998, 1347.5)
+texture = SubResource("CanvasTexture_b4as5")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D" unique_id=472165340]
+
+[node name="PlayerDog" parent="." unique_id=1420059897 instance=ExtResource("1_axify")]
+position = Vector2(-60, 0)
