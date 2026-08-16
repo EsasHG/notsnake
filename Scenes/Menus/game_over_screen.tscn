@@ -21,7 +21,7 @@ modulate_color = Color(0.886275, 0.878431, 0.87451, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x8dhy"]
 content_margin_top = 20.0
 
-[node name="GameOverScreen" type="Control" unique_id=742327613]
+[node name="GameOverScreen" type="Control" unique_id=742327613 node_paths=PackedStringArray("leaderboard_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,6 +30,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_st1k0")
+leaderboard_button = NodePath("ScoreLabels/Leaderboard")
 
 [node name="WhiteBackgroundPanel" type="Panel" parent="." unique_id=846407584]
 z_index = -3
