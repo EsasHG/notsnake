@@ -204,6 +204,8 @@ offset_right = 199.0
 offset_bottom = -178.0
 grow_horizontal = 2
 grow_vertical = 0
+theme = ExtResource("2_3eorv")
+theme_type_variation = &"ButtonVBoxContainer"
 alignment = 1
 
 [node name="RetryButton" type="Button" parent="ButtonContainer" unique_id=1455811056]

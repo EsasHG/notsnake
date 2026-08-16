@@ -49,7 +49,7 @@ BILLING_PENDING_TITLE,Waiting for purchase to finish...,Venter på at betalingen
 BILLING_PENDING_DESCRIPTION,"Do you need to do something in another app? 
 You can close this and keep playing the game in the meantime","Trenger du å gjøre noe i et annet program?
 Du kan lukke denne meldingen og fortsette å spille mens du venter.",
-EDIT_DOG,Edit appearance,Endre utseende,
+EDIT_DOG,Change style,Endre utseende,
 CURRENCY,Treats,Godbiter,
 CHANGE_DOG,Change dog,Bytt hund,
 SELECT_SKIN,Choose a look!,Velg utseende!,
@@ -131,3 +131,4 @@ TUTORIAL_9,You can play this tutorial again from the settings menu.,,
 TUTORIAL_7,"Try to get as many treats as you can, and then catch your tail!","Prøv å få så mange godbiter du kan, og så fang halen din!",
 TUTORIAL_8,Good luck!,Lykke til!,
 FEEDBACK_BUTTON,Give Feedback,Gi Tilbakemelding,
+VERSION,Version,Versjon,

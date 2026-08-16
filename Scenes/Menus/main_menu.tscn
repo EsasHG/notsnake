@@ -18,6 +18,7 @@
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="15_8dws6"]
 [ext_resource type="PackedScene" uid="uid://dve3ihhfdxc3w" path="res://Scenes/Menus/close_button.tscn" id="17_fx838"]
 [ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="18_0rh2w"]
+[ext_resource type="Texture2D" uid="uid://bb1eumteya8s" path="res://Assets/UI/stop_symbol.png" id="19_fx838"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cy8ve"]
 bg_color = Color(0, 0, 0, 1)
@@ -35,7 +36,7 @@ content_margin_bottom = 20.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fx838"]
 content_margin_left = 20.0
 content_margin_top = 20.0
-content_margin_right = 20.0
+content_margin_right = 50.0
 content_margin_bottom = 20.0
 bg_color = Color(0.827451, 0.5921569, 0.08235294, 1)
 border_width_left = 4
@@ -84,14 +85,6 @@ border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
 corner_radius_top_left = 30
 corner_radius_bottom_left = 30
 
-[sub_resource type="Gradient" id="Gradient_47bqg"]
-offsets = PackedFloat32Array(0, 0.499, 0.5, 0.6, 0.601, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.4788676, 0.09985284, 0.07846785, 0, 0.6392157, 0.12941177, 0.105882354, 1, 0.656353, 0.17076476, 0.14835298, 0.9524999, 0.74255604, 0.37804863, 0.36074692, 0, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_fx838"]
-gradient = SubResource("Gradient_47bqg")
-fill_from = Vector2(0, 1)
-
 [node name="MainMenu" type="Control" unique_id=1644317146 node_paths=PackedStringArray("sign_in_button")]
 layout_mode = 3
 anchors_preset = 15
@@ -120,24 +113,6 @@ mouse_filter = 2
 texture = ExtResource("2_5vvlb")
 expand_mode = 1
 stretch_mode = 4
-
-[node name="Label" type="Label" parent="Logo" unique_id=152821257]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -136.75
-offset_top = 103.5
-offset_right = -40.75
-offset_bottom = 128.5
-grow_horizontal = 0
-grow_vertical = 2
-theme = ExtResource("15_8dws6")
-theme_type_variation = &"HeaderSmall"
-theme_override_font_sizes/font_size = 24
-text = "v0.12.6"
 
 [node name="GoogleSignIn" type="TextureButton" parent="Logo" unique_id=1318092359]
 layout_mode = 1
@@ -233,7 +208,6 @@ last_wrap_alignment = 2
 layout_mode = 2
 
 [node name="LockedMessageContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1459852420]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -379,7 +353,8 @@ offset_right = 199.0
 offset_bottom = -159.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 12
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"ButtonVBoxContainer"
 alignment = 1
 
 [node name="Start" type="Button" parent="MainButtons" unique_id=918679550]
@@ -414,23 +389,25 @@ script = ExtResource("13_vtepg")
 [node name="Button" type="Button" parent="." unique_id=36558254]
 visible = false
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = 3
 anchor_left = 1.0
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -8.0
-offset_top = -4.0
-offset_bottom = 4.0
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = -250.0
+offset_bottom = -166.0
 grow_horizontal = 0
-grow_vertical = 2
+grow_vertical = 0
 theme = ExtResource("15_8dws6")
+theme_override_font_sizes/font_size = 54
 theme_override_styles/normal = SubResource("StyleBoxFlat_fx838")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_8bdjp")
 theme_override_styles/hover = SubResource("StyleBoxFlat_fx838")
 theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_0rh2w")
 theme_override_styles/focus = SubResource("StyleBoxFlat_ou7d0")
 text = "AD"
+icon_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Button" unique_id=505928661]
 texture_filter = 1
@@ -438,12 +415,12 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 10.0
-offset_top = -30.0
-offset_right = 74.0
-offset_bottom = 34.0
+offset_left = 12.0
+offset_top = -36.25
+offset_right = 85.63281
+offset_bottom = 36.25
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_fx838")
+texture = ExtResource("19_fx838")
 
 [connection signal="pressed" from="Logo/GoogleSignIn" to="." method="_on_sign_in_pressed"]
 [connection signal="pressed" from="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_on_tutorial_yes_pressed"]

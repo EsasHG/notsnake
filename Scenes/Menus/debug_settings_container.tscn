@@ -49,7 +49,8 @@ script = ExtResource("1_qs44x")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 8
+theme = ExtResource("1_5j8qy")
+theme_type_variation = &"ButtonVBoxContainer"
 alignment = 2
 
 [node name="Label" type="Label" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=542016325]

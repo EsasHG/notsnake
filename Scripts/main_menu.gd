@@ -69,7 +69,7 @@ func _ready() -> void:
 	GameSettings.on_languageSelected.connect(create_level_buttons)
 	GameSettings.on_viewportChanged.connect(_on_viewport_changed)
 	buttons.visibility_changed.connect(func(): 
-		if !GameSettings.userAuthenticated: 
+		if OS.has_feature("mobile") and !GameSettings.userAuthenticated: 
 			sign_in_button.visible = buttons.visible
 			)
 	_on_viewport_changed()

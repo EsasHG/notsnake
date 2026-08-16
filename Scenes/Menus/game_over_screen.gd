@@ -3,12 +3,13 @@ extends Control
 class_name  GameOverScreen
 
 @export var bonusScreenThreshold = 30
+@export var hiddenButtonYPos_offset : float = 375 #this needs to be an offset so it works on either orientation
+@export var leaderboard_button: AudioButton
 
 @onready var BGmusic = get_tree().root.find_child("BGMusic", true, false)
 @onready var button_container: VBoxContainer = $ButtonContainer
 @onready var retry_button: Button = $ButtonContainer/RetryButton
 @onready var main_menu_button: Button = $ButtonContainer/MainMenuButton
-@onready var leaderboard_button: AudioButton = $ScoreLabels/Leaderboard
 @onready var unlocks_container: VBoxContainer = $UnlocksContainer
 @onready var unlock_title_label: Label = $UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/TitleLabel
 @onready var unlock_description_label: Label = $UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/DescriptionLabel
@@ -16,7 +17,6 @@ class_name  GameOverScreen
 
 
 @onready var visibleButtonYPos : float = button_container.position.y
-@export var hiddenButtonYPos_offset : float = 375 #this needs to be an offset so it works on either orientation
 var buttons_enabled = false
 
 

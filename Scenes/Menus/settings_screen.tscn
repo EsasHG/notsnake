@@ -12,7 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://n0icqrejpobn" path="res://Assets/UI/options_icons_etc/speaker_off_2.png" id="11_whg11"]
 [ext_resource type="Texture2D" uid="uid://1c7arj57sx2i" path="res://Assets/UI/Google Branding/Play Games/games_achievements_white.png" id="12_2b6r5"]
 [ext_resource type="StyleBox" uid="uid://cur2omqlkol8p" path="res://Assets/Styles/normal_button_stylebox_flat.tres" id="12_qwjhj"]
+[ext_resource type="Script" uid="uid://clh5sp6rrk1m5" path="res://Scenes/Menus/VersionLabel.gd" id="13_64y2j"]
 [ext_resource type="Texture2D" uid="uid://ylcsjr7l3m4j" path="res://Assets/UI/Google Branding/Play Games/games_leaderboards_white.png" id="13_qwjhj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwjhj"]
+content_margin_top = 50.0
+content_margin_bottom = 10.0
+corner_radius_top_left = 150
+corner_radius_bottom_right = 150
+corner_detail = 11
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b4as5"]
 
@@ -29,6 +37,10 @@ texture = ExtResource("8_2b6r5")
 texture = ExtResource("11_whg11")
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_7smr3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qwjhj"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
 
 [node name="AdLayoutContainer" type="VBoxContainer" unique_id=742566856]
 process_mode = 3
@@ -47,12 +59,13 @@ theme = ExtResource("1_nfl8x")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="OuterPanelContainer" unique_id=910289530]
 clip_children = 1
-custom_minimum_size = Vector2(610, 1200)
+custom_minimum_size = Vector2(610, 600)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"LowerScrollContainer"
+theme_override_styles/panel = SubResource("StyleBoxFlat_qwjhj")
 horizontal_scroll_mode = 0
 script = ExtResource("2_nfl8x")
 
@@ -70,7 +83,8 @@ theme_type_variation = &"InnerContainer"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 12
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"ButtonVBoxContainer"
 alignment = 2
 script = ExtResource("1_u03vw")
 music_mute = NodePath("SoundButtons/MusicMute")
@@ -199,7 +213,7 @@ button_group = SubResource("ButtonGroup_7smr3")
 text = "TAP"
 script = ExtResource("5_64y2j")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=477237773]
+[node name="Divider2" type="Control" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1187538925]
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1768239325]
@@ -207,28 +221,39 @@ layout_mode = 2
 alignment = 1
 
 [node name="AchievementsButton" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer" unique_id=2009678036]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
+size_flags_horizontal = 2
 mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"EmptyButton"
+theme_override_font_sizes/font_size = 26
+text = "ACHIEVEMENTS"
 icon = ExtResource("12_2b6r5")
-flat = true
 icon_alignment = 1
+vertical_icon_alignment = 0
 expand_icon = true
 script = ExtResource("5_64y2j")
 
 [node name="LeaderboardsButton" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer" unique_id=1644430493]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
+size_flags_horizontal = 10
 mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"EmptyButton"
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 26
+text = "LEADERBOARDS"
 icon = ExtResource("13_qwjhj")
 flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
 expand_icon = true
 script = ExtResource("5_64y2j")
+
+[node name="Divider" type="Control" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=301674773]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
 
 [node name="LanguageSelect" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=169140364]
 custom_minimum_size = Vector2(130, 50)
@@ -300,7 +325,6 @@ script = ExtResource("5_64y2j")
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_nfl8x")
-theme_override_constants/underline_spacing = 2
 text = "PRIVACY_POLICY"
 uri = "https://loopdog.app/privacy-policy"
 
@@ -309,6 +333,18 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 6
 text = "MANAGE_CONSENT"
+
+[node name="VersionLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=52484877]
+modulate = Color(0.66656864, 0.6665687, 0.66656864, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"HeaderSmall"
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qwjhj")
+text = "Version: 0.12.6"
+horizontal_alignment = 1
+script = ExtResource("13_64y2j")
 
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("2_u03vw")]
 layout_mode = 2
