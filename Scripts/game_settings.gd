@@ -33,7 +33,6 @@ var round_time_seconds:int = 60
 var lives = 1
 var game_running:bool = false
 var language = "automatic"
-var banner_ad_showing = false
 var game_startup_loading_screen:SceneTransition = null
 var skip_intro:bool = false
 const SCENE_TRANSITION = preload("uid://gsu5a1hu0rjf")

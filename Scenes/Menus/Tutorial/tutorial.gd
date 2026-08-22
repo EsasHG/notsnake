@@ -1,13 +1,18 @@
 extends Control
-@onready var popup_menu: AdLayout = $PopupMenu
-@onready var next_button: Button = $PopupMenu/OuterPanelContainer/VBoxContainer/HBoxContainer/NextButton
-@onready var panel: Panel = $PopupMenu/OuterPanelContainer/VBoxContainer/HBoxContainer/Panel
-@onready var back_button: Button = $PopupMenu/OuterPanelContainer/VBoxContainer/HBoxContainer/BackButton
-@onready var description_label: Label = $PopupMenu/OuterPanelContainer/VBoxContainer/DescriptionLabel
+@onready var popup_menu: PanelContainer = $OuterPanelContainer
+@onready var next_button: Button = $OuterPanelContainer/VBoxContainer/HBoxContainer/NextButton
+@onready var panel: Panel = $OuterPanelContainer/VBoxContainer/HBoxContainer/Panel
+@onready var back_button: Button = $OuterPanelContainer/VBoxContainer/HBoxContainer/BackButton
+@onready var description_label: Label = $OuterPanelContainer/VBoxContainer/DescriptionLabel
+
+
 const PLAYER_SPAWN_NAME = "PlayerStart"
 const SHOW_ARROW_MESSAGE = 5
 var current_message: int  = 1
 var _current_pickup_pos : Vector2
+var _dragging = false
+var prev_mouse_pos: Vector2 = Vector2.ZERO
+var _banner_ad_dimension:Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	panel.visible = true
@@ -20,7 +25,26 @@ func _ready() -> void:
 	_current_pickup_pos = GameSettings.players[0].arrowTarget
 	var player_spawner = get_tree().root.find_child(PLAYER_SPAWN_NAME,true,false)
 	player_spawner.player_spawned.connect(_player_spawned)
+	if GameSettings.adManager and GameSettings.adManager.banner_ad_showing:
+		print("Ad dimension: ",GameSettings.adManager.admob.get_banner_dimension())
+		_banner_ad_dimension = GameSettings.adManager.admob.get_banner_dimension_in_pixels()
+		print("Ad dimension in pixels: ",GameSettings.adManager.admob.get_banner_dimension_in_pixels())
 	
+	
+func _process(delta: float) -> void:
+	if _dragging:
+		var current_mouse_pos = get_global_mouse_position()
+		var delta_mouse_pos = current_mouse_pos - prev_mouse_pos
+		var popup_rect = popup_menu.get_rect()
+		var new_pos = global_position+delta_mouse_pos
+		if new_pos.x > (0-popup_rect.position.x) and new_pos.x < (get_viewport_rect().size.x - popup_rect.end.x):
+			global_position.x += delta_mouse_pos.x
+			
+		if new_pos.y > (0-popup_rect.position.y) and new_pos.y < (get_viewport_rect().size.y - popup_rect.end.y - _banner_ad_dimension.y):
+			global_position.y += delta_mouse_pos.y
+			
+		prev_mouse_pos = current_mouse_pos
+		
 
 func _player_spawned(player:PlayerDog) -> void:
 	player.arrowTarget = _current_pickup_pos
@@ -99,3 +123,12 @@ func _on_back_button_pressed() -> void:
 
 func _pickup_spawned(pickup : Area2D) -> void:
 	_current_pickup_pos = pickup.global_position
+
+
+func _on_outer_panel_container_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("Press"):
+		prev_mouse_pos = get_global_mouse_position()
+		print("Pressing!")
+		_dragging = true
+	elif event.is_action_released("Press"):
+		_dragging = false
