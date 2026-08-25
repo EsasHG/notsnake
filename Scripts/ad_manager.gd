@@ -1,10 +1,11 @@
-extends Node2D
+extends Control
 class_name  AdManager
 
 signal on_admob_initialized
 
 @onready var admob: Admob = $Admob
 @onready var interstitial_ad_timer: Timer = $"Interstitial Ad Timer"
+@onready var banner_background: Panel = $BannerBackground
 
 var interstitial_ad_loaded : bool = false
 var admob_initialized:bool = false
@@ -14,6 +15,7 @@ var rounds_played:int = 0
 var banner_ad_showing : bool = false
 var interstitial_ads_shown = 0
 var ad_points = 0
+var banner_ad_size = Vector2.ZERO
 
 
 enum AGE_GROUP {UNSPECIFIED,UNDER_13, UNDER_16, UNDER_18, ADULT}
@@ -74,7 +76,7 @@ func initialize() -> void:
 			interstitial_ad_timer.paused = true)
 
 
-func _on_admob_initialization_completed(status_data: InitializationStatus) -> void:
+func _on_admob_initialization_completed(_status_data: InitializationStatus) -> void:
 	Logging.logMessage("Admob initialized")
 	admob_initialized = true
 	#check_consent_status()
@@ -132,8 +134,11 @@ func setup_banner_ad() -> void:
 	if admob_initialized:
 		Logging.logMessage("Loading banner ad")
 		admob.set_banner_position(LoadAdRequest.AdPosition.BOTTOM)
-		#admob.set_banner_size(LoadAdRequest.AdSize.BANNER)
-		admob.set_banner_size(LoadAdRequest.RequestedAdSize.FULL_BANNER)
+		#admob.set_banner_size(LoadAdRequest.RequestedAdSize.BANNER)
+		admob.set_banner_size(LoadAdRequest.RequestedAdSize.ADAPTIVE)
+		
+		#var req = LoadAdRequest.new()
+		#req.set_adaptive_width(get_viewport_rect().size.x)
 		admob.load_banner_ad()
 
 
@@ -142,6 +147,8 @@ func remove_banner_ad() -> void:
 		admob.hide_banner_ad()
 		admob.remove_banner_ad()
 		banner_ad_showing = false
+		banner_ad_size = Vector2.ZERO
+		GameSettings.on_banner_ad_changed.emit()
 		
 
 func show_consent_form() -> void:
@@ -152,7 +159,6 @@ func show_consent_form() -> void:
 			#admob.show_consent_form()
 		else:			
 			Logging.logMessage("Loading consent form..")
-			
 			admob.load_consent_form()
 
 func _on_admob_banner_ad_failed_to_load(ad_info: AdInfo, error_data: LoadAdError) -> void:
@@ -168,7 +174,37 @@ func _on_admob_banner_ad_loaded(ad_info: AdInfo, _response_info: ResponseInfo) -
 	Logging.logMessage("Banner ad loaded! Showing ad")
 	admob.show_banner_ad(ad_info.get_ad_id())
 	banner_ad_showing = true
+	var screen_scale = DisplayServer.screen_get_scale() 
+	var meas = ad_info.get_measured_height()
+	print("Measured height: ", meas)
+	print("Measured height2: ", meas * screen_scale)
 	
+	var dim = admob.get_banner_dimension(ad_info.get_ad_id())
+	print("Banner dimension: ", dim)
+	var conv = Vector2(dp_to_px(dim.x), dp_to_px(dim.y))
+	print("Banner dimension converted: ", conv)
+
+	var dim_pix = admob.get_banner_dimension_in_pixels(ad_info.get_ad_id())
+	print("Banner dimension in pixels: ", dim_pix)
+	print("Screen scale: ", screen_scale)
+	banner_ad_size = dim_pix
+	
+	var monitor_res = DisplayServer.screen_get_size()
+	print("Screen res: ", monitor_res)
+	
+	var new = get_viewport_rect().end.y/monitor_res.y
+	banner_ad_size.y = (dim_pix.y) * new
+	print("New: ", new)
+	#banner_ad_size.y = (meas*2)
+	banner_background.custom_minimum_size.y = banner_ad_size.y
+	banner_background.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	banner_background.visible = true
+	
+	GameSettings.on_banner_ad_changed.emit()
+	
+func dp_to_px(dp: float) -> float:
+	var dpi: int = DisplayServer.screen_get_dpi()
+	return dp * (dpi / 160.0)
 
 func setup_interstitial_ad() -> void:
 	Logging.logMessage("Loading interstitial ad")
@@ -239,3 +275,14 @@ func _on_admob_interstitial_ad_dismissed_full_screen_content(ad_info: AdInfo) ->
 
 func _on_admob_interstitial_ad_clicked(ad_info: AdInfo) -> void:
 	Logging.logMessage("Interstitial Ad Clicked")
+
+
+func _on_admob_banner_ad_refreshed(ad_info: AdInfo, response_info: ResponseInfo) -> void:
+	Logging.logMessage("Banner Ad Refreshed")
+	var new_size = admob.get_banner_dimension_in_pixels()
+	DisplayServer.screen_get_scale()
+	if banner_ad_size != new_size:
+		banner_ad_size = new_size
+		GameSettings.on_banner_ad_changed.emit()
+		
+	pass # Replace with function body.

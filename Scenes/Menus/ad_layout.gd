@@ -16,6 +16,7 @@ func _ready() -> void:
 		
  
 func _show_banner_panel() -> void:
+	ad_panel.custom_minimum_size.y = GameSettings.adManager.banner_ad_size.y
 	ad_panel.visible = true
 
 

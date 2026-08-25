@@ -84,3 +84,7 @@ func _on_play_ad_pressed() -> void:
 	else:
 		Logging.error("Could not show interstitial ad! Admob is not properly initialized.")
 		
+
+
+func _on_consume_purchase_pressed() -> void:
+	GameSettings.billingManager._consume_purchase()

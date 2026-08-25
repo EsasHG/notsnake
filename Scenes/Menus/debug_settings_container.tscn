@@ -174,6 +174,15 @@ theme = ExtResource("1_5j8qy")
 text = "Play Ad"
 script = ExtResource("3_5j8qy")
 
+[node name="ConsumePurchase" type="Button" parent="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen" unique_id=646373268]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_5j8qy")
+text = "Consume Purchase"
+script = ExtResource("3_5j8qy")
+
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("7_ikqh6")]
 layout_mode = 2
 mouse_filter = 1
@@ -197,3 +206,4 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/ShowAgeScreen" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_show_age_screen_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/GiveTreats" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_give_treats_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/PlayAd" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_play_ad_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/DebugSettingsContainer/DebugScreen/ConsumePurchase" to="OuterPanelContainer/ScrollContainer/DebugSettingsContainer" method="_on_consume_purchase_pressed"]
