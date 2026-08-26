@@ -1,13 +1,13 @@
 #
 # © 2024-present https://github.com/cengiz-pz
 #
+class_name AdapterStatus
+extends RefCounted
 
-class_name AdapterStatus extends RefCounted
-
-const ADAPTER_CLASS_PROPERTY: String = "adapter_class"
-const LATENCY_PROPERTY: String = "latency"
-const INITIALIZATION_STATE_PROPERTY: String = "initialization_state"
-const DESCRIPTION_PROPERTY: String = "description"
+const ADAPTER_CLASS_PROPERTY := &"adapter_class"
+const LATENCY_PROPERTY := &"latency"
+const INITIALIZATION_STATE_PROPERTY := &"initialization_state"
+const DESCRIPTION_PROPERTY := &"description"
 
 var _data: Dictionary
 

@@ -1,13 +1,13 @@
 #
 # © 2024-present https://github.com/cengiz-pz
 #
+class_name AdError
+extends RefCounted
 
-class_name AdError extends RefCounted
-
-const CODE_PROPERTY: String = "code"
-const DOMAIN_PROPERTY: String = "domain"
-const MESSAGE_PROPERTY: String = "message"
-const CAUSE_PROPERTY: String = "cause"
+const CODE_PROPERTY := &"code"
+const DOMAIN_PROPERTY := &"domain"
+const MESSAGE_PROPERTY := &"message"
+const CAUSE_PROPERTY := &"cause"
 
 var _data: Dictionary
 

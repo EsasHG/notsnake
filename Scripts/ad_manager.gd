@@ -16,7 +16,8 @@ var banner_ad_showing : bool = false
 var interstitial_ads_shown = 0
 var ad_points = 0
 var banner_ad_size = Vector2.ZERO
-
+var portrait_banner_ad;
+var landscape_banner_ad;
 
 enum AGE_GROUP {UNSPECIFIED,UNDER_13, UNDER_16, UNDER_18, ADULT}
 var user_age_group : AGE_GROUP
@@ -25,8 +26,16 @@ var wait_consent: bool = true
 
 
 func _ready() -> void:
-	pass
+	GameSettings.on_viewportChanged.connect(_on_viewport_size_changed)
+
+
+func _on_viewport_size_changed() -> void:
+	remove_banner_ad()
+	setup_banner_ad()
+	if GameSettings.viewport_mode == GameSettings.VIEWPORT_MODE.PORTRAIT:
+		pass
 	
+
 func set_age_group(age_group : AGE_GROUP) -> void:
 	#Logging.error("WARNING: Resetting consent info! Should never be done outside of testing.")
 	#admob.reset_consent_info()
@@ -137,7 +146,9 @@ func setup_banner_ad() -> void:
 		#admob.set_banner_size(LoadAdRequest.RequestedAdSize.BANNER)
 		admob.set_banner_size(LoadAdRequest.RequestedAdSize.ADAPTIVE)
 		
-		#var req = LoadAdRequest.new()
+		#var req = admob.create_banner_ad_request()
+		#req.set_anchor_to_safe_area(true)
+		#req.set_ad_size(admob.get_portrait_adaptive_banner_size())
 		#req.set_adaptive_width(get_viewport_rect().size.x)
 		admob.load_banner_ad()
 
@@ -160,6 +171,7 @@ func show_consent_form() -> void:
 		else:			
 			Logging.logMessage("Loading consent form..")
 			admob.load_consent_form()
+	
 
 func _on_admob_banner_ad_failed_to_load(ad_info: AdInfo, error_data: LoadAdError) -> void:
 	var response_infos:Array[AdapterResponseInfo] = error_data.get_response_info().get_adapter_responses()
@@ -209,7 +221,8 @@ func dp_to_px(dp: float) -> float:
 func setup_interstitial_ad() -> void:
 	Logging.logMessage("Loading interstitial ad")
 	if admob_initialized and !interstitial_ad_loaded:
-		admob.load_interstitial_ad()
+		var req = admob.create_interstitial_ad_request()
+		admob.load_interstitial_ad(req)
 
 
 func _on_admob_interstitial_ad_loaded(_ad_info: AdInfo, _response_info: ResponseInfo) -> void:

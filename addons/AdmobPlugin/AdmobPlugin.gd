@@ -5,21 +5,14 @@
 @tool
 extends EditorPlugin
 
-const PLUGIN_NODE_TYPE_NAME = "Admob"
-const PLUGIN_PARENT_NODE_TYPE = "Node"
 const PLUGIN_NAME: String = "AdmobPlugin"
 const ANDROID_DEPENDENCIES: Array = [ "androidx.appcompat:appcompat:1.7.1", "androidx.lifecycle:lifecycle-process:2.8.3", "com.google.android.gms:play-services-ads:24.9.0" ]
 const IOS_PLATFORM_VERSION: String = "14.3"
 const IOS_FRAMEWORKS: Array = [ "Foundation.framework", "AppTrackingTransparency.framework" ]
-const IOS_EMBEDDED_FRAMEWORKS: Array = [ "res://ios/framework/GoogleMobileAds.xcframework", "res://ios/framework/UserMessagingPlatform.xcframework" ]
-const IOS_LINKER_FLAGS: Array = [ "-ObjC", "-Wl", "-weak-lswiftCore", "-weak-lswiftObjectiveC", "-weak-lswift_Concurrency" ]
-
-const APP_ID_META_TAG = """
-<meta-data
-		tools:replace="android:value"
-		android:name="com.google.android.gms.ads.APPLICATION_ID"
-		android:value="%s"/>
-"""
+const IOS_EMBEDDED_FRAMEWORKS: Array = [  ]
+const IOS_LINKER_FLAGS: Array = [ "-ObjC" ]
+const IOS_BUNDLE_FILES: Array = [  ]
+const SPM_DEPENDENCIES: Array = [ {&"url": "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", &"version": "12.14.0", &"products": ["GoogleMobileAds"]} ]
 
 var android_export_plugin: AndroidExportPlugin
 var ios_export_plugin: IosExportPlugin
@@ -40,6 +33,13 @@ func _exit_tree() -> void:
 
 
 class AndroidExportPlugin extends EditorExportPlugin:
+	const APP_ID_META_TAG = """
+<meta-data
+		tools:replace="android:value"
+		android:name="com.google.android.gms.ads.APPLICATION_ID"
+		android:value="%s"/>
+"""
+
 	var _plugin_name = PLUGIN_NAME
 	var _export_config: AdmobAndroidExportConfig
 
@@ -73,7 +73,7 @@ class AndroidExportPlugin extends EditorExportPlugin:
 				for __dependency in __network.android_dependencies:
 					deps.append(__dependency)
 
-		Admob.log_info("Android dependencies: %s" % str(deps))
+		GmpLogger.log_info("Android dependencies: %s" % str(deps))
 
 		return deps
 
@@ -85,8 +85,10 @@ class AndroidExportPlugin extends EditorExportPlugin:
 			for network in _export_config.enabled_mediation_networks:
 				if network.android_custom_maven_repo and not network.android_custom_maven_repo.is_empty():
 					__custom_repos.append(network.android_custom_maven_repo)
-					Admob.log_info("Added custom Maven repo for %s mediation: %s" %
-							[network.tag, network.android_custom_maven_repo])
+					GmpLogger.log_info(
+						"Added custom Maven repo for %s mediation: %s" %
+						[network.tag, network.android_custom_maven_repo],
+					)
 
 		return __custom_repos
 
@@ -95,9 +97,10 @@ class AndroidExportPlugin extends EditorExportPlugin:
 		var __contents: String
 
 		if _export_config:
-			__contents = APP_ID_META_TAG % (_export_config.real_application_id if _export_config.is_real else _export_config.debug_application_id)
+			__contents = APP_ID_META_TAG % (_export_config.real_application_id if _export_config.is_real \
+				else _export_config.debug_application_id )
 		else:
-			Admob.log_warn("Export config not found for %s!" % _plugin_name)
+			GmpLogger.log_warn("Export config not found for %s!" % _plugin_name)
 			__contents = ""
 
 		return __contents
@@ -115,6 +118,7 @@ class IosExportPlugin extends EditorExportPlugin:
 """
 
 	var _plugin_name = PLUGIN_NAME
+	var _spm_dependencies = []
 	var _export_config: AdmobIosExportConfig
 	var _export_path: String
 
@@ -135,13 +139,20 @@ class IosExportPlugin extends EditorExportPlugin:
 				_export_config.load_export_config_from_node()
 
 			add_apple_embedded_platform_plist_content("<key>GADApplicationIdentifier</key>")
-			add_apple_embedded_platform_plist_content("\t<string>%s</string>" % (_export_config.real_application_id if _export_config.is_real else _export_config.debug_application_id))
+			add_apple_embedded_platform_plist_content(
+				"\t<string>%s</string>" % (_export_config.real_application_id
+					if _export_config.is_real else _export_config.debug_application_id ),
+			)
 
 			if _export_config.att_enabled and _export_config.att_text and not _export_config.att_text.is_empty():
 				add_apple_embedded_platform_plist_content("<key>NSUserTrackingUsageDescription</key>")
 				add_apple_embedded_platform_plist_content("<string>%s</string>" % _export_config.att_text)
 
-			add_apple_embedded_platform_plist_content(MediationNetwork.generate_sk_ad_network_plist(_export_config.enabled_mediation_networks))
+			add_apple_embedded_platform_plist_content(
+				MediationNetwork.generate_sk_ad_network_plist(
+					_export_config.enabled_mediation_networks,
+				),
+			)
 
 			add_apple_embedded_platform_plist_content(NS_APP_TRANSPORT_SECURITY)
 
@@ -154,108 +165,210 @@ class IosExportPlugin extends EditorExportPlugin:
 			for __flag in IOS_LINKER_FLAGS:
 				add_apple_embedded_platform_linker_flags(__flag)
 
+			for __bundle_file in IOS_BUNDLE_FILES:
+				add_apple_embedded_platform_bundle_file(__bundle_file)
 
-	func _export_end() -> void:
+			for __spm_dep in SPM_DEPENDENCIES:
+				_spm_dependencies.append(SpmDependency.new(__spm_dep))
+
+
+	func _end_generate_apple_embedded_project(path: String, will_build_archive: bool) -> void:
+		GmpLogger.log_info("Apple export project generated at: %s. Will build archive: %s"
+				% [path, str(will_build_archive)])
+
 		if _supports_platform(get_export_platform()):
-			_install_mediation_dependencies(_export_path.get_base_dir(), _export_path.get_file().get_basename())
+			_spm_dependencies.append_array(_get_extra_dependencies())
 
-
-	func _install_mediation_dependencies(a_base_dir: String, a_project_name: String) -> void:
-		if _export_config.enabled_mediation_networks.size() > 0:
-			if _generate_podfile(a_base_dir, a_project_name) == Error.OK:
-				var __script_path = a_base_dir.path_join("setup_pods.sh")
-				if _generate_setup_script(__script_path, a_project_name) == Error.OK:
-					if OS.has_feature("macos"):
-						Admob.log_info("Detected macOS: Auto-running pod install...")
-
-						# Step 1: Make executable
-						var chmod_output: Array = []
-						var chmod_code = OS.execute("chmod", ["+x", __script_path], chmod_output, true, false)
-						if chmod_code != 0:
-							Admob.log_error("Failed to chmod script: %s" % (chmod_output if chmod_output.size() > 0 else "Unknown error"))
-							Admob.log_warn("Run manually: cd %s && ./setup_pods.sh" % a_base_dir)
-							return
-
-						# Step 2: Execute the script (blocking; captures output)
-						var exec_output: Array = []
-						var exec_code = OS.execute(__script_path, [], exec_output, true, false)
-
-						if exec_code == 0:
-							Admob.log_info("Pod install completed successfully!")
-							for line in exec_output:
-								Admob.log_info("Pods: %s" % line)
-						else:
-							Admob.log_error("Pod install failed (exit code %d)" % exec_code)
-							for line in exec_output:
-								Admob.log_error("Pods: %s" % line)
-							Admob.log_warn("Check CocoaPods installation and try manually: cd %s && ./setup_pods.sh" % a_base_dir)
-					else:
-						# Non-macOS: Instructions only
-						Admob.log_warn("Non-macOS detected (OS: %s). Manual setup required:" % OS.get_name())
-						Admob.log_warn("1. Ensure CocoaPods is installed (run 'gem install cocoapods' on macOS/Linux).")
-						Admob.log_warn("2. In terminal: cd '%s'" % a_base_dir)
-						Admob.log_warn("3. Run: ./setup_pods.sh")
-						Admob.log_warn("4. Open '%s.xcworkspace' in Xcode." % a_project_name)
+			if _spm_dependencies.is_empty():
+				GmpLogger.log_info("No SPM dependencies to install. Skipping.")
 			else:
-				Admob.log_error("Failed to generate podfile!")
+				GmpLogger.log_info("Installing %d SPM dependencies." % _spm_dependencies.size())
+				_install_dependencies(path.get_base_dir(), path.get_file().get_basename())
+
+
+	func _get_extra_dependencies() -> Array[SpmDependency]:
+		var __extra_dependencies:= [] as Array[SpmDependency]
+
+		__extra_dependencies.append_array(
+				MediationNetwork.get_spm_dependencies(_export_config.enabled_mediation_networks))
+
+		return __extra_dependencies
+
+
+	func _install_dependencies(a_base_dir: String, a_project_name: String) -> void:
+		var __project_file_name:= "%s.xcodeproj" % a_project_name
+		var __project_file_path:= a_base_dir.path_join(__project_file_name)
+		if not DirAccess.dir_exists_absolute(__project_file_path):
+			GmpLogger.log_error("Xcode project '%s' does not exist! Can't install SPM dependencies."
+					% __project_file_path)
+			return
+
+		var __script_name = "add_dependency.rb"
+		var __add_dependency_script_path = a_base_dir.path_join(__script_name)
+		var __result = _generate_add_dependency_script(__add_dependency_script_path)
+		if __result != Error.OK:
+			GmpLogger.log_error("Failed to generate '%s' script with error %d!" % [__script_name, __result])
+			return
+
+		GmpLogger.log_info("Adding SPM dependencies to %s..." % __project_file_path)
+
+		for __spm_dep: SpmDependency in _spm_dependencies:
+			for __spm_dep_product: String in __spm_dep.get_products():
+				var exec_output: Array = []
+				var exec_code = OS.execute("ruby", [
+							__add_dependency_script_path,
+							__project_file_path,
+							__spm_dep.get_url(),
+							__spm_dep.get_version(),
+							__spm_dep_product,
+						], exec_output, true, false)
+
+				if exec_code == 0:
+					GmpLogger.log_info("Product %s for SPM dependency %s added successfully!"
+							% [__spm_dep_product, __spm_dep.format_to_string()])
+					for line in exec_output:
+						GmpLogger.log_info("SPM: %s" % line)
+				else:
+					GmpLogger.log_info("Failed to add product %s for SPM dependency %s !"
+							% [__spm_dep_product, __spm_dep.format_to_string()])
+					for line in exec_output:
+						GmpLogger.log_error("SPM: %s" % line)
+
+		GmpLogger.log_info("Resolving SPM dependencies...")
+
+		__script_name = "resolve_dependencies.sh"
+		var __resolve_dependencies_script_path = a_base_dir.path_join(__script_name)
+		__result = _generate_resolve_dependencies_script(__resolve_dependencies_script_path, a_base_dir, a_project_name)
+		if __result != Error.OK:
+			GmpLogger.log_error("Failed to generate '%s' script with error %d!" % [__script_name, __result])
+			return
+
+		var exec_output: Array = []
+		var exec_code = OS.execute(__resolve_dependencies_script_path, [], exec_output, true, false)
+
+		if exec_code == 0:
+			for line in exec_output:
+				GmpLogger.log_info("SPM: %s" % line)
+			GmpLogger.log_info("Resolved dependencies successfully!")
 		else:
-			Admob.log_info("No mediation enabled; skipping Podfile and setup.")
+			for line in exec_output:
+				GmpLogger.log_error("SPM: %s" % line)
+			GmpLogger.log_info("Failed to resolve dependencies! Try manually in Xcode.")
 
 
-	func _generate_podfile(a_project_dir: String, a_project_name: String) -> Error:
-		var __result = Error.OK
-		var __podfile_path = a_project_dir.path_join("Podfile")
+	const ADD_DEPENDENCY_RUBY_SCRIPT = """
+require 'xcodeproj'
 
-		# Generate Podfile content
-		var __pod_content = """
-source 'https://github.com/CocoaPods/Specs.git'
-use_frameworks!
+project_path = ARGV[0]
+url          = ARGV[1].strip
+version      = ARGV[2].strip
+product_name = ARGV[3].strip
 
-project '%s.xcodeproj'
-
-target '%s' do
-	platform :ios, '%s'
-
-%s
+unless File.exist?(project_path)
+	puts "Error: Xcode project not found at #{project_path}"
+	exit 1
 end
-""" % [a_project_name, a_project_name, IOS_PLATFORM_VERSION, MediationNetwork.generate_pod_list(_export_config.enabled_mediation_networks)]
 
-		# Write Podfile
-		var __pod_file = FileAccess.open(__podfile_path, FileAccess.WRITE)
-		if __pod_file:
-			__pod_file.store_string(__pod_content)
-			__pod_file.close()
-			Admob.log_info("Generated %s for target '%s' with mediation: %s" % [__podfile_path, a_project_name,
-					MediationNetwork.generate_tag_list(_export_config.enabled_mediation_networks)])
-			Admob.log_info("Podfile content:\n%s" % __pod_content)
-		else:
-			Admob.log_error("Failed to write Podfile: %s" % __podfile_path)
-			__result = Error.ERR_FILE_CANT_WRITE
+if url.empty? || version.empty? || product_name.empty?
+	puts "Error: url, version, and product_name must all be non-empty."
+	exit 1
+end
+
+begin
+	project = Xcodeproj::Project.open(project_path)
+	target = project.targets.first
+
+	if target.nil?
+		puts "Error: No targets found in the Xcode project."
+		exit 1
+	end
+
+	existing_dep = target.package_product_dependencies.find do |dep|
+		dep.product_name == product_name
+	end
+
+	if existing_dep
+		puts "Warning: Product dependency '#{product_name}' already exists in the project. Skipping add.\n\n"
+	else
+		# Reuse an existing package reference for the same URL, or create a new one
+		pkg = project.root_object.package_references.find do |p|
+			p.repositoryURL == url
+		end
+
+		if pkg
+			puts "Reusing existing package reference for '#{url}'."
+		else
+			pkg = project.new(Xcodeproj::Project::Object::XCRemoteSwiftPackageReference)
+			pkg.repositoryURL = url
+			pkg.requirement = {
+				'kind' => 'upToNextMajorVersion',
+				'minimumVersion' => version
+			}
+			project.root_object.package_references << pkg
+		end
+
+		# Create the product dependency and link it to the shared package reference
+		ref = project.new(Xcodeproj::Project::Object::XCSwiftPackageProductDependency)
+		ref.product_name = product_name
+		ref.package = pkg
+		target.package_product_dependencies << ref
+
+		puts "Successfully added SPM dependency '#{product_name}' " \
+				"(#{url} @ #{version}) to #{File.basename(project_path)}\n\n"
+	end
+
+	project.save
+
+rescue => e
+	puts "An error occurred: #{e.message}\n\n"
+	exit 1
+end
+"""
+	func _generate_add_dependency_script(a_script_path: String) -> Error:
+		var __result = Error.OK
+
+		var __script_content = ADD_DEPENDENCY_RUBY_SCRIPT
+
+		__result = _create_script(a_script_path, __script_content)
 
 		return __result
 
 
-	func _generate_setup_script(a_script_path: String, a_project_name: String) -> Error:
-		var __result: Error = Error.OK
-
-		var __script_content = """#!/bin/bash
+	const RESOLVE_DEPENDENCIES_BASH_SCRIPT = """
+#!/bin/bash
 set -e	# Exit on error
 
-cd "$(dirname "$0")" 	# Change to project dir
-echo "Setting up CocoaPods for mediation..."
-pod install --repo-update
+xcodebuild -resolvePackageDependencies \
+			-project "%s.xcodeproj" \
+			-scheme "%s"
+"""
+	func _generate_resolve_dependencies_script(a_script_path: String, a_base_dir: String,
+			a_project_name: String) -> Error:
+		var __result: Error = Error.OK
 
-echo "Setup complete! Open '%s.xcworkspace' in Xcode (not .xcodeproj)."
-""" % a_project_name
+		var __script_content = RESOLVE_DEPENDENCIES_BASH_SCRIPT \
+				% [ ProjectSettings.globalize_path(a_base_dir.path_join(a_project_name)), a_project_name ]
+
+		__result = _create_script(a_script_path, __script_content)
+
+		return __result
+
+
+	func _create_script(a_script_path: String, a_script_content: String) -> Error:
+		var __result: Error = Error.OK
 
 		var __script_file = FileAccess.open(a_script_path, FileAccess.WRITE)
 		if __script_file:
-			__script_file.store_string(__script_content)
+			__script_file.store_string(a_script_content)
 			__script_file.close()
-			Admob.log_info("Generated setup script: %s" % a_script_path)
-			Admob.log_info("Setup script content:\n%s" % __script_content)
 		else:
-			Admob.log_error("Failed to write setup script: %s" % a_script_path)
 			__result = Error.ERR_FILE_CANT_WRITE
+
+		var chmod_output: Array = []
+		var chmod_code = OS.execute("chmod", ["+x", a_script_path], chmod_output, true, false)
+		if chmod_code != 0:
+			GmpLogger.log_error("Failed to chmod %s script: %s"
+					% [a_script_path, (chmod_output if chmod_output.size() > 0 else "Unknown error")])
+			__result = Error.ERR_FILE_NO_PERMISSION
 
 		return __result
