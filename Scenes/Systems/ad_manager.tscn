@@ -7,6 +7,7 @@
 bg_color = Color(0, 0, 0, 1)
 
 [node name="AdManager" type="Control" unique_id=826560767]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,6 +28,11 @@ test_device_hashed_ids = Array[String](["ee326b21-924e-4aae-a548-f65d31fadb9a "]
 [node name="Interstitial Ad Timer" type="Timer" parent="." unique_id=45894705]
 wait_time = 180.0
 one_shot = true
+
+[node name="OrientationChangeTimer" type="Timer" parent="." unique_id=803193001]
+wait_time = 0.5
+one_shot = true
+ignore_time_scale = true
 
 [node name="BannerBackground" type="Panel" parent="." unique_id=308669635]
 custom_minimum_size = Vector2(0, 60)

@@ -88,3 +88,13 @@ func _on_play_ad_pressed() -> void:
 
 func _on_consume_purchase_pressed() -> void:
 	GameSettings.billingManager._consume_purchase()
+
+
+func _on_toggle_banner_pressed() -> void:
+	if GameSettings.adManager:
+		if GameSettings.adManager.banner_ad_showing:
+			GameSettings.adManager.hide_banner_ad()
+		else:
+			GameSettings.adManager.show_banner_ad()
+		
+	pass # Replace with function body.
