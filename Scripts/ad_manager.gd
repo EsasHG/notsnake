@@ -29,14 +29,15 @@ var wait_consent: bool = true
 func _ready() -> void:
 	GameSettings.on_viewportChanged.connect(_on_viewport_size_changed)
 	orientation_change_timer.timeout.connect(setup_banner_ad)
+	banner_background.visible = false
 
 func _on_viewport_size_changed() -> void:
-	_current_size_y = get_viewport_rect().size.y
+	#_current_size_y = get_viewport_rect().size.y
 	if admob_initialized and !banner_ad_loading:
 		remove_banner_ad()
 		#if !orientation_change_timer.is_stopped():
 			#orientation_change_timer.stop()
-		orientation_change_timer.start(1.5)
+		orientation_change_timer.start(0.5)
 	
 
 func set_age_group(age_group : AGE_GROUP) -> void:
@@ -201,7 +202,6 @@ func _on_admob_banner_ad_failed_to_load(ad_info: AdInfo, error_data: LoadAdError
 
 func _on_admob_banner_ad_loaded(ad_info: AdInfo, _response_info: ResponseInfo) -> void:
 	Logging.logMessage("Banner ad loaded!")
-	
 	if _current_size_y != get_viewport_rect().size.y:
 		admob.remove_banner_ad(ad_info.get_ad_id())
 		setup_banner_ad()
@@ -301,5 +301,3 @@ func _on_admob_banner_ad_refreshed(ad_info: AdInfo, response_info: ResponseInfo)
 	if banner_ad_size != new_size:
 		banner_ad_size = new_size
 		GameSettings.on_banner_ad_changed.emit()
-		
-	pass # Replace with function body.

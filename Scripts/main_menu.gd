@@ -108,7 +108,7 @@ func _on_viewport_changed() -> void:
 		logo.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP,Control.PRESET_MODE_KEEP_SIZE)
 		logo.position.y += 50
 		buttons.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM,Control.PRESET_MODE_KEEP_SIZE)
-		buttons.position.y -= 160
+		buttons.position.y -= 200
 		#buttons.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 	
 	else:
