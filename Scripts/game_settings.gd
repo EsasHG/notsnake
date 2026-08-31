@@ -14,6 +14,7 @@ signal on_viewportChanged()
 signal on_somethingUnlocked(unlock:String)
 signal on_languageSelected()
 signal on_scoreChanged()
+signal on_banner_ad_changed()
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 
@@ -33,7 +34,6 @@ var round_time_seconds:int = 60
 var lives = 1
 var game_running:bool = false
 var language = "automatic"
-var banner_ad_showing = false
 var game_startup_loading_screen:SceneTransition = null
 var skip_intro:bool = false
 const SCENE_TRANSITION = preload("uid://gsu5a1hu0rjf")
@@ -191,6 +191,7 @@ func playgames_auth_checked() -> void:
 	
 
 func _do_deferred_setup():
+	Firebase.process_mode = Node.PROCESS_MODE_ALWAYS
 	Firebase.Auth.signup_succeeded.connect(_on_signup_succeeded)
 	Firebase.Auth.login_failed.connect(_on_login_failed)
 	Firebase.Auth.login_anonymous()

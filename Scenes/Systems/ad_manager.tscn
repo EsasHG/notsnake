@@ -1,9 +1,19 @@
 [gd_scene format=3 uid="uid://ck01dnrayeqyd"]
 
 [ext_resource type="Script" uid="uid://ccmc352d6i6js" path="res://Scripts/ad_manager.gd" id="1_eyngg"]
-[ext_resource type="Script" uid="uid://bbtsfyblck4j6" path="res://addons/AdmobPlugin/Admob.gd" id="2_nuc1s"]
+[ext_resource type="Script" uid="uid://cfnq2ko235mp8" path="res://addons/AdmobPlugin/Admob.gd" id="2_nuc1s"]
 
-[node name="AdManager" type="Node2D" unique_id=2111872399]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_du106"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="AdManager" type="Control" unique_id=826560767]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_eyngg")
 
 [node name="Admob" type="Node" parent="." unique_id=647124894]
@@ -19,8 +29,26 @@ test_device_hashed_ids = Array[String](["ee326b21-924e-4aae-a548-f65d31fadb9a "]
 wait_time = 180.0
 one_shot = true
 
+[node name="OrientationChangeTimer" type="Timer" parent="." unique_id=803193001]
+wait_time = 0.5
+one_shot = true
+ignore_time_scale = true
+
+[node name="BannerBackground" type="Panel" parent="." unique_id=308669635]
+visible = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_du106")
+
 [connection signal="banner_ad_failed_to_load" from="Admob" to="." method="_on_admob_banner_ad_failed_to_load"]
 [connection signal="banner_ad_loaded" from="Admob" to="." method="_on_admob_banner_ad_loaded"]
+[connection signal="banner_ad_refreshed" from="Admob" to="." method="_on_admob_banner_ad_refreshed"]
 [connection signal="consent_form_dismissed" from="Admob" to="." method="_on_admob_consent_form_dismissed"]
 [connection signal="consent_form_failed_to_load" from="Admob" to="." method="_on_admob_consent_form_failed_to_load"]
 [connection signal="consent_form_loaded" from="Admob" to="." method="_on_admob_consent_form_loaded"]

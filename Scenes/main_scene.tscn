@@ -132,6 +132,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("6_76v2p")
 
+[node name="AdManager" parent="CanvasLayer/Gui" unique_id=1227274275 instance=ExtResource("16_viu5a")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+grow_vertical = 0
+
 [node name="SceneTransition" parent="CanvasLayer" unique_id=1227316617 instance=ExtResource("8_5oxhp")]
 skip_transition_in = true
 
@@ -189,9 +195,6 @@ metadata/_custom_type_script = "uid://glagih2j03pk"
 unique_name_in_owner = true
 script = ExtResource("18_oyb3p")
 metadata/_custom_type_script = "uid://c7rjippj2i4of"
-
-[node name="AdManager" parent="." unique_id=1227274275 instance=ExtResource("16_viu5a")]
-visible = false
 
 [connection signal="pressed" from="CanvasLayer/Gui/AudioButtons/PauseButton" to="CanvasLayer/Gui/AudioButtons/PauseButton" method="_on_pressed"]
 [connection signal="transition_out_finished" from="CanvasLayer/SceneTransition" to="BubbleCutscene" method="startBubbleCutscene"]

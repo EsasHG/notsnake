@@ -1,11 +1,11 @@
 #
 # © 2024-present https://github.com/cengiz-pz
 #
+class_name FormError
+extends RefCounted
 
-class_name FormError extends RefCounted
-
-const CODE_PROPERTY: String = "code"
-const MESSAGE_PROPERTY: String = "message"
+const CODE_PROPERTY := &"code"
+const MESSAGE_PROPERTY := &"message"
 
 var _data: Dictionary
 

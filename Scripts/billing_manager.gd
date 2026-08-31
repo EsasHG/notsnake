@@ -25,6 +25,8 @@ var consecutive_exceptions = 0
 
 func _ready() -> void:
 	Logging.logMessage("Billing manager getting ready")
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	billing_client.process_mode = Node.PROCESS_MODE_ALWAYS
 	if enable:
 		billing_client.connected.connect(_on_connected)
 		billing_client.disconnected.connect(_on_disconnected) # No params
@@ -50,29 +52,6 @@ func query_purchases():
 	billing_client.query_purchases(BillingClient.ProductType.INAPP) # Or BillingClient.ProductType.SUBS for subscriptions.
 
 
-func send_verification_request(purchase:Dictionary) -> void:
-	var strPurchase:String = str(purchase)
-	var task = Firebase.Functions.execute("verifyPurchase", HTTPClient.METHOD_POST,{}, {"data":strPurchase})
-	task.function_executed.connect(_on_fb_verification_finished)
-	
-
-func update_popup():
-	if products_loaded and purchases_checked and !no_ads_purchased and is_instance_valid(ad_removal_popup):
-		ad_removal_popup.button_yes.pressed.connect.call_deferred(_on_button_yes_pressed)
-		ad_removal_popup.button_no.pressed.connect.call_deferred(_on_button_no_pressed)
-		#var currency = remove_ads_product.one_time_purchase_offer_details.price_currency_code
-		var price : String = remove_ads_product.one_time_purchase_offer_details.formatted_price
-		#ad_removal_popup.title.text = remove_ads_product.name
-		#ad_removal_popup.description.text = remove_ads_product.description
-		ad_removal_popup.price_label.text = price
-
-
-func show_ad_removal_popup() -> void:
-	ad_removal_popup = UINavigator.open_from_scene(AD_REMOVAL_POPUP)
-	update_popup()
-#	UINavigator.open(ad_removal_popup)
-
-
 func _on_connected():
 	Logging.logMessage("Connected to billing!")
 	consecutive_exceptions = 0
@@ -83,7 +62,7 @@ func _on_connected():
 func _on_disconnected():
 	pass
 	
-	
+
 func _on_connect_error(response_code: int, debug_message: String):
 	Logging.error("Error connecting to billing! Status: " + str(response_code) + " Message: " + debug_message)
 	consecutive_exceptions+=1
@@ -105,8 +84,8 @@ func _on_query_product_details_response(query_result: Dictionary):
 				products_loaded = true
 				update_popup()
 		checkLoadingFinished()
-			
-			
+	
+
 func _on_query_purchases_response(query_result: Dictionary):
 	if query_result.response_code == BillingClient.BillingResponseCode.OK:
 		Logging.logMessage("Purchase query success")
@@ -136,8 +115,42 @@ func _on_query_purchases_response(query_result: Dictionary):
 func checkLoadingFinished() -> void:
 	if(purchases_checked and products_loaded):
 		loading_finished.emit()
-		
-		
+	
+
+func _show_error_popup(description:String) -> void:
+	var error_popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU,true,false,popup_dismissed.emit)
+	error_popup.title.text = tr("ERROR")
+	error_popup.description.text = description
+
+
+func show_ad_removal_popup() -> void:
+	ad_removal_popup = UINavigator.open_from_scene(AD_REMOVAL_POPUP)
+	update_popup()
+#	UINavigator.open(ad_removal_popup)
+
+
+func update_popup():
+	if products_loaded and purchases_checked and !no_ads_purchased and is_instance_valid(ad_removal_popup):
+		ad_removal_popup.button_yes.pressed.connect.call_deferred(_on_button_yes_pressed)
+		ad_removal_popup.button_no.pressed.connect.call_deferred(_on_button_no_pressed)
+		#var currency = remove_ads_product.one_time_purchase_offer_details.price_currency_code
+		var price : String = remove_ads_product.one_time_purchase_offer_details.formatted_price
+		#ad_removal_popup.title.text = remove_ads_product.name
+		#ad_removal_popup.description.text = remove_ads_product.description
+		ad_removal_popup.price_label.text = price
+
+
+func _on_button_no_pressed() -> void:
+	popup_dismissed.emit()
+	UINavigator.back()
+	
+
+func _on_button_yes_pressed() -> void:
+	Logging.logMessage("Trying to purchase ad removal!")
+	billing_client.purchase(remove_ads_id)
+
+
+
 func _on_purchase_updated(response: Dictionary):
 	Logging.logMessage("Purchases updated")
 	var response_ok:bool = false
@@ -155,6 +168,10 @@ func _on_purchase_updated(response: Dictionary):
 								Logging.logMessage("Verifying purchase...")
 								_ad_removal_purchase = purchase
 								send_verification_request(purchase)
+								UINavigator.back()
+								var wait_popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU)
+								wait_popup.title.text = tr("REMOVE_AD_WAIT_MESSAGE")
+								wait_popup.description.text = tr("VERIFYING_PURCHASE")
 					billing_client.PurchaseState.PENDING:
 						var pending_popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU)
 						pending_popup.title.text = tr("BILLING_PENDING_TITLE")
@@ -181,7 +198,7 @@ func _on_purchase_updated(response: Dictionary):
 			
 	if not response_ok:
 		Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
-	
+
 
 func _check_retry_purchase() -> void:
 	consecutive_exceptions+=1
@@ -193,6 +210,13 @@ func _check_retry_purchase() -> void:
 		Logging.warn("Maximum number of retries has been reached!")
 		_show_error_popup(tr("UNKNOWN_ERROR"))
 		consecutive_exceptions = 0
+		
+
+func send_verification_request(purchase:Dictionary) -> void:
+	var strPurchase:String = str(purchase)
+	
+	var task = Firebase.Functions.execute("verifyPurchase", HTTPClient.METHOD_POST,{}, {"data":strPurchase})
+	task.function_executed.connect(_on_fb_verification_finished)
 
 
 func _on_fb_verification_finished(status, response) -> void:
@@ -214,7 +238,7 @@ func _on_fb_task_error(code, status, message) -> void:
 	Logging.error("Message: " +  str(message))
 	_show_error_popup("An unknown error occurred") #TODO: translate these
 	#TODO: Something 
-
+	
 
 func _on_acknowledge_purchase_response(response: Dictionary):
 	Logging.logMessage("Acknowledge purchase response")
@@ -232,17 +256,5 @@ func _on_acknowledge_purchase_response(response: Dictionary):
 	popup_dismissed.emit()
 
 
-func _show_error_popup(description:String) -> void:
-	var error_popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU,true,false,popup_dismissed.emit)
-	error_popup.title.text = tr("ERROR")
-	error_popup.description.text = description
-
-
-func _on_button_yes_pressed() -> void:
-	Logging.logMessage("Trying to purchase ad removal!")
-	billing_client.purchase(remove_ads_id)
-	
-
-func _on_button_no_pressed() -> void:
-	popup_dismissed.emit()
-	UINavigator.back()
+func _consume_purchase() -> void:
+	billing_client.consume_purchase(_ad_removal_purchase.purchase_token)
