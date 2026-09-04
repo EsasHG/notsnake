@@ -159,8 +159,8 @@ func _on_retry_button_pressed() -> void:
 	var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
 	loseMusic.stop()
 	BGmusic.play()
-	GameSettings.startGame()
 	GameSettings.on_gameBegin.connect(queue_free)
+	GameSettings.startGame()
 
 
 func _on_main_menu_button_pressed() -> void:
@@ -171,6 +171,7 @@ func _on_main_menu_button_pressed() -> void:
 	var loseMusic = get_tree().root.find_child("LoseMusic", true, false)
 	loseMusic.stop()
 	GameSettings.mainMenu()
+	BGmusic.play()
 	queue_free()
 
 
