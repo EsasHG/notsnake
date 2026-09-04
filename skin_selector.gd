@@ -215,7 +215,6 @@ func _on_child_visibility_changed() -> void:
 	
 func _confirm_choices() -> void:
 	if _current_skin != GlobalInputMap.skins_selected[0]:
-		var new_color: Color = _head.self_modulate
 		GlobalInputMap.skins_selected[0] = _current_skin
 		GameSettings.on_dogSkinChanged.emit(_current_skin)
 	if _current_hat != GlobalInputMap.hats_selected[0]:

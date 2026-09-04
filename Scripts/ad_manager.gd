@@ -78,15 +78,25 @@ func initialize() -> void:
 			_can_show_interstitial_ad = true
 			)
 		interstitial_ad_timer.start()
-		if !GameSettings.game_running:
+		
+		if !GameSettings.game_running or GameSettings.play_tutorial:
 			interstitial_ad_timer.paused = true
-		GameSettings.on_gameBegin.connect(func(): 
-			Logging.logMessage("Unpausing ad timer")
-			interstitial_ad_timer.paused = false)
-		GameSettings.on_gameOver.connect(func(): 
-			Logging.logMessage("Pausing ad timer")
-			
-			interstitial_ad_timer.paused = true)
+		
+		GameSettings.on_gameBegin.connect(_unpause_ad_timer)
+		GameSettings.on_gameOver.connect(_pause_ad_timer)
+		GameSettings.on_gamePaused.connect(_pause_ad_timer)
+		GameSettings.on_gameUnpaused.connect(_unpause_ad_timer)
+
+
+func _pause_ad_timer() -> void:
+	Logging.logMessage("Pausing ad timer")
+	interstitial_ad_timer.paused = true
+
+
+func _unpause_ad_timer() -> void:
+	if !GameSettings.play_tutorial:
+		Logging.logMessage("Unpausing ad timer")
+		interstitial_ad_timer.paused = false
 
 
 func _on_admob_initialization_completed(_status_data: InitializationStatus) -> void:
@@ -94,6 +104,7 @@ func _on_admob_initialization_completed(_status_data: InitializationStatus) -> v
 	admob_initialized = true
 	#check_consent_status()
 	on_admob_initialized.emit()
+	
 	setup_ads()
 
 	#Logging.logMessage("Loading consent form")
@@ -190,7 +201,7 @@ func show_consent_form() -> void:
 			admob.load_consent_form()
 	
 
-func _on_admob_banner_ad_failed_to_load(ad_info: AdInfo, error_data: LoadAdError) -> void:
+func _on_admob_banner_ad_failed_to_load(_ad_info: AdInfo, error_data: LoadAdError) -> void:
 	var response_infos:Array[AdapterResponseInfo] = error_data.get_response_info().get_adapter_responses()
 	Logging.error("Banner ad failed to load!")
 	banner_ad_loading = false
@@ -286,18 +297,48 @@ func _on_admob_consent_form_dismissed(error_data: FormError) -> void:
 	admob.update_consent_info()
 
 
-func _on_admob_interstitial_ad_dismissed_full_screen_content(ad_info: AdInfo) -> void:
+func _on_admob_interstitial_ad_dismissed_full_screen_content(_ad_info: AdInfo) -> void:
 	Logging.logMessage("Interstitial Ad Dismissed")
 
 
-func _on_admob_interstitial_ad_clicked(ad_info: AdInfo) -> void:
+func _on_admob_interstitial_ad_clicked(_ad_info: AdInfo) -> void:
 	Logging.logMessage("Interstitial Ad Clicked")
 
 
-func _on_admob_banner_ad_refreshed(ad_info: AdInfo, response_info: ResponseInfo) -> void:
+func _on_admob_banner_ad_refreshed(_ad_info: AdInfo, _response_info: ResponseInfo) -> void:
 	Logging.logMessage("Banner Ad Refreshed")
 	var new_size = admob.get_banner_dimension_in_pixels()
 	DisplayServer.screen_get_scale()
 	if banner_ad_size != new_size:
 		banner_ad_size = new_size
 		GameSettings.on_banner_ad_changed.emit()
+
+
+func _on_admob_interstitial_ad_failed_to_load(ad_info: AdInfo, error_data: LoadAdError) -> void:
+	Logging.error("Interstitial Ad failed to load!")
+	var response_infos:Array[AdapterResponseInfo] = error_data.get_response_info().get_adapter_responses()
+	for response:AdapterResponseInfo in response_infos:
+		var ad_error : AdError = response.get_ad_error()
+		if ad_error:
+			Logging.error("interstitial ad error: " + str(ad_error.get_code()) + " " + ad_error.get_message())
+
+
+func _on_admob_interstitial_ad_failed_to_show_full_screen_content(ad_info: AdInfo, error_data: AdError) -> void:
+	Logging.error("Interstitial Ad failed to show full screen content!")
+	var response_infos:Array[AdapterResponseInfo] = error_data.get_response_info().get_adapter_responses()
+	for response:AdapterResponseInfo in response_infos:
+		var ad_error : AdError = response.get_ad_error()
+		if ad_error:
+			Logging.error("interstitial ad error: " + str(ad_error.get_code()) + " " + ad_error.get_message())
+
+
+func _on_admob_interstitial_ad_impression(ad_info: AdInfo) -> void:
+	Logging.logMessage("Interstitial Ad impression registered")
+
+
+func _on_admob_interstitial_ad_refreshed(ad_info: AdInfo, response_info: ResponseInfo) -> void:
+	Logging.logMessage("Interstitial Ad refreshed")
+
+
+func _on_admob_interstitial_ad_showed_full_screen_content(ad_info: AdInfo) -> void:
+	Logging.logMessage("Interstitial Ad showed full screen content")

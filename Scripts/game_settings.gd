@@ -600,7 +600,7 @@ func _exit_game_startup_loading_screen() -> void:
 		game_startup_loading_screen.transition_out()
 
 
-func _on_signup_succeeded(auth_info:Dictionary) -> void:
+func _on_signup_succeeded(_auth_info:Dictionary) -> void:
 	Logging.logMessage("Firebase signup succeeded!")
 	firebase_init_finished = true
 	_check_init_finisehed()

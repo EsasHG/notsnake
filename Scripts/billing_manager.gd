@@ -219,7 +219,7 @@ func send_verification_request(purchase:Dictionary) -> void:
 	task.function_executed.connect(_on_fb_verification_finished)
 
 
-func _on_fb_verification_finished(status, response) -> void:
+func _on_fb_verification_finished(_status, response) -> void:
 	if response.has("error"):
 		Logging.error("Firebase Function returned an error: " + response["error"])
 		# Example: Handle specific error states

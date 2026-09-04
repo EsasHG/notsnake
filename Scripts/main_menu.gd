@@ -2,7 +2,8 @@ extends Control
 
 class_name MainMenu
 
-var menu_active = true;
+var menu_active = true
+var show_from_start = false
 const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
 const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 
@@ -30,7 +31,6 @@ const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 @export var feedback_link : String
 
 func _ready() -> void:
-	UINavigator.open.call_deferred(buttons,false, true)
 	GameSettings.on_gameBegin.connect(queue_free)
 	if OS.has_feature("mobile"):
 		quit_button.visible = false;
@@ -45,17 +45,13 @@ func _ready() -> void:
 		if sign_in_button:
 			sign_in_button.visible = false
 		start_button.grab_focus(true)
-		
+	
 	visible = true
-	buttons.visible = true
 	level_select_container.visible = false
 	locked_message_container.visible = false
 	tutorial_question_container.visible = false
-	get_tree().create_timer(0.5).timeout.connect(func():	
-		var blackPanelTween = get_tree().create_tween()
-		blackPanelTween.set_ease(Tween.EASE_IN)
-		blackPanelTween.tween_property($Panel2, "modulate:a", 0, 1.5)
-		)
+	logo.visible = true
+	
 	
 	start_button.visibility_changed.connect(func(): 
 			if start_button.visible:
@@ -73,7 +69,26 @@ func _ready() -> void:
 			sign_in_button.visible = buttons.visible
 			)
 	_on_viewport_changed()
-
+	check_play_in_animations.call_deferred()
+	
+func check_play_in_animations() -> void:
+	if show_from_start:
+		buttons.visible = true
+	else:
+		buttons.visible = false
+		logo.scale = Vector2(0.3,0.3)
+		var tween_length : float = 0.35 
+		var logo_tween : Tween = get_tree().create_tween()
+		logo_tween.set_ease(Tween.EASE_OUT)
+		logo_tween.tween_property(logo,"scale",Vector2(1,1),tween_length).set_trans(Tween.TRANS_BACK)
+		await get_tree().create_timer(0.15).timeout
+		buttons.visible = true
+		buttons.scale = Vector2(0.3,0.3)
+		var button_tween : Tween = get_tree().create_tween()
+		button_tween.set_ease(Tween.EASE_OUT)
+		button_tween.tween_property(buttons,"scale",Vector2(1,1),tween_length).set_trans(Tween.TRANS_BACK)
+		button_tween.finished.connect(UINavigator.open.bind(buttons,false, true))
+		
 
 func create_level_buttons() -> void:
 	if !level_buttons:
@@ -108,9 +123,8 @@ func _on_viewport_changed() -> void:
 		logo.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP,Control.PRESET_MODE_KEEP_SIZE)
 		logo.position.y += 50
 		buttons.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM,Control.PRESET_MODE_KEEP_SIZE)
-		buttons.position.y -= 200
+		buttons.position.y -= 300
 		#buttons.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
-	
 	else:
 		logo.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT,Control.PRESET_MODE_KEEP_SIZE)
 		logo.position.y += 50
@@ -172,7 +186,7 @@ func _on_map_selected(map_name:String):
 	start_game()
 
 
-func _on_locked_map_selected(map_name:String):
+func _on_locked_map_selected(_map_name:String):
 	UINavigator.open(locked_message_container)
 	locked_message_description.text = tr("MAP_UNLOCK_CONDITION")
 	
