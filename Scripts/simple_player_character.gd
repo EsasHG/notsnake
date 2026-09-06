@@ -127,11 +127,10 @@ func _process(delta: float) -> void:
 	
 	if(rotateRight && playerControl):
 		dir = 1
-		rotate(delta*ROTATE_SPEED*OVERALL_SPEED)
 	else:
 		dir = -1
-		rotate(-delta*ROTATE_SPEED*OVERALL_SPEED)
 		
+	rotate(dir*delta*ROTATE_SPEED*OVERALL_SPEED)
 	#Player has to move and rotate before the sprites so we don't override their global rotation by rotating the player. 
 	move_local_y(delta*MOVE_SPEED*OVERALL_SPEED)
 	

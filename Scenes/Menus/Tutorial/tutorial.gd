@@ -31,7 +31,7 @@ func _ready() -> void:
 		print("Ad dimension in pixels: ",GameSettings.adManager.admob.get_banner_dimension_in_pixels())
 	
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _dragging:
 		var current_mouse_pos = get_global_mouse_position()
 		var delta_mouse_pos = current_mouse_pos - prev_mouse_pos

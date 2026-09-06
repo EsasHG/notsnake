@@ -60,7 +60,7 @@ func transition_out() -> void:
 	Logging.logMessage("transitioning out!")
 	var tween:Tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(panel, "modulate:a", 0, transitionTime) #TODO: something fancy to find a better end point?
+	tween.tween_property(panel, "modulate:a", 0, transitionTime) 
 	#tween.tween_property(panel, "position", Vector2(-start_x,0), transitionTime) #TODO: something fancy to find a better end point?
 	tween.tween_callback(_transition_out_finished)
 

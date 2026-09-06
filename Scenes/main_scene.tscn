@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://2rjb4w7s6uto"]
 
 [ext_resource type="PackedScene" uid="uid://3va5fhmx5hn4" path="res://Scenes/Bubble Cutscene/bubble_cutscene.tscn" id="1_gnsmo"]
+[ext_resource type="Script" uid="uid://88kul0olvf02" path="res://Scenes/Menus/safe_area_margin.gd" id="2_oyb3p"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_psl12"]
 [ext_resource type="Script" uid="uid://brq0l2fygvy7n" path="res://Scripts/fps_tracker.gd" id="3_2ebs2"]
 [ext_resource type="Script" uid="uid://dk0kh7s0cylgw" path="res://Scripts/game_visible_ui.gd" id="4_oyb3p"]
@@ -8,6 +9,7 @@
 [ext_resource type="Script" uid="uid://70vyyvp51k8q" path="res://Scenes/Menus/Arena/round_timer_display.gd" id="6_76v2p"]
 [ext_resource type="Script" uid="uid://bk38lwjwmwmqo" path="res://Scripts/score_label.gd" id="6_b48ew"]
 [ext_resource type="PackedScene" uid="uid://cuenmscfk4h76" path="res://Scenes/Menus/log_window.tscn" id="7_8edxt"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="7_jvnna"]
 [ext_resource type="PackedScene" uid="uid://gsu5a1hu0rjf" path="res://Scenes/Menus/scene_transition.tscn" id="8_5oxhp"]
 [ext_resource type="Script" uid="uid://c1ktgg75y0rmt" path="res://Scripts/audio_manager.gd" id="9_nt2eh"]
 [ext_resource type="AudioStream" uid="uid://bejk7rxl7y8dk" path="res://Assets/Sound/zapsplat_cartoon_musical_orchestral_pizzicato_riff_ending_fail_92164.mp3" id="10_76v2p"]
@@ -45,7 +47,8 @@ Vector2i(1, 0): {
 
 [node name="Main" type="Node" unique_id=1937019595]
 
-[node name="BubbleCutscene" parent="." unique_id=1365938795 instance=ExtResource("1_gnsmo")]
+[node name="BubbleCutscene" parent="." unique_id=1365938795 node_paths=PackedStringArray("skip_button") instance=ExtResource("1_gnsmo")]
+skip_button = NodePath("../CanvasLayer/Gui/Skip")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=107664094]
 
@@ -58,6 +61,68 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
+[node name="Skip" type="Button" parent="CanvasLayer/Gui" unique_id=1700735237]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -251.0
+offset_top = -267.0
+offset_right = -75.0
+offset_bottom = -191.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme = ExtResource("2_psl12")
+text = "SKIP_INTRO"
+flat = true
+script = ExtResource("7_jvnna")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Gui" unique_id=1196840040]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+script = ExtResource("2_oyb3p")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Gui/MarginContainer" unique_id=258898023]
+layout_mode = 2
+size_flags_vertical = 0
+script = ExtResource("4_oyb3p")
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Gui/MarginContainer/HBoxContainer" unique_id=936554379]
+custom_minimum_size = Vector2(0, 82)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+theme = ExtResource("2_psl12")
+theme_override_font_sizes/font_size = 60
+text = "SCORE"
+vertical_alignment = 1
+script = ExtResource("6_b48ew")
+
+[node name="PauseButton" type="Button" parent="CanvasLayer/Gui/MarginContainer/HBoxContainer" unique_id=530047473]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 2
+theme = ExtResource("2_psl12")
+theme_type_variation = &"EmptyButton"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 100
+text = "II"
+script = ExtResource("5_psl12")
+
 [node name="FPS_Tracker" type="Label" parent="CanvasLayer/Gui" unique_id=630340280]
 visible = false
 layout_mode = 0
@@ -66,48 +131,6 @@ offset_right = 105.0
 offset_bottom = 259.0
 theme = ExtResource("2_psl12")
 script = ExtResource("3_2ebs2")
-
-[node name="AudioButtons" type="Control" parent="CanvasLayer/Gui" unique_id=548944593]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("4_oyb3p")
-
-[node name="PauseButton" type="Button" parent="CanvasLayer/Gui/AudioButtons" unique_id=530047473]
-process_mode = 3
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -107.0
-offset_top = 65.0
-offset_right = -70.0
-offset_bottom = 115.0
-grow_horizontal = 0
-size_flags_vertical = 3
-theme = ExtResource("2_psl12")
-theme_type_variation = &"EmptyButton"
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 60
-text = "II"
-script = ExtResource("5_psl12")
-
-[node name="ScoreLabel" type="Label" parent="CanvasLayer/Gui" unique_id=936554379]
-visible = false
-layout_mode = 0
-offset_left = 40.0
-offset_top = 65.0
-offset_right = 275.0
-offset_bottom = 148.0
-theme = ExtResource("2_psl12")
-theme_override_font_sizes/font_size = 60
-text = "SCORE"
-script = ExtResource("6_b48ew")
 
 [node name="LogWindow" parent="CanvasLayer/Gui" unique_id=812355967 instance=ExtResource("7_8edxt")]
 layout_mode = 1
@@ -196,5 +219,5 @@ unique_name_in_owner = true
 script = ExtResource("18_oyb3p")
 metadata/_custom_type_script = "uid://c7rjippj2i4of"
 
-[connection signal="pressed" from="CanvasLayer/Gui/AudioButtons/PauseButton" to="CanvasLayer/Gui/AudioButtons/PauseButton" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Gui/MarginContainer/HBoxContainer/PauseButton" to="CanvasLayer/Gui/MarginContainer/HBoxContainer/PauseButton" method="_on_pressed"]
 [connection signal="transition_out_finished" from="CanvasLayer/SceneTransition" to="BubbleCutscene" method="startBubbleCutscene"]

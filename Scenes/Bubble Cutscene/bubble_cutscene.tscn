@@ -12,11 +12,12 @@
 script = ExtResource("1_hhurv")
 
 [node name="BubbleCamera" type="Camera2D" parent="." unique_id=549315961]
+position = Vector2(0, 95)
 zoom = Vector2(1.1, 1.1)
-limit_left = -953
-limit_top = -535
-limit_right = 953
-limit_bottom = 535
+limit_left = -1633
+limit_top = -1389
+limit_right = 1647
+limit_bottom = 1342
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
@@ -42,3 +43,9 @@ scale = Vector2(0.636438, 0.636438)
 
 [node name="ThoughtBubble_Sad" parent="." unique_id=2105242594 instance=ExtResource("7_4yith")]
 position = Vector2(172, -169)
+
+[node name="Direction Change Timer" type="Timer" parent="." unique_id=240344191]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Direction Change Timer" to="." method="change_direction"]

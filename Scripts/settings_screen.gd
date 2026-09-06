@@ -43,8 +43,7 @@ func _ready() -> void:
 		consent_form_button.visible = false
 		
 	if not GameSettings.billingManager or GameSettings.billingManager.no_ads_purchased:
-		#ad_removal_button.visible = false
-		pass
+		ad_removal_button.visible = false
 	else:
 		ad_removal_button.visible = true
 			
@@ -149,7 +148,8 @@ func _on_button_pressed() -> void:
 			)
 		add_child(timer)
 	_debug_press_count +=1
-	timer.start.call_deferred(0.5)
+	print("Presses: ", _debug_press_count, " Time left: ", timer.time_left)
+	timer.start.call_deferred(0.35)
 	pass # Replace with function body.
 
 
