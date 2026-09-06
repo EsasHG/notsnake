@@ -51,7 +51,7 @@ You can close this and keep playing the game in the meantime","Trenger du å gj�
 Du kan lukke denne meldingen og fortsette å spille mens du venter.",
 BILLING_FEATURE_NOT_SUPPORTED,This feature is not supported.,Denne funksjonen støttes ikke på din enhet.,
 BILLING_ITEM_UNAVAILABLE,The item is no longer avaliable.,Denne varen er ikke lenger tilgjengelig.,
-BILLING_PURCHASE_VERIFICATION_INVALID,The purchase could not be validated...,Kjøpet kunne ikke valideres...,
+BILLING_PURCHASE_VERIFICATION_INVALID,Could not validate purchase,Kunne ikke validere betalingen,
 ITEM_ALREADY_OWNED,You seem to already own this.,Det ser ut som du allerede eier dette produktet.,
 PURCHASE_ALREADY_PENDING,You already have a pending purchase.,Du har allerede en ventende betaling.,
 REMOVE_AD_WAIT_MESSAGE,Please wait,Vennligst vent,
@@ -139,3 +139,4 @@ TUTORIAL_7,"Try to get as many treats as you can, and then catch your tail!","Pr
 TUTORIAL_8,Good luck!,Lykke til!,
 FEEDBACK_BUTTON,Give Feedback,Gi Tilbakemelding,
 VERSION,Version,Versjon,
+SKIP_INTRO,Skip >>,Hopp over >>,
