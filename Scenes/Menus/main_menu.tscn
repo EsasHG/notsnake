@@ -2,17 +2,10 @@
 
 [ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
-[ext_resource type="Script" uid="uid://n878hmblwv3d" path="res://Scripts/map.gd" id="8_5egv6"]
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="8_vtepg"]
-[ext_resource type="Resource" uid="uid://csf486hunk2iy" path="res://Scenes/Maps/Winter.tres" id="9_0xbgx"]
-[ext_resource type="Resource" uid="uid://cibsfp4rd5p5b" path="res://Scenes/Maps/Field.tres" id="9_vtepg"]
-[ext_resource type="Resource" uid="uid://ce2xllrb7yjod" path="res://Scenes/Maps/Park.tres" id="10_8dnnj"]
-[ext_resource type="Resource" uid="uid://br6kp3c2pxqet" path="res://Scenes/Maps/Square.tres" id="11_m3bi6"]
 [ext_resource type="Texture2D" uid="uid://b66jsl7mt57nl" path="res://Assets/UI/Google Branding/Theme=Dark, Show text=Yes, Shape=Pill, Platform=Android+Web@2x.png" id="12_8bdjp"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="12_12hqc"]
-[ext_resource type="Resource" uid="uid://c786inhs2hhtg" path="res://Scenes/Maps/Small.tres" id="12_wyh8j"]
 [ext_resource type="Texture2D" uid="uid://cyv58jfdwkjpt" path="res://Assets/UI/Google Branding/Theme=Light, Show text=Yes, Shape=Pill, Platform=Android+Web@2x.png" id="13_fx838"]
-[ext_resource type="Resource" uid="uid://oa287witflah" path="res://Scenes/Maps/Forest.tres" id="13_ujyyl"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="13_vtepg"]
 [ext_resource type="Script" uid="uid://1dr1kq5ex2bw" path="res://Scenes/Menus/ad_layout.gd" id="15_8bdjp"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="15_8dws6"]
@@ -93,7 +86,6 @@ mouse_filter = 2
 script = ExtResource("1_jrsic")
 sign_in_button = NodePath("Logo/GoogleSignIn")
 buttonTheme = ExtResource("8_vtepg")
-levels = Array[ExtResource("8_5egv6")]([ExtResource("9_vtepg"), ExtResource("10_8dnnj"), ExtResource("9_0xbgx"), ExtResource("11_m3bi6"), ExtResource("12_wyh8j"), ExtResource("13_ujyyl")])
 level_buttons_size = 215.0
 feedback_link = "https://forms.gle/R1QdRBykNZQTnVqdA"
 

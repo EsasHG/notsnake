@@ -14,6 +14,8 @@ func _ready() -> void:
 			_hide_banner_panel()
 	else:
 		_hide_banner_panel()
+		
+
 func _on_banner_ad_changed() -> void:
 	Logging.logMessage("Banner ad changed!")
 	_show_banner_panel()

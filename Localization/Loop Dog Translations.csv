@@ -49,6 +49,13 @@ BILLING_PENDING_TITLE,Waiting for purchase to finish...,Venter på at betalingen
 BILLING_PENDING_DESCRIPTION,"Do you need to do something in another app? 
 You can close this and keep playing the game in the meantime","Trenger du å gjøre noe i et annet program?
 Du kan lukke denne meldingen og fortsette å spille mens du venter.",
+BILLING_FEATURE_NOT_SUPPORTED,This feature is not supported.,Denne funksjonen støttes ikke på din enhet.,
+BILLING_ITEM_UNAVAILABLE,The item is no longer avaliable.,Denne varen er ikke lenger tilgjengelig.,
+BILLING_PURCHASE_VERIFICATION_INVALID,The purchase could not be validated...,Kjøpet kunne ikke valideres...,
+ITEM_ALREADY_OWNED,You seem to already own this.,Det ser ut som du allerede eier dette produktet.,
+PURCHASE_ALREADY_PENDING,You already have a pending purchase.,Du har allerede en ventende betaling.,
+REMOVE_AD_WAIT_MESSAGE,Please wait,Vennligst vent,
+VERIFYING_PURCHASE,Verifying purchase,Verifiserer betalingen,
 EDIT_DOG,Change style,Endre utseende,
 CURRENCY,Treats,Godbiter,
 CHANGE_DOG,Change dog,Bytt hund,

@@ -104,11 +104,14 @@ text = "SETTINGS"
 horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Label" unique_id=1466089934]
-layout_mode = 0
-offset_left = 300.0
-offset_top = 3.0
-offset_right = 340.0
-offset_bottom = 43.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 87.0
+offset_right = 127.0
+offset_bottom = 50.0
+grow_horizontal = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_b4as5")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_b4as5")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_b4as5")

@@ -1,5 +1,6 @@
 extends Control
-@onready var resume: AudioButton = $Panel/VBoxContainer/HBoxContainer2/VBoxContainer/Resume
+@onready var resume: AudioButton = $Panel/VBoxContainer/VBoxContainer/Resume
+
 @onready var v_box_container: VBoxContainer = $Panel/VBoxContainer
 
 const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")

@@ -15,6 +15,7 @@ var remove_ads_id : String = "loopdog_remove_ads"
 var products_loaded : bool = false
 var purchases_checked : bool = false
 var no_ads_purchased: bool = false
+var no_ads_purchase_pending: bool = false
 
 var ad_removal_popup : PopupContainer
 var remove_ads_product
@@ -90,20 +91,29 @@ func _on_query_purchases_response(query_result: Dictionary):
 	if query_result.response_code == BillingClient.BillingResponseCode.OK:
 		Logging.logMessage("Purchase query success")
 		for purchase in query_result.purchases:
-			if purchase.purchase_state == billing_client.PurchaseState.PURCHASED:
-				for id in purchase.product_ids:
-					if id == remove_ads_id:
-						_ad_removal_purchase = purchase
-						if not purchase.is_acknowledged:
-							Logging.logMessage("Unacknowledged purchase found. Verifying purchase...")
-							if Firebase.Auth and not Firebase.Auth.auth.is_empty():
-								send_verification_request(purchase)
-							else: 
-								await Firebase.ready
-								send_verification_request(purchase)
-						else:
-							no_ads_purchased = true
-							GameSettings.remove_all_ads()
+			match purchase.purchase_state:
+				billing_client.PurchaseState.PURCHASED:
+					for id in purchase.product_ids:
+						if id == remove_ads_id:
+							_ad_removal_purchase = purchase
+							if not purchase.is_acknowledged:
+								Logging.warn("Unacknowledged purchase found. Verifying purchase...")
+								if GameSettings.firebase_init_finished:
+									send_verification_request(purchase)
+								else: 
+									GameSettings.on_firebase_init_finished.connect(send_verification_request.bind(purchase),CONNECT_ONE_SHOT)
+							else:
+								no_ads_purchased = true
+								no_ads_purchase_pending = false
+								GameSettings.remove_all_ads()
+				billing_client.PurchaseState.PENDING:
+					for id in purchase.product_ids:
+						if id == remove_ads_id:
+							_ad_removal_purchase = purchase
+							no_ads_purchase_pending = true
+				_: 
+					Logging.error("Purchase with unknown state found! Purchase state: " + billing_client.PurchaseState.keys()[purchase.purchase_state])
+					
 		purchases_checked = true
 		update_popup()	
 		checkLoadingFinished()
@@ -124,8 +134,13 @@ func _show_error_popup(description:String) -> void:
 
 
 func show_ad_removal_popup() -> void:
-	ad_removal_popup = UINavigator.open_from_scene(AD_REMOVAL_POPUP)
-	update_popup()
+	if no_ads_purchased:
+		_show_error_popup(tr("ITEM_ALREADY_OWNED"))
+	elif no_ads_purchase_pending:
+		_show_error_popup(tr("PURCHASE_ALREADY_PENDING"))
+	else:
+		ad_removal_popup = UINavigator.open_from_scene(AD_REMOVAL_POPUP)
+		update_popup()
 #	UINavigator.open(ad_removal_popup)
 
 
@@ -134,7 +149,14 @@ func update_popup():
 		ad_removal_popup.button_yes.pressed.connect.call_deferred(_on_button_yes_pressed)
 		ad_removal_popup.button_no.pressed.connect.call_deferred(_on_button_no_pressed)
 		#var currency = remove_ads_product.one_time_purchase_offer_details.price_currency_code
-		var price : String = remove_ads_product.one_time_purchase_offer_details.formatted_price
+		var details_list:Array = remove_ads_product.one_time_purchase_offer_details_list
+		var price:String = "ERROR"
+		if details_list.size() > 1:
+			Logging.warn("More than one item in product details list!")
+		elif details_list.size() == 0:
+			Logging.warn("No items in product details list!")
+		else:
+			price = details_list[0].formatted_price
 		#ad_removal_popup.title.text = remove_ads_product.name
 		#ad_removal_popup.description.text = remove_ads_product.description
 		ad_removal_popup.price_label.text = price
@@ -148,7 +170,6 @@ func _on_button_no_pressed() -> void:
 func _on_button_yes_pressed() -> void:
 	Logging.logMessage("Trying to purchase ad removal!")
 	billing_client.purchase(remove_ads_id)
-
 
 
 func _on_purchase_updated(response: Dictionary):
@@ -173,32 +194,39 @@ func _on_purchase_updated(response: Dictionary):
 								wait_popup.title.text = tr("REMOVE_AD_WAIT_MESSAGE")
 								wait_popup.description.text = tr("VERIFYING_PURCHASE")
 					billing_client.PurchaseState.PENDING:
-						var pending_popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU)
+						var pending_popup : PopupContainer = UINavigator.open_from_scene(POPUP_MENU,true,false,UINavigator.back)
 						pending_popup.title.text = tr("BILLING_PENDING_TITLE")
 						pending_popup.description.text = tr("BILLING_PENDING_DESCRIPTION")
+						no_ads_purchase_pending = true
 					_:
 						Logging.error("Unknown purchase state: " + str(purchase.PurchaseState))
-						_show_error_popup("Unable to verify that the purchase went through correctly.")
+						_show_error_popup(tr("BILLING_PURCHASE_VERIFICATION_INVALID"))
 	else:
-		match response.response_code:	#TODO: translate these
+		match response.response_code:
 			billing_client.BillingResponseCode.FEATURE_NOT_SUPPORTED:
-				_show_error_popup("This feature is not supported.")
+				_show_error_popup(tr("BILLING_FEATURE_NOT_SUPPORTED"))
 			billing_client.BillingResponseCode.USER_CANCELED:
-				_show_error_popup("The purchase was cancelled by the user.")
-				UINavigator.back()
+				Logging.logMessage("Purchase cancelled by user")
 				UINavigator.back()
 			billing_client.BillingResponseCode.ITEM_UNAVAILABLE:
-				_show_error_popup("The item is no longer avaliable.")
+				_show_error_popup(tr("BILLING_ITEM_UNAVAILABLE"))
 			billing_client.BillingResponseCode.DEVELOPER_ERROR:
 				_show_error_popup(tr("UNKNOWN_ERROR"))
-			billing_client.BillingResponseCode.ITEM_ALREADY_OWNED: ##TODO Could retry this too sometimes?
-				_show_error_popup("You seem to already own this.")
+			billing_client.BillingResponseCode.ITEM_ALREADY_OWNED: 
+				_show_error_popup(tr("ITEM_ALREADY_OWNED"))
+				query_purchases()
+				await billing_client.query_purchases_response
+				if !no_ads_purchased:
+					_check_retry_purchase()
+			billing_client.BillingResponseCode.BILLING_UNAVAILABLE:
+				Logging.logMessage("Billing unavaliable")
+				UINavigator.back()
 			_: 
 				_check_retry_purchase()
 			
 	if not response_ok:
-		Logging.error("Something went wrong with the purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
-
+		Logging.error("Something went wrong with the purchase! Status: " + str(billing_client.BillingResponseCode.keys()[response.response_code]) + ". Message: " + response.debug_message)
+		no_ads_purchase_pending = false
 
 func _check_retry_purchase() -> void:
 	consecutive_exceptions+=1
@@ -214,7 +242,6 @@ func _check_retry_purchase() -> void:
 
 func send_verification_request(purchase:Dictionary) -> void:
 	var strPurchase:String = str(purchase)
-	
 	var task = Firebase.Functions.execute("verifyPurchase", HTTPClient.METHOD_POST,{}, {"data":strPurchase})
 	task.function_executed.connect(_on_fb_verification_finished)
 
@@ -229,14 +256,16 @@ func _on_fb_verification_finished(_status, response) -> void:
 		billing_client.acknowledge_purchase(_ad_removal_purchase.purchase_token)
 	else:
 		Logging.warn("Function succeeded, but purchase is invalid! Reason: " + response["result"]["result"])
-		_show_error_popup("The purchase could not be validated...") #TODO: translate these
+		_show_error_popup(tr("BILLING_PURCHASE_VERIFICATION_INVALID"))
 	
 
 func _on_fb_task_error(code, status, message) -> void:
 	Logging.error("Purchase verification failed! Status code: " + str(code))
 	Logging.error("Status: " +  str(status))
 	Logging.error("Message: " +  str(message))
-	_show_error_popup("An unknown error occurred") #TODO: translate these
+	_show_error_popup(tr("BILLING_PURCHASE_VERIFICATION_INVALID"))
+	popup_dismissed.connect(UINavigator.back, CONNECT_ONE_SHOT)
+	
 	#TODO: Something 
 	
 
@@ -250,9 +279,10 @@ func _on_acknowledge_purchase_response(response: Dictionary):
 			popup.description.text = tr("AD_REMOVAL_PURCHASED_DESCRIPTION")
 			Logging.logMessage("Purchase acknowledged!")
 			no_ads_purchased = true
+			no_ads_purchase_pending = false
 			GameSettings.remove_all_ads()
 		_:
-			Logging.logMessage("Error acknowledging purchase! Status: " + str(response.response_code) + ". Message: " + response.debug_message)
+			Logging.logMessage("Error acknowledging purchase! Status: " + response.response_code + ". Message: " + response.debug_message)
 	popup_dismissed.emit()
 
 

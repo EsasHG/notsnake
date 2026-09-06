@@ -25,11 +25,11 @@ var _current_size_y : float
 
 var wait_consent: bool = true
 
-
 func _ready() -> void:
 	GameSettings.on_viewportChanged.connect(_on_viewport_size_changed)
 	orientation_change_timer.timeout.connect(setup_banner_ad)
 	banner_background.visible = false
+
 
 func _on_viewport_size_changed() -> void:
 	#_current_size_y = get_viewport_rect().size.y
@@ -224,8 +224,6 @@ func _on_admob_banner_ad_loaded(ad_info: AdInfo, _response_info: ResponseInfo) -
 	var dim_pix = admob.get_banner_dimension_in_pixels(ad_info.get_ad_id())
 	var ratio = get_viewport_rect().end.y/DisplayServer.screen_get_size().y
 	banner_ad_size = dim_pix* ratio
-	Logging.logMessage("Banner ad size: " + str(banner_ad_size))
-	Logging.logMessage("Screen size: " + str(get_viewport_rect().size))
 	banner_background.custom_minimum_size.y = banner_ad_size.y
 	banner_background.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
 	banner_background.visible = true

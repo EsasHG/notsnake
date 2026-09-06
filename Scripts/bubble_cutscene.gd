@@ -9,7 +9,7 @@ extends Node2D
 @onready var thoughtBubble2 = $ThoughtBubble_2
 @onready var thoughtBubble3 = $ThoughtBubble_3
 @onready var bubble_dog: PlayerDog = $BubbleDog
-@onready var skip_button: AudioButton = $CanvasLayer/Skip
+@export var skip_button: AudioButton
 
 var bubblesSpawned : int = 0
 var activeBubble : Node2D
@@ -36,7 +36,8 @@ func _ready() -> void:
 	GameSettings.on_gameBegin.connect(queue_free)
 	if(skipEntireCutscene):
 		_on_skip_pressed()
-		
+	else:
+		skip_button.pressed.connect(_on_skip_pressed)
 
 func startBubbleCutscene():
 	bubble_dog.visible = true
@@ -107,11 +108,8 @@ func deleteBubble():
 			bubble = thoughtBubble3
 		_:
 			move_dog = true
-			skip_button.visible = false
-			
 			var timer = _create_timer(3.0)
 			timer.timeout.connect(showMenu)
-#			queue_free()
 			return	
 	bubblesSpawned+=1
 	activeBubble = bubble
@@ -127,7 +125,8 @@ func deleteBubble():
 
 
 func showMenu():
-	skip_button.visible = false
+	if skip_button:
+		skip_button.visible = false
 	var mainMenu = null
 	if GameSettings.game_mode == GameSettings.GAME_MODE.SINGLE_PLAYER:
 		mainMenu = UINavigator.open_from_scene(MAIN_MENU,false,true)

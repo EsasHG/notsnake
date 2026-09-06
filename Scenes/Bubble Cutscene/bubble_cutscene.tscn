@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://og63l6ftex25" path="res://Scenes/Bubble Cutscene/thought_bubble_2.tscn" id="5_6a4oy"]
 [ext_resource type="PackedScene" uid="uid://bighcj0mfvk1w" path="res://Scenes/Bubble Cutscene/thought_bubble_3.tscn" id="6_8w46o"]
 [ext_resource type="PackedScene" uid="uid://cgndgpv6ds1ja" path="res://Scenes/Bubble Cutscene/thought_bubble_sadface.tscn" id="7_4yith"]
-[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="8_8plnj"]
-[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="9_rujgs"]
 
 [node name="BubbleCutscene" type="Node2D" unique_id=1363020299]
 script = ExtResource("1_hhurv")
@@ -50,23 +48,4 @@ position = Vector2(172, -169)
 wait_time = 0.5
 autostart = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1312692650]
-layer = 0
-
-[node name="Skip" type="Button" parent="CanvasLayer" unique_id=1234908442]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -216.0
-offset_top = 65.0
-offset_right = -40.0
-offset_bottom = 141.0
-grow_horizontal = 0
-theme = ExtResource("8_8plnj")
-text = "Skip >>"
-flat = true
-script = ExtResource("9_rujgs")
-metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
-
 [connection signal="timeout" from="Direction Change Timer" to="." method="change_direction"]
-[connection signal="pressed" from="CanvasLayer/Skip" to="." method="_on_skip_pressed"]

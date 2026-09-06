@@ -3,6 +3,8 @@ extends Control
 class_name  GameOverScreen
 
 @export var bonusScreenThreshold = 30
+@export var score_label:Label
+@export var high_score_label:Label
 @export var leaderboard_button: AudioButton
 
 @export var end_textures : Array[TextureRect]
@@ -61,8 +63,8 @@ func _set_score(score : int):
 	Logging.logMessage("Setting Scores in game over screen!")
 	var highScore : int = GameSettings.getCurrentMapHighScore()
 	
-	$ScoreLabels/ScoreLabel.text = tr("SCORE") + " " + var_to_str(score)
-	$ScoreLabels/HighScoreLabel.text =  tr("BEST_SCORE") + " " + var_to_str(highScore)
+	score_label.text = tr("SCORE") + " " + var_to_str(score)
+	high_score_label.text =  tr("BEST_SCORE") + " " + var_to_str(highScore)
 	
 
 func game_over(players:Array[PlayerDog]):

@@ -21,8 +21,6 @@ const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 @onready var logo: TextureRect = $Logo
 
 @export var buttonTheme:Theme
-## TODO: Use global input map instead of this...
-@export var levels : Array[Map]
 @export var level_buttons_size : float:
 	set(new_value):
 		level_buttons_size = new_value
