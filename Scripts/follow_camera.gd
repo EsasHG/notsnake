@@ -12,16 +12,30 @@ func _ready() -> void:
 	if GameSettings.game_mode == GameSettings.GAME_MODE.SINGLE_PLAYER:
 		var player_spawner = get_tree().root.find_child(PLAYER_SPAWN_NAME,true,false)
 		player_spawner.player_spawned.connect(set_follow_node)
+
 	GameSettings.on_gameBegin.connect(find_dog)
 	GameSettings.on_banner_ad_changed.connect(_set_limit_bottom)
+	drag_horizontal_enabled = true
+	drag_vertical_enabled = true
+	drag_left_margin = 0.2
+	drag_top_margin = 0.2
+	drag_right_margin = 0.2
+	drag_bottom_margin = 0.2
+	
 	_set_limit_bottom()
+
 
 
 func _set_limit_bottom() -> void:
 	if GameSettings.adManager and GameSettings.adManager.banner_ad_showing:
 		limit_bottom = initial_limit_bottom + GameSettings.adManager.banner_ad_size.y
+		var landscape = GameSettings.viewport_mode == GameSettings.VIEWPORT_MODE.LANDSCAPE
+		drag_bottom_margin = 0.1 if landscape else 0.2
+		drag_top_margin = 0.3 if landscape else 0.2
 	else:
 		limit_bottom = initial_limit_bottom
+		drag_bottom_margin = 0.2
+		drag_top_margin = 0.2
 
 
 func set_follow_node(node_to_follow : Node2D) -> void:

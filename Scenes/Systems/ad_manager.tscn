@@ -23,7 +23,7 @@ under_age_of_consent = 1
 android_debug_application_id = "ca-app-pub-3940256099942544~3347511713"
 android_real_application_id = "ca-app-pub-1333268640689716~3036536539"
 remove_interstitial_ads_after_displayed = true
-test_device_hashed_ids = Array[String](["ee326b21-924e-4aae-a548-f65d31fadb9a "])
+test_device_hashed_ids = Array[String](["aa9f5c7d583c366eb193d1a61c66495df2c03c0ea3c619d973ff1983380d412f", "614bee3facfda476fd7c3e8a31a6df76cf2c1308c6b3408043ff0c7b0b68b39e", "309ccc6f41ae57681e120f589a031f2a0db255821496c25c995260439a5b71ce", "526acbda665d46206142cb9e96e02a1e85be8dc8fe4a459dcc8909668a101d0c"])
 
 [node name="Interstitial Ad Timer" type="Timer" parent="." unique_id=45894705]
 wait_time = 180.0

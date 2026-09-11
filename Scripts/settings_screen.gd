@@ -46,7 +46,9 @@ func _ready() -> void:
 		ad_removal_button.visible = false
 	else:
 		ad_removal_button.visible = true
-			
+	
+	if GameSettings.game_running:
+		$Tutorial.visible = false
 	GameSettings.on_dogSkinChanged.connect(_on_skin_changed)
 	GameSettings.on_dogHatChanged.connect(_on_hat_changed)
 	UINavigator.add_callable.call_deferred(_on_back)
@@ -124,8 +126,10 @@ func _on_tutorial_pressed() -> void:
 	GameSettings.currentMap = "FIELD"
 	GlobalInputMap.ControllerIds = [0,-1,-1,-1]
 	GameSettings.startGame()
-	get_tree().root.find_child("MainMenu",true,false).queue_free.call_deferred()
-	UINavigator.back()
+	var menu = get_tree().root.find_child("MainMenu",true,false)
+	if is_instance_valid(menu):
+		menu.queue_free.call_deferred()
+		UINavigator.back()
 
 
 func _on_language_select_pressed() -> void:
