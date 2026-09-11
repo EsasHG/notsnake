@@ -66,7 +66,6 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_behavior_recursive = 2
-action_mode = 0
 text = "BACK"
 
 [node name="Panel2" type="Panel" parent="OuterPanelContainer/VBoxContainer/HBoxContainer" unique_id=566270272]
@@ -84,8 +83,12 @@ theme_type_variation = &"EmptyPanel"
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_behavior_recursive = 2
-action_mode = 0
 text = "NEXT"
+
+[node name="Label" type="Label" parent="OuterPanelContainer/VBoxContainer/HBoxContainer" unique_id=377640764]
+visible = false
+layout_mode = 2
+text = "0/5"
 
 [connection signal="gui_input" from="OuterPanelContainer" to="." method="_on_outer_panel_container_gui_input"]
 [connection signal="pressed" from="OuterPanelContainer/VBoxContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

@@ -328,7 +328,7 @@ func _actually_start_game():
 func game_over():
 	if ! game_running: 
 		return
-		
+	
 	if currentWorld != null:
 		currentWorld.queue_free()
 		currentWorld = null
