@@ -138,7 +138,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="UnlocksContainer" type="VBoxContainer" parent="." unique_id=742566856]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -181,7 +180,7 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_vertical = 0
 theme_type_variation = &"HeaderLarge"
-text = "LEVEL_UNLOCKED"
+text = "HAT_UNLOCKED_TITLE"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UnlocksContainer/OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=1084489137]

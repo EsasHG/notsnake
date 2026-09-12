@@ -5,7 +5,6 @@
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="8_vtepg"]
 [ext_resource type="Texture2D" uid="uid://b66jsl7mt57nl" path="res://Assets/UI/Google Branding/Theme=Dark, Show text=Yes, Shape=Pill, Platform=Android+Web@2x.png" id="12_8bdjp"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="12_12hqc"]
-[ext_resource type="Texture2D" uid="uid://cyv58jfdwkjpt" path="res://Assets/UI/Google Branding/Theme=Light, Show text=Yes, Shape=Pill, Platform=Android+Web@2x.png" id="13_fx838"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="13_vtepg"]
 [ext_resource type="Script" uid="uid://1dr1kq5ex2bw" path="res://Scenes/Menus/ad_layout.gd" id="15_8bdjp"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="15_8dws6"]
@@ -114,9 +113,8 @@ offset_top = -99.0
 offset_right = 380.25
 offset_bottom = -19.0
 grow_vertical = 0
-toggle_mode = true
 texture_normal = ExtResource("12_8bdjp")
-texture_pressed = ExtResource("13_fx838")
+texture_pressed = ExtResource("12_8bdjp")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=240977837]
 visible = false
@@ -321,7 +319,6 @@ theme = ExtResource("15_8dws6")
 theme_type_variation = &"EmptyPanel"
 
 [node name="MainButtons" type="VBoxContainer" parent="." unique_id=880943489]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
