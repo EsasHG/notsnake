@@ -303,11 +303,13 @@ func _on_admob_interstitial_ad_clicked(_ad_info: AdInfo) -> void:
 	Logging.logMessage("Interstitial Ad Clicked")
 
 
-func _on_admob_banner_ad_refreshed(_ad_info: AdInfo, _response_info: ResponseInfo) -> void:
-	Logging.logMessage("Banner Ad Refreshed")
-	var new_size = admob.get_banner_dimension_in_pixels()
-	DisplayServer.screen_get_scale()
+func _on_admob_banner_ad_refreshed(ad_info: AdInfo, _response_info: ResponseInfo) -> void:
+	Logging.logMessage("Banner Ad Refreshed")	
+	var dim_pix = admob.get_banner_dimension_in_pixels(ad_info.get_ad_id())
+	var ratio = get_viewport_rect().end.y/DisplayServer.screen_get_size().y
+	var new_size = dim_pix* ratio
 	if banner_ad_size != new_size:
+		banner_background.custom_minimum_size.y = banner_ad_size.y
 		banner_ad_size = new_size
 		GameSettings.on_banner_ad_changed.emit()
 
