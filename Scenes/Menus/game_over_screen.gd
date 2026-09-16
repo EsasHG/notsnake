@@ -141,7 +141,8 @@ func check_unlocks() -> void:
 			unlock_texture.texture = icon
 			unlock_texture.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		unlock_title_label.text = tr(type + "_UNLOCKED_TITLE")
-		unlock_description_label.text = tr(unlock) + " " + tr(type + "_UNLOCKED_DESCRIPTION") 
+		unlock_description_label.text = ""
+		#unlock_description_label.text = tr(unlock) + " " + tr(type + "_UNLOCKED_DESCRIPTION") 
 		Logging.logMessage("Showing unlocked item!")
 		UINavigator.open(unlocks_container, false, false, check_unlocks)
 	else:
