@@ -351,6 +351,7 @@ text = "SETTINGS"
 script = ExtResource("13_vtepg")
 
 [node name="Feedback" type="Button" parent="MainButtons" unique_id=518457150]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 theme = ExtResource("15_8dws6")
