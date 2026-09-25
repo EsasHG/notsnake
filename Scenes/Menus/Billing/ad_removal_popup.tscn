@@ -29,11 +29,13 @@ autowrap_mode = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer" parent_id_path=PackedInt32Array(920526114) index="3" unique_id=971621022]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("3_4cmwp")
+theme_type_variation = &"ButtonHBoxContainer"
 
 [node name="Button_Yes" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="0" unique_id=1564857878]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 2
 mouse_filter = 1
 theme = ExtResource("3_4cmwp")
 text = "AD_REMOVAL_YES"
@@ -42,7 +44,7 @@ script = ExtResource("4_2uel7")
 [node name="Button_No" type="Button" parent="OuterPanelContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer" index="1" unique_id=255784658]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 10
 mouse_filter = 1
 theme = ExtResource("3_4cmwp")
 text = "AD_REMOVAL_NO"

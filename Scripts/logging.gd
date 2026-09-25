@@ -7,8 +7,8 @@ var missedTypes:Array[int]
 
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	_findLogWindow.call_deferred()
-	
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("_debug_log"):

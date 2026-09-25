@@ -1,5 +1,6 @@
 extends Control
-@onready var resume: AudioButton = $Panel/VBoxContainer/HBoxContainer2/VBoxContainer/Resume
+@onready var resume: AudioButton = $Panel/VBoxContainer/VBoxContainer/Resume
+
 @onready var v_box_container: VBoxContainer = $Panel/VBoxContainer
 
 const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
@@ -15,33 +16,7 @@ func _ready() -> void:
 #do we really want this here?
 func _on_buttons_back() -> void:
 	$Panel.visible = false
-	next_count(3)
-	GameSettings.unpause_game()
 	UINavigator.back()
-
-func next_count(count : int) -> void:
-	$Countdown.scale = Vector2(2,2)
-	$Countdown.modulate.a = 1
-	
-	if count > 0:
-		$Countdown.text = str(count)
-		var t = create_countdown_tween()
-		t.tween_callback(next_count.bind(count-1))
-	else:
-		$Countdown.text = "Loop!"
-		GameSettings.unpause_game()
-		var t = create_countdown_tween()
-		t.tween_callback(UINavigator.back)
-
-
-func create_countdown_tween():
-	$Countdown.visible = true
-	var tween = get_tree().create_tween()
-	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.set_trans(Tween.TRANS_QUAD)
-	tween.tween_property($Countdown, "modulate:a", 0, 1.0).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property($Countdown,"scale", Vector2(25,25),1.0).set_ease(Tween.EASE_IN)
-	return tween
 
 
 func _on_settings_pressed() -> void:

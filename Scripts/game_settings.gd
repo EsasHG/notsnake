@@ -14,6 +14,8 @@ signal on_viewportChanged()
 signal on_somethingUnlocked(unlock:String)
 signal on_languageSelected()
 signal on_scoreChanged()
+signal on_banner_ad_changed()
+signal on_firebase_init_finished()
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 
@@ -33,7 +35,6 @@ var round_time_seconds:int = 60
 var lives = 1
 var game_running:bool = false
 var language = "automatic"
-var banner_ad_showing = false
 var game_startup_loading_screen:SceneTransition = null
 var skip_intro:bool = false
 const SCENE_TRANSITION = preload("uid://gsu5a1hu0rjf")
@@ -191,6 +192,7 @@ func playgames_auth_checked() -> void:
 	
 
 func _do_deferred_setup():
+	Firebase.process_mode = Node.PROCESS_MODE_ALWAYS
 	Firebase.Auth.signup_succeeded.connect(_on_signup_succeeded)
 	Firebase.Auth.login_failed.connect(_on_login_failed)
 	Firebase.Auth.login_anonymous()
@@ -258,6 +260,9 @@ func mainMenu():
 
 
 func startGame():
+	var safe_area = DisplayServer.get_display_safe_area()
+	Logging.logMessage("Safe area pos: " + str(safe_area.position))
+	Logging.logMessage("Safe area size: " + str(safe_area.size))
 	assert(!game_running)
 	currentScore = 0
 	var transition : SceneTransition = _create_transition()
@@ -323,7 +328,7 @@ func _actually_start_game():
 func game_over():
 	if ! game_running: 
 		return
-		
+	
 	if currentWorld != null:
 		currentWorld.queue_free()
 		currentWorld = null
@@ -582,13 +587,13 @@ func _check_init_finisehed() -> void:
 	if billing_init_finished and file_loading_finished and admob_init_finished and auth_checked and firebase_init_finished:
 		_exit_game_startup_loading_screen()
 	else:
-		Logging.warn("Init is not finished!")
-		Logging.warn("Billing finished: " + str(billing_init_finished))
-		Logging.warn("File loading finished: " + str(file_loading_finished))
-		Logging.warn("Admob finished: " + str(admob_init_finished))
-		Logging.warn("PlayGames Auth finished: " + str(auth_checked))
-		Logging.warn("Firebase finished: " + str(firebase_init_finished))
-		Logging.warn("deferred setup finished: " + str(deferred_setup_complete))
+		Logging.logMessage("Init is not finished!")
+		Logging.logMessage("Billing finished: " + str(billing_init_finished))
+		Logging.logMessage("File loading finished: " + str(file_loading_finished))
+		Logging.logMessage("Admob finished: " + str(admob_init_finished))
+		Logging.logMessage("PlayGames Auth finished: " + str(auth_checked))
+		Logging.logMessage("Firebase finished: " + str(firebase_init_finished))
+		Logging.logMessage("deferred setup finished: " + str(deferred_setup_complete))
 		
 
 func _exit_game_startup_loading_screen() -> void:
@@ -599,9 +604,10 @@ func _exit_game_startup_loading_screen() -> void:
 		game_startup_loading_screen.transition_out()
 
 
-func _on_signup_succeeded(auth_info:Dictionary) -> void:
+func _on_signup_succeeded(_auth_info:Dictionary) -> void:
 	Logging.logMessage("Firebase signup succeeded!")
 	firebase_init_finished = true
+	on_firebase_init_finished.emit()
 	_check_init_finisehed()
 
 
@@ -612,6 +618,7 @@ func _on_login_failed(code : String, message:String) -> void:
 		403:
 			Logging.error("Unauthorized! Could not login to firebase.")
 			firebase_init_finished = true
+			on_firebase_init_finished.emit()
 			return
 	Logging.logMessage("Consecutive exceptions: " + str(consecutive_exceptions))
 	if consecutive_exceptions <= max_retries:
@@ -620,4 +627,5 @@ func _on_login_failed(code : String, message:String) -> void:
 	else:
 		Logging.error("Max consecutive exceptions reached. Could not login to firebase.")
 		firebase_init_finished = true
+		on_firebase_init_finished.emit()
 		

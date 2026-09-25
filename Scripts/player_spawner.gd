@@ -15,6 +15,7 @@ signal player_spawned(player:PlayerDog)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
 	if spawn_on_start:
 		spawn_player()
 	spawn_timer.wait_time = respawn_time

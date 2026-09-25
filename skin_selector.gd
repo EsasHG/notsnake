@@ -50,6 +50,9 @@ func _ready() -> void:
 
 
 func _create_hat_buttons() -> void:
+	for c in hat_buttons.get_children():
+		c.queue_free()
+	
 	var keys = GlobalInputMap.hats.keys()
 	keys.sort_custom(func(a,b): 
 			return GlobalInputMap.hats[a].unlocked > GlobalInputMap.hats[b].unlocked
@@ -193,6 +196,7 @@ func _item_purchased() -> void:
 	GameSettings.total_treats -= item.price
 	_create_skin_buttons()
 	_create_hat_buttons()
+	SaveManager.save_game()
 	UINavigator.back()
 	
 	
@@ -211,7 +215,6 @@ func _on_child_visibility_changed() -> void:
 	
 func _confirm_choices() -> void:
 	if _current_skin != GlobalInputMap.skins_selected[0]:
-		var new_color: Color = _head.self_modulate
 		GlobalInputMap.skins_selected[0] = _current_skin
 		GameSettings.on_dogSkinChanged.emit(_current_skin)
 	if _current_hat != GlobalInputMap.hats_selected[0]:

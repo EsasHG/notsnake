@@ -1,29 +1,29 @@
 #
 # © 2024-present https://github.com/cengiz-pz
 #
-
-class_name ConsentRequestParameters extends RefCounted
+class_name ConsentRequestParameters
+extends RefCounted
 
 enum DebugGeography {
-	NOT_SET = -1, ## Don't specify location. (Actual location will be used.)
-	DISABLED = 0, ## Use actual location.
-	EEA = 1, ## Use European Economic Area.
-	NOT_EEA = 2, ## Deprecated.
-	REGULATED_US_STATE = 3, ## Use a regulated state of USA. (ie. California)
-	OTHER = 4 ## Use any non-regulated location.
+	NOT_SET = -1,  ## Don't specify location. (Actual location will be used.)
+	DISABLED = 0,  ## Use actual location.
+	EEA = 1,  ## Use European Economic Area.
+	NOT_EEA = 2,  ## Deprecated.
+	REGULATED_US_STATE = 3,  ## Use a regulated state of USA. (ie. California)
+	OTHER = 4,  ## Use any non-regulated location.
 }
 
-const IS_REAL_PROPERTY: String = "is_real"
-const TAG_FOR_UNDER_AGE_OF_CONSENT_PROPERTY: String = "tag_for_under_age_of_consent"
-const DEBUG_GEOGRAPHY_PROPERTY: String = "debug_geography"
-const TEST_DEVICE_HASHED_IDS_PROPERTY: String = "test_device_hashed_ids"
+const IS_REAL_PROPERTY := &"is_real"
+const TAG_FOR_UNDER_AGE_OF_CONSENT_PROPERTY := &"tag_for_under_age_of_consent"
+const DEBUG_GEOGRAPHY_PROPERTY := &"debug_geography"
+const TEST_DEVICE_HASHED_IDS_PROPERTY := &"test_device_hashed_ids"
 
 var _data: Dictionary
 
 
 func _init():
 	_data = {
-		TEST_DEVICE_HASHED_IDS_PROPERTY: []
+		TEST_DEVICE_HASHED_IDS_PROPERTY: [],
 	}
 
 

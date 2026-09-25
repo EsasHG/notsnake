@@ -111,7 +111,7 @@ func _cleanup() -> bool:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Press"):
+	if event.is_action_released("Press"):
 		var moved_back = back()
 		if moved_back and streamPlayer:
 			streamPlayer.play()	#is this ok?

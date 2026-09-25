@@ -6,13 +6,11 @@ extends VBoxContainer
 @export var hold_controls: CheckBox
 @export var tap_controls: CheckBox
 
-@export var language_selector: OptionButton 
 @export var googlePlayButtonsContainer: HBoxContainer 
 
 @export var enable_cloud_button : AudioButton
 @export var ad_removal_button : AudioButton
 @onready var consent_form_button: LinkButton = $ConsentFormButton
-
 
 const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
@@ -45,24 +43,12 @@ func _ready() -> void:
 		consent_form_button.visible = false
 		
 	if not GameSettings.billingManager or GameSettings.billingManager.no_ads_purchased:
-		#ad_removal_button.visible = false
-		pass
+		ad_removal_button.visible = false
 	else:
 		ad_removal_button.visible = true
-			
 	
-	language_selector.clear()
-	for locale in TranslationServer.get_loaded_locales():
-		## the method below returned "Norwegian bokmål" for "nb", and that didn't feel right to me.
-		var lang = TranslationServer.get_language_name(locale)
-		if locale == "nb":
-			language_selector.add_item("Norsk")
-		else:
-			language_selector.add_item(lang)
-			
-		if GameSettings.language == locale:
-			language_selector.select(language_selector.item_count-1)
-			
+	if GameSettings.game_running:
+		$Tutorial.visible = false
 	GameSettings.on_dogSkinChanged.connect(_on_skin_changed)
 	GameSettings.on_dogHatChanged.connect(_on_hat_changed)
 	UINavigator.add_callable.call_deferred(_on_back)
@@ -140,8 +126,10 @@ func _on_tutorial_pressed() -> void:
 	GameSettings.currentMap = "FIELD"
 	GlobalInputMap.ControllerIds = [0,-1,-1,-1]
 	GameSettings.startGame()
-	get_tree().root.find_child("MainMenu",true,false).queue_free.call_deferred()
-	UINavigator.back()
+	var menu = get_tree().root.find_child("MainMenu",true,false)
+	if is_instance_valid(menu):
+		menu.queue_free.call_deferred()
+		UINavigator.back()
 
 
 func _on_language_select_pressed() -> void:
@@ -164,7 +152,8 @@ func _on_button_pressed() -> void:
 			)
 		add_child(timer)
 	_debug_press_count +=1
-	timer.start.call_deferred(0.5)
+	print("Presses: ", _debug_press_count, " Time left: ", timer.time_left)
+	timer.start.call_deferred(0.35)
 	pass # Replace with function body.
 
 

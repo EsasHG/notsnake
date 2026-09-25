@@ -1,14 +1,14 @@
 #
 # © 2024-present https://github.com/cengiz-pz
 #
+class_name ResponseInfo
+extends RefCounted
 
-class_name ResponseInfo extends RefCounted
-
-const ADAPTER_RESPONSES_PROPERTY: String = "adapter_responses"
-const LOADED_ADAPTER_RESPONSE_PROPERTY: String = "loaded_adapter_response"
-const ADAPTER_CLASS_NAME_PROPERTY: String = "adapter_class_name"
-const NETWORK_TAG_PROPERTY: String = "network_tag"
-const RESPONSE_ID_PROPERTY: String = "response_id"
+const ADAPTER_RESPONSES_PROPERTY := &"adapter_responses"
+const LOADED_ADAPTER_RESPONSE_PROPERTY := &"loaded_adapter_response"
+const ADAPTER_CLASS_NAME_PROPERTY := &"adapter_class_name"
+const NETWORK_TAG_PROPERTY := &"network_tag"
+const RESPONSE_ID_PROPERTY := &"response_id"
 
 var _data: Dictionary
 
@@ -27,13 +27,15 @@ func get_adapter_responses() -> Array[AdapterResponseInfo]:
 
 
 func get_loaded_adapter_response() -> AdapterResponseInfo:
-	return AdapterResponseInfo.new(_data[LOADED_ADAPTER_RESPONSE_PROPERTY]) \
-			if _data.has(LOADED_ADAPTER_RESPONSE_PROPERTY) else null
+	return (
+		AdapterResponseInfo.new(_data[LOADED_ADAPTER_RESPONSE_PROPERTY])
+		if _data.has(LOADED_ADAPTER_RESPONSE_PROPERTY)
+		else null
+	)
 
 
 func get_adapter_class_name() -> String:
-	return _data[ADAPTER_CLASS_NAME_PROPERTY] \
-			if _data.has(ADAPTER_CLASS_NAME_PROPERTY) else ""
+	return _data[ADAPTER_CLASS_NAME_PROPERTY] if _data.has(ADAPTER_CLASS_NAME_PROPERTY) else ""
 
 
 func get_network_tag() -> String:

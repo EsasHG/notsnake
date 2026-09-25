@@ -117,6 +117,15 @@ func save_game() -> void:
 		_save_to_local()
 
 
+func _delete_saves() -> void:
+	snapshotClient.delete_snapshot(_save_file_name)
+	DirAccess.remove_absolute(SETTINGS_FILE)
+	DirAccess.remove_absolute(SCORES_FILE)
+	DirAccess.remove_absolute(UNLOCKS_FILE)
+	DirAccess.remove_absolute(CLOUD_SETTINGS_FILE)
+	DirAccess.remove_absolute(AGE_GROUP_FILE)
+
+	
 func _load_from_cloud() -> bool:
 	if snapshotClient:
 		snapshotClient.load_snapshots(_force_cloudsave_reload)
@@ -262,10 +271,12 @@ func _set_unlocks_save_content(node_data: Dictionary) -> void:
 			if GlobalInputMap.Maps.has(map):
 				GlobalInputMap.Maps[map].unlocked = true
 	
+
 	if node_data.has("unlocked_hats"):
 		var unlocked_hats : Array = node_data["unlocked_hats"]
 		for hat in unlocked_hats:
 			GlobalInputMap.hats[hat].unlocked = true
+
 
 	if node_data.has("unlocked_skins"):
 		var unlocked_skins:Array = node_data["unlocked_skins"]

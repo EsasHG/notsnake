@@ -1,14 +1,14 @@
 #
 # © 2024-present https://github.com/cengiz-pz
 #
+class_name AdInfo
+extends RefCounted
 
-class_name AdInfo extends RefCounted
-
-const AD_ID_PROPERTY: String = "ad_id"
-const MEASURED_WIDTH_PROPERTY: String = "measured_width"
-const MEASURED_HEIGHT_PROPERTY: String = "measured_height"
-const IS_COLLAPSIBLE_PROPERTY: String = "is_collapsible"
-const LOAD_AD_REQUEST_PROPERTY: String = "load_ad_request"
+const AD_ID_PROPERTY := &"ad_id"
+const MEASURED_WIDTH_PROPERTY := &"measured_width"
+const MEASURED_HEIGHT_PROPERTY := &"measured_height"
+const IS_COLLAPSIBLE_PROPERTY := &"is_collapsible"
+const LOAD_AD_REQUEST_PROPERTY := &"load_ad_request"
 
 var _data: Dictionary
 

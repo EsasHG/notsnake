@@ -1,28 +1,72 @@
 extends Control
-@onready var popup_menu: AdLayout = $PopupMenu
-@onready var next_button: Button = $PopupMenu/OuterPanelContainer/VBoxContainer/HBoxContainer/NextButton
-@onready var panel: Panel = $PopupMenu/OuterPanelContainer/VBoxContainer/HBoxContainer/Panel
-@onready var back_button: Button = $PopupMenu/OuterPanelContainer/VBoxContainer/HBoxContainer/BackButton
-@onready var description_label: Label = $PopupMenu/OuterPanelContainer/VBoxContainer/DescriptionLabel
+@onready var popup_menu: PanelContainer = $OuterPanelContainer
+@onready var next_button: Button = $OuterPanelContainer/VBoxContainer/HBoxContainer/NextButton
+@onready var panel: Panel = $OuterPanelContainer/VBoxContainer/HBoxContainer/Panel
+@onready var back_button: Button = $OuterPanelContainer/VBoxContainer/HBoxContainer/BackButton
+@onready var description_label: Label = $OuterPanelContainer/VBoxContainer/DescriptionLabel
+@onready var rot_count_label: Label = $OuterPanelContainer/VBoxContainer/HBoxContainer/Label
+
+
 const PLAYER_SPAWN_NAME = "PlayerStart"
 const SHOW_ARROW_MESSAGE = 5
 var current_message: int  = 1
 var _current_pickup_pos : Vector2
+var _dragging = false
+var prev_mouse_pos: Vector2 = Vector2.ZERO
+var _banner_ad_dimension:Vector2 = Vector2.ZERO
+var prev_dog_dir : bool 
+var _player : PlayerDog
+var dir_changes : int = 0
+var dir_changes_needed : int = 10
+var dir_lock_passed = false
 
 func _ready() -> void:
 	panel.visible = true
 	back_button.visible = false
+	rot_count_label.visible = false
 	description_label.text = tr("TUTORIAL_1")
 	GameSettings.on_pickupSpawned.connect(_pickup_spawned)
 	UINavigator.open.call_deferred(popup_menu,false,true)
 	GameSettings.on_viewportChanged.connect(_on_viewport_changed)
 	_on_viewport_changed()
-	_current_pickup_pos = GameSettings.players[0].arrowTarget
+	_player = GameSettings.players[0]
+	_current_pickup_pos = _player.arrowTarget
 	var player_spawner = get_tree().root.find_child(PLAYER_SPAWN_NAME,true,false)
 	player_spawner.player_spawned.connect(_player_spawned)
+	if GameSettings.adManager and GameSettings.adManager.banner_ad_showing:
+		print("Ad dimension: ",GameSettings.adManager.admob.get_banner_dimension())
+		_banner_ad_dimension = GameSettings.adManager.admob.get_banner_dimension_in_pixels()
+		print("Ad dimension in pixels: ",GameSettings.adManager.admob.get_banner_dimension_in_pixels())
+	
+	
+func _process(_delta: float) -> void:
+	if _dragging:
+		var current_mouse_pos = get_global_mouse_position()
+		var delta_mouse_pos = current_mouse_pos - prev_mouse_pos
+		var popup_rect = popup_menu.get_rect()
+		var new_pos = global_position+delta_mouse_pos
+		if new_pos.x > (0-popup_rect.position.x) and new_pos.x < (get_viewport_rect().size.x - popup_rect.end.x):
+			global_position.x += delta_mouse_pos.x
+			
+		if new_pos.y > (0-popup_rect.position.y) and new_pos.y < (get_viewport_rect().size.y - popup_rect.end.y - _banner_ad_dimension.y):
+			global_position.y += delta_mouse_pos.y
+			
+		prev_mouse_pos = current_mouse_pos
+	if _player and _player.rotateRight != prev_dog_dir:
+		_player_rotated()
+		prev_dog_dir = _player.rotateRight
+
+func _player_rotated() -> void:
+	dir_changes += 1
+	if  current_message == 3 and dir_changes >= dir_changes_needed:
+		next_button.visible = true
+		rot_count_label.visible = false
+		dir_lock_passed = true
+	rot_count_label.text = str(dir_changes) + "/" + str(dir_changes_needed)
 	
 
 func _player_spawned(player:PlayerDog) -> void:
+	_player = player
 	player.arrowTarget = _current_pickup_pos
 	if current_message >= SHOW_ARROW_MESSAGE:
 		await player.ready
@@ -40,7 +84,6 @@ func _on_viewport_changed() -> void:
 			set_anchors_and_offsets_preset(PRESET_TOP_RIGHT,Control.PRESET_MODE_KEEP_SIZE)
 			position.y += 200
 			position.x -= 340.0
-			pass
 
 
 func _on_next_button_pressed() -> void:
@@ -55,6 +98,14 @@ func _on_next_button_pressed() -> void:
 			2:
 				back_button.visible = true
 				panel.visible = false
+			3:
+				var controls = "_HOLD" if GlobalInputMap.Player_Controls_Selected[0] else "_TAP"
+				description_label.text = tr("TUTORIAL_" + str(current_message)+controls)
+				if !dir_lock_passed:
+					next_button.visible = false
+					dir_changes = 0
+					rot_count_label.text = str(dir_changes) + "/" + str(dir_changes_needed)
+					rot_count_label.visible = true
 			SHOW_ARROW_MESSAGE:
 				next_button.visible = false
 				GameSettings.players[0].arrow.visible = true
@@ -86,6 +137,14 @@ func _on_back_button_pressed() -> void:
 			1:
 				panel.visible = true
 				back_button.visible = false
+			2:
+				rot_count_label.visible = false
+			3:
+				var controls = "_HOLD" if GlobalInputMap.Player_Controls_Selected[0] else "_TAP"
+				description_label.text = tr("TUTORIAL_" + str(current_message)+controls)
+				dir_changes = dir_changes_needed
+				rot_count_label.text = str(dir_changes) + "/" + str(dir_changes_needed)
+				rot_count_label.visible = false
 			5:
 				GameSettings.players[0].arrow.visible = true
 				GameSettings.on_pickup.connect(_on_next_button_pressed)
@@ -99,3 +158,12 @@ func _on_back_button_pressed() -> void:
 
 func _pickup_spawned(pickup : Area2D) -> void:
 	_current_pickup_pos = pickup.global_position
+
+
+func _on_outer_panel_container_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("Press"):
+		prev_mouse_pos = get_global_mouse_position()
+		print("Pressing!")
+		_dragging = true
+	elif event.is_action_released("Press"):
+		_dragging = false
