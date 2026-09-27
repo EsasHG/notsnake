@@ -21,7 +21,7 @@ func _ready() -> void:
 	drag_top_margin = 0.2
 	drag_right_margin = 0.2
 	drag_bottom_margin = 0.2
-	
+	zoom = Vector2(1.5,1.5)
 	_set_limit_bottom()
 
 

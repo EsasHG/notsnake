@@ -63,7 +63,7 @@ var player_spawners : Array[Node]
 
 var players : Array[PlayerDog]
 enum VIEWPORT_MODE {PORTRAIT, LANDSCAPE}
-var viewport_mode:VIEWPORT_MODE = VIEWPORT_MODE.LANDSCAPE
+var viewport_mode:VIEWPORT_MODE = VIEWPORT_MODE.PORTRAIT
 
 var currentMap :String
 var sfxVol = linear_to_db(0.8)
@@ -521,7 +521,7 @@ func _on_viewport_size_changed():
 	var viewportSize:Vector2 = get_viewport().size
 	Logging.logMessage("Viewport size: " + str(get_viewport().size))
 	if viewportSize.x >= viewportSize.y:
-		viewport_mode = VIEWPORT_MODE.LANDSCAPE
+		viewport_mode = VIEWPORT_MODE.PORTRAIT
 	else:
 		viewport_mode = VIEWPORT_MODE.PORTRAIT
 	on_viewportChanged.emit()

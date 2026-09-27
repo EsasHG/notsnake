@@ -13,7 +13,7 @@ script = ExtResource("1_hhurv")
 
 [node name="BubbleCamera" type="Camera2D" parent="." unique_id=549315961]
 position = Vector2(0, 95)
-zoom = Vector2(1.1, 1.1)
+zoom = Vector2(1.5, 1.5)
 limit_left = -1633
 limit_top = -1389
 limit_right = 1647

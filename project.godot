@@ -39,16 +39,20 @@ gdscript/warnings/directory_rules={
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1920
 window/size/mode=4
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep_width"
 window/handheld/orientation=6
 
 [dotnet]
 
 project/assembly_name="NotSnake"
+
+[editor]
+
+movie_writer/movie_file="C:/Users/Mascot/Videos/Godot Recordings/loopdog_gameplay_square.ogv"
 
 [editor_plugins]
 
@@ -153,5 +157,5 @@ locale/translations=PackedStringArray("res://Localization/Loop Dog Translations.
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
