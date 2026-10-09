@@ -25,6 +25,7 @@ const DOG_THUMBNAIL = preload("uid://bp1qs2tnveae5")
 var _current_hat : String
 var _current_skin : String
 var _considering_item : String
+var _changes_made : bool = false
 
 func _ready() -> void:
 	_current_hat = GlobalInputMap.hats_selected[0]
@@ -104,7 +105,7 @@ func _create_skin_buttons() -> void:
 	for key in skin_names:
 		var skin:DogSkin = GlobalInputMap.skins[key]
 		var button : Button = ICON_BUTTON.instantiate()
-		button.icon = skin.head.get_frame_texture("default",0)
+		button.icon = skin.icon
 		button.self_modulate = skin.modulate
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		skin_buttons.add_child(button)
@@ -139,16 +140,20 @@ func _on_main_screen_back() -> void:
 	
 	
 func _on_skin_selected(skin_id:String) -> void:
-	_current_skin = skin_id
-	update_visuals(skin_id)
+	if skin_id != _current_skin:
+		_current_skin = skin_id
+		_changes_made = true
+		update_visuals(skin_id)
 	UINavigator.back()
 	
 
 func _on_hat_selected(_hat_id:String) -> void:
-	_current_hat = _hat_id
-	var new_hat = GlobalInputMap.hats[_current_hat]
-	_hat.texture = new_hat.texture
-	_hat.position = new_hat.offset + GlobalInputMap.skins[_current_skin].hat_offset
+	if _hat_id != _current_hat:
+		_current_hat = _hat_id
+		var new_hat = GlobalInputMap.hats[_current_hat]
+		_hat.texture = new_hat.texture
+		_hat.position = new_hat.offset + GlobalInputMap.skins[_current_skin].hat_offset
+		_changes_made = true
 	UINavigator.back()
 	
 
@@ -220,4 +225,6 @@ func _confirm_choices() -> void:
 	if _current_hat != GlobalInputMap.hats_selected[0]:
 		GlobalInputMap.hats_selected[0] = _current_hat
 		GameSettings.on_dogHatChanged.emit(_current_hat)
+	if _changes_made:
+		SaveManager.save_game()
 	UINavigator.back()

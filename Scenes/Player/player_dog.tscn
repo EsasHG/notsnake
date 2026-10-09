@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://bkjd5mneny7c1"]
 
 [ext_resource type="Script" uid="uid://b78ceum26wnjq" path="res://Scripts/simple_player_character.gd" id="1_hgq6l"]
-[ext_resource type="SpriteFrames" uid="uid://doe3fl7h31x3o" path="res://Assets/Dogs/CapitalDog/SF_CapitalDog_Head.tres" id="2_it6ej"]
-[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT.tres" id="3_onfn8"]
+[ext_resource type="SpriteFrames" uid="uid://cf3jfyr4idhji" path="res://Assets/Dogs/OutlinedDog/SF_FACES_C.tres" id="2_it6ej"]
+[ext_resource type="SpriteFrames" uid="uid://crm7qydlje76u" path="res://Assets/Dogs/OutlinedDog/SF_newdog_legsFRONT_C.tres" id="3_onfn8"]
 [ext_resource type="AudioStream" uid="uid://vsxwvpth1gna" path="res://Assets/Sound/bark.mp3" id="4_it6ej"]
 [ext_resource type="Texture2D" uid="uid://espi8xvrclq6" path="res://Assets/Dogs/cosmetics/hat_crown.png" id="5_it6ej"]
 [ext_resource type="Texture2D" uid="uid://bywajg5yonlif" path="res://Assets/UI/arrow.png" id="9_50el2"]
 [ext_resource type="SpriteFrames" uid="uid://bdhta2cfuy4pa" path="res://Assets/Dogs/SF_TAILS-sheet.tres" id="9_xuah4"]
-[ext_resource type="SpriteFrames" uid="uid://dwpt678tie3co" path="res://Assets/Dogs/NewDog/SF_newdog_legsBACK.tres" id="10_it6ej"]
 [ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="10_m7s8p"]
+[ext_resource type="SpriteFrames" uid="uid://b0d8ss37lqdgn" path="res://Assets/Dogs/OutlinedDog/SF_newdog_legsBACK_C.tres" id="10_xuah4"]
 [ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/Dogs/OutlinedDog/TAIL_C.png" id="11_ei6el"]
 [ext_resource type="Script" uid="uid://brb1sob6alono" path="res://Scripts/paused_input_buffer.gd" id="14_x26c4"]
 
@@ -38,7 +38,6 @@ sprite_frames = ExtResource("2_it6ej")
 z_index = -1
 position = Vector2(0, -8)
 sprite_frames = ExtResource("3_onfn8")
-frame_progress = 0.035183866
 
 [node name="BarkSound" type="AudioStreamPlayer2D" parent="Head" unique_id=1187651775]
 stream = ExtResource("4_it6ej")
@@ -89,8 +88,7 @@ frame_progress = 0.90881026
 [node name="Legs_back" type="AnimatedSprite2D" parent="Butt/ButtSprite" unique_id=291010464]
 z_index = -1
 position = Vector2(0, 13)
-sprite_frames = ExtResource("10_it6ej")
-frame_progress = 0.3582303
+sprite_frames = ExtResource("10_xuah4")
 
 [node name="PausedInputBuffer" type="Node2D" parent="." unique_id=2135115763]
 process_mode = 2

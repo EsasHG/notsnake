@@ -13,7 +13,6 @@ extends VBoxContainer
 @onready var consent_form_button: LinkButton = $ConsentFormButton
 
 const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
-const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
 const DEBUG_SETTINGS_CONTAINER = preload("uid://d0dfdlrxfu8iw")
 const CLOUD_MENU = preload("uid://kyb2ynbcw74p")
 const CREDITS = preload("uid://chpsai0xuu3vn")
@@ -49,8 +48,6 @@ func _ready() -> void:
 	
 	if GameSettings.game_running:
 		$Tutorial.visible = false
-	GameSettings.on_dogSkinChanged.connect(_on_skin_changed)
-	GameSettings.on_dogHatChanged.connect(_on_hat_changed)
 	UINavigator.add_callable.call_deferred(_on_back)
 
 
@@ -90,18 +87,6 @@ func _on_language_selector_item_selected(index: int) -> void:
 	var locale = TranslationServer.get_loaded_locales()[index]
 	TranslationServer.set_locale(locale)
 	GameSettings.language = locale
-	_changes_made = true
-
-
-func _on_skin_select_pressed() -> void:
-	UINavigator.open_from_scene(SKIN_SELECTOR)
-
-
-func _on_skin_changed(_skin_id:String) -> void:
-	_changes_made = true
-
-
-func _on_hat_changed(_hat: String):
 	_changes_made = true
 
 

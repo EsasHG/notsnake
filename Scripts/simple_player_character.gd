@@ -56,11 +56,11 @@ func _ready() -> void:
 	iframes_timer.one_shot = true
 	iframes_timer.timeout.connect(func(): _invulnerable = false)
 	add_child(iframes_timer)
-	
-	$Head.play("default")
-	$Head/Legs.play("default")
-	$Butt/ButtSprite/Legs_back.play("default")
-	$Butt/ButtSprite/Tail.play("default")
+	legs
+	head.play("default")
+	legs.play("default")
+	hindLegs.play("default")
+	tail.play("default")
 	add_sprite()
 	get_tree().create_timer(1.0).timeout.connect(func(): butt.get_child(0).disabled = false)
 
@@ -234,6 +234,10 @@ func _on_area_entered(area: Area2D) -> void:
 			
 
 func bark():
+	head.frame = 1
+	get_tree().create_timer(0.3).timeout.connect(func():
+		if head: 
+			head.frame = 0)
 	$Head/BarkSound.pitch_scale = randf_range(0.9,1.1)
 	$Head/BarkSound.play()
 

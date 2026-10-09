@@ -7,12 +7,12 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_veuty")
+"texture": ExtResource("2_xcv33")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_xcv33")
+"texture": ExtResource("1_veuty")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 2.0
 }]
