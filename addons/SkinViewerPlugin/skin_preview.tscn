@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://t85bt1r6sh3c" path="res://addons/SkinViewerPlugin/skin_preview.gd" id="1_oif7w"]
 [ext_resource type="Script" uid="uid://wuegnx1jc224" path="res://addons/SkinViewerPlugin/skin_preview_window.gd" id="2_sf5s6"]
 [ext_resource type="SpriteFrames" uid="uid://cf3jfyr4idhji" path="res://Assets/Dogs/OutlinedDog/SF_FACES_C.tres" id="2_vuop0"]
-[ext_resource type="SpriteFrames" uid="uid://34v6av6vnn0i" path="res://Assets/Dogs/NewDog/SF_newdog_legsFRONT.tres" id="3_18gsr"]
+[ext_resource type="SpriteFrames" uid="uid://crm7qydlje76u" path="res://Assets/Dogs/OutlinedDog/SF_newdog_legsFRONT_C.tres" id="4_vuop0"]
 [ext_resource type="Texture2D" uid="uid://espi8xvrclq6" path="res://Assets/Dogs/cosmetics/hat_crown.png" id="5_vuop0"]
 [ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="5_y566a"]
 [ext_resource type="SpriteFrames" uid="uid://bdhta2cfuy4pa" path="res://Assets/Dogs/SF_TAILS-sheet.tres" id="7_bgp03"]
-[ext_resource type="SpriteFrames" uid="uid://oviwgdg6g7h" path="res://Assets/Dogs/dachs/dachs_legs_back.tres" id="7_sf5s6"]
+[ext_resource type="SpriteFrames" uid="uid://b0d8ss37lqdgn" path="res://Assets/Dogs/OutlinedDog/SF_newdog_legsBACK_C.tres" id="8_18gsr"]
 [ext_resource type="Texture2D" uid="uid://c84i47m2lf0ea" path="res://Assets/Dogs/OutlinedDog/BODY_SEGMENT_C.png" id="9_6imq1"]
 
 [node name="SkinPreview" type="VBoxContainer" unique_id=2063915458]
@@ -39,8 +39,7 @@ frame_progress = 0.897358
 z_index = -1
 texture_filter = 1
 position = Vector2(0, -8)
-sprite_frames = ExtResource("3_18gsr")
-frame_progress = 0.035183866
+sprite_frames = ExtResource("4_vuop0")
 
 [node name="Hat" type="Sprite2D" parent="SubViewportContainer/SubViewport/Dog/Head" unique_id=1220021735]
 position = Vector2(0, -12.5)
@@ -61,8 +60,7 @@ frame_progress = 0.90881026
 z_index = -1
 texture_filter = 1
 position = Vector2(0, 13)
-sprite_frames = ExtResource("7_sf5s6")
-frame_progress = 0.15043773
+sprite_frames = ExtResource("8_18gsr")
 
 [node name="BodySegment" type="Sprite2D" parent="SubViewportContainer/SubViewport/Dog" unique_id=1000558009]
 z_index = -1

@@ -343,6 +343,14 @@ theme = ExtResource("15_8dws6")
 text = "START"
 script = ExtResource("13_vtepg")
 
+[node name="SkinSelect" type="Button" parent="MainButtons" unique_id=939563164]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("15_8dws6")
+text = "EDIT_DOG"
+script = ExtResource("13_vtepg")
+
 [node name="Settings" type="Button" parent="MainButtons" unique_id=65590118]
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
@@ -406,6 +414,7 @@ texture = ExtResource("19_fx838")
 [connection signal="pressed" from="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_on_tutorial_yes_pressed"]
 [connection signal="pressed" from="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/No" to="." method="_on_no_pressed"]
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainButtons/SkinSelect" to="." method="_on_skin_select_pressed"]
 [connection signal="pressed" from="MainButtons/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MainButtons/Feedback" to="." method="_on_feedback_pressed"]
 [connection signal="pressed" from="MainButtons/Quit" to="." method="_on_quit_pressed"]

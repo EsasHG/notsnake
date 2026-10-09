@@ -108,18 +108,20 @@ var hats: Dictionary = {
 	},
 }
 var skins : Dictionary = {
-	#"DEFAULT" = preload("uid://b7af0yq15vqtw"),
-	#"DEFAULT_V_2" = preload("uid://b4aj3wr1celdq"),
 	"DEFAULT" = preload("uid://cax0llp5vepyb"),
-	"BROWN" = preload("uid://ctck1prc87wmx"),
-	"GOLD" = preload("uid://ddnwrn4ojw666"),
+	"BROWN" = preload("uid://crvyc07q2bpp2"),
+	"GOLD" = preload("uid://byb7drkg0uy7i"),
 	"LABRADOR" = preload("uid://d1r7ugtokkbku"),
+	"BLONDE" = preload("uid://c5j0qgebg1tkt"),
 	"ORANGE" = preload("uid://cco5f6wqi6oi"),
 	"SADDLE_BROWN" = preload("uid://cp00enlx3liny"),
 	"MINT" = preload("uid://ndxh4v4hxi7c"),
 	"BASSET" = preload("uid://dma1wttfl715"),
-	"PURPLE" = preload("uid://ckc35hgwesu5u"),
-	#"TINY" = preload("uid://dm3iaacejmpe0"),
-	#"DACHS" = preload("uid://bhv5fouypr0i8"),
-	"PINK" = preload("uid://kfcludfb5rcd"),
+	"PURPLE" = preload("uid://b7tux5yf5omyc"),
+	"PINK" = preload("uid://itqdjc46fuyp"),
+	"GRAYBLUE" = preload("uid://spnblrwecc4m"),
+	"ALIEN_GREEN" = preload("uid://bxvacllhjybkq"),
+	
+	
+	
 }

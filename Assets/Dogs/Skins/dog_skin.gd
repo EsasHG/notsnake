@@ -63,5 +63,8 @@ class_name  DogSkin
 		modulate = value
 		changed.emit()
 		
+@export var icon: Texture2D = preload("uid://dopkokna0w8sq")
+
+
 @export var price: int = 0
 @export var unlocked: bool = false

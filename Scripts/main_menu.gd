@@ -6,6 +6,7 @@ var menu_active = true
 var show_from_start = false
 const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
 const LOCKED_ICON = preload("uid://bq331b3dfslw5")
+const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
 
 @export var sign_in_button: TextureButton 
 @onready var tutorial_question_container: PanelContainer = $AdLayoutContainer/TutorialQuestionContainer
@@ -168,6 +169,7 @@ func _on_start_button_pressed() -> void:
 	else:
 		UINavigator.open(tutorial_question_container)
 
+
 func open_level_select():
 	level_buttons.get_children()[0].grab_focus()
 	UINavigator.open(level_select_container,true)
@@ -221,3 +223,7 @@ func _on_no_pressed() -> void:
 func _on_feedback_pressed() -> void:
 	OS.shell_open(feedback_link)
 	pass # Replace with function body.
+
+
+func _on_skin_select_pressed() -> void:
+	UINavigator.open_from_scene(SKIN_SELECTOR)
