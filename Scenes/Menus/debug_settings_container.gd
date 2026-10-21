@@ -31,8 +31,9 @@ func _on_unlock_maps_pressed() -> void:
 		main_menu.create_level_buttons()
 
 func _on_unlock_skins_pressed() -> void:
-	for key in GlobalInputMap.skins:
-		GlobalInputMap.skins[key].unlocked = true
+	for dog in GlobalInputMap.dogs:
+		for skin in GlobalInputMap.dogs[dog]:
+			GlobalInputMap.dogs[dog][skin].unlocked = true
 
 
 func _on_lock_hats_pressed() -> void:
@@ -54,9 +55,10 @@ func _on_lock_maps_pressed() -> void:
 
 
 func _on_lock_skins_pressed() -> void:
-	for key in GlobalInputMap.skins:
-		if key != "DEFAULT":
-			GlobalInputMap.skins[key].unlocked = false
+	for dog in GlobalInputMap.dogs:
+		for skin in GlobalInputMap.dogs[dog]:
+			if dog != "DEFAULT":
+				GlobalInputMap.dogs[dog][skin].unlocked = false
 	
 
 func _on_back_pressed() -> void:

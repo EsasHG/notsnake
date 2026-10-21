@@ -14,6 +14,8 @@
 [ext_resource type="StyleBox" uid="uid://cur2omqlkol8p" path="res://Assets/Styles/normal_button_stylebox_flat.tres" id="12_qwjhj"]
 [ext_resource type="Script" uid="uid://clh5sp6rrk1m5" path="res://Scenes/Menus/VersionLabel.gd" id="13_64y2j"]
 [ext_resource type="Texture2D" uid="uid://ylcsjr7l3m4j" path="res://Assets/UI/Google Branding/Play Games/games_leaderboards_white.png" id="13_qwjhj"]
+[ext_resource type="Script" uid="uid://cvyh12ndl1iol" path="res://Scenes/Menus/Settings/sound_settings.gd" id="14_64y2j"]
+[ext_resource type="Script" uid="uid://d3feokfaoryiu" path="res://Scenes/Menus/Settings/gameplay_settings.gd" id="15_c0uh7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qwjhj"]
 content_margin_top = 50.0
@@ -41,6 +43,53 @@ texture = ExtResource("11_whg11")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qwjhj"]
 content_margin_top = 10.0
 content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0uh7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gs3il"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.91764706, 0.78039217, 0.3137255, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_64y2j"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.91764706, 0.78039217, 0.3137255, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_udlbk"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_b4as5"]
 
 [node name="AdLayoutContainer" type="VBoxContainer" unique_id=742566856]
 process_mode = 3
@@ -125,6 +174,7 @@ theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_b4as5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_b4as5")
 
 [node name="SoundButtons" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=359946672]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -188,6 +238,7 @@ script = ExtResource("5_64y2j")
 metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=733936477]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer2" unique_id=320440196]
@@ -217,9 +268,11 @@ text = "TAP"
 script = ExtResource("5_64y2j")
 
 [node name="Divider2" type="Control" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1187538925]
+visible = false
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1768239325]
+visible = false
 layout_mode = 2
 alignment = 1
 
@@ -255,10 +308,22 @@ expand_icon = true
 script = ExtResource("5_64y2j")
 
 [node name="Divider" type="Control" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=301674773]
+visible = false
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
+[node name="LanguageSelect2" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=793275521]
+visible = false
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+text = "Game"
+script = ExtResource("5_64y2j")
+
 [node name="LanguageSelect" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=169140364]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
@@ -268,6 +333,7 @@ text = "LANGUAGE"
 script = ExtResource("5_64y2j")
 
 [node name="EnableCloud" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=505666261]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
@@ -276,17 +342,8 @@ theme = ExtResource("1_nfl8x")
 text = "ENABLE_CLOUD_SAVES"
 script = ExtResource("5_64y2j")
 
-[node name="DebugSettings" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1629551732]
-visible = false
-custom_minimum_size = Vector2(130, 50)
-layout_mode = 2
-size_flags_vertical = 4
-mouse_filter = 1
-theme = ExtResource("1_nfl8x")
-text = "DEBUG_SETTINGS"
-script = ExtResource("5_64y2j")
-
 [node name="Tutorial" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=275893717]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
@@ -296,6 +353,7 @@ text = "HOW_TO_PLAY"
 script = ExtResource("5_64y2j")
 
 [node name="PurchaseAdRemoval" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=817169865]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -307,12 +365,101 @@ text = "PURCHASE_AD_REMOVAL"
 script = ExtResource("5_64y2j")
 
 [node name="Credits" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=1116451543]
+visible = false
 custom_minimum_size = Vector2(130, 50)
 layout_mode = 2
 size_flags_vertical = 4
 mouse_filter = 1
 theme = ExtResource("1_nfl8x")
 text = "CREDITS"
+script = ExtResource("5_64y2j")
+
+[node name="DoubleButtons" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=184891564]
+layout_mode = 2
+
+[node name="Left" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons" unique_id=1872999837]
+layout_mode = 2
+
+[node name="Gameplay" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Left" unique_id=1370914895]
+layout_mode = 2
+text = "Gameplay"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="Saves" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Left" unique_id=920640766]
+layout_mode = 2
+text = "Saves"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="Credits" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Left" unique_id=930280304]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+text = "CREDITS"
+script = ExtResource("5_64y2j")
+
+[node name="Test 2" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Left" unique_id=530056941]
+visible = false
+layout_mode = 2
+text = "Test 2"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="AchievementsButton" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Left" unique_id=628490231]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"EmptyButton"
+theme_override_font_sizes/font_size = 26
+text = "ACHIEVEMENTS"
+icon = ExtResource("12_2b6r5")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+script = ExtResource("5_64y2j")
+
+[node name="Right" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons" unique_id=200931452]
+layout_mode = 2
+
+[node name="Audio" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Right" unique_id=1060074294]
+custom_minimum_size = Vector2(237, 0)
+layout_mode = 2
+text = "Audio"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="Language" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Right" unique_id=379067913]
+custom_minimum_size = Vector2(237, 0)
+layout_mode = 2
+text = "Language"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="Test2" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Right" unique_id=1339167697]
+custom_minimum_size = Vector2(237, 0)
+layout_mode = 2
+text = "Test 2"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="LeaderboardsButton" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Right" unique_id=20443450]
+custom_minimum_size = Vector2(90, 90)
+layout_mode = 2
+size_flags_horizontal = 6
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"EmptyButton"
+theme_override_font_sizes/font_size = 26
+text = "LEADERBOARDS"
+icon = ExtResource("13_qwjhj")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
 script = ExtResource("5_64y2j")
 
 [node name="LinkButton" type="LinkButton" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" unique_id=325287330]
@@ -340,6 +487,219 @@ text = "Version: 0.12.6"
 horizontal_alignment = 1
 script = ExtResource("13_64y2j")
 
+[node name="SoundSettings" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer" unique_id=538412410]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"ButtonVBoxContainer"
+alignment = 2
+script = ExtResource("14_64y2j")
+
+[node name="Label" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings" unique_id=924801280]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"HeaderLarge"
+text = "SOUND_SETTINGS"
+horizontal_alignment = 1
+
+[node name="MusicLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings" unique_id=58592591]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"HeaderMedium"
+text = "MUSIC"
+
+[node name="Music" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings" unique_id=484461557]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+
+[node name="MusicIcon" type="TextureRect" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings/Music" unique_id=1828307087]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+texture = ExtResource("5_nfl8x")
+expand_mode = 1
+
+[node name="MusicSlider" type="HSlider" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings/Music" unique_id=310880924]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+max_value = 1.0
+step = 0.1
+tick_count = 8
+
+[node name="SFXLabel" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings" unique_id=1841878621]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"HeaderMedium"
+text = "SFX"
+
+[node name="SFX" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings" unique_id=1007288027]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
+
+[node name="SFXIcon" type="TextureRect" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings/SFX" unique_id=1607362316]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("8_2b6r5")
+expand_mode = 1
+
+[node name="SFXSlider" type="HSlider" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings/SFX" unique_id=2109174395]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/center_grabber = 1
+theme_override_styles/slider = SubResource("StyleBoxFlat_c0uh7")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_gs3il")
+max_value = 1.0
+step = 0.1
+value = 1.0
+tick_count = 8
+
+[node name="GameplaySettings" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer" unique_id=520835331]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"ButtonVBoxContainer"
+alignment = 2
+script = ExtResource("15_c0uh7")
+
+[node name="Label" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1989708907]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"HeaderLarge"
+text = "GAMEPLAY"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1232537935]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"HeaderMedium"
+text = "CONTROLS"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1142688080]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HoldControls" type="CheckBox" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/HBoxContainer2" unique_id=1600094909]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+button_pressed = true
+button_group = SubResource("ButtonGroup_7smr3")
+text = "HOLD"
+script = ExtResource("5_64y2j")
+
+[node name="TapControls" type="CheckBox" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/HBoxContainer2" unique_id=865749198]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+button_group = SubResource("ButtonGroup_7smr3")
+text = "TAP"
+script = ExtResource("5_64y2j")
+
+[node name="Hold" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/HBoxContainer2" unique_id=46044757]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxFlat_64y2j")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_udlbk")
+text = "HOLD"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="Tap" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/HBoxContainer2" unique_id=618826512]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_udlbk")
+text = "TAP"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="Divider" type="Control" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=539473676]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1661606064]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"HeaderMedium"
+text = "GAME_SPEED"
+
+[node name="GameSpeed" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1195106719]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AudioButton" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/GameSpeed" unique_id=1742278969]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4as5")
+text = "SLOW"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="AudioButton2" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/GameSpeed" unique_id=1005723852]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_b4as5")
+text = "NORMAL"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="AudioButton3" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/GameSpeed" unique_id=1300948226]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4as5")
+text = "HARD"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="SlowWarning" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=518628226]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"HeaderSmall"
+text = "SLOW_WARNING"
+
+[node name="Tutorial" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1065251078]
+visible = false
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+text = "HOW_TO_PLAY"
+script = ExtResource("5_64y2j")
+
+[node name="PurchaseAdRemoval" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1421959637]
+visible = false
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+theme_override_styles/normal = ExtResource("12_qwjhj")
+text = "PURCHASE_AD_REMOVAL"
+script = ExtResource("5_64y2j")
+
 [node name="CloseButton" parent="OuterPanelContainer" unique_id=998217422 instance=ExtResource("2_u03vw")]
 layout_mode = 2
 mouse_filter = 1
@@ -361,8 +721,14 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/HBoxContainer/LeaderboardsButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_leaderboards_button_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/LanguageSelect" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_language_select_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/EnableCloud" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_enable_cloud_pressed"]
-[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DebugSettings" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_debug_settings_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Tutorial" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_tutorial_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/PurchaseAdRemoval" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_purchase_ad_removal_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Credits" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_credits_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Left/Gameplay" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_gameplay_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Right/Audio" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_audio_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/ConsentFormButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_consent_form_button_pressed"]
+[connection signal="value_changed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings/Music/MusicSlider" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings" method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings/SFX/SFXSlider" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings" method="_on_sfx_slider_value_changed"]
+[connection signal="toggled" from="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/HBoxContainer2/HoldControls" to="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" method="_on_hold_controls_toggled"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/Tutorial" to="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" method="_on_tutorial_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/PurchaseAdRemoval" to="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" method="_on_purchase_ad_removal_pressed"]

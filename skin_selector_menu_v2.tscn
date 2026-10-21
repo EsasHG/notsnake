@@ -1,0 +1,296 @@
+[gd_scene format=3 uid="uid://c2dq68g2oqewv"]
+
+[ext_resource type="Script" uid="uid://dks68e7oq3vwa" path="res://skin_selector.gd" id="1_6s7yi"]
+[ext_resource type="Script" uid="uid://1dr1kq5ex2bw" path="res://Scenes/Menus/ad_layout.gd" id="2_vrryg"]
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_uqw6p"]
+[ext_resource type="Script" uid="uid://88kul0olvf02" path="res://Scenes/Menus/safe_area_margin.gd" id="4_cun1s"]
+[ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="4_hkyl8"]
+[ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="5_c42am"]
+[ext_resource type="Texture2D" uid="uid://b0tyotp4tpuu8" path="res://Assets/UI/martin_arrow.png" id="5_cun1s"]
+[ext_resource type="PackedScene" uid="uid://cs36y8gtg2lgk" path="res://Scenes/Player/fake_dog.tscn" id="9_oydb1"]
+[ext_resource type="StyleBox" uid="uid://be3phh27oleub" path="res://Assets/Styles/tab_panel_container_style_box.tres" id="21_jlxjr"]
+[ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="24_jlxjr"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_cun1s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mn3mo"]
+content_margin_top = 50.0
+content_margin_bottom = 50.0
+corner_radius_top_left = 40
+corner_radius_bottom_right = 40
+corner_detail = 11
+
+[node name="SkinSelectorMenu" type="Control" unique_id=1699506825]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("3_uqw6p")
+script = ExtResource("1_6s7yi")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1566154234]
+z_index = -10
+layout_mode = 0
+offset_right = 2368.8748
+offset_bottom = 1849.0
+mouse_filter = 2
+texture = ExtResource("24_jlxjr")
+expand_mode = 1
+
+[node name="AdLayoutContainer" type="VBoxContainer" parent="." unique_id=742566856]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("2_vrryg")
+
+[node name="MarginContainer" type="MarginContainer" parent="AdLayoutContainer" unique_id=978306239]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("4_cun1s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer" unique_id=1763540510]
+layout_mode = 2
+
+[node name="DogVisual" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer" unique_id=886118151]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual" unique_id=1925331592]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SELECT_SKIN"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual" unique_id=763575567]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TextureButton" type="TextureButton" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer" unique_id=1242592662]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_vertical = 4
+texture_normal = ExtResource("5_cun1s")
+stretch_mode = 0
+
+[node name="Control" type="Control" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer" unique_id=1529781303]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Control" type="Control" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control" unique_id=324465875]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FakeDog" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control/Control" unique_id=137224374 instance=ExtResource("9_oydb1")]
+scale = Vector2(2, 2)
+rotate_dog = true
+
+[node name="DogName" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control" unique_id=1404646750]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -175.0
+offset_top = -67.0
+offset_right = 175.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "DOG_NAME"
+horizontal_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer" unique_id=1913099958]
+custom_minimum_size = Vector2(80, 80)
+custom_maximum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("5_cun1s")
+stretch_mode = 0
+flip_h = true
+
+[node name="SkinSelection" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer" unique_id=1371658451]
+layout_mode = 2
+
+[node name="TabButtons" type="HBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection" unique_id=1241123882]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="ColorButton" type="Button" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/TabButtons" unique_id=858399526]
+custom_minimum_size = Vector2(177, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_cun1s")
+text = "CHANGE_DOG"
+script = ExtResource("5_c42am")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="HatButton" type="Button" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/TabButtons" unique_id=557269587]
+custom_minimum_size = Vector2(177, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+toggle_mode = true
+button_group = SubResource("ButtonGroup_cun1s")
+text = "CHANGE_HAT"
+script = ExtResource("5_c42am")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="ChoicePanel" type="PanelContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection" unique_id=1697547335]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_uqw6p")
+theme_override_styles/panel = ExtResource("21_jlxjr")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel" unique_id=341061208]
+clip_children = 1
+layout_mode = 2
+theme = ExtResource("3_uqw6p")
+theme_type_variation = &"LowerScrollContainer"
+theme_override_styles/panel = SubResource("StyleBoxFlat_mn3mo")
+horizontal_scroll_mode = 0
+script = ExtResource("4_hkyl8")
+
+[node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer" unique_id=518084377]
+process_mode = 3
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme = ExtResource("3_uqw6p")
+theme_type_variation = &"InnerContainer"
+
+[node name="SkinSelectContainer" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer" unique_id=879834990]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/SkinSelectContainer" unique_id=829984061]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_uqw6p")
+theme_type_variation = &"HeaderLarge"
+text = "SELECT_SKIN"
+horizontal_alignment = 1
+
+[node name="TreatLabel" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/SkinSelectContainer" unique_id=917764932]
+z_index = 1
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("3_uqw6p")
+text = "TREATS: 300"
+horizontal_alignment = 1
+
+[node name="SkinButtons" type="HFlowContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/SkinSelectContainer" unique_id=1507177500]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="HatSelectContainer" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer" unique_id=1980249530]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/HatSelectContainer" unique_id=1266528221]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_uqw6p")
+theme_type_variation = &"HeaderLarge"
+text = "SELECT_HAT"
+
+[node name="HatTreatLabel" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/HatSelectContainer" unique_id=1791933320]
+z_index = 1
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme = ExtResource("3_uqw6p")
+text = "TREATS: 300"
+horizontal_alignment = 1
+
+[node name="HatButtons" type="HFlowContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/HatSelectContainer" unique_id=1509806025]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+alignment = 1
+last_wrap_alignment = 2
+
+[node name="LockedMessageContainer" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer" unique_id=1445916001]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=842744484]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_uqw6p")
+theme_type_variation = &"HeaderLarge"
+text = "SKIN_LOCKED"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=411711996]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_uqw6p")
+theme_type_variation = &"HeaderMedium"
+text = "HAT_UNLOCK_CONDITION"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=1499630632]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="SkinPurchaseButtons" type="HBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=2012772672]
+layout_mode = 2
+size_flags_vertical = 10
+theme = ExtResource("3_uqw6p")
+alignment = 2
+
+[node name="YesButton" type="Button" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/LockedMessageContainer/SkinPurchaseButtons" unique_id=2014046975]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_behavior_recursive = 2
+text = "YES"
+
+[node name="Panel" type="Panel" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/LockedMessageContainer/SkinPurchaseButtons" unique_id=1768275284]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_type_variation = &"EmptyPanel"
+
+[node name="NoButton" type="Button" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/ScrollContainer/InnerContainer/LockedMessageContainer/SkinPurchaseButtons" unique_id=1001273656]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_behavior_recursive = 2
+text = "NO"
+
+[node name="AdPanel" type="Panel" parent="AdLayoutContainer" unique_id=800514159]
+visible = false
+custom_minimum_size = Vector2(0, 130)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("3_uqw6p")
+theme_type_variation = &"EmptyPanel"
+
+[connection signal="toggled" from="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/TabButtons/ColorButton" to="." method="_on_color_button_toggled"]

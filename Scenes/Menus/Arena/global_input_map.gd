@@ -5,6 +5,7 @@ var ControllerIds: Array[int] = [0, 1, 2, 3]
 
 var hats_selected : Dictionary[int, String] = {0:"NONE"}
 var skins_selected : Dictionary[int, String] = {0:"DEFAULT"}
+var dogs_selected : Dictionary[int,String] = {0:"DEFAULT"}
 var Player_Controls_Selected : Dictionary[int, bool] = {0:true}
 var Player_Lives: Dictionary[int,int] = {}
 var Player_Score: Dictionary[int,int] = {}
@@ -107,21 +108,24 @@ var hats: Dictionary = {
 		price = 1000,
 	},
 }
-var skins : Dictionary = {
-	"DEFAULT" = preload("uid://cax0llp5vepyb"),
-	"BROWN" = preload("uid://crvyc07q2bpp2"),
-	"GOLD" = preload("uid://byb7drkg0uy7i"),
-	"LABRADOR" = preload("uid://d1r7ugtokkbku"),
-	"BLONDE" = preload("uid://c5j0qgebg1tkt"),
-	"ORANGE" = preload("uid://cco5f6wqi6oi"),
-	"SADDLE_BROWN" = preload("uid://cp00enlx3liny"),
-	"MINT" = preload("uid://ndxh4v4hxi7c"),
-	"BASSET" = preload("uid://dma1wttfl715"),
-	"PURPLE" = preload("uid://b7tux5yf5omyc"),
-	"PINK" = preload("uid://itqdjc46fuyp"),
-	"GRAYBLUE" = preload("uid://spnblrwecc4m"),
-	"ALIEN_GREEN" = preload("uid://bxvacllhjybkq"),
-	
-	
-	
+var dogs : Dictionary = {
+	"DEFAULT" = {
+		"DEFAULT" = preload("uid://cax0llp5vepyb"),
+		"BROWN" = preload("uid://crvyc07q2bpp2"),
+		"GOLD" = preload("uid://byb7drkg0uy7i"),
+		"LABRADOR" = preload("uid://d1r7ugtokkbku"),
+		"BLONDE" = preload("uid://c5j0qgebg1tkt"),
+		"ORANGE" = preload("uid://cco5f6wqi6oi"),
+		"SADDLE_BROWN" = preload("uid://cp00enlx3liny"),
+		"MINT" = preload("uid://ndxh4v4hxi7c"),
+		"PURPLE" = preload("uid://b7tux5yf5omyc"),
+		"PINK" = preload("uid://itqdjc46fuyp"),
+		"GRAYBLUE" = preload("uid://spnblrwecc4m"),
+	},
+	"BASSET"  = {
+		"BASSET" = preload("uid://dma1wttfl715"),
+	},
+	"ALIEN" = {
+		"ALIEN_GREEN" = preload("uid://bxvacllhjybkq"),
+	}
 }

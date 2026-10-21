@@ -56,7 +56,6 @@ func _ready() -> void:
 	iframes_timer.one_shot = true
 	iframes_timer.timeout.connect(func(): _invulnerable = false)
 	add_child(iframes_timer)
-	legs
 	head.play("default")
 	legs.play("default")
 	hindLegs.play("default")
@@ -65,10 +64,11 @@ func _ready() -> void:
 	get_tree().create_timer(1.0).timeout.connect(func(): butt.get_child(0).disabled = false)
 
 	add_sibling.call_deferred(segmentParent)
-	butt.reparent(segmentParent)
+	butt.reparent(segmentParent,false)
+	
 	
 	if GameSettings.game_mode == GameSettings.GAME_MODE.SINGLE_PLAYER:
-		set_skin(GlobalInputMap.skins_selected[0])
+		set_skin(GlobalInputMap.dogs_selected[0],GlobalInputMap.skins_selected[0])
 		set_hat(GlobalInputMap.hats_selected[0])
 	Input.emulate_mouse_from_touch = true
 	
@@ -246,11 +246,14 @@ func set_arrow_target(target:Node2D):
 	arrowTarget = target.global_position
 
 
-func set_skin(skin_id:String) -> void:
-	if not GlobalInputMap.skins.has(skin_id):
-		Logging.error("Trying to use skin '" + skin_id +"', but could not find it in the list of skins." )
+func set_skin(dog_id,skin_id:String) -> void:
+	if not GlobalInputMap.dogs.has(dog_id):
+		Logging.error("Could not find dog with ID " + dog_id)
+		dog_id = "DEFAULT"
+	if not GlobalInputMap.dogs[dog_id].has(skin_id):
+		Logging.error("Could not find skin with ID " + skin_id + " for dog " + dog_id)
 		skin_id = "DEFAULT"
-	var skin:DogSkin = GlobalInputMap.skins[skin_id]
+	var skin:DogSkin = GlobalInputMap.dogs[dog_id][skin_id]
 	self_modulate = skin.modulate
 	head.sprite_frames = skin.head
 	head.self_modulate = self_modulate
@@ -273,7 +276,7 @@ func set_hat(hat_id:String):
 	var new_hat =  GlobalInputMap.hats[hat_id]
 
 	hat.texture = new_hat.texture
-	hat.position = new_hat.offset + GlobalInputMap.skins[GlobalInputMap.skins_selected[0]].hat_offset
+	hat.position = new_hat.offset + GlobalInputMap.dogs[GlobalInputMap.dogs_selected[0]][GlobalInputMap.skins_selected[0]].hat_offset
 
 #why is this here
 func _on_controls_changed(_hold_controls:bool):

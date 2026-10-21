@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dssnjngj51l66"]
+
+[ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="1_mejr0"]
+
+[node name="Control" type="Control" unique_id=1347152725]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=105846759]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_mejr0")
+tab_alignment = 1
+current_tab = 1
+tab_0/title = "Hats"
+tab_1/title = "Colors"
+
+[node name="HFlowContainer" type="HFlowContainer" parent="TabContainer" unique_id=157919830]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+metadata/_tab_name = "Hats"
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="TabContainer" unique_id=1628597815]
+layout_mode = 2
+metadata/_tab_index = 1
+metadata/_tab_name = "Colors"
+
+[node name="TabBar" type="TabBar" parent="." unique_id=276344215]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -165.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+tab_count = 2
+tab_0/title = "Hat"
+tab_1/title = "Colors"
+
+[node name="PanelContainer" type="PanelContainer" parent="TabBar" unique_id=167123874]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

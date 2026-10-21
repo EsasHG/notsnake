@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://cs36y8gtg2lgk"]
+
+[ext_resource type="Script" uid="uid://ugqre0sypogq" path="res://Scenes/Player/fake_dog.gd" id="1_lw5yh"]
+[ext_resource type="SpriteFrames" uid="uid://cf3jfyr4idhji" path="res://Assets/Dogs/OutlinedDog/SF_FACES_C.tres" id="2_tlexa"]
+[ext_resource type="SpriteFrames" uid="uid://crm7qydlje76u" path="res://Assets/Dogs/OutlinedDog/SF_newdog_legsFRONT_C.tres" id="3_1sjtb"]
+[ext_resource type="Texture2D" uid="uid://espi8xvrclq6" path="res://Assets/Dogs/cosmetics/hat_crown.png" id="4_cmsk5"]
+[ext_resource type="Texture2D" uid="uid://76dljaeimam1" path="res://Assets/Dogs/OutlinedDog/BUTT_C.png" id="5_34xgi"]
+[ext_resource type="Texture2D" uid="uid://cqa6r0md8lct2" path="res://Assets/Dogs/OutlinedDog/TAIL_C.png" id="6_pn1br"]
+[ext_resource type="SpriteFrames" uid="uid://bdhta2cfuy4pa" path="res://Assets/Dogs/SF_TAILS-sheet.tres" id="7_1um0n"]
+[ext_resource type="SpriteFrames" uid="uid://b0d8ss37lqdgn" path="res://Assets/Dogs/OutlinedDog/SF_newdog_legsBACK_C.tres" id="8_ujly8"]
+
+[node name="FakeDog" type="Node2D" unique_id=137224374]
+texture_filter = 1
+script = ExtResource("1_lw5yh")
+rot_speed = -180
+
+[node name="Head" type="AnimatedSprite2D" parent="." unique_id=734186962]
+z_index = 1
+texture_filter = 1
+position = Vector2(-60, 0)
+sprite_frames = ExtResource("2_tlexa")
+
+[node name="Legs" type="AnimatedSprite2D" parent="Head" unique_id=557263149]
+z_index = -1
+position = Vector2(0, -8)
+sprite_frames = ExtResource("3_1sjtb")
+
+[node name="Hat" type="Sprite2D" parent="Head" unique_id=1734741805]
+position = Vector2(0, -12.5)
+texture = ExtResource("4_cmsk5")
+
+[node name="ButtSprite" type="Sprite2D" parent="." unique_id=630151917]
+texture_filter = 1
+position = Vector2(-60, 0)
+texture = ExtResource("5_34xgi")
+
+[node name="Tail2" type="Sprite2D" parent="ButtSprite" unique_id=1082892822]
+visible = false
+texture_filter = 1
+position = Vector2(0, -11)
+texture = ExtResource("6_pn1br")
+region_enabled = true
+region_rect = Rect2(7, 3, 6, 14)
+
+[node name="Tail" type="AnimatedSprite2D" parent="ButtSprite" unique_id=1872324861]
+texture_filter = 1
+position = Vector2(1, -11)
+sprite_frames = ExtResource("7_1um0n")
+frame_progress = 0.90881026
+
+[node name="Legs_back" type="AnimatedSprite2D" parent="ButtSprite" unique_id=876095812]
+z_index = -1
+position = Vector2(0, 13)
+sprite_frames = ExtResource("8_ujly8")

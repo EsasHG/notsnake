@@ -20,6 +20,7 @@ func _on_banner_ad_changed() -> void:
 	Logging.logMessage("Banner ad changed!")
 	_show_banner_panel()
  
+
 func _show_banner_panel() -> void:
 	var banner_y = GameSettings.adManager.banner_ad_size.y
 	if banner_y > 0:

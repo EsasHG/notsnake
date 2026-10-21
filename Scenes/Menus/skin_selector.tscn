@@ -123,7 +123,6 @@ theme = ExtResource("2_dimmy")
 theme_type_variation = &"InnerContainer"
 
 [node name="MainContainer" type="VBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer" unique_id=860431152]
-visible = false
 layout_mode = 2
 size_flags_vertical = 4
 
@@ -136,7 +135,7 @@ theme_type_variation = &"HeaderLarge"
 text = "EDIT_DOG"
 horizontal_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/MainContainer" unique_id=1731919654]
+[node name="VBoxContainer" type="HBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer/MainContainer" unique_id=804250077]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_dimmy")
@@ -200,6 +199,7 @@ mouse_filter = 1
 text = "SKIN_SELECTION_BACK"
 
 [node name="HatSelectContainer" type="VBoxContainer" parent="AdLayoutContainer/MainScreen/ScrollContainer/InnerContainer" unique_id=820670715]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 

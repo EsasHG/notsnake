@@ -392,38 +392,44 @@ func increaseScore():
 	currentScore+=1
 	total_treats+=1
 
+
 func getCurrentMapHighScore():
 	return GlobalInputMap.Maps[currentMap].high_score
 
 
 func setMusicVol(in_vol : float):
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),in_vol)
 	musicVol = in_vol
-	
+	if musicVol <= 0:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"),true)
+	else:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"),false)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),musicVol)
 	
 func setSFXVol(in_vol : float):
 	sfxVol = in_vol
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),in_vol)
+	if sfxVol <= 0:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"),true)
+	else:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"),false)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"),sfxVol)
 
 
 func setMusicMuted(muted:bool):
 	Logging.logMessage("Setting music muted to " + str(muted))
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"),muted)
 	musicMuted = muted
-	var vol : float = linear_to_db(0.8)
 	if musicMuted: 
-		vol = linear_to_db(0)
-	setMusicVol(vol)
+		musicVol = 0
+	setMusicVol(musicVol)
 
 
 func setSFXMuted(muted:bool):
 	Logging.logMessage("Setting sfx muted to " + str(muted))
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"),muted)
 	sfxMuted = muted
-	var vol : float = linear_to_db(0.8)
 	if sfxMuted: 
-		vol = linear_to_db(0)
-	setSFXVol(vol)
+		sfxVol = 0
+	setSFXVol(sfxVol)
 
 
 func setControls(hold:bool):
@@ -629,3 +635,9 @@ func _on_login_failed(code : String, message:String) -> void:
 		firebase_init_finished = true
 		on_firebase_init_finished.emit()
 		
+		
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_APPLICATION_FOCUS_OUT:
+			if game_running and not get_tree().paused:
+				pause_game()

@@ -10,7 +10,10 @@ extends VBoxContainer
 
 @export var enable_cloud_button : AudioButton
 @export var ad_removal_button : AudioButton
+
 @onready var consent_form_button: LinkButton = $ConsentFormButton
+@onready var gameplay_settings: VBoxContainer = $"../GameplaySettings"
+@onready var sound_settings: VBoxContainer = $"../SoundSettings"
 
 const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 const DEBUG_SETTINGS_CONTAINER = preload("uid://d0dfdlrxfu8iw")
@@ -19,6 +22,7 @@ const CREDITS = preload("uid://chpsai0xuu3vn")
 var _changes_made = false
 var _debug_press_count = 0
 var timer : Timer
+
 
 func _ready() -> void:
 	music_mute.set_pressed_no_signal(GameSettings.musicMuted)
@@ -49,11 +53,13 @@ func _ready() -> void:
 	if GameSettings.game_running:
 		$Tutorial.visible = false
 	UINavigator.add_callable.call_deferred(_on_back)
-
+	UINavigator.open(self,true,false,UINavigator.back)
+	
 
 func _on_music_mute_toggled(toggled_on: bool) -> void:
 	GameSettings.setMusicMuted(toggled_on)
 	_changes_made = true
+
 
 func _on_sfx_mute_toggled(toggled_on: bool) -> void:
 	GameSettings.setSFXMuted(toggled_on)
@@ -139,10 +145,18 @@ func _on_button_pressed() -> void:
 	_debug_press_count +=1
 	print("Presses: ", _debug_press_count, " Time left: ", timer.time_left)
 	timer.start.call_deferred(0.35)
-	pass # Replace with function body.
 
 
 func _on_confirm_debug_pressed() -> void:
 	if _debug_press_count == 5:
 		UINavigator.open_from_scene(DEBUG_SETTINGS_CONTAINER)
-	pass # Replace with function body.
+
+
+func _on_gameplay_pressed() -> void:
+	UINavigator.open(gameplay_settings)
+
+
+func _on_audio_pressed() -> void:
+	UINavigator.open(sound_settings)
+	
+	

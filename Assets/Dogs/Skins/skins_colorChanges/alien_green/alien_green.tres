@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ds4e7hepmpui0" path="res://Assets/Dogs/Skins/skins_colorChanges/SKINS_MENU_icons/menuicon_alien.png" id="4_qu1fu"]
 [ext_resource type="Texture2D" uid="uid://c1aau46mlr412" path="res://Assets/Dogs/Skins/skins_colorChanges/alien_green/newdog_legsFRONT_sheet_C_ALIEN_GREEN.png" id="5_bxo6y"]
 [ext_resource type="Script" uid="uid://b7y2kj325h7uv" path="res://Assets/Dogs/Skins/dog_skin.gd" id="6_3rmpr"]
-[ext_resource type="Texture2D" uid="uid://dov8bnv4cfxsb" path="res://Assets/Dogs/Skins/skins_colorChanges/alien_green/TAIL_C_ALIEN_GREEN.png" id="7_6qgis"]
+[ext_resource type="Texture2D" uid="uid://da80cs0kf6qpd" path="res://Assets/Dogs/Skins/skins_colorChanges/alien_green/TAIL_C_ALIEN_GREEN.png" id="7_6qgis"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ddqtb"]
 atlas = ExtResource("3_34361")
@@ -117,15 +117,11 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_to0af"]
-atlas = ExtResource("7_6qgis")
-region = Rect2(0, 0, 21, 21)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_urpq8"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_to0af")
+"texture": ExtResource("7_6qgis")
 }],
 "loop": 1,
 "name": &"default",
@@ -144,7 +140,7 @@ legs_front_offset = Vector2(0, -5)
 legs_back_offset = Vector2(0, 15.145)
 body_offset = Vector2(0, -16.105)
 butt_offset = Vector2(0, -30.945)
-tail_offset = Vector2(0, -11.47)
+tail_offset = Vector2(-1, -12)
 icon = ExtResource("4_qu1fu")
 price = 100
 metadata/_custom_type_script = "uid://b7y2kj325h7uv"
