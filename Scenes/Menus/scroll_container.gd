@@ -20,13 +20,13 @@ func _ready() -> void:
 	
 	
 func update_size() -> void:
-	Logging.logMessage("min y: " + str(min_size_y))
+	#Logging.logMessage("min y: " + str(min_size_y))
 	var max_y:float 
 	if GameSettings.viewport_mode == GameSettings.VIEWPORT_MODE.PORTRAIT:
 		max_y = max_size_portrait
 	else:
 		max_y = max_size_landscape
-	Logging.logMessage("max y: " + str(max_y))
+	#Logging.logMessage("max y: " + str(max_y))
 	
 	if not is_instance_valid(child):
 		child = get_child(0) as Control
@@ -34,4 +34,4 @@ func update_size() -> void:
 	if desired_size_y < min_size_y:
 		desired_size_y = min_size_y 
 	custom_minimum_size.y =  desired_size_y if desired_size_y < max_y else max_y
-	Logging.logMessage("custom min y: " + str(custom_minimum_size.y))
+	#Logging.logMessage("custom min y: " + str(custom_minimum_size.y))

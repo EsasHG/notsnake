@@ -8,6 +8,7 @@ signal on_gameUnpaused()
 signal on_pickupSpawned(pickup:Area2D)
 signal on_mainMenuOpened()
 signal on_controls_changed(holdControls:bool)
+signal on_difficulty_changed(new_difficulty:DIFFICULTY)
 signal on_dogSkinChanged(skin_id:String)
 signal on_dogHatChanged(hat:String)
 signal on_viewportChanged()
@@ -16,6 +17,8 @@ signal on_languageSelected()
 signal on_scoreChanged()
 signal on_banner_ad_changed()
 signal on_firebase_init_finished()
+
+
 const BILLING_MANAGER = preload("uid://di83hh7jce01j")
 const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 
@@ -28,6 +31,8 @@ var currentScore : int = 0:
 
 enum GAME_MODE {LAST_DOG_STANDING, TIME, SCORE, SINGLE_PLAYER}
 var game_mode :GAME_MODE = GAME_MODE.SINGLE_PLAYER
+enum DIFFICULTY {EASY, NORMAL, HARD, INSANE}
+var difficulty : DIFFICULTY = DIFFICULTY.NORMAL
 var age_group : AdManager.AGE_GROUP = AdManager.AGE_GROUP.UNSPECIFIED
 
 @onready var game_timer : Timer = Timer.new()
@@ -436,6 +441,10 @@ func setControls(hold:bool):
 	GlobalInputMap.Player_Controls_Selected[0] = hold
 	on_controls_changed.emit(hold)
 	
+	
+func set_difficulty(new_difficulty : DIFFICULTY) -> void:
+	difficulty = new_difficulty
+	on_difficulty_changed.emit(difficulty)
 
 func remove_all_ads():
 	if adManager == null:

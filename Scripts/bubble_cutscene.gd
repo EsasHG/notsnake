@@ -133,7 +133,7 @@ func showMenu():
 		#queue_free()
 		#mainMenu = MAIN_MENU.instantiate()
 	else:
-		mainMenu = UINavigator.open_from_scene(ARENA_MENU,false)
+		mainMenu = UINavigator.open_from_scene(ARENA_MENU,false,true)
 		$MapTutorial1.reparent(mainMenu)
 		$BubbleCamera.reparent(mainMenu)
 		#mainMenu = ARENA_MENU.instantiate()

@@ -48,13 +48,12 @@ func open_from_scene(new_layer:PackedScene, hide_previous:bool = true, root:bool
 	newHelper.root = root
 	newHelper.destroy_on_pop = true
 	newHelper.callback = back_callback
-	_mainGuiNode.add_child(s)
 	
 	if hide_previous && _ui_stack.size() > 0:
 		_cleanup()
 		_ui_stack.back().control.visible = false
 	_ui_stack.append(newHelper)
-	
+	_mainGuiNode.add_child(s)
 	return s
 
 

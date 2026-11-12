@@ -14,6 +14,7 @@ extends VBoxContainer
 @onready var consent_form_button: LinkButton = $ConsentFormButton
 @onready var gameplay_settings: VBoxContainer = $"../GameplaySettings"
 @onready var sound_settings: VBoxContainer = $"../SoundSettings"
+@onready var save_settings: VBoxContainer = $"../SaveSettings"
 
 const LANGUAGE_SELECT_MENU = preload("uid://cy0to6qw5b3n2")
 const DEBUG_SETTINGS_CONTAINER = preload("uid://d0dfdlrxfu8iw")
@@ -52,8 +53,7 @@ func _ready() -> void:
 	
 	if GameSettings.game_running:
 		$Tutorial.visible = false
-	UINavigator.add_callable.call_deferred(_on_back)
-	UINavigator.open(self,true,false,UINavigator.back)
+	UINavigator.open(self,false,false,_on_back)
 	
 
 func _on_music_mute_toggled(toggled_on: bool) -> void:
@@ -87,6 +87,7 @@ func _on_visibility_changed():
 func _on_back() -> void:
 	if _changes_made:
 		SaveManager.save_game()
+	UINavigator.back()
 
 
 func _on_language_selector_item_selected(index: int) -> void:
@@ -105,7 +106,7 @@ func _on_enable_cloud_pressed() -> void:
 
 
 func _on_credits_pressed() -> void:
-	UINavigator.open_from_scene(CREDITS) # Replace with function body.
+	UINavigator.open_from_scene(CREDITS)
 
 
 func _on_consent_form_button_pressed() -> void:
@@ -158,5 +159,7 @@ func _on_gameplay_pressed() -> void:
 
 func _on_audio_pressed() -> void:
 	UINavigator.open(sound_settings)
-	
-	
+
+
+func _on_saves_pressed() -> void:
+	UINavigator.open(save_settings)

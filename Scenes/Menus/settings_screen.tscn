@@ -563,6 +563,32 @@ step = 0.1
 value = 1.0
 tick_count = 8
 
+[node name="SaveSettings" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer" unique_id=852601711]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"ButtonVBoxContainer"
+alignment = 2
+
+[node name="Label" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SaveSettings" unique_id=1225805816]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("1_nfl8x")
+theme_type_variation = &"HeaderLarge"
+text = "SAVE_SETTINGS"
+horizontal_alignment = 1
+
+[node name="EnableCloud" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/SaveSettings" unique_id=1870586175]
+custom_minimum_size = Vector2(130, 50)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme = ExtResource("1_nfl8x")
+text = "ENABLE_CLOUD_SAVES"
+script = ExtResource("5_64y2j")
+
 [node name="GameplaySettings" type="VBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer" unique_id=520835331]
 visible = false
 layout_mode = 2
@@ -614,6 +640,7 @@ text = "TAP"
 script = ExtResource("5_64y2j")
 
 [node name="Hold" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/HBoxContainer2" unique_id=46044757]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 theme_override_styles/pressed = SubResource("StyleBoxFlat_64y2j")
 toggle_mode = true
@@ -624,6 +651,7 @@ script = ExtResource("5_64y2j")
 metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
 
 [node name="Tap" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/HBoxContainer2" unique_id=618826512]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_udlbk")
@@ -635,35 +663,37 @@ metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1661606064]
+[node name="Difficulty" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1661606064]
 layout_mode = 2
 size_flags_horizontal = 6
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"HeaderMedium"
-text = "GAME_SPEED"
+text = "DIFFICULTY"
 
-[node name="GameSpeed" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1195106719]
+[node name="DiffucultyButtons" type="HBoxContainer" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1195106719]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="AudioButton" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/GameSpeed" unique_id=1742278969]
+[node name="Easy" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/DiffucultyButtons" unique_id=1742278969]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_b4as5")
-text = "SLOW"
+text = "EASY"
 script = ExtResource("5_64y2j")
 metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
 
-[node name="AudioButton2" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/GameSpeed" unique_id=1005723852]
+[node name="Normal" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/DiffucultyButtons" unique_id=1005723852]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 toggle_mode = true
-button_pressed = true
 button_group = SubResource("ButtonGroup_b4as5")
 text = "NORMAL"
 script = ExtResource("5_64y2j")
 metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
 
-[node name="AudioButton3" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/GameSpeed" unique_id=1300948226]
+[node name="Hard" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/DiffucultyButtons" unique_id=1300948226]
+custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_b4as5")
@@ -671,12 +701,26 @@ text = "HARD"
 script = ExtResource("5_64y2j")
 metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
 
-[node name="SlowWarning" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=518628226]
+[node name="Insane" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/DiffucultyButtons" unique_id=640665318]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4as5")
+text = "INSANE"
+script = ExtResource("5_64y2j")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="DifficultyExplanation" type="Label" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=518628226]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 3
 theme = ExtResource("1_nfl8x")
 theme_type_variation = &"HeaderSmall"
-text = "SLOW_WARNING"
+theme_override_font_sizes/font_size = 31
+text = "DIFFICULTY_EXPLANATION"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="Tutorial" type="Button" parent="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" unique_id=1065251078]
 visible = false
@@ -725,10 +769,19 @@ theme_type_variation = &"EmptyPanel"
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/PurchaseAdRemoval" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_purchase_ad_removal_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/Credits" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_credits_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Left/Gameplay" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_gameplay_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Left/Saves" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_saves_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Left/Credits" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_credits_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Left/AchievementsButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_achievements_button_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Right/Audio" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_audio_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Right/Language" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_language_select_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/DoubleButtons/Right/LeaderboardsButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_leaderboards_button_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen/ConsentFormButton" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SettingsScreen" method="_on_consent_form_button_pressed"]
 [connection signal="value_changed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings/Music/MusicSlider" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings" method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings/SFX/SFXSlider" to="OuterPanelContainer/ScrollContainer/SettingsContainer/SoundSettings" method="_on_sfx_slider_value_changed"]
 [connection signal="toggled" from="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/HBoxContainer2/HoldControls" to="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" method="_on_hold_controls_toggled"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/DiffucultyButtons/Easy" to="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" method="_on_slow_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/DiffucultyButtons/Normal" to="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" method="_on_normal_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/DiffucultyButtons/Hard" to="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" method="_on_fast_pressed"]
+[connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/DiffucultyButtons/Insane" to="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" method="_on_insane_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/Tutorial" to="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" method="_on_tutorial_pressed"]
 [connection signal="pressed" from="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings/PurchaseAdRemoval" to="OuterPanelContainer/ScrollContainer/SettingsContainer/GameplaySettings" method="_on_purchase_ad_removal_pressed"]

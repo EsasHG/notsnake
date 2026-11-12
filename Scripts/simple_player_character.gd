@@ -1,6 +1,13 @@
 extends Area2D
 
 class_name PlayerDog
+@export var speed_settings : Dictionary={ 
+	GameSettings.DIFFICULTY.EASY: 0.6,
+	GameSettings.DIFFICULTY.NORMAL: 0.75,
+	GameSettings.DIFFICULTY.HARD: 0.9,
+	GameSettings.DIFFICULTY.INSANE: 1.15,
+}
+
 @export var ROTATE_SPEED = 5
 @export var MOVE_SPEED = 1
 @export var OVERALL_SPEED = 0.9
@@ -48,6 +55,10 @@ var arrowTarget : Vector2
 
 func _ready() -> void:
 	Logging.logMessage("Player ready!")
+	OVERALL_SPEED = speed_settings[GameSettings.difficulty]
+	GameSettings.on_difficulty_changed.connect(func(new_difficulty):
+		OVERALL_SPEED = speed_settings[new_difficulty]
+		)
 	
 	_invulnerable = true
 	iframes_timer = Timer.new()

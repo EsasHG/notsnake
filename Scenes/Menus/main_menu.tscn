@@ -137,6 +137,7 @@ mouse_filter = 2
 script = ExtResource("15_8bdjp")
 
 [node name="LevelSelectContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1354738231]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6

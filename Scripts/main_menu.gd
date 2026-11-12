@@ -6,7 +6,8 @@ var menu_active = true
 var show_from_start = false
 const SETTINGS_SCREEN = preload("uid://b2gf7obd6wwhk")
 const LOCKED_ICON = preload("uid://bq331b3dfslw5")
-const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
+#const SKIN_SELECTOR = preload("uid://cwe8t3lvlv7ki")
+const SKIN_SELECTOR = preload("uid://c2dq68g2oqewv")
 
 @export var sign_in_button: TextureButton 
 @onready var tutorial_question_container: PanelContainer = $AdLayoutContainer/TutorialQuestionContainer
@@ -70,9 +71,10 @@ func _ready() -> void:
 	_on_viewport_changed()
 	check_play_in_animations.call_deferred()
 	
+
 func check_play_in_animations() -> void:
 	if show_from_start:
-		buttons.visible = true
+		UINavigator.open(buttons, false, true)
 	else:
 		buttons.visible = false
 		logo.scale = Vector2(0.3,0.3)
@@ -81,12 +83,12 @@ func check_play_in_animations() -> void:
 		logo_tween.set_ease(Tween.EASE_OUT)
 		logo_tween.tween_property(logo,"scale",Vector2(1,1),tween_length).set_trans(Tween.TRANS_BACK)
 		await get_tree().create_timer(0.15).timeout
-		buttons.visible = true
+		UINavigator.open(buttons, false, true)
 		buttons.scale = Vector2(0.3,0.3)
 		var button_tween : Tween = get_tree().create_tween()
 		button_tween.set_ease(Tween.EASE_OUT)
 		button_tween.tween_property(buttons,"scale",Vector2(1,1),tween_length).set_trans(Tween.TRANS_BACK)
-		button_tween.finished.connect(UINavigator.open.bind(buttons,false, true))
+		#button_tween.finished.connect(UINavigator.open.bind(buttons,false, true))
 		
 
 func create_level_buttons() -> void:
@@ -226,4 +228,5 @@ func _on_feedback_pressed() -> void:
 
 
 func _on_skin_select_pressed() -> void:
-	UINavigator.open_from_scene(SKIN_SELECTOR)
+	logo.visible = false
+	UINavigator.open_from_scene(SKIN_SELECTOR,true,false,func(): logo.visible = true)

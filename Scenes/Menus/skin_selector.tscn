@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cwe8t3lvlv7ki"]
 
 [ext_resource type="Script" uid="uid://1dr1kq5ex2bw" path="res://Scenes/Menus/ad_layout.gd" id="1_cmbhx"]
-[ext_resource type="Script" uid="uid://dks68e7oq3vwa" path="res://skin_selector.gd" id="1_dimmy"]
+[ext_resource type="Script" uid="uid://dks68e7oq3vwa" path="res://Scenes/Menus/skin_selector.gd" id="1_dimmy"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="2_dimmy"]
 [ext_resource type="Texture2D" uid="uid://br21lo6rpcuvq" path="res://Assets/Dogs/OutlinedDog/FACES_C.png" id="3_6fsxm"]
 [ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="3_k52lc"]
