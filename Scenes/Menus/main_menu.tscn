@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://i0e0jrgopg00" path="res://Scripts/main_menu.gd" id="1_jrsic"]
 [ext_resource type="Texture2D" uid="uid://2pyc7tjeu5et" path="res://Assets/UI/GAME_LOGO_WHITE.png" id="2_5vvlb"]
 [ext_resource type="Theme" uid="uid://dayndqrmaoq3i" path="res://Assets/Styles/LevelSelectTheme.tres" id="8_vtepg"]
+[ext_resource type="Script" uid="uid://ghj68i6tp6t2" path="res://Scenes/Menus/Settings/difficulty_selector.gd" id="9_0xbgx"]
+[ext_resource type="Texture2D" uid="uid://i4xpa6tu0rtg" path="res://Assets/UI/arrow_triangle_normal.png" id="10_8dws6"]
+[ext_resource type="Texture2D" uid="uid://b0ephdebmpyx2" path="res://Assets/UI/arrow_triangle_pressed.png" id="11_s0gno"]
 [ext_resource type="Texture2D" uid="uid://b66jsl7mt57nl" path="res://Assets/UI/Google Branding/Theme=Dark, Show text=Yes, Shape=Pill, Platform=Android+Web@2x.png" id="12_8bdjp"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="12_12hqc"]
 [ext_resource type="Script" uid="uid://bxl2hwwcycl0s" path="res://Scripts/audio_button.gd" id="13_vtepg"]
@@ -12,15 +15,36 @@
 [ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="18_0rh2w"]
 [ext_resource type="Texture2D" uid="uid://bb1eumteya8s" path="res://Assets/UI/stop_symbol.png" id="19_fx838"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s0gno"]
-content_margin_top = 50.0
-content_margin_bottom = 0.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6t1rs"]
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 150
-corner_radius_bottom_right = 150
+corner_radius_top_right = 3
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 3
 corner_detail = 11
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s0gno"]
-content_margin_bottom = 20.0
+content_margin_top = 35.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xbgx"]
+content_margin_top = 10.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_top = 3
+border_color = Color(0, 0, 0, 1)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dws6"]
+content_margin_left = 20.0
+content_margin_right = 20.0
+bg_color = Color(0.8980392, 0.43529412, 0.46666667, 0)
+corner_radius_top_left = 150
+corner_radius_bottom_right = 150
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fx838"]
 content_margin_left = 20.0
@@ -74,7 +98,7 @@ border_color = Color(0.06666667, 0.039215688, 0.08235294, 1)
 corner_radius_top_left = 30
 corner_radius_bottom_left = 30
 
-[node name="MainMenu" type="Control" unique_id=1644317146 node_paths=PackedStringArray("sign_in_button")]
+[node name="MainMenu" type="Control" unique_id=1644317146 node_paths=PackedStringArray("sign_in_button", "level_buttons")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,8 +108,9 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_jrsic")
 sign_in_button = NodePath("Logo/GoogleSignIn")
+level_buttons = NodePath("AdLayoutContainer/LevelSelectContainer/VBoxContainer/ScrollContainer/InnerContainer/LevelButtons")
 buttonTheme = ExtResource("8_vtepg")
-level_buttons_size = 215.0
+level_buttons_size = 201.0
 feedback_link = "https://forms.gle/R1QdRBykNZQTnVqdA"
 
 [node name="Logo" type="TextureRect" parent="." unique_id=307307508]
@@ -137,44 +162,85 @@ mouse_filter = 2
 script = ExtResource("15_8bdjp")
 
 [node name="LevelSelectContainer" type="PanelContainer" parent="AdLayoutContainer" unique_id=1354738231]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("15_8dws6")
+theme_override_styles/panel = SubResource("StyleBoxFlat_6t1rs")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/LevelSelectContainer" unique_id=1217507080]
-clip_children = 1
-custom_minimum_size = Vector2(610, 400)
+[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/LevelSelectContainer" unique_id=1563362695]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("15_8dws6")
-theme_type_variation = &"LowerScrollContainer"
-theme_override_styles/panel = SubResource("StyleBoxFlat_s0gno")
-horizontal_scroll_mode = 0
-script = ExtResource("18_0rh2w")
-
-[node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/LevelSelectContainer/ScrollContainer" unique_id=83918249]
-custom_minimum_size = Vector2(650, 0)
-layout_mode = 2
-mouse_filter = 1
-theme = ExtResource("15_8dws6")
-theme_type_variation = &"InnerContainer"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/LevelSelectContainer/ScrollContainer/InnerContainer" unique_id=1563362695]
-layout_mode = 2
-size_flags_vertical = 0
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="AdLayoutContainer/LevelSelectContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=387330869]
+[node name="Label" type="Label" parent="AdLayoutContainer/LevelSelectContainer/VBoxContainer" unique_id=387330869]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 theme_override_styles/normal = SubResource("StyleBoxEmpty_s0gno")
 text = "LEVEL_SELECT"
 horizontal_alignment = 1
 
-[node name="LevelButtons" type="HFlowContainer" parent="AdLayoutContainer/LevelSelectContainer/ScrollContainer/InnerContainer/VBoxContainer" unique_id=92469686]
+[node name="DifficultySelector" type="HBoxContainer" parent="AdLayoutContainer/LevelSelectContainer/VBoxContainer" unique_id=1001372803]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 9
+script = ExtResource("9_0xbgx")
+
+[node name="LeftArrow" type="TextureButton" parent="AdLayoutContainer/LevelSelectContainer/VBoxContainer/DifficultySelector" unique_id=1709223379]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture_normal = ExtResource("10_8dws6")
+texture_pressed = ExtResource("11_s0gno")
+texture_hover = ExtResource("11_s0gno")
+ignore_texture_size = true
+stretch_mode = 0
+flip_h = true
+
+[node name="Label" type="Label" parent="AdLayoutContainer/LevelSelectContainer/VBoxContainer/DifficultySelector" unique_id=1499932396]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"HeaderMedium"
+theme_override_font_sizes/font_size = 45
+text = "NORMAL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightArrow" type="TextureButton" parent="AdLayoutContainer/LevelSelectContainer/VBoxContainer/DifficultySelector" unique_id=1105816896]
+custom_minimum_size = Vector2(50, 50)
+custom_maximum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("10_8dws6")
+texture_pressed = ExtResource("11_s0gno")
+texture_hover = ExtResource("11_s0gno")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/LevelSelectContainer/VBoxContainer" unique_id=1217507080]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"LowerScrollContainer"
+theme_override_styles/panel = SubResource("StyleBoxFlat_0xbgx")
+horizontal_scroll_mode = 0
+script = ExtResource("18_0rh2w")
+
+[node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/LevelSelectContainer/VBoxContainer/ScrollContainer" unique_id=83918249]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+mouse_filter = 1
+theme = ExtResource("15_8dws6")
+theme_type_variation = &"InnerContainer"
+theme_override_styles/panel = SubResource("StyleBoxFlat_8dws6")
+
+[node name="LevelButtons" type="HFlowContainer" parent="AdLayoutContainer/LevelSelectContainer/VBoxContainer/ScrollContainer/InnerContainer" unique_id=92469686]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
 theme = ExtResource("8_vtepg")
@@ -312,7 +378,6 @@ script = ExtResource("13_vtepg")
 layout_mode = 2
 
 [node name="AdPanel" type="Panel" parent="AdLayoutContainer" unique_id=800514159]
-visible = false
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 size_flags_vertical = 8
@@ -320,6 +385,7 @@ theme = ExtResource("15_8dws6")
 theme_type_variation = &"EmptyPanel"
 
 [node name="MainButtons" type="VBoxContainer" parent="." unique_id=880943489]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -412,6 +478,8 @@ grow_vertical = 2
 texture = ExtResource("19_fx838")
 
 [connection signal="pressed" from="Logo/GoogleSignIn" to="." method="_on_sign_in_pressed"]
+[connection signal="pressed" from="AdLayoutContainer/LevelSelectContainer/VBoxContainer/DifficultySelector/LeftArrow" to="AdLayoutContainer/LevelSelectContainer/VBoxContainer/DifficultySelector" method="_on_left_arrow_pressed"]
+[connection signal="pressed" from="AdLayoutContainer/LevelSelectContainer/VBoxContainer/DifficultySelector/RightArrow" to="AdLayoutContainer/LevelSelectContainer/VBoxContainer/DifficultySelector" method="_on_right_arrow_pressed"]
 [connection signal="pressed" from="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_on_tutorial_yes_pressed"]
 [connection signal="pressed" from="AdLayoutContainer/TutorialQuestionContainer/ScrollContainer/InnerContainer/VBoxContainer/HBoxContainer/No" to="." method="_on_no_pressed"]
 [connection signal="pressed" from="MainButtons/Start" to="." method="_on_start_button_pressed"]

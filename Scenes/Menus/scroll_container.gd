@@ -6,7 +6,7 @@ extends ScrollContainer
 @export var min_size_y : float
 @export var padding : float = 100
 
-var child : PanelContainer
+@onready var child : PanelContainer = get_child(0) as PanelContainer
 
 func _ready() -> void:
 	update_size()
@@ -14,10 +14,9 @@ func _ready() -> void:
 	scrollbar.theme_type_variation = "CustomScrollBar"
 	scrollbar.custom_minimum_size.x = scrollbar_size_x
 	scrollbar.scale.y = 0.9
-	child = get_child(0) as PanelContainer
-	child.minimum_size_changed.connect(update_size)
+	child.resized.connect(update_size)
 	GameSettings.on_viewportChanged.connect(update_size)
-	
+	GameSettings.on_banner_ad_changed
 	
 func update_size() -> void:
 	#Logging.logMessage("min y: " + str(min_size_y))

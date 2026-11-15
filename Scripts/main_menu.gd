@@ -10,10 +10,10 @@ const LOCKED_ICON = preload("uid://bq331b3dfslw5")
 const SKIN_SELECTOR = preload("uid://c2dq68g2oqewv")
 
 @export var sign_in_button: TextureButton 
+@export var level_buttons: HFlowContainer
 @onready var tutorial_question_container: PanelContainer = $AdLayoutContainer/TutorialQuestionContainer
 @onready var buttons: VBoxContainer = $MainButtons
 @onready var level_select_container: PanelContainer = $AdLayoutContainer/LevelSelectContainer
-@onready var level_buttons: HFlowContainer = $AdLayoutContainer/LevelSelectContainer/ScrollContainer/InnerContainer/VBoxContainer/LevelButtons
 @onready var level_selected_sound: AudioStreamPlayer = get_tree().root.find_child("LevelSelected", true, false)
 @onready var start_button: Button = $MainButtons/Start
 @onready var settings_button: Button = $MainButtons/Settings
