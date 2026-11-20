@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c2dq68g2oqewv"]
 
 [ext_resource type="Script" uid="uid://dks68e7oq3vwa" path="res://Scenes/Menus/skin_selector.gd" id="1_6s7yi"]
-[ext_resource type="Script" uid="uid://1dr1kq5ex2bw" path="res://Scenes/Menus/ad_layout.gd" id="2_vrryg"]
 [ext_resource type="Theme" uid="uid://caljym4n8ghq8" path="res://Assets/Styles/DefaultTheme.tres" id="3_uqw6p"]
 [ext_resource type="Script" uid="uid://88kul0olvf02" path="res://Scenes/Menus/safe_area_margin.gd" id="4_cun1s"]
 [ext_resource type="Script" uid="uid://d2xl418opv1fq" path="res://Scenes/Menus/scroll_container.gd" id="4_hkyl8"]
@@ -13,14 +12,36 @@
 [ext_resource type="StyleBox" uid="uid://be3phh27oleub" path="res://Assets/Styles/tab_panel_container_style_box.tres" id="21_jlxjr"]
 [ext_resource type="Texture2D" uid="uid://u54l1x8wb25f" path="res://Assets/Map/map_Tutorial_1.png" id="24_jlxjr"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_cun1s"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hqh1o"]
+content_margin_bottom = 40.0
+bg_color = Color(0, 0, 0, 0)
+draw_center = false
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mn3mo"]
 content_margin_top = 10.0
+content_margin_bottom = 10.0
 bg_color = Color(0.6, 0.6, 0.6, 0)
-border_width_top = 3
 border_color = Color(0, 0, 0, 1)
 corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6kjjp"]
+content_margin_left = 20.0
+content_margin_right = 20.0
+bg_color = Color(0.8980392, 0.43529412, 0.46666667, 0)
+corner_radius_top_left = 150
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b4as5"]
+content_margin_left = 2.0
+content_margin_top = 7.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_top = 5
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_cun1s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vegl"]
 bg_color = Color(0.1331965, 0.13319635, 0.13319644, 1)
@@ -97,42 +118,38 @@ mouse_filter = 2
 texture = ExtResource("24_jlxjr")
 expand_mode = 1
 
-[node name="AdLayoutContainer" type="VBoxContainer" parent="." unique_id=742566856]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=978306239]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-script = ExtResource("2_vrryg")
-
-[node name="MarginContainer" type="MarginContainer" parent="AdLayoutContainer" unique_id=978306239]
-layout_mode = 2
-size_flags_vertical = 3
 script = ExtResource("4_cun1s")
+bottom_margin_portrait = 0
+bottom_margin_landscape = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer" unique_id=1763540510]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1763540510]
 layout_mode = 2
 theme_override_constants/separation = 19
 
-[node name="DogVisual" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer" unique_id=886118151]
+[node name="DogVisual" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=886118151]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 2
+size_flags_vertical = 2
 
-[node name="Label" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual" unique_id=1925331592]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/DogVisual" unique_id=1925331592]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "SELECT_SKIN"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual" unique_id=763575567]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/DogVisual" unique_id=763575567]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 3
+size_flags_vertical = 4
 
-[node name="LeftArrow" type="TextureButton" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer" unique_id=1242592662]
+[node name="LeftArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/DogVisual/HBoxContainer" unique_id=1242592662]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_vertical = 4
@@ -143,13 +160,13 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[node name="Control" type="Control" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer" unique_id=1529781303]
-custom_minimum_size = Vector2(500, 500)
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/DogVisual/HBoxContainer" unique_id=1529781303]
+custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Control" type="Control" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control" unique_id=324465875]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control" unique_id=324465875]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -159,11 +176,11 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="FakeDog" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control/Control" unique_id=137224374 instance=ExtResource("9_oydb1")]
+[node name="FakeDog" parent="MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control/Control" unique_id=137224374 instance=ExtResource("9_oydb1")]
 scale = Vector2(2, 2)
 rotate_dog = true
 
-[node name="DogName" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control" unique_id=1404646750]
+[node name="DogName" type="Label" parent="MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control" unique_id=1404646750]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -179,7 +196,7 @@ size_flags_horizontal = 4
 text = "DOG_NAME"
 horizontal_alignment = 1
 
-[node name="RightArrow" type="TextureButton" parent="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer" unique_id=1913099958]
+[node name="RightArrow" type="TextureButton" parent="MarginContainer/VBoxContainer/DogVisual/HBoxContainer" unique_id=1913099958]
 custom_minimum_size = Vector2(80, 80)
 custom_maximum_size = Vector2(100, 100)
 layout_mode = 2
@@ -191,48 +208,24 @@ texture_hover = ExtResource("7_42yv3")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="SkinSelection" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer" unique_id=1371658451]
+[node name="SkinSelection" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1371658451]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 10
 
-[node name="TabButtons" type="HBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection" unique_id=1241123882]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-
-[node name="ColorButton" type="Button" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/TabButtons" unique_id=1282175198]
-custom_minimum_size = Vector2(177, 50)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("3_uqw6p")
-toggle_mode = true
-button_pressed = true
-button_group = SubResource("ButtonGroup_cun1s")
-text = "CHANGE_DOG"
-script = ExtResource("5_c42am")
-metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
-
-[node name="HatButton" type="Button" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/TabButtons" unique_id=557269587]
-custom_minimum_size = Vector2(177, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-toggle_mode = true
-button_group = SubResource("ButtonGroup_cun1s")
-text = "CHANGE_HAT"
-script = ExtResource("5_c42am")
-metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
-
-[node name="ChoicePanel" type="PanelContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection" unique_id=1697547335]
+[node name="ChoicePanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/SkinSelection" unique_id=1697547335]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("3_uqw6p")
 theme_override_styles/panel = ExtResource("21_jlxjr")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel" unique_id=1657818726]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel" unique_id=1657818726]
 layout_mode = 2
+theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer" unique_id=1660106022]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer" unique_id=1660106022]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("3_uqw6p")
@@ -240,94 +233,64 @@ theme_type_variation = &"HeaderLarge"
 text = "SELECT_SKIN"
 horizontal_alignment = 1
 
-[node name="TreatLabel" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer" unique_id=655284345]
+[node name="TreatLabel" type="Label" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer" unique_id=655284345]
 z_index = 1
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme = ExtResource("3_uqw6p")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hqh1o")
 text = "TREATS: 300"
 horizontal_alignment = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer" unique_id=341061208]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer" unique_id=341061208]
 layout_mode = 2
+size_flags_vertical = 3
 theme = ExtResource("3_uqw6p")
 theme_type_variation = &"LowerScrollContainer"
 theme_override_styles/panel = SubResource("StyleBoxFlat_mn3mo")
 horizontal_scroll_mode = 0
 script = ExtResource("4_hkyl8")
-max_size_landscape = 500.0
+do_size_update = false
+max_size_landscape = 400.0
 max_size_portrait = 575.0
+padding = 20.0
 
-[node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer" unique_id=518084377]
+[node name="InnerContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer" unique_id=518084377]
 process_mode = 3
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 mouse_filter = 1
 theme = ExtResource("3_uqw6p")
 theme_type_variation = &"InnerContainer"
+theme_override_styles/panel = SubResource("StyleBoxFlat_6kjjp")
 
-[node name="ColorSelectContainer" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer" unique_id=879834990]
+[node name="ColorSelectContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer" unique_id=879834990]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/ColorSelectContainer" unique_id=829984061]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("3_uqw6p")
-theme_type_variation = &"HeaderLarge"
-text = "SELECT_SKIN"
-horizontal_alignment = 1
-
-[node name="TreatLabel" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/ColorSelectContainer" unique_id=917764932]
-visible = false
-z_index = 1
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme = ExtResource("3_uqw6p")
-text = "TREATS: 300"
-horizontal_alignment = 1
-
-[node name="SkinButtons" type="HFlowContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/ColorSelectContainer" unique_id=1507177500]
+[node name="SkinButtons" type="HFlowContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/ColorSelectContainer" unique_id=1507177500]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
 alignment = 1
 last_wrap_alignment = 2
 
-[node name="HatSelectContainer" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer" unique_id=1980249530]
+[node name="HatSelectContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer" unique_id=1980249530]
 visible = false
 layout_mode = 2
+size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/HatSelectContainer" unique_id=1266528221]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("3_uqw6p")
-theme_type_variation = &"HeaderLarge"
-text = "SELECT_HAT"
-
-[node name="HatTreatLabel" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/HatSelectContainer" unique_id=1791933320]
-visible = false
-z_index = 1
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme = ExtResource("3_uqw6p")
-text = "TREATS: 300"
-horizontal_alignment = 1
-
-[node name="HatButtons" type="HFlowContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/HatSelectContainer" unique_id=1509806025]
+[node name="HatButtons" type="HFlowContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/HatSelectContainer" unique_id=1509806025]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
 alignment = 1
 last_wrap_alignment = 2
 
-[node name="LockedMessageContainer" type="VBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer" unique_id=1445916001]
-visible = false
+[node name="LockedMessageContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer" unique_id=1445916001]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/separation = 0
 
-[node name="TitleLabel" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=842744484]
-visible = false
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=842744484]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -337,38 +300,39 @@ text = "SKIN_LOCKED"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="LockedTreatLabel" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=344293852]
-visible = false
-z_index = 1
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-theme = ExtResource("3_uqw6p")
-text = "TREATS: 300"
-horizontal_alignment = 1
-
-[node name="DescriptionLabel" type="Label" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=411711996]
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=411711996]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 6
 theme = ExtResource("3_uqw6p")
 theme_type_variation = &"HeaderMedium"
 text = "HAT_UNLOCK_CONDITION"
+horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=1499630632]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=1499630632]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 
-[node name="SkinPurchaseButtons" type="HBoxContainer" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=2012772672]
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=383833840]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 10
+size_flags_vertical = 6
+text = "BACK"
+
+[node name="SkinPurchaseButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer" unique_id=2012772672]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 theme = ExtResource("3_uqw6p")
 theme_override_constants/separation = 72
 alignment = 2
 
-[node name="YesButton" type="Button" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/SkinPurchaseButtons" unique_id=2014046975]
+[node name="YesButton" type="Button" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/SkinPurchaseButtons" unique_id=2014046975]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -376,19 +340,51 @@ size_flags_vertical = 4
 mouse_behavior_recursive = 2
 text = "YES"
 
-[node name="NoButton" type="Button" parent="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/SkinPurchaseButtons" unique_id=1001273656]
+[node name="NoButton" type="Button" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/SkinPurchaseButtons" unique_id=1001273656]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_behavior_recursive = 2
+theme = ExtResource("3_uqw6p")
+theme_type_variation = &"DangerButton"
 text = "NO"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AdLayoutContainer/MarginContainer" unique_id=1202926167]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer" unique_id=1349602276]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_b4as5")
+
+[node name="TabButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/PanelContainer" unique_id=1241123882]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ColorButton" type="Button" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/PanelContainer/TabButtons" unique_id=1282175198]
+custom_minimum_size = Vector2(177, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_uqw6p")
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_cun1s")
+text = "DOGS"
+script = ExtResource("5_c42am")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="HatButton" type="Button" parent="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/PanelContainer/TabButtons" unique_id=557269587]
+custom_minimum_size = Vector2(177, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+button_group = SubResource("ButtonGroup_cun1s")
+text = "HATS"
+script = ExtResource("5_c42am")
+metadata/_custom_type_script = "uid://bxl2hwwcycl0s"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1202926167]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="CloseButton" parent="AdLayoutContainer/MarginContainer" unique_id=998217422 instance=ExtResource("12_6vegl")]
+[node name="CloseButton" parent="MarginContainer" unique_id=998217422 instance=ExtResource("12_6vegl")]
 custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
 theme_override_font_sizes/font_size = 55
@@ -400,14 +396,8 @@ theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_1g6ib")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_ackff")
 theme_override_styles/focus = SubResource("StyleBoxFlat_qnqs0")
 
-[node name="AdPanel" type="Panel" parent="AdLayoutContainer" unique_id=800514159]
-visible = false
-custom_minimum_size = Vector2(0, 130)
-layout_mode = 2
-size_flags_vertical = 8
-theme = ExtResource("3_uqw6p")
-theme_type_variation = &"EmptyPanel"
-
-[connection signal="pressed" from="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer/LeftArrow" to="." method="_on_left_arrow_pressed"]
-[connection signal="pressed" from="AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer/RightArrow" to="." method="_on_right_arrow_pressed"]
-[connection signal="toggled" from="AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/TabButtons/ColorButton" to="." method="_on_color_button_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/DogVisual/HBoxContainer/LeftArrow" to="." method="_on_left_arrow_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/DogVisual/HBoxContainer/RightArrow" to="." method="_on_right_arrow_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/BackButton" to="." method="_locked_container_back"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/PanelContainer/TabButtons/ColorButton" to="." method="_on_color_button_toggled"]
+[connection signal="pressed" from="MarginContainer/CloseButton" to="." method="_on_close_button_pressed"]

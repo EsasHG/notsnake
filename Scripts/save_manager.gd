@@ -214,15 +214,15 @@ func _set_settings_save_content(node_data: Dictionary) -> void:
 		if node_data["dogSkin"] == "BASSET":
 			GlobalInputMap.dogs_selected[0] = "BASSET"
 			GlobalInputMap.skins_selected[0] = "BASSET"
-			GameSettings.on_dogSkinChanged.emit("BASSET")
+			GameSettings.on_dogSkinChanged.emit("BASSET","BASSET")
 		elif not GlobalInputMap.dogs[GlobalInputMap.dogs_selected[0]].has(node_data["dogSkin"]):
 			Logging.error("Invalid skin found in save file for dog " + GlobalInputMap.dogs_selected[0] + ": " + node_data["dogSkin"])
 			GlobalInputMap.dogs_selected[0] = "DEFAULT"
 			GlobalInputMap.skins_selected[0] = "DEFAULT"
-			GameSettings.on_dogSkinChanged.emit("DEFAULT")
+			GameSettings.on_dogSkinChanged.emit(GlobalInputMap.dogs_selected[0],"DEFAULT")
 		else:
 			GlobalInputMap.skins_selected[0] = node_data["dogSkin"]
-			GameSettings.on_dogSkinChanged.emit(node_data["dogSkin"])
+			GameSettings.on_dogSkinChanged.emit(GlobalInputMap.dogs_selected[0],node_data["dogSkin"])
 		
 	if node_data.has("hat"):
 		GlobalInputMap.hats_selected[0] = node_data["hat"]

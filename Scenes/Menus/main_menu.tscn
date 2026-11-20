@@ -231,6 +231,7 @@ theme_type_variation = &"LowerScrollContainer"
 theme_override_styles/panel = SubResource("StyleBoxFlat_0xbgx")
 horizontal_scroll_mode = 0
 script = ExtResource("18_0rh2w")
+padding = 20.0
 
 [node name="InnerContainer" type="PanelContainer" parent="AdLayoutContainer/LevelSelectContainer/VBoxContainer/ScrollContainer" unique_id=83918249]
 custom_minimum_size = Vector2(650, 0)
@@ -378,6 +379,7 @@ script = ExtResource("13_vtepg")
 layout_mode = 2
 
 [node name="AdPanel" type="Panel" parent="AdLayoutContainer" unique_id=800514159]
+visible = false
 custom_minimum_size = Vector2(0, 130)
 layout_mode = 2
 size_flags_vertical = 8

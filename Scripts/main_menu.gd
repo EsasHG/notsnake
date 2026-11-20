@@ -229,4 +229,4 @@ func _on_feedback_pressed() -> void:
 
 func _on_skin_select_pressed() -> void:
 	logo.visible = false
-	UINavigator.open_from_scene(SKIN_SELECTOR,true,false,func(): logo.visible = true)
+	UINavigator.open_from_scene(SKIN_SELECTOR,true,true,func(): logo.visible = true)

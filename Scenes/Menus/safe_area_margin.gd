@@ -12,6 +12,7 @@ extends MarginContainer
 @export var left_margin_landscape: int = 40
 @export var bottom_margin_landscape: int = 40
 @export var right_margin_landscape: int = 40
+@export var banner_buffer: int = 10
 
 var prev_banner_height : int = 0
 func _ready() -> void:
@@ -57,7 +58,7 @@ func _calculate_margins() -> void:
 	if ad_manager:
 		var banner_height = ad_manager.banner_ad_size.y
 		if banner_height > 0:
-			bot += banner_height
+			bot += banner_height + banner_buffer
 			prev_banner_height = banner_height
 		else:
 			bot += prev_banner_height

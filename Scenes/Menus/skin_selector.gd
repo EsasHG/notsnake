@@ -1,21 +1,22 @@
 extends Control
 
-@onready var fake_dog: Node2D = $AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control/Control/FakeDog
-@onready var color_select_screen: VBoxContainer = $AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/ColorSelectContainer
-@onready var hat_select_screen: VBoxContainer = $AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/HatSelectContainer
+@onready var fake_dog: Node2D = $MarginContainer/VBoxContainer/DogVisual/HBoxContainer/Control/Control/FakeDog
+@onready var color_select_screen: VBoxContainer = $MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/ColorSelectContainer
+@onready var hat_select_screen: VBoxContainer = $MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/HatSelectContainer
 
-@onready var ad_layout_container: AdLayout = $AdLayoutContainer
-@onready var v_box_container: VBoxContainer = $AdLayoutContainer/MarginContainer/VBoxContainer
-@onready var h_box_container: HBoxContainer = $AdLayoutContainer/MarginContainer/HBoxContainer
-@onready var locked_message_container: VBoxContainer = $AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer
-@onready var skin_purchase_buttons: HBoxContainer = $AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/SkinPurchaseButtons
-@onready var dog_visual: VBoxContainer = $AdLayoutContainer/MarginContainer/VBoxContainer/DogVisual
-@onready var skin_selection: VBoxContainer = $AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection
-@onready var color_button: AudioButton = $AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/TabButtons/ColorButton
-@onready var hat_button: AudioButton = $AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/TabButtons/HatButton
-@onready var locked_message_title_label: Label = $AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/TitleLabel
-@onready var locked_message_description_label: Label = $AdLayoutContainer/MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/DescriptionLabel
+@onready var v_box_container: VBoxContainer = $MarginContainer/VBoxContainer
+@onready var h_box_container: HBoxContainer = $MarginContainer/HBoxContainer
+@onready var locked_message_container: VBoxContainer = $MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer
+@onready var skin_purchase_buttons: HBoxContainer = $MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/SkinPurchaseButtons
+@onready var dog_visual: VBoxContainer = $MarginContainer/VBoxContainer/DogVisual
+@onready var skin_selection: VBoxContainer = $MarginContainer/VBoxContainer/SkinSelection
+@onready var locked_message_title_label: Label = $MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/TitleLabel
+@onready var locked_message_description_label: Label = $MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/DescriptionLabel
+@onready var color_button: AudioButton = $MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/PanelContainer/TabButtons/ColorButton
+@onready var hat_button: AudioButton = $MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/PanelContainer/TabButtons/HatButton
+@onready var treat_label: Label = $MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/TreatLabel
 
+@onready var locked_back_button: Button = $MarginContainer/VBoxContainer/SkinSelection/ChoicePanel/VBoxContainer/ScrollContainer/InnerContainer/LockedMessageContainer/BackButton
 
 const ICON_BUTTON = preload("uid://csw1duo5yljwy")
 const LOCKED_ICON = preload("uid://bq331b3dfslw5")
@@ -80,16 +81,21 @@ func _on_viewport_changed() -> void:
 	if GameSettings.viewport_mode == GameSettings.VIEWPORT_MODE.PORTRAIT:
 		v_box_container.visible = true
 		dog_visual.reparent(v_box_container)
+		dog_visual.size_flags_horizontal = Control.SIZE_FILL
+		dog_visual.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 		skin_selection.reparent(v_box_container)
 		h_box_container.visible = false
 	else:
 		h_box_container.visible = true
 		dog_visual.reparent(h_box_container)
+		dog_visual.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		dog_visual.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		skin_selection.reparent(h_box_container)
 		v_box_container.visible = false
 
 func _create_hat_buttons() -> void:
-	for c in hat_select_screen.get_child(2).get_children():
+	var hat_button_container = hat_select_screen.get_child(0)
+	for c in hat_button_container.get_children():
 		c.queue_free()
 	
 	var keys = GlobalInputMap.hats.keys()
@@ -98,13 +104,13 @@ func _create_hat_buttons() -> void:
 			)
 	
 	for key:String in keys:
-		hat_select_screen.get_child(1).text = tr("CURRENCY") + ": " + str(GameSettings.total_treats)
+		treat_label.text = tr("CURRENCY") + ": " + str(GameSettings.total_treats)
 		
 		var hat_info:Dictionary = GlobalInputMap.hats[key]
 		var button : Button = ICON_BUTTON.instantiate()
 		button.icon = hat_info.texture
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		hat_select_screen.get_child(2).add_child(button)
+		hat_button_container.add_child(button)
 		
 		if !hat_info.unlocked: 
 			var locked = LOCKED_ICON.instantiate()
@@ -128,9 +134,9 @@ func _create_hat_buttons() -> void:
 	
 	
 func _create_skin_buttons() -> void:
-	color_select_screen.get_child(1).text = tr("CURRENCY") + ": " + str(GameSettings.total_treats)
-	
-	for c in color_select_screen.get_child(2).get_children():
+	treat_label.text = tr("CURRENCY") + ": " + str(GameSettings.total_treats)
+	var color_button_container = color_select_screen.get_child(0)
+	for c in color_button_container.get_children():
 		c.queue_free()
 		
 	var skin_names = GlobalInputMap.dogs[_current_dog].keys()
@@ -146,7 +152,7 @@ func _create_skin_buttons() -> void:
 		button.icon = skin.icon
 		button.self_modulate = skin.modulate
 		button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		color_select_screen.get_child(2).add_child(button)
+		color_button_container.add_child(button)
 		
 		if !skin.unlocked: 
 			var locked = LOCKED_ICON.instantiate()
@@ -188,6 +194,8 @@ func _on_locked_hat_pressed(_hat_id:String) -> void:
 	hat_select_screen.visible = false
 	color_select_screen.visible = false
 	locked_message_container.visible = true
+	skin_purchase_buttons.visible = false
+	locked_back_button.visible = true
 	#UINavigator.open(locked_message_container)
 
 
@@ -207,12 +215,15 @@ func _on_locked_item_pressed(item_id:String) -> void:
 	
 	if item.price > GameSettings.total_treats:
 		locked_message_description_label.text = tr("ITEM_UNAFFORDABLE") % item.price
+		skin_purchase_buttons.visible = false
+		locked_back_button.visible = true
 	else:
 		locked_message_description_label.text = tr("UNLOCK_ITEM") % item.price
 		skin_purchase_buttons.visible = true
+		locked_back_button.visible = false
 		_considering_item = item_id
 	
-	locked_message_container.get_child(1).text = tr("CURRENCY") + ": " + str(GameSettings.total_treats)
+	treat_label.text = tr("CURRENCY") + ": " + str(GameSettings.total_treats)
 	locked_message_container.visible = true
 	color_select_screen.visible = false
 	hat_select_screen.visible = false
@@ -231,11 +242,14 @@ func _item_purchased() -> void:
 	if GlobalInputMap.dogs.has(_considering_item):
 		item = GlobalInputMap.dogs[_considering_item].values().front()
 		_current_dog = _considering_item
-		_current_skin = GlobalInputMap.dogs[_considering_item].keys().front()
+		_on_skin_selected(GlobalInputMap.dogs[_considering_item].keys().front())
+		
 	elif GlobalInputMap.dogs[_current_dog].has(_considering_item):
 		item = GlobalInputMap.dogs[_current_dog][_considering_item]
+		_on_skin_selected(_considering_item)
 	elif GlobalInputMap.hats.has(_considering_item):
 		item = GlobalInputMap.hats[_considering_item]
+		_on_hat_selected(_considering_item)
 	else:
 		Logging.error("Purchased item '" +_considering_item + "' is not a dog, hat, or a skin for dog " + _current_dog + "!") 
 	item.unlocked = true
@@ -246,7 +260,6 @@ func _item_purchased() -> void:
 	_locked_container_back()
 	
 	
-
 func _locked_container_back() -> void:
 	locked_message_container.visible = false
 	_considering_item = ""
@@ -271,13 +284,15 @@ func _on_change_color_pressed() -> void:
 
 
 func _confirm_choices() -> void:
+	if _current_dog != GlobalInputMap.dogs_selected[0]:
+		GlobalInputMap.dogs_selected[0] = _current_dog
 	if _current_skin != GlobalInputMap.skins_selected[0]:
 		GlobalInputMap.skins_selected[0] = _current_skin
-		GameSettings.on_dogSkinChanged.emit(_current_skin)
 	if _current_hat != GlobalInputMap.hats_selected[0]:
 		GlobalInputMap.hats_selected[0] = _current_hat
 		GameSettings.on_dogHatChanged.emit(_current_hat)
 	if _changes_made:
+		GameSettings.on_dogSkinChanged.emit(_current_dog,_current_skin)
 		SaveManager.save_game()
 	UINavigator.back()
 
@@ -327,3 +342,8 @@ func _on_right_arrow_pressed() -> void:
 	else:
 		_considering_item = new_dog
 		_on_locked_item_pressed(new_dog)
+
+
+func _on_close_button_pressed() -> void:
+	_confirm_choices()
+	UINavigator.force_back()

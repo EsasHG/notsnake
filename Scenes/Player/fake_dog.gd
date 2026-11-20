@@ -48,11 +48,8 @@ func set_skin(dog_id:String, skin_id:String) -> void:
 		Logging.error("Could not find skin with ID " + skin_id + " for dog " + dog_id)
 		skin_id = "DEFAULT"
 	var skin:DogSkin = GlobalInputMap.dogs[dog_id][skin_id]
-	self_modulate = skin.modulate
 	head.sprite_frames = skin.head
-	head.self_modulate = self_modulate
 	legs.sprite_frames = skin.legs_front
-	legs.modulate = skin.modulate
 	legs_back.sprite_frames = skin.legs_back
 	butt_sprite.texture = skin.butt
 	tail.sprite_frames = skin.tail
